@@ -6,13 +6,13 @@
 */
 $config = array(
 // site
-    'url' => '',
+	'url' => '',
 
 // debug
 // (to enable ethna_info and ethna_unittest, turn this true)
-    'debug' => false,
+	'debug' => true,
 
-	'dsn' => 'mysql://jmesse:idsjmesse@localhost/jmesse',
+	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
 // db
 // sample-1: single db
 // 'dsn' => 'mysql://user:password@server/database',
@@ -28,13 +28,22 @@ $config = array(
 //     'mysql://ro_user:password@slave2/database',         // read-only(slave)
 // ),
 
+
+	'log' => array(
+		'file' => array(
+			'level' => 'debug',
+			'option' => 'pid,function,pos',
+			'mode' => '666',
+		),
+	),
+
 // log
 // sample-1: sigile facility
-    'log_facility'          => 'echo',
-    'log_level'             => 'warning',
-    'log_option'            => 'pid,function,pos',
-    'log_filter_do'         => '',
-    'log_filter_ignore'     => 'Undefined index.*%%.*tpl',
+//     'log_facility'          => 'echo',
+//     'log_level'             => 'debug',
+//     'log_option'            => 'pid,function,pos',
+//     'log_filter_do'         => '',
+//     'log_filter_ignore'     => 'Undefined index.*%%.*tpl',
 
 // sample-2: mulitple facility
 //'log' => array(
