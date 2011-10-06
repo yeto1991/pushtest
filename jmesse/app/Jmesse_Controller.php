@@ -135,7 +135,10 @@ class Jmesse_Controller extends Ethna_Controller
         'class'         => 'Ethna_ClassFactory',
         'backend'       => 'Ethna_Backend',
         'config'        => 'Ethna_Config',
-        'db'            => 'Ethna_DB_PEAR',
+// MOD-S 2011.10.06 m.sasaki 文字化け対応。
+        'db'            => 'Jmesse_DB_PEAR',
+//        'db'            => 'Ethna_DB_PEAR',
+// MOD-E 2011.10.06 m.sasaki 文字化け対応。
         'error'         => 'Ethna_ActionError',
         'form'          => 'Jmesse_ActionForm',
         'i18n'          => 'Ethna_I18N',
@@ -174,7 +177,7 @@ class Jmesse_Controller extends Ethna_Controller
     var $filter = array(
         /*
          *  TODO: when you use filter, write filter plugin name here.
-         *  (If you specify class name, Ethna reads filter class in 
+         *  (If you specify class name, Ethna reads filter class in
          *   filter directory)
          *
          *  Example:
