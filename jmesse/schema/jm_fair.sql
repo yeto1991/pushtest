@@ -56,7 +56,7 @@ create table jmesse.jm_fair(
   , total_number_of_exhibitors int (10)
   , number_of_foreign_exhibitors int (10)
   , net_square_meters int (10)
-  , spare_field1 text
+  , spare_field1 varchar (255)
   , app_dead_yyyy varchar (4)
   , app_dead_mm varchar (2)
   , app_dead_dd varchar (2)

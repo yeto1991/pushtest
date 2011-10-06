@@ -6,7 +6,7 @@ create table jmesse.jm_fair_temp(
   , fair_title_en varchar (255)
   , abbrev_title varchar (100)
   , fair_url varchar (255)
-  , mihon_no int not null
+  , mihon_no int
   , profile_jp varchar (200)
   , profile_en varchar (200)
   , detailed_information_jp text(800)
@@ -56,7 +56,7 @@ create table jmesse.jm_fair_temp(
   , total_number_of_exhibitors int (10)
   , number_of_foreign_exhibitors int (10)
   , net_square_meters int (10)
-  , spare_field1 text
+  , spare_field1 varchar (255)
   , app_dead_yyyy varchar (4)
   , app_dead_mm varchar (2)
   , app_dead_dd varchar (2)
@@ -91,7 +91,7 @@ create table jmesse.jm_fair_temp(
   , note_for_system_manager text(400)
   , note_for_data_manager text(400)
   , confirm_flag char (1)
-  , negate_comment varchar (400)
+  , negate_comment text(400)
   , mail_send_flag char (1)
   , del_flg char (1)
   , del_date datetime
