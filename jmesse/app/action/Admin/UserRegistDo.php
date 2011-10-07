@@ -38,6 +38,9 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
+		if ($this->af->validate() > 0) {
+			return 'admin_login';
+		}
 		return null;
 	}
 
@@ -50,42 +53,38 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 	function perform()
 	{
 		$jm_user =& $this->backend->getObject('JmUser');
-		$jm_user->set('user_id', '日本語');
-		$jm_user->set('password', 'xxxxx');
-		$jm_user->set('company_nm', 'xxxxx');
-		$jm_user->set('division_dept_nm', 'xxxxx');
-		$jm_user->set('user_nm', 'xxxxx');
-		$jm_user->set('gender_cd', 'xxxxx');
-		$jm_user->set('email', 'xxxxx');
-		$jm_user->set('post_code', 'xxxxx');
-		$jm_user->set('address', 'xxxxx');
-		$jm_user->set('tel', 'xxxxx');
-		$jm_user->set('fax', 'xxxxx');
-		$jm_user->set('url', 'xxxxx');
-		$jm_user->set('secret_question_cd', 'xxxxx');
-		$jm_user->set('secret_question_answer', 'xxxxx');
-		$jm_user->set('use_language_cd', 'xxxxx');
-		$jm_user->set('regist_result_notice_cd', 'xxxxx');
-		$jm_user->set('auth_gen', 'xxxxx');
-		$jm_user->set('auth_user', 'xxxxx');
-		$jm_user->set('auth_fair', 'xxxxx');
-		$jm_user->set('idpass_notice_cd', 'xxxxx');
+		$jm_user->set('user_id', $this->af->get('userId'));
+		$jm_user->set('password', $this->af->get('password'));
+		$jm_user->set('company_nm', $this->af->get('companyNm'));
+		$jm_user->set('division_dept_nm', $this->af->get('divisionDeptNm'));
+		$jm_user->set('user_nm', $this->af->get('userNm'));
+		$jm_user->set('gender_cd', $this->af->get('genderCd'));
+		$jm_user->set('email', $this->af->get('email'));
+		$jm_user->set('post_code', $this->af->get('postCode'));
+		$jm_user->set('address', $this->af->get('address'));
+		$jm_user->set('tel', $this->af->get('tel'));
+		$jm_user->set('fax', $this->af->get('fax'));
+		$jm_user->set('url', $this->af->get('url'));
+		$jm_user->set('secret_question_cd', $this->af->get('secretQuestionCd'));
+		$jm_user->set('secret_question_answer', $this->af->get('secretQuestionAnswer'));
+		$jm_user->set('use_language_cd', $this->af->get('useLanguageCd'));
+		$jm_user->set('regist_result_notice_cd', $this->af->get('registResultNoticeCd'));
+		$jm_user->set('auth_gen', null);
+		$jm_user->set('auth_user', $this->af->get('userAuthorityCd'));
+		$jm_user->set('auth_fair', null);
+		$jm_user->set('idpass_notice_cd', $this->af->get('idpassNoticeCd'));
 		$jm_user->set('del_flg', '0');
 		$jm_user->set('del_date', null);
-		$jm_user->set('regist_user_id', 'xxxxx');
-		$jm_user->set('regist_date', '2011/10/05');
-		$jm_user->set('update_user_id', 'xxxxx');
-		$jm_user->set('update_date', '2011/10/05');
-
+		$jm_user->set('regist_user_id', $this->session->get('username'));//ログインセッションID
+		$jm_user->set('regist_date', date('Y/m/d H:i:s'));//現在日付
+		$jm_user->set('update_user_id', null);
+		$jm_user->set('update_date', null);
 		$ret = $jm_user->add();
 
-
-		if (Ethna::isError($r)) {
-			echo 'ERROR!!!';
+		if (Ethna::isError($ret)) {
 			return 'error';
 		}
-
-		return 'admin_userRegistDo';
+		return 'admin_top';
 	}
 }
 

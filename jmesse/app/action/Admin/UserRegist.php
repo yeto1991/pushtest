@@ -20,49 +20,242 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
      *  @access private
      *  @var    array   form definition.
      */
-    var $form = array(
-       /*
-        *  TODO: Write form definition which this action uses.
-        *  @see http://ethna.jp/ethna-document-dev_guide-form.html
-        *
-        *  Example(You can omit all elements except for "type" one) :
-        *
-        *  'sample' => array(
-        *      // Form definition
-        *      'type'        => VAR_TYPE_INT,    // Input type
-        *      'form_type'   => FORM_TYPE_TEXT,  // Form type
-        *      'name'        => 'Sample',        // Display name
-        *  
-        *      //  Validator (executes Validator by written order.)
-        *      'required'    => true,            // Required Option(true/false)
-        *      'min'         => null,            // Minimum value
-        *      'max'         => null,            // Maximum value
-        *      'regexp'      => null,            // String by Regexp
-        *      'mbregexp'    => null,            // Multibype string by Regexp
-        *      'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp 
-        *
-        *      //  Filter
-        *      'filter'      => 'sample',        // Optional Input filter to convert input
-        *      'custom'      => null,            // Optional method name which
-        *                                        // is defined in this(parent) class.
-        *  ),
-        */
+	var $form = array(
+		'userId' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'ユーザID',
+			'required'    => true,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => '/^[a-zA-Z0-9]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'password' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'パスワード',
+			'required'    => true,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => '/^[a-zA-Z0-9]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'companyNm' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => '会社名',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'divisionDeptNm' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => '部署名',
+			'required'    => false,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'userNm' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => '氏名',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 100,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'genderCd' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_RADIO,
+			'name'        => '性別',
+			'required'    => true,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'email' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'Eメール',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'postCode' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => '郵便番号',
+			'required'    => false,
+			'min'         => null,
+			'max'         => 20,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'address' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => '住所',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'tel' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'TEL',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 20,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'fax' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'FAX',
+			'required'    => false,
+			'min'         => null,
+			'max'         => 20,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'url' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'URL',
+			'required'    => false,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'useLanguageCd' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_RADIO,
+			'name'        => 'ユーザ使用言語',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'registResultNoticeCd' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_RADIO,
+			'name'        => '登録結果通知',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'userAuthorityCd' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_RADIO,
+			'name'        => 'ユーザ管理権限',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'secretQuestionCd' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_SELECT,
+			'name'        => '秘密の質問',
+			'required'    => true,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'secretQuestionAnswer' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_SELECT,
+			'name'        => '秘密の質問の答え',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 100,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'idpassNoticeCd' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_RADIO,
+			'name'        => 'ID・パスワード通知メール',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
     );
-
-    /**
-     *  Form input value convert filter : sample
-     *
-     *  @access protected
-     *  @param  mixed   $value  Form Input Value
-     *  @return mixed           Converted result.
-     */
-    /*
-    function _filter_sample($value)
-    {
-        //  convert to upper case.
-        return strtoupper($value);
-    }
-    */
 }
 
 /**
@@ -83,7 +276,8 @@ class Jmesse_Action_AdminUserRegist extends Jmesse_ActionClass
      */
     function prepare()
     {
-        return null;
+    	//処理ロジック不要、何も記述しない。
+    	return null;
     }
 
     /**
@@ -94,6 +288,7 @@ class Jmesse_Action_AdminUserRegist extends Jmesse_ActionClass
      */
     function perform()
     {
+    	//処理ロジック不要、何も記述しない。
         return 'admin_userRegist';
     }
 }
