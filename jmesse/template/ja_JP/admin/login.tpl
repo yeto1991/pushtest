@@ -2,37 +2,48 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=UTF-8">
-<title>見本市ユーザ管理</title>
+<title>管理画面</title>
 </head>
 <body>
-	<center>
-		<font size=5><b>見本市ユーザ・展示会管理</b></font>
-	</center>
+	<div align="center">
+		<font size=5><b>管理画面</b></font>
+	</div>
 	<hr>
 
-	<div align="center">ログイン画面</div>
-	<form name="form_login" id="form_login" method="POST" action="">
+	{* エラー表示 *]
+	{if count($errors)}
+	<ul>
+		{foreach from=$errors item=error}
+		<li><font color="#ff0000">{$error}</font></li>
+		{/foreach}
+	</ul>
+	{/if}
+
+	<div align="center">ログイン</div>
+	<br />
+	<form name="form_admin_login" id="form_admin_login" method="POST" action="">
 		<input type="hidden" name="action_admin_loginDo" id="action_admin_loginDo" value="dummy" />
-		<center>
+		{uniqid}
+		<div align="center">
 			<table>
 				<tr>
-					<td colspan=2>ID、Passwordを入力してください。</td>
+					<td colspan=3 align="left">ID、Passwordを入力してください。</td>
 				</tr>
 				<tr>
-					<td>ID :</td>
-					<td><input type="text" name="Username" id="Username" value="" size=28 maxlength=28></td>
+					<td align="left">ID</td>
+					<td>:</td>
+					<td align="left"><input type="text" name="username" id="username" value="{$form.username}"  maxlength="28" style="width:200px" /></td>
 				</tr>
 				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="Password" id="Password" value="" size=8 maxlength=8></td>
+					<td align="left">Password</td>
+					<td>:</td>
+					<td align="left"><input type="password" name="password" id="password" value="" maxlength="8" style="width:200px;" /></td>
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
-					<td><input type="submit" value=" 実  行 "></td>
+					<td colspan="3" align="center"><input type="submit" value=" 実  行 " /></td>
 				</tr>
-
 			</table>
-		</center>
+		</div>
 	</form>
 </body>
 </html>
