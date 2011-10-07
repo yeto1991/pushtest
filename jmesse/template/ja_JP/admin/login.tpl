@@ -10,7 +10,7 @@
 	</div>
 	<hr>
 
-	{* エラー表示 *]
+	{* エラー表示 *}
 	{if count($errors)}
 	<ul>
 		{foreach from=$errors item=error}
