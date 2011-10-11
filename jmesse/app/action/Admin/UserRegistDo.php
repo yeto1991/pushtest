@@ -45,12 +45,12 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 
 		//入力値チェック
 		if ($this->af->validate() > 0) {
-			$user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('userId'));
 			//重複チェック
-			if ($this->af->get('userId') == $user->get('user_id')) {
+			$user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('userId'));
+			if ($this->af->get('userId') != null && ($this->af->get('userId') == $user->get('user_id'))) {
 				$this->ae->add(null, "入力されたユーザIDは既に使用されています。");
 			}
-			if ($this->af->get('email') == $user->get('email')) {
+			if ($this->af->get('email') != null && ($this->af->get('email') == $user->get('email'))) {
 				$this->ae->add(null, "入力されたEメールは既に使用されています。");
 			}
 			return 'admin_userRegist';
