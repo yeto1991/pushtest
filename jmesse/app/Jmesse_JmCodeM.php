@@ -114,7 +114,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 	 * @param string $kbn_2 業種（大分類）
 	 * @return array<string>：業種（小分類）リスト、null：データなし、DB::Error()：エラー
 	 */
-	function getMainIndustoryList($kbn_2) {
+	function getSubIndustoryList($kbn_2) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
