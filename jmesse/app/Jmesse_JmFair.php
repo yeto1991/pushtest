@@ -16,6 +16,42 @@
  */
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
+	/**
+	 * 見本市情報の全件数を取得する。
+	 *
+	 * @return int 見本市情報の全件数
+	 */
+	function getCountAll() {
+		$db = $this->backend->getDB();
+		$sql = "select count(*) cnt from jm_fair";
+		$res = $db->query($sql);
+		if (Ethna::isError($res)) {
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
+
+	/**
+	 * 特定ユーザの見本市情報の件数を取得する。
+	 *
+	 * @param string $user_id ユーザID
+	 * @return int 特定ユーザの見本市情報の件数
+	 */
+	function getCountUser($user_id) {
+		$db = $this->backend->getDB();
+		$sql = "select count(*) cnt from jm_fair where user_id = ?";
+		$stmt =& $db->db->prepare($sql);
+		$param = array($user_id);
+		$res = $db->db->execute($sql, $param);
+		if (Ethna::isError($res)) {
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
 }
 
 /**

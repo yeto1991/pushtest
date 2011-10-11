@@ -29,28 +29,38 @@ class Jmesse_Form_AdminFairRegistDo extends Jmesse_Form_AdminFairRegist
  */
 class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 {
-    /**
-     *  preprocess of admin_fairRegistDo Action.
-     *
-     *  @access public
-     *  @return string    forward name(null: success.
-     *                                false: in case you want to exit.)
-     */
-    function prepare()
-    {
-        return null;
-    }
+	/**
+	 *  preprocess of admin_fairRegistDo Action.
+	 *
+	 *  @access public
+	 *  @return string    forward name(null: success.
+	 *                                false: in case you want to exit.)
+	 */
+	function prepare()
+	{
+		// ログインチェック
+		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
+			return 'admin_Login';
+		}
 
-    /**
-     *  admin_fairRegistDo action implementation.
-     *
-     *  @access public
-     *  @return string  forward name.
-     */
-    function perform()
-    {
-        return 'admin_fairRegistDo';
-    }
+		// 入力チェック（必須）
+		if ($this->af->validate() > 0) {
+			return 'admin_registFair';
+		}
+
+		return null;
+	}
+
+	/**
+	 *  admin_fairRegistDo action implementation.
+	 *
+	 *  @access public
+	 *  @return string  forward name.
+	 */
+	function perform()
+	{
+		return 'admin_fairRegistDo';
+	}
 }
 
 ?>

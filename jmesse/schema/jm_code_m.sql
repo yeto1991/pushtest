@@ -1,4 +1,4 @@
-create table jmesse.jm_code_m( 
+create table jmesse.jm_code_m(
   kbn_1 varchar (3) not null
   , kbn_2 varchar (3) not null
   , kbn_3 varchar (3) not null
@@ -13,6 +13,5 @@ create table jmesse.jm_code_m(
   , reserve_4 varchar (255)
   , reserve_5 varchar (255)
   , reserve_6 varchar (255)
-  , index (kbn_1, kbn_2, kbn_3, kbn_4)
+  , primary key (kbn_1, kbn_2, kbn_3, kbn_4)
 ) engine = innodb
-

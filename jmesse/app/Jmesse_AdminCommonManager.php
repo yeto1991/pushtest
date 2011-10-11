@@ -75,10 +75,6 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	function regLog($user_id, $ope_kbn, $info_kbn, $remarks) {
 		// オブジェクトを取得
 		$jm_log = $this->backend->getObject('JmLog');
-		if (null == $jm_log) {
-			$this->backend->getLogger()->log(LOG_ERR, 'JmLogオブジェクト取得失敗');
-			return Ethna::raiseError('JmLogオブジェクト取得に失敗しました。', E_FAIL_TO_GET_OBJECT_JM_LOG);
-		}
 
 		// 項目設定
 		$jm_log->set('user_id', $user_id);

@@ -1,4 +1,4 @@
-create table jmesse.jm_fair( 
+create table jmesse.jm_fair(
   user_id varchar (16) not null
   , date_of_application datetime not null
   , date_of_registration datetime not null
@@ -6,7 +6,7 @@ create table jmesse.jm_fair(
   , fair_title_en varchar (255)
   , abbrev_title varchar (100)
   , fair_url varchar (255)
-  , mihon_no int not null
+  , mihon_no int not null auto_increment
   , profile_jp varchar (200)
   , profile_en varchar (200)
   , detailed_information_jp text(800)
