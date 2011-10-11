@@ -26,8 +26,8 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'form_type'   => FORM_TYPE_TEXT,
 			'name'        => 'ユーザID',
 			'required'    => true,
-			'min'         => null,
-			'max'         => null,
+			'min'         => 8,
+			'max'         => 16,
 			'regexp'      => '/^[a-zA-Z0-9]+$/',
 			'mbregexp'    => null,
 			'mbregexp_encoding' => 'UTF-8',
@@ -39,8 +39,8 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'form_type'   => FORM_TYPE_TEXT,
 			'name'        => 'パスワード',
 			'required'    => true,
-			'min'         => null,
-			'max'         => null,
+			'min'         => 4,
+			'max'         => 8,
 			'regexp'      => '/^[a-zA-Z0-9]+$/',
 			'mbregexp'    => null,
 			'mbregexp_encoding' => 'UTF-8',
@@ -203,10 +203,36 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'filter'      => null,
 			'custom'      => null,
 		),
-		'userAuthorityCd' => array(
+		'authGen' => array(
 			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_RADIO,
+			'form_type'   => FORM_TYPE_CHECKBOX,
+			'name'        => '一般権限',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'authUser' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_CHECKBOX,
 			'name'        => 'ユーザ管理権限',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'authFair' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_CHECKBOX,
+			'name'        => '展示会管理権限',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -276,8 +302,11 @@ class Jmesse_Action_AdminUserRegist extends Jmesse_ActionClass
      */
     function prepare()
     {
-    	//処理ロジック不要、何も記述しない。
-    	return null;
+		// ログインチェック
+		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
+			return 'admin_Login';
+		}
+		return null;
     }
 
     /**
@@ -288,7 +317,6 @@ class Jmesse_Action_AdminUserRegist extends Jmesse_ActionClass
      */
     function perform()
     {
-    	//処理ロジック不要、何も記述しない。
         return 'admin_userRegist';
     }
 }
