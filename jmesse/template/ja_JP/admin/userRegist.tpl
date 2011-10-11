@@ -23,7 +23,7 @@
 	</ul>
 	{/if}
 
-	<div align="center">登録・編集画面</div>
+	<div align="center">ユーザ新規登録</div>
 	<center>
 		<table>
 			<tr>
@@ -61,9 +61,9 @@
 									<table border=0>
 										<tr>
 											<td>
-												<input type="radio" name="genderCd" id="genderCd" value="0">男性
-												<input type="radio" name="genderCd" id="genderCd" value="1">女性
-												<input type="radio" name="genderCd" id="genderCd" value="2" checked>不明
+												<input type="radio" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0"} checked {/if}>男性
+												<input type="radio" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if}>女性
+												<input type="radio" name="genderCd" id="genderCd" value="2" {if $form.genderCd != "0" && $form.genderCd != "1"} checked {/if}>不明
 											</td>
 										</tr>
 									</table>
@@ -98,8 +98,8 @@
 								<td nowrap style=text-align:left>
 									<table border=0>
 										<tr>
-											<input type="radio" name="useLanguageCd" id="useLanguageCd" value="0" checked>日本語
-											<input type="radio" name="useLanguageCd" id="useLanguageCd" value="1">英語
+											<input type="radio" name="useLanguageCd" id="useLanguageCd" value="0" {if $form.useLanguageCd != "1"} checked {/if}>日本語
+											<input type="radio" name="useLanguageCd" id="useLanguageCd" value="1" {if $form.useLanguageCd == "1"} checked {/if}>英語
 										</tr>
 									</table>
 								</td>
@@ -109,8 +109,8 @@
 								<td nowrap style=text-align:left>
 									<table border=0>
 										<tr>
-											<input type="radio" name="registResultNoticeCd" id="registResultNoticeCd" value="0">メール送信する
-											<input type="radio" name="registResultNoticeCd" id="registResultNoticeCd" value="1" checked>メール送信しない
+											<input type="radio" name="registResultNoticeCd" id="registResultNoticeCd" value="0" {if $form.registResultNoticeCd == "0"} checked {/if}>メール送信する
+											<input type="radio" name="registResultNoticeCd" id="registResultNoticeCd" value="1" {if $form.registResultNoticeCd != "0"} checked {/if}>メール送信しない
 										</tr>
 									</table>
 								</td>
@@ -120,9 +120,9 @@
 								<td nowrap style=text-align:left>
 									<table border=0>
 										<tr>
-											<input type="checkbox" name="authGen" id="userAuthorityCd" value="1">一般
-											<input type="checkbox" name="authUser" id="userAuthorityCd" value="1">ユーザ管理
-											<input type="checkbox" name="authFair" id="userAuthorityCd" value="1">展示会管理
+											<input type="checkbox" name="authGen" id="authGen" value="1" {if $form.authGen == "1"} checked {/if}>一般
+											<input type="checkbox" name="authUser" id="authUser" value="1" {if $form.authUser == "1"} checked {/if}>ユーザ管理
+											<input type="checkbox" name="authFair" id="authFair" value="1" {if $form.authFair == "1"} checked {/if}>展示会管理
 										</tr>
 									</table>
 								</td>
@@ -133,7 +133,7 @@
 									<select name="secretQuestionCd" id="secretQuestionCd">
 										<option value="">...</option>
 										{section name=it loop=$app.secretQuestionCd}
-											<option value="{$app.secretQuestionCd[it].kbn_2}">
+											<option value="{$app.secretQuestionCd[it].kbn_2}" {if $app.secretQuestionCd[it].kbn_2 ==  $form.secretQuestionCd} selected {/if}>
 												{$app.secretQuestionCd[it].discription_jp}
 											</option>
 										{/section}
@@ -150,9 +150,9 @@
 									<table border=0>
 										<tr>
 											<td>
-												<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="0">日本語で送信
-												<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="1">英語で送信
-												<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="2" checked>変更しない
+												<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="0" {if $form.idpassNoticeCd == "0"} checked {/if}>日本語で送信
+												<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="1" {if $form.idpassNoticeCd == "1"} checked {/if}>英語で送信
+												<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="2" {if $form.genderCd != "0" && $form.genderCd != "1"} checked {/if}>変更しない
 											</td>
 										</tr>
 									</table>
@@ -165,7 +165,7 @@
 				<td colspan=2>&nbsp</td>
 			</tr>
 			<tr>
-				<td><div align="left"><input type="submit" value="登録・更新"></div></td>
+				<td><div align="left"><input type="submit" value="登録"></div></td>
 				<td align=right></td>
 			</tr>
 		</table>
