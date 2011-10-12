@@ -23,8 +23,6 @@ class Jmesse_View_AdminUserRegist extends Jmesse_ViewClass
      */
     function preforward()
     {
-    	// 秘密の質問
-    	$this->af->setApp('secretQuestionCd', $this->backend->getManager('JmCodeM')->getSecretQuestionList());
     }
 }
 
