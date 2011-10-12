@@ -42,17 +42,19 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			return 'admin_Login';
 		}
-
 		//入力値チェック
 		if ($this->af->validate() > 0) {
-			//重複チェック
-			$user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('userId'));
-			if ($this->af->get('userId') != null && ($this->af->get('userId') == $user->get('user_id'))) {
-				$this->ae->add(null, "入力されたユーザIDは既に使用されています。");
-			}
-			if ($this->af->get('email') != null && ($this->af->get('email') == $user->get('email'))) {
-				$this->ae->add(null, "入力されたEメールは既に使用されています。");
-			}
+			return 'admin_userRegist';
+		}
+		//重複チェック
+		$jmUserMgr = $this->backend->getManager('jmUser');
+		$emailCheck = $jmUserMgr->getEmailForDoubleCheck($this->af->get('email'));
+		if (Ethna::isError($emailCheck)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録時の重複チェック失敗');
+			return 'error';
+		}
+		if($emailCheck == "DOUBLE_CHECK_NG"){
+			$this->ae->add(null, "入力されたEメールは既に使用されています。");
 			return 'admin_userRegist';
 		}
 		return null;
@@ -67,20 +69,17 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 	function perform()
 	{
 		$jm_user =& $this->backend->getObject('JmUser');
-		$jm_user->set('user_id', $this->af->get('userId'));
+		$jm_user->set('email', strtolower($this->af->get('email'))); //メールアドレスを小文字変換
 		$jm_user->set('password', $this->af->get('password'));
 		$jm_user->set('company_nm', $this->af->get('companyNm'));
 		$jm_user->set('division_dept_nm', $this->af->get('divisionDeptNm'));
 		$jm_user->set('user_nm', $this->af->get('userNm'));
 		$jm_user->set('gender_cd', $this->af->get('genderCd'));
-		$jm_user->set('email', $this->af->get('email'));
 		$jm_user->set('post_code', $this->af->get('postCode'));
 		$jm_user->set('address', $this->af->get('address'));
 		$jm_user->set('tel', $this->af->get('tel'));
 		$jm_user->set('fax', $this->af->get('fax'));
 		$jm_user->set('url', $this->af->get('url'));
-		$jm_user->set('secret_question_cd', $this->af->get('secretQuestionCd'));
-		$jm_user->set('secret_question_answer', $this->af->get('secretQuestionAnswer'));
 		$jm_user->set('use_language_cd', $this->af->get('useLanguageCd'));
 		$jm_user->set('regist_result_notice_cd', $this->af->get('registResultNoticeCd'));
 		if ($this->af->get('authGen') == 1) {
@@ -108,17 +107,20 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 		$ret = $jm_user->add();
 
 		if (Ethna::isError($ret)) {
-			$this->backend->getLogger()->log(LOG_DEBUG, 'ユーザ新規登録失敗');
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ新規登録失敗');
 			return 'error';
 		}
 		// ログに記録
 		$mgr = $this->backend->getManager('adminCommon');
-		if (null == $mgr) {
+		if ($mgr == null) {
 			$this->backend->getLogger()->log(LOG_ERR, 'adminCommonマネージャ取得失敗');
 			$this->ae->addObject(Ethna::raiseError('adminCommonマネージャ取得に失敗しました。', E_FAIL_TO_GET_MANAGER_ADMIN_COMMON));
 			return 'error';
 		}
-		$ret = $mgr->regLog($this->session->get('username'), '2', '1', $this->af->get('userId'));
+
+		// 登録したユーザ情報取得
+		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+		$ret = $mgr->regLog($this->session->get('user_id'), '2', '1', $user->get('user_id'));
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			return 'error';
