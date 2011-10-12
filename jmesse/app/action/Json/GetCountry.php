@@ -1,31 +1,33 @@
 <?php
 /**
- *  Admin/Login.php
+ *  Json/GetCountry.php
  *
- *  @author     m.sasaki
+ *  @author     {$author}
  *  @package    Jmesse
  *  @version    $Id: 6dbb28cac61a23f06dba884c38c304aed3dcc84b $
  */
 
+require_once 'Jmesse_JmCodeM.php';
+
 /**
- *  admin_login Form implementation.
+ *  json_getCountry Form implementation.
  *
- *  @author     m.sasaki
+ *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_AdminLogin extends Jmesse_ActionForm
+class Jmesse_Form_JsonGetCountry extends Jmesse_ActionForm
 {
 	/**
 	 *  @access private
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		'email' => array(
+		'kbn_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'Eメール',       // Display name
-			'required'    => true,            // Required Option(true/false)
+			'name'        => '区分2',         // Display name
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -34,11 +36,11 @@ class Jmesse_Form_AdminLogin extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'password' => array(
+		'use_language_flag' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'パスワード',    // Display name
-			'required'    => true,            // Required Option(true/false)
+			'name'        => 'ユーザ使用言語フラグ', // Display name
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -51,16 +53,16 @@ class Jmesse_Form_AdminLogin extends Jmesse_ActionForm
 }
 
 /**
- *  admin_login action implementation.
+ *  json_getCountry action implementation.
  *
- *  @author     m.sasaki
+ *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Action_AdminLogin extends Jmesse_ActionClass
+class Jmesse_Action_JsonGetCountry extends Jmesse_ActionClass
 {
 	/**
-	 *  preprocess of admin_login Action.
+	 *  preprocess of json_getCountry Action.
 	 *
 	 *  @access public
 	 *  @return string    forward name(null: success.
@@ -68,20 +70,46 @@ class Jmesse_Action_AdminLogin extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ここには何も記述しないで下さい。
 		return null;
 	}
 
 	/**
-	 *  admin_login action implementation.
+	 *  json_getCountry action implementation.
 	 *
 	 *  @access public
 	 *  @return string  forward name.
 	 */
 	function perform()
 	{
-		// ここには何も記述しないで下さい。
-		return 'admin_login';
+		$kbn_2 = $this->af->get('kbn_2');
+		$use_language_flag = $this->af->get('use_language_flag');
+		if (0 < strlen($kbn_2) && 0 < strlen($use_language_flag)) {
+			$jmCodeMMgr = $this->backend->getManager('jmCodeM');
+			$list = $jmCodeMMgr->getCountryList($kbn_2);
+			if (null != $list) {
+				$json = '[{"text":"...","value":""}';
+				if ("0" == $use_language_flag) {
+					for ($i = 0; $i < count($list); $i++) {
+						$json .= ',{"text":"'.$list[$i]['discription_jp'].'","value":"'.$list[$i]['kbn_3'].'"}';
+					}
+				} else {
+					for ($i = 0; $i < count($list); $i++) {
+						$json .= ',{"text":"'.$list[$i]['discription_en'].'","value":"'.$list[$i]['kbn_3'].'"}';
+					}
+				}
+				$json .= ']';
+			} else {
+				$this->backend->getLogger()->log(LOG_WARNING, '検索件数[0]');
+				$json = '[{"text":"...","value":""}]';
+			}
+		} else {
+			$this->backend->getLogger()->log(LOG_WARNING, '入力項目空');
+			$json = '[{"text":"...","value":""}]';
+
+		}
+
+		echo $json;
+		return null;
 	}
 }
 

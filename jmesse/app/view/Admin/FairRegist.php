@@ -30,6 +30,9 @@ class Jmesse_View_AdminFairRegist extends Jmesse_ViewClass
 		$this->af->setApp('month', date('m'));
 		$this->af->setApp('day', date('d'));
 
+		// Fairの件数を取得
+		$this->af->setApp('fair_count', $this->backend->getManager('JmFair')->getCountAll());
+
 		// 開催頻度
 		$this->af->setApp('frequency', $this->backend->getManager('JmCodeM')->getFrequencyList());
 
@@ -39,6 +42,8 @@ class Jmesse_View_AdminFairRegist extends Jmesse_ViewClass
 		// 開催地（地域）
 		$this->af->setApp('region', $this->backend->getManager('JmCodeM')->getRegionList());
 
+		// 入場資格
+		$this->af->setApp('open_to', $this->backend->getManager('JmCodeM')->getOpenToList());
 	}
 }
 

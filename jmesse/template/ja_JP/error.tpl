@@ -10,7 +10,6 @@
 		<hr />
 	</div>
 	<ul>
-		<li><font color="#ff0000">{message name="error"}</font>
 		{if count($errors)}
 		{foreach from=$errors item=error}
 		<li><font color="#ff0000">{$error}</font></li>

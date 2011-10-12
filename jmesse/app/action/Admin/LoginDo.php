@@ -54,13 +54,13 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		$this->backend->getLogger()->log(LOG_DEBUG, $this->af->get('username'));
+		$this->backend->getLogger()->log(LOG_DEBUG, $this->af->get('email'));
 		$this->backend->getLogger()->log(LOG_DEBUG, $this->af->get('password'));
 
 		$login_ok = true;
 
 		// ユーザ情報取得
-		$user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('username'));
+		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
 
 		// ユーザ認証
 		if (null == $user || null == $user->get('user_id')) {
@@ -68,9 +68,6 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 			$login_ok = false;
 		} else if ($this->af->get('password') != $user->get('password')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, 'パスワード相違');
-			$login_ok = false;
-		} else if ('1' != $user->get('auth_gen')) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '一般権限なし');
 			$login_ok = false;
 		} else if ('1' != $user->get('auth_user') && '1' != $user->get('auth_fair')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '管理権限なし');
@@ -80,7 +77,7 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 		if ($login_ok) {
 			// ログに記録
 			$mgr = $this->backend->getManager('adminCommon');
-			$ret = $mgr->regLog($this->af->get('username'), '5', '3', 'login time');
+			$ret = $mgr->regLog($user->get('user_id'), '5', '3', 'login time');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				return 'error';
@@ -88,21 +85,9 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 
 			// SESSIONに設定
 			$this->session->start();
-			$this->session->set('username', $this->af->get('username'));
+			$this->session->set('user_id', $user->get('user_id'));
 			$this->session->set('auth_user', $user->get('auth_user'));
 			$this->session->set('auth_fair', $user->get('auth_fair'));
-
-			// Fairの件数を取得
-			$jmFairMgr = $this->backend->getManager('jmFair');
-			if ('1' == $user->get('auth_user')) {
-				$fair_count = $jmFairMgr->getCountAll();
-			} else {
-				$fair_count = $jmFairMgr->getCountUser($this->af->get('username'));
-			}
-			if (Ethna::isError($fair_count)) {
-				return 'error';
-			}
-			$this->af->setApp('fair_count', $fair_count);
 
 			// TOP画面へ遷移
 			$ret_view = 'admin_top';

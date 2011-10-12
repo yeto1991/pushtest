@@ -28,7 +28,7 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 		if (!$this->session->isStart()) {
 			// Sessionが開始していない。
 			$ret = false;
-		} else if (null == $this->session->get('username') || '' == $this->session->get('username')) {
+		} else if (null == $this->session->get('user_id') || '' == $this->session->get('user_id')) {
 			// ログインユーザが設定されていない。
 			$ret = false;
 		} else if ('1' != $this->session->get('auth_user')) {
@@ -51,7 +51,7 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 		if (!$this->session->isStart()) {
 			// Sessionが開始していない。
 			$ret = false;
-		} else if (null == $this->session->get('username') || '' == $this->session->get('username')) {
+		} else if (null == $this->session->get('user_id') || '' == $this->session->get('user_id')) {
 			// ログインユーザが設定されていない。
 			$ret = false;
 		} else if ('1' != $this->session->get('auth_fair')) {

@@ -16,14 +16,16 @@
  */
 class Jmesse_View_AdminFairSearch extends Jmesse_ViewClass
 {
-    /**
-     *  preprocess before forwarding.
-     *
-     *  @access public
-     */
-    function preforward()
-    {
-    }
+	/**
+	 *  preprocess before forwarding.
+	 *
+	 *  @access public
+	 */
+	function preforward()
+	{
+		// Fairの件数を取得
+		$this->af->setApp('fair_count', $this->backend->getManager('JmFair')->getCountAll());
+	}
 }
 
 ?>

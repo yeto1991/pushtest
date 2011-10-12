@@ -100,17 +100,6 @@ class Jmesse_Action_AdminFairRegist extends Jmesse_ActionClass
 	function perform()
 	{
 		// Fairの件数を取得
-		$jmFairMgr = $this->backend->getManager('jmFair');
-		if ('1' == $this->session->get('auth_user')) {
-			$fair_count = $jmFairMgr->getCountAll();
-		} else {
-			$fair_count = $jmFairMgr->getCountUser($this->af->get('username'));
-		}
-		if (Ethna::isError($fair_count)) {
-			return 'error';
-		}
-		$this->af->setApp('fair_count', $fair_count);
-
 		return 'admin_fairRegist';
 	}
 }

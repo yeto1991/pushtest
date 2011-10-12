@@ -27,15 +27,15 @@
 		<div align="center">
 			<table>
 				<tr>
-					<td colspan=3 align="left">ID、Passwordを入力してください。</td>
+					<td colspan=3 align="left">Eメール、パスワードを入力してください。</td>
 				</tr>
 				<tr>
-					<td align="left">ID</td>
+					<td align="left">Eメール</td>
 					<td>:</td>
-					<td align="left"><input type="text" name="username" id="username" value="{$form.username}"  maxlength="28" style="width:200px" /></td>
+					<td align="left"><input type="text" name="email" id="email" value="{$form.email}"  maxlength="28" style="width:200px" /></td>
 				</tr>
 				<tr>
-					<td align="left">Password</td>
+					<td align="left">パスワード</td>
 					<td>:</td>
 					<td align="left"><input type="password" name="password" id="password" value="" maxlength="8" style="width:200px;" /></td>
 				</tr>
