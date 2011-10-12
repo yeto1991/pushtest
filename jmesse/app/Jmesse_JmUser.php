@@ -16,6 +16,30 @@
  */
 class Jmesse_JmUserManager extends Ethna_AppManager
 {
+	/**
+	* Eメール重複チェック用データ取得
+	*
+	* @param string $email 登録するEメール
+	* @return string 取得結果（重複エラーの場合[DOUBLE_CHECK_OK],重複エラーではない場合[DOUBLE_CHECK_NG]）
+	*/
+	function getEmailForDoubleCheck($email) {
+		$db = $this->backend->getDB();
+		$sql = "select count(*) cnt from jm_user where email = ?";
+		$stmt =& $db->db->prepare($sql);
+		$param = array($email);
+		$res = $db->db->execute($sql, $param);
+		if (Ethna::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERROR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		if($row['cnt'] != 0){
+			return "DOUBLE_CHECK_NG";
+		}
+		return "DOUBLE_CHECK_OK";
+	}
+
 }
 
 /**
