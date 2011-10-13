@@ -1653,6 +1653,19 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 
+		'del_flg' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'データ管理者備考欄', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 
 	);
 }

@@ -1,38 +1,36 @@
 <?php
 /**
- *  Admin/FairRegistDo.php
+ *  Admin/FairChangeDo.php
  *
  *  @author     {$author}
  *  @package    Jmesse
  *  @version    $Id: 6dbb28cac61a23f06dba884c38c304aed3dcc84b $
  */
 
-require_once 'Jmesse_JmFair.php';
-require_once 'Jmesse_JmUser.php';
 require_once 'FairRegist.php';
 
 /**
- *  admin_fairRegistDo Form implementation.
+ *  admin_fairChangeDo Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_AdminFairRegistDo extends Jmesse_Form_AdminFairRegist
+class Jmesse_Form_AdminFairChangeDo extends Jmesse_Form_AdminFairRegist
 {
 }
 
 /**
- *  admin_fairRegistDo action implementation.
+ *  admin_fairChangeDo action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
+class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 {
 	/**
-	 *  preprocess of admin_fairRegistDo Action.
+	 *  preprocess of admin_fairChangeDo Action.
 	 *
 	 *  @access public
 	 *  @return string    forward name(null: success.
@@ -67,7 +65,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 				$this->ae->addObject('error', Ethna::raiseError('開催地（国・地域）が入力されていません', E_REQUIRED));
 			}
 			if ((null == $this->af->get('city_jp') || '' == $this->af->get('city_jp'))
-				&& (null == $this->af->get('othercity_jp') || '' == $this->af->get('othercity_jp'))) {
+			&& (null == $this->af->get('othercity_jp') || '' == $this->af->get('othercity_jp'))) {
 				$this->ae->addObject('error', Ethna::raiseError('開催地（都市）が入力されていません', E_REQUIRED));
 			}
 			// 入場資格
@@ -76,7 +74,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			}
 			// チケットの入手方法
 			if ('1' == $this->af->get('admission_ticket_5_jp')
-				&& (null == $this->af->get('other_admission_ticket_jp') || '' == $this->af->get('other_admission_ticket_jp'))) {
+			&& (null == $this->af->get('other_admission_ticket_jp') || '' == $this->af->get('other_admission_ticket_jp'))) {
 				$this->ae->addObject('error', Ethna::raiseError('チケットの入手方法が入力されていません', E_REQUIRED));
 			}
 		} else {
@@ -92,7 +90,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 				$this->ae->addObject('error', Ethna::raiseError('開催地（国・地域）が入力されていません', E_REQUIRED));
 			}
 			if ((null == $this->af->get('city_en') || '' == $this->af->get('city_en'))
-				&& (null == $this->af->get('othercity_en') || '' == $this->af->get('othercity_en'))) {
+			&& (null == $this->af->get('othercity_en') || '' == $this->af->get('othercity_en'))) {
 				$this->ae->addObject('error', Ethna::raiseError('開催地（都市）が入力されていません', E_REQUIRED));
 			}
 			// 入場資格
@@ -101,7 +99,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			}
 			// チケットの入手方法
 			if ('1' == $this->af->get('admission_ticket_5_en')
-				&& (null == $this->af->get('other_admission_ticket_en') || '' == $this->af->get('other_admission_ticket_en'))) {
+			&& (null == $this->af->get('other_admission_ticket_en') || '' == $this->af->get('other_admission_ticket_en'))) {
 				$this->ae->addObject('error', Ethna::raiseError('チケットの入手方法が入力されていません', E_REQUIRED));
 			}
 		}
@@ -120,6 +118,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
 			$this->ae->addObject('error', Ethna::raiseError('主催者・問合せ先が入力されていません', E_REQUIRED));
 		}
+		// 見本市番号
+		if (null == $this->af->get('mihon_no') || '' == $this->af->get('mihon_no')) {
+			$this->ae->addObject('error', Ethna::raiseError('見本市番号が入力されていません', E_REQUIRED));
+		}
+
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
@@ -130,7 +133,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 	}
 
 	/**
-	 *  admin_fairRegistDo action implementation.
+	 *  admin_fairChangeDo action implementation.
 	 *
 	 *  @access public
 	 *  @return string  forward name.
@@ -140,11 +143,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if (Ethna_Util::isDuplicatePost()) {
 			// 二重POSTの場合
 			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
-//			return 'admin_fairRegist';
+			return 'admin_fairRegist';
 		}
 
 		// JM_FAIRオブジェクトの取得
-		$jm_fair =& $this->backend->getObject('JmFair');
+		$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 
 		// Webページの表示/非表示
 		$jm_fair->set('web_display_type', $this->af->get('web_display_type'));
@@ -177,7 +180,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('select_language_info', $this->af->get('select_language_info'));
 
 		// 見本市番号
-//		$jm_fair->set('mihon_no', $this->af->get('mihon_no'));
+		//		$jm_fair->set('mihon_no', $this->af->get('mihon_no'));
 
 		// 見本市名
 		$jm_fair->set('fair_title_jp', $this->af->get('fair_title_jp'));
@@ -338,8 +341,8 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		}
 
 		// 登録情報
-		$jm_fair->set('regist_user_id', $this->session->get('user_id'));
-		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
+		$jm_fair->set('update_user_id', $this->session->get('user_id'));
+		$jm_fair->set('update_date', date('Y/m/d H:i:s'));
 
 		// 入力項目なし
 		$jm_fair->set('venue_url', '');
@@ -347,11 +350,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');
 		$jm_fair->set('regist_type', '');
-		$jm_fair->set('update_user_id', '');
-		$jm_fair->set('update_date', '');
+//		$jm_fair->set('regist_user_id', $this->session->get('user_id'));
+//		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
 
-		// INSERT
-		$ret = $jm_fair->add();
+		// UPDATE
+		$ret = $jm_fair->update();
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			return 'error';
@@ -377,15 +380,23 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 
 		// ログに登録
 		$mgr = $this->backend->getManager('adminCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '2', '2', 'regist fair');
+		if ('1' == $this->af->get('del_flg')) {
+			$ope_kbn = '4';
+			$remarks = 'delete fair';
+		} else {
+			$ope_kbn = '3';
+			$remarks = 'update fair';
+		}
+		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '2', $remarks);
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			return 'error';
 		}
 
+		// 編集モード
 		$this->af->setApp('mode', 'change');
 
-		return 'admin_fairRegist';
+		return 'admin_fairChangeDo';
 	}
 }
 

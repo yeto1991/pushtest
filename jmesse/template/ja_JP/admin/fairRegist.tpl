@@ -289,27 +289,28 @@
 		var name_file;
 		var name_list;
 		var is_exist;
-		for (i = 0; i < 3; i++) {
-			is_exist = false;
-			no = i + 1;
-			name_file = document.getElementById('photos_' + String(no)).value;
-			for (j = 0; j < document.getElementById('photos_list').length; j++) {
-				name_list = document.getElementById('photos_list').options[j].value;
-				if (name_list == name_file) {
-					is_exist = true;
-					break;
+		if (0 < document.getElementById('photos_list').length) {
+			for (i = 0; i < 3; i++) {
+				is_exist = false;
+				no = i + 1;
+				name_file = document.getElementById('photos_' + String(no)).value;
+				for (j = 0; j < document.getElementById('photos_list').length; j++) {
+					name_list = document.getElementById('photos_list').options[j].value;
+					if (name_list == name_file) {
+						is_exist = true;
+						break;
+					}
+				}
+				if (!is_exist) {
+					window.alert('ファイル名不一致');
+					return;
 				}
 			}
-			if (!is_exist) {
-				window.alert('ファイル名不一致');
-				return;
+			for (i = 0; i < document.getElementById('photos_list').length; i++) {
+				no = i + 1;
+				document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
 			}
 		}
-		for (i = 0; i < document.getElementById('photos_list').length; i++) {
-			no = i + 1;
-			document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
-		}
-
 
 		if (!window.confirm('登録します。よろしいですか？')) {
 			return;
@@ -342,7 +343,11 @@
 
 				<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
 					{uniqid}
+					{if ("regist" == $app.mode)}
 					<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
+					{else}
+					<input type="hidden" name="action_admin_fairChangeDo" id="action_admin_fairChangeDo" value="dummy">
+					{/if}
 
 					<!-- 業種（小分類） -->
 					<input type="hidden" name="tmp_sub_industory_jp" id="tmp_sub_industory_jp" value="{$form.tmp_sub_industory_jp}" />
@@ -469,7 +474,8 @@
 						</tr>
 
 						<tr>
-							<td nowrap>見本市番号</td>
+							<td nowrap>見本市番号{if ("change" == $app.mode)} <font color="#CC3333">●</font></td>{/if}</td>
+
 							<!-- 見本市番号 -->
 							<td nowrap><input type="text" name="mihon_no" id="mihon_no" value="{$app.mihon_no}" maxlength="10" size="10" /></td>
 						</tr>
@@ -1079,11 +1085,9 @@
 							<font size="-1">2. 登録された画像ファイル名が以下に表示されます。表示されない時は画面上をクリックしてください。</font><br/>
 							<input type="button" value="上へ" onClick="up_photos_list();">&nbsp;<input type="button" value="下へ" onClick="down_photos_list()">&nbsp;<input type="button" value="削除" onClick="delete_photos_list()"><br>
 							<select name="photos_list" id="photos_list" size="5" style="width:200px">
-							{if 0 < count($app.photos_list)}
 								{section name=it loop=$app.photos}
-								<option value="{$app.photos[it].value}">{$app.photos[it].text}</option>
+								<option value="{$app.photos[it]}">{$app.photos[it]}</option>
 								{/section}
-							{/if}
 							</select>
 							<input type="hidden" name="values2" value=""> <br/>
 							<font size="-1">登録されているイメージの順番は上から1番目です。<br>
@@ -1098,10 +1102,16 @@
 						</tr>
 
 						<tr>
-							<td nowrap>データ管理者備考欄:</td>
+							<td nowrap>データ管理者備考欄</td>
 							<!-- データ管理者備考欄 -->
 							<td nowrap><input type="text" name="note_for_data_manager" id="note_for_data_manager" value="{$form.note_for_data_manager}" maxlength="400" size="120" /></td>
 						</tr>
+						<tr>
+							<td nowrap>削除</td>
+							<!-- 削除フラグ -->
+							<td nowrap><input type="checkbox" name="del_flg" id="del_flg" value="1" {if ("1" ==$form.del_flg)}checked{/if} />削除
+						</tr>
+
 					</table>
 					<hr>
 
