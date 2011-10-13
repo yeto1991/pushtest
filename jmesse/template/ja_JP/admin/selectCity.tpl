@@ -1,27 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-{literal}
 <script type="text/javascript">
+{literal}
 <!--
 	function set_city() {
 		for (i = 0; i < document.getElementsByName('city').length; i++) {
+			if ('0' == document.getElementById('use_language_flag').value) {
+				window.opener.document.getElementById('city_jp').value = '';
+				window.opener.document.getElementById('city_name_jp').value = '';
+			} else {
+				window.opener.document.getElementById('city_en').value = '';
+				window.opener.document.getElementById('city_name_en').value = '';
+			}
 			if (document.getElementsByName('city')[i].checked) {
 				city = document.getElementsByName('city')[i].value.split(':');
-				window.opener.document.getElementById('city_jp').value = city[0];
-				window.opener.document.getElementById('city_name_jp').value = city[1];
+				if ('0' == document.getElementById('use_language_flag').value) {
+					window.opener.document.getElementById('city_jp').value = city[0];
+					window.opener.document.getElementById('city_name_jp').value = city[1];
+				} else {
+					window.opener.document.getElementById('city_en').value = city[0];
+					window.opener.document.getElementById('city_name_en').value = city[1];
+				}
 				break;
 			}
 		}
 		window.close();
 	}
 // -->
-</script>
 {/literal}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 	<form name="form_selectCity" id="form_selectCity" method="post" action="">
+		<input type="hidden" name="use_language_flag" id="use_language_flag" value="{$app.use_language_flag}" />
 		<input type="button" value="決定" onclick="set_city()" />
 		<input type="button" value="閉じる" onclick="window.close();" />
 		<hr />

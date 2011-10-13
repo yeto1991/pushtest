@@ -36,7 +36,7 @@ class Jmesse_Form_AdminLogin extends Jmesse_ActionForm
 		),
 		'password' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'form_type'   => FORM_TYPE_PASSWORD, // Form type
 			'name'        => 'パスワード',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value

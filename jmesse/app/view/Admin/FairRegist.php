@@ -42,6 +42,13 @@ class Jmesse_View_AdminFairRegist extends Jmesse_ViewClass
 		// 開催地（地域）
 		$this->af->setApp('region', $this->backend->getManager('JmCodeM')->getRegionList());
 
+		// 開催地（国・地域）
+		if (null != $this->af->get('region_jp') || 0 < count($this->af->get('region_jp'))) {
+			$this->af->setApp('country', $this->backend->getManager('JmCodeM')->getCountryList($this->af->get('region_jp')));
+		} else if (null != $this->af->get('region_en') || 0 < count($this->af->get('region_en'))) {
+			$this->af->setApp('country', $this->backend->getManager('JmCodeM')->getCountryList($this->af->get('region_en')));
+		}
+
 		// 入場資格
 		$this->af->setApp('open_to', $this->backend->getManager('JmCodeM')->getOpenToList());
 	}

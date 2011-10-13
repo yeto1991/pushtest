@@ -15,23 +15,28 @@
 		// 業種関連
 		var main_industory = document.getElementById('main_industory_jp').options[document.getElementById('main_industory_jp').selectedIndex].value;
 		if (null != main_industory) {
-			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=0','','#sub_industory_jp',document.getElementById('sub_industory').value);
+			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=0','','#sub_industory_jp',document.getElementById('tmp_sub_industory_jp').value);
 		}
 		main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
 		if (null != main_industory) {
-			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',document.getElementById('sub_industory').value);
+			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',document.getElementById('tmp_sub_industory_en').value);
 		}
 
 		// 開催地関連
 		var region = document.getElementById('region_jp').options[document.getElementById('region_jp').selectedIndex].value;
-		if (null != region) {
-			dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0','','#country_jp',document.getElementById('country').value);
+		if (null != document.getElementById('tmp_country_jp').value && '' != document.getElementById('tmp_country_jp').value) {
+			if (null != region && '' != region) {
+				dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0','','#country_jp',document.getElementById('tmp_country_jp').value);
+			}
 		}
-		region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
-		if (null != region) {
-			dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',document.getElementById('country').value);
+		if (null != document.getElementById('tmp_country_en').value && '' != document.getElementById('tmp_country_en').value) {
+			region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
+			if (null != region && '' != region) {
+				dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',document.getElementById('tmp_country_en').value);
+			}
 		}
 	}
+
 	/**
 	 * 業種関連。
 	 */
@@ -39,16 +44,86 @@
 		var main_industory = document.getElementById('main_industory_jp').options[document.getElementById('main_industory_jp').selectedIndex].value;
 		dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=0','','#sub_industory_jp',null);
 	}
+
 	function set_sub_industory_en() {
 		var main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
 		dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',null);
 	}
+
 	function save_sub_industory_jp() {
-		document.getElementById('sub_industory').value = document.getElementById('sub_industory_jp').options[document.getElementById('sub_industory_jp').selectedIndex].value;
+		document.getElementById('tmp_sub_industory_jp').value = document.getElementById('sub_industory_jp').options[document.getElementById('sub_industory_jp').selectedIndex].value;
 	}
+
 	function save_sub_industory_en() {
-		document.getElementById('sub_industory').value = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
+		document.getElementById('tmp_sub_industory_en').value = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
 	}
+
+	function regist_industory_jp() {
+		var main_industory = document.getElementById('main_industory_jp').options[document.getElementById('main_industory_jp').selectedIndex].value;
+		var sub_industory = document.getElementById('sub_industory_jp').options[document.getElementById('sub_industory_jp').selectedIndex].value;
+		var main_industory_str = document.getElementById('main_industory_jp').options[document.getElementById('main_industory_jp').selectedIndex].text;
+		var sub_industory_str = document.getElementById('sub_industory_jp').options[document.getElementById('sub_industory_jp').selectedIndex].text;
+		if ('' == main_industory || '' == sub_industory) {
+			window.alert('大分類と小分類の両方を選択して下さい。');
+			return;
+		}
+		if (6 == document.getElementById('industory_list_jp').options.length) {
+			window.alert('登録可能な最大数が登録されています。');
+			return;
+		}
+		for (var i = 0; i < document.getElementById('industory_list_jp').length; i++) {
+			if (document.getElementById('industory_list_jp').options[i].value == main_industory + ':' + sub_industory) {
+				window.alert(main_industory_str + '／' + sub_industory_str + 'は既に登録されています。');
+				return;
+			}
+		}
+		var op = document.createElement('option');
+		op.value = main_industory + ':' + sub_industory;
+		op.innerHTML = main_industory_str + '／' + sub_industory_str;
+		document.getElementById('industory_list_jp').appendChild(op);
+	}
+
+	function regist_industory_en() {
+		var main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
+		var sub_industory = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
+		var main_industory_str = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].text;
+		var sub_industory_str = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].text;
+		if ('' == main_industory || '' == sub_industory) {
+			window.alert('大分類と小分類の両方を選択して下さい。');
+			return;
+		}
+		if (6 == document.getElementById('industory_list_en').options.length) {
+			window.alert('登録可能な最大数が登録されています。');
+			return;
+		}
+		for (var i = 0; i < document.getElementById('industory_list_en').length; i++) {
+			if (document.getElementById('industory_list_en').options[i].value == main_industory + ':' + sub_industory) {
+				window.alert(main_industory_str + '／' + sub_industory_str + 'は既に登録されています。');
+				return;
+			}
+		}
+		var op = document.createElement('option');
+		op.value = main_industory + ':' + sub_industory;
+		op.innerHTML = main_industory_str + '／' + sub_industory_str;
+		document.getElementById('industory_list_en').appendChild(op);
+	}
+
+	function delete_industory_jp() {
+		for (var i = document.getElementById('industory_list_jp').length - 1; i >= 0; i--) {
+			if (document.getElementById('industory_list_jp').options[i].selected) {
+				document.getElementById('industory_list_jp').remove(i);
+			}
+		}
+	}
+
+	function delete_industory_en() {
+		for (var i = document.getElementById('industory_list_en').length - 1; i >= 0; i--) {
+			if (document.getElementById('industory_list_en').options[i].selected) {
+				document.getElementById('industory_list_en').remove(i);
+			}
+		}
+	}
+
 	/**
 	 * 開催地関連。
 	 */
@@ -56,31 +131,190 @@
 		var region = document.getElementById('region_jp').options[document.getElementById('region_jp').selectedIndex].value;
 		dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0','','#country_jp',null);
 	}
+
 	function set_country_en() {
 		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
 		dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',null);
 	}
+
 	function save_country_jp() {
-		document.getElementById('country').value = document.getElementById('country_jp').options[document.getElementById('country_jp').selectedIndex].value;
+		document.getElementById('tmp_country_jp').value = document.getElementById('country_jp').options[document.getElementById('country_jp').selectedIndex].value;
+		document.getElementById('city_name_jp').value = '';
+		document.getElementById('city_jp').value = '';
 	}
+
 	function save_country_en() {
-		document.getElementById('country').value = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
+		document.getElementById('tmp_country_en').value = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
+		document.getElementById('city_name_en').value = '';
+		document.getElementById('city_en').value = '';
 	}
+
 	function open_select_city_jp() {
 		var region = document.getElementById('region_jp').options[document.getElementById('region_jp').selectedIndex].value;
 		var country = document.getElementById('country_jp').options[document.getElementById('country_jp').selectedIndex].value;
 		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=0", null);
 	}
+
 	function open_select_city_en() {
 		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
 		var country = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
 		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=1", null);
 	}
-	function delete_city() {
+
+	function delete_city_jp() {
 		document.getElementById('city_jp').value = "";
 		document.getElementById('city_name_jp').value = "";
+	}
+
+	function delete_city_en() {
 		document.getElementById('city_en').value = "";
 		document.getElementById('city_name_en').value = "";
+	}
+
+	/**
+	 * 展示会に係わる画像(3点)関連。
+	 */
+	function up_photos_list() {
+		var value;
+		var text;
+		for (var i = 0; i < document.getElementById('photos_list').length; i++) {
+			if (document.getElementById('photos_list').options[i].selected) {
+				if (0 < i) {
+					value = document.getElementById('photos_list').options[i].value;
+					text = document.getElementById('photos_list').options[i].text;
+					document.getElementById('photos_list').options[i].value = document.getElementById('photos_list').options[i-1].value;
+					document.getElementById('photos_list').options[i].text = document.getElementById('photos_list').options[i-1].text;
+					document.getElementById('photos_list').options[i-1].value = value;
+					document.getElementById('photos_list').options[i-1].text = text;
+					document.getElementById('photos_list').options[i-1].selected = true;
+				}
+				break;
+			}
+		}
+	}
+
+	function down_photos_list() {
+		var value;
+		var text;
+		for (var i = document.getElementById('photos_list').length - 1; i >= 0; i--) {
+			if (document.getElementById('photos_list').options[i].selected) {
+				if (document.getElementById('photos_list').length - 1 > i) {
+					value = document.getElementById('photos_list').options[i].value;
+					text = document.getElementById('photos_list').options[i].text;
+					document.getElementById('photos_list').options[i].value = document.getElementById('photos_list').options[i+1].value;
+					document.getElementById('photos_list').options[i].text = document.getElementById('photos_list').options[i+1].text;
+					document.getElementById('photos_list').options[i+1].value = value;
+					document.getElementById('photos_list').options[i+1].text = text;
+					document.getElementById('photos_list').options[i+1].selected = true;
+				}
+				break;
+			}
+		}
+	}
+
+	function delete_photos_list() {
+		for (var i = document.getElementById('photos_list').length - 1; i >= 0; i--) {
+			if (document.getElementById('photos_list').options[i].selected) {
+				document.getElementById('photos_list').remove(i);
+			}
+		}
+	}
+
+	function add_photos(photos) {
+		var filename = document.getElementById(photos).value;
+		for (i = 0; i < document.getElementById('photos_list').length; i++) {
+			if (filename == document.getElementById('photos_list').options[i].value) {
+				window.alert('重複。')
+				return;
+			}
+		}
+		if (3 <= document.getElementById('photos_list').length) {
+			window.alert('3件まで。')
+			return;
+		}
+
+		var op = document.createElement('option');
+		op.value = document.getElementById(photos).value;
+		op.innerHTML = document.getElementById(photos).value;
+		document.getElementById('photos_list').appendChild(op);
+	}
+
+	/**
+	 * 登録。
+	 */
+	function registFair() {
+		// 業種設定
+		var i = 0;
+		var value;
+		var text;
+		var no;
+		var use_language_flag;
+		for (i = 0; i < document.getElementsByName('use_language_flag').length; i++) {
+			if (document.getElementsByName('use_language_flag')[i].checked) {
+				use_language_flag = document.getElementsByName('use_language_flag')[i].value;
+				break;
+			}
+		}
+		if ("0" == use_language_flag) {
+			for (i = 0; i < document.getElementById('industory_list_jp').length; i++) {
+				value = document.getElementById('industory_list_jp').options[i].value.split(":");
+				text = document.getElementById('industory_list_jp').options[i].text.split("／");
+				no = i + 1;
+				document.getElementById('main_industory_' + String(no)).value = value[0];
+				document.getElementById('sub_industory_' + String(no)).value = value[1];
+				document.getElementById('main_industory_name_' + String(no)).value = text[0];
+				document.getElementById('sub_industory_name_' + String(no)).value = text[1];
+			}
+		} else {
+			for (i = 0; i < document.getElementById('industory_list_en').length; i++) {
+				value = document.getElementById('industory_list_en').options[i].value.split(":");
+				text = document.getElementById('industory_list_en').options[i].text.split("／");
+				no = i + 1;
+				document.getElementById('main_industory_' + String(no)).value = value[0];
+				document.getElementById('sub_industory_' + String(no)).value = value[1];
+				document.getElementById('main_industory_name_' + String(no)).value = text[0];
+				document.getElementById('sub_industory_name_' + String(no)).value = text[1];
+			}
+		}
+		for (; i < 6; i++) {
+			no = i + 1;
+			document.getElementById('main_industory_' + String(no)).value = '';
+			document.getElementById('sub_industory_' + String(no)).value = '';
+			document.getElementById('main_industory_name_' + String(no)).value = '';
+			document.getElementById('sub_industory_name_' + String(no)).value = '';
+		}
+
+		// 展示会に係わる画像(3点)
+		var j = 0;
+		var name_file;
+		var name_list;
+		var is_exist;
+		for (i = 0; i < 3; i++) {
+			is_exist = false;
+			no = i + 1;
+			name_file = document.getElementById('photos_' + String(no)).value;
+			for (j = 0; j < document.getElementById('photos_list').length; j++) {
+				name_list = document.getElementById('photos_list').options[j].value;
+				if (name_list == name_file) {
+					is_exist = true;
+					break;
+				}
+			}
+			if (!is_exist) {
+				window.alert('ファイル名不一致');
+				return;
+			}
+		}
+		for (i = 0; i < document.getElementById('photos_list').length; i++) {
+			no = i + 1;
+			document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
+		}
+
+
+		if (!window.confirm('登録します。よろしいですか？')) {
+			return;
+		}
+		document.getElementById('form_admin_fairRegist').submit();
 	}
 // -->
 {/literal}
@@ -106,21 +340,55 @@
 				</ul>
 				{/if}
 
-				<form name="form_admin_fairRegist" method="post" action="">
-					<input type="hidden" name="action_admon_fairRegistDo" id="action_admon_fairRegistDo" value="dummy"> <font color="#CC3333">●</font>印は入力必須項目、<font color="#CC3333">○</font>は入力推奨項目です。<br> 言語選択で「日本語のみ」をつけた時は、原則 翻訳入力は必要ありません<br> （英語インターフェースでの検索対象となりません）
+				<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
+					{uniqid}
+					<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
+
 					<!-- 業種（小分類） -->
-					<input type="hidden" name="sub_industory" id="sub_industory" value="{$form.sub_industory}" />
+					<input type="hidden" name="tmp_sub_industory_jp" id="tmp_sub_industory_jp" value="{$form.tmp_sub_industory_jp}" />
+					<input type="hidden" name="tmp_sub_industory_en" id="tmp_sub_industory_en" value="{$form.tmp_sub_industory_en}" />
+					<!-- 業種登録 -->
+					<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
+					<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
+					<input type="hidden" name="main_industory_name_1" id="main_industory_name_1" value="{$form.main_industory_1}" />
+					<input type="hidden" name="sub_industory_name_1" id="sub_industory_name_1" value="{$form.sub_industory_1}" />
+					<input type="hidden" name="main_industory_2" id="main_industory_2" value="{$form.main_industory_2}" />
+					<input type="hidden" name="sub_industory_2" id="sub_industory_2" value="{$form.sub_industory_2}" />
+					<input type="hidden" name="main_industory_name_2" id="main_industory_name_2" value="{$form.main_industory_2}" />
+					<input type="hidden" name="sub_industory_name_2" id="sub_industory_name_2" value="{$form.sub_industory_2}" />
+					<input type="hidden" name="main_industory_3" id="main_industory_3" value="{$form.main_industory_3}" />
+					<input type="hidden" name="sub_industory_3" id="sub_industory_3" value="{$form.sub_industory_3}" />
+					<input type="hidden" name="main_industory_name_3" id="main_industory_name_3" value="{$form.main_industory_3}" />
+					<input type="hidden" name="sub_industory_name_3" id="sub_industory_name_3" value="{$form.sub_industory_3}" />
+					<input type="hidden" name="main_industory_4" id="main_industory_4" value="{$form.main_industory_4}" />
+					<input type="hidden" name="sub_industory_4" id="sub_industory_4" value="{$form.sub_industory_4}" />
+					<input type="hidden" name="main_industory_name_4" id="main_industory_name_4" value="{$form.main_industory_4}" />
+					<input type="hidden" name="sub_industory_name_4" id="sub_industory_name_4" value="{$form.sub_industory_4}" />
+					<input type="hidden" name="main_industory_5" id="main_industory_5" value="{$form.main_industory_5}" />
+					<input type="hidden" name="sub_industory_5" id="sub_industory_5" value="{$form.sub_industory_5}" />
+					<input type="hidden" name="main_industory_name_5" id="main_industory_name_5" value="{$form.main_industory_5}" />
+					<input type="hidden" name="sub_industory_name_5" id="sub_industory_name_5" value="{$form.sub_industory_5}" />
+					<input type="hidden" name="main_industory_6" id="main_industory_6" value="{$form.main_industory_6}" />
+					<input type="hidden" name="sub_industory_6" id="sub_industory_6" value="{$form.sub_industory_6}" />
+					<input type="hidden" name="main_industory_name_6" id="main_industory_name_6" value="{$form.main_industory_6}" />
+					<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_6}" />
 					<!-- 国・地域 -->
-					<input type="hidden" name="country" id="country" value="{$form.country}" />
+					<input type="hidden" name="tmp_country_jp" id="tmp_country_jp" value="{$form.tmp_country_jp}" />
+					<input type="hidden" name="tmp_country_en" id="tmp_country_en" value="{$form.tmp_country_en}" />
+					<!-- 展示会に係わる画像(3点) -->
+					<input type="hidden" name="photos_name_1" id="photos_name_1" value="{$form.photos_name_1}" />
+					<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
+					<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
+
+					<font color="#CC3333">●</font>印は入力必須項目、<font color="#CC3333">○</font>は入力推奨項目です。<br> 言語選択で「日本語のみ」をつけた時は、原則 翻訳入力は必要ありません<br> （英語インターフェースでの検索対象となりません）
 
 					<table border="1">
-
 						<tr>
 							<td nowrap>新規登録／コピー更新登録</td>
 							<!-- 新規登録／コピー更新登録 -->
 							<td nowrap>
-								<input type="radio" name="copy" id="copy" value="0" checked />新規登録
-								<input type="radio" name="copy" id="copy" value="1" />コピー編集登録
+								<input type="radio" name="copy" id="copy" value="0" {if ("0" == $form.copy || "1" != $form.copy)}checked{/if} />新規登録
+								<input type="radio" name="copy" id="copy" value="1" {if ("1" == $form.copy)}checked{/if} />コピー編集登録
 							</td>
 						</tr>
 
@@ -128,7 +396,7 @@
 							<td nowrap>Webページの表示／非表示 <font color="#CC3333">●</font></td>
 							<!-- Ｗｅｂページの表示／非表示 -->
 							<td nowrap>
-								<input type="radio" name="web_display_type" id="web_display_type" value="1" {if ("1" == $form.web_display_type)}checked{/if} />表示する
+								<input type="radio" name="web_display_type" id="web_display_type" value="1" {if ("1" == $form.web_display_type || "0" != $form.web_display_type)}checked{/if} />表示する
 								<input type="radio" name="web_display_type" id="web_display_type" value="0" {if ("0" == $form.web_display_type)}checked{/if} />表示しない
 							</td>
 						</tr>
@@ -140,7 +408,7 @@
 							<!-- 否認コメント -->
 							<td nowrap>
 								<input type="radio" name="confirm_flag" id="confirm_flag" value="1" {if ("1" == $form.confirm_flag)}checked{/if} />承認
-								<input type="radio" name="confirm_flag" id="confirm_flag" value="0" {if ("0" == $form.confirm_flag)}checked{/if} />承認待ち
+								<input type="radio" name="confirm_flag" id="confirm_flag" value="0" {if ("0" == $form.confirm_flag || ("1" != $form.confirm_flag && "2" != $form.confirm_flag))}checked{/if} />承認待ち
 								<input type="radio" name="confirm_flag" id="confirm_flag" value="2" {if ("2" == $form.confirm_flag)}checked{/if} />否認<br />
 								否認コメント： <input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" size="120" />
 							</td>
@@ -150,24 +418,24 @@
 							<td nowrap>メール送信フラグ <font color="#CC3333">●</font></td>
 							<!-- メール送信フラグ -->
 							<td nowrap>
-								<input type="radio" name="mail_send_flag" id="mail_send_flag" value="0" {if ("0" == $form.mail_send_flag)}checked{/if} />送信しない
-								<input type="radio" name="mail_send_flag" id="mail_send_flag" value="1" {if ("0" == $form.mail_send_flag)}checked{/if} />送信する
+								<input type="radio" name="mail_send_flag" id="mail_send_flag" value="1" {if ("1" == $form.mail_send_flag)}checked{/if} />送信しない
+								<input type="radio" name="mail_send_flag" id="mail_send_flag" value="0" {if ("0" == $form.mail_send_flag || "1" != $form.mail_send_flag)}checked{/if} />送信する
 							</td>
 						</tr>
 
 						<tr>
 							<td nowrap>ユーザ使用言語フラグ <font color="#CC3333">●</font></td>
-							<!-- 予備フラグ３ -->
+							<!-- ユーザ使用言語フラグ -->
 							<td nowrap>
-								<input type="radio" name="use_language_flag" id="use_language_flag" value="0" {if ("0" == $form.use_language_flag)}checked{/if} />日本語
+								<input type="radio" name="use_language_flag" id="use_language_flag" value="0" {if ("0" == $form.use_language_flag || "1" != $form.use_language_flag)}checked{/if} />日本語
 								<input type="radio" name="use_language_flag" id="use_language_flag" value="1" {if ("1" == $form.use_language_flag)}checked{/if} />英語
 							</td>
 						</tr>
 
 						<tr>
-							<td nowrap>ユーザID <font color="#CC3333">●</font></td>
+							<td nowrap>Eメール <font color="#CC3333">●</font></td>
 							<!-- ユーザＩＤ -->
-							<td nowrap><input type="text" name="user_id" id="user_id" value="{if (null == $form.user_id || 0 == count($form.user_id))}{$session.username}{else}{$form.user_id}{/if}" maxlength="28" size="28" />（半角英数）</td>
+							<td nowrap><input type="text" name="email" id="email" value="{$form.email}" maxlength="28" size="28" />（半角英数）</td>
 						</tr>
 
 						<tr>
@@ -194,7 +462,7 @@
 							<td nowrap>言語選択情報 <font color="#CC3333">●</font></td>
 							<!-- 言語選択情報 -->
 							<td nowrap>
-								<input type="radio" name="select_language_info" id="select_language_info" value="0" {if ("0" == $form.select_language_info)}checked{/if} />日本語
+								<input type="radio" name="select_language_info" id="select_language_info" value="0" {if ("0" == $form.select_language_info || ("1" != $form.select_language_info && "2" != $form.select_language_info))}checked{/if} />日本語
 								<input type="radio" name="select_language_info" id="select_language_info" value="2" {if ("2" == $form.select_language_info)}checked{/if} />日本語・英語両方
 								<input type="radio" name="select_language_info" id="select_language_info" value="1" {if ("1" == $form.select_language_info)}checked{/if} />英語
 							</td>
@@ -203,7 +471,7 @@
 						<tr>
 							<td nowrap>見本市番号</td>
 							<!-- 見本市番号 -->
-							<td nowrap><input type="text" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" maxlength="10" size="10" /></td>
+							<td nowrap><input type="text" name="mihon_no" id="mihon_no" value="{$app.mihon_no}" maxlength="10" size="10" /></td>
 						</tr>
 
 						<tr>
@@ -243,10 +511,10 @@
 							<td nowrap rowspan="2">ＰＲ・紹介文</td>
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
-							<td nowrap>日：<br> <textarea name="detailed_infomation_jp" id="detailed_infomation_jp" cols="100" rows="7">{$form.detailed_infomation_jp}</textarea></td>
+							<td nowrap>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="100" rows="7">{$form.detailed_information_jp}</textarea></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<br> <textarea name="detailed_infomation_en" id="detailed_infomation_en" cols="100" rows="7">{$form.detailed_infomation_en}</textarea></td>
+							<td nowrap>英：<br> <textarea name="detailed_information_en" id="detailed_information_en" cols="100" rows="7">{$form.detailed_information_en}</textarea></td>
 						</tr>
 
 						<tr>
@@ -315,7 +583,7 @@
 										<td colspan="2"><font size="-1">1. 大分類 → 小分類の順に選択してください。</font></td>
 									</tr>
 									<tr>
-										<td colspan="2">大分類<br/>
+										<td colspan="2">大分類
 											<select name="main_industory_jp" id="main_industory_jp" style="width:200px;" onchange="set_sub_industory_jp()">
 												<option value="">...</option>
 											{section name=it loop=$app.main_industory}
@@ -325,7 +593,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2">小分類<br/>
+										<td colspan="2">小分類
 											<select name="sub_industory_jp" id="sub_industory_jp" style="width:200px;" onchange="save_sub_industory_jp()">
 												<option value="">...</option>
 											</select>
@@ -335,8 +603,34 @@
 										<td colspan="2"><font size="-1">2.「登録」ボタンをクリックして下さい。</font></td>
 									</tr>
 									<tr>
-										<td><select name="industory_list_jp" id="industory_list_jp" size="4"></select></td>
-										<td><input type="button" name="ind_add" value="登録" onClick="" /><br /> <br /> <input type="button" name="ind_del" value="削除" onClick="" /></td>
+										<td>
+											<select name="industory_list_jp" id="industory_list_jp" size="4" style="width:200px;">
+											{if ("0" == $form.use_language_flag)}
+											{if (null != $form.main_industory_1 && 0 < count($form.main_industory_1))}
+												<option value="{$form.main_industory_1}:{$form.sub_industory_1}">{$form.main_industory_name_1}／{$form.sub_industory_name_1}</option>
+											{/if}
+											{if (null != $form.main_industory_2 && 0 < count($form.main_industory_2))}
+												<option value="{$form.main_industory_2}:{$form.sub_industory_2}">{$form.main_industory_name_2}／{$form.sub_industory_name_2}</option>
+											{/if}
+											{if (null != $form.main_industory_3 && 0 < count($form.main_industory_3))}
+												<option value="{$form.main_industory_3}:{$form.sub_industory_3}">{$form.main_industory_name_3}／{$form.sub_industory_name_3}</option>
+											{/if}
+											{if (null != $form.main_industory_4 && 0 < count($form.main_industory_4))}
+												<option value="{$form.main_industory_4}:{$form.sub_industory_4}">{$form.main_industory_name_4}／{$form.sub_industory_name_4}</option>
+											{/if}
+											{if (null != $form.main_industory_5 && 0 < count($form.main_industory_5))}
+												<option value="{$form.main_industory_5}:{$form.sub_industory_5}">{$form.main_industory_name_5}／{$form.sub_industory_name_5}</option>
+											{/if}
+											{if (null != $form.main_industory_6 && 0 < count($form.main_industory_6))}
+												<option value="{$form.main_industory_6}:{$form.sub_industory_6}">{$form.main_industory_name_6}／{$form.sub_industory_name_6}</option>
+											{/if}
+											{/if}
+											</select>
+										</td>
+										<td>
+											<input type="button" name="ind_add" value="登録" onClick="regist_industory_jp()" /><br /><br />
+											<input type="button" name="ind_del" value="削除" onClick="delete_industory_jp()" />
+										</td>
 									</tr>
 								</table> <font size="-1">■ 業種は6つまで登録可能です。業種を追加したい場合には1、2の作業を繰り返して下さい。 </font>
 							</td>
@@ -348,7 +642,7 @@
 										<td colspan="2"><font size="-1">1. 大分類 → 小分類の順に選択してください。</font></td>
 									</tr>
 									<tr>
-										<td colspan="2">大分類<br/>
+										<td colspan="2">大分類
 											<select name="main_industory_en" id="main_industory_en" style="width:200px;" onchange="set_sub_industory_en()">
 												<option value="">...</option>
 											{section name=it loop=$app.main_industory}
@@ -358,7 +652,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2">小分類<br/>
+										<td colspan="2">小分類
 											<select name="sub_industory_en" id="sub_industory_en" style="width:200px;" onchange="save_sub_industory_en()">
 												<option value="">...</option>
 											</select>
@@ -368,10 +662,36 @@
 										<td colspan="2"><font size="-1">2.「登録」ボタンをクリックして下さい。</font></td>
 									</tr>
 									<tr>
-										<td><select name="industory_list_jp" id="industory_list_jp" size="4"></select></td>
-										<td><input type="button" name="ind_add" value="登録" onClick="" /><br /> <br /> <input type="button" name="ind_del" value="削除" onClick="" /></td>
+										<td>
+											<select name="industory_list_en" id="industory_list_en" size="4" style="width:200px;">
+											{if ("1" == $form.use_language_flag)}
+											{if (null != $form.main_industory_1 && 0 < count($form.main_industory_1))}
+												<option value="{$form.main_industory_1}:{$form.sub_industory_1}">{$form.main_industory_name_1}／{$form.sub_industory_name_1}</option>
+											{/if}
+											{if (null != $form.main_industory_2 && 0 < count($form.main_industory_2))}
+												<option value="{$form.main_industory_2}:{$form.sub_industory_2}">{$form.main_industory_name_2}／{$form.sub_industory_name_2}</option>
+											{/if}
+											{if (null != $form.main_industory_3 && 0 < count($form.main_industory_3))}
+												<option value="{$form.main_industory_3}:{$form.sub_industory_3}">{$form.main_industory_name_3}／{$form.sub_industory_name_3}</option>
+											{/if}
+											{if (null != $form.main_industory_4 && 0 < count($form.main_industory_4))}
+												<option value="{$form.main_industory_4}:{$form.sub_industory_4}">{$form.main_industory_name_4}／{$form.sub_industory_name_4}</option>
+											{/if}
+											{if (null != $form.main_industory_5 && 0 < count($form.main_industory_5))}
+												<option value="{$form.main_industory_5}:{$form.sub_industory_5}">{$form.main_industory_name_5}／{$form.sub_industory_name_5}</option>
+											{/if}
+											{if (null != $form.main_industory_6 && 0 < count($form.main_industory_6))}
+												<option value="{$form.main_industory_6}:{$form.sub_industory_6}">{$form.main_industory_name_6}／{$form.sub_industory_name_6}</option>
+											{/if}
+											{/if}
+											</select>
+										</td>
+										<td>
+											<input type="button" name="ind_add" value="登録" onClick="regist_industory_en()" /><br /><br />
+											<input type="button" name="ind_del" value="削除" onClick="delete_industory_en()" />
+										</td>
 									</tr>
-								</table> <font size="-1">■ 業種は6つまで登録可能です。業種を追加したい場合には1、2の作業を繰り返して下さい。 </font> <!--  2002.10.24 add [  end  ] infocom  -->
+								</table> <font size="-1">■ 業種は6つまで登録可能です。業種を追加したい場合には1、2の作業を繰り返して下さい。 </font>
 							</td>
 						</tr>
 
@@ -427,6 +747,9 @@
 										<td>
 										<select name="country_jp" id="country_jp" style="width:200px;" onchange="save_country_jp()">
 											<option value="">...</option>
+										{section name=it loop=$app.country}
+											<option value="{$app.country[it].kbn_3}" {if ($form.country_jp == $app.country[it].kbn_3)}selected{/if}>{$app.country[it].discription_jp}</option>
+										{/section}
 										</select>
 										</td>
 										<td colspan="2"></td>
@@ -439,13 +762,13 @@
 											<a href="javascript:open_select_city_jp();">都市を選択</a>
 											<input type="text" name="city_name_jp" id="city_name_jp" value="{$form.city_name_jp}" readonly/>
 											<input type="hidden" name="city_jp" id="city_jp" value="{$form.city_jp}" />
-											<input type="button" value="削除" onClick="delete_city()"></td>
+											<input type="button" value="削除" onClick="delete_city_jp()"></td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
-										<td><input type="checkbox" name="othercity_jp" value="その他" onFocus=""> その他</td>
+										<td><input type="checkbox" name="othercity_jp" value="1" {if ("1" == $form.othercity_jp)}checked{/if} /> その他</td>
 										<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td></td>
+										<td><input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" /></td>
 									</tr>
 								</table> <font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font>
 
@@ -480,6 +803,9 @@
 										<td>
 										<select name="country_en" id="country_en" style="width:200px;" onchange="save_country_en()">
 											<option value="">...</option>
+										{section name=it loop=$app.country}
+											<option value="{$app.country[it].kbn_3}" {if ($form.country_en == $app.country[it].kbn_3)}selected{/if}>{$app.country[it].discription_en}</option>
+										{/section}
 										</select>
 										</td>
 										<td colspan="2"></td>
@@ -490,13 +816,13 @@
 										<td colspan="2"><a href="javascript:open_select_city_en();">都市を選択</a>
 										<input type="text" name="city_name_en" id="city_name_en" value="{$form.city_name_en}" readonly/>
 										<input type="hidden" name="city_en" id="city_en" value="{$form.city_en}" />
-										<input type="button" value="削除" onClick=""></td>
+										<input type="button" value="削除" onClick="delete_city_en()"></td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
-										<td><input type="checkbox" name="othercity_en" value="Other" onFocus=""> Others</td>
+										<td><input type="checkbox" name="othercity_en" value="1" {if ("1" == $form.othercity_en)}checked{/if} /> Others</td>
 										<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><font color="#CC3333">（翻訳）</font></td>
+										<td><input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" /><font color="#CC3333">（翻訳）</font></td>
 									</tr>
 								</table> <font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font> <!--  2002.10.24 add [  end  ] infocom  -->
 							</td>
@@ -506,10 +832,10 @@
 							<td nowrap rowspan="2">会場名 <font color="#CC3333">●</font></td>
 							<!-- 会場名(日) -->
 							<!-- 会場名(英) -->
-							<td nowrap>日：<input type="text" name="venus_jp" id="venus_jp" value="{$form.venus_jp}" maxlength="255" size="120" /></td>
+							<td nowrap>日：<input type="text" name="venue_jp" id="venue_jp" value="{$form.venue_jp}" maxlength="255" size="120" /></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<input type="text" name="venus_en" id="venus_en" value="{$form.venus_en}" maxlength="255" size="120" /></td>
+							<td nowrap>英：<input type="text" name="venue_en" id="venue_en" value="{$form.venue_en}" maxlength="255" size="120" /></td>
 						</tr>
 
 						<tr>
@@ -559,7 +885,7 @@
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
 						<tr>
-							<td nowrap>日：z<br/>
+							<td nowrap>日：<br/>
 							<table>
 							<tr>
 							<td><input type="checkbox" name="admission_ticket_1_jp" id="admission_ticket_1_jp" value="1" {if ("1" == $form.admission_ticket_1_jp)}checked{/if} />登録の必要なし</td>
@@ -586,7 +912,7 @@
 							<td><input type="checkbox" name="admission_ticket_4_en" id="admission_ticket_4_en" value="1" {if ("1" == $form.admission_ticket_4_en)}checked{/if} />Available at the Gate</td>
 							</tr>
 							<tr>
-							<td colspan="2"><input type="checkbox" name="admission_ticket_5_en" id="admission_ticket_5_en" value="1" {if ("1" == $form.admission_ticket_5_en)}checked{/if} />Others <input type="text" name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_jp}" maxlenth="100" size="100" /></td>
+							<td colspan="2"><input type="checkbox" name="admission_ticket_5_en" id="admission_ticket_5_en" value="1" {if ("1" == $form.admission_ticket_5_en)}checked{/if} />Others <input type="text" name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" maxlenth="100" size="100" /></td>
 							</table>
 							</td>
 						</tr>
@@ -603,9 +929,8 @@
 							<td nowrap>
 								<table border="0">
 									<tr>
-
 										<td>&nbsp;</td>
-										<td colspan="2"><input type="text" name="app_dead_yyyy" id="app_dead_yyyy" value="{$form.app_dead_yyyy}" maxlength="4" size="10" /> 年実績（西暦４桁）</td>
+										<td colspan="2"><input type="text" name="year_of_the_trade_fair" id="year_of_the_trade_fair" value="{$form.year_of_the_trade_fair}" maxlength="4" size="10" /> 年実績（西暦４桁）</td>
 										<td colspan="2">&nbsp;</td>
 									</tr>
 									<tr>
@@ -748,12 +1073,18 @@
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
 							<td><font size="-1">1.「参照」ボタンをクリックして登録する画像ファイルを選択してください。最大3つまで登録できます。（JPEG, GIF, TIFF 形式のみ）</font><br/><br/>
-							<input type="file" name="photos_1" id="photos_1" size=50 onBlur=""><br/>
-							<input type="file" name="photos_2" id="photos_2" size=50 onBlur=""><br/>
-							<input type="file" name="photos_3" id="photos_3" size=50 onBlur=""><br/>
+							<input type="file" name="photos_1" id="photos_1" size=50 onBlur="add_photos('photos_1')" /><br/>
+							<input type="file" name="photos_2" id="photos_2" size=50 onBlur="add_photos('photos_2')"><br/>
+							<input type="file" name="photos_3" id="photos_3" size=50 onBlur="add_photos('photos_3')"><br/>
 							<font size="-1">2. 登録された画像ファイル名が以下に表示されます。表示されない時は画面上をクリックしてください。</font><br/>
-							<input type="button" value="上へ" onClick="">&nbsp;<input type="button" value="下へ" onClick="">&nbsp;<input type="button" value="削除" onClick=""><br>
-							<select name="filelist2" size=5><option></select>
+							<input type="button" value="上へ" onClick="up_photos_list();">&nbsp;<input type="button" value="下へ" onClick="down_photos_list()">&nbsp;<input type="button" value="削除" onClick="delete_photos_list()"><br>
+							<select name="photos_list" id="photos_list" size="5" style="width:200px">
+							{if 0 < count($app.photos_list)}
+								{section name=it loop=$app.photos}
+								<option value="{$app.photos[it].value}">{$app.photos[it].text}</option>
+								{/section}
+							{/if}
+							</select>
 							<input type="hidden" name="values2" value=""> <br/>
 							<font size="-1">登録されているイメージの順番は上から1番目です。<br>
 							詳細表示するときには左から1番目を表示します。</font>
@@ -774,10 +1105,11 @@
 					</table>
 					<hr>
 
-					<input type="button" value="登録" onclick="" />
+					<input type="button" value="登録" onclick="registFair()" />
 				</form>
 			</td>
 		</tr>
 	</table>
 </body>
 </html>
+{debug}

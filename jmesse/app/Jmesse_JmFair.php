@@ -68,7 +68,7 @@ class Jmesse_JmFair extends Ethna_AppObject
 	 */
 	var $table_def = array(
 		'jm_fair' => array(
-		'primary' => true,
+			'primary' => true,
 		),
 	);
 

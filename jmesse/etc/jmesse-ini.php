@@ -7,6 +7,7 @@
 $config = array(
 // site
 	'url' => '',
+	'img_path' => 'img/',
 
 // debug
 // (to enable ethna_info and ethna_unittest, turn this true)

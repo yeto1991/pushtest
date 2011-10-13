@@ -1,4 +1,4 @@
-create table jmesse.jm_code_m(
+create table jmesse.jm_code_m( 
   kbn_1 varchar (3) not null
   , kbn_2 varchar (3) not null
   , kbn_3 varchar (3) not null

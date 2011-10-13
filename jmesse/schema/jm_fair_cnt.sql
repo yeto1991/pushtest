@@ -1,8 +1,9 @@
 create table jmesse.jm_fair_cnt( 
-  category_kbn char (1) not null
-  , kind_kbn char (1) not null
+  kbn_1 varchar (3) not null
+  , kbn_2 varchar (3) not null
+  , kbn_3 varchar (3) not null
+  , kbn_4 varchar (3) not null
   , venue_kbn char (1) not null
   , fair_cnt int not null
-  , primary key (category_kbn, kind_kbn, venue_kbn)
+  , primary key (kbn_1, kbn_2, kbn_3, kbn_4, venue_kbn)
 ) engine = innodb
-
