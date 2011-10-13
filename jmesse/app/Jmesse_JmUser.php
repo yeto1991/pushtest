@@ -28,8 +28,8 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		$stmt =& $db->db->prepare($sql);
 		$param = array($email);
 		$res = $db->db->execute($sql, $param);
-		if (Ethna::isError($res)) {
-			$this->backend->getLogger()->log(LOG_ERROR, '検索Errorが発生しました。');
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->ae->addObject('error', $res);
 			return $res;
 		}
@@ -40,6 +40,67 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		return "DOUBLE_CHECK_OK";
 	}
 
+	/**
+	* ユー情報検索画面 検索処理。
+	*
+	* @return array<string>：検索結果、null：データなし、DB::Error()：エラー
+	*/
+	function getUserInfoList($searchConditions) {
+		$db = $this->backend->getDB();
+		if($searchConditions != null){
+			$sql = 'select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user ? order by user_id asc';
+			$stmt =& $db->db->prepare($sql);
+			$param = array($searchConditions);
+			$res = $db->db->execute($stmt, $param);
+		}else{
+			$sql = 'select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user order by user_id asc';
+			$res = $db->query($sql);
+		}
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$data[$i] = $tmp;
+			$i ++;
+		}
+		return $data;
+	}
+
+	/**
+	* ユー情報検索画面 検索処理 総件数取得。
+	*
+	* @return array<string>：検索結果件数、null：データなし、DB::Error()：エラー
+	*/
+	function getUserInfoListCount($searchConditions) {
+		$db = $this->backend->getDB();
+		if($searchConditions != null){
+			$sql = 'select count(*) cnt from jm_user ? order by user_id asc';
+			$stmt =& $db->db->prepare($sql);
+			$param = array($searchConditions);
+			$res = $db->db->execute($sql, $param);
+		}else{
+			$sql = 'select count(*) cnt from jm_user order by user_id asc';
+			$res = $db->query($sql);
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
 }
 
 /**

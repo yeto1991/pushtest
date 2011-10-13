@@ -1,7 +1,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript">
+<!--
+{literal}
+function check_dialog(msg){
+  if(confirm(msg)){
+	  document.getElementById('form_admin_userRegist').submit();
+  }
+}
+function init(){
+	//セッション？で判別？
+	  if(confirm(msg)){
+		  document.getElementById('form_admin_userRegist').submit();
+	  }
+	}
+{/literal}
+-->
+</script>
 <title>ユーザ管理</title>
 </head>
 <body>
@@ -111,7 +128,14 @@
 								<td nowrap style=text-align:left>
 									<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="0" {if $form.idpassNoticeCd == "0"} checked {/if}>日本語で送信
 									<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="1" {if $form.idpassNoticeCd == "1"} checked {/if}>英語で送信
-									<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="2" {if $form.genderCd != "0" && $form.genderCd != "1"} checked {/if}>変更しない
+									<input type="radio" name="idpassNoticeCd" id="idpassNoticeCd" value="2" {if $form.idpassNoticeCd != "0" && $form.idpassNoticeCd != "1"} checked {/if}>変更しない
+								</td>
+							</tr>
+							<tr>
+								<th nowrap style=text-align:left>削除フラグ<font color="#CC3333"></font></th>
+								<td nowrap style=text-align:left>
+									<input type="radio" name="delFlg" id="delFlg" value="0" {if $form.delFlg != "1"} checked {/if}>未削除
+									<input type="radio" name="delFlg" id="delFlg" value="1" {if $form.delFlg == "1"} checked {/if}>削除済
 								</td>
 							</tr>
 						</table>
@@ -119,7 +143,7 @@
 			</tr>
 			<tr>
 				<td>
-					<br><div align="left"><input type="submit" value="登録"></div>
+					<br><div align="left"><input type="button" value="登録" onclick="check_dialog('登録してもよろしいですか？')"></div>
 				</td>
 			</tr>
 		</table>

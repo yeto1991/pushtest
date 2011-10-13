@@ -98,8 +98,12 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 			$jm_user->set('auth_fair', '0');
 		}
 		$jm_user->set('idpass_notice_cd', $this->af->get('idpassNoticeCd'));
-		$jm_user->set('del_flg', '0');
-		$jm_user->set('del_date', null);
+		$jm_user->set('del_flg', $this->af->get('delFlg'));
+		if ($this->af->get('delFlg') == 1) {
+			$jm_user->set('del_date', date('Y/m/d H:i:s'));
+		}else{
+			$jm_user->set('del_date', null);
+		}
 		$jm_user->set('regist_user_id', $this->session->get('username'));
 		$jm_user->set('regist_date', date('Y/m/d H:i:s'));
 		$jm_user->set('update_user_id', null);
@@ -126,7 +130,7 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 			return 'error';
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, 'ユーザ新規登録完了');
-		return 'admin_userRegistDo';
+		return 'admin_userRegist';
 	}
 }
 
