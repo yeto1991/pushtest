@@ -7,7 +7,7 @@
  *  @version    $Id: 6dbb28cac61a23f06dba884c38c304aed3dcc84b $
  */
 
-require_once 'FairRegist.php';
+require_once 'FairChange.php';
 
 /**
  *  admin_fairChangeDo Form implementation.
@@ -16,7 +16,7 @@ require_once 'FairRegist.php';
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_AdminFairChangeDo extends Jmesse_Form_AdminFairRegist
+class Jmesse_Form_AdminFairChangeDo extends Jmesse_Form_AdminFairChange
 {
 }
 
@@ -145,6 +145,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
 			return 'admin_fairRegist';
 		}
+
+		if ("1" == $this)
 
 		// JM_FAIRオブジェクトの取得
 		$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));

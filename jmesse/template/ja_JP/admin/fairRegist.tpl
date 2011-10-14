@@ -328,7 +328,7 @@
 			<td valign="top" style="width: 200px;">{include file="admin/menu.tpl"}</td>
 			<td valign="top">
 				<div align="center">
-					<font size="5"><b>見本市ＤＢ 管理者用</b></font>
+					<font size="5"><b>見本市ＤＢ 管理者用（{if ("regist" == $app.mode)}新規登録{else}更新・コピー登録{/if}）</b></font>
 				</div>
 				<hr>
 
@@ -339,6 +339,10 @@
 					<li><font color="#ff0000">{$error}</font></li>
 					{/foreach}
 				</ul>
+				{/if}
+
+				{if ("1" == $app.success)}
+				<b><font color="#ff0000"><br/>登録しました。<br/><br/></font></b>
 				{/if}
 
 				<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
@@ -388,6 +392,13 @@
 					<font color="#CC3333">●</font>印は入力必須項目、<font color="#CC3333">○</font>は入力推奨項目です。<br> 言語選択で「日本語のみ」をつけた時は、原則 翻訳入力は必要ありません<br> （英語インターフェースでの検索対象となりません）
 
 					<table border="1">
+						{if ("change" == $app.mode)}
+						<tr>
+							<td nowrap>見本市番号</td>
+							<!-- 見本市番号 -->
+							<td nowrap>{$app.mihon_no}<input type="hidden" name="mihon_no" id="mihon_no" value="{$app.mihon_no}" /></td>
+						</tr>
+
 						<tr>
 							<td nowrap>新規登録／コピー更新登録</td>
 							<!-- 新規登録／コピー更新登録 -->
@@ -396,6 +407,7 @@
 								<input type="radio" name="copy" id="copy" value="1" {if ("1" == $form.copy)}checked{/if} />コピー編集登録
 							</td>
 						</tr>
+						{/if}
 
 						<tr>
 							<td nowrap>Webページの表示／非表示 <font color="#CC3333">●</font></td>
@@ -407,7 +419,6 @@
 						</tr>
 
 						<tr>
-
 							<td nowrap>承認フラグ <font color="#CC3333">●</font></td>
 							<!-- 承認フラグ -->
 							<!-- 否認コメント -->
@@ -471,13 +482,6 @@
 								<input type="radio" name="select_language_info" id="select_language_info" value="2" {if ("2" == $form.select_language_info)}checked{/if} />日本語・英語両方
 								<input type="radio" name="select_language_info" id="select_language_info" value="1" {if ("1" == $form.select_language_info)}checked{/if} />英語
 							</td>
-						</tr>
-
-						<tr>
-							<td nowrap>見本市番号{if ("change" == $app.mode)} <font color="#CC3333">●</font></td>{/if}</td>
-
-							<!-- 見本市番号 -->
-							<td nowrap><input type="text" name="mihon_no" id="mihon_no" value="{$app.mihon_no}" maxlength="10" size="10" /></td>
 						</tr>
 
 						<tr>

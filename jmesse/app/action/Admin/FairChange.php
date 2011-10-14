@@ -1,6 +1,6 @@
 <?php
 /**
- *  Admin/FairRegist.php
+ *  Admin/FairChange.php
  *
  *  @author     {$author}
  *  @package    Jmesse
@@ -8,24 +8,37 @@
  */
 
 /**
- *  admin_fairRegist Form implementation.
+ *  admin_fairChange Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
+class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 {
 	/**
 	 *  @access private
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
+		'success' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '成功',          // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'copy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_RADIO, // Form type
 			'name'        => '新規登録／コピー更新登録', // Display name
-			'required'    => false,            // Required Option(true/false)
+			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -207,7 +220,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市番号',    // Display name
-			'required'    => false,           // Required Option(true/false)
+			'required'    => true,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1666,21 +1679,20 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
 	);
 }
 
 /**
- *  admin_fairRegist action implementation.
+ *  admin_fairChange action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Action_AdminFairRegist extends Jmesse_ActionClass
+class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 {
 	/**
-	 *  preprocess of admin_fairRegist Action.
+	 *  preprocess of admin_fairChange Action.
 	 *
 	 *  @access public
 	 *  @return string    forward name(null: success.
@@ -1688,23 +1700,22 @@ class Jmesse_Action_AdminFairRegist extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ログインチェック
-		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
-			return 'admin_Login';
-		}
-
 		return null;
 	}
 
 	/**
-	 *  admin_fairRegist action implementation.
+	 *  admin_fairChange action implementation.
 	 *
 	 *  @access public
 	 *  @return string  forward name.
 	 */
 	function perform()
 	{
-		$this->af->setApp('mode', 'regist');
+		// 成功？
+		$this->af->setApp('success', $this->af->get('success'));
+
+		// 表示モード（更新）
+		$this->af->setApp('mode', 'change');
 
 		return 'admin_fairRegist';
 	}

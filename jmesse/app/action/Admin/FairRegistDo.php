@@ -383,9 +383,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// 表示モード（更新）
 		$this->af->setApp('mode', 'change');
 
-		return 'admin_fairRegist';
+		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_id='.$jm_fair->get('mihon_no'));
+		return null;
 	}
 }
 
