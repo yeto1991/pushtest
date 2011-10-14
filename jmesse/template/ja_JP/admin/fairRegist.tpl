@@ -400,8 +400,8 @@
 		<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 		<table width="100%">
 			<tr>
-				<td valign="top">{include file="admin/menu.tpl"}</td>
-				<td valign="top">
+				<td valign="top" width="200">{include file="admin/menu.tpl"}</td>
+				<td valign="top" >
 					<div align="center">
 						<font size="5"><b>見本市ＤＢ 管理者用（
 {if ("regist" == $form.mode)}新規登録
@@ -522,6 +522,7 @@
 						<tr>
 							<td nowrap>英：<input type="text" name="fair_title_en" id="fair_title_en" value="{$form.fair_title_en}" maxlength="255" size="100" /></td>
 						</tr>
+
 						<tr>
 							<td nowrap>見本市略称</td>
 							<!-- 見本市略称(英) -->
@@ -529,6 +530,7 @@
 
 							</td>
 						</tr>
+
 						<tr>
 							<td nowrap>見本市URL</td>
 							<!-- 見本市ＵＲＬ -->
@@ -813,8 +815,6 @@
 						</tr>
 						<tr>
 							<td nowrap>英：
-
-
 								<table border="0">
 									<tr>
 										<td colspan="4"><font size="-1">1.地域 → 2.国 → 3.都市の順に選択してください。</font></td>
@@ -993,6 +993,7 @@
 								</table> <font size="-1">■出展者数の多いデータが検索結果で上位に表示されます。</font>
 							</td>
 						</tr>
+
 						<tr>
 							<td nowrap>出展申込締切日</td>
 							<!-- 出典申込締切日 -->
@@ -1065,7 +1066,7 @@
 									</tr>
 									<tr>
 										<td nowrap>住所</td>
-										<td><input type="text" name="agency_in_japan_addr" id="agency_in_japan_addr" value="{$form.agency_in_japan_addr}" maxlength="255" size="190" /></td>
+										<td><input type="text" name="agency_in_japan_addr" id="agency_in_japan_addr" value="{$form.agency_in_japan_addr}" maxlength="255" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>担当部課</td>
@@ -1140,7 +1141,6 @@
 							<!-- 削除フラグ -->
 							<td nowrap><input type="checkbox" name="del_flg" id="del_flg" value="1" {if ("1" ==$form.del_flg)}checked{/if} />削除
 						</tr>
-
 					</table>
 					<hr>
 					<input type="button" value="登録" onclick="registFair()" />
