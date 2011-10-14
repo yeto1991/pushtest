@@ -138,7 +138,7 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		if (Ethna_Util::isDuplicatePost()) {
 			// 二重POSTの場合
 			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
-			header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$jm_fair->get('mihon_no').'&mode=change');
+			header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$this->af->get('mihon_no').'&mode=change');
 			return null;
 		}
 
@@ -190,12 +190,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('fair_url', $this->af->get('fair_url'));
 
 		// キャッチフレーズ
-		$jm_fair->set('profile_jp', str_replace('\n', '<br/>', $this->af->get('profile_jp')));
-		$jm_fair->set('profile_en', str_replace('\n', '<br/>', $this->af->get('profile_en')));
+		$jm_fair->set('profile_jp', str_replace("\n", '<br/>', $this->af->get('profile_jp')));
+		$jm_fair->set('profile_en', str_replace("\n", '<br/>', $this->af->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$jm_fair->set('detailed_information_jp', str_replace('\n', '<br/>', $this->af->get('detailed_information_jp')));
-		$jm_fair->set('detailed_information_en', str_replace('\n', '<br/>', $this->af->get('detailed_information_en')));
+		$jm_fair->set('detailed_information_jp', str_replace("\n", '<br/>', $this->af->get('detailed_information_jp')));
+		$jm_fair->set('detailed_information_en', str_replace("\n", '<br/>', $this->af->get('detailed_information_en')));
 
 		// 会期
 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
@@ -227,8 +227,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('sub_industory_6', $this->af->get('sub_industory_6'));
 
 		// 出品物
-		$jm_fair->set('exhibits_jp', str_replace('\n', '<br/>', $this->af->get('exhibits_jp')));
-		$jm_fair->set('exhibits_en', str_replace('\n', '<br/>', $this->af->get('exhibits_en')));
+		$jm_fair->set('exhibits_jp', str_replace("\n", '<br/>', $this->af->get('exhibits_jp')));
+		$jm_fair->set('exhibits_en', str_replace("\n", '<br/>', $this->af->get('exhibits_en')));
 
 		// 開催地
 		if ('0' == $use_language_flag) {
@@ -359,15 +359,24 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		}
 		$this->af->setApp('mihon_no', $jm_fair->get('mihon_no'));
 
+		// 画像ファイルの削除
+		$del_photos_name = $this->af->get('del_photos_name');
+		for ($i = 0; $i < count($del_photos_name); $i++) {
+			if (null == $del_photos_name[$i] || '' == $del_photos_name[$i]) {
+				continue;
+			}
+			$this->backend->getLogger()->log(LOG_DEBUG, $this->config->get('img_path').$del_photos_name[$i].'削除します。');
+			unlink($this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$del_photos_name[$i]);
+		}
+
 		// 画像ファイルの保存
 		$photos_list = array();
 		$idx = 0;
-		mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
 		for ($i = 1; $i <= 3; $i++) {
 			$name_list = $this->af->get('photos_name_'.$i);
 			for ($j = 1; $j <=3; $j++) {
 				$file = $this->af->get('photos_'.$j);
-				if ($name_list == $file['name']) {
+				if (null != $file && $name_list == $file['name']) {
 					rename($file['tmp_name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$file['name']);
 					$photos_list[$idx++] = $name_list;
 					break;
@@ -392,7 +401,7 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		}
 
 		// 変更画面へ遷移
-		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$jm_fair->get('mihon_no').'&mode=change&success=1');
+		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$this->af->get('mihon_no').'&mode=change&success=1');
 		return null;
 	}
 }

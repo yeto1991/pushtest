@@ -1642,6 +1642,19 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'del_photos_name' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '削除した画像ファイル', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 
 		'note_for_system_manager' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1790,12 +1803,12 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('fair_url', $jm_fair->get('fair_url'));
 
 		// キャッチフレーズ
-		$this->af->set('profile_jp', str_replace('<br/>', '\n', $jm_fair->get('profile_jp')));
-		$this->af->set('profile_en', str_replace('<br/>', '\n', $jm_fair->get('profile_en')));
+		$this->af->set('profile_jp', str_replace('<br/>', "\n", $jm_fair->get('profile_jp')));
+		$this->af->set('profile_en', str_replace('<br/>', "\n", $jm_fair->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$this->af->set('detailed_information_jp', str_replace('<br/>', '\n', $jm_fair->get('detailed_information_jp')));
-		$this->af->set('detailed_information_en', str_replace('<br/>', '\n', $jm_fair->get('detailed_information_en')));
+		$this->af->set('detailed_information_jp', str_replace('<br/>', "\n", $jm_fair->get('detailed_information_jp')));
+		$this->af->set('detailed_information_en', str_replace('<br/>', "\n", $jm_fair->get('detailed_information_en')));
 
 		// 会期
 		$this->af->set('date_from_yyyy', $jm_fair->get('date_from_yyyy'));
@@ -1827,8 +1840,8 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('sub_industory_6', $jm_fair->get('sub_industory_6'));
 
 		// 出品物
-		$this->af->set('exhibits_jp', str_replace('<br/>', '\n', $jm_fair->get('exhibits_jp')));
-		$this->af->set('exhibits_en', str_replace('<br/>', '\n', $jm_fair->get('exhibits_en')));
+		$this->af->set('exhibits_jp', str_replace('<br/>', "\n", $jm_fair->get('exhibits_jp')));
+		$this->af->set('exhibits_en', str_replace('<br/>', "\n", $jm_fair->get('exhibits_en')));
 
 		// 開催地
 		if ('0' == $use_language_flag) {
@@ -1934,7 +1947,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		if (null != $jm_fair->get('photos_3') && '' != $jm_fair->get('photos_3')) {
 			$photo_list[$i++] = $jm_fair->get('photos_3');
 		}
-		$this->af->setApp('photo_list', $photo_list);
+		$this->af->setApp('photos', $photo_list);
 
 		// システム管理者備考欄
 		$this->af->set('note_for_system_manager', $jm_fair->get('note_for_system_manager'));

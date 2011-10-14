@@ -191,12 +191,12 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('fair_url', $this->af->get('fair_url'));
 
 		// キャッチフレーズ
-		$jm_fair->set('profile_jp', str_replace('\n', '<br/>', $this->af->get('profile_jp')));
-		$jm_fair->set('profile_en', str_replace('\n', '<br/>', $this->af->get('profile_en')));
+		$jm_fair->set('profile_jp', str_replace("\n", '<br/>', $this->af->get('profile_jp')));
+		$jm_fair->set('profile_en', str_replace("\n", '<br/>', $this->af->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$jm_fair->set('detailed_information_jp', str_replace('\n', '<br/>', $this->af->get('detailed_information_jp')));
-		$jm_fair->set('detailed_information_en', str_replace('\n', '<br/>', $this->af->get('detailed_information_en')));
+		$jm_fair->set('detailed_information_jp', str_replace("\n", '<br/>', $this->af->get('detailed_information_jp')));
+		$jm_fair->set('detailed_information_en', str_replace("\n", '<br/>', $this->af->get('detailed_information_en')));
 
 		// 会期
 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
@@ -228,8 +228,8 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('sub_industory_6', $this->af->get('sub_industory_6'));
 
 		// 出品物
-		$jm_fair->set('exhibits_jp', str_replace('\n', '<br/>', $this->af->get('exhibits_jp')));
-		$jm_fair->set('exhibits_en', str_replace('\n', '<br/>', $this->af->get('exhibits_en')));
+		$jm_fair->set('exhibits_jp', str_replace("\n", '<br/>', $this->af->get('exhibits_jp')));
+		$jm_fair->set('exhibits_en', str_replace("\n", '<br/>', $this->af->get('exhibits_en')));
 
 		// 開催地
 		if ('0' == $use_language_flag) {
@@ -366,7 +366,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			$name_list = $this->af->get('photos_name_'.$i);
 			for ($j = 1; $j <=3; $j++) {
 				$file = $this->af->get('photos_'.$j);
-				if ($name_list == $file['name']) {
+				if (null != $file && $name_list == $file['name']) {
 					rename($file['tmp_name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$file['name']);
 					$photos_list[$idx++] = $name_list;
 					break;

@@ -213,15 +213,32 @@
 	}
 
 	function delete_photos_list() {
+		var delfiletag;
 		for (var i = document.getElementById('photos_list').length - 1; i >= 0; i--) {
 			if (document.getElementById('photos_list').options[i].selected) {
+				delfiletag = document.createElement('input');
+				delfiletag.type = 'hidden';
+				delfiletag.name = 'del_photos_name[]';
+				delfiletag.id = 'del_photos_name[]';
+				delfiletag.value = document.getElementById('photos_list').options[i].value;
+				document.getElementById('form_admin_fairRegist').appendChild(delfiletag);
 				document.getElementById('photos_list').remove(i);
 			}
 		}
 	}
 
 	function add_photos(photos) {
-		var filename = document.getElementById(photos).value;
+		var path = document.getElementById(photos).value;
+		if ('' == path) {
+			return;
+		}
+
+		var paths = path.split('\\');
+		if (1 == paths.length) {
+			paths = path.split('/');
+		}
+		var filename = paths[paths.length - 1];
+
 		for (i = 0; i < document.getElementById('photos_list').length; i++) {
 			if (filename == document.getElementById('photos_list').options[i].value) {
 				window.alert('重複。')
@@ -234,8 +251,8 @@
 		}
 
 		var op = document.createElement('option');
-		op.value = document.getElementById(photos).value;
-		op.innerHTML = document.getElementById(photos).value;
+		op.value = filename;
+		op.innerHTML = filename;
 		document.getElementById('photos_list').appendChild(op);
 	}
 
@@ -376,6 +393,7 @@
 		<input type="hidden" name="photos_name_1" id="photos_name_1" value="{$form.photos_name_1}" />
 		<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
 		<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
+		<input type="hidden" name="del_photos_name[]" id="del_photos_name[]" value="" />
 		<!-- 見本市番号 -->
 		<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 		<!-- 登録モード -->
@@ -405,7 +423,7 @@
 
 					{* 成功 *}
 					{if ("1" == $app.success)}
-					<b><font color="#ff0000"><br/>登録しました。<br/><br/></font></b>
+					<center><b><font color="#ff0000"><br/>登録しました。<br/><br/></font></b></center>
 					{/if}
 
 
