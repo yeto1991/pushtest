@@ -297,6 +297,55 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 	}
 
 	/**
+	* 都市名を取得する。
+	*
+	* @param string $kbn_2 地域
+	* @param string $kbn_3 国・地域
+	* @param string $kbn_4 都市
+	* @return array<string>：都市名配列、null：データなし、DB::Error()：エラー
+	*/
+	function getCityName($kbn_2, $kbn_3, $kbn_4) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = 'select discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 = ? and kbn_4 = ?';
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array('003', $kbn_2, $kbn_3, $kbn_4);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$data[$i] = $tmp;
+			$i ++;
+		}
+
+		return $data[0];
+	}
+
+	/**
 	 * 秘密の質問リストを取得する。
 	 *
 	 * @return array<string>：秘密の質問リスト、null：データなし、DB::Error()：エラー
@@ -402,7 +451,7 @@ class Jmesse_JmCodeM extends Ethna_AppObject
 	 */
 	var $table_def = array(
 		'jm_code_m' => array(
-		'primary' => true,
+			'primary' => true,
 	),
 	);
 

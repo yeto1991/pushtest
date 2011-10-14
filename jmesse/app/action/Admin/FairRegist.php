@@ -21,11 +21,11 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		'copy' => array(
+		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '新規登録／コピー更新登録', // Display name
-			'required'    => false,            // Required Option(true/false)
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '登録モード',    // Display name
+			'required'    => true,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1656,7 +1656,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'del_flg' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => 'データ管理者備考欄', // Display name
+			'name'        => '削除',          // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1666,7 +1666,6 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
 	);
 }
 
@@ -1704,7 +1703,7 @@ class Jmesse_Action_AdminFairRegist extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		$this->af->setApp('mode', 'regist');
+		$this->af->set('mode', 'regist');
 
 		return 'admin_fairRegist';
 	}

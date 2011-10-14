@@ -284,32 +284,39 @@
 			document.getElementById('sub_industory_name_' + String(no)).value = '';
 		}
 
+		// TEXTAREAの文字数チェック
+		// キャッチフレーズ
+		if (500 < document.getElementById('profile_jp').value.length) {
+			window.alert('キャッチフレーズ（日）は500文字以内（改行を含む）で入力して下さい。(' + document.getElementById('profile_jp').value.length + ')');
+			return;
+		}
+		if (500 < document.getElementById('profile_en').value.length) {
+			window.alert('キャッチフレーズ（英）は500文字以内（改行を含む）で入力して下さい。(' + document.getElementById('profile_en').value.length + ')');
+			return;
+		}
+		// ＰＲ・紹介文
+		if (1000 < document.getElementById('detailed_information_jp').value.length) {
+			window.alert('ＰＲ・紹介文（日）は1000文字以内（改行を含む）で入力して下さい。(' + document.getElementById('detailed_information_jp').value.length + ')');
+			return;
+		}
+		if (1000 < document.getElementById('detailed_information_en').value.length) {
+			window.alert('ＰＲ・紹介文（英）は1000文字以内（改行を含む）で入力して下さい。(' + document.getElementById('detailed_information_en').value.length + ')');
+			return;
+		}
+		// 出品物
+		if (300 < document.getElementById('exhibits_jp').value.length) {
+			window.alert('出品物（日）は300文字以内（改行を含む）で入力して下さい。(' + document.getElementById('exhibits_jp').value.length + ')');
+			return;
+		}
+		if (300 < document.getElementById('exhibits_en').value.length) {
+			window.alert('出品物（英）は300文字以内（改行を含む）で入力して下さい。(' + document.getElementById('exhibits_en').value.length + ')');
+			return;
+		}
+
 		// 展示会に係わる画像(3点)
-		var j = 0;
-		var name_file;
-		var name_list;
-		var is_exist;
-		if (0 < document.getElementById('photos_list').length) {
-			for (i = 0; i < 3; i++) {
-				is_exist = false;
-				no = i + 1;
-				name_file = document.getElementById('photos_' + String(no)).value;
-				for (j = 0; j < document.getElementById('photos_list').length; j++) {
-					name_list = document.getElementById('photos_list').options[j].value;
-					if (name_list == name_file) {
-						is_exist = true;
-						break;
-					}
-				}
-				if (!is_exist) {
-					window.alert('ファイル名不一致');
-					return;
-				}
-			}
-			for (i = 0; i < document.getElementById('photos_list').length; i++) {
-				no = i + 1;
-				document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
-			}
+		for (i = 0; i < document.getElementById('photos_list').length; i++) {
+			no = i + 1;
+			document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
 		}
 
 		if (!window.confirm('登録します。よろしいですか？')) {
@@ -323,89 +330,93 @@
 <title>見本市ＤＢ 管理者用</title>
 </head>
 <body onload="init()">
-	<table style="width: 100%;">
-		<tr>
-			<td valign="top" style="width: 200px;">{include file="admin/menu.tpl"}</td>
-			<td valign="top">
-				<div align="center">
-					<font size="5"><b>見本市ＤＢ 管理者用（{if ("regist" == $app.mode)}新規登録{else}更新・コピー登録{/if}）</b></font>
-				</div>
-				<hr>
+	<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
+		{uniqid}
+		{if ("regist" == $form.mode)}
+		<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
+		{elseif ("change" == $form.mode)}
+		<input type="hidden" name="action_admin_fairChangeDo" id="action_admin_fairChangeDo" value="dummy">
+		{elseif ("copy" == $form.mode)}
+		<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
+		{/if}
+		<!-- 業種（小分類） -->
+		<input type="hidden" name="tmp_sub_industory_jp" id="tmp_sub_industory_jp" value="{$form.tmp_sub_industory_jp}" />
+		<input type="hidden" name="tmp_sub_industory_en" id="tmp_sub_industory_en" value="{$form.tmp_sub_industory_en}" />
+		<!-- 業種登録 -->
+		<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
+		<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
+		<input type="hidden" name="main_industory_name_1" id="main_industory_name_1" value="{$form.main_industory_1}" />
+		<input type="hidden" name="sub_industory_name_1" id="sub_industory_name_1" value="{$form.sub_industory_1}" />
+		<input type="hidden" name="main_industory_2" id="main_industory_2" value="{$form.main_industory_2}" />
+		<input type="hidden" name="sub_industory_2" id="sub_industory_2" value="{$form.sub_industory_2}" />
+		<input type="hidden" name="main_industory_name_2" id="main_industory_name_2" value="{$form.main_industory_2}" />
+		<input type="hidden" name="sub_industory_name_2" id="sub_industory_name_2" value="{$form.sub_industory_2}" />
+		<input type="hidden" name="main_industory_3" id="main_industory_3" value="{$form.main_industory_3}" />
+		<input type="hidden" name="sub_industory_3" id="sub_industory_3" value="{$form.sub_industory_3}" />
+		<input type="hidden" name="main_industory_name_3" id="main_industory_name_3" value="{$form.main_industory_3}" />
+		<input type="hidden" name="sub_industory_name_3" id="sub_industory_name_3" value="{$form.sub_industory_3}" />
+		<input type="hidden" name="main_industory_4" id="main_industory_4" value="{$form.main_industory_4}" />
+		<input type="hidden" name="sub_industory_4" id="sub_industory_4" value="{$form.sub_industory_4}" />
+		<input type="hidden" name="main_industory_name_4" id="main_industory_name_4" value="{$form.main_industory_4}" />
+		<input type="hidden" name="sub_industory_name_4" id="sub_industory_name_4" value="{$form.sub_industory_4}" />
+		<input type="hidden" name="main_industory_5" id="main_industory_5" value="{$form.main_industory_5}" />
+		<input type="hidden" name="sub_industory_5" id="sub_industory_5" value="{$form.sub_industory_5}" />
+		<input type="hidden" name="main_industory_name_5" id="main_industory_name_5" value="{$form.main_industory_5}" />
+		<input type="hidden" name="sub_industory_name_5" id="sub_industory_name_5" value="{$form.sub_industory_5}" />
+		<input type="hidden" name="main_industory_6" id="main_industory_6" value="{$form.main_industory_6}" />
+		<input type="hidden" name="sub_industory_6" id="sub_industory_6" value="{$form.sub_industory_6}" />
+		<input type="hidden" name="main_industory_name_6" id="main_industory_name_6" value="{$form.main_industory_6}" />
+		<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_6}" />
+		<!-- 国・地域 -->
+		<input type="hidden" name="tmp_country_jp" id="tmp_country_jp" value="{$form.tmp_country_jp}" />
+		<input type="hidden" name="tmp_country_en" id="tmp_country_en" value="{$form.tmp_country_en}" />
+		<input type="hidden" name="city_jp" id="city_jp" value="{$form.city_jp}" />
+		<input type="hidden" name="city_en" id="city_en" value="{$form.city_en}" />
+		<!-- 展示会に係わる画像(3点) -->
+		<input type="hidden" name="photos_name_1" id="photos_name_1" value="{$form.photos_name_1}" />
+		<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
+		<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
+		<!-- 見本市番号 -->
+		<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
+		<!-- 登録モード -->
+		<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+		<table width="100%">
+			<tr>
+				<td valign="top">{include file="admin/menu.tpl"}</td>
+				<td valign="top">
+					<div align="center">
+						<font size="5"><b>見本市ＤＢ 管理者用（
+{if ("regist" == $form.mode)}新規登録
+{elseif ("change" == $form.mode)}更新登録
+{elseif ("copy" == $form.mode)}コピー更新登録
+{/if}
+）</b></font>
+					</div>
+					<hr>
 
-				{* エラー表示 *}
-				{if count($errors)}
-				<ul>
-					{foreach from=$errors item=error}
-					<li><font color="#ff0000">{$error}</font></li>
-					{/foreach}
-				</ul>
-				{/if}
-
-				{if ("1" == $app.success)}
-				<b><font color="#ff0000"><br/>登録しました。<br/><br/></font></b>
-				{/if}
-
-				<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
-					{uniqid}
-					{if ("regist" == $app.mode)}
-					<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
-					{else}
-					<input type="hidden" name="action_admin_fairChangeDo" id="action_admin_fairChangeDo" value="dummy">
+					{* エラー表示 *}
+					{if count($errors)}
+					<ul>
+						{foreach from=$errors item=error}
+						<li><font color="#ff0000">{$error}</font></li>
+						{/foreach}
+					</ul>
 					{/if}
 
-					<!-- 業種（小分類） -->
-					<input type="hidden" name="tmp_sub_industory_jp" id="tmp_sub_industory_jp" value="{$form.tmp_sub_industory_jp}" />
-					<input type="hidden" name="tmp_sub_industory_en" id="tmp_sub_industory_en" value="{$form.tmp_sub_industory_en}" />
-					<!-- 業種登録 -->
-					<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
-					<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
-					<input type="hidden" name="main_industory_name_1" id="main_industory_name_1" value="{$form.main_industory_1}" />
-					<input type="hidden" name="sub_industory_name_1" id="sub_industory_name_1" value="{$form.sub_industory_1}" />
-					<input type="hidden" name="main_industory_2" id="main_industory_2" value="{$form.main_industory_2}" />
-					<input type="hidden" name="sub_industory_2" id="sub_industory_2" value="{$form.sub_industory_2}" />
-					<input type="hidden" name="main_industory_name_2" id="main_industory_name_2" value="{$form.main_industory_2}" />
-					<input type="hidden" name="sub_industory_name_2" id="sub_industory_name_2" value="{$form.sub_industory_2}" />
-					<input type="hidden" name="main_industory_3" id="main_industory_3" value="{$form.main_industory_3}" />
-					<input type="hidden" name="sub_industory_3" id="sub_industory_3" value="{$form.sub_industory_3}" />
-					<input type="hidden" name="main_industory_name_3" id="main_industory_name_3" value="{$form.main_industory_3}" />
-					<input type="hidden" name="sub_industory_name_3" id="sub_industory_name_3" value="{$form.sub_industory_3}" />
-					<input type="hidden" name="main_industory_4" id="main_industory_4" value="{$form.main_industory_4}" />
-					<input type="hidden" name="sub_industory_4" id="sub_industory_4" value="{$form.sub_industory_4}" />
-					<input type="hidden" name="main_industory_name_4" id="main_industory_name_4" value="{$form.main_industory_4}" />
-					<input type="hidden" name="sub_industory_name_4" id="sub_industory_name_4" value="{$form.sub_industory_4}" />
-					<input type="hidden" name="main_industory_5" id="main_industory_5" value="{$form.main_industory_5}" />
-					<input type="hidden" name="sub_industory_5" id="sub_industory_5" value="{$form.sub_industory_5}" />
-					<input type="hidden" name="main_industory_name_5" id="main_industory_name_5" value="{$form.main_industory_5}" />
-					<input type="hidden" name="sub_industory_name_5" id="sub_industory_name_5" value="{$form.sub_industory_5}" />
-					<input type="hidden" name="main_industory_6" id="main_industory_6" value="{$form.main_industory_6}" />
-					<input type="hidden" name="sub_industory_6" id="sub_industory_6" value="{$form.sub_industory_6}" />
-					<input type="hidden" name="main_industory_name_6" id="main_industory_name_6" value="{$form.main_industory_6}" />
-					<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_6}" />
-					<!-- 国・地域 -->
-					<input type="hidden" name="tmp_country_jp" id="tmp_country_jp" value="{$form.tmp_country_jp}" />
-					<input type="hidden" name="tmp_country_en" id="tmp_country_en" value="{$form.tmp_country_en}" />
-					<!-- 展示会に係わる画像(3点) -->
-					<input type="hidden" name="photos_name_1" id="photos_name_1" value="{$form.photos_name_1}" />
-					<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
-					<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
+					{* 成功 *}
+					{if ("1" == $app.success)}
+					<b><font color="#ff0000"><br/>登録しました。<br/><br/></font></b>
+					{/if}
+
 
 					<font color="#CC3333">●</font>印は入力必須項目、<font color="#CC3333">○</font>は入力推奨項目です。<br> 言語選択で「日本語のみ」をつけた時は、原則 翻訳入力は必要ありません<br> （英語インターフェースでの検索対象となりません）
 
 					<table border="1">
-						{if ("change" == $app.mode)}
+						{if ("change" == $form.mode || "copy" == $form.mode)}
 						<tr>
 							<td nowrap>見本市番号</td>
 							<!-- 見本市番号 -->
-							<td nowrap>{$app.mihon_no}<input type="hidden" name="mihon_no" id="mihon_no" value="{$app.mihon_no}" /></td>
-						</tr>
-
-						<tr>
-							<td nowrap>新規登録／コピー更新登録</td>
-							<!-- 新規登録／コピー更新登録 -->
-							<td nowrap>
-								<input type="radio" name="copy" id="copy" value="0" {if ("0" == $form.copy || "1" != $form.copy)}checked{/if} />新規登録
-								<input type="radio" name="copy" id="copy" value="1" {if ("1" == $form.copy)}checked{/if} />コピー編集登録
-							</td>
+							<td nowrap>{$form.mihon_no}</td>
 						</tr>
 						{/if}
 
@@ -426,7 +437,7 @@
 								<input type="radio" name="confirm_flag" id="confirm_flag" value="1" {if ("1" == $form.confirm_flag)}checked{/if} />承認
 								<input type="radio" name="confirm_flag" id="confirm_flag" value="0" {if ("0" == $form.confirm_flag || ("1" != $form.confirm_flag && "2" != $form.confirm_flag))}checked{/if} />承認待ち
 								<input type="radio" name="confirm_flag" id="confirm_flag" value="2" {if ("2" == $form.confirm_flag)}checked{/if} />否認<br />
-								否認コメント： <input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" size="120" />
+								否認コメント： <input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" maxlength="255" size="100" />
 							</td>
 						</tr>
 
@@ -450,8 +461,8 @@
 
 						<tr>
 							<td nowrap>Eメール <font color="#CC3333">●</font></td>
-							<!-- ユーザＩＤ -->
-							<td nowrap><input type="text" name="email" id="email" value="{$form.email}" maxlength="28" size="28" />（半角英数）</td>
+							<!-- Eメール -->
+							<td nowrap><input type="text" name="email" id="email" value="{$form.email}" maxlength="255" size="100" />（半角英数）</td>
 						</tr>
 
 						<tr>
@@ -488,32 +499,32 @@
 							<td nowrap rowspan="2">見本市名 <font color="#CC3333">●</font></td>
 							<!-- 見本市名(日) -->
 							<!-- 見本市名(英) -->
-							<td nowrap>日：<input type="text" name="fair_title_jp" id="fair_title_jp" value="{$form.fair_title_jp}" maxlength="255" size="120" /></td>
+							<td nowrap>日：<input type="text" name="fair_title_jp" id="fair_title_jp" value="{$form.fair_title_jp}" maxlength="255" size="100" /></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<input type="text" name="fair_title_en" id="fair_title_en" value="{$form.fair_title_en}" maxlength="255" size="120" /></td>
+							<td nowrap>英：<input type="text" name="fair_title_en" id="fair_title_en" value="{$form.fair_title_en}" maxlength="255" size="100" /></td>
 						</tr>
 						<tr>
 							<td nowrap>見本市略称</td>
 							<!-- 見本市略称(英) -->
-							<td nowrap>英：<input type="text" name="abbrev_title" id="abbrev_title" value="{$form.abbrev_title}" maxlength="100" size="100" /><br> <font size="-1">■日本語は文字化けが発生するため、入力しないでください。</font>
+							<td nowrap>英：<input type="text" name="abbrev_title" id="abbrev_title" value="{$form.abbrev_title}" maxlength="255" size="100" /><br> <font size="-1">■日本語は文字化けが発生するため、入力しないでください。</font>
 
 							</td>
 						</tr>
 						<tr>
 							<td nowrap>見本市URL</td>
 							<!-- 見本市ＵＲＬ -->
-							<td nowrap><input type="text" name="fair_url" id="fair_url" value="{$form.fair_url}" maxlength="255" size="120" /></td>
+							<td nowrap><input type="text" name="fair_url" id="fair_url" value="{$form.fair_url}" maxlength="255" size="100" /></td>
 						</tr>
 
 						<tr>
 							<td nowrap rowspan="2">キャッチフレーズ</td>
 							<!-- キャッチフレーズ(日) -->
 							<!-- キャッチフレーズ(英) -->
-							<td nowrap>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="100" rows="7">{$form.profile_jp}</textarea><br />
+							<td nowrap>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="80" rows="7">{$form.profile_jp}</textarea><br />
 						</tr>
 						<tr>
-							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="profile_en" id="profile_en" cols="100" rows="7">{$form.profile_en}</textarea><br />
+							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="profile_en" id="profile_en" cols="80" rows="7">{$form.profile_en}</textarea><br />
 							</td>
 						</tr>
 
@@ -521,10 +532,10 @@
 							<td nowrap rowspan="2">ＰＲ・紹介文</td>
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
-							<td nowrap>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="100" rows="7">{$form.detailed_information_jp}</textarea></td>
+							<td nowrap>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="80" rows="7">{$form.detailed_information_jp}</textarea></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<br> <textarea name="detailed_information_en" id="detailed_information_en" cols="100" rows="7">{$form.detailed_information_en}</textarea></td>
+							<td nowrap>英：<br> <textarea name="detailed_information_en" id="detailed_information_en" cols="80" rows="7">{$form.detailed_information_en}</textarea></td>
 						</tr>
 
 						<tr>
@@ -710,13 +721,13 @@
 							<!-- 出品物(日) -->
 							<!-- 出品物(英) -->
 							<td nowrap>日：<br/>
-							<textarea name="exhibits_jp" id="exhibits_jp" cols="100" rows="7">{$form.exhibits_jp}</textarea>
+							<textarea name="exhibits_jp" id="exhibits_jp" cols="80" rows="7">{$form.exhibits_jp}</textarea>
 							<br>
 							</td>
 						</tr>
 						<tr>
 							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br>
-							<textarea name="exhibits_en" id="exhibits_en" cols="100" rows="7">{$form.exhibits_en}</textarea>
+							<textarea name="exhibits_en" id="exhibits_en" cols="80" rows="7">{$form.exhibits_en}</textarea>
 							</td>
 						</tr>
 
@@ -770,15 +781,13 @@
 
 										<td colspan="2">
 											<a href="javascript:open_select_city_jp();">都市を選択</a>
-											<input type="text" name="city_name_jp" id="city_name_jp" value="{$form.city_name_jp}" readonly/>
-											<input type="hidden" name="city_jp" id="city_jp" value="{$form.city_jp}" />
+											<input type="text" name="city_name_jp" id="city_name_jp" value="{$form.city_name_jp}" readonly />
 											<input type="button" value="削除" onClick="delete_city_jp()"></td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
 										<td><input type="checkbox" name="othercity_jp" value="1" {if ("1" == $form.othercity_jp)}checked{/if} /> その他</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" /></td>
+										<td colspan="2"><input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" maxlength="100" size="100" /></td>
 									</tr>
 								</table> <font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font>
 
@@ -825,14 +834,12 @@
 										<td>都市</td>
 										<td colspan="2"><a href="javascript:open_select_city_en();">都市を選択</a>
 										<input type="text" name="city_name_en" id="city_name_en" value="{$form.city_name_en}" readonly/>
-										<input type="hidden" name="city_en" id="city_en" value="{$form.city_en}" />
 										<input type="button" value="削除" onClick="delete_city_en()"></td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
 										<td><input type="checkbox" name="othercity_en" value="1" {if ("1" == $form.othercity_en)}checked{/if} /> Others</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td><input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" /><font color="#CC3333">（翻訳）</font></td>
+										<td colspan="2"><input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" maxlength="100" size="100" /><font color="#CC3333">（翻訳）</font></td>
 									</tr>
 								</table> <font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font> <!--  2002.10.24 add [  end  ] infocom  -->
 							</td>
@@ -842,27 +849,27 @@
 							<td nowrap rowspan="2">会場名 <font color="#CC3333">●</font></td>
 							<!-- 会場名(日) -->
 							<!-- 会場名(英) -->
-							<td nowrap>日：<input type="text" name="venue_jp" id="venue_jp" value="{$form.venue_jp}" maxlength="255" size="120" /></td>
+							<td nowrap>日：<input type="text" name="venue_jp" id="venue_jp" value="{$form.venue_jp}" maxlength="255" size="100" /></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<input type="text" name="venue_en" id="venue_en" value="{$form.venue_en}" maxlength="255" size="120" /></td>
+							<td nowrap>英：<input type="text" name="venue_en" id="venue_en" value="{$form.venue_en}" maxlength="255" size="100" /></td>
 						</tr>
 
 						<tr>
 							<td nowrap>展示会で使用する面積（Ｎｅｔ） <font color="#CC3333">○</font></td>
 							<!-- 会場の展示面積 -->
-							<td nowrap><input type="text" name="gross_floor_area" id="gross_floor_area" value="{$form.gross_floor_area}" maxlength="10" /><br> <font size="-1">■半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
+							<td nowrap><input type="text" name="gross_floor_area" id="gross_floor_area" value="{$form.gross_floor_area}" maxlength="10" size="10" /><br> <font size="-1">■半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
 						</tr>
 
 						<tr>
 							<td nowrap rowspan="2">交通手段</td>
 							<!-- 交通手段(日) -->
 							<!-- 交通手段(英) -->
-							<td nowrap>日：<input type="text" name="transportation_jp" id="transportation_jp" value="{$form.transportation_jp}" maxlength="255" size="120" /><br> <font size="-1">■例：成田空港からA12バスで30分</font>
+							<td nowrap>日：<input type="text" name="transportation_jp" id="transportation_jp" value="{$form.transportation_jp}" maxlength="500" size="100" /><br> <font size="-1">■例：成田空港からA12バスで30分</font>
 							</td>
 						</tr>
 						<tr>
-							<td nowrap>英：<input type="text" name="transportation_en" id="transportation_en" value="{$form.transportation_en}" maxlength="255" size="120" /></td>
+							<td nowrap>英：<input type="text" name="transportation_en" id="transportation_en" value="{$form.transportation_en}" maxlength="500" size="100" /></td>
 						</tr>
 
 						<tr>
@@ -906,7 +913,7 @@
 							<td><input type="checkbox" name="admission_ticket_4_jp" id="admission_ticket_4_jp" value="1" {if ("1" == $form.admission_ticket_4_jp)}checked{/if} />当日会場で入手</td>
 							</tr>
 							<tr>
-							<td colspan="2"><input type="checkbox" name="admission_ticket_5_jp" id="admission_ticket_5_jp" value="1" {if ("1" == $form.admission_ticket_5_jp)}checked{/if} />その他 <input type="text" name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" maxlenth="100" size="100" /></td>
+							<td colspan="2"><input type="checkbox" name="admission_ticket_5_jp" id="admission_ticket_5_jp" value="1" {if ("1" == $form.admission_ticket_5_jp)}checked{/if} />その他 <input type="text" name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" maxlenth="500" size="100" /></td>
 							</table>
 							</td>
 						</tr>
@@ -922,7 +929,7 @@
 							<td><input type="checkbox" name="admission_ticket_4_en" id="admission_ticket_4_en" value="1" {if ("1" == $form.admission_ticket_4_en)}checked{/if} />Available at the Gate</td>
 							</tr>
 							<tr>
-							<td colspan="2"><input type="checkbox" name="admission_ticket_5_en" id="admission_ticket_5_en" value="1" {if ("1" == $form.admission_ticket_5_en)}checked{/if} />Others <input type="text" name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" maxlenth="100" size="100" /></td>
+							<td colspan="2"><input type="checkbox" name="admission_ticket_5_en" id="admission_ticket_5_en" value="1" {if ("1" == $form.admission_ticket_5_en)}checked{/if} />Others <input type="text" name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" maxlenth="500" size="100" /></td>
 							</table>
 							</td>
 						</tr>
@@ -940,7 +947,7 @@
 								<table border="0">
 									<tr>
 										<td>&nbsp;</td>
-										<td colspan="2"><input type="text" name="year_of_the_trade_fair" id="year_of_the_trade_fair" value="{$form.year_of_the_trade_fair}" maxlength="4" size="10" /> 年実績（西暦４桁）</td>
+										<td colspan="2"><input type="text" name="year_of_the_trade_fair" id="year_of_the_trade_fair" value="{$form.year_of_the_trade_fair}" maxlength="20" size="10" /> 年実績（西暦４桁）</td>
 										<td colspan="2">&nbsp;</td>
 									</tr>
 									<tr>
@@ -959,11 +966,11 @@
 									</tr>
 									<tr>
 										<td>展示面積</td>
-										<td colspan="4"><input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" maxlength="10" size="20">㎡</td>
+										<td colspan="4"><input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" maxlength="50" size="50">㎡</td>
 									</tr>
 									<tr>
 										<td>承認機関</td>
-										<td colspan="4">英：<input type="text" name="spare_field1" id="spare_field1" value="{$form.spare_field1}" maxlength="255" size="120" /></td>
+										<td colspan="4">英：<input type="text" name="spare_field1" id="spare_field1" value="{$form.spare_field1}" maxlength="255" size="100" /></td>
 									</tr>
 								</table> <font size="-1">■出展者数の多いデータが検索結果で上位に表示されます。</font>
 							</td>
@@ -986,35 +993,35 @@
 								<table border="0">
 									<tr>
 										<td nowrap>名称（日）</td>
-										<td nowrap><input type="text" name="organizer_jp" id="organizer_jp" value="{$form.organizer_jp}" maxlength="255" size="120" /></td>
+										<td nowrap><input type="text" name="organizer_jp" id="organizer_jp" value="{$form.organizer_jp}" maxlength="500" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>名称（英）</td>
-										<td nowrap><input type="text" name="organizer_en" id="organizer_en" value="{$form.organizer_en}" maxlength="255" size="120" /><font color="#CC3333">（翻訳）</font></td>
+										<td nowrap><input type="text" name="organizer_en" id="organizer_en" value="{$form.organizer_en}" maxlength="500" size="100" /><font color="#CC3333">（翻訳）</font></td>
 									</tr>
 									<tr>
 										<td nowrap>住所</td>
-										<td><input type="text" name="organizer_addr" id="organizer_addr" value="{$form.organizer_addr}" maxlength="225" size="120" /></td>
+										<td><input type="text" name="organizer_addr" id="organizer_addr" value="{$form.organizer_addr}" maxlength="225" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>担当部課</td>
-										<td><input type="text" name="organizer_div" id="organizer_div" value="{$form.organizer_div}" maxlength="225" size="120" /></td>
+										<td><input type="text" name="organizer_div" id="organizer_div" value="{$form.organizer_div}" maxlength="225" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>担当者</td>
-										<td><input type="text" name="organizer_pers" id="organizer_pers" value="{$form.organizer_pers}" maxlength="100" size="50" /></td>
+										<td><input type="text" name="organizer_pers" id="organizer_pers" value="{$form.organizer_pers}" maxlength="100" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>ＴＥＬ</td>
-										<td><input type="text" name="organizer_tel" id="organizer_tel" value="{$form.organizer_tel}" maxlength="20" size="30" /> （半角数字）</td>
+										<td><input type="text" name="organizer_tel" id="organizer_tel" value="{$form.organizer_tel}" maxlength="100" size="100" /> （半角数字）</td>
 									</tr>
 									<tr>
 										<td nowrap>ＦＡＸ</td>
-										<td><input type="text" name="organizer_fax" id="organizer_fax" value="{$form.organizer_fax}" maxlength="20" size="30" /> （半角数字）</td>
+										<td><input type="text" name="organizer_fax" id="organizer_fax" value="{$form.organizer_fax}" maxlength="100" size="100" /> （半角数字）</td>
 									</tr>
 									<tr>
 										<td nowrap>Ｅ－Ｍａｉｌ</td>
-										<td nowrap><input type="text" name="organizer_email" id="organizer_email" value="{$form.organizer_email}" maxlength="255" size="110" /> （半角英数）</td>
+										<td nowrap><input type="text" name="organizer_email" id="organizer_email" value="{$form.organizer_email}" maxlength="255" size="100" /> （半角英数）</td>
 									</tr>
 								</table> <font size="-1"> ■TEL・FAX はハイフン区切り、国番号から入力してください。 <br> 例：東京の場合 +81-3-1234-5678 <br> ■TEL、FAX、E-mailのどれか一つは必ず入力願います。
 							</font>
@@ -1032,35 +1039,35 @@
 								<table border="0">
 									<tr>
 										<td nowrap>名称（日）</td>
-										<td nowrap><input type="text" name="agency_in_japan_jp" id="agency_in_japan_jp" value="{$form.agency_in_japan_jp}" maxlength="255" size="120" /></td>
+										<td nowrap><input type="text" name="agency_in_japan_jp" id="agency_in_japan_jp" value="{$form.agency_in_japan_jp}" maxlength="255" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>名称（英）</td>
-										<td nowrap><input type="text" name="agency_in_japan_en" id="agency_in_japan_en" value="{$form.agency_in_japan_en}" maxlength="255" size="120" /><font color="#CC3333">（翻訳）</font></td>
+										<td nowrap><input type="text" name="agency_in_japan_en" id="agency_in_japan_en" value="{$form.agency_in_japan_en}" maxlength="255" size="100" /><font color="#CC3333">（翻訳）</font></td>
 									</tr>
 									<tr>
 										<td nowrap>住所</td>
-										<td><input type="text" name="agency_in_japan_addr" id="agency_in_japan_addr" value="{$form.agency_in_japan_addr}" maxlength="255" size="120" /></td>
+										<td><input type="text" name="agency_in_japan_addr" id="agency_in_japan_addr" value="{$form.agency_in_japan_addr}" maxlength="255" size="190" /></td>
 									</tr>
 									<tr>
 										<td nowrap>担当部課</td>
-										<td><input type="text" name="agency_in_japan_div" id="agency_in_japan_div" value="{$form.agency_in_japan_div}" maxlength="255" size="120" /></td>
+										<td><input type="text" name="agency_in_japan_div" id="agency_in_japan_div" value="{$form.agency_in_japan_div}" maxlength="255" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>担当者</td>
-										<td><input type="text" name="agency_in_japan_pers" id="agency_in_japan_pers" value="{$form.agency_in_japan_pers}" maxlength="100" size="50" /></td>
+										<td><input type="text" name="agency_in_japan_pers" id="agency_in_japan_pers" value="{$form.agency_in_japan_pers}" maxlength="100" size="100" /></td>
 									</tr>
 									<tr>
 										<td nowrap>ＴＥＬ</td>
-										<td><input type="text" name="agency_in_japan_tel" id="agency_in_japan_tel" value="{$form.agency_in_japan_tel}" maxlength="20" size="30" /> （半角数字）</td>
+										<td><input type="text" name="agency_in_japan_tel" id="agency_in_japan_tel" value="{$form.agency_in_japan_tel}" maxlength="100" size="100" /> （半角数字）</td>
 									</tr>
 									<tr>
 										<td nowrap>ＦＡＸ</td>
-										<td><input type="text" name="agency_in_japan_fax" id="agency_in_japan_fax" value="{$form.agency_in_japan_fax}" maxlength="20" size="30" /> （半角数字）</td>
+										<td><input type="text" name="agency_in_japan_fax" id="agency_in_japan_fax" value="{$form.agency_in_japan_fax}" maxlength="100" size="100" /> （半角数字）</td>
 									</tr>
 									<tr>
 										<td nowrap>Ｅ－Ｍａｉｌ</td>
-										<td nowrap><input type="text" name="agency_in_japan_email" id="agency_in_japan_email" value="{$form.agency_in_japan_email}" maxlength="255" size="110" /> （半角英数）</td>
+										<td nowrap><input type="text" name="agency_in_japan_email" id="agency_in_japan_email" value="{$form.agency_in_japan_email}" maxlength="255" size="100" /> （半角英数）</td>
 									</tr>
 								</table> <font size="-1"> ■海外で開催される見本市で、日本国内に問合せ先がある場合のみ入力してください。 <br> ■TEL・FAX はハイフン区切り、国番号から入力してください。 <br> 例：東京の場合 +81-3-1234-5678
 							</font>
@@ -1070,13 +1077,13 @@
 						<tr>
 							<td nowrap>見本市レポート／URL</td>
 							<!-- 駐在員レポート／リンク -->
-							<td nowrap><input type="text" name="report_link" id="report_link" value="{$form.report_link}" maxlength="255" size="120" /></td>
+							<td nowrap><input type="text" name="report_link" id="report_link" value="{$form.report_link}" maxlength="255" size="100" /></td>
 						</tr>
 
 						<tr>
 							<td nowrap>世界の展示会場／URL</td>
 							<!-- 展示会場／リンク -->
-							<td nowrap><input type="text" name="venue_link" id="venue_link" value="{$form.venue_link}" maxlength="255" size="120" /></td>
+							<td nowrap><input type="text" name="venue_link" id="venue_link" value="{$form.venue_link}" maxlength="255" size="100" /></td>
 						</tr>
 
 						<tr>
@@ -1102,13 +1109,13 @@
 						<tr>
 							<td nowrap>システム管理者備考欄</td>
 							<!-- システム管理者備考欄 -->
-							<td nowrap><input type="text" name="note_for_system_manager" id="note_for_system_manager" value="{$form.note_for_system_manager}" maxlength="400" size="120" /></td>
+							<td nowrap><input type="text" name="note_for_system_manager" id="note_for_system_manager" value="{$form.note_for_system_manager}" maxlength="255" size="100" /></td>
 						</tr>
 
 						<tr>
 							<td nowrap>データ管理者備考欄</td>
 							<!-- データ管理者備考欄 -->
-							<td nowrap><input type="text" name="note_for_data_manager" id="note_for_data_manager" value="{$form.note_for_data_manager}" maxlength="400" size="120" /></td>
+							<td nowrap><input type="text" name="note_for_data_manager" id="note_for_data_manager" value="{$form.note_for_data_manager}" maxlength="255" size="100" /></td>
 						</tr>
 						<tr>
 							<td nowrap>削除</td>
@@ -1118,12 +1125,10 @@
 
 					</table>
 					<hr>
-
 					<input type="button" value="登録" onclick="registFair()" />
-				</form>
-			</td>
-		</tr>
-	</table>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
-{debug}

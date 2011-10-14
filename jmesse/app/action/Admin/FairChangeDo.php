@@ -118,11 +118,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
 			$this->ae->addObject('error', Ethna::raiseError('主催者・問合せ先が入力されていません', E_REQUIRED));
 		}
-		// 見本市番号
-		if (null == $this->af->get('mihon_no') || '' == $this->af->get('mihon_no')) {
-			$this->ae->addObject('error', Ethna::raiseError('見本市番号が入力されていません', E_REQUIRED));
-		}
-
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
@@ -143,13 +138,16 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		if (Ethna_Util::isDuplicatePost()) {
 			// 二重POSTの場合
 			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
-			return 'admin_fairRegist';
+			header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$jm_fair->get('mihon_no').'&mode=change');
+			return null;
 		}
-
-		if ("1" == $this)
 
 		// JM_FAIRオブジェクトの取得
 		$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
+		if (Ethna::isError($jm_fair)) {
+			$this->ae->addObject('error', $jm_fair);
+			return 'error';
+		}
 
 		// Webページの表示/非表示
 		$jm_fair->set('web_display_type', $this->af->get('web_display_type'));
@@ -181,9 +179,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// 言語選択情報
 		$jm_fair->set('select_language_info', $this->af->get('select_language_info'));
 
-		// 見本市番号
-		//		$jm_fair->set('mihon_no', $this->af->get('mihon_no'));
-
 		// 見本市名
 		$jm_fair->set('fair_title_jp', $this->af->get('fair_title_jp'));
 		$jm_fair->set('fair_title_en', $this->af->get('fair_title_en'));
@@ -195,12 +190,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('fair_url', $this->af->get('fair_url'));
 
 		// キャッチフレーズ
-		$jm_fair->set('profile_jp', $this->af->get('profile_jp'));
-		$jm_fair->set('profile_en', $this->af->get('profile_en'));
+		$jm_fair->set('profile_jp', str_replace('\n', '<br/>', $this->af->get('profile_jp')));
+		$jm_fair->set('profile_en', str_replace('\n', '<br/>', $this->af->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$jm_fair->set('detailed_information_jp', $this->af->get('detailed_information_jp'));
-		$jm_fair->set('detailed_information_en', $this->af->get('detailed_information_en'));
+		$jm_fair->set('detailed_information_jp', str_replace('\n', '<br/>', $this->af->get('detailed_information_jp')));
+		$jm_fair->set('detailed_information_en', str_replace('\n', '<br/>', $this->af->get('detailed_information_en')));
 
 		// 会期
 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
@@ -232,8 +227,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('sub_industory_6', $this->af->get('sub_industory_6'));
 
 		// 出品物
-		$jm_fair->set('exhibits_jp', $this->af->get('exhibits_jp'));
-		$jm_fair->set('exhibits_en', $this->af->get('exhibits_en'));
+		$jm_fair->set('exhibits_jp', str_replace('\n', '<br/>', $this->af->get('exhibits_jp')));
+		$jm_fair->set('exhibits_en', str_replace('\n', '<br/>', $this->af->get('exhibits_en')));
 
 		// 開催地
 		if ('0' == $use_language_flag) {
@@ -352,6 +347,7 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');
 		$jm_fair->set('regist_type', '');
+//		$jm_fair->set('mihon_no', $this->af->get('mihon_no'));
 //		$jm_fair->set('regist_user_id', $this->session->get('user_id'));
 //		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
 
@@ -395,10 +391,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			return 'error';
 		}
 
-		// 編集モード
-		$this->af->setApp('mode', 'change');
-
-		return 'admin_fairChangeDo';
+		// 変更画面へ遷移
+		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$jm_fair->get('mihon_no').'&mode=change&success=1');
+		return null;
 	}
 }
 
