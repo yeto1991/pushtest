@@ -198,21 +198,21 @@
 										</td>
 									</tr>
 									<tr>
-										<td nowrap style=text-align:left>権限(一般)</td>
+										<td nowrap style=text-align:left>一般権限</td>
 										<td nowrap style=text-align:left>
 											<input type="checkbox" name="searchAuthGen1" id="searchAuthGen1" value="1">有
 											<input type="checkbox" name="searchAuthGen0" id="searchAuthGen0" value="1">無
 										</td>
 									</tr>
 									<tr>
-										<td nowrap style=text-align:left>権限(ユーザ管理)</td>
+										<td nowrap style=text-align:left>ユーザ管理権限</td>
 										<td nowrap style=text-align:left>
 											<input type="checkbox" name="searchAuthUser1" id="searchAuthUser1" value="1">有
 											<input type="checkbox" name="searchAuthUser0" id="searchAuthUser0" value="1">無
 										</td>
 									</tr>
 									<tr>
-										<td nowrap style=text-align:left>権限(展示会管理)</td>
+										<td nowrap style=text-align:left>展示会管理権限</td>
 										<td nowrap style=text-align:left>
 											<input type="checkbox" name="searchAuthFair1" id="searchAuthFair1" value="1">有
 											<input type="checkbox" name="searchAuthFair0" id="searchAuthFair0" value="1">無
