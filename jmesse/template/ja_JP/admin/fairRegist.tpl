@@ -17,10 +17,10 @@
 		if (null != main_industory) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=0','','#sub_industory_jp',document.getElementById('tmp_sub_industory_jp').value);
 		}
-		main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
-		if (null != main_industory) {
-			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',document.getElementById('tmp_sub_industory_en').value);
-		}
+// 		main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
+// 		if (null != main_industory) {
+// 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',document.getElementById('tmp_sub_industory_en').value);
+// 		}
 
 		// 開催地関連
 		var region = document.getElementById('region_jp').options[document.getElementById('region_jp').selectedIndex].value;
@@ -29,12 +29,12 @@
 				dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0','','#country_jp',document.getElementById('tmp_country_jp').value);
 			}
 		}
-		if (null != document.getElementById('tmp_country_en').value && '' != document.getElementById('tmp_country_en').value) {
-			region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
-			if (null != region && '' != region) {
-				dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',document.getElementById('tmp_country_en').value);
-			}
-		}
+// 		if (null != document.getElementById('tmp_country_en').value && '' != document.getElementById('tmp_country_en').value) {
+// 			region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
+// 			if (null != region && '' != region) {
+// 				dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',document.getElementById('tmp_country_en').value);
+// 			}
+// 		}
 	}
 
 	/**
@@ -45,18 +45,18 @@
 		dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=0','','#sub_industory_jp',null);
 	}
 
-	function set_sub_industory_en() {
-		var main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
-		dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',null);
-	}
+// 	function set_sub_industory_en() {
+// 		var main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
+// 		dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory+'&use_language_flag=1','','#sub_industory_en',null);
+// 	}
 
 	function save_sub_industory_jp() {
 		document.getElementById('tmp_sub_industory_jp').value = document.getElementById('sub_industory_jp').options[document.getElementById('sub_industory_jp').selectedIndex].value;
 	}
 
-	function save_sub_industory_en() {
-		document.getElementById('tmp_sub_industory_en').value = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
-	}
+// 	function save_sub_industory_en() {
+// 		document.getElementById('tmp_sub_industory_en').value = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
+// 	}
 
 	function regist_industory_jp() {
 		var main_industory = document.getElementById('main_industory_jp').options[document.getElementById('main_industory_jp').selectedIndex].value;
@@ -83,30 +83,30 @@
 		document.getElementById('industory_list_jp').appendChild(op);
 	}
 
-	function regist_industory_en() {
-		var main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
-		var sub_industory = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
-		var main_industory_str = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].text;
-		var sub_industory_str = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].text;
-		if ('' == main_industory || '' == sub_industory) {
-			window.alert('大分類と小分類の両方を選択して下さい。');
-			return;
-		}
-		if (6 == document.getElementById('industory_list_en').options.length) {
-			window.alert('登録可能な最大数が登録されています。');
-			return;
-		}
-		for (var i = 0; i < document.getElementById('industory_list_en').length; i++) {
-			if (document.getElementById('industory_list_en').options[i].value == main_industory + ':' + sub_industory) {
-				window.alert(main_industory_str + '／' + sub_industory_str + 'は既に登録されています。');
-				return;
-			}
-		}
-		var op = document.createElement('option');
-		op.value = main_industory + ':' + sub_industory;
-		op.innerHTML = main_industory_str + '／' + sub_industory_str;
-		document.getElementById('industory_list_en').appendChild(op);
-	}
+// 	function regist_industory_en() {
+// 		var main_industory = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].value;
+// 		var sub_industory = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].value;
+// 		var main_industory_str = document.getElementById('main_industory_en').options[document.getElementById('main_industory_en').selectedIndex].text;
+// 		var sub_industory_str = document.getElementById('sub_industory_en').options[document.getElementById('sub_industory_en').selectedIndex].text;
+// 		if ('' == main_industory || '' == sub_industory) {
+// 			window.alert('大分類と小分類の両方を選択して下さい。');
+// 			return;
+// 		}
+// 		if (6 == document.getElementById('industory_list_en').options.length) {
+// 			window.alert('登録可能な最大数が登録されています。');
+// 			return;
+// 		}
+// 		for (var i = 0; i < document.getElementById('industory_list_en').length; i++) {
+// 			if (document.getElementById('industory_list_en').options[i].value == main_industory + ':' + sub_industory) {
+// 				window.alert(main_industory_str + '／' + sub_industory_str + 'は既に登録されています。');
+// 				return;
+// 			}
+// 		}
+// 		var op = document.createElement('option');
+// 		op.value = main_industory + ':' + sub_industory;
+// 		op.innerHTML = main_industory_str + '／' + sub_industory_str;
+// 		document.getElementById('industory_list_en').appendChild(op);
+// 	}
 
 	function delete_industory_jp() {
 		for (var i = document.getElementById('industory_list_jp').length - 1; i >= 0; i--) {
@@ -116,13 +116,13 @@
 		}
 	}
 
-	function delete_industory_en() {
-		for (var i = document.getElementById('industory_list_en').length - 1; i >= 0; i--) {
-			if (document.getElementById('industory_list_en').options[i].selected) {
-				document.getElementById('industory_list_en').remove(i);
-			}
-		}
-	}
+// 	function delete_industory_en() {
+// 		for (var i = document.getElementById('industory_list_en').length - 1; i >= 0; i--) {
+// 			if (document.getElementById('industory_list_en').options[i].selected) {
+// 				document.getElementById('industory_list_en').remove(i);
+// 			}
+// 		}
+// 	}
 
 	/**
 	 * 開催地関連。
@@ -132,10 +132,10 @@
 		dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0','','#country_jp',null);
 	}
 
-	function set_country_en() {
-		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
-		dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',null);
-	}
+// 	function set_country_en() {
+// 		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
+// 		dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',null);
+// 	}
 
 	function save_country_jp() {
 		document.getElementById('tmp_country_jp').value = document.getElementById('country_jp').options[document.getElementById('country_jp').selectedIndex].value;
@@ -143,33 +143,41 @@
 		document.getElementById('city_jp').value = '';
 	}
 
-	function save_country_en() {
-		document.getElementById('tmp_country_en').value = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
-		document.getElementById('city_name_en').value = '';
-		document.getElementById('city_en').value = '';
-	}
+// 	function save_country_en() {
+// 		document.getElementById('tmp_country_en').value = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
+// 		document.getElementById('city_name_en').value = '';
+// 		document.getElementById('city_en').value = '';
+// 	}
 
 	function open_select_city_jp() {
 		var region = document.getElementById('region_jp').options[document.getElementById('region_jp').selectedIndex].value;
 		var country = document.getElementById('country_jp').options[document.getElementById('country_jp').selectedIndex].value;
-		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=0", null);
+		if ('' == region || '' == country) {
+			window.alert('地域と国・地域の両方を選択して下さい');
+			return;
+		}
+		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=0", 'select_city', 'width=400, height=300, menubar=no, toolbar=no, location=no, status=no, scrollbars=yes');
 	}
 
-	function open_select_city_en() {
-		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
-		var country = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
-		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=1", null);
-	}
+// 	function open_select_city_en() {
+// 		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
+// 		var country = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
+// 		if ('' == region || '' == country) {
+// 			window.alert('地域と国・地域の両方を選択して下さい');
+// 			return;
+// 		}
+// 		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=1", 'select_city', 'width=400, height=300, menubar=no, toolbar=no, location=no, status=no, scrollbars=yes');
+// 	}
 
 	function delete_city_jp() {
 		document.getElementById('city_jp').value = "";
 		document.getElementById('city_name_jp').value = "";
 	}
 
-	function delete_city_en() {
-		document.getElementById('city_en').value = "";
-		document.getElementById('city_name_en').value = "";
-	}
+// 	function delete_city_en() {
+// 		document.getElementById('city_en').value = "";
+// 		document.getElementById('city_name_en').value = "";
+// 	}
 
 	/**
 	 * 展示会に係わる画像(3点)関連。
@@ -358,7 +366,7 @@
 		{/if}
 		<!-- 業種（小分類） -->
 		<input type="hidden" name="tmp_sub_industory_jp" id="tmp_sub_industory_jp" value="{$form.tmp_sub_industory_jp}" />
-		<input type="hidden" name="tmp_sub_industory_en" id="tmp_sub_industory_en" value="{$form.tmp_sub_industory_en}" />
+{*		<input type="hidden" name="tmp_sub_industory_en" id="tmp_sub_industory_en" value="{$form.tmp_sub_industory_en}" /> *}
 		<!-- 業種登録 -->
 		<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
 		<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
@@ -386,7 +394,7 @@
 		<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_6}" />
 		<!-- 国・地域 -->
 		<input type="hidden" name="tmp_country_jp" id="tmp_country_jp" value="{$form.tmp_country_jp}" />
-		<input type="hidden" name="tmp_country_en" id="tmp_country_en" value="{$form.tmp_country_en}" />
+{*		<input type="hidden" name="tmp_country_en" id="tmp_country_en" value="{$form.tmp_country_en}" /> *}
 		<input type="hidden" name="city_jp" id="city_jp" value="{$form.city_jp}" />
 		<input type="hidden" name="city_en" id="city_en" value="{$form.city_en}" />
 		<!-- 展示会に係わる画像(3点) -->
@@ -576,12 +584,14 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="3">開催頻度 <font color="#CC3333">●</font></td>
+							<td nowrap rowspan="1">開催頻度 <font color="#CC3333">●</font></td>
 							<!-- 開催頻度(日) -->
 							<!-- 開催頻度(英) -->
+{*
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
 						<tr>
+*}
 							<td nowrap>日：<br/>
 							<table>
 								{section name=it loop=$app.frequency}
@@ -596,6 +606,7 @@
 							</table>
 							</td>
 						</tr>
+{*
 						<tr>
 							<td nowrap>英：<br/>
 							<table>
@@ -611,13 +622,16 @@
 							</table>
 							</td>
 						</tr>
+*}
 
 						<tr>
-							<td nowrap rowspan="3">業種 <font color="#CC3333">●</font></td>
+							<td nowrap rowspan="1">業種 <font color="#CC3333">●</font></td>
 							<!-- 業種大分類(日) -->
+{*
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
 						<tr>
+*}
 							<td nowrap>日：
 								<table>
 									<tr>
@@ -676,6 +690,7 @@
 								</table> <font size="-1">■ 業種は6つまで登録可能です。業種を追加したい場合には1、2の作業を繰り返して下さい。 </font>
 							</td>
 						</tr>
+{*
 						<tr>
 							<td nowrap>英： <!--  2002.10.24 add [ start ] infocom  -->
 								<table>
@@ -735,6 +750,7 @@
 								</table> <font size="-1">■ 業種は6つまで登録可能です。業種を追加したい場合には1、2の作業を繰り返して下さい。 </font>
 							</td>
 						</tr>
+*}
 
 						<tr>
 							<td nowrap rowspan="2">出品物 <font color="#CC3333">●</font></td>
@@ -752,7 +768,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="3">開催地 <font color="#CC3333">●</font></td>
+							<td nowrap rowspan="1">開催地 <font color="#CC3333">●</font></td>
 							<!-- 開催地域(日) -->
 							<!-- 開催地域(英) -->
 							<!-- 開催国(日) -->
@@ -761,9 +777,11 @@
 							<!-- 開催都市(英) -->
 							<!-- その他の都市(日) -->
 							<!-- その他の都市(英) -->
+{*
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
 						<tr>
+*}
 							<td nowrap>日：
 								<table border="0">
 									<tr>
@@ -809,10 +827,16 @@
 										<td><input type="checkbox" name="othercity_jp" value="1" {if ("1" == $form.othercity_jp)}checked{/if} /> その他</td>
 										<td colspan="2"><input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" maxlength="100" size="100" /></td>
 									</tr>
-								</table> <font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font>
-
+									<tr>
+										<td>&nbsp;</td>
+										<td><input type="checkbox" name="othercity_en" value="1" {if ("1" == $form.othercity_en)}checked{/if} /> Others</td>
+										<td colspan="2"><input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" maxlength="100" size="100" /><font color="#CC3333">（翻訳）</font></td>
+									</tr>
+								</table>
+								<font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font>
 							</td>
 						</tr>
+{*
 						<tr>
 							<td nowrap>英：
 								<table border="0">
@@ -862,7 +886,7 @@
 								</table> <font size="-1">■「都市を選択」をクリックして表示される一覧に、開催都市がない場合は「その他」にチェックをし、都市名を入力して下さい。</font> <!--  2002.10.24 add [  end  ] infocom  -->
 							</td>
 						</tr>
-
+*}
 						<tr>
 							<td nowrap rowspan="2">会場名 <font color="#CC3333">●</font></td>
 							<!-- 会場名(日) -->
@@ -891,18 +915,21 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="3">入場資格 <font color="#CC3333">●</font></td>
+							<td nowrap rowspan="1">入場資格 <font color="#CC3333">●</font></td>
 							<!-- 入場資格(日) -->
 							<!-- 入場資格(英) -->
+{*
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
 						<tr>
+*}
 							<td nowrap>日：<br/>
 							{section name=it loop=$app.open_to}
 							<input type="radio" name="open_to_jp" id="open_to_jp" value="{$app.open_to[it].kbn_2}" {if ($app.open_to[it].kbn_2 == $form.open_to_jp)}checked{/if} />{$app.open_to[it].discription_jp}
 							{/section}
 							</td>
 						</tr>
+{*
 						<tr>
 							<td nowrap>英：<br/>
 							{section name=it loop=$app.open_to}
@@ -910,16 +937,19 @@
 							{/section}
 							</td>
 						</tr>
+*}
 
 						<tr>
-							<td nowrap rowspan="3">チケットの入手方法</td>
+							<td nowrap rowspan="1">チケットの入手方法</td>
 							<!-- チケットの入手方法(日) -->
 							<!-- チケットの入手方法(英) -->
 							<!-- その他のチケットの入手方法(日) -->
 							<!-- その他のチケットの入手方法(英) -->
+{*
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
 						<tr>
+*}
 							<td nowrap>日：<br/>
 							<table>
 							<tr>
@@ -932,9 +962,14 @@
 							</tr>
 							<tr>
 							<td colspan="2"><input type="checkbox" name="admission_ticket_5_jp" id="admission_ticket_5_jp" value="1" {if ("1" == $form.admission_ticket_5_jp)}checked{/if} />その他 <input type="text" name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" maxlenth="500" size="100" /></td>
+							</tr>
+							<tr>
+							<td colspan="2"><input type="checkbox" name="admission_ticket_5_en" id="admission_ticket_5_en" value="1" {if ("1" == $form.admission_ticket_5_en)}checked{/if} />Others <input type="text" name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" maxlenth="500" size="100" /></td>
+							</tr>
 							</table>
 							</td>
 						</tr>
+{*
 						<tr>
 							<td nowrap>英：<br/>
 							<table>
@@ -948,9 +983,11 @@
 							</tr>
 							<tr>
 							<td colspan="2"><input type="checkbox" name="admission_ticket_5_en" id="admission_ticket_5_en" value="1" {if ("1" == $form.admission_ticket_5_en)}checked{/if} />Others <input type="text" name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" maxlenth="500" size="100" /></td>
+							</tr>
 							</table>
 							</td>
 						</tr>
+*}
 
 						<tr>
 							<td nowrap>過去の実績 <font color="#CC3333">○</font></td>

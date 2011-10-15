@@ -1,20 +1,19 @@
 <div id="menu">
+	<font size="2">
+	<br/>
 	{if ("1" == $session.auth_user)}
-	<b>ユーザ情報</b>
-	<ul>
-		<li><a href="?action_admin_userRegist=true">ユーザ登録</a></li>
-		<li><a href="?action_admin_userSearch=true">ユーザ検索</a></li>
-	</ul>
-	<br />
+	<b>ユーザ情報</b><br />
+	・<a href="?action_admin_userRegist=true">ユーザ登録</a><br/>
+	・<a href="?action_admin_userSearch=true">ユーザ検索</a><br/>
+	<br/>
 	{/if}
 	{if ("1" == $session.auth_fair)}
-	<b>展示会情報({$app.fair_count})</b>
-	<ul>
-		<li><a href="{$config.url}?action_admin_fairRegist=true">新規展示会登録</a></li>
-		<li><a href="{$config.url}?action_admin_fairSearch=true">展示会検索</a></li>
-		<li><a href="{$config.url}?action_admin_fairList=true&type=unauthorized">展示会未承認一覧表示</a></li>
-		<li><a href="{$config.url}?action_admin_fairList=true&type=denial">展示会否認一覧表示</a></li>
-	</ul>
+	<b>展示会情報({$app.fair_count})</b><br/>
+	・<a href="{$config.url}?action_admin_fairRegist=true">新規展示会登録</a><br/>
+	・<a href="{$config.url}?action_admin_fairSearch=true">展示会検索</a><br/>
+	・<a href="{$config.url}?action_admin_fairList=true&type=unauthorized">展示会未承認一覧表示</a><br />
+	・<a href="{$config.url}?action_admin_fairList=true&type=denial">展示会否認一覧表示</a><br />
 	{/if}
+	</font>
 </div>
 

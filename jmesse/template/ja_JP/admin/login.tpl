@@ -4,7 +4,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=UTF-8">
 <title>管理画面</title>
 </head>
-<body>
+<body onload="document.getElementById('email').focus()">
 	<div align="center">
 		<font size=5><b>管理画面</b></font>
 	</div>
