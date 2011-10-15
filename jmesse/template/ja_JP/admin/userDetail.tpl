@@ -102,7 +102,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th nowrap style=text-align:left>ユーザ管理</th>
+										<th nowrap style=text-align:left>ユーザ管理権限</th>
 										<td width="500" style="text-align:left">
 											{if $form.authUser == "0"}権限なし{/if}
 											{if $form.authUser == "1"}権限あり{/if}
