@@ -372,6 +372,14 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		$this->af->set('delFlg', $jm_user->get('del_flg'));
 		$this->af->set('registDate', $jm_user->get('regist_date'));
 		$this->af->set('updateDate', $jm_user->get('update_date'));
+
+		// ログテーブル登録
+		$mgr = $this->backend->getManager('adminCommon');
+		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $jm_user->get('user_id'));
+		if (Ethna::isError($ret)) {
+			$this->ae->addObject('error', $ret);
+			return 'error';
+		}
 		return 'admin_userDetail';
 	}
 }
