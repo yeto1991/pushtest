@@ -21,6 +21,32 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
      *  @var    array   form definition.
      */
 	var $form = array(
+		'mode' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '登録モード',    // Display name
+			'required'    => true,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'user_id' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'ユーザID',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'email' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
@@ -53,7 +79,7 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'name'        => '会社名',
 			'required'    => true,
 			'min'         => null,
-			'max'         => 255,
+			'max'         => 500,
 			'regexp'      => null,
 			'mbregexp'    => null,
 			'mbregexp_encoding' => 'UTF-8',
@@ -131,7 +157,7 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'name'        => 'TEL',
 			'required'    => true,
 			'min'         => null,
-			'max'         => 20,
+			'max'         => 100,
 			'regexp'      => null,
 			'mbregexp'    => null,
 			'mbregexp_encoding' => 'UTF-8',
@@ -144,7 +170,7 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'name'        => 'FAX',
 			'required'    => false,
 			'min'         => null,
-			'max'         => 20,
+			'max'         => 100,
 			'regexp'      => null,
 			'mbregexp'    => null,
 			'mbregexp_encoding' => 'UTF-8',
@@ -277,7 +303,7 @@ class Jmesse_Action_AdminUserRegist extends Jmesse_ActionClass
     function prepare()
     {
 		// ログインチェック
-		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
+		if (!$this->backend->getManager('adminCommon')->isLoginUser()) {
 			return 'admin_Login';
 		}
 		return null;
@@ -291,7 +317,8 @@ class Jmesse_Action_AdminUserRegist extends Jmesse_ActionClass
      */
     function perform()
     {
-        return 'admin_userRegist';
+		$this->af->set('mode', 'regist');
+		return 'admin_userRegist';
     }
 }
 
