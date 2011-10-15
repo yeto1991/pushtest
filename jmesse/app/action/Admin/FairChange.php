@@ -221,10 +221,10 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'mihon_no' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市番号',    // Display name
-			'required'    => true,           // Required Option(true/false)
+			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -972,7 +972,7 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'gross_floor_area' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '展示会で使用する面積（Net）', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1210,7 +1210,7 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_visitor' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績来場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1223,7 +1223,7 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_visitor' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外来場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1236,7 +1236,7 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_exhibitors' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1249,7 +1249,7 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_exhibitors' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1262,7 +1262,7 @@ class Jmesse_Form_AdminFairChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'net_square_meters' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績展示面積(㎡)', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1861,7 +1861,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('venue_en', $jm_fair->get('venue_en'));
 
 		// 展示会で使用する面積（Ｎｅｔ）
-		$this->af->set('gross_floor_area', $jm_fair->get('gross_floor_area'));
+		$this->af->set('gross_floor_area', $this->isZero($jm_fair->get('gross_floor_area')));
 
 		// 交通手段
 		$this->af->set('transportation_jp', $jm_fair->get('transportation_jp'));
@@ -1897,11 +1897,11 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 
 		// 過去の実績
 		$this->af->set('year_of_the_trade_fair', $jm_fair->get('year_of_the_trade_fair'));
-		$this->af->set('total_number_of_visitor', $jm_fair->get('total_number_of_visitor'));
-		$this->af->set('number_of_foreign_visitor', $jm_fair->get('number_of_foreign_visitor'));
-		$this->af->set('total_number_of_exhibitors', $jm_fair->get('total_number_of_exhibitors'));
-		$this->af->set('number_of_foreign_exhibitors', $jm_fair->get('number_of_foreign_exhibitors'));
-		$this->af->set('net_square_meters', $jm_fair->get('net_square_meters'));
+		$this->af->set('total_number_of_visitor', $this->isZero($jm_fair->get('total_number_of_visitor')));
+		$this->af->set('number_of_foreign_visitor', $this->isZero($jm_fair->get('number_of_foreign_visitor')));
+		$this->af->set('total_number_of_exhibitors', $this->isZero($jm_fair->get('total_number_of_exhibitors')));
+		$this->af->set('number_of_foreign_exhibitors', $this->isZero($jm_fair->get('number_of_foreign_exhibitors')));
+		$this->af->set('net_square_meters', $this->isZero($jm_fair->get('net_square_meters')));
 		$this->af->set('spare_field1', $jm_fair->get('spare_field1'));
 
 		// 出展申込締切日
@@ -2064,6 +2064,20 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 					$ret = $sub_industory_list[$i]['discription_en'];
 				}
 			}
+		}
+		return $ret;
+	}
+
+	/**
+	 * INT型の項目が0の場合''空文字を返す。
+	 *
+	 * @param int $param 対象パラメータ
+	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+	 */
+	function isZero($param) {
+		$ret = $param;
+		if ("0" == $param) {
+			$ret = '';
 		}
 		return $ret;
 	}

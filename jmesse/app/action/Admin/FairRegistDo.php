@@ -121,6 +121,29 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			$this->ae->addObject('error', Ethna::raiseError('主催者・問合せ先が入力されていません', E_REQUIRED));
 		}
 
+		// 型チェック
+		// 申請年月日
+		if (!checkdate($this->af->get('date_of_application_m'), $this->af->get('date_of_application_d'), $this->af->get('date_of_application_y'))) {
+			$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません', E_INPUT_TYPE));
+		}
+		// 登録日(承認日)
+		if (!checkdate($this->af->get('date_of_registration_m'), $this->af->get('date_of_registration_d'), $this->af->get('date_of_registration_y'))) {
+			$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません', E_INPUT_TYPE));
+		}
+		// 会期
+		if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
+			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません', E_INPUT_TYPE));
+		}
+		if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません', E_INPUT_TYPE));
+		}
+		// 出展申込締切日
+		if (null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy')) {
+			if (!checkdate($this->af->get('app_dead_mm'), $this->af->get('app_dead_dd'), $this->af->get('app_dead_yyyy'))) {
+				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
+			}
+		}
+
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
 			return 'admin_fairRegist';

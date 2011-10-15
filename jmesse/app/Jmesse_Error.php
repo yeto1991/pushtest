@@ -42,6 +42,10 @@ define('E_FAIL_TO_GET_MANAGER_ADMIN_COMMON', 608);
 // 必須項目が未入力
 define('E_REQUIRED', 700);
 
+// 入力型不正
+define('E_INPUT_TYPE', 800);
+
+
 
 /*--- Application Error Definition ---*/
 /*

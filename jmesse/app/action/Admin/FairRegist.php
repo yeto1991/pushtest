@@ -204,7 +204,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'mihon_no' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市番号',    // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -955,7 +955,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'gross_floor_area' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '展示会で使用する面積（Net）', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1193,7 +1193,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_visitor' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績来場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1206,7 +1206,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_visitor' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外来場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1219,7 +1219,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_exhibitors' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1232,7 +1232,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_exhibitors' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1245,7 +1245,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'net_square_meters' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績展示面積(㎡)', // Display name
 			'required'    => false,           // Required Option(true/false)
