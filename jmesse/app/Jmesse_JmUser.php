@@ -48,14 +48,11 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	function getUserInfoList($searchConditions) {
 		$db = $this->backend->getDB();
 		if($searchConditions != null){
-			$sql = 'select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user ? order by user_id asc';
-			$stmt =& $db->db->prepare($sql);
-			$param = array($searchConditions);
-			$res = $db->db->execute($stmt, $param);
+			$sql = "select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user ".$searchConditions." order by user_id asc";
 		}else{
-			$sql = 'select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user order by user_id asc';
-			$res = $db->query($sql);
+			$sql = "select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user order by user_id asc";
 		}
+		$res = $db->query($sql);
 		if (null == $res) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
 			return null;
@@ -85,14 +82,11 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	function getUserInfoListCount($searchConditions) {
 		$db = $this->backend->getDB();
 		if($searchConditions != null){
-			$sql = 'select count(*) cnt from jm_user ? order by user_id asc';
-			$stmt =& $db->db->prepare($sql);
-			$param = array($searchConditions);
-			$res = $db->db->execute($sql, $param);
+			$sql = "select count(*) cnt from jm_user ".$searchConditions." order by user_id asc";
 		}else{
 			$sql = 'select count(*) cnt from jm_user order by user_id asc';
-			$res = $db->query($sql);
 		}
+		$res = $db->query($sql);
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->ae->addObject('error', $res);

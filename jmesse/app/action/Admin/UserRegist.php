@@ -35,7 +35,7 @@ class Jmesse_Form_AdminUserRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'user_id' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => 'ユーザID',    // Display name
 			'required'    => false,           // Required Option(true/false)

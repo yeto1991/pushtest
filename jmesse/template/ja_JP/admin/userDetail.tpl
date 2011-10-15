@@ -1,108 +1,157 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>見本市ユーザ管理</title>
-		<script language="javascript" src="/mihonuser_admin/mihonuser/CommonTips.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ユーザ管理</title>
 </head>
 <body>
+<form name="form_admin_userDetail" id="form_admin_userDetail" method="POST" action=""  enctype="multipart/form-data">
+<input type="hidden" name="action_admin_userChange" id="action_admin_userChange" value="dummy">
+<!-- ユーザID -->
+<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
+<!-- 登録モード -->
+<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 	<table style="width:100%;">
 		<tr>
 			<td valign="top" style="width:200px;">{include file="admin/menu.tpl"}</td>
 			<td>
-				<center>
-					<font size=5><b>見本市ユーザ管理</b></font>
-				</center>
+				<div style="text-align:center">
+					<font size=5><b>ユーザ管理</b></font>
+				</div>
 				<hr>
-				<div align="center">詳細画面</div>
-				<center>
-		  			<table border=0>
-		  				<tr>
-		  					<td>
-		  						<input type="submit" name="$List" value="ユーザ一覧に戻る">
-		  					</td>
-		  				</tr>
-		  				<tr>
-		  					<td>
-								  <table border=1>
-									   <tr>
-									   		<th nowrap>ユーザID</th><td width=500>TEST</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>パスワード</th><td>TEST</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>会社名</th><td width=500>TEST</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>部署名</th><td width=500>TEST</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>氏名</th><td width=500>TEST</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>性別</th><td width=500>性別コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>Eメール</th><td width=500>TEST@ssss.com</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>郵便番号</th><td width=500>000-1111</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>住所</th><td width=500>東京大阪</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>TEL</th><td width=500>(03)1111-2222</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>FAX</th><td width=500>(03)1111-2222</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>URL</th><td width=500>http://www.yahoo.com</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>秘密の質問</th><td width=500>秘密の質問コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>秘密の質問の答え</th><td width=500>TEST</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>ユーザ使用言語</th><td width=500>ユーザ使用言語コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>登録結果通知</th><td width=500>登録結果通知コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>権限(一般)</th><td width=500>権限(一般)コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>権限(ユーザ管理)</th><td width=500>権限(ユーザ管理)コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									   		<th nowrap>権限(展示会管理)</th><td width=500>権限(展示会管理)コードマスタ参照</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>ID・パスワード通知メール</th><td width=500>ID・パスワード通知メールコードマスタ参照</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>登録日</th><td width=500>YYYY-MM-DD HH:MM:SS</td>
-									   </tr>
-									   <tr>
-									    	<th nowrap>更新日</th><td width=500>YYYY-MM-DD HH:MM:SS</td>
-									   </tr>
-								  </table>
+				<div align="center">ユーザ詳細</div>
+				<div align="center">
+					<table>
+						<tr>
+							<td>
+								<div align="left">
+									<input type="button" value="ユーザ一覧に戻る" onclick="history.back()"><br>
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<br><input type="submit" name="$EditDoc" value="編集開始">
+								<table border=1 style="width:100%; font-size:15px;">
+									<tr>
+										<th nowrap style="text-align:left">Eメール</th>
+										<td width="500" style="text-align:left">{$form.email}</td>
+									</tr>
+									<tr>
+										<th nowrap style="text-align:left">パスワード</th>
+										<td width="500" style="text-align:left">{$form.password}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>会社名</th>
+										<td width="500" style="text-align:left">{$form.companyNm}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>部署名</th>
+										<td width="500" style="text-align:left">{$form.divisionDeptNm}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>氏名</th>
+										<td width="500" style="text-align:left">{$form.userNm}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>性別</th>
+										<td width="500" style="text-align:left">
+											{if $form.genderCd == "0"}男性{/if}
+											{if $form.genderCd == "1"}女性{/if}
+											{if $form.genderCd == "2"}不明{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>郵便番号</th>
+										<td width="500" style="text-align:left">{$form.postCode}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>住所</th>
+										<td width="500" style="text-align:left">{$form.address}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>TEL</th>
+										<td width="500" style="text-align:left">{$form.tel}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>FAX</th>
+										<td width="500" style="text-align:left">{$form.fax}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>URL</th>
+										<td width="500" style="text-align:left">{$form.url}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>ユーザ使用言語</th>
+										<td width="500" style="text-align:left">
+											{if $form.useLanguageCd == "0"}日本語{/if}
+											{if $form.useLanguageCd == "1"}英語{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>登録結果通知</th>
+										<td width="500" style="text-align:left">
+											{if $form.registResultNoticeCd == "0"}メール送信する{/if}
+											{if $form.registResultNoticeCd == "1"}メール送信しない{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>一般権限</th>
+										<td width="500" style="text-align:left">
+											{if $form.authGen == "0"}権限なし{/if}
+											{if $form.authGen == "1"}権限あり{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>ユーザ管理</th>
+										<td width="500" style="text-align:left">
+											{if $form.authUser == "0"}権限なし{/if}
+											{if $form.authUser == "1"}権限あり{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>展示会管理権限</th>
+										<td width="500" style="text-align:left">
+											{if $form.authFair == "0"}権限なし{/if}
+											{if $form.authFair == "1"}権限あり{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>ID・パスワード通知メール</th>
+										<td width="500" style="text-align:left">
+											{if $form.idpassNoticeCd == "0"}日本語で送信{/if}
+											{if $form.idpassNoticeCd == "1"}英語で送信{/if}
+											{if $form.idpassNoticeCd == "2"}変更しない{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>削除フラグ</th>
+										<td width="500" style="text-align:left">
+											{if $form.delFlg == "0"}未削除{/if}
+											{if $form.delFlg == "1"}削除済{/if}
+										</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>登録</th>
+										<td width="500" style="text-align:left">{$form.registDate}</td>
+									</tr>
+									<tr>
+										<th nowrap style=text-align:left>更新</th>
+										<td width="500" style="text-align:left">{$form.updateDate}</td>
+									</tr>
+								</table>
 							</td>
+						</tr>
 						<tr>
+							<td>
+								<br><input type="submit" value="編集開始" />
+							</td>
+						</tr>
 					</table>
-		  		</center>
+				</div>
 			</td>
 		</tr>
 	</table>
+</form>
 </body>
 </html>
+

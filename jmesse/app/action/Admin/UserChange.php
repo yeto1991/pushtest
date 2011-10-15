@@ -35,7 +35,7 @@ class Jmesse_Form_AdminUserChange extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'user_id' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => 'ユーザID',    // Display name
 			'required'    => true,           // Required Option(true/false)
@@ -374,6 +374,21 @@ class Jmesse_Action_AdminUserChange extends Jmesse_ActionClass
 		$this->af->setApp('success', $this->af->get('success'));
 		return 'admin_userRegist';
 	}
+
+	/**
+	* INT型の項目が0の場合''空文字を返す。
+	*
+	* @param int $param 対象パラメータ
+	* @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+	*/
+	function isZero($param) {
+		$ret = $param;
+		if ("0" == $param) {
+			$ret = '';
+		}
+		return $ret;
+	}
+
 }
 
 ?>
