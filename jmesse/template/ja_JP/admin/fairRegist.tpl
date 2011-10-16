@@ -363,6 +363,8 @@
 		<input type="hidden" name="action_admin_fairChangeDo" id="action_admin_fairChangeDo" value="dummy">
 		{elseif ("copy" == $form.mode)}
 		<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
+		{else}
+		<input type="hidden" name="action_admin_fairRegistDo" id="action_admin_fairRegistDo" value="dummy">
 		{/if}
 		<!-- 業種（小分類） -->
 		<input type="hidden" name="tmp_sub_industory_jp" id="tmp_sub_industory_jp" value="{$form.tmp_sub_industory_jp}" />

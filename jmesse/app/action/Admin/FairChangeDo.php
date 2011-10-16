@@ -678,8 +678,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		return $ret;
 	}
 
-
-
 }
 
 ?>

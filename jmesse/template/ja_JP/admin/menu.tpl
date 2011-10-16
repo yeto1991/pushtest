@@ -1,4 +1,4 @@
-<div id="menu">
+<div id="menu" width="150">
 <font size="2">
 <br/>
 {if ("1" == $session.auth_user)}

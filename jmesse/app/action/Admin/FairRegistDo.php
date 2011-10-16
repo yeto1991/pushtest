@@ -605,6 +605,49 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		return null;
 	}
 
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $main_industory_list
+	 * @param unknown_type $kbn_2
+	 * @param unknown_type $use_language_flag
+	 */
+	function _getMainIndustory($main_industory_list, $kbn_2, $use_language_flag) {
+		$ret = '';
+		for ($i = 0; $i < count($main_industory_list); $i++) {
+			if ($kbn_2 == $main_industory_list[$i]['kbn_2']) {
+				if ('0' == $use_language_flag) {
+					$ret = $main_industory_list[$i]['discription_jp'];
+				} else {
+					$ret = $main_industory_list[$i]['discription_en'];
+				}
+			}
+		}
+		return $ret;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $sub_industory_list
+	 * @param unknown_type $kbn_3
+	 * @param unknown_type $use_language_flag
+	 * @return string
+	 */
+	function _getSubIndustory($sub_industory_list, $kbn_3, $use_language_flag) {
+		$ret = '';
+		for ($i = 0; $i < count($sub_industory_list); $i++) {
+			if ($kbn_3 == $sub_industory_list[$i]['kbn_3']) {
+				if ('0' == $use_language_flag) {
+					$ret = $sub_industory_list[$i]['discription_jp'];
+				} else {
+					$ret = $sub_industory_list[$i]['discription_en'];
+				}
+			}
+		}
+		return $ret;
+	}
+
 }
 
 ?>
