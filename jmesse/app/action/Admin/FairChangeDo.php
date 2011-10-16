@@ -50,6 +50,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			return 'admin_fairRegist';
 		}
 
+		// 見本市番号は必須
+		if (null == $this->af->get('mihon_no') || '' == $this->af->get('mihon_no')) {
+			$this->ae->addObject('error', Ethna::raiseError('見本市番号が入力されていません', E_REQUIRED));
+			return 'error';
+		}
+
 		// 入力チェック（詳細）
 		$use_language_flag = $this->af->get('use_language_flag');
 // 		if ('0' == $use_language_flag) {
@@ -214,6 +220,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// TEXTAREAの改行コード
+		$br = $this->af->get('br');
+
 		// Webページの表示/非表示
 		$jm_fair->set('web_display_type', $this->af->get('web_display_type'));
 
@@ -255,12 +264,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('fair_url', $this->af->get('fair_url'));
 
 		// キャッチフレーズ
-		$jm_fair->set('profile_jp', str_replace("\n", '<br/>', $this->af->get('profile_jp')));
-		$jm_fair->set('profile_en', str_replace("\n", '<br/>', $this->af->get('profile_en')));
+		$jm_fair->set('profile_jp', str_replace($br, '<br/>', $this->af->get('profile_jp')));
+		$jm_fair->set('profile_en', str_replace($br, '<br/>', $this->af->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$jm_fair->set('detailed_information_jp', str_replace("\n", '<br/>', $this->af->get('detailed_information_jp')));
-		$jm_fair->set('detailed_information_en', str_replace("\n", '<br/>', $this->af->get('detailed_information_en')));
+		$jm_fair->set('detailed_information_jp', str_replace($br, '<br/>', $this->af->get('detailed_information_jp')));
+		$jm_fair->set('detailed_information_en', str_replace($br, '<br/>', $this->af->get('detailed_information_en')));
 
 		// 会期
 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
@@ -292,8 +301,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('sub_industory_6', $this->af->get('sub_industory_6'));
 
 		// 出品物
-		$jm_fair->set('exhibits_jp', str_replace("\n", '<br/>', $this->af->get('exhibits_jp')));
-		$jm_fair->set('exhibits_en', str_replace("\n", '<br/>', $this->af->get('exhibits_en')));
+		$jm_fair->set('exhibits_jp', str_replace($br, '<br/>', $this->af->get('exhibits_jp')));
+		$jm_fair->set('exhibits_en', str_replace($br, '<br/>', $this->af->get('exhibits_en')));
 
 		// 開催地
 // 		if ('0' == $use_language_flag) {
@@ -412,6 +421,155 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 //		$jm_fair->set('regist_user_id', $this->session->get('user_id'));
 //		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
 
+		// 検索キーワードの作成
+		$search_key = '';
+		// 申請年月日
+		$search_key .= $this->af->get('date_of_application_y').'年'.$this->af->get('date_of_application_m').'月'.$this->af->get('date_of_application_d').'日 ';
+		// 登録日(承認日)
+		$search_key .= $this->af->get('date_of_registration_y').'年'.$this->af->get('date_of_registration_m').'月'.$this->af->get('date_of_registration_d').'日 ';
+		// 見本市番号
+		$search_key .= $this->af->get('mihon_no').' ';
+		// 見本市名
+		$search_key .= $this->af->get('fair_title_jp').' ';
+		$search_key .= $this->af->get('fair_title_en').' ';
+		// 見本市略称
+		$search_key .= $this->af->get('abbrev_title').' ';
+		// 見本市URL
+		$search_key .= $this->af->get('fair_url').' ';
+		// キャッチフレーズ
+		$search_key .= str_replace($br, '', $this->af->get('profile_jp')).' ';
+		$search_key .= str_replace($br, '', $this->af->get('profile_en')).' ';
+		// ＰＲ・紹介文
+		$search_key .= str_replace($br, '', $this->af->get('detailed_information_jp')).' ';
+		$search_key .= str_replace($br, '', $this->af->get('detailed_information_en')).' ';
+		// 会期
+		$search_key .= $this->af->get('date_from_yyyy').'年'.$this->af->get('date_from_mm').'月'.$this->af->get('date_from_dd').'日 ';
+		$search_key .= $this->af->get('date_to_yyyy').'年'.$this->af->get('date_to_mm').'月'.$this->af->get('date_to_dd').'日 ';
+		// 開催頻度
+		$jm_code_m_mgr =& $this->backend->getManager('JmCodeM');
+		$code = $jm_code_m_mgr->getCode('001', $this->af->get('frequency_jp'), '000', '000');
+		$search_key .= $code['discription_jp'].' ';
+		$search_key .= $code['discription_en'].' ';
+		// 業種
+		$main_list = $jm_code_m_mgr->getMainIndustoryList();
+		$sub_list = $jm_code_m_mgr->getSubIndustoryList($this->af->get('main_industory_1'));
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_1'), '0').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_1'), '0').' ';
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_1'), '1').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_1'), '1').' ';
+		$sub_list = $jm_code_m_mgr->getSubIndustoryList($this->af->get('main_industory_2'));
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_2'), '0').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_2'), '0').' ';
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_2'), '1').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_2'), '1').' ';
+		$sub_list = $jm_code_m_mgr->getSubIndustoryList($this->af->get('main_industory_3'));
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_3'), '0').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_3'), '0').' ';
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_3'), '1').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_3'), '1').' ';
+		$sub_list = $jm_code_m_mgr->getSubIndustoryList($this->af->get('main_industory_4'));
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_4'), '0').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_4'), '0').' ';
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_4'), '1').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_4'), '1').' ';
+		$sub_list = $jm_code_m_mgr->getSubIndustoryList($this->af->get('main_industory_5'));
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_5'), '0').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_5'), '0').' ';
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_5'), '1').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_5'), '1').' ';
+		$sub_list = $jm_code_m_mgr->getSubIndustoryList($this->af->get('main_industory_6'));
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_6'), '0').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_6'), '0').' ';
+		$search_key .= $this->_getMainIndustory($main_list, $this->af->get('main_industory_6'), '1').' ';
+		$search_key .= $this->_getSubIndustory($sub_list, $this->af->get('sub_industory_6'), '1').' ';
+		// 出品物
+		$search_key .= str_replace($br, '', $this->af->get('exhibits_jp')).' ';
+		$search_key .= str_replace($br, '', $this->af->get('exhibits_en')).' ';
+		// 開催地
+		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region'), '000', '000');
+		$search_key .= $code['discription_jp'].' ';
+		$search_key .= $code['discription_en'].' ';
+		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region'), $this->af->get('country'), '000');
+		$search_key .= $code['discription_jp'].' ';
+		$search_key .= $code['discription_en'].' ';
+		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region'), $this->af->get('country'), $this->af->get('city'));
+		$search_key .= $code['discription_jp'].' ';
+		$search_key .= $code['discription_en'].' ';
+		$search_key .= $this->af->get('other_city_jp').' ';
+		$search_key .= $this->af->get('other_city_en').' ';
+		// 会場名
+		$search_key .= $this->af->get('venue_jp').' ';
+		$search_key .= $this->af->get('venue_en').' ';
+		// 展示会で使用する面積（Ｎｅｔ）
+		$search_key .= $this->af->get('gross_floor_area').' ';
+		// 交通手段
+		$search_key .= $this->af->get('transportation_jp').' ';
+		$search_key .= $this->af->get('transportation_en').' ';
+		// 入場資格
+		$code = $jm_code_m_mgr->getCode('004', $this->af->get('open_to'), '000', '000');
+		$search_key .= $code['discription_jp'].' ';
+		$search_key .= $code['discription_en'].' ';
+		// チケットの入手方法
+		if ('1' == $this->af->get('admission_ticket_1')) {
+			$search_key .= '登録の必要なし ';
+		}
+		if ('1' == $this->af->get('admission_ticket_2')) {
+			$search_key .= 'WEBからの事前登録 ';
+		}
+		if ('1' == $this->af->get('admission_ticket_3')) {
+			$search_key .= '主催者・日本の照会先へ問い合わせ ';
+		}
+		if ('1' == $this->af->get('admission_ticket_3')) {
+			$search_key .= '当日会場で入手 ';
+		}
+		$search_key .= $this->af->get('other_admission_ticket_jp').' ';
+		$search_key .= $this->af->get('other_admission_ticket_en').' ';
+		// 過去の実績
+		$search_key .= $this->af->get('year_of_the_trade_fair').' ';
+		$search_key .= $this->af->get('total_number_of_visitor').' ';
+		$search_key .= $this->af->get('number_of_foreign_visitor').' ';
+		$search_key .= $this->af->get('total_number_of_exhibitors').' ';
+		$search_key .= $this->af->get('number_of_foreign_exhibitors').' ';
+		$search_key .= $this->af->get('net_square_meters').' ';
+		$search_key .= $this->af->get('spare_field1').' ';
+		// 出展申込締切日
+		$search_key .= $this->af->get('app_dead_yyyy').'年'.$this->af->get('app_dead_mm').'月'.$this->af->get('app_dead_dd').'日 ';
+		// 主催者・問合せ先
+		$search_key .= $this->af->get('organizer_jp').' ';
+		$search_key .= $this->af->get('organizer_en').' ';
+		$search_key .= $this->af->get('organizer_tel').' ';
+		$search_key .= $this->af->get('organizer_fax').' ';
+		$search_key .= $this->af->get('organizer_email').' ';
+		$search_key .= $this->af->get('organizer_addr').' ';
+		$search_key .= $this->af->get('organizer_div').' ';
+		$search_key .= $this->af->get('organizer_pers').' ';
+		// 日本国内の照会先
+		$search_key .= $this->af->get('agency_in_japan_jp').' ';
+		$search_key .= $this->af->get('agency_in_japan_en').' ';
+		$search_key .= $this->af->get('agency_in_japan_tel').' ';
+		$search_key .= $this->af->get('agency_in_japan_fax').' ';
+		$search_key .= $this->af->get('agency_in_japan_email').' ';
+		$search_key .= $this->af->get('agency_in_japan_addr').' ';
+		$search_key .= $this->af->get('agency_in_japan_div').' ';
+		$search_key .= $this->af->get('agency_in_japan_pers').' ';
+		// 見本市レポート／URL
+		$search_key .= $this->af->get('report_link').' ';
+		// 世界の展示会場／URL
+		$search_key .= $this->af->get('venue_link').' ';
+		// 展示会に係わる画像(3点)
+		$search_key .= $this->af->get('photos_name_1').' ';
+		$search_key .= $this->af->get('photos_name_2').' ';
+		$search_key .= $this->af->get('photos_name_3').' ';
+		// システム管理者備考欄
+		$search_key .= $this->af->get('note_for_system_manager').' ';
+		// データ管理者備考欄
+		$search_key .= $this->af->get('note_for_data_manager').' ';
+		// 削除
+		if ('1' == $this->af->get('del_flg')) {
+			$search_key .= '削除 ';
+		}
+		$jm_fair->set('search_key', $search_key);
+
 		// UPDATE
 		$ret = $jm_fair->update();
 		if (Ethna::isError($ret)) {
@@ -446,16 +604,18 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		}
 		$this->af->setApp('photos', $photos_list);
 
+		// JM_FAIR_TEMPにコピー
+		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+		$jmFairTempMgr->copyFair($jm_fair->get('mihon_no'));
+
 		// ログに登録
 		$mgr = $this->backend->getManager('adminCommon');
 		if ('1' == $this->af->get('del_flg')) {
 			$ope_kbn = '4';
-			$remarks = 'delete fair';
 		} else {
 			$ope_kbn = '3';
-			$remarks = 'update fair';
 		}
-		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '2', $remarks);
+		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '2', $jm_fair->get('mihon_no'));
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			return 'error';
@@ -465,6 +625,61 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$this->af->get('mihon_no').'&mode=change&success=1');
 		return null;
 	}
+
+
+	function vdump($obj){
+		ob_start();
+		var_dump($obj);
+		$dump = ob_get_contents();
+		ob_end_clean();
+		return $dump;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $main_industory_list
+	 * @param unknown_type $kbn_2
+	 * @param unknown_type $use_language_flag
+	 */
+	function _getMainIndustory($main_industory_list, $kbn_2, $use_language_flag) {
+		$ret = '';
+		for ($i = 0; $i < count($main_industory_list); $i++) {
+			if ($kbn_2 == $main_industory_list[$i]['kbn_2']) {
+				if ('0' == $use_language_flag) {
+					$ret = $main_industory_list[$i]['discription_jp'];
+				} else {
+					$ret = $main_industory_list[$i]['discription_en'];
+				}
+			}
+		}
+		return $ret;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $sub_industory_list
+	 * @param unknown_type $kbn_3
+	 * @param unknown_type $use_language_flag
+	 * @return string
+	 */
+	function _getSubIndustory($sub_industory_list, $kbn_3, $use_language_flag) {
+		$ret = '';
+		for ($i = 0; $i < count($sub_industory_list); $i++) {
+			if ($kbn_3 == $sub_industory_list[$i]['kbn_3']) {
+				if ('0' == $use_language_flag) {
+					$ret = $sub_industory_list[$i]['discription_jp'];
+				} else {
+					$ret = $sub_industory_list[$i]['discription_en'];
+				}
+			}
+		}
+		return $ret;
+	}
+
+
+
 }
 
 ?>

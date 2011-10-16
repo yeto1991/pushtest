@@ -16,14 +16,14 @@
  */
 class Jmesse_View_AdminLogin extends Jmesse_ViewClass
 {
-    /**
-     *  preprocess before forwarding.
-     *
-     *  @access public
-     */
-    function preforward()
-    {
-    }
+	/**
+	 *  preprocess before forwarding.
+	 *
+	 *  @access public
+	 */
+	function preforward()
+	{
+	}
 }
 
 ?>

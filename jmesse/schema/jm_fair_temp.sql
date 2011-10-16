@@ -6,8 +6,8 @@ create table jmesse.jm_fair_temp(
   , fair_title_en varchar (255)
   , abbrev_title varchar (255)
   , fair_url varchar (255)
-  , mihon_no int
-  , seq_num int auto_increment
+  , mihon_no int not null
+  , seq_num int not null auto_increment
   , profile_jp text
   , profile_en text
   , detailed_information_jp text
@@ -96,9 +96,10 @@ create table jmesse.jm_fair_temp(
   , mail_send_flag char (1)
   , del_flg char (1)
   , del_date datetime
+  , search_key longtext
   , regist_user_id int not null
   , regist_date datetime not null
   , update_user_id int
   , update_date datetime
-  , primary key (seq_num, mihon_no)
+  , primary key (mihon_no, seq_num)
 ) engine = innodb

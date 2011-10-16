@@ -32,7 +32,7 @@ class Jmesse_JmRanking extends Ethna_AppObject
 	 */
 	var $table_def = array(
 		'jm_ranking' => array(
-		'primary' => true,
+			'primary' => true,
 		),
 	);
 

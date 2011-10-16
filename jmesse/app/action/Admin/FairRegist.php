@@ -123,7 +123,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'date_of_application_y' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -220,7 +220,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市番号',    // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -253,7 +253,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'abbrev_title' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -266,7 +266,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'fair_url' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -279,7 +279,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'profile_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -305,7 +305,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'detailed_information_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -331,7 +331,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'date_from_yyyy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -520,7 +520,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'main_industory_name_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(1)', // Display name
+			'name'        => '業種大分類名(2)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -780,7 +780,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'region_jp' => array(
@@ -938,7 +938,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'venue_jp' => array(
@@ -965,7 +965,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'gross_floor_area' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
@@ -1004,7 +1004,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'open_to_jp' => array(
@@ -1089,7 +1089,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'admission_ticket_5_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'その他', // Display name
+			'name'        => 'その他',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1189,7 +1189,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'year_of_the_trade_fair' => array(
@@ -1281,7 +1281,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'app_dead_yyyy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1347,7 +1347,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'organizer_addr' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1425,7 +1425,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'agency_in_japan_jp' => array(
@@ -1452,7 +1452,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'agency_in_japan_addr' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1530,7 +1530,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'report_link' => array(
@@ -1544,7 +1544,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'venue_link' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1557,7 +1557,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 
 		'photos_1' => array(
@@ -1692,7 +1692,43 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+
+		'br' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
+			'name'        => '改行コード',          // Display name
+			'required'    => true,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 	);
+
+	/**
+	 * 半角英数記号チェック。
+	 *
+	 * @param unknown_type $name
+	 */
+	function checkHalfWidthChar($name) {
+		$br = $this->form_vars['br'];
+		if (null != $this->form_vars[$name] && '' != $this->form_vars[$name]) {
+			// 改行はOK
+			$str = str_replace($br, '', $this->form_vars[$name]);
+			if (!preg_match("/^[ -~]+$/", $str)) {
+				$this->ae->add($name, "{form}は半角文字を入力して下さい", E_INPUT_TYPE);
+			}
+			if (preg_match("/`/", $str)) {
+				$this->ae->add($name, "{form}に「`:バッククォート」は使用できません", E_INPUT_TYPE);
+			}
+			if (preg_match('/\\\\/', $str)) {
+				$this->ae->add($name, "{form}に「\:バックスラッシュ」は使用できません", E_INPUT_TYPE);
+			}
+		}
+	}
 }
 
 /**

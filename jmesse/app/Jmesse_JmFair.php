@@ -38,7 +38,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('', $res);
+			$this->ae->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -79,7 +79,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('', $res);
+			$this->ae->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -131,7 +131,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('', $res);
+			$this->ae->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {

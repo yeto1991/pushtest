@@ -32,7 +32,7 @@ class Jmesse_JmLog extends Ethna_AppObject
 	 */
 	var $table_def = array(
 		'jm_log' => array(
-		'primary' => true,
+			'primary' => true,
 		),
 	);
 

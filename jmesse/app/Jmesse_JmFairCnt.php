@@ -32,7 +32,7 @@ class Jmesse_JmFairCnt extends Ethna_AppObject
 	 */
 	var $table_def = array(
 		'jm_fair_cnt' => array(
-		'primary' => true,
+			'primary' => true,
 		),
 	);
 

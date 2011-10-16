@@ -77,6 +77,9 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// TEXTAREAの改行コード
+		$br = $this->af->get('br');
+
 		// 見本市番号
 		$this->af->set('mihon_no', $jm_fair->get('mihon_no'));
 
@@ -127,12 +130,12 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('fair_url', $jm_fair->get('fair_url'));
 
 		// キャッチフレーズ
-		$this->af->set('profile_jp', str_replace('<br/>', "\n", $jm_fair->get('profile_jp')));
-		$this->af->set('profile_en', str_replace('<br/>', "\n", $jm_fair->get('profile_en')));
+		$this->af->set('profile_jp', str_replace('<br/>', $br, $jm_fair->get('profile_jp')));
+		$this->af->set('profile_en', str_replace('<br/>', $br, $jm_fair->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$this->af->set('detailed_information_jp', str_replace('<br/>', "\n", $jm_fair->get('detailed_information_jp')));
-		$this->af->set('detailed_information_en', str_replace('<br/>', "\n", $jm_fair->get('detailed_information_en')));
+		$this->af->set('detailed_information_jp', str_replace('<br/>', $br, $jm_fair->get('detailed_information_jp')));
+		$this->af->set('detailed_information_en', str_replace('<br/>', $br, $jm_fair->get('detailed_information_en')));
 
 		// 会期
 		$this->af->set('date_from_yyyy', $jm_fair->get('date_from_yyyy'));
@@ -164,8 +167,8 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('sub_industory_6', $jm_fair->get('sub_industory_6'));
 
 		// 出品物
-		$this->af->set('exhibits_jp', str_replace('<br/>', "\n", $jm_fair->get('exhibits_jp')));
-		$this->af->set('exhibits_en', str_replace('<br/>', "\n", $jm_fair->get('exhibits_en')));
+		$this->af->set('exhibits_jp', str_replace('<br/>', $br, $jm_fair->get('exhibits_jp')));
+		$this->af->set('exhibits_en', str_replace('<br/>', $br, $jm_fair->get('exhibits_en')));
 
 		// 開催地
 //		if ('0' == $use_language_flag) {
@@ -191,7 +194,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('venue_en', $jm_fair->get('venue_en'));
 
 		// 展示会で使用する面積（Ｎｅｔ）
-		$this->af->set('gross_floor_area', $this->isZero($jm_fair->get('gross_floor_area')));
+		$this->af->set('gross_floor_area', $this->_isZero($jm_fair->get('gross_floor_area')));
 
 		// 交通手段
 		$this->af->set('transportation_jp', $jm_fair->get('transportation_jp'));
@@ -227,11 +230,11 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 
 		// 過去の実績
 		$this->af->set('year_of_the_trade_fair', $jm_fair->get('year_of_the_trade_fair'));
-		$this->af->set('total_number_of_visitor', $this->isZero($jm_fair->get('total_number_of_visitor')));
-		$this->af->set('number_of_foreign_visitor', $this->isZero($jm_fair->get('number_of_foreign_visitor')));
-		$this->af->set('total_number_of_exhibitors', $this->isZero($jm_fair->get('total_number_of_exhibitors')));
-		$this->af->set('number_of_foreign_exhibitors', $this->isZero($jm_fair->get('number_of_foreign_exhibitors')));
-		$this->af->set('net_square_meters', $this->isZero($jm_fair->get('net_square_meters')));
+		$this->af->set('total_number_of_visitor', $this->_isZero($jm_fair->get('total_number_of_visitor')));
+		$this->af->set('number_of_foreign_visitor', $this->_isZero($jm_fair->get('number_of_foreign_visitor')));
+		$this->af->set('total_number_of_exhibitors', $this->_isZero($jm_fair->get('total_number_of_exhibitors')));
+		$this->af->set('number_of_foreign_exhibitors', $this->_isZero($jm_fair->get('number_of_foreign_exhibitors')));
+		$this->af->set('net_square_meters', $this->_isZero($jm_fair->get('net_square_meters')));
 		$this->af->set('spare_field1', $jm_fair->get('spare_field1'));
 
 		// 出展申込締切日
@@ -354,6 +357,14 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		// 成功？
 		$this->af->setApp('success', $this->af->get('success'));
 
+		// ログに登録
+		$mgr = $this->backend->getManager('adminCommon');
+		$ret = $mgr->regLog($this->session->get('user_id'), '1', '2', $jm_fair->get('mihon_no'));
+		if (Ethna::isError($ret)) {
+			$this->ae->addObject('error', $ret);
+			return 'error';
+		}
+
 		return 'admin_fairRegist';
 	}
 
@@ -406,7 +417,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 	 * @param int $param 対象パラメータ
 	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
 	 */
-	function isZero($param) {
+	function _isZero($param) {
 		$ret = $param;
 		if ("0" == $param) {
 			$ret = '';

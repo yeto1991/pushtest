@@ -137,12 +137,12 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$this->af->set('fair_url', $jm_fair->get('fair_url'));
 
 		// キャッチフレーズ
-		$this->af->set('profile_jp', str_replace('<br/>', "\n", $jm_fair->get('profile_jp')));
-		$this->af->set('profile_en', str_replace('<br/>', "\n", $jm_fair->get('profile_en')));
+		$this->af->set('profile_jp', str_replace('<br/>', $br, $jm_fair->get('profile_jp')));
+		$this->af->set('profile_en', str_replace('<br/>', $br, $jm_fair->get('profile_en')));
 
 		// ＰＲ・紹介文
-		$this->af->set('detailed_information_jp', str_replace('<br/>', "\n", $jm_fair->get('detailed_information_jp')));
-		$this->af->set('detailed_information_en', str_replace('<br/>', "\n", $jm_fair->get('detailed_information_en')));
+		$this->af->set('detailed_information_jp', str_replace('<br/>', $br, $jm_fair->get('detailed_information_jp')));
+		$this->af->set('detailed_information_en', str_replace('<br/>', $br, $jm_fair->get('detailed_information_en')));
 
 		// 会期
 		$this->af->set('date_from_yyyy', $jm_fair->get('date_from_yyyy'));
@@ -170,8 +170,8 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$this->af->set('sub_industory_6', $jm_fair->get('sub_industory_6'));
 
 		// 出品物
-		$this->af->set('exhibits_jp', str_replace('<br/>', "\n", $jm_fair->get('exhibits_jp')));
-		$this->af->set('exhibits_en', str_replace('<br/>', "\n", $jm_fair->get('exhibits_en')));
+		$this->af->set('exhibits_jp', str_replace('<br/>', $br, $jm_fair->get('exhibits_jp')));
+		$this->af->set('exhibits_en', str_replace('<br/>', $br, $jm_fair->get('exhibits_en')));
 
 		// 開催地
 		$this->af->set('region_jp', $jm_fair->get('region'));
@@ -336,6 +336,14 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		}
 		$this->af->set('city_name_jp', $city_name['discription_jp']);
 		$this->af->set('city_name_en', $city_name['discription_en']);
+
+		// ログに登録
+		$mgr = $this->backend->getManager('adminCommon');
+		$ret = $mgr->regLog($this->session->get('user_id'), '1', '2', $jm_fair->get('mihon_no'));
+		if (Ethna::isError($ret)) {
+			$this->ae->addObject('error', $ret);
+			return 'error';
+		}
 
 		return 'admin_fairDetail';
 	}
