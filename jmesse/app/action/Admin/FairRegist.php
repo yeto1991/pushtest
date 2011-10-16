@@ -21,6 +21,19 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
+		'success' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '成功',          // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -66,7 +79,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '否認コメント',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -105,7 +118,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'Eメール',      // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -118,7 +131,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '申請年月日（年）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 4,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -131,7 +144,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '申請年月日（月）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -144,7 +157,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '申請年月日（日）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -157,7 +170,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '登録日(承認日)（年）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 4,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -170,7 +183,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '登録日(承認日)（月）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -183,7 +196,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '登録日(承認日)（日）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -207,7 +220,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市番号',    // Display name
-			'required'    => false,           // Required Option(true/false)
+			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -222,7 +235,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '見本市名（日）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -235,7 +248,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '見本市名（英）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -248,7 +261,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '見本市略称',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -261,7 +274,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '見本市URL',     // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -274,7 +287,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'キャッチフレーズ（日）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -287,7 +300,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'キャッチフレーズ（英）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -300,7 +313,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'ＰＲ・紹介文（日）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 1000,            // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -313,7 +326,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'ＰＲ・紹介文（英）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 1000,            // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -326,7 +339,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会期開始年',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 4,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -339,7 +352,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会期開始月',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -352,7 +365,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会期開始日',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -365,7 +378,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会期終了年',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 4,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -378,7 +391,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会期終了月',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -391,7 +404,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会期終了日',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -749,7 +762,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '出品物(日)',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 300,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -762,7 +775,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '出品物(英)',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 300,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -815,7 +828,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '開催地都市',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => null,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -841,7 +854,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '開催地その他（日）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -920,7 +933,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '開催地その他（英）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -934,7 +947,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会場名(日)',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -947,7 +960,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '会場名(英)',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -960,7 +973,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '展示会で使用する面積（Net）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => null,              // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -973,7 +986,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '交通手段(日)',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -986,7 +999,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '交通手段(英)',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1076,7 +1089,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'admission_ticket_5_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'その他',        // Display name
+			'name'        => 'その他', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1092,7 +1105,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'その他のチケットの入手方法(日)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1154,7 +1167,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 // 		),
 		'admission_ticket_5_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
 			'name'        => 'Others',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
@@ -1171,7 +1184,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'その他のチケットの入手方法(英)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1185,7 +1198,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '過去の実績年',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 4,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1206,7 +1219,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_visitor' => array(
-			'type'        => VAR_TYPE_INT, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外来場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1219,7 +1232,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_exhibitors' => array(
-			'type'        => VAR_TYPE_INT, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1232,7 +1245,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_exhibitors' => array(
-			'type'        => VAR_TYPE_INT, // Input type
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
@@ -1263,7 +1276,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '過去の実績認証機関', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1276,7 +1289,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '出展申込締切日(年)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 4,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1289,7 +1302,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '出展申込締切日(月)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1302,7 +1315,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '出展申込締切日(日)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 2,               // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1316,7 +1329,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先名称（日）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1329,7 +1342,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先名称（英）', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1342,7 +1355,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先住所', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1355,7 +1368,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先担当部課', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1368,7 +1381,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先担当者', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1381,7 +1394,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先TEL', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1394,7 +1407,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先FAX', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1407,7 +1420,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '主催者・問合せ先E-Mail', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1421,7 +1434,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先名称（日）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1434,7 +1447,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先名称（英）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1447,7 +1460,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先住所', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1460,7 +1473,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先担当部課', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1473,7 +1486,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先先担当者', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1486,7 +1499,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先TEL', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1499,7 +1512,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先FAX', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1512,7 +1525,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '日本国内の照会先E-Mail', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1526,7 +1539,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '見本市レポート/URL', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1539,7 +1552,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '世界の展示会場/URL', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1625,6 +1638,19 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'del_photos_name' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '削除した画像ファイル', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 
 		'note_for_system_manager' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1632,7 +1658,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'システム管理者備考欄', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1645,7 +1671,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => 'データ管理者備考欄', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
