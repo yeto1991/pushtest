@@ -23,6 +23,8 @@ class Jmesse_View_AdminUserRegistDo extends Jmesse_ViewClass
      */
     function preforward()
     {
+    	// Fairの件数を取得
+    	$this->af->setApp('fair_count', $this->backend->getManager('JmFair')->getCountAll());
     }
 }
 
