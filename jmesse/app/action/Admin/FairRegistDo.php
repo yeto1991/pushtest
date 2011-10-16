@@ -273,11 +273,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('date_to_dd', $this->af->get('date_to_dd'));
 
 		// 開催頻度
-		if ('0' == $use_language_flag) {
+// 		if ('0' == $use_language_flag) {
 			$jm_fair->set('frequency', $this->af->get('frequency_jp'));
-		} else {
-			$jm_fair->set('frequency', $this->af->get('frequency_en'));
-		}
+// 		} else {
+// 			$jm_fair->set('frequency', $this->af->get('frequency_en'));
+// 		}
 
 		// 業種
 		$jm_fair->set('main_industory_1', $this->af->get('main_industory_1'));
@@ -298,21 +298,17 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('exhibits_en', str_replace("\n", '<br/>', $this->af->get('exhibits_en')));
 
 		// 開催地
-		if ('0' == $use_language_flag) {
+// 		if ('0' == $use_language_flag) {
 			$jm_fair->set('region', $this->af->get('region_jp'));
 			$jm_fair->set('country', $this->af->get('country_jp'));
 			$jm_fair->set('city', $this->af->get('city_jp'));
-			if ('1' == $this->af->get('othercity_jp')) {
-				$jm_fair->set('other_city_jp', $this->af->get('other_city_jp'));
-			}
-		} else {
-			$jm_fair->set('region', $this->af->get('region_en'));
-			$jm_fair->set('country', $this->af->get('country_en'));
-			$jm_fair->set('city', $this->af->get('city_en'));
-			if ('1' == $this->af->get('othercity_en')) {
-				$jm_fair->set('other_city_en', $this->af->get('other_city_en'));
-			}
-		}
+			$jm_fair->set('other_city_jp', $this->af->get('other_city_jp'));
+// 		} else {
+// 			$jm_fair->set('region', $this->af->get('region_en'));
+// 			$jm_fair->set('country', $this->af->get('country_en'));
+// 			$jm_fair->set('city', $this->af->get('city_en'));
+			$jm_fair->set('other_city_en', $this->af->get('other_city_en'));
+// 		}
 
 		// 会場名
 		$jm_fair->set('venue_jp', $this->af->get('venue_jp'));
@@ -326,26 +322,26 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('transportation_en', $this->af->get('transportation_en'));
 
 		// 入場資格
-		if ('0' == $use_language_flag) {
+// 		if ('0' == $use_language_flag) {
 			$jm_fair->set('open_to', $this->af->get('open_to_jp'));
-		} else {
-			$jm_fair->set('open_to', $this->af->get('open_to_en'));
-		}
+// 		} else {
+// 			$jm_fair->set('open_to', $this->af->get('open_to_en'));
+// 		}
 
 		// チケットの入手方法
-		if ('0' == $use_language_flag) {
+// 		if ('0' == $use_language_flag) {
 			$jm_fair->set('admission_ticket_1', $this->af->get('admission_ticket_1_jp'));
 			$jm_fair->set('admission_ticket_2', $this->af->get('admission_ticket_2_jp'));
 			$jm_fair->set('admission_ticket_3', $this->af->get('admission_ticket_3_jp'));
 			$jm_fair->set('admission_ticket_4', $this->af->get('admission_ticket_4_jp'));
 			$jm_fair->set('other_admission_ticket_jp', $this->af->get('other_admission_ticket_jp'));
-		} else {
-			$jm_fair->set('admission_ticket_1', $this->af->get('admission_ticket_1_en'));
-			$jm_fair->set('admission_ticket_2', $this->af->get('admission_ticket_2_en'));
-			$jm_fair->set('admission_ticket_3', $this->af->get('admission_ticket_3_en'));
-			$jm_fair->set('admission_ticket_4', $this->af->get('admission_ticket_4_en'));
+// 		} else {
+// 			$jm_fair->set('admission_ticket_1', $this->af->get('admission_ticket_1_en'));
+// 			$jm_fair->set('admission_ticket_2', $this->af->get('admission_ticket_2_en'));
+// 			$jm_fair->set('admission_ticket_3', $this->af->get('admission_ticket_3_en'));
+// 			$jm_fair->set('admission_ticket_4', $this->af->get('admission_ticket_4_en'));
 			$jm_fair->set('other_admission_ticket_en', $this->af->get('other_admission_ticket_en'));
-		}
+// 		}
 
 		// 過去の実績
 		$jm_fair->set('year_of_the_trade_fair', $this->af->get('year_of_the_trade_fair'));

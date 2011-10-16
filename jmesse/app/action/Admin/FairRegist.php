@@ -411,24 +411,24 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'frequency_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '開催頻度',      // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'frequency_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_RADIO, // Form type
+// 			'name'        => '開催頻度',      // Display name
+// 			'required'    => false,            // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 
 		'main_industory_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(1)', // Display name
+			'name'        => '業種大分類', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -441,7 +441,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'sub_industory_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(1)', // Display name
+			'name'        => '業種小分類', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -454,7 +454,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'main_industory_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(1)', // Display name
+			'name'        => '業種大分類名', // Display name
 			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -467,7 +467,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'sub_industory_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(1)', // Display name
+			'name'        => '業種小分類名', // Display name
 			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -849,58 +849,58 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 
-		'region_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '開催地地域',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'country_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '開催地国地域',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'city_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '開催地都市',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'city_name_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT, // Form type
-			'name'        => '開催地都市',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'region_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_SELECT, // Form type
+// 			'name'        => '開催地地域',    // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'country_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_SELECT, // Form type
+// 			'name'        => '開催地国地域',  // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'city_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+// 			'name'        => '開催地都市',    // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'city_name_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT, // Form type
+// 			'name'        => '開催地都市',    // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 		'othercity_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
@@ -1007,24 +1007,24 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'open_to_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '入場資格',      // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'open_to_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_RADIO, // Form type
+// 			'name'        => '入場資格',      // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 
 		'admission_ticket_1_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => 'チケットの入手方法(1)', // Display name
+			'name'        => '登録の必要なし', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1037,7 +1037,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'admission_ticket_2_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(2)', // Display name
+			'name'        => 'WEBからの事前登録', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1050,7 +1050,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'admission_ticket_3_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(3)', // Display name
+			'name'        => '主催者・日本の照会先へ問い合わせ', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1063,7 +1063,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'admission_ticket_4_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(4)', // Display name
+			'name'        => '当日会場で入手', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1076,7 +1076,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'admission_ticket_5_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(5)', // Display name
+			'name'        => 'その他',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1100,62 +1100,62 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 
-		'admission_ticket_1_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => 'チケットの入手方法(1)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_2_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(2)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_3_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(3)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_4_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(4)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'admission_ticket_1_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+// 			'name'        => 'チケットの入手方法(1)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'admission_ticket_2_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
+// 			'name'        => 'チケットの入手方法(2)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'admission_ticket_3_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
+// 			'name'        => 'チケットの入手方法(3)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'admission_ticket_4_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
+// 			'name'        => 'チケットの入手方法(4)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 		'admission_ticket_5_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(5)', // Display name
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'Others',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value

@@ -280,7 +280,7 @@
 				break;
 			}
 		}
-		if ("0" == use_language_flag) {
+//		if ("0" == use_language_flag) {
 			for (i = 0; i < document.getElementById('industory_list_jp').length; i++) {
 				value = document.getElementById('industory_list_jp').options[i].value.split(":");
 				text = document.getElementById('industory_list_jp').options[i].text.split("／");
@@ -290,17 +290,17 @@
 				document.getElementById('main_industory_name_' + String(no)).value = text[0];
 				document.getElementById('sub_industory_name_' + String(no)).value = text[1];
 			}
-		} else {
-			for (i = 0; i < document.getElementById('industory_list_en').length; i++) {
-				value = document.getElementById('industory_list_en').options[i].value.split(":");
-				text = document.getElementById('industory_list_en').options[i].text.split("／");
-				no = i + 1;
-				document.getElementById('main_industory_' + String(no)).value = value[0];
-				document.getElementById('sub_industory_' + String(no)).value = value[1];
-				document.getElementById('main_industory_name_' + String(no)).value = text[0];
-				document.getElementById('sub_industory_name_' + String(no)).value = text[1];
-			}
-		}
+//		} else {
+// 			for (i = 0; i < document.getElementById('industory_list_en').length; i++) {
+// 				value = document.getElementById('industory_list_en').options[i].value.split(":");
+// 				text = document.getElementById('industory_list_en').options[i].text.split("／");
+// 				no = i + 1;
+// 				document.getElementById('main_industory_' + String(no)).value = value[0];
+// 				document.getElementById('sub_industory_' + String(no)).value = value[1];
+// 				document.getElementById('main_industory_name_' + String(no)).value = text[0];
+// 				document.getElementById('sub_industory_name_' + String(no)).value = text[1];
+// 			}
+// 		}
 		for (; i < 6; i++) {
 			no = i + 1;
 			document.getElementById('main_industory_' + String(no)).value = '';
@@ -550,6 +550,7 @@
 							<!-- キャッチフレーズ(日) -->
 							<!-- キャッチフレーズ(英) -->
 							<td nowrap>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="80" rows="7">{$form.profile_jp}</textarea><br />
+							</td>
 						</tr>
 						<tr>
 							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="profile_en" id="profile_en" cols="80" rows="7">{$form.profile_en}</textarea><br />
@@ -592,7 +593,7 @@
 						</tr>
 						<tr>
 *}
-							<td nowrap>日：<br/>
+							<td nowrap>{* 日：<br/> *}
 							<table>
 								{section name=it loop=$app.frequency}
 								{if (0 == (($smarty.section.it.index) % 5))}
@@ -632,7 +633,7 @@
 						</tr>
 						<tr>
 *}
-							<td nowrap>日：
+							<td nowrap>{* 日： *}
 								<table>
 									<tr>
 										<td colspan="2"><font size="-1">1. 大分類 → 小分類の順に選択してください。</font></td>
@@ -660,7 +661,7 @@
 									<tr>
 										<td>
 											<select name="industory_list_jp" id="industory_list_jp" size="4" style="width:200px;">
-											{if ("0" == $form.use_language_flag)}
+{*											{if ("0" == $form.use_language_flag)} *}
 											{if (null != $form.main_industory_1 && 0 < count($form.main_industory_1))}
 												<option value="{$form.main_industory_1}:{$form.sub_industory_1}">{$form.main_industory_name_1}／{$form.sub_industory_name_1}</option>
 											{/if}
@@ -679,7 +680,7 @@
 											{if (null != $form.main_industory_6 && 0 < count($form.main_industory_6))}
 												<option value="{$form.main_industory_6}:{$form.sub_industory_6}">{$form.main_industory_name_6}／{$form.sub_industory_name_6}</option>
 											{/if}
-											{/if}
+{*											{/if} *}
 											</select>
 										</td>
 										<td>
@@ -782,7 +783,7 @@
 						</tr>
 						<tr>
 *}
-							<td nowrap>日：
+							<td nowrap>{* 日： *}
 								<table border="0">
 									<tr>
 										<td colspan="4"><font size="-1">1.地域 → 2.国 → 3.都市の順に選択してください。</font></td>
@@ -824,12 +825,12 @@
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
-										<td><input type="checkbox" name="othercity_jp" value="1" {if ("1" == $form.othercity_jp)}checked{/if} /> その他</td>
+										<td><input type="checkbox" name="othercity_jp" id="othercity_jp" value="1" {if ("1" == $form.othercity_jp)}checked{/if} /> その他</td>
 										<td colspan="2"><input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" maxlength="100" size="100" /></td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
-										<td><input type="checkbox" name="othercity_en" value="1" {if ("1" == $form.othercity_en)}checked{/if} /> Others</td>
+										<td><input type="checkbox" name="othercity_en" id="othercity_en" value="1" {if ("1" == $form.othercity_en)}checked{/if} /> Others</td>
 										<td colspan="2"><input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" maxlength="100" size="100" /><font color="#CC3333">（翻訳）</font></td>
 									</tr>
 								</table>
@@ -923,7 +924,7 @@
 						</tr>
 						<tr>
 *}
-							<td nowrap>日：<br/>
+							<td nowrap>{* 日：<br/> *}
 							{section name=it loop=$app.open_to}
 							<input type="radio" name="open_to_jp" id="open_to_jp" value="{$app.open_to[it].kbn_2}" {if ($app.open_to[it].kbn_2 == $form.open_to_jp)}checked{/if} />{$app.open_to[it].discription_jp}
 							{/section}
@@ -950,7 +951,7 @@
 						</tr>
 						<tr>
 *}
-							<td nowrap>日：<br/>
+							<td nowrap>{* 日：<br/> *}
 							<table>
 							<tr>
 							<td><input type="checkbox" name="admission_ticket_1_jp" id="admission_ticket_1_jp" value="1" {if ("1" == $form.admission_ticket_1_jp)}checked{/if} />登録の必要なし</td>
@@ -1146,9 +1147,9 @@
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
 							<td><font size="-1">1.「参照」ボタンをクリックして登録する画像ファイルを選択してください。最大3つまで登録できます。（JPEG, GIF, TIFF 形式のみ）</font><br/><br/>
-							<input type="file" name="photos_1" id="photos_1" size=50 onBlur="add_photos('photos_1')" /><br/>
-							<input type="file" name="photos_2" id="photos_2" size=50 onBlur="add_photos('photos_2')"><br/>
-							<input type="file" name="photos_3" id="photos_3" size=50 onBlur="add_photos('photos_3')"><br/>
+							<input type="file" name="photos_1" id="photos_1" size="50" onBlur="add_photos('photos_1')" /><br/>
+							<input type="file" name="photos_2" id="photos_2" size="50" onBlur="add_photos('photos_2')" /><br/>
+							<input type="file" name="photos_3" id="photos_3" size="50" onBlur="add_photos('photos_3')" /><br/>
 							<font size="-1">2. 登録された画像ファイル名が以下に表示されます。表示されない時は画面上をクリックしてください。</font><br/>
 							<input type="button" value="上へ" onClick="up_photos_list();">&nbsp;<input type="button" value="下へ" onClick="down_photos_list()">&nbsp;<input type="button" value="削除" onClick="delete_photos_list()"><br>
 							<select name="photos_list" id="photos_list" size="5" style="width:200px">
@@ -1176,7 +1177,7 @@
 						<tr>
 							<td nowrap>削除</td>
 							<!-- 削除フラグ -->
-							<td nowrap><input type="checkbox" name="del_flg" id="del_flg" value="1" {if ("1" ==$form.del_flg)}checked{/if} />削除
+							<td nowrap><input type="checkbox" name="del_flg" id="del_flg" value="1" {if ("1" ==$form.del_flg)}checked{/if} />削除</td>
 						</tr>
 					</table>
 					<hr>
