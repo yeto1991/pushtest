@@ -38,13 +38,13 @@
 						<td colspan=2>
 							<table  border=1 style="width:100%; table-layout:fixed">
 								 <tr>
-									 <th width=4% nowrap rowspan=2><font size=2>状態</font></th>
+									 <th width=4% rowspan=2><font size=2>状態</font></th>
 									 <th width=20% rowspan=2><font size=2>Eメール</font></th>
-									 <th width=9% nowrap colspan=3><font size=2>権限</font></th>
+									 <th width=9% colspan=3><font size=2>権限</font></th>
 									 <th rowspan=2><font size=2>会社名</font></th>
 									 <th width=15% rowspan=2><font size=2>部署名</font></th>
 									 <th width=15% rowspan=2><font size=2>氏名</font></th>
-									 <th width=10% nowrap rowspan=2><font size=2>更新</font></th>
+									 <th width=10% rowspan=2><font size=2>更新</font></th>
 								</tr>
 								<tr>
 									 <th><font size=2>般</font></th>
