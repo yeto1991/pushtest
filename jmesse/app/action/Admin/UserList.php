@@ -185,10 +185,10 @@ class Jmesse_Action_AdminUserList extends Jmesse_ActionClass
 			//氏名 検索条件が存在する場合
 			$sql = $sql.makeWhereStatementForSQL("user_nm",$this->af->get('searchUserNm'),$this->af->get('searchConditionUserNm'))." AND";
 		}
-		if($this->af->get('searchUserId') != null){
-			//ユーザID 検索条件が存在する場合
-			$sql = $sql.makeWhereStatementForSQL("user_id",$this->af->get('searchUserId'),$this->af->get('searchConditionUserId'))." AND";
-		}
+// 		if($this->af->get('searchUserId') != null){
+// 			//ユーザID 検索条件が存在する場合
+// 			$sql = $sql.makeWhereStatementForSQL("user_id",$this->af->get('searchUserId'),$this->af->get('searchConditionUserId'))." AND";
+// 		}
 		if($this->af->get('searchPostCode') != null){
 			//郵便番号 検索条件が存在する場合
 			$sql = $sql.makeWhereStatementForSQL("post_code",$this->af->get('searchPostCode'),$this->af->get('searchConditionPostCode'))." AND";

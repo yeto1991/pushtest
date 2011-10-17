@@ -106,6 +106,7 @@
 											<input type="checkbox" name="searchGenderCd2" id="searchGenderCd2" value="1">不明
 										</td>
 									</tr>
+									<!--
 									<tr>
 										<td nowrap style=text-align:left>ユーザID</td>
 										<td nowrap style=text-align:left>
@@ -120,6 +121,7 @@
 											</select>
 										</td>
 									</tr>
+									-->
 									<tr>
 										<td nowrap style=text-align:left>郵便番号</td>
 										<td nowrap style=text-align:left>
