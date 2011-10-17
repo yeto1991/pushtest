@@ -95,12 +95,12 @@ create table jmesse.jm_fair(
   , mail_send_flag char (1)
   , del_flg char (1)
   , del_date datetime
-  , search_key text
+  , search_key longtext
   , regist_user_id int not null
   , regist_date datetime not null
   , update_user_id int
   , update_date datetime
   , primary key (mihon_no)
   , index (user_id, date_of_application)
-  , index (search_key)
 ) engine = innodb
+

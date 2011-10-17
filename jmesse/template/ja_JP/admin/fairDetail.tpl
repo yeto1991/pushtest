@@ -2,16 +2,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+{literal}
+<!--
+	function openDoc(url, mihon_no, seq_no) {
+		window.open(url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&seq_num=' + seq_no, 'OLD_FAIR_DETAIL');
+	}
+	function changeDoc(url, mihon_no) {
+		document.location.href = url + '?action_admin_fairChange=true&mode=change&mihon_no=' + mihon_no;
+	}
+	function copyDoc(url, mihon_no) {
+		document.location.href = url + '?action_admin_fairChange=true&mode=copy&mihon_no=' + mihon_no;
+	}
+// -->
+{/literal}
+</script>
 <title>見本市ＤＢ 管理者用</title>
 </head>
 <body onload="init()">
 	<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
 		{uniqid}
-		<input type="hidden" name="action_admin_fairChange" id="action_admin_fairChange" value="dummy">
+{*		<input type="hidden" name="action_admin_fairChange" id="action_admin_fairChange" value="dummy"> *}
 		<!-- 見本市番号 -->
 		<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 		<!-- 登録モード -->
-		<input type="hidden" name="mode" id="mode" value="change" />
+{*		<input type="hidden" name="mode" id="mode" value="change" /> *}
 		<table width="100%">
 			<tr>
 				<td valign="top" width="200">{include file="admin/menu.tpl"}</td>
@@ -26,7 +41,13 @@
 							<!-- 見本市番号 -->
 							<td nowrap>{$form.mihon_no}</td>
 						</tr>
-
+						{if (null != $form.seq_num && '' != $form.seq_num)}
+						<tr>
+							<td nowrap>見本市番号枝番</td>
+							<!-- 見本市番号 -->
+							<td nowrap>{$form.seq_num}</td>
+						</tr>
+						{/if}
 						<tr>
 							<td nowrap>Webページの表示／非表示</td>
 							<!-- Ｗｅｂページの表示／非表示 -->
@@ -495,15 +516,6 @@
 							<td nowrap>{$form.venue_link}</td>
 						</tr>
 
-						<tr>
-							<td nowrap>展示会に係わる画像(3点)</td>
-							<!-- 展示会に係わる画像(3点) -->
-							<td>
-							{section name=it loop=$app.photos}
-								<img src="{$config.url}{$config.img_path}{$form.mihon_no}/{$app.photos[it]}" alt="{$app.photos[it]}" width="150" />
-							{/section}
-							</td>
-						</tr>
 
 						<tr>
 							<td nowrap>システム管理者備考欄</td>
@@ -522,8 +534,82 @@
 							<td nowrap>{if ("1" ==$form.del_flg)}削除済{else}未削除{/if}</td>
 						</tr>
 					</table>
-					<hr>
-					<input type="submit" value="編集開始" />
+					<hr/>
+
+					展示会に係わる画像(3点) ({$app.photos|@count}ファイル)<br/>
+					<!-- 展示会に係わる画像(3点) -->
+					{section name=it loop=$app.photos}
+						<img src="{$config.url}{$config.img_path}{$form.mihon_no}/{$app.photos[it]}" alt="{$app.photos[it]}" width="150" />
+					{/section}
+					<hr/>
+
+					<!-- 履歴 -->
+					<table border="1">
+						<tr>
+							<th>操作</th>
+							<th>日時</th>
+							<th>ユーザ</th>
+							<th>承認フラグ</th>
+							<th>否認コメント</th>
+						</tr>
+						{section name=it loop=$app.jm_fair_temp_list}
+						<tr>
+							{if ("1" == $app.jm_fair_temp_list[it].del_flg)}
+								<td>削除</td>
+								<td>{$app.jm_fair_temp_list[it].del_date}</td>
+								<td>
+									{if "0" == $app.jm_fair_temp_list[it].update_user_id}
+									{$app.jm_fair_temp_list[it].regist_user_email}
+									{else}
+									{$app.jm_fair_temp_list[it].update_user_email}
+									{/if}
+								</td>
+							{else}
+								{if $app.seq_num_ed == $app.jm_fair_temp_list[it].seq_num}
+								<td>新規登録</td>
+								<td>{$app.jm_fair_temp_list[it].regist_date}</td>
+								<td>{$app.jm_fair_temp_list[it].regist_user_email}</td>
+								{else}
+								<td>更新</td>
+								<td>{$app.jm_fair_temp_list[it].update_date}</td>
+								<td>{$app.jm_fair_temp_list[it].update_user_email}</td>
+								{/if}
+							{/if}
+							<td><a href="javascript:openDoc('{$config.url}', '{$app.jm_fair_temp_list[it].mihon_no}', '{$app.jm_fair_temp_list[it].seq_num}');">
+							{if ("0" == $app.jm_fair_temp_list[it].confirm_flag)}
+							承認待ち
+							{elseif ("1" == $app.jm_fair_temp_list[it].confirm_flag)}
+							承認
+							{elseif ("2" == $app.jm_fair_temp_list[it].confirm_flag)}
+							否認
+							{else}
+							数値不正
+							{/if}
+							</a></td>
+							<td>{$app.jm_fair_temp_list[it].negate_comment}</td>
+						</tr>
+						{/section}
+					</table>
+					<hr/>
+
+					<table>
+						<tr>
+							<td>
+							{if ("" != $app.seq_num_prev)}
+							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_prev}')" />
+							{/if}
+							</td>
+							<td>
+							{if ("" != $app.seq_num_next)}
+							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_next}')" />
+							{/if}
+							</td>
+						</tr>
+						<tr>
+							<td><input type="button" value="修正・更新" onclick="changeDoc('{$config.url}', '{$form.mihon_no}')" /></td>
+							<td><input type="button" value="コピー編集登録" onclick="copyDoc('{$config.url}', '{$form.mihon_no}')" /></td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</table>

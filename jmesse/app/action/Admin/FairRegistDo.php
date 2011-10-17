@@ -574,6 +574,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$ret = $jm_fair->add();
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
+			$db->rollback();
 			return 'error';
 		}
 
@@ -602,6 +603,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$ret = $mgr->regLog($this->session->get('user_id'), '2', '2', $jm_fair->get('mihon_no'));
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
+			$db->rollback();
 			return 'error';
 		}
 

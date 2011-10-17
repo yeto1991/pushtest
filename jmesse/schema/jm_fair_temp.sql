@@ -101,5 +101,5 @@ create table jmesse.jm_fair_temp(
   , regist_date datetime not null
   , update_user_id int
   , update_date datetime
-  , primary key (mihon_no, seq_num)
+  , primary key (seq_num, mihon_no)
 ) engine = innodb

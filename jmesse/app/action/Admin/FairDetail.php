@@ -36,6 +36,19 @@ class Jmesse_Form_AdminFairDetail extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'seq_num' => array(
+			'type'        => VAR_TYPE_INT,    // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '見本市番号枝番', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 	);
 }
 
@@ -79,13 +92,26 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-
-		// JM_FAIRオブジェクトの取得
-		$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
+		$jm_fair_mgr =& $this->backend->getManager('jmFairTemp');
+		if (null != $this->af->get('seq_num') && 0 < $this->af->get('seq_num')) {
+			// JM_FAIR_TEMPより取得
+			$jm_fair = $jm_fair_mgr->getJmFairTemp($this->af->get('mihon_no'), $this->af->get('seq_num'));
+		} else {
+			// JM_FAIRより取得
+			$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
+		}
 		if (Ethna::isError($jm_fair)) {
 			$this->ae->addObject('error', $jm_fair);
 			return 'error';
 		}
+		if (null == $jm_fair || null == $jm_fair->get('mihon_no') || '' == $jm_fair->get('mihon_no')) {
+			$this->ae->addObject('error', Ethna::raiseError('指定された見本市番号は物理削除されました', E_FAIL_TO_GET_OBJECT_JM_FAIR));
+			return 'error';
+		}
+
+		// TEXTAREAの改行コード
+		$br = "\n";
+// 		$br = $this->af->get('br');
 
 		// 見本市番号
 		$this->af->set('mihon_no', $jm_fair->get('mihon_no'));
@@ -336,6 +362,32 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		}
 		$this->af->set('city_name_jp', $city_name['discription_jp']);
 		$this->af->set('city_name_en', $city_name['discription_en']);
+
+		// 履歴リスト（$appに設定）
+		$jm_fair_temp_list = $jm_fair_mgr->getJmFairTempList($this->af->get('mihon_no'));
+		$this->af->setApp('jm_fair_temp_list', $jm_fair_temp_list);
+		$this->af->setApp('seq_num_st', $jm_fair_temp_list[0]['seq_num']);
+		$this->af->setApp('seq_num_ed', $jm_fair_temp_list[count($jm_fair_temp_list) - 1]['seq_num']);
+		// 次の文書・前の文書の設定
+		if (null == $this->af->get('seq_num') || '' == $this->af->get('seq_num')) {
+			$this->af->setApp('seq_num_prev', $jm_fair_temp_list[1]['seq_num']);
+			$this->af->setApp('seq_num_next', '');
+		} else {
+			for ($i = 0; $i < count($jm_fair_temp_list); $i++) {
+				if ($this->af->get('seq_num') == $jm_fair_temp_list[$i]['seq_num']) {
+					if ($i < count($jm_fair_temp_list)) {
+						$this->af->setApp('seq_num_prev', $jm_fair_temp_list[$i + 1]['seq_num']);
+					} else {
+						$this->af->setApp('seq_num_prev', '');
+					}
+					if ($i > 0) {
+						$this->af->setApp('seq_num_next', $jm_fair_temp_list[$i - 1]['seq_num']);
+					} else {
+						$this->af->setApp('seq_num_next', '');
+					}
+				}
+			}
+		}
 
 		// ログに登録
 		$mgr = $this->backend->getManager('adminCommon');
