@@ -54,9 +54,6 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		$this->backend->getLogger()->log(LOG_DEBUG, $this->af->get('email'));
-		$this->backend->getLogger()->log(LOG_DEBUG, $this->af->get('password'));
-
 		$login_ok = true;
 
 		// ユーザ情報取得
@@ -74,10 +71,10 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 			$login_ok = false;
 		}
 
+		$mgr = $this->backend->getManager('adminCommon');
 		if ($login_ok) {
 			// ログに記録
-			$mgr = $this->backend->getManager('adminCommon');
-			$ret = $mgr->regLog($user->get('user_id'), '5', '3', 'login time');
+			$ret = $mgr->regLog($user->get('user_id'), '5', '3', 'Successful login.');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				return 'error';
@@ -89,14 +86,24 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 			$this->session->set('auth_user', $user->get('auth_user'));
 			$this->session->set('auth_fair', $user->get('auth_fair'));
 
-			// TOP画面へ遷移
 			$ret_view = 'admin_top';
 		} else {
 			// ログイン失敗画面へ遷移
-			$this->ae->add(null, "ユーザ名またはパスワードが間違っています。");
-			$ret_view = 'admin_login';
+			$ret = $mgr->regLog('0', '5', '3', 'Login failed.('.$this->af->get('email').':'.$_SERVER['REMOTE_ADDR'].')');
+			if (Ethna::isError($ret)) {
+				$this->ae->addObject('error', $ret);
+				return 'error';
+			}
+			$this->ae->add('error', 'Eメールまたはパスワードが間違っています。');
+			return 'admin_login';
 		}
 
+		// 転送
+		if (null != $this->af->get('function') && '' != $this->af->get('function')) {
+			header('Location: '.$this->af->get('function'));
+		}
+
+		// TOP画面へ遷移
 		return $ret_view;
 	}
 }

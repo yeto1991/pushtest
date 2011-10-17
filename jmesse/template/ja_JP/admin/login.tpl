@@ -23,6 +23,7 @@
 	<br />
 	<form name="form_admin_login" id="form_admin_login" method="POST" action="">
 		<input type="hidden" name="action_admin_loginDo" id="action_admin_loginDo" value="dummy" />
+		<input type="hidden" name="function" id="function" value="{$form.function}" />
 		{uniqid}
 		<div align="center">
 			<table>

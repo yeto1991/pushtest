@@ -43,6 +43,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
+			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'admin_Login';
 		}
 

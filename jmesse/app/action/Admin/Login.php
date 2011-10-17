@@ -47,6 +47,19 @@ class Jmesse_Form_AdminLogin extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'function' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_PASSWORD, // Form type
+			'name'        => '転送先',        // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => '/^[!-~]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 	);
 }
 
@@ -80,7 +93,10 @@ class Jmesse_Action_AdminLogin extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		// ここには何も記述しないで下さい。
+		if (null != $this->af->get('function') && '' != $this->af->get('function')) {
+			$this->af->set('function', $this->af->get('function'));
+		}
+
 		return 'admin_login';
 	}
 }

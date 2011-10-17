@@ -48,6 +48,9 @@ class Jmesse_Action_AdminLogout extends Jmesse_ActionClass
 	function perform()
 	{
 		// SESSIONの破棄。
+		$this->session->set('user_id', '');
+		$this->session->set('auth_user', '');
+		$this->session->set('auth_fair', '');
 		$this->session->destroy();
 
 		// ログイン画面へ遷移する。

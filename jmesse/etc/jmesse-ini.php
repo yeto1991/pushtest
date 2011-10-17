@@ -7,6 +7,7 @@
 $config = array(
 // site
 	'url' => 'http://localhost/jmesse/www/',
+	'host_path' => 'http://localhost',
 	'img_path' => 'img/',
 
 // debug

@@ -8,7 +8,7 @@
 		<tr>
 			<td valign="top" style="width: 200px;">{include file="admin/menu.tpl"}</td>
 			<td valign="top">
-				<div>ログインしました。</div>
+				<center><font color="#0000ff">ログインしました。</font></center>
 			</td>
 		</tr>
 	</table>

@@ -28,7 +28,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -38,14 +38,14 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
 			'name'        => '登録モード',    // Display name
-			'required'    => true,           // Required Option(true/false)
+			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'web_display_type' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -132,7 +132,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -145,7 +145,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -158,7 +158,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -171,7 +171,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -184,7 +184,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -197,7 +197,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -353,7 +353,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -366,7 +366,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -379,7 +379,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -392,7 +392,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -405,7 +405,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -418,7 +418,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -457,8 +457,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種大分類', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -470,8 +470,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種小分類', // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -510,8 +510,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種大分類(2)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -523,8 +523,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種小分類(2)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -563,8 +563,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種大分類(3)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -576,8 +576,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種小分類(3)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -616,8 +616,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種大分類(4)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -629,8 +629,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種小分類(4)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -669,8 +669,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種大分類(5)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -682,8 +682,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種小分類(5)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -722,8 +722,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '業種大分類(6)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -734,8 +734,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
 			'name'        => '業種小分類(6)', // Display name
 			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
+			'min'         => 3,               // Minimum value
+			'max'         => '/^[0-9]+$/',    // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -802,8 +802,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '開催地地域',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -815,8 +815,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '開催地国地域',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -828,8 +828,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '開催地都市',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1212,7 +1212,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1303,7 +1303,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1316,7 +1316,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1329,7 +1329,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1412,7 +1412,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'organizer_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1425,7 +1425,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'organizer_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1517,7 +1517,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'agency_in_japan_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1530,7 +1530,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
 		'agency_in_japan_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1695,7 +1695,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 		'del_flg' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '削除',          // Display name
+			'name'        => '削除フラグ',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1734,12 +1734,12 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			if (!preg_match("/^[ -~]+$/", $str)) {
 				$this->ae->add($name, "{form}は半角文字を入力して下さい", E_INPUT_TYPE);
 			}
-			if (preg_match("/`/", $str)) {
-				$this->ae->add($name, "{form}に「`:バッククォート」は使用できません", E_INPUT_TYPE);
-			}
-			if (preg_match('/\\\\/', $str)) {
-				$this->ae->add($name, "{form}に「\:バックスラッシュ」は使用できません", E_INPUT_TYPE);
-			}
+// 			if (preg_match("/`/", $str)) {
+// 				$this->ae->add($name, "{form}に「`:バッククォート」は使用できません", E_INPUT_TYPE);
+// 			}
+// 			if (preg_match('/\\\\/', $str)) {
+// 				$this->ae->add($name, "{form}に「\:バックスラッシュ」は使用できません", E_INPUT_TYPE);
+// 			}
 		}
 	}
 }
@@ -1764,6 +1764,8 @@ class Jmesse_Action_AdminFairRegist extends Jmesse_ActionClass
 	{
 		// ログインチェック
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
+			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
+			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'admin_Login';
 		}
 
