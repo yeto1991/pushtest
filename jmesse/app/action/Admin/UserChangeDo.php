@@ -190,7 +190,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		} else {
 			$ope_kbn = '3'; //更新
 		}
-		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '1', $jm_user->get('user_id'));
+		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '1', strtolower($this->af->get('email').'('.$this->af->get('user_id').')'));
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			return 'error';

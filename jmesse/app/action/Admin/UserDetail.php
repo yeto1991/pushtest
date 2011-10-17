@@ -375,7 +375,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 
 		// ログテーブル登録
 		$mgr = $this->backend->getManager('adminCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $jm_user->get('user_id'));
+		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $this->af->get('email').'('.$this->af->get('user_id').')');
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			return 'error';
