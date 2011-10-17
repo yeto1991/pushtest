@@ -169,6 +169,7 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ新規登録エラー');
 			$this->ae->addObject('error', $ret);
+			$db->rollback();
 			return 'error';
 		}
 
@@ -179,6 +180,7 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 		$ret = $mgr->regLog($this->session->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
+			$db->rollback();
 			return 'error';
 		}
 		// 更新画面へ遷移

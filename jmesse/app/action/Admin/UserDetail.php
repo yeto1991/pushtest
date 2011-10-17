@@ -378,6 +378,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $this->af->get('email').'('.$this->af->get('user_id').')');
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
+			$db->rollback();
 			return 'error';
 		}
 		return 'admin_userDetail';
