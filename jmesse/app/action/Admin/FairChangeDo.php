@@ -220,6 +220,11 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+
 		// TEXTAREAの改行コード
 		$br = $this->af->get('br');
 
@@ -621,18 +626,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// コミット
+		$db->commit();
+
 		// 変更画面へ遷移
 		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$this->af->get('mihon_no').'&mode=change&success=1');
 		return null;
-	}
-
-
-	function vdump($obj){
-		ob_start();
-		var_dump($obj);
-		$dump = ob_get_contents();
-		ob_end_clean();
-		return $dump;
 	}
 
 	/**
@@ -678,6 +677,13 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		return $ret;
 	}
 
+	function vdump($obj){
+		ob_start();
+		var_dump($obj);
+		$dump = ob_get_contents();
+		ob_end_clean();
+		return $dump;
+	}
 }
 
 ?>

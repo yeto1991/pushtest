@@ -76,9 +76,14 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 			$this->ae->addObject('error', $jm_fair);
 			return 'error';
 		}
+		if ($this->af->get('mihon_no') != $jm_fair->get('mihon_no')) {
+			$this->ae->addObject('error', Ethna::raiseError('指定された見本市番号は未登録です', E_FAIL_TO_GET_OBJECT_JM_FAIR));
+			return 'error';
+		}
 
 		// TEXTAREAの改行コード
-		$br = $this->af->get('br');
+		$br = "\n";
+// 		$br = $this->af->get('br');
 
 		// 見本市番号
 		$this->af->set('mihon_no', $jm_fair->get('mihon_no'));
@@ -423,6 +428,14 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 			$ret = '';
 		}
 		return $ret;
+	}
+
+	function vdump($obj){
+		ob_start();
+		var_dump($obj);
+		$dump = ob_get_contents();
+		ob_end_clean();
+		return $dump;
 	}
 
 }

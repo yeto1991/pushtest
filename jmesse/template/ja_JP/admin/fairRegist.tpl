@@ -433,7 +433,7 @@
 
 					{* 成功 *}
 					{if ("1" == $app.success)}
-					<center><b><font color="#ff0000"><br/>登録しました。<br/><br/></font></b></center>
+					<center><b><font color="#0000ff"><br/>登録しました。<br/><br/></font></b></center>
 					{/if}
 
 
@@ -1179,7 +1179,10 @@
 						<tr>
 							<td nowrap>削除</td>
 							<!-- 削除フラグ -->
-							<td nowrap><input type="checkbox" name="del_flg" id="del_flg" value="1" {if ("1" ==$form.del_flg)}checked{/if} />削除</td>
+							<td nowrap>
+								<input type="radio" name="del_flg" id="del_flg" value="0" {if ("0" == $form.del_flg || "1" != $form.del_flg)}checked{/if} />未削除
+								<input type="radio" name="del_flg" id="del_flg" value="1" {if ("1" == $form.del_flg)}checked{/if} />削除済
+							</td>
 						</tr>
 					</table>
 					<hr>
