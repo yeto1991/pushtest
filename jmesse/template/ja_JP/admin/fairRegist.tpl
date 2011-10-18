@@ -35,6 +35,12 @@
 // 				dynamicpulldownlist('?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1','','#country_en',document.getElementById('tmp_country_en').value);
 // 			}
 // 		}
+
+		// 展示会に係わる画像(3点)
+		// input fileの中身が消えてしまうので削除
+		document.getElementById('photos_name_1').value = '';
+		document.getElementById('photos_name_2').value = '';
+		document.getElementById('photos_name_3').value = '';
 	}
 
 	/**

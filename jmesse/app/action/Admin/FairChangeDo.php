@@ -411,6 +411,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('del_flg', $this->af->get('del_flg'));
 		if ('1' == $this->af->get('del_flg')) {
 			$jm_fair->set('del_date', date('Y/m/d H:i:s'));
+		} else {
+			$jm_fair->set('del_date', null);
 		}
 
 		// 登録情報
@@ -572,7 +574,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$search_key .= $this->af->get('note_for_data_manager').' ';
 		// 削除
 		if ('1' == $this->af->get('del_flg')) {
-			$search_key .= '削除 ';
+			$search_key .= '削除済 ';
+		} else {
+			$search_key .= '未削除 ';
 		}
 		$jm_fair->set('search_key', $search_key);
 

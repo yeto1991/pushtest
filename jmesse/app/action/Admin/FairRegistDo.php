@@ -567,7 +567,9 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$search_key .= $this->af->get('note_for_data_manager').' ';
 		// 削除
 		if ('1' == $this->af->get('del_flg')) {
-			$search_key .= '削除 ';
+			$search_key .= '削除済 ';
+		} else {
+			$search_key .= '未削除 ';
 		}
 		$jm_fair->set('search_key', $search_key);
 

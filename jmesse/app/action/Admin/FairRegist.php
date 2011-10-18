@@ -734,9 +734,9 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
 			'name'        => '業種小分類(6)', // Display name
 			'required'    => false,           // Required Option(true/false)
-			'min'         => 3,               // Minimum value
-			'max'         => '/^[0-9]+$/',    // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'min'         => null,               // Minimum value
+			'max'         => 3,    // Maximum value
+			'regexp'      => '/^[0-9]+$/',            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
