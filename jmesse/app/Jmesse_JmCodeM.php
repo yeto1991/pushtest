@@ -248,6 +248,52 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 	}
 
 	/**
+	 * 地域リストを取得する。（検索画面用）
+	 *
+	 * @return array<string>：地域リスト、null：データなし、DB::Error()：エラー
+	 */
+	function getRegionListSearch() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by kbn_2 asc';
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array('003', '000', '000');
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$data[$i] = $tmp;
+			$i ++;
+		}
+
+		return $data;
+	}
+
+	/**
 	 * 国・地域リストを取得する。
 	 *
 	 * @param string $kbn_2 地域
@@ -265,6 +311,53 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 
 		// 検索条件をArray化
 		$param = array('003', $kbn_2, '000', '001', '000');
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$data[$i] = $tmp;
+			$i ++;
+		}
+
+		return $data;
+	}
+
+	/**
+	* 国・地域リストを取得する。（検索画面用）
+	*
+	* @param string $kbn_2 地域
+	* @return array<string>：国・地域リスト、null：データなし、DB::Error()：エラー
+	*/
+	function getCountryListSearch($kbn_2) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 <> ? and kbn_4 = ? order by kbn_3 asc';
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array('003', $kbn_2, '000', '000');
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $param);

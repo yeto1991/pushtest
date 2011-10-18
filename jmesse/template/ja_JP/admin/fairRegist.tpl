@@ -155,24 +155,24 @@
 // 		document.getElementById('city_en').value = '';
 // 	}
 
-	function open_select_city_jp() {
+	function open_select_city_jp(url) {
 		var region = document.getElementById('region_jp').options[document.getElementById('region_jp').selectedIndex].value;
 		var country = document.getElementById('country_jp').options[document.getElementById('country_jp').selectedIndex].value;
 		if ('' == region || '' == country) {
 			window.alert('地域と国・地域の両方を選択して下さい');
 			return;
 		}
-		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=0", 'select_city', 'width=400, height=300, menubar=no, toolbar=no, location=no, status=no, scrollbars=yes');
+		window.open(url + "?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=0", 'select_city', 'width=400, height=300, menubar=no, toolbar=no, location=no, status=no, scrollbars=yes');
 	}
 
-// 	function open_select_city_en() {
+// 	function open_select_city_en(url) {
 // 		var region = document.getElementById('region_en').options[document.getElementById('region_en').selectedIndex].value;
 // 		var country = document.getElementById('country_en').options[document.getElementById('country_en').selectedIndex].value;
 // 		if ('' == region || '' == country) {
 // 			window.alert('地域と国・地域の両方を選択して下さい');
 // 			return;
 // 		}
-// 		window.open("?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=1", 'select_city', 'width=400, height=300, menubar=no, toolbar=no, location=no, status=no, scrollbars=yes');
+// 		window.open(url + "?action_admin_selectCity=1&kbn_2=" + region + "&kbn_3=" + country + "&use_language_flag=1", 'select_city', 'width=400, height=300, menubar=no, toolbar=no, location=no, status=no, scrollbars=yes');
 // 	}
 
 	function delete_city_jp() {
@@ -827,7 +827,7 @@
 										<td>都市</td>
 
 										<td colspan="2">
-											<a href="javascript:open_select_city_jp();">都市を選択</a>
+											<a href="javascript:open_select_city_jp('{$config.url}');">都市を選択</a>
 											<input type="text" name="city_name_jp" id="city_name_jp" value="{$form.city_name_jp}" readonly />
 											<input type="button" value="削除" onClick="delete_city_jp()"></td>
 									</tr>
@@ -883,7 +883,7 @@
 									<tr>
 										<td>3.</td>
 										<td>都市</td>
-										<td colspan="2"><a href="javascript:open_select_city_en();">都市を選択</a>
+										<td colspan="2"><a href="javascript:open_select_city_en('{$config.url}');">都市を選択</a>
 										<input type="text" name="city_name_en" id="city_name_en" value="{$form.city_name_en}" readonly/>
 										<input type="button" value="削除" onClick="delete_city_en()"></td>
 									</tr>

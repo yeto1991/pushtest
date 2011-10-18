@@ -23,12 +23,12 @@ class Jmesse_Form_AdminSelectCity extends Jmesse_ActionForm
 	var $form = array(
 		'kbn_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT,  // Form type
-			'name'        => '地域',            // Display name
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '地域',          // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -36,12 +36,12 @@ class Jmesse_Form_AdminSelectCity extends Jmesse_ActionForm
 		),
 		'kbn_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT,  // Form type
-			'name'        => '国・地域',            // Display name
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '国・地域',      // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -49,12 +49,12 @@ class Jmesse_Form_AdminSelectCity extends Jmesse_ActionForm
 		),
 		'use_language_flag' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT,  // Form type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
 			'name'        => 'ユーザ使用言語フラグ',            // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
