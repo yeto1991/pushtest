@@ -41,7 +41,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
+			$this->af->set('function', $this->config->get('url').'?action_admin_fairSearch=true');
 			return 'admin_Login';
 		}
 
@@ -52,8 +52,164 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		}
 
 		// 日付の整合性
-		// 日付、数値の大小
+		// 申請年月日
+		if ((null != $this->af->get('date_of_application_y_from') && '' != $this->af->get('date_of_application_y_from'))
+			|| (null != $this->af->get('date_of_application_m_from') && '' != $this->af->get('date_of_application_m_from'))
+			|| (null != $this->af->get('date_of_application_d_from') && '' != $this->af->get('date_of_application_d_from'))) {
+			if (!checkdate($this->af->get('date_of_application_m_from'), $this->af->get('date_of_application_d_from'), $this->af->get('date_of_application_y_from'))) {
+				$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません（開始）', E_INPUT_TYPE));
+			}
+		}
+		if ((null != $this->af->get('date_of_application_y_to') && '' != $this->af->get('date_of_application_y_to')
+			|| (null != $this->af->get('date_of_application_m_to') && '' != $this->af->get('date_of_application_m_to'))
+			|| (null != $this->af->get('date_of_application_d_to') && '' != $this->af->get('date_of_application_d_to')))) {
+			if (!checkdate($this->af->get('date_of_application_m_to'), $this->af->get('date_of_application_d_to'), $this->af->get('date_of_application_y_to'))) {
+				$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません（終了）', E_INPUT_TYPE));
+			}
+		}
+		if (((null != $this->af->get('date_of_application_y_from') && '' != $this->af->get('date_of_application_y_from'))
+			|| (null != $this->af->get('date_of_application_m_from') && '' != $this->af->get('date_of_application_m_from'))
+			|| (null != $this->af->get('date_of_application_d_from') && '' != $this->af->get('date_of_application_d_from')))
+			&& ((null != $this->af->get('date_of_application_y_to') && '' != $this->af->get('date_of_application_y_to'))
+			|| (null != $this->af->get('date_of_application_m_to') && '' != $this->af->get('date_of_application_m_to'))
+			|| (null != $this->af->get('date_of_application_d_to') && '' != $this->af->get('date_of_application_d_to')))) {
+			if (mktime(0, 0, 0, $this->af->get('date_of_application_m_from'), $this->af->get('date_of_application_d_from'), $this->af->get('date_of_application_y_from'))
+				> mktime(0, 0, 0, $this->af->get('date_of_application_m_to'), $this->af->get('date_of_application_d_to'), $this->af->get('date_of_application_y_to'))) {
+				$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+		// 登録日(承認日)
+		if ((null != $this->af->get('date_of_registration_y_from') && '' != $this->af->get('date_of_registration_y_from'))
+			|| (null != $this->af->get('date_of_registration_m_from') && '' != $this->af->get('date_of_registration_m_from'))
+			|| (null != $this->af->get('date_of_registration_d_from') && '' != $this->af->get('date_of_registration_d_from'))) {
+			if (!checkdate($this->af->get('date_of_registration_m_from'), $this->af->get('date_of_registration_d_from'), $this->af->get('date_of_registration_y_from'))) {
+				$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません', E_INPUT_TYPE));
+			}
+		}
+		if ((null != $this->af->get('date_of_registration_y_to') && '' != $this->af->get('date_of_registration_y_to'))
+			|| (null != $this->af->get('date_of_registration_m_to') && '' != $this->af->get('date_of_registration_m_to'))
+			|| (null != $this->af->get('date_of_registration_d_to') && '' != $this->af->get('date_of_registration_d_to'))) {
+			if (!checkdate($this->af->get('date_of_registration_m_to'), $this->af->get('date_of_registration_d_to'), $this->af->get('date_of_registration_y_to'))) {
+				$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません', E_INPUT_TYPE));
+			}
+		}
+		if (((null != $this->af->get('date_of_registration_y_from') && '' != $this->af->get('date_of_registration_y_from'))
+			|| (null != $this->af->get('date_of_registration_m_from') && '' != $this->af->get('date_of_registration_m_from'))
+			|| (null != $this->af->get('date_of_registration_d_from') && '' != $this->af->get('date_of_registration_d_from')))
+			&& ((null != $this->af->get('date_of_registration_y_to') && '' != $this->af->get('date_of_registration_y_to'))
+			|| (null != $this->af->get('date_of_registration_m_to') && '' != $this->af->get('date_of_registration_m_to'))
+			|| (null != $this->af->get('date_of_registration_d_to') && '' != $this->af->get('date_of_registration_d_to')))) {
+			if (mktime(0, 0, 0, $this->af->get('date_of_registration_m_from'), $this->af->get('date_of_registration_d_from'), $this->af->get('date_of_registration_y_from'))
+				> mktime(0, 0, 0, $this->af->get('date_of_registration_m_to'), $this->af->get('date_of_registration_d_to'), $this->af->get('date_of_registration_y_to'))) {
+				$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+		// 会期
+		if ((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
+			|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
+			|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd'))) {
+			if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
+				$this->ae->addObject('error', Ethna::raiseError('会期（開始）が正しくありません', E_INPUT_TYPE));
+			}
+		}
+		if ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
+			|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
+			|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd'))) {
+			if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+				$this->ae->addObject('error', Ethna::raiseError('会期（終了）が正しくありません', E_INPUT_TYPE));
+			}
+		}
+		if (((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
+			|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
+			|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd')))
+			&& ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
+			|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
+			|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd')))) {
+			if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
+				> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+				$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+		// 出展申込締切日
+		if ((null != $this->af->get('app_dead_yyyy_from') && '' != $this->af->get('app_dead_yyyy_from'))
+			|| (null != $this->af->get('app_dead_mm_from') && '' != $this->af->get('app_dead_mm_from'))
+			|| (null != $this->af->get('app_dead_d_from') && '' != $this->af->get('app_dead_dd_from'))) {
+			if (!checkdate($this->af->get('app_dead_mm_from'), $this->af->get('app_dead_dd_from'), $this->af->get('app_dead_yyyy_from'))) {
+				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
+			}
+		}
+		if ((null != $this->af->get('app_dead_yyyy_to') && '' != $this->af->get('app_dead_yyyy_to'))
+			|| (null != $this->af->get('app_dead_mm_to') && '' != $this->af->get('app_dead_mm_to'))
+			|| (null != $this->af->get('app_dead_d_to') && '' != $this->af->get('app_dead_dd_to'))) {
+			if (!checkdate($this->af->get('app_dead_mm_to'), $this->af->get('app_dead_dd_to'), $this->af->get('app_dead_yyyy_to'))) {
+				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
+			}
+		}
+		if (((null != $this->af->get('app_dead_yyyy_from') && '' != $this->af->get('app_dead_yyyy_from'))
+		|| (null != $this->af->get('app_dead_mm_from') && '' != $this->af->get('app_dead_mm_from'))
+		|| (null != $this->af->get('app_dead_d_from') && '' != $this->af->get('app_dead_dd_from')))
+			&& ((null != $this->af->get('app_dead_yyyy_to') && '' != $this->af->get('app_dead_yyyy_to'))
+			|| (null != $this->af->get('app_dead_mm_to') && '' != $this->af->get('app_dead_mm_to'))
+			|| (null != $this->af->get('app_dead_d_to') && '' != $this->af->get('app_dead_dd_to')))) {
+			if (mktime(0, 0, 0, $this->af->get('app_dead_mm_from'), $this->af->get('app_dead_d_from'), $this->af->get('app_dead_yyyy_from'))
+				> mktime(0, 0, 0, $this->af->get('app_dead_mm_to'), $this->af->get('app_dead_d_to'), $this->af->get('app_dead_yyyy_to'))) {
+				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
 
+		// 数値の大小
+		// 見本市番号
+		if (null != $this->af->get('mihon_no_from') && '' != $this->af->get('mihon_no_from')
+			&& null != $this->af->get('mihon_no_to') && '' != $this->af->get('mihon_no_to')) {
+			if ($this->af->get('mihon_no_from') > $this->af->get('mihon_no_to')) {
+				$this->ae->addObject('error', Ethna::raiseError('見本市番号が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+
+		// 同展示場で使用する面積（Ｎｅｔ）
+		if (null != $this->af->get('gross_floor_area_from') && '' != $this->af->get('gross_floor_area_from')
+			&& null != $this->af->get('gross_floor_area_to') && '' != $this->af->get('gross_floor_area_to')) {
+			if ($this->af->get('gross_floor_area_from') > $this->af->get('gross_floor_area_to')) {
+				$this->ae->addObject('error', Ethna::raiseError('同展示場で使用する面積（Ｎｅｔ）が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+
+		// 過去の実績(入場者数)
+		if (null != $this->af->get('total_number_of_visitor_from') && '' != $this->af->get('total_number_of_visitor_from')
+			&& null != $this->af->get('total_number_of_visitor_to') && '' != $this->af->get('total_number_of_visitor_to')) {
+			if ($this->af->get('total_number_of_visitor_from') > $this->af->get('total_number_of_visitor_to')) {
+				$this->ae->addObject('error', Ethna::raiseError('過去の実績(入場者数)が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+
+		// 過去の実績(入場者数(うち海外から))
+		if (null != $this->af->get('number_of_foreign_visitor_from') && '' != $this->af->get('number_of_foreign_visitor_from')
+			&& null != $this->af->get('number_of_foreign_visitor_to') && '' != $this->af->get('number_of_foreign_visitor_to')) {
+			if ($this->af->get('number_of_foreign_visitor_from') > $this->af->get('number_of_foreign_visitor_to')) {
+				$this->ae->addObject('error', Ethna::raiseError('過去の実績(入場者数(うち海外から))が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+
+		// 過去の実績(出展社数)
+		if (null != $this->af->get('total_number_of_exhibitors_from') && '' != $this->af->get('total_number_of_exhibitors_from')
+			&& null != $this->af->get('total_number_of_exhibitors_to') && '' != $this->af->get('total_number_of_exhibitors_to')) {
+			if ($this->af->get('total_number_of_exhibitors_from') > $this->af->get('total_number_of_exhibitors_to')) {
+				$this->ae->addObject('error', Ethna::raiseError('過去の実績(出展社数)が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+
+		// 過去の実績(出展社数(うち海外から))
+		if (null != $this->af->get('number_of_foreign_exhibitors_from') && '' != $this->af->get('number_of_foreign_exhibitors_from')
+		&& null != $this->af->get('number_of_foreign_exhibitors_to') && '' != $this->af->get('number_of_foreign_exhibitors_to')) {
+			if ($this->af->get('number_of_foreign_exhibitors_from') > $this->af->get('number_of_foreign_exhibitors_to')) {
+				$this->ae->addObject('error', Ethna::raiseError('過去の実績(出展社数(うち海外から))が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			}
+		}
+
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
+			return 'admin_fairSearch';
+		}
 
 		return null;
 	}
@@ -214,16 +370,10 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			$this->session->set('search_cond', $search_cond);
 		}
 
-		var_dump($this->session->get('search_cond'));
-		echo '<br/><br/>';
-
 		// 以降、SESSIONから検索条件を取得する。
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 		$jm_fair_list = $jm_fair_mgr->getFairList();
 		$this->af->setApp('jm_fair_list', $jm_fair_list);
-
-		echo 'result<br/><br/>';
-		var_dump($jm_fair_list);
 
 		return 'admin_fairList';
 	}

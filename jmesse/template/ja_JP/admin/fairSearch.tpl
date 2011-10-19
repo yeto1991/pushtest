@@ -182,8 +182,8 @@
 							<!-- 申請年月日 -->
 							<td nowrap>
 								<input type="text" name="date_of_application_y_from" id="date_of_application_y_from" value="{$form.date_of_application_y_from}" maxlength="4" size="4" />年
-								<input type="text" name="date_of_application_m_from" id="date_of_application_from_m" value="{$form.date_of_application_m_from}" maxlength="2" size="2" />月
-								<input type="text" name="date_of_application_d_from" id="date_of_application_from_d" value="{$form.date_of_application_d_from}" maxlength="2" size="2" />日から&nbsp;
+								<input type="text" name="date_of_application_m_from" id="date_of_application_m_from" value="{$form.date_of_application_m_from}" maxlength="2" size="2" />月
+								<input type="text" name="date_of_application_d_from" id="date_of_application_d_from" value="{$form.date_of_application_d_from}" maxlength="2" size="2" />日から&nbsp;
 								<input type="text" name="date_of_application_y_to" id="date_of_application_y_to" value="{$form.date_of_application_y_to}" maxlength="4" size="4" />年
 								<input type="text" name="date_of_application_m_to" id="date_of_application_m_to" value="{$form.date_of_application_m_to}" maxlength="2" size="2" />月
 								<input type="text" name="date_of_application_d_to" id="date_of_application_d_to" value="{$form.date_of_application_d_to}" maxlength="2" size="2" />日まで

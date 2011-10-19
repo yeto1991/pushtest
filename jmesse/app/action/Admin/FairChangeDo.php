@@ -147,7 +147,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません（開始 > 終了）', E_INPUT_TYPE));
 		}
 		// 出展申込締切日
-		if (null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy')) {
+		if ((null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy'))
+			|| (null != $this->af->get('app_dead_mm') && '' != $this->af->get('app_dead_mm'))
+			|| (null != $this->af->get('app_dead_dd') && '' != $this->af->get('app_dead_dd'))) {
 			if (!checkdate($this->af->get('app_dead_mm'), $this->af->get('app_dead_dd'), $this->af->get('app_dead_yyyy'))) {
 				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
 			}
