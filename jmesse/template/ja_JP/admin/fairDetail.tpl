@@ -22,11 +22,8 @@
 <body onload="init()">
 	<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
 		{uniqid}
-{*		<input type="hidden" name="action_admin_fairChange" id="action_admin_fairChange" value="dummy"> *}
 		<!-- 見本市番号 -->
 		<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
-		<!-- 登録モード -->
-{*		<input type="hidden" name="mode" id="mode" value="change" /> *}
 		<table width="100%">
 			<tr>
 				<td valign="top" width="200">{include file="admin/menu.tpl"}</td>
@@ -35,6 +32,25 @@
 						<font size="5"><b>見本市ＤＢ 管理者用</b></font>
 					</div>
 					<hr>
+					<table>
+						<tr>
+							<td>
+							{if ("" != $app.seq_num_prev)}
+							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_prev}')" />
+							{/if}
+							</td>
+							<td>
+							{if ("" != $app.seq_num_next)}
+							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_next}')" />
+							{/if}
+							</td>
+						</tr>
+						<tr>
+							<td><input type="button" value="修正・更新" onclick="changeDoc('{$config.url}', '{$form.mihon_no}')" /></td>
+							<td><input type="button" value="コピー編集登録" onclick="copyDoc('{$config.url}', '{$form.mihon_no}')" /></td>
+						</tr>
+					</table>
+					<hr/>
 					<table border="1">
 						<tr>
 							<td nowrap>見本市番号</td>
