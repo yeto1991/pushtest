@@ -73,6 +73,16 @@
 						<font size="5"><b>見本市ＤＢ 管理者用</b></font>
 					</div>
 					<hr>
+
+					{* エラー表示 *}
+					{if count($errors)}
+					<ul>
+						{foreach from=$errors item=error}
+						<li><font color="#ff0000">{$error}</font></li>
+						{/foreach}
+					</ul>
+					{/if}
+
 					<div align="center">検索画面</div>
 					<input type="submit" value="検索実行" />
 					<input type="reset" value="リセット" />
@@ -82,8 +92,8 @@
 						<!-- 全文検索 -->
 						<dt>キーワード
 						<dd><input type="text" name="phrases" id="phrases" value="{$form.phrases}" size="40" />
-						<dd><input type="radio" name="phrase_connection" id="phrase_connection" value="and" {if ('or' != $form.phrase_connection)}checked{/if} />両方を含む（AND）
-						<dd><input type="radio" name="phrase_connection" id="phrase_connection" value="or" {if ('or' == $form.phrase_connection)}checked{/if}>どちらかを含む（OR）
+						<dd><input type="radio" name="phrase_connection" id="phrase_connection" value="a" {if ('or' != $form.phrase_connection)}checked{/if} />両方を含む（AND）
+						<dd><input type="radio" name="phrase_connection" id="phrase_connection" value="o" {if ('or' == $form.phrase_connection)}checked{/if}>どちらかを含む（OR）
 					</dl>
 					<hr>
 
@@ -92,15 +102,15 @@
 						<tr>
 							<td nowrap>項目間の関連</td>
 							<td nowrap>
-								<input type="radio" name="connection" id="connection" value="and" {if ('or' != $form.connection)}checked{/if} />AND
-								<input type="radio" name="connection" id="connection" value="or" {if ('or' == $form.connection)}checked{/if} />OR
+								<input type="radio" name="connection" id="connection" value="a" {if ('or' != $form.connection)}checked{/if} />AND
+								<input type="radio" name="connection" id="connection" value="o" {if ('or' == $form.connection)}checked{/if} />OR
 							</td>
 						</tr>
 						<tr>
 							<td nowrap>項目内の関連</td>
 							<td nowrap>
-								<input type="radio" name="relation" id="relation" value="and" {if ('and' == $form.relation)}checked{/if} />AND
-								<input type="radio" name="relation" id="relation" value="or" {if ('and' != $form.relation)}checked{/if} />OR
+								<input type="radio" name="relation" id="relation" value="a" {if ('and' == $form.relation)}checked{/if} />AND
+								<input type="radio" name="relation" id="relation" value="o" {if ('and' != $form.relation)}checked{/if} />OR
 							</td>
 						</tr>
 
@@ -108,8 +118,8 @@
 							<td nowrap>Webページの表示／非表示</td>
 							<!-- Ｗｅｂページの表示／非表示 -->
 							<td nowrap>
-								<input type="checkbox" name="web_display_type" id="web_display_type" value="1" {if ('1' == $form.web_display_type)}checked{/if} />表示する
-								<input type="checkbox" name="web_display_type" id="web_display_type" value="0" {if ('0' == $form.web_display_type)}checked{/if} />表示しない
+								<input type="checkbox" name="web_display_type[]" id="web_display_type[]" value="1" {if ('1' == $form.web_display_type)}checked{/if} />表示する
+								<input type="checkbox" name="web_display_type[]" id="web_display_type[]" value="0" {if ('0' == $form.web_display_type)}checked{/if} />表示しない
 							</td>
 						</tr>
 
@@ -118,9 +128,9 @@
 							<!-- 承認フラグ -->
 							<!-- 否認コメント -->
 							<td nowrap>
-								<input type="checkbox" name="confirm_flag" id="confirm_flag" value="1" {if ('1' == $form.confirm_flag)}checked{/if} />承認
-								<input type="checkbox" name="confirm_flag" id="confirm_flag" value="0" {if ('0' == $form.confirm_flag)}checked{/if} />承認待ち
-								<input type="checkbox" name="confirm_flag" id="confirm_flag" value="2" {if ('2' == $form.confirm_flag)}checked{/if} />否認<br/>
+								<input type="checkbox" name="confirm_flag[]" id="confirm_flag[]" value="1" {if ('1' == $form.confirm_flag)}checked{/if} />承認
+								<input type="checkbox" name="confirm_flag[]" id="confirm_flag[]" value="0" {if ('0' == $form.confirm_flag)}checked{/if} />承認待ち
+								<input type="checkbox" name="confirm_flag[]" id="confirm_flag[]" value="2" {if ('2' == $form.confirm_flag)}checked{/if} />否認<br/>
 								否認コメント：<input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" size="50" />
 								<select name="negate_comment_cond" id="negate_comment_cond">
 									<option value="1" {if ('1' == $form.negate_comment_cond)}selected{/if}>一致</option>
@@ -171,12 +181,12 @@
 							<td nowrap>申請年月日</td>
 							<!-- 申請年月日 -->
 							<td nowrap>
-								<input type="text" name="date_of_application_from_y" id="date_of_application_from_y" value="{$form.date_of_application_from_y}" maxlength="4" size="4" />年
-								<input type="text" name="date_of_application_from_m" id="date_of_application_from_m" value="{$form.date_of_application_from_m}" maxlength="2" size="2" />月
-								<input type="text" name="date_of_application_from_d" id="date_of_application_from_d" value="{$form.date_of_application_from_d}" maxlength="2" size="2" />日から&nbsp;
-								<input type="text" name="date_of_application_to_y" id="date_of_application_to_y" value="{$form.date_of_application_to_y}" maxlength="4" size="4" />年
-								<input type="text" name="date_of_application_to_m" id="date_of_application_to_m" value="{$form.date_of_application_to_m}" maxlength="2" size="2" />月
-								<input type="text" name="date_of_application_to_d" id="date_of_application_to_d" value="{$form.date_of_application_to_d}" maxlength="2" size="2" />日まで
+								<input type="text" name="date_of_application_y_from" id="date_of_application_y_from" value="{$form.date_of_application_y_from}" maxlength="4" size="4" />年
+								<input type="text" name="date_of_application_m_from" id="date_of_application_from_m" value="{$form.date_of_application_m_from}" maxlength="2" size="2" />月
+								<input type="text" name="date_of_application_d_from" id="date_of_application_from_d" value="{$form.date_of_application_d_from}" maxlength="2" size="2" />日から&nbsp;
+								<input type="text" name="date_of_application_y_to" id="date_of_application_y_to" value="{$form.date_of_application_y_to}" maxlength="4" size="4" />年
+								<input type="text" name="date_of_application_m_to" id="date_of_application_m_to" value="{$form.date_of_application_m_to}" maxlength="2" size="2" />月
+								<input type="text" name="date_of_application_d_to" id="date_of_application_d_to" value="{$form.date_of_application_d_to}" maxlength="2" size="2" />日まで
 							</td>
 						</tr>
 
@@ -184,12 +194,12 @@
 							<td nowrap>登録日(承認日)</td>
 							<!-- 登録日(承認日) -->
 							<td nowrap>
-								<input type="text" name="date_of_registration_from_y" id="date_of_registration_from_y" value="{$form.date_of_registration_from_y}" maxlength="4" size="4" />年
-								<input type="text" name="date_of_registration_from_m" id="date_of_registration_from_m" value="{$form.date_of_registration_from_m}" maxlength="2" size="2" />月
-								<input type="text" name="date_of_registration_from_d" id="date_of_registration_from_d" value="{$form.date_of_registration_from_d}" maxlength="2" size="2" />日から&nbsp;
-								<input type="text" name="date_of_registration_to_y" id="date_of_registration_to_y" value="{$form.date_of_registration_to_y}" maxlength="4" size="4" />年
-								<input type="text" name="date_of_registration_to_m" id="date_of_registration_to_m" value="{$form.date_of_registration_to_m}" maxlength="2" size="2" />月
-								<input type="text" name="date_of_registration_to_d" id="date_of_registration_to_d" value="{$form.date_of_registration_to_d}" maxlength="2" size="2" />日まで
+								<input type="text" name="date_of_registration_y_from" id="date_of_registration_y_from" value="{$form.date_of_registration_y_from}" maxlength="4" size="4" />年
+								<input type="text" name="date_of_registration_m_from" id="date_of_registration_m_from" value="{$form.date_of_registration_m_from}" maxlength="2" size="2" />月
+								<input type="text" name="date_of_registration_d_from" id="date_of_registration_d_from" value="{$form.date_of_registration_d_from}" maxlength="2" size="2" />日から&nbsp;
+								<input type="text" name="date_of_registration_y_to" id="date_of_registration_y_to" value="{$form.date_of_registration_y_to}" maxlength="4" size="4" />年
+								<input type="text" name="date_of_registration_m_to" id="date_of_registration_m_to" value="{$form.date_of_registration_m_to}" maxlength="2" size="2" />月
+								<input type="text" name="date_of_registration_d_to" id="date_of_registration_d_to" value="{$form.date_of_registration_d_to}" maxlength="2" size="2" />日まで
 							</td>
 						</tr>
 
@@ -311,7 +321,7 @@
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
 							<td nowrap>日：
-								<input type="text" name="detailed_information_jp" id="detailed_information_jp" value="{$form.detailed_information_jp}" size=50>
+								<input type="text" name="detailed_information_jp" id="detailed_information_jp" value="{$form.detailed_information_jp}" size="50" />
 								<select name="detailed_information_jp_cond" id="detailed_information_jp_cond">
 									<option value="1" {if ('1' == $form.detailed_information_jp_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.detailed_information_jp_cond)}selected{/if}>不一致</option>
@@ -319,9 +329,9 @@
 									<option value="4" {if ('4' == $form.detailed_information_jp_cond)}selected{/if}>前不一</option>
 									<option value="5" {if ('5' == $form.detailed_information_jp_cond || '' == $form.detailed_information_jp_cond)}selected{/if}>含む</option>
 									<option value="6" {if ('6' == $form.detailed_information_jp_cond)}selected{/if}>含まず</option>
-									<option value="9" {if ('9' == $form.detailed_information_jp_cond)}selected{/if}>一致(全)</option>
+									{*<option value="9" {if ('9' == $form.detailed_information_jp_cond)}selected{/if}>一致(全)</option>
 									<option value="10" {if ('10' == $form.detailed_information_jp_cond)}selected{/if}>前一致(全)</option>
-									<option value="11" {if ('11' == $form.detailed_information_jp_cond)}selected{/if}>含む(全)</option>
+									<option value="11" {if ('11' == $form.detailed_information_jp_cond)}selected{/if}>含む(全)</option>*}
 								</select>
 							</td>
 						</tr>
@@ -335,9 +345,9 @@
 									<option value="4" {if ('4' == $form.detailed_information_en_cond)}selected{/if}>前不一</option>
 									<option value="5" {if ('5' == $form.detailed_information_en_cond || '' == $form.detailed_information_en_cond)}selected{/if}>含む</option>
 									<option value="6" {if ('6' == $form.detailed_information_en_cond)}selected{/if}>含まず</option>
-									<option value="9" {if ('9' == $form.detailed_information_en_cond)}selected{/if}>一致(全)</option>
+									{*<option value="9" {if ('9' == $form.detailed_information_en_cond)}selected{/if}>一致(全)</option>
 									<option value="10" {if ('10' == $form.detailed_information_en_cond)}selected{/if}>前一致(全)</option>
-									<option value="11" {if ('11' == $form.detailed_information_en_cond)}selected{/if}>含む(全)</option>
+									<option value="11" {if ('11' == $form.detailed_information_en_cond)}selected{/if}>含む(全)</option>*}
 								</select>
 							</td>
 						</tr>
@@ -350,11 +360,11 @@
 							<!-- 終了日 -->
 							<td nowrap>
 								<input type="text" name="date_from_yyyy" id="date_from_yyyy" value="{$form.date_from_yyyy}" maxlength="4" size="4" />年
-								<input type="text" name="date_from_yyyy" id="date_from_yyyy" value="{$form.date_from_yyyy}" maxlength="2" size="2" />月
-								<input type="text" name="date_from_yyyy" id="date_from_yyyy" value="{$form.date_from_yyyy}" maxlength="2" size="2" />日から&nbsp;
+								<input type="text" name="date_from_mm" id="date_from_mm" value="{$form.date_from_mm}" maxlength="2" size="2" />月
+								<input type="text" name="date_from_dd" id="date_from_dd" value="{$form.date_from_dd}" maxlength="2" size="2" />日から&nbsp;
 								<input type="text" name="date_to_yyyy" id="date_to_yyyy" value="{$form.date_to_yyyy}" maxlength="4" size="4" />年
-								<input type="text" name="date_to_yyyy" id="date_to_yyyy" value="{$form.date_to_yyyy}" maxlength="2" size="2" />月
-								<input type="text" name="date_to_yyyy" id="date_to_yyyy" value="{$form.date_to_yyyy}" maxlength="2" size="2" />日まで
+								<input type="text" name="date_to_mm" id="date_to_mm" value="{$form.date_to_mm}" maxlength="2" size="2" />月
+								<input type="text" name="date_to_dd" id="date_to_dd" value="{$form.date_to_dd}" maxlength="2" size="2" />日まで
 							</td>
 						</tr>
 
@@ -368,7 +378,7 @@
 								{if (0 == (($smarty.section.it.index) % 5))}
 								<tr>
 								{/if}
-									<td><input type="checkbox" name="frequency" id="frequency" value="{$app.frequency[it].kbn_2}" {if ($form.frequency == $app.frequency[it].kbn_2)}checked{/if} />{$app.frequency[it].discription_jp}</td>
+									<td><input type="checkbox" name="frequency[]" id="frequency[]" value="{$app.frequency[it].kbn_2}" {if ($form.frequency == $app.frequency[it].kbn_2)}checked{/if} />{$app.frequency[it].discription_jp}</td>
 								{if (0 == (($smarty.section.it.index + 1) % 5))}
 								</tr>
 								{/if}
@@ -482,7 +492,7 @@
 									</tr>
 									<tr>
 										<td>英：
-											<input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" size=50>
+											<input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" size="50" />
 											<select name="other_city_en_cond" id="other_city_en_cond">
 												<option value="1" {if ('1' == $form.other_city_en_cond)}selected{/if}>一致</option>
 												<option value="2" {if ('2' == $form.other_city_en_cond)}selected{/if}>不一致</option>
@@ -502,7 +512,7 @@
 							<!-- 会場名(日) -->
 							<!-- 会場名(英) -->
 							<td nowrap>日：
-								<input type="text" name="venue_jp" id="venue_jp" value="{$form.venue_jp}" />
+								<input type="text" name="venue_jp" id="venue_jp" value="{$form.venue_jp}" size="50" />
 								<select name="venue_jp_cond" id="venue_jp_cond">
 									<option value="1" {if ('1' == $form.venue_jp_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.venue_jp_cond)}selected{/if}>不一致</option>
@@ -515,7 +525,7 @@
 						</tr>
 						<tr>
 							<td nowrap>英：
-								<input type="text" name="venue_en" id="venue_en" value="{$form.venue_en}" size=50>
+								<input type="text" name="venue_en" id="venue_en" value="{$form.venue_en}" size="50" />
 								<select name="venue_en_cond" id="venue_en_cond">
 									<option value="1" {if ('1' == $form.venue_en_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.venue_en_cond)}selected{/if}>不一致</option>
@@ -546,7 +556,7 @@
 							<!-- 交通手段(日) -->
 							<!-- 交通手段(英) -->
 							<td nowrap>日：
-								<input type="text" name="transportation_jp" id="transportation_jp" value="{$form.transportation_jp}" size=50 />
+								<input type="text" name="transportation_jp" id="transportation_jp" value="{$form.transportation_jp}" size="50" />
 								<select name="transportation_jp_cond" id="transportation_jp_cond">
 									<option value="1" {if ('1' == $form.transportation_jp_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.transportation_jp_cond)}selected{/if}>不一致</option>
@@ -559,7 +569,7 @@
 						</tr>
 						<tr>
 							<td nowrap>英：
-								<input type="text" name="transportation_en" id="transportation_en" value="{$form.transportation_en}" size=50>
+								<input type="text" name="transportation_en" id="transportation_en" value="{$form.transportation_en}" size="50" />
 								<select name="transportation_en_cond" id="transportation_en_cond">
 									<option value="1" {if ('1' == $form.transportation_en_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.transportation_en_cond)}selected{/if}>不一致</option>
