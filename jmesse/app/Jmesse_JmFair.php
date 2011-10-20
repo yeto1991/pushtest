@@ -232,9 +232,15 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// Web表示言語
 		$sql_tmp = $this->_mkSqlCheckBox1('select_language_info', $search_cond['select_language_info'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
-		// 見本市番号
+		//見本市番号
+		$sql_tmp = $this->_mkSqlNumber('mihon_no', $search_cond['mihon_no_from'], $search_cond['mihon_no_to'], $search_cond['mihon_no_cond'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 見本市名(日)
+		$sql_tmp = $this->_mkSqlText('fair_title_jp', $search_cond['fair_title_jp'], $search_cond['fair_title_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 見本市名(英)
+		$sql_tmp = $this->_mkSqlText('fair_title_en', $search_cond['fair_title_en'], $search_cond['fair_title_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 見本市略称
 		$sql_tmp = $this->_mkSqlText('abbrev_title', $search_cond['abbrev_title'], $search_cond['abbrev_title_cond'], $search_cond['relation'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
@@ -242,38 +248,108 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_tmp = $this->_mkSqlText('fair_url', $search_cond['fair_url'], $search_cond['fair_url_cond'], $search_cond['relation'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// キャッチフレーズ(日)
+		$sql_tmp = $this->_mkSqlText('profile_jp', $search_cond['profile_jp'], $search_cond['profile_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// キャッチフレーズ(英)
+		$sql_tmp = $this->_mkSqlText('profile_en', $search_cond['profile_en'], $search_cond['profile_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// ＰＲ・紹介文(日)
+		$sql_tmp = $this->_mkSqlText('detailed_information_jp', $search_cond['detailed_information_jp'], $search_cond['detailed_information_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// ＰＲ・紹介文(英)
+		$sql_tmp = $this->_mkSqlText('detailed_information_en', $search_cond['detailed_information_en'], $search_cond['detailed_information_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 会期
+
+
+
+
+
+
+
+
+
+
 		// 開催頻度
 		$sql_tmp = $this->_mkSqlCheckBox1('frequency', $search_cond['frequency'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 業種
+		$sql_tmp = $this->_mkSqlCheckBox1($search_cond['main_industory'], $search_cond['sub_industory'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 出品物(日)
+		$sql_tmp = $this->_mkSqlText('exhibits_jp', $search_cond['exhibits_jp'], $search_cond['exhibits_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 出品物(英)
+		$sql_tmp = $this->_mkSqlText('exhibits_en', $search_cond['exhibits_en'], $search_cond['exhibits_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 開催地(地域)
 		// 開催地(国・地域)
 		// 開催地(都市)
+
+
+
+
+
+
+
+
+
 		// 開催地(その他(日))
+		$sql_tmp = $this->_mkSqlText('other_city_jp', $search_cond['other_city_jp'], $search_cond['other_city_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 開催地(その他(英))
+		$sql_tmp = $this->_mkSqlText('other_city_en', $search_cond['other_city_en'], $search_cond['other_city_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 会場名(日)
+		$sql_tmp = $this->_mkSqlText('venue_jp', $search_cond['venue_jp'], $search_cond['venue_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 会場名(英)
+		$sql_tmp = $this->_mkSqlText('venue_en', $search_cond['venue_en'], $search_cond['venue_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 同展示場で使用する面積（Ｎｅｔ）
+		$sql_tmp = $this->_mkSqlNumber('gross_floor_area', $search_cond['gross_floor_area_from'], $search_cond['gross_floor_area_to'], $search_cond['gross_floor_area_cond'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 交通手段(日)
+		$sql_tmp = $this->_mkSqlText('transportation_jp', $search_cond['transportation_jp'], $search_cond['transportation_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 交通手段(英)
+		$sql_tmp = $this->_mkSqlText('transportation_en', $search_cond['transportation_en'], $search_cond['transportation_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 入場資格
 		$sql_tmp = $this->_mkSqlCheckBox1('open_to', $search_cond['open_to'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['open_to']);
 		// チケットの入手方法
-		// チケットの入手方法(その他)
+		$admissionTicketsColums = array('admission_ticket_1','admission_ticket_2','admission_ticket_3','admission_ticket_4');
+		$admissionTickets = array($search_cond['admission_ticket_1'],$search_cond['admission_ticket_2'],$search_cond['admission_ticket_3'],$search_cond['admission_ticket_4']);
+		$sql_tmp = $this->_mkSqlCheckBox2($admissionTicketsColums, $admissionTickets, $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['open_to']);
+		// チケットの入手方法(その他)日本語
+		$sql_tmp = $this->_mkSqlText('other_admission_ticket_jp', $search_cond['other_admission_ticket_jp'], $search_cond['other_admission_ticket_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+		// チケットの入手方法(その他)英語
+		$sql_tmp = $this->_mkSqlText('other_admission_ticket_en', $search_cond['other_admission_ticket_en'], $search_cond['other_admission_ticket_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(年実績（西暦４桁）)
+		$sql_tmp = $this->_mkSqlText('year_of_the_trade_fair', $search_cond['year_of_the_trade_fair'], $search_cond['year_of_the_trade_fair_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(入場者数)
+		$sql_tmp = $this->_mkSqlNumber('total_number_of_visitor', $search_cond['total_number_of_visitor_from'], $search_cond['total_number_of_visitor_to'], $search_cond['total_number_of_visitor_cond'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(うち海外から)
+		$sql_tmp = $this->_mkSqlNumber('number_of_foreign_visitor', $search_cond['number_of_foreign_visitor_from'], $search_cond['number_of_foreign_visitor_to'], $search_cond['number_of_foreign_visitor_cond'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(出展社数)
+		$sql_tmp = $this->_mkSqlNumber('total_number_of_exhibitors', $search_cond['total_number_of_exhibitors_from'], $search_cond['total_number_of_exhibitors_to'], $search_cond['total_number_of_exhibitors_cond'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(うち海外から)
+		$sql_tmp = $this->_mkSqlNumber('number_of_foreign_exhibitors', $search_cond['number_of_foreign_exhibitors_from'], $search_cond['number_of_foreign_exhibitors_to'], $search_cond['number_of_foreign_exhibitors_cond'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(展示面積)
+		$sql_tmp = $this->_mkSqlText('net_square_meters', $search_cond['net_square_meters'], $search_cond['net_square_meters_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 過去の実績(認証機関)
+		$sql_tmp = $this->_mkSqlText('spare_field1', $search_cond['spare_field1'], $search_cond['spare_field1_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 出展申込締切日
 		if ('' != $search_cond['app_dead_yyyy_from']) {
 			$date_from = $search_cond['app_dead_yyyy_from'].'/'.$search_cond['app_dead_mm_from'].'/'.$search_cond['app_dead_dd_from'].' 00:00:00';
@@ -288,15 +364,35 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_tmp = $this->_mkSqlDate1("concat(app_dead_yyyy, '/', app_dead_mm, '/', app_dead_dd, ' 00:00:00')", $date_from, $date_to, $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 主催者・問合せ先(名称(日))
+		$sql_tmp = $this->_mkSqlText('organizer_jp', $search_cond['organizer_jp'], $search_cond['organizer_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 主催者・問合せ先(名称(英))
+		$sql_tmp = $this->_mkSqlText('organizer_en', $search_cond['organizer_en'], $search_cond['organizer_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 主催者・問合せ先(ＴＥＬ)
+		$sql_tmp = $this->_mkSqlText('organizer_tel', $search_cond['organizer_tel'], $search_cond['organizer_tel_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 主催者・問合せ先(ＦＡＸ)
+		$sql_tmp = $this->_mkSqlText('organizer_fax', $search_cond['organizer_fax'], $search_cond['organizer_fax_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 主催者・問合せ先(Ｅ－Ｍａｉｌ)
+		$sql_tmp = $this->_mkSqlText('organizer_email', $search_cond['organizer_email'], $search_cond['organizer_email_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 日本国内の照会先(名称(日))
+		$sql_tmp = $this->_mkSqlText('agency_in_japan_jp', $search_cond['agency_in_japan_jp'], $search_cond['agency_in_japan_jp_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 日本国内の照会先(名称(英))
+		$sql_tmp = $this->_mkSqlText('agency_in_japan_en', $search_cond['agency_in_japan_en'], $search_cond['agency_in_japan_en_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 日本国内の照会先(ＴＥＬ)
+		$sql_tmp = $this->_mkSqlText('agency_in_japan_tel', $search_cond['agency_in_japan_tel'], $search_cond['agency_in_japan_tel_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 日本国内の照会先(ＦＡＸ)
+		$sql_tmp = $this->_mkSqlText('agency_in_japan_fax', $search_cond['agency_in_japan_fax'], $search_cond['agency_in_japan_fax_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 日本国内の照会先(Ｅ－Ｍａｉｌ)
+		$sql_tmp = $this->_mkSqlText('agency_in_japan_email', $search_cond['agency_in_japan_email'], $search_cond['agency_in_japan_email_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// 見本市レポート／URL
 		$sql_tmp = $this->_mkSqlText('report_link', $search_cond['report_link'], $search_cond['report_link_cond'], $search_cond['relation'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
