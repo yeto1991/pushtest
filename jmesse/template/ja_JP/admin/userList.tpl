@@ -25,14 +25,14 @@
 				<table style="width:100%;">
 					<tr>
 						<td>
-							<input type="button" name="" value="ダウンロード" style="height:20px;"/>
+							<input type="button" name="$GetList" value="ダウンロード" style="height:20px;" onClick="document.location.href='{$config.url}?action_admin_userCsvDownload=true'"/>
 						</td>
 						<td align="right">
 							<input type="button" name="" value="次の一覧" style="height:20px;"/>
 						</td>
 					<tr>
 					<tr>
-						<td colspan=2><font size=2>199999999999999～100222222222222222件目／{$app.user_search_count}ヒット</font></td>
+						<td colspan=2><font size=2>★★★～●●●件目／{$app.user_search_count}ヒット</font></td>
 					</tr>
 					<tr>
 						<td colspan=2>

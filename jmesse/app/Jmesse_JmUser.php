@@ -206,7 +206,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	}
 
 	/**
-	* ユー情報検索画面 検索処理。
+	* ユーザ管理 ユーザ情報検索画面 検索処理。
 	*
 	* @return array<string>：検索結果、null：データなし、DB::Error()：エラー
 	*/
@@ -295,7 +295,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	}
 
 	/**
-	* ユーザ情報検索画面 検索処理総件数取得。
+	* ユーザ管理 ユーザ情報検索画面 検索処理総件数取得。
 	*
 	* @return array<string>：検索結果件数、null：データなし、DB::Error()：エラー
 	*/
@@ -376,6 +376,95 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		}
 		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 		return $row['cnt'];
+	}
+
+	/**
+	* ユーザ管理 ユーザ情報ダウンロード用検索処理
+	*
+	* @return array<string>：検索結果、null：データなし、DB::Error()：エラー
+	*/
+	function getUserCsvList() {
+		$db = $this->backend->getDB();
+		$sql = "select email from jm_user";
+		$search_cond = $this->session->get('search_cond');
+		// where句用 変数設定
+		$sql_tmp = '';
+		$sql_ext = '';
+		$data = array();
+		//Eメール
+		$sql_tmp = $this->_mkSqlText('email', $search_cond['searchEmail'], $search_cond['searchConditionEmail'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//パスワード
+		$sql_tmp = $this->_mkSqlText('password', $search_cond['searchPassword'], $search_cond['searchConditionPassword'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//会社名
+		$sql_tmp = $this->_mkSqlText('company_nm', $search_cond['searchCompanyNm'], $search_cond['searchConditionCompanyNm'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//部署名
+		$sql_tmp = $this->_mkSqlText('division_dept_nm', $search_cond['searchDivisionDeptNm'], $search_cond['searchConditionDivisionDeptNm'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//氏名
+		$sql_tmp = $this->_mkSqlText('user_nm', $search_cond['searchUserNm'], $search_cond['searchConditionUserNm'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//郵便番号
+		$sql_tmp = $this->_mkSqlText('post_code', $search_cond['searchPostCode'], $search_cond['searchConditionPostCode'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//住所
+		$sql_tmp = $this->_mkSqlText('address', $search_cond['searchAddress'], $search_cond['searchConditionAddress'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//TEL
+		$sql_tmp = $this->_mkSqlText('tel', $search_cond['searchTel'], $search_cond['searchConditionTel'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//FAX
+		$sql_tmp = $this->_mkSqlText('fax', $search_cond['searchFax'], $search_cond['searchConditionFax'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//URL
+		$sql_tmp = $this->_mkSqlText('url', $search_cond['searchUrl'], $search_cond['searchConditionUrl'],$data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		// 性別
+		$sql_tmp = $this->_mkSqlCheckGender('gender_cd', $search_cond['searchGenderCd0'],$search_cond['searchGenderCd1'],$search_cond['searchGenderCd2'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//ユーザ使用言語
+		$sql_tmp = $this->_mkSqlCheckSelectCode2('use_language_cd', $search_cond['searchUseLanguageCd0'],$search_cond['searchUseLanguageCd1'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//一般権限
+		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_gen', $search_cond['searchAuthGen0'],$search_cond['searchAuthGen1'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//ユーザ管理権限
+		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_user', $search_cond['searchAuthUser0'],$search_cond['searchAuthUser1'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//展示会管理権限
+		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_fair', $search_cond['searchAuthFair0'],$search_cond['searchAuthFair1'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		//削除フラグ
+		$sql_tmp = $this->_mkSqlCheckSelectCode2('del_flg', $search_cond['searchdelflg0'],$search_cond['searchdelflg1'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
+		$sql_ext = $sql_ext." order by user_id asc";
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql.$sql_ext);
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+		return $list;
 	}
 }
 
