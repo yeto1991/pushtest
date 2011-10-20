@@ -155,23 +155,26 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	* @return string 成功:作成SQL 失敗:空文字
 	*/
 	function _mkSqlCheckGender($column, $gender0, $gender1, $gender2, &$data) {
-		$genderSC = ' '.$column." in (";
+		$sql = ' '.$column." in (";
 		if($gender0 == "1"){
-			$genderSC = $genderSC."'0',";
+			$sql = $sql."?,";
+			array_push($data, '0');
 		}
 		if($gender1 == "1"){
-			$genderSC = $genderSC."'1',";
+			$sql = $sql."?,";
+			array_push($data, '1');
 		}
 		if($gender2 == "1"){
-			$genderSC = $genderSC."'2',";
+			$sql = $sql."?,";
+			array_push($data, '2');
 		}
 		//最後のカンマを削除
-		$genderSC = rtrim($genderSC, ",");
-		$genderSC = $genderSC.") ";
-		if($genderSC == ' '.$column." in (".") "){
+		$sql = rtrim($sql, ",");
+		$sql = $sql.") ";
+		if($sql == ' '.$column." in (".") "){
 			return '';
 		}
-		return $genderSC;
+		return $sql;
 	}
 
 	/**
@@ -186,10 +189,12 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	function _mkSqlCheckSelectCode2($column, $code0, $code1, &$data) {
 		$sql = ' '.$column." in (";
 		if($code0 == "1"){
-			$sql = $sql."'0',";
+			$sql = $sql."?,";
+			array_push($data, '0');
 		}
 		if($code1 == "1"){
-			$sql = $sql."'1',";
+			$sql = $sql."?,";
+			array_push($data, '1');
 		}
 		//最後のカンマを削除
 		$sql = rtrim($sql, ",");
@@ -290,7 +295,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	}
 
 	/**
-	* ユー情報検索画面 検索処理総件数取得。
+	* ユーザ情報検索画面 検索処理総件数取得。
 	*
 	* @return array<string>：検索結果件数、null：データなし、DB::Error()：エラー
 	*/
