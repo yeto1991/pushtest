@@ -37,11 +37,15 @@
 							<td>
 							{if ("" != $app.seq_num_prev)}
 							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_prev}')" />
+							{else}
+							<input type="button" value="前の文書" onclick="" disabled />
 							{/if}
 							</td>
 							<td>
 							{if ("" != $app.seq_num_next)}
 							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_next}')" />
+							{else}
+							<input type="button" value="次の文書" onclick="" disabled />
 							{/if}
 							</td>
 						</tr>
@@ -613,11 +617,15 @@
 							<td>
 							{if ("" != $app.seq_num_prev)}
 							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_prev}')" />
+							{else}
+							<input type="button" value="前の文書" onclick="" disabled />
 							{/if}
 							</td>
 							<td>
 							{if ("" != $app.seq_num_next)}
 							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_next}')" />
+							{else}
+							<input type="button" value="次の文書" onclick="" disabled />
 							{/if}
 							</td>
 						</tr>

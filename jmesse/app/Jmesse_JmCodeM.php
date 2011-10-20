@@ -101,11 +101,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -147,11 +147,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -194,11 +194,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -240,11 +240,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -286,11 +286,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -333,11 +333,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -380,11 +380,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -428,11 +428,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -477,11 +477,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data[0];
+		return $list[0];
 	}
 
 	/**
@@ -523,10 +523,10 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
-		return $data;
+		return $list;
 	}
 
 	/**
@@ -568,11 +568,11 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
 
-		return $data;
+		return $list;
 	}
 }
 

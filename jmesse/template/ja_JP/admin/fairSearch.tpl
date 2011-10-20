@@ -60,7 +60,8 @@
 </head>
 <body onload="init()">
 	<form name="form_fairSearch" id="form_fairSearch" method="post" action="">
-		<input type="hidden" name="action_admin_fairList" id="action_admin_fairList" value="dummy" /> <input type="hidden" name="type" id="type" value="any" />
+		<input type="hidden" name="action_admin_fairList" id="action_admin_fairList" value="dummy" />
+		<input type="hidden" name="type" id="type" value="a" />
 		<input type="hidden" name="tmp_sub_industory" id="tmp_sub_industory" value="{$form.tmp_sub_industory}" />
 		<input type="hidden" name="tmp_country" id="tmp_country" value="{$form.tmp_country}" />
 		<input type="hidden" name="city" id="city" value="{$form.city}" />

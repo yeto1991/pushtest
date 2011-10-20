@@ -102,12 +102,19 @@ class Jmesse_Action_AdminFairCsvDownload extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		// 以降、SESSIONから検索条件を取得する。
+		// ソート順
+		$sort_cond = $this->session->get('sort_cond');
+		$ary_sort = array($sort_cond['sort_1'], $sort_cond['sort_2'], $sort_cond['sort_3'], $sort_cond['sort_4'], $sort_cond['sort_5']);
+		$ary_sort_cond = array($sort_cond['sort_cond_1'], $sort_cond['sort_cond_2'], $sort_cond['sort_cond_3'], $sort_cond['sort_cond_4'], $sort_cond['sort_cond_5']);
+
+		// 検索
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
-		$jm_fair_list = $jm_fair_mgr->getFairList();
+		$jm_fair_list = $jm_fair_mgr->getFairListDownload($ary_sort, $ary_sort_cond);
 
-		$file = 'xxx.csv';
+		// ファイル名
+		$file = 'list.csv';
 
+		// header出力
 		header ("Content-Disposition: attachment; filename=$file");
 		header ("Content-type: application/x-csv");
 

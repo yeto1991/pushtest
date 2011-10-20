@@ -11,8 +11,8 @@
 <b>展示会情報({$app.fair_count})</b><br/>
 ・<a href="{$config.url}?action_admin_fairRegist=true">新規展示会登録</a><br/>
 ・<a href="{$config.url}?action_admin_fairSearch=true">展示会検索</a><br/>
-・<a href="{$config.url}?action_admin_fairList=true&type=unauthorized">展示会未承認一覧表示</a><br />
-・<a href="{$config.url}?action_admin_fairList=true&type=denial">展示会否認一覧表示</a><br />
+・<a href="{$config.url}?action_admin_fairList=true&type=u">展示会未承認一覧表示</a><br />
+・<a href="{$config.url}?action_admin_fairList=true&type=d">展示会否認一覧表示</a><br />
 {/if}
 {* テキストエリアの改行コード *}
 <textarea name="br" id="br" style="display:none;">
