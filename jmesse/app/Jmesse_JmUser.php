@@ -288,10 +288,10 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		// リスト化
 		$i = 0;
 		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			$data[$i] = $tmp;
+			$list[$i] = $tmp;
 			$i ++;
 		}
-		return $data;
+		return $list;
 	}
 
 	/**

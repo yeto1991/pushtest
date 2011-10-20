@@ -106,22 +106,6 @@
 											<input type="checkbox" name="searchGenderCd2" id="searchGenderCd2" value="1">不明
 										</td>
 									</tr>
-									<!--
-									<tr>
-										<td nowrap style=text-align:left>ユーザID</td>
-										<td nowrap style=text-align:left>
-											<input type="text" name="searchUserId" id="searchUserId" value="" size=50 ></input>
-											<select name="searchConditionUserId" id="searchConditionUserId">
-												<option value="1">一致</option>
-												<option value="2">不一致</option>
-												<option value="3">前一致</option>
-												<option value="4">前不一</option>
-												<option selected value="5">含む</option>
-												<option value="6">含まず</option>
-											</select>
-										</td>
-									</tr>
-									-->
 									<tr>
 										<td nowrap style=text-align:left>郵便番号</td>
 										<td nowrap style=text-align:left>
