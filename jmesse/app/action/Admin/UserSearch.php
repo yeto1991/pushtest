@@ -530,7 +530,9 @@ class Jmesse_Action_AdminUserSearch extends Jmesse_ActionClass
      */
     function perform()
     {
-        return 'admin_userSearch';
+    	// SESSIONに保持した検索条件の削除
+    	$this->session->set('search_cond', null);
+    	return 'admin_userSearch';
     }
 }
 
