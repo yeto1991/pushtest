@@ -31,7 +31,7 @@
 						</tr>
 						<tr>
 							<td>
-								<table border=1 style="width:100%; font-size:15px;table-layout:fixed"">
+								<table border=1 style="width:100%; font-size:15px;table-layout:fixed">
 									<tr>
 										<th nowrap style="text-align:left">Eメール</th>
 										<td width="500" style="text-align:left">{$form.email}</td>
