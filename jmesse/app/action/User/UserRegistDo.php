@@ -39,11 +39,11 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 	function prepare()
 	{
 		// ログインチェック
-		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
-			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
-		}
+// 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
+// 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
+// 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
+// 			return 'user_Login';
+// 		}
 		//入力値チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
@@ -138,33 +138,15 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 		$jm_user->set('tel', $this->af->get('tel'));
 		$jm_user->set('fax', $this->af->get('fax'));
 		$jm_user->set('url', $this->af->get('url'));
-		$jm_user->set('use_language_cd', $this->af->get('useLanguageCd'));
-		$jm_user->set('regist_result_notice_cd', $this->af->get('registResultNoticeCd'));
-		if ($this->af->get('authGen') == '1') {
-			$jm_user->set('auth_gen', $this->af->get('authGen'));
-		}else{
-			$jm_user->set('auth_gen', '0');
-		}
-		if ($this->af->get('authUser') == '1') {
-			$jm_user->set('auth_user', $this->af->get('authUser'));
-		}else{
-			$jm_user->set('auth_user', '0');
-		}
-		if ($this->af->get('authFair') == '1') {
-			$jm_user->set('auth_fair', $this->af->get('authFair'));
-		}else{
-			$jm_user->set('auth_fair', '0');
-		}
-		$jm_user->set('idpass_notice_cd', $this->af->get('idpassNoticeCd'));
-		$jm_user->set('del_flg', $this->af->get('delFlg'));
-		if ($this->af->get('delFlg') == '1') {
-			$jm_user->set('del_date', date('Y/m/d H:i:s'));
-		}else{
-			$jm_user->set('del_date', null);
-		}
-		$jm_user->set('regist_user_id', $this->session->get('user_id'));
+		//$jm_user->set('use_language_cd', '0');
+		//$jm_user->set('regist_result_notice_cd', $this->af->get(''));
+		$jm_user->set('auth_gen', '1');
+		$jm_user->set('auth_user', '0');
+		$jm_user->set('auth_fair', '0');
+		//$jm_user->set('idpass_notice_cd', '0');
+		$jm_user->set('del_flg', '0');
+		//$jm_user->set('regist_user_id', '');
 		$jm_user->set('regist_date', date('Y/m/d H:i:s'));
-
 		// INSERT処理実行
 		$ret = $jm_user->add();
 		if (Ethna::isError($ret)) {
@@ -178,7 +160,7 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 		$mgr = $this->backend->getManager('userCommon');
 		// 登録したユーザ情報取得
 		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
-		$ret = $mgr->regLog($this->session->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
+		$ret = $mgr->regLog($user->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();

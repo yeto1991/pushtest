@@ -24,7 +24,7 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '登録モード',    // Display name
+			'name'        => '画面モード',    // Display name
 			'required'    => true,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -60,10 +60,36 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 			'filter'      => null,
 			'custom'      => null,
 		),
+		'email2' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'Eメール(確認)',
+			'required'    => true,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => '/^[!-~]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
 		'password' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
 			'name'        => 'パスワード',
+			'required'    => true,
+			'min'         => 4,
+			'max'         => 8,
+			'regexp'      => '/^[!-~]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
+		'password2' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_TEXT,
+			'name'        => 'パスワード(確認)',
 			'required'    => true,
 			'min'         => 4,
 			'max'         => 8,
@@ -190,97 +216,6 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 			'filter'      => null,
 			'custom'      => null,
 		),
-		'useLanguageCd' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_RADIO,
-			'name'        => 'ユーザ使用言語',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
-		'registResultNoticeCd' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_RADIO,
-			'name'        => '登録結果通知',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
-		'authGen' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_CHECKBOX,
-			'name'        => '一般権限',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
-		'authUser' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_CHECKBOX,
-			'name'        => 'ユーザ管理権限',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
-		'authFair' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_CHECKBOX,
-			'name'        => '展示会管理権限',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
-		'idpassNoticeCd' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_RADIO,
-			'name'        => 'ID・パスワード通知メール',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
-		'delFlg' => array(
-			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_RADIO,
-			'name'        => '削除フラグ',
-			'required'    => false,
-			'min'         => null,
-			'max'         => null,
-			'regexp'      => null,
-			'mbregexp'    => null,
-			'mbregexp_encoding' => 'UTF-8',
-			'filter'      => null,
-			'custom'      => null,
-		),
     );
 }
 
@@ -303,11 +238,11 @@ class Jmesse_Action_UserUserRegist extends Jmesse_ActionClass
     function prepare()
     {
 		// ログインチェック
-		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
-			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
-		}
+// 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
+// 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
+// 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
+// 			return 'user_Login';
+// 		}
 		return null;
     }
 

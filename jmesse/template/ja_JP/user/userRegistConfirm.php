@@ -9,14 +9,11 @@
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
-<title>ユーザー登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+<title>ユーザー登録 - 世界の見本市・展示会 -ジェトロ</title>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-
-
-
 </head>
 
 
@@ -150,41 +147,25 @@
 </div>
 
 <div class="in_main">
-<h3 class="img t_center"><img src="/j-messe/images/db/user02.jpg" alt="ユーザー情報入力"></h3>
+<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
 
-<form name="form_user_userRegist" id="form_user_userRegist" method="post" action=""  enctype="multipart/form-data" >
-		<input type="hidden" name="action_user_userRegistDo" id="action_user_userRegistDo" value="dummy">
-		<!-- ユーザID -->
-		<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
-		<!-- 登録モード -->
-		<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
-<h4>Eメールとパスワード</h4>
-<p class="nomargin">J-messe見本市登録をご利用いただくためのEメールとパスワードを設定してください。</p>
+<p>以下の内容に間違いがないかご確認の上、「登録」ボタンをクリックしてください。<br />
+修正したい場合は「戻る」ボタンをクリックしてください。</p>
+
+<form>
+<h4>ユーザーIDとパスワード</h4>
 <table id="registration">
 <tr>
-<th class="item">Eメール </th>
+<th class="item">ユーザーID</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.email}" size="50" name="email">
-</td>
-</tr>
-<tr>
-<th class="item">Eメール（確認）</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.email2}" size="50" name="email2"><br />
-<strong>確認のためもう一度Eメールを入力してください。</strong></td>
+<td>userid</td>
 </tr>
 <tr>
 <th class="item">パスワード</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="password" value="{$form.password}" size="20" name="password"><br />
-<strong>半角英数小文字6文字以上、16文字以内で入力して下さい。</td>
+<td>******</td>
 </tr>
-<tr>
-<th class="item">パスワード（確認）</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="password" value="{$form.password2}" size="20" name="password2"><br />
-<strong>確認のためもう一度パスワードを入力してください。</td>
-</tr>
+
 </table>
 <br />
 <h4>お客様情報入力</h4>
@@ -192,73 +173,59 @@
 <tr>
 <th class="item">会社名</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.companyNm}" size="60" name="company"><br />
-	</td>
+<td>会社名</td>
 </tr>
 <tr>
 <th class="item">部署名</th>
 <th class="required"></th>
-<td><input type="text" value="{$form.divisionDeptNm}" size="60" name="section"><br />
-	</td>
+<td>部署名<br /></td>
 </tr>
 <tr>
 <th class="item">お名前</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.userNm}" size="60" name="section"><br />
-</td>
+<td>お名前</td>
+</tr>
+<tr>
+<th class="item">Eメール </th>
+<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+<td>aaa@aaa.co.jp</td>
 </tr>
 <tr>
 
 <th class="item">郵便番号</th>
 <th class="required"></th>
-<td>
-<input type="text" maxlength="8" value="{$form.postCode}" size="10" name="postal">
-（半角数字）<br />
-郵便番号はハイフン区切りで入力してください。例：123-4567
-</td>
+<td>123-4567</td>
 </tr>
+
 <tr>
 <th class="item">住所</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.address}" size="80" name="address"><br />
-</td>
+<td>東京都</td>
 </tr>
 <tr>
+
 <th class="item">TEL</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>
-<input type="text" value="{$form.tel}" size="30" name="tel"><br />
-電話番号はハイフン区切りで国番号から入力してください。（半角数字)<br />
-例：東京の場合　+81-3-1234-5678</td>
+<td>+81-3-1234-5678</td>
 </tr>
 <tr>
 <th class="item">FAX</th>
 <th class="required"></th>
-<td>
-<input type="text" value="{$form.fax}" size="30" name="fax"><br />
-電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
-例：東京の場合　+81-3-1234-5678</td>
+<td>+81-3-1234-5678</td>
 </tr>
 </tr>
 <tr>
 <th class="item">御社のウェブサイトURL</th>
 <th class="required"></th>
-<td><input type="text" value="{$form.url}" size="60" name="website">
-<br />
-URLはhttp:// から入力して下さい。
-</td>
+<td>http://www.aaa.co.jp</td>
 </tr>
 </table>
 
 <!-- navi area-->
 <table width="100%">
-<tr><td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
+<tr><td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
 
-
-
-
-
-<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ"  /></td></tr>
+<td align="right"><img src="/j-messe/images/db/btn-finish.gif" alt="完了" width="180" height="37" class="over" /></td></tr>
 </table>
 </form>
 <div class="line_dot">
@@ -283,7 +250,7 @@ type="text/javascript">coderz();</script></div>
 <td>このページから送信される情報は、SSL暗号化通信により保護されています。</td>
 </tr>
 </table>
-<!-- /ssl area-->
+
 
 </div>
 
@@ -296,6 +263,7 @@ type="text/javascript">coderz();</script></div>
 </div>
 </div>
 <!-- /contents -->
+13:35 2011/10/18
 <!-- footer -->
 <div id="footer">
 	<div class="area">
@@ -310,17 +278,7 @@ type="text/javascript">coderz();</script></div>
 		<p id="copyright">Copyright (C) 1995-2011 Japan External Trade Organization(JETRO). All rights reserved.</p>
 	</div>
 </div>
-<!-- form_script -->
-<script type="text/javascript" src="/js/jquery/jquery.highlight.js"></script>
-<script type="text/javascript">
-		$(document).ready(
-			function(){
-				// form demo
-					$('form').highlight()
-				}
-			);
-</script>
-<!-- /form_script -->
+
 <!-- footer_script -->
 <script src="http://search.jetro.go.jp/site/js/suggest_ext.js#unitid=ja_all" type="text/javascript" charset=" UTF-8"></script>
 <script type="text/javascript" src="/js/galink.js"></script>
