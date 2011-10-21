@@ -41,7 +41,17 @@
 					<td align="left"><input type="password" name="password" id="password" value="" maxlength="8" style="width:200px;" /></td>
 				</tr>
 				<tr>
-					<td colspan="3" align="center"><input type="submit" value=" 実  行 " /></td>
+					<td colspan="3" align="center"><input type="submit" value=" 実  行 " /><br /><br /><br /><br /></td>
+				</tr>
+			</table>
+		</div>
+		<div align="center">
+			<table>
+				<tr>
+					<td align="left">新規登録の方は<a href="?action_user_userRegist=true">こちら</a><br /><br /><br /><br /></td>
+				</tr>
+				<tr>
+					<td align="left">パスワード忘れた方は<a href="http://www.yahoo.com">こちら</a><br /><br /><br /><br /></td>
 				</tr>
 			</table>
 		</div>
