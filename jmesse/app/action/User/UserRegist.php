@@ -36,7 +36,7 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 		),
 		'user_id' => array(
 			'type'        => VAR_TYPE_INT, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'form_type'   => FORM_TYPE_HIDDEN,  // Form type
 			'name'        => 'ユーザID',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
@@ -75,7 +75,7 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 		),
 		'password' => array(
 			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_TEXT,
+			'form_type'   => FORM_TYPE_PASSWORD,
 			'name'        => 'パスワード',
 			'required'    => true,
 			'min'         => 4,
@@ -88,7 +88,7 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 		),
 		'password2' => array(
 			'type'        => VAR_TYPE_STRING,
-			'form_type'   => FORM_TYPE_TEXT,
+			'form_type'   => FORM_TYPE_PASSWORD,
 			'name'        => 'パスワード(確認)',
 			'required'    => true,
 			'min'         => 4,
@@ -237,7 +237,7 @@ class Jmesse_Action_UserUserRegist extends Jmesse_ActionClass
      */
     function prepare()
     {
-		// ログインチェック
+// 		// ログインチェック
 // 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 // 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 // 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);

@@ -152,37 +152,43 @@
 <div class="in_main">
 <h3 class="img t_center"><img src="/j-messe/images/db/user02.jpg" alt="ユーザー情報入力"></h3>
 
-<form name="form_user_userRegist" id="form_user_userRegist" method="post" action=""  enctype="multipart/form-data" >
-		<input type="hidden" name="action_user_userRegistDo" id="action_user_userRegistDo" value="dummy">
-		<!-- ユーザID -->
-		<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
-		<!-- 登録モード -->
-		<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+<form name="form_user_userRegist" id="form_user_userRegist" method="post" action="">
+<input type="hidden" name="action_user_userRegistDo" id="action_user_userRegistDo" value="dummy" />
+<!-- 登録モード -->
+<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+{* エラー表示 *}
+{if count($errors)}
+<ul>
+	{foreach from=$errors item=error}
+	<li><font color="#ff0000">{$error}</font></li>
+	{/foreach}
+</ul>
+{/if}
 <h4>Eメールとパスワード</h4>
-<p class="nomargin">J-messe見本市登録をご利用いただくためのEメールとパスワードを設定してください。</p>
+<p class="nomargin">J-messe見本市登録をご利用いただくためのEメールとパスワードを設定してください。<br />
+（※入力されたEメールは小文字に変換されて登録されます。）</p>
 <table id="registration">
-<tr>
 <th class="item">Eメール </th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.email}" size="50" name="email">
+<td><input type="text" value="{$form.email}" size="50" name="email" id="email"><br />
 </td>
 </tr>
 <tr>
 <th class="item">Eメール（確認）</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.email2}" size="50" name="email2"><br />
+<td><input type="text" value="{$form.email2}" size="50" name="email2" id="email2"><br />
 <strong>確認のためもう一度Eメールを入力してください。</strong></td>
 </tr>
 <tr>
 <th class="item">パスワード</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="password" value="{$form.password}" size="20" name="password"><br />
-<strong>半角英数小文字6文字以上、16文字以内で入力して下さい。</td>
+<td><input type="password" value="{$form.password}" size="20" name="password" id="password"><br />
+<strong>半角英数字4文字以上、8文字以内で入力して下さい。</td>
 </tr>
 <tr>
 <th class="item">パスワード（確認）</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="password" value="{$form.password2}" size="20" name="password2"><br />
+<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2"><br />
 <strong>確認のためもう一度パスワードを入力してください。</td>
 </tr>
 </table>
@@ -192,60 +198,66 @@
 <tr>
 <th class="item">会社名</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.companyNm}" size="60" name="company"><br />
+<td><input type="text" value="{$form.companyNm}" size="60" name="companyNm" id="companyNm"><br />
 	</td>
 </tr>
 <tr>
 <th class="item">部署名</th>
 <th class="required"></th>
-<td><input type="text" value="{$form.divisionDeptNm}" size="60" name="section"><br />
+<td><input type="text" value="{$form.divisionDeptNm}" size="60" name="divisionDeptNm" id="divisionDeptNm"><br />
 	</td>
 </tr>
 <tr>
 <th class="item">お名前</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.userNm}" size="60" name="section"><br />
+<td><input type="text" value="{$form.userNm}" size="60" name="userNm" id="userNm"><br />
 </td>
 </tr>
 <tr>
-
+<th class="item">性別</th>
+<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+<td>
+<input type="radio" size="60" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0" } checked {/if}>男性
+<input type="radio" size="60" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if}>女性<br />
+</td>
+</tr>
+<tr>
 <th class="item">郵便番号</th>
 <th class="required"></th>
 <td>
-<input type="text" maxlength="8" value="{$form.postCode}" size="10" name="postal">
-（半角数字）<br />
+<input type="text" maxlength="8" value="{$form.postCode}" size="10" name="postCode" id="postCode">（半角英数字)<br />
 郵便番号はハイフン区切りで入力してください。例：123-4567
 </td>
 </tr>
 <tr>
 <th class="item">住所</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="{$form.address}" size="80" name="address"><br />
+<td><input type="text" value="{$form.address}" size="80" name="address" id="address"><br />
 </td>
 </tr>
 <tr>
 <th class="item">TEL</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td>
-<input type="text" value="{$form.tel}" size="30" name="tel"><br />
-電話番号はハイフン区切りで国番号から入力してください。（半角数字)<br />
+<input type="text" value="{$form.tel}" size="30" name="tel" id="tel">（半角英数字)<br />
+電話番号はハイフン区切りで国番号から入力してください。<br />
 例：東京の場合　+81-3-1234-5678</td>
 </tr>
 <tr>
 <th class="item">FAX</th>
 <th class="required"></th>
 <td>
-<input type="text" value="{$form.fax}" size="30" name="fax"><br />
-電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
+<input type="text" value="{$form.fax}" size="30" name="fax" id="fax" >（半角英数字)<br />
+FAX番号はハイフン区切りで国番号から入力してください。<br />
 例：東京の場合　+81-3-1234-5678</td>
 </tr>
 </tr>
 <tr>
 <th class="item">御社のウェブサイトURL</th>
 <th class="required"></th>
-<td><input type="text" value="{$form.url}" size="60" name="website">
+<td><input type="text" value="{$form.url}" size="60" name="url" id="url">
 <br />
-URLはhttp:// から入力して下さい。
+URLはhttp(s):// から入力して下さい。
 </td>
 </tr>
 </table>
@@ -253,12 +265,7 @@ URLはhttp:// から入力して下さい。
 <!-- navi area-->
 <table width="100%">
 <tr><td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-
-
-
-
-
-<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ"  /></td></tr>
+<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ"  class="over" /></td></tr>
 </table>
 </form>
 <div class="line_dot">

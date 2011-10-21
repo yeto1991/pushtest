@@ -38,7 +38,7 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ログインチェック
+// 		// ログインチェック
 // 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 // 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 // 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
@@ -120,55 +120,9 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		if (Ethna_Util::isDuplicatePost()) {
-			// 二重POSTの場合
-			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
-			header('Location: '.$this->config->get('url').'?action_user_userChange=true');
-			return null;
-		}
-		$jm_user =& $this->backend->getObject('JmUser');
-		$jm_user->set('email', strtolower($this->af->get('email'))); //メールアドレスを小文字変換
-		$jm_user->set('password', $this->af->get('password'));
-		$jm_user->set('company_nm', $this->af->get('companyNm'));
-		$jm_user->set('division_dept_nm', $this->af->get('divisionDeptNm'));
-		$jm_user->set('user_nm', $this->af->get('userNm'));
-		$jm_user->set('gender_cd', $this->af->get('genderCd'));
-		$jm_user->set('post_code', $this->af->get('postCode'));
-		$jm_user->set('address', $this->af->get('address'));
-		$jm_user->set('tel', $this->af->get('tel'));
-		$jm_user->set('fax', $this->af->get('fax'));
-		$jm_user->set('url', $this->af->get('url'));
-		//$jm_user->set('use_language_cd', '0');
-		//$jm_user->set('regist_result_notice_cd', $this->af->get(''));
-		$jm_user->set('auth_gen', '1');
-		$jm_user->set('auth_user', '0');
-		$jm_user->set('auth_fair', '0');
-		//$jm_user->set('idpass_notice_cd', '0');
-		$jm_user->set('del_flg', '0');
-		//$jm_user->set('regist_user_id', '');
-		$jm_user->set('regist_date', date('Y/m/d H:i:s'));
-		// INSERT処理実行
-		$ret = $jm_user->add();
-		if (Ethna::isError($ret)) {
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ新規登録エラー');
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'error';
-		}
-
-		// ログテーブルに登録
-		$mgr = $this->backend->getManager('userCommon');
-		// 登録したユーザ情報取得
-		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
-		$ret = $mgr->regLog($user->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'error';
-		}
-		// 更新画面へ遷移
-		header('Location: '.$this->config->get('url').'?action_user_userChange=true&user_id='.$user->get('user_id').'&mode=change&success=1');
-		return null;
+		// 確認画面へ遷移
+		//header('Location: '.$this->config->get('url').'?action_user_userRegistDone=true&user_id='.$user->get('user_id').'&mode=change&success=1');
+		return user_userRegistDo;
 	}
 }
 
