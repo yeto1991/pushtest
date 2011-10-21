@@ -5,8 +5,8 @@
 <script type="text/javascript">
 {literal}
 <!--
-	function openDoc(url, mihon_no, seq_no) {
-		window.open(url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&seq_num=' + seq_no, 'OLD_FAIR_DETAIL');
+	function openDoc(url, mihon_no) {
+	document.location.href = url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no;
 	}
 	function changeDoc(url, mihon_no) {
 		document.location.href = url + '?action_admin_fairChange=true&mode=change&mihon_no=' + mihon_no;
@@ -35,15 +35,15 @@
 					<table>
 						<tr>
 							<td>
-							{if ("" != $app.seq_num_prev)}
-							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_prev}')" />
+							{if ("" != $app.mihon_no_prev)}
+							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_prev}')" />
 							{else}
 							<input type="button" value="前の文書" onclick="" disabled />
 							{/if}
 							</td>
 							<td>
-							{if ("" != $app.seq_num_next)}
-							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_next}')" />
+							{if ("" != $app.mihon_no_next)}
+							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_next}')" />
 							{else}
 							<input type="button" value="次の文書" onclick="" disabled />
 							{/if}
@@ -615,15 +615,15 @@
 					<table>
 						<tr>
 							<td>
-							{if ("" != $app.seq_num_prev)}
-							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_prev}')" />
+							{if ("" != $app.mihon_no_prev)}
+							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_prev}')" />
 							{else}
 							<input type="button" value="前の文書" onclick="" disabled />
 							{/if}
 							</td>
 							<td>
-							{if ("" != $app.seq_num_next)}
-							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$form.mihon_no}', '{$app.seq_num_next}')" />
+							{if ("" != $app.mihon_no_next)}
+							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_next}')" />
 							{else}
 							<input type="button" value="次の文書" onclick="" disabled />
 							{/if}

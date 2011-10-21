@@ -304,16 +304,85 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* 見本市リスト取得（表示用）。
-	*
-	* @param int $page ページ番号
-	* @return array 見本市リスト
-	*/
+	 * 見本市リスト取得（ダウンロード用）。
+	 *
+	 * @param array $ary_sort ソート項目
+	 * @param array $ary_sort_cond ソート方法
+	 * @return array 見本市リスト
+	 */
 	function getFairListDownload($ary_sort, $ary_sort_cond) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
-		$sql = 'select user_id, date_of_application, date_of_registration, fair_title_jp, fair_title_en, abbrev_title, fair_url, mihon_no, profile_jp, profile_en, detailed_information_jp, detailed_information_en, date_from_yyyy, date_from_mm, date_from_dd, date_to_yyyy, date_to_mm, date_to_dd, frequency, main_industory_1, sub_industory_1, main_industory_2, sub_industory_2, main_industory_3, sub_industory_3, main_industory_4, sub_industory_4, main_industory_5, sub_industory_5, main_industory_6, sub_industory_6, exhibits_jp, exhibits_en, region, country, city, other_city_jp, other_city_en, venue_jp, venue_en, venue_url, gross_floor_area, transportation_jp, transportation_en, open_to, admission_ticket_1, admission_ticket_2, admission_ticket_3, admission_ticket_4, other_admission_ticket_jp, other_admission_ticket_en, year_of_the_trade_fair, total_number_of_visitor, number_of_foreign_visitor, total_number_of_exhibitors, number_of_foreign_exhibitors, net_square_meters, spare_field1, app_dead_yyyy, app_dead_mm, app_dead_dd, organizer_jp, organizer_en, organizer_tel, organizer_fax, organizer_email, organizer_addr, organizer_div, organizer_pers, agency_in_japan_jp, agency_in_japan_en, agency_in_japan_tel, agency_in_japan_fax, agency_in_japan_email, agency_in_japan_addr, agency_in_japan_div, agency_in_japan_pers, photos_1, photos_2, photos_3, select_language_info, report_link, venue_link, keyword, jetro_suport, jetro_suport_url, use_language_flag, web_display_type, regist_type, note_for_system_manager, note_for_data_manager, confirm_flag, negate_comment, mail_send_flag, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_fair';
+		$sql = 'select jf.user_id, jf.date_of_application, jf.date_of_registration, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.fair_url, jf.mihon_no, jf.profile_jp, jf.profile_en, jf.detailed_information_jp, jf.detailed_information_en, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.frequency, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, jf.exhibits_jp, jf.exhibits_en, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.venue_jp, jf.venue_en, jf.venue_url, jf.gross_floor_area, jf.transportation_jp, jf.transportation_en, jf.open_to, jf.admission_ticket_1, jf.admission_ticket_2, jf.admission_ticket_3, jf.admission_ticket_4, jf.other_admission_ticket_jp, jf.other_admission_ticket_en, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.app_dead_yyyy, jf.app_dead_mm, jf.app_dead_dd, jf.organizer_jp, jf.organizer_en, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.agency_in_japan_jp, jf.agency_in_japan_en, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.photos_1, jf.photos_2, jf.photos_3, jf.select_language_info, jf.report_link, jf.venue_link, jf.keyword, jf.jetro_suport, jf.jetro_suport_url, jf.use_language_flag, jf.web_display_type, jf.regist_type, jf.note_for_system_manager, jf.note_for_data_manager, jf.confirm_flag, jf.negate_comment, jf.mail_send_flag, jf.del_flg, jf.del_date, jf.regist_user_id, jf.regist_date, jf.update_user_id, jf.update_date from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id';
+
+		// 入力値
+		$data = array();
+
+		// where句の取得
+		$sql_ext =$this->_getWhere($data);
+
+		// sort
+		// 入力値を取得
+		for ($i = 0; $i < count($ary_sort); $i++) {
+			if ('' != $ary_sort[$i]) {
+				if ('' == $sql_sort) {
+					$sql_sort = ' order by ';
+				} else {
+					$sql_sort = ', ';
+				}
+				$sql_sort .= $this->sort_column[$ary_sort[$i]];
+				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
+			}
+		}
+		if ('' == $sql_sort) {
+			// 見本市名(日) 昇順, 見本市番号 昇順
+			$sql_sort = ' order by '.$this->sort_column['1'].$this->sort_cond['0'].', '.$this->sort_column['0'].$this->sort_cond['0'];
+		}
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_sort);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+	/**
+	 * 見本市リスト取得（詳細ページング用）。
+	 *
+	 * @param array $ary_sort ソート項目
+	 * @param array $ary_sort_cond ソート方法
+	 * @return array 見本市リスト
+	 */
+	function getFairListDetailPaging($ary_sort, $ary_sort_cond) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		$sql = 'select jf.mihon_no from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id';
 
 		// 入力値
 		$data = array();
@@ -649,8 +718,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 展示会に係わる画像(3点)
-
-
+		$sql_tmp = $this->_mkSqlPhotos($search_cond['photos'], $search_cond['photos_cond'], $search_cond['relation'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// システム管理者備考欄
 		$sql_tmp = $this->_mkSqlText('note_for_system_manager', $search_cond['note_for_system_manager'], $search_cond['note_for_system_manager_cond'], $search_cond['relation'], $data);
@@ -1030,6 +1099,218 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}
 		return $sql;
 	}
+
+	function _mkSqlPhotos($photos, $photos_cond, $relation, &$data) {
+		if ('' == $photos && '12' != $photos_cond && '13' != $photos_cond) {
+			return '';
+		}
+
+		$value = explode(' ', $photos);
+
+		$sql ='';
+		if ('1' == $photos_cond) {
+			$sql_1 = '';
+			$sql_2 = '';
+			$sql_3 = '';
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_1) {
+						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_1 .= ' photos_1 = ? ';
+					array_push($data, $value[$i]);
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_2) {
+						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_2 .= ' photos_2 = ? ';
+					array_push($data, $value[$i]);
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_3) {
+						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_3 .= ' photos_3 = ? ';
+					array_push($data, $value[$i]);
+				}
+			}
+			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+		} elseif ('2' == $photos_cond) {
+			$sql_1 = '';
+			$sql_2 = '';
+			$sql_3 = '';
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_1) {
+						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_1 .= ' photos_1 <> ? ';
+					array_push($data, $value[$i]);
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_2) {
+						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_2 .= ' photos_2 <> ? ';
+					array_push($data, $value[$i]);
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_3) {
+						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_3 .= ' photos_3 <> ? ';
+					array_push($data, $value[$i]);
+				}
+			}
+			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+		} elseif ('3' == $photos_cond) {
+			$sql_1 = '';
+			$sql_2 = '';
+			$sql_3 = '';
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_1) {
+						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_1 .= ' photos_1 like ? ';
+					array_push($data, $value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_2) {
+						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_2 .= ' photos_2 like ? ';
+					array_push($data, $value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_3) {
+						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_3 .= ' photos_3 like ? ';
+					array_push($data, $value[$i].'%');
+				}
+			}
+			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+		} elseif ('4' == $photos_cond) {
+			$sql_1 = '';
+			$sql_2 = '';
+			$sql_3 = '';
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_1) {
+						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_1 .= ' photos_1 not like ? ';
+					array_push($data, $value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_2) {
+						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_2 .= ' photos_2 not like ? ';
+					array_push($data, $value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_3) {
+						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_3 .= ' photos_3 not like ? ';
+					array_push($data, $value[$i].'%');
+				}
+			}
+			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+		} elseif ('5' == $photos_cond) {
+			$sql_1 = '';
+			$sql_2 = '';
+			$sql_3 = '';
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_1) {
+						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_1 .= ' photos_1 like ? ';
+					array_push($data, '%'.$value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_2) {
+						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_2 .= ' photos_2 like ? ';
+					array_push($data, '%'.$value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_3) {
+						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_3 .= ' photos_3 like ? ';
+					array_push($data, '%'.$value[$i].'%');
+				}
+			}
+			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+		} elseif ('6' == $photos_cond) {
+			$sql_1 = '';
+			$sql_2 = '';
+			$sql_3 = '';
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_1) {
+						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_1 .= ' photos_1 not like ? ';
+					array_push($data, '%'.$value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_2) {
+						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_2 .= ' photos_2 not like ? ';
+					array_push($data, '%'.$value[$i].'%');
+				}
+			}
+			for ($i = 0; $i < count($value); $i++) {
+				if ('' != $value[$i]) {
+					if ('' != $sql_3) {
+						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+					}
+					$sql_3 .= ' photos_3 not like ? ';
+					array_push($data, '%'.$value[$i].'%');
+				}
+			}
+			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+		} elseif ('7' == $photos_cond) {
+		} elseif ('8' == $photos_cond) {
+		} elseif ('9' == $photos_cond) {
+		} elseif ('12' == $photos_cond) {
+			$sql = " photos_1 <> '' or photos_2 <> '' or photos_3 <> '' ";
+		} elseif ('13' == $photos_cond) {
+			$sql = " photos_1 = '' and photos_2 = '' and photos_3 = '' ";
+		}
+
+		return $sql;
+}
 
 	/**
 	 * 項目内の関連を変換する。

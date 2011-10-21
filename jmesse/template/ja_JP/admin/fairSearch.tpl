@@ -968,6 +968,8 @@
 									<option value="4" {if ('4' == $form.photos_cond)}selected{/if}>前不一</option>
 									<option value="5" {if ('5' == $form.photos_cond || '' == $form.photos_cond)}selected{/if}>含む</option>
 									<option value="6" {if ('6' == $form.photos_cond)}selected{/if}>含まず</option>
+									<option value="12" {if ('12' == $form.photos_cond)}selected{/if}>有り</option>
+									<option value="13" {if ('13' == $form.photos_cond)}selected{/if}>無し</option>
 									<option value="9" {if ('9' == $form.photos_cond)}selected{/if}>一致(全)</option>
 									<option value="10" {if ('10' == $form.photos_cond)}selected{/if}>前一致(全)</option>
 									<option value="11" {if ('11' == $form.photos_cond)}selected{/if}>含む(全)</option>

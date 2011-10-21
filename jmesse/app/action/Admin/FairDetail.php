@@ -94,10 +94,10 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		$jm_fair_mgr =& $this->backend->getManager('jmFairTemp');
+		$jm_fair_tmp_mgr =& $this->backend->getManager('jmFairTemp');
 		if (null != $this->af->get('seq_num') && 0 < $this->af->get('seq_num')) {
 			// JM_FAIR_TEMPより取得
-			$jm_fair = $jm_fair_mgr->getJmFairTemp($this->af->get('mihon_no'), $this->af->get('seq_num'));
+			$jm_fair = $jm_fair_tmp_mgr->getJmFairTemp($this->af->get('mihon_no'), $this->af->get('seq_num'));
 		} else {
 			// JM_FAIRより取得
 			$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
@@ -219,7 +219,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$this->af->set('venue_en', $jm_fair->get('venue_en'));
 
 		// 展示会で使用する面積（Ｎｅｔ）
-		$this->af->set('gross_floor_area', $this->isZero($jm_fair->get('gross_floor_area')));
+		$this->af->set('gross_floor_area', $this->_isZero($jm_fair->get('gross_floor_area')));
 
 		// 交通手段
 		$this->af->set('transportation_jp', $jm_fair->get('transportation_jp'));
@@ -244,11 +244,11 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 
 		// 過去の実績
 		$this->af->set('year_of_the_trade_fair', $jm_fair->get('year_of_the_trade_fair'));
-		$this->af->set('total_number_of_visitor', $this->isZero($jm_fair->get('total_number_of_visitor')));
-		$this->af->set('number_of_foreign_visitor', $this->isZero($jm_fair->get('number_of_foreign_visitor')));
-		$this->af->set('total_number_of_exhibitors', $this->isZero($jm_fair->get('total_number_of_exhibitors')));
-		$this->af->set('number_of_foreign_exhibitors', $this->isZero($jm_fair->get('number_of_foreign_exhibitors')));
-		$this->af->set('net_square_meters', $this->isZero($jm_fair->get('net_square_meters')));
+		$this->af->set('total_number_of_visitor', $this->_isZero($jm_fair->get('total_number_of_visitor')));
+		$this->af->set('number_of_foreign_visitor', $this->_isZero($jm_fair->get('number_of_foreign_visitor')));
+		$this->af->set('total_number_of_exhibitors', $this->_isZero($jm_fair->get('total_number_of_exhibitors')));
+		$this->af->set('number_of_foreign_exhibitors', $this->_isZero($jm_fair->get('number_of_foreign_exhibitors')));
+		$this->af->set('net_square_meters', $this->_isZero($jm_fair->get('net_square_meters')));
 		$this->af->set('spare_field1', $jm_fair->get('spare_field1'));
 
 		// 出展申込締切日
@@ -366,30 +366,50 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$this->af->set('city_name_en', $city_name['discription_en']);
 
 		// 履歴リスト（$appに設定）
-		$jm_fair_temp_list = $jm_fair_mgr->getJmFairTempList($this->af->get('mihon_no'));
+		$jm_fair_temp_list = $jm_fair_tmp_mgr->getJmFairTempList($this->af->get('mihon_no'));
 		$this->af->setApp('jm_fair_temp_list', $jm_fair_temp_list);
 		$this->af->setApp('seq_num_st', $jm_fair_temp_list[0]['seq_num']);
 		$this->af->setApp('seq_num_ed', $jm_fair_temp_list[count($jm_fair_temp_list) - 1]['seq_num']);
+
 		// 次の文書・前の文書の設定
-		if (null == $this->af->get('seq_num') || '' == $this->af->get('seq_num')) {
-			$this->af->setApp('seq_num_prev', $jm_fair_temp_list[1]['seq_num']);
-			$this->af->setApp('seq_num_next', '');
-		} else {
-			for ($i = 0; $i < count($jm_fair_temp_list); $i++) {
-				if ($this->af->get('seq_num') == $jm_fair_temp_list[$i]['seq_num']) {
-					if ($i < count($jm_fair_temp_list)) {
-						$this->af->setApp('seq_num_prev', $jm_fair_temp_list[$i + 1]['seq_num']);
-					} else {
-						$this->af->setApp('seq_num_prev', '');
-					}
-					if ($i > 0) {
-						$this->af->setApp('seq_num_next', $jm_fair_temp_list[$i - 1]['seq_num']);
-					} else {
-						$this->af->setApp('seq_num_next', '');
-					}
+		$sort_cond = $this->session->get('sort_cond');
+		$ary_sort = array($sort_cond['sort_1'], $sort_cond['sort_2'], $sort_cond['sort_3'], $sort_cond['sort_4'], $sort_cond['sort_5']);
+		$ary_sort_cond = array($sort_cond['sort_cond_1'], $sort_cond['sort_cond_2'], $sort_cond['sort_cond_3'], $sort_cond['sort_cond_4'], $sort_cond['sort_cond_5']);
+		$jm_fair_mgr =& $this->backend->getManager('jmFair');
+		$mihon_no_list = $jm_fair_mgr->getFairListDetailPaging($ary_sort, $ary_sort_cond);
+		for ($i = 0; $i < count($mihon_no_list); $i++) {
+			if ($this->af->get('mihon_no') == $mihon_no_list[$i]['mihon_no']) {
+				if (0 == $i) {
+					$this->af->setApp('mihon_no_prev', '');
+				} else {
+					$this->af->setApp('mihon_no_prev', $mihon_no_list[$i - 1]['mihon_no']);
+				}
+				if (count($mihon_no_list) - 1 == $i ) {
+					$this->af->setApp('mihon_no_next', '');
+				} else {
+					$this->af->setApp('mihon_no_next', $mihon_no_list[$i + 1]['mihon_no']);
 				}
 			}
 		}
+// 		if (null == $this->af->get('seq_num') || '' == $this->af->get('seq_num')) {
+// 			$this->af->setApp('seq_num_prev', $jm_fair_temp_list[1]['seq_num']);
+// 			$this->af->setApp('seq_num_next', '');
+// 		} else {
+// 			for ($i = 0; $i < count($jm_fair_temp_list); $i++) {
+// 				if ($this->af->get('seq_num') == $jm_fair_temp_list[$i]['seq_num']) {
+// 					if ($i < count($jm_fair_temp_list)) {
+// 						$this->af->setApp('seq_num_prev', $jm_fair_temp_list[$i + 1]['seq_num']);
+// 					} else {
+// 						$this->af->setApp('seq_num_prev', '');
+// 					}
+// 					if ($i > 0) {
+// 						$this->af->setApp('seq_num_next', $jm_fair_temp_list[$i - 1]['seq_num']);
+// 					} else {
+// 						$this->af->setApp('seq_num_next', '');
+// 					}
+// 				}
+// 			}
+// 		}
 
 		// ログに登録
 		$mgr = $this->backend->getManager('adminCommon');
@@ -451,7 +471,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 	 * @param int $param 対象パラメータ
 	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
 	 */
-	function isZero($param) {
+	function _isZero($param) {
 		$ret = $param;
 		if ("0" == $param) {
 			$ret = '';
