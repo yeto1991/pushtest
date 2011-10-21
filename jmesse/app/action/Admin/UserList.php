@@ -93,11 +93,67 @@ class Jmesse_Action_AdminUserList extends Jmesse_ActionClass
 			$search_cond['searchdelflg1'] = $this->af->get('searchdelflg1');
 			$this->session->set('search_cond', $search_cond);
 		}
-		// 以降、SESSIONから検索条件を取得する。
-		//検索結果総件数
-		$this->af->setApp('user_search_count', $this->backend->getManager('jmUser')->getUserInfoListCount());
-		//検索結果取得情報
-		$this->af->setApp('user_search_info_list', $this->backend->getManager('jmUser')->getUserInfoList());
+		// マネージャの取得
+		$jm_user_mgr =& $this->backend->getManager('JmUser');
+		// 総件数の取得
+		$jm_user_cnt = $jm_user_mgr->getUserInfoListCount();
+		if (0 < $jm_user_cnt) {
+			// ページ設定
+			$limit = 100;
+			$max_page = floor($jm_user_cnt / $limit);
+			if (0 < $jm_user_cnt % $limit) {
+				$max_page += 1;
+			}
+			if ('' == $this->af->get('page')) {
+				$page = 1;
+			} elseif ($max_page < $this->af->get('page')) {
+				$page = $max_page;
+			} else {
+				$page = $this->af->get('page');
+			}
+			$offset = $limit * ($page - 1);
+			//検索結果取得
+			$jm_user_list = $jm_user_mgr->getUserInfoList($offset, $limit);
+			//検索結果取得情報設定
+			$this->af->setApp('user_search_info_list', $jm_user_list);
+			// 全件数
+			$this->af->setApp('user_search_count', $jm_user_cnt);
+			// 表示開始
+			$this->af->setApp('begin', $offset + 1);
+			// 表示件数
+			if ($jm_user_cnt > ($page * $limit)) {
+				$this->af->setApp('limit', $limit);
+			} else {
+				$this->af->setApp('limit', $jm_user_cnt - (($page - 1) * $limit));
+			}
+			// ページ
+			$this->af->setApp('page', $page);
+			$this->af->setApp('page_next', $page + 1);
+			$this->af->setApp('page_prev', $page - 1);
+			// 最初・最後？
+			if (1 == $page) {
+				$this->af->setApp('first_page', '1');
+			}
+			if ($max_page == $page) {
+				$this->af->setApp('last_page', '1');
+			}
+		} else {
+			// 見本市リスト
+			$this->af->setApp('user_search_info_list', null);
+			// 全件数
+			$this->af->setApp('user_search_count', $jm_user_cnt);
+			// 表示開始
+			$this->af->setApp('begin', 0);
+			// 表示件数
+			$this->af->setApp('limit', 0);
+			// ページ
+			$this->af->setApp('page', 1);
+			$this->af->setApp('page_next', $page + 1);
+			$this->af->setApp('page_prev', $page - 1);
+			// 最初・最後？
+			$this->af->setApp('first_page', '1');
+			$this->af->setApp('last_page', '1');
+		}
 		return 'admin_userList';
     }
 }

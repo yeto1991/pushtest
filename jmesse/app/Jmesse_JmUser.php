@@ -131,6 +131,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	 *
 	 * @param string $sql_ext where句
 	 * @param string $sql_tmp 追加のwhere句
+	 * @return string where句の連結文
 	 */
 	function _addWhere($sql_ext, $sql_tmp) {
 		if ('' != $sql_tmp) {
@@ -151,8 +152,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	* @param array $gender0 性別0
 	* @param array $gender1 性別1
 	* @param array $gender2 性別2
-	* @param array $data 完成した条件式
-	* @return string 成功:作成SQL 失敗:空文字
+	* @return array $data 完成した条件式
 	*/
 	function _mkSqlCheckGender($column, $gender0, $gender1, $gender2, &$data) {
 		$sql = ' '.$column." in (";
@@ -183,8 +183,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	* @param string $column カラム名
 	* @param array $code0 コード値：0のデータ
 	* @param array $code1 コード値：1のデータ
-	* @param array $data 完成した条件式
-	* @return string 成功:作成SQL 失敗:空文字
+	* @return array $data 完成した条件式
 	*/
 	function _mkSqlCheckSelectCode2($column, $code0, $code1, &$data) {
 		$sql = ' '.$column." in (";
@@ -206,18 +205,18 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	}
 
 	/**
-	* ユーザ管理 ユーザ情報検索画面 検索処理。
+	* 検索条件によるwhere句の作成。
 	*
-	* @return array<string>：検索結果、null：データなし、DB::Error()：エラー
+	* @param array $data 入力値
+	* @return 形成したWhere句
 	*/
-	function getUserInfoList() {
-		$db = $this->backend->getDB();
-		$sql = "select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user";
+	function _getWhere(&$data) {
+		// 入力値を取得
 		$search_cond = $this->session->get('search_cond');
-		// where句用 変数設定
-		$sql_tmp = '';
+		// 形成用変数
 		$sql_ext = '';
-		$data = array();
+		$sql_tmp = '';
+
 		//Eメール
 		$sql_tmp = $this->_mkSqlText('email', $search_cond['searchEmail'], $search_cond['searchConditionEmail'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
@@ -267,8 +266,27 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		$sql_tmp = $this->_mkSqlCheckSelectCode2('del_flg', $search_cond['searchdelflg0'],$search_cond['searchdelflg1'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
 		$sql_ext = $sql_ext." order by user_id asc";
+
+		return $sql_ext;
+	}
+
+	/**
+	* ユーザ管理 ユーザ情報検索画面 検索処理。
+	* @param array ページング $offset
+	* @param array ページング $limit
+	* @return array<string>：検索結果、null：データなし、DB::Error()：エラー
+	*/
+	function getUserInfoList($offset, $limit) {
+		$db = $this->backend->getDB();
+		$sql = "select user_id, password, company_nm, division_dept_nm, user_nm,gender_cd, email, post_code, address, tel, fax, url, use_language_cd, regist_result_notice_cd, auth_gen, auth_user, auth_fair, idpass_notice_cd, del_flg, del_date, regist_user_id, regist_date, update_user_id, update_date from jm_user";
+		$data = array();
+		// where句の取得
+		$sql_ext =$this->_getWhere($data);
+		// ページング
+		$sql_limit = ' limit '.$offset.', '.$limit;
+		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_limit);
 		// Prepare Statement化
-		$stmt =& $db->db->prepare($sql.$sql_ext);
+		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_limit);
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
 		// 結果の判定
@@ -287,7 +305,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		}
 		// リスト化
 		$i = 0;
-		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 			$list[$i] = $tmp;
 			$i ++;
 		}
@@ -302,60 +320,9 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	function getUserInfoListCount() {
 		$db = $this->backend->getDB();
 		$sql = "select count(*) cnt from jm_user";
-		$search_cond = $this->session->get('search_cond');
-		// where句用 変数設定
-		$sql_tmp = '';
-		$sql_ext = '';
 		$data = array();
-		//Eメール
-		$sql_tmp = $this->_mkSqlText('email', $search_cond['searchEmail'], $search_cond['searchConditionEmail'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//パスワード
-		$sql_tmp = $this->_mkSqlText('password', $search_cond['searchPassword'], $search_cond['searchConditionPassword'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//会社名
-		$sql_tmp = $this->_mkSqlText('company_nm', $search_cond['searchCompanyNm'], $search_cond['searchConditionCompanyNm'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//部署名
-		$sql_tmp = $this->_mkSqlText('division_dept_nm', $search_cond['searchDivisionDeptNm'], $search_cond['searchConditionDivisionDeptNm'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//氏名
-		$sql_tmp = $this->_mkSqlText('user_nm', $search_cond['searchUserNm'], $search_cond['searchConditionUserNm'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//郵便番号
-		$sql_tmp = $this->_mkSqlText('post_code', $search_cond['searchPostCode'], $search_cond['searchConditionPostCode'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//住所
-		$sql_tmp = $this->_mkSqlText('address', $search_cond['searchAddress'], $search_cond['searchConditionAddress'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//TEL
-		$sql_tmp = $this->_mkSqlText('tel', $search_cond['searchTel'], $search_cond['searchConditionTel'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//FAX
-		$sql_tmp = $this->_mkSqlText('fax', $search_cond['searchFax'], $search_cond['searchConditionFax'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//URL
-		$sql_tmp = $this->_mkSqlText('url', $search_cond['searchUrl'], $search_cond['searchConditionUrl'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		// 性別
-		$sql_tmp = $this->_mkSqlCheckGender('gender_cd', $search_cond['searchGenderCd0'],$search_cond['searchGenderCd1'],$search_cond['searchGenderCd2'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//ユーザ使用言語
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('use_language_cd', $search_cond['searchUseLanguageCd0'],$search_cond['searchUseLanguageCd1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//一般権限
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_gen', $search_cond['searchAuthGen0'],$search_cond['searchAuthGen1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//ユーザ管理権限
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_user', $search_cond['searchAuthUser0'],$search_cond['searchAuthUser1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//展示会管理権限
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_fair', $search_cond['searchAuthFair0'],$search_cond['searchAuthFair1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//削除フラグ
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('del_flg', $search_cond['searchdelflg0'],$search_cond['searchdelflg1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//$sql_ext = $sql_ext." order by user_id asc";
+		// where句の取得
+		$sql_ext = $this->_getWhere($data);
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql.$sql_ext);
 		// SQLを実行
@@ -383,63 +350,12 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	*
 	* @return array<string>：検索結果、null：データなし、DB::Error()：エラー
 	*/
-	function getUserCsvList() {
+	function getUserListDownload() {
 		$db = $this->backend->getDB();
 		$sql = "select email from jm_user";
-		$search_cond = $this->session->get('search_cond');
-		// where句用 変数設定
-		$sql_tmp = '';
-		$sql_ext = '';
 		$data = array();
-		//Eメール
-		$sql_tmp = $this->_mkSqlText('email', $search_cond['searchEmail'], $search_cond['searchConditionEmail'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//パスワード
-		$sql_tmp = $this->_mkSqlText('password', $search_cond['searchPassword'], $search_cond['searchConditionPassword'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//会社名
-		$sql_tmp = $this->_mkSqlText('company_nm', $search_cond['searchCompanyNm'], $search_cond['searchConditionCompanyNm'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//部署名
-		$sql_tmp = $this->_mkSqlText('division_dept_nm', $search_cond['searchDivisionDeptNm'], $search_cond['searchConditionDivisionDeptNm'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//氏名
-		$sql_tmp = $this->_mkSqlText('user_nm', $search_cond['searchUserNm'], $search_cond['searchConditionUserNm'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//郵便番号
-		$sql_tmp = $this->_mkSqlText('post_code', $search_cond['searchPostCode'], $search_cond['searchConditionPostCode'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//住所
-		$sql_tmp = $this->_mkSqlText('address', $search_cond['searchAddress'], $search_cond['searchConditionAddress'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//TEL
-		$sql_tmp = $this->_mkSqlText('tel', $search_cond['searchTel'], $search_cond['searchConditionTel'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//FAX
-		$sql_tmp = $this->_mkSqlText('fax', $search_cond['searchFax'], $search_cond['searchConditionFax'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//URL
-		$sql_tmp = $this->_mkSqlText('url', $search_cond['searchUrl'], $search_cond['searchConditionUrl'],$data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		// 性別
-		$sql_tmp = $this->_mkSqlCheckGender('gender_cd', $search_cond['searchGenderCd0'],$search_cond['searchGenderCd1'],$search_cond['searchGenderCd2'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//ユーザ使用言語
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('use_language_cd', $search_cond['searchUseLanguageCd0'],$search_cond['searchUseLanguageCd1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//一般権限
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_gen', $search_cond['searchAuthGen0'],$search_cond['searchAuthGen1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//ユーザ管理権限
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_user', $search_cond['searchAuthUser0'],$search_cond['searchAuthUser1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//展示会管理権限
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('auth_fair', $search_cond['searchAuthFair0'],$search_cond['searchAuthFair1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		//削除フラグ
-		$sql_tmp = $this->_mkSqlCheckSelectCode2('del_flg', $search_cond['searchdelflg0'],$search_cond['searchdelflg1'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp);
-		$sql_ext = $sql_ext." order by user_id asc";
+		// where句の取得
+		$sql_ext =$this->_getWhere($data);
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql.$sql_ext);
 		// SQLを実行

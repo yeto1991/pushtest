@@ -55,9 +55,8 @@ class Jmesse_Action_AdminUserCsvDownload extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		// 以降、SESSIONから検索条件を取得する。
 		$jm_user_mgr =& $this->backend->getManager('JmUser');
-		$jm_user_csv_list = $jm_user_mgr->getUserCsvList();
+		$jm_user_csv_list = $jm_user_mgr->getUserListDownload();
 
 		$file = 'userList.csv';
 
