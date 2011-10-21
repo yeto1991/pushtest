@@ -57,9 +57,8 @@
 						<td colspan=2>
 							<table  border=1 style="width:100%; table-layout:fixed">
 								 <tr>
-									 <th width=4% rowspan=2><font size=2>状態</font></th>
 									 <th width=20% rowspan=2><font size=2>Eメール</font></th>
-									 <th width=9% colspan=3><font size=2>権限</font></th>
+									 <th width=10% colspan=3><font size=2>権限</font></th>
 									 <th rowspan=2><font size=2>会社名</font></th>
 									 <th width=15% rowspan=2><font size=2>部署名</font></th>
 									 <th width=15% rowspan=2><font size=2>氏名</font></th>
@@ -73,7 +72,6 @@
 								<!-- 検索結果分 繰り返し処理 -->
 								{section name=it loop=$app.user_search_info_list}
 								<tr>
-									<td><font size=2>?</font></td>
 									<td><font size=2><a href="{$config.url}?action_admin_userDetail=true&user_id={$app.user_search_info_list[it].user_id}">{$app.user_search_info_list[it].email}</a></font></td>
 									<td><font size=2>
 										{if ($app.user_search_info_list[it].auth_gen == '1')}
