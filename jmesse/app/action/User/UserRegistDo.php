@@ -61,11 +61,21 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('email')))){
 					$this->ae->add(null, "Eメールは半角英数字、半角記号で入力してください");
 				}
+				if($this->af->get('email2') != null && $this->af->get('email2') != ''){
+					if($this->af->get('email') != $this->af->get('email2')){
+						$this->ae->add(null, "入力されたEメールが合致していません。");
+					}
+				}
 			}
 			//パスワード
 			if($this->af->get('password') != null && $this->af->get('password') != ''){
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('password')))){
 					$this->ae->add(null, "パスワードは半角英数字、半角記号で入力してください");
+				}
+				if($this->af->get('password2') != null && $this->af->get('password2') != ''){
+					if($this->af->get('password') != $this->af->get('password2')){
+						$this->ae->add(null, "入力されたパスワードが合致していません。");
+					}
 				}
 			}
 			//郵便番号
@@ -99,7 +109,7 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 		}
 		//重複チェック
 		$jmUserMgr = $this->backend->getManager('jmUser');
-		$emailCheck = $jmUserMgr->getEmailForDoubleCheck($this->af->get('email'));
+		$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('email'));
 		if (Ethna::isError($emailCheck)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
 			return 'error';
@@ -109,6 +119,8 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
 			return 'user_userRegist';
 		}
+		//チェックフラグ Formに設定
+		$this->af->set('emailCheckFlg', $emailCheck);
 		return null;
 	}
 
@@ -121,7 +133,6 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 	function perform()
 	{
 		// 確認画面へ遷移
-		//header('Location: '.$this->config->get('url').'?action_user_userRegistDone=true&user_id='.$user->get('user_id').'&mode=change&success=1');
 		return user_userRegistDo;
 	}
 }

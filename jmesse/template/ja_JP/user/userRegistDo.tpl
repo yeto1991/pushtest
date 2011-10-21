@@ -168,6 +168,7 @@
 <input type="hidden" name="tel" id="tel" value="{$form.tel}" />
 <input type="hidden" name="fax" id="fax" value="{$form.fax}" />
 <input type="hidden" name="url" id="url" value="{$form.url}" />
+<input type="hidden" name="emailCheckFlg" id="emailCheckFlg" value="{$form.emailCheckFlg}" />
 {* エラー表示 *}
 {if count($errors)}
 <ul>

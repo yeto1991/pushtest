@@ -47,6 +47,19 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'emailCheckFlg' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_HIDDEN,
+			'name'        => 'Eメール重複チェック判定フラグ',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
 		'email' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,

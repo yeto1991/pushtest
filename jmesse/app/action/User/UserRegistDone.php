@@ -46,7 +46,7 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 // 		}
 		//重複チェック
 		$jmUserMgr = $this->backend->getManager('jmUser');
-		$emailCheck = $jmUserMgr->getEmailForDoubleCheck($this->af->get('email'));
+		$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('email'));
 		if (Ethna::isError($emailCheck)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
 			return 'error';
@@ -73,6 +73,41 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			header('Location: '.$this->config->get('url').'?action_user_userRegist=true');
 			return null;
 		}
+
+		if($this->af->get('emailCheckFlg') == "DOUBLE_CHECK_DEL_FLG1"){
+			//Eメール重複チェック対象Eメールが削除済みである場合物理レコード削除
+			// 削除対象ユーザ情報取得
+			$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+			$user_id_target = $user->get('user_id');
+
+			//jm_userテーブル
+			$jm_user_del = $this->backend->getObject('JmUser','email',strtolower($this->af->get('email')));
+			$userdel = $jm_user_del->remove();
+			if (Ethna::isError($retdel)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル物理削除エラー');
+				$this->ae->addObject('error', $userdel);
+				$db->rollback();
+				return 'error';
+			}
+			//jm_fairテーブル
+			$jm_fair_del = $this->backend->getObject('JmFair','user_id',$user_id_target);
+			$fairdel = $jm_fair_del->remove();
+			if (Ethna::isError($retdel)) {
+				$this->backend->getLogger()->log(LOG_ERR, '見本市情報テーブル物理削除エラー');
+				$this->ae->addObject('error', $fairdel);
+				$db->rollback();
+				return 'error';
+			}
+			//jm_fair_tempテーブル
+			$jm_fair_temp_del = $this->backend->getObject('JmFairTemp','user_id',$user_id_target);
+			$fairtempdel = $jm_fair_temp_del->remove();
+			if (Ethna::isError($retdel)) {
+				$this->backend->getLogger()->log(LOG_ERR, '見本市情報一時保存テーブル物理削除エラー');
+				$this->ae->addObject('error', $fairtempdel);
+				$db->rollback();
+				return 'error';
+			}
+		}
 		$jm_user =& $this->backend->getObject('JmUser');
 		$jm_user->set('email', strtolower($this->af->get('email'))); //メールアドレスを小文字変換
 		$jm_user->set('password', $this->af->get('password'));
@@ -85,14 +120,14 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		$jm_user->set('tel', $this->af->get('tel'));
 		$jm_user->set('fax', $this->af->get('fax'));
 		$jm_user->set('url', $this->af->get('url'));
-		//$jm_user->set('use_language_cd', '0');
-		//$jm_user->set('regist_result_notice_cd', $this->af->get(''));
+		$jm_user->set('use_language_cd', '0');
+		$jm_user->set('regist_result_notice_cd', '0');
 		$jm_user->set('auth_gen', '1');
 		$jm_user->set('auth_user', '0');
 		$jm_user->set('auth_fair', '0');
-		//$jm_user->set('idpass_notice_cd', '0');
+		$jm_user->set('idpass_notice_cd', '0');
 		$jm_user->set('del_flg', '0');
-		//$jm_user->set('regist_user_id', '');
+		$jm_user->set('regist_user_id', '0');
 		$jm_user->set('regist_date', date('Y/m/d H:i:s'));
 		// INSERT処理実行
 		$ret = $jm_user->add();
