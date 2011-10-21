@@ -2,17 +2,27 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META HTTP-EQUIV="Expires" CONTENT="0">
 <script type="text/javascript">
 {literal}
-<!--
--->
+	function goto_page(url,page) {
+		document.location.href = url + '?action_admin_userList=true&page=' + page;
+	}
+	function download() {
+		action = document.createElement('input');
+		action.type = 'hidden';
+		action.name = 'action_admin_userCsvDownload';
+		action.id = 'action_admin_userCsvDownload';
+		action.value = 'dummy';
+		document.getElementById('form_userList').appendChild(action);
+		document.getElementById('form_userList').submit();
+	}
 {/literal}
 </script>
 <title>ユーザ管理</title>
 </head>
 <body>
-<form name="form_admin_userList" id="form_admin_userList" method="POST" action=""  enctype="multipart/form-data">
+<form name="form_userList" id="form_userList" method="POST" action="" >
+<input type="hidden" name="page" id="page" value="{$app.page}" />
 	<table style="width:100%;">
 		<tr>
 			<td valign="top" style="width:150px;">{include file="admin/menu.tpl"}</td>
@@ -25,14 +35,23 @@
 				<table style="width:100%;">
 					<tr>
 						<td>
-							<input type="button" name="$GetList" value="ダウンロード" style="height:20px;" onClick="document.location.href='{$config.url}?action_admin_userCsvDownload=true'"/>
+							<input type="button" style="height:20px;" value="ダウンロード" onclick="download()" />
 						</td>
 						<td align="right">
-							<input type="button" name="" value="次の一覧" style="height:20px;"/>
+							{if ('1' != $app.first_page)}
+							<input type="button" value="前の一覧" style="height:20px;" onclick="goto_page('{$config.url}','{$app.page_prev}')" />
+							{else}
+							<input type="button" value="前の一覧" style="height:20px;" onclick="" disabled />
+							{/if}
+							{if ('1' != $app.last_page)}
+							<input type="button" value="次の一覧" style="height:20px;" onclick="goto_page('{$config.url}','{$app.page_next}')" />
+							{else}
+							<input type="button" value="次の一覧" style="height:20px;" onclick="" disabled />
+							{/if}
 						</td>
 					<tr>
 					<tr>
-						<td colspan=2><font size=2>★★★～●●●件目／{$app.user_search_count}ヒット</font></td>
+						<td colspan=2><font size=2>総件数：{$app.user_search_count}件　　{$app.begin}件目 から {$app.limit} 件表示</font></td>
 					</tr>
 					<tr>
 						<td colspan=2>
