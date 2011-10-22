@@ -183,6 +183,7 @@
 <input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 {* エラー表示 *}
 {if count($errors)}
+<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
 <ul>
 	{foreach from=$errors item=error}
 	<li><font color="#ff0000">{$error}</font></li>
