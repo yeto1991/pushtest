@@ -126,8 +126,8 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 	{
 
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
-		if (Ethna::isError($jm_fair)) {
-			$this->ae->addObject('error', $jm_fair);
+		if (Ethna::isError($jm_user)) {
+			$this->ae->addObject('error', $jm_user);
 			return 'error';
 		}
 		if (Ethna_Util::isDuplicatePost()) {
