@@ -133,26 +133,26 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		// 出展申込締切日
 		if ((null != $this->af->get('app_dead_yyyy_from') && '' != $this->af->get('app_dead_yyyy_from'))
 			|| (null != $this->af->get('app_dead_mm_from') && '' != $this->af->get('app_dead_mm_from'))
-			|| (null != $this->af->get('app_dead_d_from') && '' != $this->af->get('app_dead_dd_from'))) {
+			|| (null != $this->af->get('app_dead_dd_from') && '' != $this->af->get('app_dead_dd_from'))) {
 			if (!checkdate($this->af->get('app_dead_mm_from'), $this->af->get('app_dead_dd_from'), $this->af->get('app_dead_yyyy_from'))) {
-				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
+				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（開始）', E_INPUT_TYPE));
 			}
 		}
 		if ((null != $this->af->get('app_dead_yyyy_to') && '' != $this->af->get('app_dead_yyyy_to'))
 			|| (null != $this->af->get('app_dead_mm_to') && '' != $this->af->get('app_dead_mm_to'))
-			|| (null != $this->af->get('app_dead_d_to') && '' != $this->af->get('app_dead_dd_to'))) {
+			|| (null != $this->af->get('app_dead_dd_to') && '' != $this->af->get('app_dead_dd_to'))) {
 			if (!checkdate($this->af->get('app_dead_mm_to'), $this->af->get('app_dead_dd_to'), $this->af->get('app_dead_yyyy_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
+				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（終了）', E_INPUT_TYPE));
 			}
 		}
 		if (((null != $this->af->get('app_dead_yyyy_from') && '' != $this->af->get('app_dead_yyyy_from'))
 		|| (null != $this->af->get('app_dead_mm_from') && '' != $this->af->get('app_dead_mm_from'))
-		|| (null != $this->af->get('app_dead_d_from') && '' != $this->af->get('app_dead_dd_from')))
+		|| (null != $this->af->get('app_dead_dd_from') && '' != $this->af->get('app_dead_dd_from')))
 			&& ((null != $this->af->get('app_dead_yyyy_to') && '' != $this->af->get('app_dead_yyyy_to'))
 			|| (null != $this->af->get('app_dead_mm_to') && '' != $this->af->get('app_dead_mm_to'))
-			|| (null != $this->af->get('app_dead_d_to') && '' != $this->af->get('app_dead_dd_to')))) {
-			if (mktime(0, 0, 0, $this->af->get('app_dead_mm_from'), $this->af->get('app_dead_d_from'), $this->af->get('app_dead_yyyy_from'))
-				> mktime(0, 0, 0, $this->af->get('app_dead_mm_to'), $this->af->get('app_dead_d_to'), $this->af->get('app_dead_yyyy_to'))) {
+			|| (null != $this->af->get('app_dead_dd_to') && '' != $this->af->get('app_dead_dd_to')))) {
+			if (mktime(0, 0, 0, $this->af->get('app_dead_mm_from'), $this->af->get('app_dead_dd_from'), $this->af->get('app_dead_yyyy_from'))
+				> mktime(0, 0, 0, $this->af->get('app_dead_mm_to'), $this->af->get('app_dead_dd_to'), $this->af->get('app_dead_yyyy_to'))) {
 				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（開始 > 終了）', E_INPUT_TYPE));
 			}
 		}
@@ -277,12 +277,18 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			// 展示会未承認一覧表示
 			// それまでの検索条件を削除
 			$this->session->set('search_cond', null);
-
+			$this->session->set('sort_cond', null);
+			$search_cond = array();
+			$search_cond['confirm_flag'] = '0';;
+			$this->session->set('search_cond', $search_cond);
 		} elseif ('d' == $this->af->get('type')) {
 			// 展示会否認一覧表示
 			// それまでの検索条件を削除
 			$this->session->set('search_cond', null);
-
+			$this->session->set('sort_cond', null);
+			$search_cond = array();
+			$search_cond['confirm_flag'] = '2';;
+			$this->session->set('search_cond', $search_cond);
 		} elseif ('a' == $this->af->get('type')) {
 			if (null == $this->session->get('search_cond')) {
 				$this->backend->getLogger()->log(LOG_DEBUG, '■検索画面より');
@@ -446,7 +452,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 
 		if (0 < $jm_fair_cnt) {
 			// ページ設定
-			$limit = 30;
+			$limit = 100;
 			$max_page = floor($jm_fair_cnt / $limit);
 			if (0 < $jm_fair_cnt % $limit) {
 				$max_page += 1;

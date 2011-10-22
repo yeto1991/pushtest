@@ -6,11 +6,17 @@
 {literal}
 <!--
 	function openDoc(url, mihon_no) {
-	document.location.href = url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no;
+		document.location.href = url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no;
 	}
+
+	function openTemp(url, mihon_no, seq_no) {
+		window.open(url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&seq_num=' + seq_no, 'OLD_FAIR_DETAIL');
+	}
+
 	function changeDoc(url, mihon_no) {
 		document.location.href = url + '?action_admin_fairChange=true&mode=change&mihon_no=' + mihon_no;
 	}
+
 	function copyDoc(url, mihon_no) {
 		document.location.href = url + '?action_admin_fairChange=true&mode=copy&mihon_no=' + mihon_no;
 	}
@@ -19,7 +25,7 @@
 </script>
 <title>見本市ＤＢ 管理者用</title>
 </head>
-<body onload="init()">
+<body>
 	<form name="form_admin_fairRegist" id="form_admin_fairRegist" method="post" action="" enctype="multipart/form-data">
 		{uniqid}
 		<!-- 見本市番号 -->
@@ -32,6 +38,7 @@
 						<font size="5"><b>見本市ＤＢ 管理者用</b></font>
 					</div>
 					<hr>
+					{if (null == $form.seq_num || '' == $form.seq_num)}
 					<table>
 						<tr>
 							<td>
@@ -55,6 +62,7 @@
 						</tr>
 					</table>
 					<hr/>
+					{/if}
 					<table border="1">
 						<tr>
 							<td nowrap>見本市番号</td>
@@ -595,7 +603,7 @@
 								<td>{$app.jm_fair_temp_list[it].update_user_email}</td>
 								{/if}
 							{/if}
-							<td><a href="javascript:openDoc('{$config.url}', '{$app.jm_fair_temp_list[it].mihon_no}', '{$app.jm_fair_temp_list[it].seq_num}');">
+							<td><a href="javascript:openTemp('{$config.url}', '{$app.jm_fair_temp_list[it].mihon_no}', '{$app.jm_fair_temp_list[it].seq_num}');">
 							{if ("0" == $app.jm_fair_temp_list[it].confirm_flag)}
 							承認待ち
 							{elseif ("1" == $app.jm_fair_temp_list[it].confirm_flag)}
@@ -612,6 +620,7 @@
 					</table>
 					<hr/>
 
+					{if (null == $form.seq_num || '' == $form.seq_num)}
 					<table>
 						<tr>
 							<td>
@@ -634,6 +643,7 @@
 							<td><input type="button" value="コピー編集登録" onclick="copyDoc('{$config.url}', '{$form.mihon_no}')" /></td>
 						</tr>
 					</table>
+					{/if}
 				</td>
 			</tr>
 		</table>

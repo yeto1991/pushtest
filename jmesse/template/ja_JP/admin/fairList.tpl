@@ -105,7 +105,7 @@
 					<table border="1">
 						<tr>
 							<th nowrap>選択</th>
-							<th nowrap>状態</th>
+{*							<th nowrap>状態</th> *}
 							<th nowrap>見本市番号</th>
 							<th nowrap>見本市名</th>
 							<th nowrap>見本市略称</th>
@@ -120,7 +120,7 @@
 						{section name=it loop=$app.jm_fair_list}
 						<tr>
 							<td align="center"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.jm_fair_list[it].mihon_no}"></td>
-							<td></td>
+{*							<td></td> *}
 							<td align="right">{$app.jm_fair_list[it].mihon_no}</td>
 							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}">{$app.jm_fair_list[it].fair_title_jp}</a></td>
 							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}">{$app.jm_fair_list[it].abbrev_title}</a></td>
@@ -147,7 +147,7 @@
 							<select name="sort_1" id="sort_1">
 								<option value="" {if ('' == $form.sort_1)}selected{/if}>ソートなし</option>
 								<option value="0" {if ('0' == $form.sort_1)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_1)}selected{/if}>:見本市名
+								<option value="1" {if ('1' == $form.sort_1)}selected{/if}>見本市名
 								<option value="2" {if ('2' == $form.sort_1)}selected{/if}>見本市略称
 								<option value="3" {if ('3' == $form.sort_1)}selected{/if}>会期
 								<option value="4" {if ('4' == $form.sort_1)}selected{/if}>開催地
@@ -162,7 +162,7 @@
 							<select name="sort_2" id="sort_2">
 								<option value="" {if ('' == $form.sort_2)}selected{/if}>ソートなし</option>
 								<option value="0" {if ('0' == $form.sort_2)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_2)}selected{/if}>:見本市名
+								<option value="1" {if ('1' == $form.sort_2)}selected{/if}>見本市名
 								<option value="2" {if ('2' == $form.sort_2)}selected{/if}>見本市略称
 								<option value="3" {if ('3' == $form.sort_2)}selected{/if}>会期
 								<option value="4" {if ('4' == $form.sort_2)}selected{/if}>開催地
@@ -177,7 +177,7 @@
 							<select name="sort_3" id="sort_3">
 								<option value="" {if ('' == $form.sort_3)}selected{/if}>ソートなし</option>
 								<option value="0" {if ('0' == $form.sort_3)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_3)}selected{/if}>:見本市名
+								<option value="1" {if ('1' == $form.sort_3)}selected{/if}>見本市名
 								<option value="2" {if ('2' == $form.sort_3)}selected{/if}>見本市略称
 								<option value="3" {if ('3' == $form.sort_3)}selected{/if}>会期
 								<option value="4" {if ('4' == $form.sort_3)}selected{/if}>開催地
@@ -192,7 +192,7 @@
 							<select name="sort_4" id="sort_4">
 								<option value="" {if ('' == $form.sort_4)}selected{/if}>ソートなし</option>
 								<option value="0" {if ('0' == $form.sort_4)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_4)}selected{/if}>:見本市名
+								<option value="1" {if ('1' == $form.sort_4)}selected{/if}>見本市名
 								<option value="2" {if ('2' == $form.sort_4)}selected{/if}>見本市略称
 								<option value="3" {if ('3' == $form.sort_4)}selected{/if}>会期
 								<option value="4" {if ('4' == $form.sort_4)}selected{/if}>開催地
@@ -207,7 +207,7 @@
 							<select name="sort_5" id="sort_5">
 								<option value="" {if ('' == $form.sort_5)}selected{/if}>ソートなし</option>
 								<option value="0" {if ('0' == $form.sort_5)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_5)}selected{/if}>:見本市名
+								<option value="1" {if ('1' == $form.sort_5)}selected{/if}>見本市名
 								<option value="2" {if ('2' == $form.sort_5)}selected{/if}>見本市略称
 								<option value="3" {if ('3' == $form.sort_5)}selected{/if}>会期
 								<option value="4" {if ('4' == $form.sort_5)}selected{/if}>開催地

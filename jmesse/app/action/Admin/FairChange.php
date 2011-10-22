@@ -431,14 +431,6 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		return $ret;
 	}
 
-	function vdump($obj){
-		ob_start();
-		var_dump($obj);
-		$dump = ob_get_contents();
-		ob_end_clean();
-		return $dump;
-	}
-
 }
 
 ?>

@@ -489,13 +489,13 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$search_key .= str_replace($br, '', $this->af->get('exhibits_jp')).' ';
 		$search_key .= str_replace($br, '', $this->af->get('exhibits_en')).' ';
 		// 開催地
-		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region'), '000', '000');
+		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region_jp'), '000', '000');
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
-		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region'), $this->af->get('country'), '000');
+		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region_jp'), $this->af->get('country_jp'), '000');
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
-		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region'), $this->af->get('country'), $this->af->get('city'));
+		$code = $jm_code_m_mgr->getCode('003', $this->af->get('region_jp'), $this->af->get('country_jp'), $this->af->get('city_jp'));
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
 		$search_key .= $this->af->get('other_city_jp').' ';
@@ -569,9 +569,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$search_key .= $this->af->get('note_for_data_manager').' ';
 		// 削除
 		if ('1' == $this->af->get('del_flg')) {
-			$search_key .= '削除済 ';
-		} else {
-			$search_key .= '未削除 ';
+			$search_key .= '削除 ';
 		}
 		$jm_fair->set('search_key', $search_key);
 
@@ -663,13 +661,6 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		return $ret;
 	}
 
-	function vdump($obj){
-		ob_start();
-		var_dump($obj);
-		$dump = ob_get_contents();
-		ob_end_clean();
-		return $dump;
-	}
 }
 
 ?>

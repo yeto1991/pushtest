@@ -75,6 +75,7 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 				}
 				$jm_fair->set('del_flg', '1');
 				$jm_fair->set('del_date', date('Y/m/d H:i:s'));
+
 				// UPDATE
 				$ret = $jm_fair->update();
 				if (Ethna::isError($ret)) {
@@ -82,6 +83,20 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 					$db->rollback();
 					return 'error';
 				}
+
+				// JM_FAIR_TEMPにコピー
+				$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+				$jmFairTempMgr->copyFair($jm_fair->get('mihon_no'));
+
+				// ログに登録
+				$mgr = $this->backend->getManager('adminCommon');
+				$ret = $mgr->regLog($this->session->get('user_id'), '4', '2', $jm_fair->get('mihon_no'));
+				if (Ethna::isError($ret)) {
+					$this->ae->addObject('error', $ret);
+					$db->rollback();
+					return 'error';
+				}
+
 			}
 		}
 		// コミット

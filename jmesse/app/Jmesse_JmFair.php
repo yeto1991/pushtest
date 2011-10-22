@@ -205,12 +205,13 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// sort
 		// 入力値を取得
+		$sql_sort = '';
 		for ($i = 0; $i < count($ary_sort); $i++) {
 			if ('' != $ary_sort[$i]) {
 				if ('' == $sql_sort) {
-					$sql_sort = ' order by ';
+					$sql_sort .= ' order by ';
 				} else {
-					$sql_sort = ', ';
+					$sql_sort .= ', ';
 				}
 				$sql_sort .= $this->sort_column[$ary_sort[$i]];
 				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
@@ -273,7 +274,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// where句の取得
 		$sql_ext =$this->_getWhere($data);
-		var_dump($data);
 
 		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : select count(*) cnt from ('.$sql.$sql_ext.') t');
 
@@ -327,9 +327,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		for ($i = 0; $i < count($ary_sort); $i++) {
 			if ('' != $ary_sort[$i]) {
 				if ('' == $sql_sort) {
-					$sql_sort = ' order by ';
+					$sql_sort .= ' order by ';
 				} else {
-					$sql_sort = ', ';
+					$sql_sort .= ', ';
 				}
 				$sql_sort .= $this->sort_column[$ary_sort[$i]];
 				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
@@ -395,9 +395,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		for ($i = 0; $i < count($ary_sort); $i++) {
 			if ('' != $ary_sort[$i]) {
 				if ('' == $sql_sort) {
-					$sql_sort = ' order by ';
+					$sql_sort .= ' order by ';
 				} else {
-					$sql_sort = ', ';
+					$sql_sort .= ', ';
 				}
 				$sql_sort .= $this->sort_column[$ary_sort[$i]];
 				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
@@ -508,8 +508,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// Web表示言語
 		$sql_tmp = $this->_mkSqlCheckBox1('select_language_info', $search_cond['select_language_info'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
-		//見本市番号
-		$sql_tmp = $this->_mkSqlNumber('mihon_no', $search_cond['mihon_no_from'], $search_cond['mihon_no_to'], $search_cond['mihon_no_cond'], $data);
+		// 見本市番号
+		$sql_tmp = $this->_mkSqlNumber('mihon_no', 'mihon_no',$search_cond['mihon_no_from'], $search_cond['mihon_no_to'], $search_cond['mihon_no_cond'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 見本市名(日)
@@ -565,8 +565,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 開催頻度
 		$sql_tmp = $this->_mkSqlCheckBox1('frequency', $search_cond['frequency'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+
 		// 業種
-		$sql_tmp = $this->_mkSqlCheckBox1($search_cond['main_industory'], $search_cond['sub_industory'], $search_cond['relation'], $data);
+		$sql_tmp = $this->_mkSqlIndustory($search_cond['main_industory'], $search_cond['sub_industory'], 'a', $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 出品物(日)
@@ -605,7 +606,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_tmp_5 = $this->_mkSqlText('other_city_en', $search_cond['other_city_en'], $search_cond['other_city_en_cond'], $search_cond['relation'], $data);
 		// 同一項目なので
  		$ary_sql = array($sql_tmp_1, $sql_tmp_2, $sql_tmp_3, $sql_tmp_4, $sql_tmp_5);
- 		$sql_tmp = $this->_addWhereRelation($ary_sql, $search_cond['relation']);
+ 		// 開催地は常にand
+ 		$sql_tmp = $this->_addWhereRelation($ary_sql, 'a');
  		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 会場名(日)
@@ -618,7 +620,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 同展示場で使用する面積（Ｎｅｔ）
-		$sql_tmp = $this->_mkSqlNumber('gross_floor_area', $search_cond['gross_floor_area_from'], $search_cond['gross_floor_area_to'], $search_cond['gross_floor_area_cond'], $data);
+		$sql_tmp = $this->_mkSqlNumber('gross_floor_area', 'gross_floor_area', $search_cond['gross_floor_area_from'], $search_cond['gross_floor_area_to'], $search_cond['gross_floor_area_cond'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 交通手段(日)
@@ -632,7 +634,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// 入場資格
 		$sql_tmp = $this->_mkSqlCheckBox1('open_to', $search_cond['open_to'], $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['open_to']);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// チケットの入手方法
 		$admissionTicketsColums = array('admission_ticket_1','admission_ticket_2','admission_ticket_3','admission_ticket_4');
@@ -650,13 +652,13 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 過去の実績(年実績（西暦４桁）)
 		$sql_tmp_1 = $this->_mkSqlText('year_of_the_trade_fair', $search_cond['year_of_the_trade_fair'], $search_cond['year_of_the_trade_fair_cond'], $search_cond['relation'], $data);
 		// 過去の実績(入場者数)
-		$sql_tmp_2 = $this->_mkSqlNumber('total_number_of_visitor', $search_cond['total_number_of_visitor_from'], $search_cond['total_number_of_visitor_to'], $search_cond['total_number_of_visitor_cond'], $data);
+		$sql_tmp_2 = $this->_mkSqlNumber('total_number_of_visitor', 'total_number_of_visitor', $search_cond['total_number_of_visitor_from'], $search_cond['total_number_of_visitor_to'], $search_cond['total_number_of_visitor_cond'], $data);
 		// 過去の実績(うち海外から)
-		$sql_tmp_3 = $this->_mkSqlNumber('number_of_foreign_visitor', $search_cond['number_of_foreign_visitor_from'], $search_cond['number_of_foreign_visitor_to'], $search_cond['number_of_foreign_visitor_cond'], $data);
+		$sql_tmp_3 = $this->_mkSqlNumber('number_of_foreign_visitor', 'number_of_foreign_visitor', $search_cond['number_of_foreign_visitor_from'], $search_cond['number_of_foreign_visitor_to'], $search_cond['number_of_foreign_visitor_cond'], $data);
 		// 過去の実績(出展社数)
-		$sql_tmp_4 = $this->_mkSqlNumber('total_number_of_exhibitors', $search_cond['total_number_of_exhibitors_from'], $search_cond['total_number_of_exhibitors_to'], $search_cond['total_number_of_exhibitors_cond'], $data);
+		$sql_tmp_4 = $this->_mkSqlNumber('total_number_of_exhibitors', 'total_number_of_exhibitors', $search_cond['total_number_of_exhibitors_from'], $search_cond['total_number_of_exhibitors_to'], $search_cond['total_number_of_exhibitors_cond'], $data);
 		// 過去の実績(うち海外から)
-		$sql_tmp_5 = $this->_mkSqlNumber('number_of_foreign_exhibitors', $search_cond['number_of_foreign_exhibitors_from'], $search_cond['number_of_foreign_exhibitors_to'], $search_cond['number_of_foreign_exhibitors_cond'], $data);
+		$sql_tmp_5 = $this->_mkSqlNumber('number_of_foreign_exhibitors', 'number_of_foreign_exhibitors', $search_cond['number_of_foreign_exhibitors_from'], $search_cond['number_of_foreign_exhibitors_to'], $search_cond['number_of_foreign_exhibitors_cond'], $data);
 		// 過去の実績(展示面積)
 		$sql_tmp_6 = $this->_mkSqlText('net_square_meters', $search_cond['net_square_meters'], $search_cond['net_square_meters_cond'], $search_cond['relation'], $data);
 		// 過去の実績(認証機関)
@@ -748,7 +750,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		for ($i = 0; $i < count($value); $i++) {
 			if ('' != $value[$i]) {
 				if (0 < $i) {
-					$sql .= ' '.$this->_changeRelation($relation).' ';
+					$sql .= ' '.$this->_changeRelation($phrase_connection).' ';
 				}
 				$sql .= " search_key like ? ";
 				array_push($data, '%'.$value[$i].'%');
@@ -777,26 +779,32 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$value = explode(' ', $text);
 		if ('1' == $cond) {
 			// 一致
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql) {
-						$sql .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql .= $column.' = ? ';
-					array_push($data, $value[$i]);
-				}
-			}
+			// 一致の時は完全一致
+			$sql .= $column.' = ? ';
+			array_push($data, $text);
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql) {
+// 						$sql .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql .= $column.' = ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
 		} elseif ('2' == $cond) {
 			// 不一致
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql) {
-						$sql .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql .= $column.' <> ? ';
-					array_push($data, $value[$i]);
-				}
-			}
+			// 不一致の時も完全不一致
+			$sql .= $column.' <> ? ';
+			array_push($data, $text);
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql) {
+// 						$sql .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql .= $column.' <> ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
 		} elseif ('3' == $cond) {
 			// 前一致
 			for ($i = 0; $i < count($value); $i++) {
@@ -997,17 +1005,17 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	function _mkSqlIndustory($main_industory, $sub_industory, $relation, &$data) {
 		$sql = '';
 		if ('' != $main_industory && '' != $sub_industory) {
-			$sql .= " main_industory_1 = ? ".$this->_changeRelation($relation)." sub_industory_1 = ? or ";
+			$sql .= " (main_industory_1 = ? ".$this->_changeRelation($relation)." sub_industory_1 = ?) or ";
 			array_push($data, $main_industory, $sub_industory);
-			$sql .= " main_industory_2 = ? ".$this->_changeRelation($relation)." sub_industory_2 = ? or ";
+			$sql .= " (main_industory_2 = ? ".$this->_changeRelation($relation)." sub_industory_2 = ?) or ";
 			array_push($data, $main_industory, $sub_industory);
-			$sql .= " main_industory_3 = ? ".$this->_changeRelation($relation)." sub_industory_3 = ? or ";
+			$sql .= " (main_industory_3 = ? ".$this->_changeRelation($relation)." sub_industory_3 = ?) or ";
 			array_push($data, $main_industory, $sub_industory);
-			$sql .= " main_industory_4 = ? ".$this->_changeRelation($relation)." sub_industory_4 = ? or ";
+			$sql .= " (main_industory_4 = ? ".$this->_changeRelation($relation)." sub_industory_4 = ?) or ";
 			array_push($data, $main_industory, $sub_industory);
-			$sql .= " main_industory_5 = ? ".$this->_changeRelation($relation)." sub_industory_5 = ? or ";
+			$sql .= " (main_industory_5 = ? ".$this->_changeRelation($relation)." sub_industory_5 = ?) or ";
 			array_push($data, $main_industory, $sub_industory);
-			$sql .= " main_industory_6 = ? ".$this->_changeRelation($relation)." sub_industory_6 = ? ";
+			$sql .= " (main_industory_6 = ? ".$this->_changeRelation($relation)." sub_industory_6 = ?) ";
 			array_push($data, $main_industory, $sub_industory);
 		} elseif ('' != $main_industory) {
 			$sql .= " main_industory_1 = ? or ";
@@ -1024,17 +1032,17 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			array_push($data, $main_industory);
 		} elseif ('' != $sub_industory) {
 			$sql .= " sub_industory_1 = ? or ";
-			array_push($data, $main_industory, $sub_industory);
+			array_push($data, $sub_industory);
 			$sql .= " sub_industory_2 = ? or ";
-			array_push($data, $main_industory, $sub_industory);
+			array_push($data, $sub_industory);
 			$sql .= " sub_industory_3 = ? or ";
-			array_push($data, $main_industory, $sub_industory);
+			array_push($data, $sub_industory);
 			$sql .= " sub_industory_4 = ? or ";
-			array_push($data, $main_industory, $sub_industory);
+			array_push($data, $sub_industory);
 			$sql .= " sub_industory_5 = ? or ";
-			array_push($data, $main_industory, $sub_industory);
+			array_push($data, $sub_industory);
 			$sql .= " sub_industory_6 = ?";
-			array_push($data, $main_industory, $sub_industory);
+			array_push($data, $sub_industory);
 		}
 		return $sql;
 	}
@@ -1100,6 +1108,16 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		return $sql;
 	}
 
+	/**
+	 * 展示会に係わる画像(3点)
+	 *
+	 * Enter description here ...
+	 * @param string $photos 入力値
+	 * @param string $photos_cond 検索条件
+	 * @param string_type $relation 項目内の関連
+	 * @param array $data values
+	 * @return string 成功:作成SQL 失敗:空文字
+	 */
 	function _mkSqlPhotos($photos, $photos_cond, $relation, &$data) {
 		if ('' == $photos && '12' != $photos_cond && '13' != $photos_cond) {
 			return '';
