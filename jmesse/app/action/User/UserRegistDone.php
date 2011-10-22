@@ -141,13 +141,8 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			return 'error';
 		}
 		//TODO メール送信処理
-		mb_language("Ja") ;
-		mb_internal_encoding("UTF-8") ;
-		$mailto= strtolower($this->af->get('email'));
-		$subject="Jmesse登録完了メール";
-		$content="ユーザ登録されました。 \n ログインEメール：".strtolower($this->af->get('email'))." \n ログインパスワード：".$this->af->get('password')." です。";
-		$mailfrom="From:Jmesse";
-		mb_send_mail($mailto,$subject,$content,$mailfrom);
+		$ethna_mail =& new Ethna_MailSender($this->backend);
+		$ethna_mail->send(($this->af->get('email')),'userRegistMail.tpl',array('username' => $this->af->get('userNm'),'email' => $this->af->get('email'),'password' => $this->af->get('password')));
 
 		// 完了画面へ遷移
 		// SESSIONに設定

@@ -78,7 +78,7 @@
 	<li><a href="/database/">引き合い・展示会検索</a></li>
 	<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 	<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-	<li>ユーザー登録</li>
+	<li>ユーザー詳細</li>
 </ul>
 </div>
 <!-- /bread -->
@@ -134,6 +134,19 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
@@ -149,22 +162,14 @@
 <div class="in_main">
 <!-- <h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3> -->
 
-<p>登録情報を変更する場合は、「編集画面へ」ボタンをクリックしてください。<br />
+<p>登録情報を変更したい場合、または退会をご希望の方は「編集画面へ」ボタンをクリックしてください。<br />
 
 <form name="form_user_userDetail" id="form_user_userDetail" method="post" action=""  enctype="multipart/form-data">
 <input type="hidden" name="action_user_userChange" id="action_user_userChange" value="dummy">
-<!-- 登録モード -->
+<!-- モード -->
 <input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 <!-- ユーザID -->
 <input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
-{* エラー表示 *}
-{if count($errors)}
-<ul>
-	{foreach from=$errors item=error}
-	<li><font color="#ff0000">{$error}</font></li>
-	{/foreach}
-</ul>
-{/if}
 <h4>Eメールとパスワード</h4>
 <table id="registration">
 <tr>
@@ -241,6 +246,21 @@
 <td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="編集画面へ"  class="over" /></td></tr>
 </table>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="line_dot">
 	<hr />
 </div>

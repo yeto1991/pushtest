@@ -153,9 +153,9 @@
 
 <div class="h2">
 {if ("regist" == $form.mode)}
-<h2>ユーザー登録</h2>￥
+<h2>ユーザー登録</h2>
 {elseif ("change" == $form.mode)}
-<h2>ユーザー更新</h2>
+<h2>ユーザー編集</h2>
 {else}
 <h2>ユーザー削除</h2>
 {/if}
@@ -163,10 +163,13 @@
 
 <div class="in_main">
 <h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
-
+{if ("delete" == $form.mode)}
+<p><font color="red">「完了」ボタンをクリックすると、ユーザ情報が削除されます。<br />
+ユーザ情報は元に戻せませんので、削除してもよいか再度ご確認ください。</font></p>
+{else}
 <p>以下の内容に間違いがないかご確認の上、「完了」ボタンをクリックしてください。<br />
 修正したい場合は「戻る」ボタンをクリックしてください。</p>
-
+{/if}
 <form name="form_user_userRegistDo" id="form_user_userRegistDo" method="post" action="">
 {uniqid}
 {if ("regist" == $form.mode)}
