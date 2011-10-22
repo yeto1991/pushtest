@@ -43,12 +43,13 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 	/**
 	* Eメール重複チェック用データ取得（フロントサイト用）
 	*
+	* @param string $user_id Eメールを登録予定のユーザID（新規登録の場合、''空文字）
 	* @param string $email 登録するEメール
 	* @return string 取得結果（重複エラーの場合[DOUBLE_CHECK_OK],重複エラーではない場合[DOUBLE_CHECK_NG]）
 	*/
-	function getEmailForDoubleCheckForFront($email) {
+	function getEmailForDoubleCheckForFront($user_id, $email) {
 		$db = $this->backend->getDB();
-		$sql = "select del_flg from jm_user where email = ?";
+		$sql = "select user_id, del_flg from jm_user where email = ?";
 		$stmt =& $db->db->prepare($sql);
 		$param = array($email);
 		$res = $db->db->execute($stmt, $param);
@@ -59,7 +60,11 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		}
 		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 		if($row['del_flg'] == '0'){
-			return "DOUBLE_CHECK_NG";
+			if($row['user_id'] == $user_id){
+				return DOUBLE_CHECK_OK;
+			}else{
+				return DOUBLE_CHECK_NG;
+			}
 		}
 		elseif($row['del_flg'] == '1'){
 			return "DOUBLE_CHECK_DEL_FLG1";

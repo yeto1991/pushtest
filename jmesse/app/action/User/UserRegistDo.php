@@ -38,16 +38,9 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-// 		// ログインチェック
-// 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
-// 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-// 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-// 			return 'user_Login';
-// 		}
 		//入力値チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-
 			//入力チェック詳細
 			//Eメール
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
@@ -109,7 +102,7 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 		}
 		//重複チェック
 		$jmUserMgr = $this->backend->getManager('jmUser');
-		$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('email'));
+		$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront('',$this->af->get('email'));
 		if (Ethna::isError($emailCheck)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
 			return 'error';

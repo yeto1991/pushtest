@@ -229,6 +229,19 @@ class Jmesse_Form_UserUserRegist extends Jmesse_ActionForm
 			'filter'      => null,
 			'custom'      => null,
 		),
+		'delFlg' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_RADIO,
+			'name'        => '削除フラグ',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
     );
 }
 
@@ -250,12 +263,6 @@ class Jmesse_Action_UserUserRegist extends Jmesse_ActionClass
      */
     function prepare()
     {
-// 		// ログインチェック
-// 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
-// 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-// 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-// 			return 'user_Login';
-// 		}
 		return null;
     }
 

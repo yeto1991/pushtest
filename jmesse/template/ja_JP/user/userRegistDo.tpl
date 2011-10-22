@@ -134,6 +134,15 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
@@ -143,7 +152,13 @@
 			<div class="h1"><h1>見本市・展示会データベース</h1></div>
 
 <div class="h2">
-		<h2>ユーザー登録</h2>
+{if ("regist" == $form.mode)}
+<h2>ユーザー登録</h2>￥
+{elseif ("change" == $form.mode)}
+<h2>ユーザー更新</h2>
+{else}
+<h2>ユーザー削除</h2>
+{/if}
 </div>
 
 <div class="in_main">
@@ -153,7 +168,14 @@
 修正したい場合は「戻る」ボタンをクリックしてください。</p>
 
 <form name="form_user_userRegistDo" id="form_user_userRegistDo" method="post" action="">
+{uniqid}
+{if ("regist" == $form.mode)}
 <input type="hidden" name="action_user_userRegistDone" id="action_user_userRegistDone" value="dummy" />
+{else}
+<input type="hidden" name="action_user_userChangeDone" id="action_user_userChangeDone" value="dummy" />
+{/if}
+<!-- ユーザID -->
+<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
 <!-- 登録モード -->
 <input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 <!-- フォーム情報をhidden設定 -->
@@ -168,6 +190,7 @@
 <input type="hidden" name="tel" id="tel" value="{$form.tel}" />
 <input type="hidden" name="fax" id="fax" value="{$form.fax}" />
 <input type="hidden" name="url" id="url" value="{$form.url}" />
+<input type="hidden" name="delFlg" id="delFlg" value="{$form.delFlg}" />
 <input type="hidden" name="emailCheckFlg" id="emailCheckFlg" value="{$form.emailCheckFlg}" />
 {* エラー表示 *}
 {if count($errors)}
@@ -245,14 +268,19 @@
 <th class="required"></th>
 <td>{$form.url}</td>
 </tr>
+{if ("1" == $form.delFlg)}
+<tr>
+<th class="item">退会希望</th>
+<th class="required"></th>
+<td>退会を希望します。</td>
+</tr>
+{/if}
 </table>
 
 <!-- navi area-->
 <table width="100%">
 <tr><td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-
 <td align="right">
-
 <input type="image" src="/j-messe/images/db/btn-finish.gif" alt="完了" class="over" /></td></tr>
 </table>
 </form>

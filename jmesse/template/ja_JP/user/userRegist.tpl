@@ -137,6 +137,21 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
@@ -146,14 +161,24 @@
 			<div class="h1"><h1>見本市・展示会データベース</h1></div>
 
 <div class="h2">
+		{if ("regist" == $form.mode)}
 		<h2>ユーザー登録</h2>
+		{else}
+		<h2>ユーザー編集</h2>
+		{/if}
 </div>
 
 <div class="in_main">
 <h3 class="img t_center"><img src="/j-messe/images/db/user02.jpg" alt="ユーザー情報入力"></h3>
 
 <form name="form_user_userRegist" id="form_user_userRegist" method="post" action="">
+{if ("regist" == $form.mode)}
 <input type="hidden" name="action_user_userRegistDo" id="action_user_userRegistDo" value="dummy" />
+{else}
+<input type="hidden" name="action_user_userChangeDo" id="action_user_userChangeDo" value="dummy" />
+{/if}
+<!-- ユーザID -->
+<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
 <!-- 登録モード -->
 <input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 {* エラー表示 *}
@@ -260,14 +285,30 @@ FAX番号はハイフン区切りで国番号から入力してください。<b
 URLはhttp(s):// から入力して下さい。
 </td>
 </tr>
+{if ("regist" != $form.mode)}
+<tr>
+<th class="item">退会希望</th>
+<th class="required"></th>
+<td><input type="checkbox" size="60" name="delFlg" id="delFlg" value="1"> 退会を希望します。
+<br />
+※退会をご希望の方は、チェックをつけてください。<br />
+</td>
+</tr>
+{/if}
 </table>
 
 <!-- navi area-->
 <table width="100%">
 <tr><td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ"  class="over" /></td></tr>
+<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ"  class="over" /></td>
+</tr>
 </table>
 </form>
+
+
+
+
+
 <div class="line_dot">
 	<hr />
 </div>

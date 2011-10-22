@@ -38,12 +38,6 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-// 		// ログインチェック
-// 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
-// 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-// 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-// 			return 'user_Login';
-// 		}
 		//重複チェック
 		$jmUserMgr = $this->backend->getManager('jmUser');
 		$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('email'));
@@ -73,7 +67,6 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			header('Location: '.$this->config->get('url').'?action_user_userRegist=true');
 			return null;
 		}
-
 		if($this->af->get('emailCheckFlg') == "DOUBLE_CHECK_DEL_FLG1"){
 			//Eメール重複チェック対象Eメールが削除済みである場合物理レコード削除
 			// 削除対象ユーザ情報取得
@@ -83,7 +76,7 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			//jm_userテーブル
 			$jm_user_del = $this->backend->getObject('JmUser','email',strtolower($this->af->get('email')));
 			$userdel = $jm_user_del->remove();
-			if (Ethna::isError($retdel)) {
+			if (Ethna::isError($userdel)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル物理削除エラー');
 				$this->ae->addObject('error', $userdel);
 				$db->rollback();
@@ -92,7 +85,7 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			//jm_fairテーブル
 			$jm_fair_del = $this->backend->getObject('JmFair','user_id',$user_id_target);
 			$fairdel = $jm_fair_del->remove();
-			if (Ethna::isError($retdel)) {
+			if (Ethna::isError($fairdel)) {
 				$this->backend->getLogger()->log(LOG_ERR, '見本市情報テーブル物理削除エラー');
 				$this->ae->addObject('error', $fairdel);
 				$db->rollback();
@@ -101,7 +94,7 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			//jm_fair_tempテーブル
 			$jm_fair_temp_del = $this->backend->getObject('JmFairTemp','user_id',$user_id_target);
 			$fairtempdel = $jm_fair_temp_del->remove();
-			if (Ethna::isError($retdel)) {
+			if (Ethna::isError($fairtempdel)) {
 				$this->backend->getLogger()->log(LOG_ERR, '見本市情報一時保存テーブル物理削除エラー');
 				$this->ae->addObject('error', $fairtempdel);
 				$db->rollback();
@@ -147,7 +140,7 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
-		//メール送信処理
+		//TODO メール送信処理
 		mb_language("Ja") ;
 		mb_internal_encoding("UTF-8") ;
 		$mailto= strtolower($this->af->get('email'));
@@ -157,7 +150,6 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		mb_send_mail($mailto,$subject,$content,$mailfrom);
 
 		// 完了画面へ遷移
-		//session情報設定
 		// SESSIONに設定
 		$this->session->start();
 		$this->session->set('user_id', $user->get('user_id'));
