@@ -184,105 +184,192 @@
 {* エラー表示 *}
 {if count($errors)}
 <p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
-<ul>
-	{foreach from=$errors item=error}
-	<li><font color="#ff0000">{$error}</font></li>
-	{/foreach}
-</ul>
 {/if}
+
 <h4>Eメールとパスワード</h4>
 <p class="nomargin">J-messe見本市登録をご利用いただくためのEメールとパスワードを設定してください。<br />
 （※入力されたEメールは小文字に変換されて登録されます。）</p>
 <table id="registration">
+{if is_error('email')}
+<tr class="errorcheck">
+{else}
+<tr>
+{/if}
 <th class="item">Eメール </th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="text" value="{$form.email}" size="50" name="email" id="email"><br />
+{if is_error('email')}
+<span class="error-message">{message name="email"}</span><br />
+{/if}
 </td>
 </tr>
+{if is_error('email2')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">Eメール（確認）</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="text" value="{$form.email2}" size="50" name="email2" id="email2"><br />
+{if is_error('email2')}
+<span class="error-message">{message name="email2"}</span><br />
+{/if}
 <strong>確認のためもう一度Eメールを入力してください。</strong></td>
 </tr>
+{if is_error('password')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">パスワード</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="password" value="{$form.password}" size="20" name="password" id="password"><br />
+{if is_error('password')}
+<span class="error-message">{message name="password"}</span><br />
+{/if}
 <strong>半角英数字4文字以上、8文字以内で入力して下さい。</td>
 </tr>
+{if is_error('password2')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">パスワード（確認）</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2"><br />
+{if is_error('password2')}
+<span class="error-message">{message name="password2"}</span><br />
+{/if}
 <strong>確認のためもう一度パスワードを入力してください。</td>
 </tr>
 </table>
 <br />
 <h4>お客様情報入力</h4>
 <table id="registration">
+{if is_error('companyNm')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">会社名</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="text" value="{$form.companyNm}" size="60" name="companyNm" id="companyNm"><br />
-	</td>
+{if is_error('companyNm')}
+<span class="error-message">{message name="companyNm"}</span><br />
+{/if}
+</td>
 </tr>
+{if is_error('divisionDeptNm')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">部署名</th>
 <th class="required"></th>
 <td><input type="text" value="{$form.divisionDeptNm}" size="60" name="divisionDeptNm" id="divisionDeptNm"><br />
-	</td>
+{if is_error('divisionDeptNm')}
+<span class="error-message">{message name="divisionDeptNm"}</span><br />
+{/if}
+</td>
 </tr>
+{if is_error('userNm')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">お名前</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="text" value="{$form.userNm}" size="60" name="userNm" id="userNm"><br />
+{if is_error('userNm')}
+<span class="error-message">{message name="userNm"}</span><br />
+{/if}
 </td>
 </tr>
+{if is_error('genderCd')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">性別</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td>
 <input type="radio" size="60" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0" } checked {/if}>男性
 <input type="radio" size="60" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if}>女性<br />
+{if is_error('genderCd')}
+<span class="error-message">{message name="genderCd"}</span><br />
+{/if}
 </td>
 </tr>
+{if is_error('postCode')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">郵便番号</th>
 <th class="required"></th>
 <td>
 <input type="text" maxlength="8" value="{$form.postCode}" size="10" name="postCode" id="postCode">（半角英数字)<br />
+{if is_error('postCode')}
+<span class="error-message">{message name="postCode"}</span><br />
+{/if}
 郵便番号はハイフン区切りで入力してください。例：123-4567
 </td>
 </tr>
+{if is_error('address')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">住所</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td><input type="text" value="{$form.address}" size="80" name="address" id="address"><br />
+{if is_error('address')}
+<span class="error-message">{message name="address"}</span><br />
+{/if}
 </td>
 </tr>
+{if is_error('tel')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">TEL</th>
 <th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 <td>
 <input type="text" value="{$form.tel}" size="30" name="tel" id="tel">（半角英数字)<br />
+{if is_error('tel')}
+<span class="error-message">{message name="tel"}</span><br />
+{/if}
 電話番号はハイフン区切りで国番号から入力してください。<br />
 例：東京の場合　+81-3-1234-5678</td>
 </tr>
+{if is_error('fax')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">FAX</th>
 <th class="required"></th>
 <td>
 <input type="text" value="{$form.fax}" size="30" name="fax" id="fax" >（半角英数字)<br />
+{if is_error('fax')}
+<span class="error-message">{message name="fax"}</span><br />
+{/if}
 FAX番号はハイフン区切りで国番号から入力してください。<br />
 例：東京の場合　+81-3-1234-5678</td>
 </tr>
 </tr>
+{if is_error('url')}
+<tr class="errorcheck">
+{else}
 <tr>
+{/if}
 <th class="item">御社のウェブサイトURL</th>
 <th class="required"></th>
-<td><input type="text" value="{$form.url}" size="60" name="url" id="url">
-<br />
+<td><input type="text" value="{$form.url}" size="60" name="url" id="url"><br />
+{if is_error('url')}
+<span class="error-message">{message name="url"}</span><br />
+{/if}
 URLはhttp(s):// から入力して下さい。
 </td>
 </tr>
@@ -305,6 +392,18 @@ URLはhttp(s):// から入力して下さい。
 </tr>
 </table>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

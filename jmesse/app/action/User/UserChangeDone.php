@@ -58,7 +58,7 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 		if (Ethna_Util::isDuplicatePost()) {
 			// 二重POSTの場合
 			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
-			header('Location: '.$this->config->get('url').'?action_user_userChange=true&user_id='.$this->af->get('user_id').'&mode=change');
+			header('Location: '.$this->config->get('url').'?action_user_userChange=true');
 			return null;
 		}
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
