@@ -313,7 +313,7 @@
 <th class="item">郵便番号</th>
 <th class="required"></th>
 <td>
-<input type="text" maxlength="8" value="{$form.postCode}" size="10" name="postCode" id="postCode">（半角英数字)<br />
+<input type="text" maxlength="20" value="{$form.postCode}" size="10" name="postCode" id="postCode">（半角英数字)<br />
 {if is_error('postCode')}
 <span class="error-message">{message name="postCode"}</span><br />
 {/if}

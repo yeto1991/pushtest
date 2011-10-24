@@ -17,6 +17,26 @@
 class Jmesse_JmFairTempManager extends Ethna_AppManager
 {
 	/**
+	* 削除済みユーザデータ削除
+	*
+	* @param string $user_id 登録するEメール情報を持つ削除済みユーザID
+	* @return string 結果
+	*/
+	function deleteUserInfo($user_id) {
+		$db = $this->backend->getDB();
+		$sql = "delete from jm_fair_temp where user_id = ?";
+		$stmt =& $db->db->prepare($sql);
+		$param = array($user_id);
+		$res = $db->db->execute($stmt, $param);
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'jm_fair_temp削除Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return "NG";
+		}
+		return null;
+	}
+
+	/**
 	 * JM_FAIRをJM_FAIR_TEMPにコピーする。
 	 *
 	 * @param unknown_type $mihon_no

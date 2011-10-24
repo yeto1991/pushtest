@@ -61,12 +61,11 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 		if($row['del_flg'] == '0'){
 			if($row['user_id'] == $user_id){
-				return DOUBLE_CHECK_OK;
+				return "DOUBLE_CHECK_OK";
 			}else{
-				return DOUBLE_CHECK_NG;
+				return "DOUBLE_CHECK_NG";
 			}
-		}
-		elseif($row['del_flg'] == '1'){
+		}elseif($row['del_flg'] == '1'){
 			return "DOUBLE_CHECK_DEL_FLG1";
 		}else{
 			return "DOUBLE_CHECK_OK";

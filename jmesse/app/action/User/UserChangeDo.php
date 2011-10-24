@@ -109,7 +109,7 @@ class Jmesse_Action_UserUserChangeDo extends Jmesse_ActionClass
 			}
 			//重複チェック
 			$jmUserMgr = $this->backend->getManager('jmUser');
-			$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront('',$this->af->get('email'));
+			$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('user_id'),$this->af->get('email'));
 			if (Ethna::isError($emailCheck)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
 				return 'error';

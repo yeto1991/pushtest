@@ -112,21 +112,17 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 				return 'error';
 			}
 			//jm_fairテーブル
-			$jm_fair_del = $this->backend->getObject('JmFair','user_id',$user_id_target);
-			$fairdel = $jm_fair_del->remove();
-			if (Ethna::isError($fairdel)) {
-				$this->backend->getLogger()->log(LOG_ERR, '見本市情報テーブル物理削除エラー');
-				$this->ae->addObject('error', $fairdel);
-				$db->rollback();
+			$jmFairMgr = $this->backend->getManager('jmFair');
+			$deleteResults = $jmFairMgr->deleteUserInfo($user_id_target);
+			if (Ethna::isError($deleteResults)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIRレコード削除エラー');
 				return 'error';
 			}
 			//jm_fair_tempテーブル
-			$jm_fair_temp_del = $this->backend->getObject('JmFairTemp','user_id',$user_id_target);
-			$fairtempdel = $jm_fair_temp_del->remove();
-			if (Ethna::isError($fairtempdel)) {
-				$this->backend->getLogger()->log(LOG_ERR, '見本市情報一時保存テーブル物理削除エラー');
-				$this->ae->addObject('error', $fairtempdel);
-				$db->rollback();
+			$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+			$deleteResults = $jmFairTempMgr->deleteUserInfo($user_id_target);
+			if (Ethna::isError($deleteResults)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIR_TEMPレコード削除エラー');
 				return 'error';
 			}
 			//新規登録

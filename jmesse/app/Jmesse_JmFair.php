@@ -50,6 +50,26 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	);
 
 	/**
+	* 削除済みユーザデータ削除
+	*
+	* @param string $user_id 登録するEメール情報を持つ削除済みユーザID
+	* @return string 結果
+	*/
+	function deleteUserInfo($user_id) {
+		$db = $this->backend->getDB();
+		$sql = "delete from jm_fair where user_id = ?";
+		$stmt =& $db->db->prepare($sql);
+		$param = array($user_id);
+		$res = $db->db->execute($stmt, $param);
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'jm_fair削除Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return "NG";
+		}
+		return null;
+	}
+
+	/**
 	 * 見本市情報の全件数を取得する。
 	 *
 	 * @return int 見本市情報の全件数
