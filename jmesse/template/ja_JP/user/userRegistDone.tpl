@@ -78,7 +78,11 @@
 	<li><a href="/database/">引き合い・展示会検索</a></li>
 	<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 	<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-	<li>ユーザー登録</li>
+	{if ("regist" == $form.mode)}
+		<li>ユーザー登録</li>
+		{else}
+		<li>ユーザー編集</li>
+	{/if}
 </ul>
 </div>
 <!-- /bread -->
@@ -143,7 +147,15 @@
 			<div class="h1"><h1>見本市・展示会データベース</h1></div>
 
 <div class="h2">
+		{if ("regist" == $form.mode)}
 		<h2>ユーザー登録</h2>
+		{/if}
+		{if ("change" == $form.mode)}
+		<h2>ユーザー編集</h2>
+		{/if}
+		{if ("delete" == $form.mode)}
+		<h2>ユーザー削除</h2>
+		{/if}
 </div>
 
 <div class="in_main">
@@ -160,10 +172,12 @@
 {/if}
 
 <div class="finish-navi">
+	{if ("delete" != $form.mode)}
 	<div class="btn">
 		<a href="/j-messe/registration/??" ><span class="title">続いて見本市を登録する</span>
 		<span class="description">見本市新規登録ページを開きます。</span></a>
 	</div>
+	{/if}
 	<div class="btn">
 		<a href="/j-messe/" ><span class="title">登録を終了する</span>
 		<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>

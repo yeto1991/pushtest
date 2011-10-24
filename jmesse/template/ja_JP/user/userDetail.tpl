@@ -9,7 +9,7 @@
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
-<title>ユーザー登録 - 世界の見本市・展示会 -ジェトロ</title>
+<title>ユーザー詳細 - 世界の見本市・展示会 -ジェトロ</title>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
