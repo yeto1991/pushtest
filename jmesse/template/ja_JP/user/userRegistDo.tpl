@@ -152,177 +152,170 @@
 	<div id="main">
 		<div class="bgbox_set">
 			<div class="bgbox_base">
-
-			<div class="h1"><h1>見本市・展示会データベース</h1></div>
-
-<div class="h2">
-{if ("regist" == $form.mode)}
-<h2>ユーザー登録</h2>
-{elseif ("change" == $form.mode)}
-<h2>ユーザー編集</h2>
-{else}
-<h2>ユーザー削除</h2>
-{/if}
-</div>
-
-<div class="in_main">
-<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
-{if ("delete" == $form.mode)}
-<p><font color="red">「完了」ボタンをクリックすると、ユーザ情報が削除されます。<br />
-ユーザ情報は元に戻せませんので、削除してもよいか再度ご確認ください。</font></p>
-{else}
-<p>以下の内容に間違いがないかご確認の上、「完了」ボタンをクリックしてください。<br />
-修正したい場合は「戻る」ボタンをクリックしてください。</p>
-{/if}
-<form name="form_user_userRegistDo" id="form_user_userRegistDo" method="post" action="">
-{uniqid}
-{if ("regist" == $form.mode)}
-<input type="hidden" name="action_user_userRegistDone" id="action_user_userRegistDone" value="dummy" />
-{else}
-<input type="hidden" name="action_user_userChangeDone" id="action_user_userChangeDone" value="dummy" />
-{/if}
-<!-- ユーザID -->
-<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
-<!-- 登録モード -->
-<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
-<!-- フォーム情報をhidden設定 -->
-<input type="hidden" name="email" id="email" value="{$form.email}" />
-<input type="hidden" name="password" id="password" value="{$form.password}" />
-<input type="hidden" name="companyNm" id="companyNm" value="{$form.companyNm}" />
-<input type="hidden" name="divisionDeptNm" id="divisionDeptNm" value="{$form.divisionDeptNm}" />
-<input type="hidden" name="userNm" id="userNm" value="{$form.userNm}" />
-<input type="hidden" name="genderCd" id="genderCd" value="{$form.genderCd}" />
-<input type="hidden" name="postCode" id="postCode" value="{$form.postCode}" />
-<input type="hidden" name="address" id="address" value="{$form.address}" />
-<input type="hidden" name="tel" id="tel" value="{$form.tel}" />
-<input type="hidden" name="fax" id="fax" value="{$form.fax}" />
-<input type="hidden" name="url" id="url" value="{$form.url}" />
-<input type="hidden" name="delFlg" id="delFlg" value="{$form.delFlg}" />
-<input type="hidden" name="emailCheckFlg" id="emailCheckFlg" value="{$form.emailCheckFlg}" />
-{* エラー表示 *}
-{if count($errors)}
-<ul>
-	{foreach from=$errors item=error}
-	<li><font color="#ff0000">{$error}</font></li>
-	{/foreach}
-</ul>
-{/if}
-<h4>Eメールとパスワード</h4>
-<table id="registration">
-<tr>
-<th class="item">Eメール</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>{$form.email}</td>
-</tr>
-<tr>
-<th class="item">パスワード</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>{$form.password}</td>
-</tr>
-
-</table>
-<br />
-<h4>お客様情報入力</h4>
-<table id="registration">
-<tr>
-<th class="item">会社名</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>{$form.companyNm}</td>
-</tr>
-<tr>
-<th class="item">部署名</th>
-<th class="required"></th>
-<td>{$form.divisionDeptNm}<br /></td>
-</tr>
-<tr>
-<th class="item">お名前</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>{$form.userNm}</td>
-</tr>
-<tr>
-<th class="item">性別</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>
-{if $form.genderCd == "0"}男性{/if}
-{if $form.genderCd == "1"}女性{/if}
-</td>
-</tr>
-<tr>
-
-<th class="item">郵便番号</th>
-<th class="required"></th>
-<td>{$form.postCode}</td>
-</tr>
-
-<tr>
-<th class="item">住所</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>{$form.address}</td>
-</tr>
-<tr>
-
-<th class="item">TEL</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>{$form.tel}</td>
-</tr>
-<tr>
-<th class="item">FAX</th>
-<th class="required"></th>
-<td>{$form.fax}</td>
-</tr>
-<tr>
-<th class="item">御社のウェブサイトURL</th>
-<th class="required"></th>
-<td>{$form.url}</td>
-</tr>
-{if ("1" == $form.delFlg)}
-<tr>
-<th class="item">退会希望</th>
-<th class="required"></th>
-<td>退会を希望します。</td>
-</tr>
-{/if}
-</table>
-
-<!-- navi area-->
-<table width="100%">
-<tr><td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-<td align="right">
-<input type="image" src="/j-messe/images/db/btn-finish.gif" alt="完了" class="over" /></td></tr>
-</table>
-</form>
-<div class="line_dot">
-	<hr />
-</div>
-<!-- /navi area-->
-<!-- ssl area-->
-<table id="ssl-content">
-<tr>
-<td>
-<!-- DigiCert Site Seal Code -->
-<div id="digicertsitesealcode"
-style="width: 65px; margin: 5px auto 5px auto;" align="center"><script
-language="javascript" type="text/javascript"
-src="https://www.digicert.com/custsupport/sealtable.php?order_id=00155638&amp;seal_type=a&amp;seal_size=small&amp;seal_color=blue&amp;new=1&amp;newsmall=1"></script><a
-href="http://www.digicert.com/ssl-certificate.htm">SSL
-Certificate</a><script language="javascript"
-type="text/javascript">coderz();</script></div>
-<!-- /DigiCert Site Seal Code -->
-
-</td>
-<td>このページから送信される情報は、SSL暗号化通信により保護されています。</td>
-</tr>
-</table>
-
-
-</div>
-
+				<div class="h1"><h1>見本市・展示会データベース</h1></div>
+				<div class="h2">
+					{if ("regist" == $form.mode)}
+					<h2>ユーザー登録</h2>
+					{elseif ("change" == $form.mode)}
+					<h2>ユーザー編集</h2>
+					{else}
+					<h2>ユーザー削除</h2>
+					{/if}
+				</div>
+				<div class="in_main">
+					<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
+					{if ("delete" == $form.mode)}
+					<p><font color="red">「完了」ボタンをクリックすると、ユーザ情報が削除されます。<br />
+					ユーザ情報は元に戻せませんので、削除してもよいか再度ご確認ください。</font></p>
+					{else}
+					<p>以下の内容に間違いがないかご確認の上、「完了」ボタンをクリックしてください。<br />
+					修正したい場合は「戻る」ボタンをクリックしてください。</p>
+					{/if}
+					<form name="form_user_userRegistDo" id="form_user_userRegistDo" method="post" action="">
+						{uniqid}
+						{if ("regist" == $form.mode)}
+						<input type="hidden" name="action_user_userRegistDone" id="action_user_userRegistDone" value="dummy" />
+						{else}
+						<input type="hidden" name="action_user_userChangeDone" id="action_user_userChangeDone" value="dummy" />
+						{/if}
+						<!-- ユーザID -->
+						<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
+						<!-- 登録モード -->
+						<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+						<!-- フォーム情報をhidden設定 -->
+						<input type="hidden" name="email" id="email" value="{$form.email}" />
+						<input type="hidden" name="password" id="password" value="{$form.password}" />
+						<input type="hidden" name="companyNm" id="companyNm" value="{$form.companyNm}" />
+						<input type="hidden" name="divisionDeptNm" id="divisionDeptNm" value="{$form.divisionDeptNm}" />
+						<input type="hidden" name="userNm" id="userNm" value="{$form.userNm}" />
+						<input type="hidden" name="genderCd" id="genderCd" value="{$form.genderCd}" />
+						<input type="hidden" name="postCode" id="postCode" value="{$form.postCode}" />
+						<input type="hidden" name="address" id="address" value="{$form.address}" />
+						<input type="hidden" name="tel" id="tel" value="{$form.tel}" />
+						<input type="hidden" name="fax" id="fax" value="{$form.fax}" />
+						<input type="hidden" name="url" id="url" value="{$form.url}" />
+						<input type="hidden" name="delFlg" id="delFlg" value="{$form.delFlg}" />
+						<input type="hidden" name="emailCheckFlg" id="emailCheckFlg" value="{$form.emailCheckFlg}" />
+						{* エラー表示 *}
+						{if count($errors)}
+						<ul>
+							{foreach from=$errors item=error}
+							<li><font color="#ff0000">{$error}</font></li>
+							{/foreach}
+						</ul>
+						{/if}
+						<h4>Eメールとパスワード</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">Eメール</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>{$form.email}</td>
+							</tr>
+							<tr>
+								<th class="item">パスワード</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>{$form.password}</td>
+							</tr>
+						</table><br />
+						<h4>お客様情報入力</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">会社名</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>{$form.companyNm}</td>
+							</tr>
+							<tr>
+								<th class="item">部署名</th>
+								<th class="required"></th>
+								<td>{$form.divisionDeptNm}<br /></td>
+							</tr>
+							<tr>
+								<th class="item">お名前</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>{$form.userNm}</td>
+							</tr>
+							<tr>
+								<th class="item">性別</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>
+								{if $form.genderCd == "0"}男性{/if}
+								{if $form.genderCd == "1"}女性{/if}
+								</td>
+							</tr>
+							<tr>
+								<th class="item">郵便番号</th>
+								<th class="required"></th>
+								<td>{$form.postCode}</td>
+							</tr>
+							<tr>
+								<th class="item">住所</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>{$form.address}</td>
+							</tr>
+							<tr>
+								<th class="item">TEL</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>{$form.tel}</td>
+							</tr>
+							<tr>
+								<th class="item">FAX</th>
+								<th class="required"></th>
+								<td>{$form.fax}</td>
+							</tr>
+							<tr>
+								<th class="item">御社のウェブサイトURL</th>
+								<th class="required"></th>
+								<td>{$form.url}</td>
+							</tr>
+							{if ("1" == $form.delFlg)}
+							<tr>
+								<th class="item">退会希望</th>
+								<th class="required"></th>
+								<td>退会を希望します。</td>
+							</tr>
+							{/if}
+						</table>
+						<!-- navi area-->
+						<table width="100%">
+							<tr>
+								<td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
+								<td align="right">
+								<input type="image" src="/j-messe/images/db/btn-finish.gif" alt="完了" class="over" /></td>
+							</tr>
+						</table>
+					</form>
+					<div class="line_dot"><hr /></div>
+					<!-- /navi area-->
+					<!-- ssl area-->
+					<table id="ssl-content">
+						<tr>
+							<td>
+							<!-- DigiCert Site Seal Code -->
+							<div id="digicertsitesealcode" style="width: 65px; margin: 5px auto 5px auto;" align="center">
+							<script language="javascript" type="text/javascript" src="https://www.digicert.com/custsupport/sealtable.php?order_id=00155638&amp;seal_type=a&amp;seal_size=small&amp;seal_color=blue&amp;new=1&amp;newsmall=1"></script>
+							<a href="http://www.digicert.com/ssl-certificate.htm">SSL Certificate</a><script language="javascript" type="text/javascript">coderz();</script></div>
+							<!-- /DigiCert Site Seal Code -->
+							</td>
+							<td>このページから送信される情報は、SSL暗号化通信により保護されています。</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
+	<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
 </div>
 <!-- /center -->
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 <!-- /contents -->

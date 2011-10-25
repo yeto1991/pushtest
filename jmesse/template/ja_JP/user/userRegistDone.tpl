@@ -138,59 +138,79 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
 		<div class="bgbox_set">
 			<div class="bgbox_base">
-
-			<div class="h1"><h1>見本市・展示会データベース</h1></div>
-
-<div class="h2">
-		{if ("regist" == $form.mode)}
-		<h2>ユーザー登録</h2>
-		{/if}
-		{if ("change" == $form.mode)}
-		<h2>ユーザー編集</h2>
-		{/if}
-		{if ("delete" == $form.mode)}
-		<h2>ユーザー削除</h2>
-		{/if}
-</div>
-
-<div class="in_main">
-<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了"></a></h3>
-
-{if ("regist" == $form.mode)}
-<p>ユーザー登録が完了しました。ありがとうございました。</p>
-{/if}
-{if ("change" == $form.mode)}
-<p>ユーザー情報更新が完了しました。ありがとうございました。</p>
-{/if}
-{if ("delete" == $form.mode)}
-<p>ユーザー情報削除が完了しました（退会処理完了）。ありがとうございました。</p>
-{/if}
-
-<div class="finish-navi">
-	{if ("delete" != $form.mode)}
-	<div class="btn">
-		<a href="/j-messe/registration/??" ><span class="title">続いて見本市を登録する</span>
-		<span class="description">見本市新規登録ページを開きます。</span></a>
-	</div>
-	{/if}
-	<div class="btn">
-		<a href="/j-messe/" ><span class="title">登録を終了する</span>
-		<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
-	</div>
-</div>
-
-</div>
+				<div class="h1"><h1>見本市・展示会データベース</h1></div>
+				<div class="h2">
+					{if ("regist" == $form.mode)}
+					<h2>ユーザー登録</h2>
+					{/if}
+					{if ("change" == $form.mode)}
+					<h2>ユーザー編集</h2>
+					{/if}
+					{if ("delete" == $form.mode)}
+					<h2>ユーザー削除</h2>
+					{/if}
+				</div>
+				<div class="in_main">
+					<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了"></a></h3>
+					{if ("regist" == $form.mode)}
+					<p>ユーザー登録が完了しました。ありがとうございました。</p>
+					{/if}
+					{if ("change" == $form.mode)}
+					<p>ユーザー情報更新が完了しました。ありがとうございました。</p>
+					{/if}
+					{if ("delete" == $form.mode)}
+					<p>ユーザー情報削除が完了しました（退会処理完了）。ありがとうございました。</p>
+					{/if}
+					<div class="finish-navi">
+						{if ("delete" != $form.mode)}
+						<div class="btn">
+							<a href="/j-messe/registration/??" ><span class="title">続いて見本市を登録する</span>
+							<span class="description">見本市新規登録ページを開きます。</span></a>
+						</div>
+						{/if}
+						<div class="btn">
+							<a href="/j-messe/" ><span class="title">登録を終了する</span>
+							<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
+	<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
 </div>
 <!-- /center -->
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 <!-- /contents -->
