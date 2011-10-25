@@ -26,7 +26,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '002' and jcm.kbn_3 = '000' and jcm.kbn_4 = '000' order by jcm.kbn_2 asc";
+		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '002' and jcm.kbn_3 = '000' and jcm.kbn_4 = '000' group by jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6 order by jcm.kbn_2 asc";
 
  		// SQLを実行
 		$res = $db->db->query($sql);
@@ -57,9 +57,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 	}
 
 	/**
-	 * kbn_3の集計リストを取得する。
-	 *
-	 * 業種（小分類）
+	 * 業種（小分類）の集計リストを取得する。
 	 *
 	 * @param string $kbn_2 区分2
 	 * @return array 集計値リスト
@@ -69,7 +67,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '002' and jcm.kbn_2 = ? and jcm.kbn_3 <> '000' and jcm.kbn_4 = '000' order by kbn_3 asc";
+		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '002' and jcm.kbn_2 = ? and jcm.kbn_3 <> '000' and jcm.kbn_4 = '000' group by jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6 order by kbn_3 asc";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -115,7 +113,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 <> '001' and jcm.kbn_3 = '000' and jcm.kbn_4 = '000' order by kbn_2 asc";
+		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 <> '001' and jcm.kbn_3 = '000' and jcm.kbn_4 = '000' group by jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6 order by kbn_2 asc";
 
 		$res = $db->db->query($sql);
 
@@ -155,7 +153,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 = ? and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' order by kbn_3 asc";
+		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 = ? and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' group by jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6 order by jcm.disp_num asc";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -203,7 +201,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 = ? and jcm.kbn_3 = ? and jcm.kbn_4 <> '000' order by kbn_4 asc";
+		$sql = "select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 = ? and jcm.kbn_3 = ? and jcm.kbn_4 <> '000' group by jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6 order by jcm.disp_num asc";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -249,7 +247,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '1' order by jcm.kbn_2 asc, jcm.disp_num asc";
+		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '1' group by jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num order by jcm.kbn_2 asc, jcm.disp_num asc";
 
 		$res = $db->db->query($sql);
 
@@ -288,7 +286,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '0' order by jcm.kbn_2 asc, jcm.disp_num asc";
+		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '0' group by jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num order by jcm.kbn_2 asc, jcm.disp_num asc";
 
 		$res = $db->db->query($sql);
 
@@ -327,7 +325,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select t1.kbn_1, t1.kbn_2, t1.kbn_3, t1.kbn_4, t1.discription_jp, t1.discription_en, t1.disp_cd, t1.disp_num, t1.reserve_1, t1.reserve_2, t1.reserve_3, t1.reserve_4, t1.reserve_5, t1.reserve_6, t1.venue_kbn, t1.fair_cnt, ifnull(sum(t2.cnt), 0) cnt from (select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, jfc.venue_kbn, ifnull(jfc.fair_cnt, 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 <> '001' and jcm.kbn_3 = '000' and jcm.kbn_4 = '000' order by kbn_2 asc) t1 left outer join (select kbn_2, count(*) cnt from jm_code_m where kbn_1 = '003' and kbn_2 not in ('000', '001') and kbn_3 not in ('000', '001') and kbn_4 = '000' and disp_cd = '0' group by kbn_2) t2 on t1.kbn_2 = t2.kbn_2 group by t1.kbn_2";
+		$sql = "select t1.kbn_1, t1.kbn_2, t1.kbn_3, t1.kbn_4, t1.discription_jp, t1.discription_en, t1.disp_cd, t1.disp_num, t1.reserve_1, t1.reserve_2, t1.reserve_3, t1.reserve_4, t1.reserve_5, t1.reserve_6, t1.fair_cnt, ifnull(sum(t2.cnt), 0) cnt from (select jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from jm_code_m jcm left outer join jm_fair_cnt jfc on jcm.kbn_1 = jfc.kbn_1 and jcm.kbn_2 = jfc.kbn_2 and jfc.kbn_3 = jcm.kbn_3 and jfc.kbn_4 = jcm.kbn_4 where jcm.kbn_1 = '003' and jcm.kbn_2 <> '001' and jcm.kbn_3 = '000' and jcm.kbn_4 = '000' group by jcm.kbn_1, jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, jcm.reserve_1, jcm.reserve_2, jcm.reserve_3, jcm.reserve_4, jcm.reserve_5, jcm.reserve_6 order by kbn_2 asc) t1 left outer join (select kbn_2, count(*) cnt from jm_code_m where kbn_1 = '003' and kbn_2 not in ('000', '001') and kbn_3 not in ('000', '001') and kbn_4 = '000' and disp_cd = '0' group by kbn_2) t2 on t1.kbn_2 = t2.kbn_2 group by t1.kbn_2 order by t1.kbn_2 asc";
 
 		$res = $db->db->query($sql);
 

@@ -9,7 +9,7 @@
 	<h4>絞り込む</h4>
 		<p>
 			{section name=it loop=$app.sub_industory_cnt}
-			<input type="checkbox" name="check_sub_industory" id="check_sub_industory" value="{$app.sub_industory_cnt[it].kbn_2}"
+			<input type="checkbox" name="check_sub_industory[]" id="check_sub_industory[]" value="{$app.sub_industory_cnt[it].kbn_2}"
 				{section name=it2 loop=$form.check_sub_industry}
 					{if ($form.check_sub_industry[it2] == $app.sub_industory_cnt[it].kbn_2)}
 						checked
@@ -87,4 +87,3 @@
 </div>
 </form>
 <!-- /menu -->
-{debug}

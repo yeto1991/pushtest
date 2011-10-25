@@ -16,7 +16,7 @@
  */
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
-	var $sql_get_fair_list = "select jf.mihon_no, jf.fair_title_jp, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.date_of_application, jf.date_of_registration, jf.negate_comment, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.select_language_info in ('0', '1') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
+	var $sql_get_fair_list = "select jf.mihon_no, jf.fair_title_jp, abbrev_title, jf.fair_title_en, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.date_of_application, jf.date_of_registration, jf.negate_comment, jf.exhibits_jp, jf.exhibits_en, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name, jcm_1.discription_en region_name_en, jcm_2.discription_en country_name_en, jcm_3.discription_en city_name_en from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
 
 	function getFairListAll($offset, $limit, $sort) {
 		// DBオブジェクト取得
@@ -28,8 +28,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SORT条件
 		if ('1' == $sort) {
-			$sql .= ' order by date_of_registration asc ';
-		} else {
+			$sql .= ' order by date_of_registration desc ';
+		} elseif ('2' == $sort) {
 			$sql .= ' order by fair_title_jp asc ';
 		}
 
@@ -40,7 +40,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$stmt =& $db->db->prepare($sql);
 
 		// 検索条件をArray化
-		$param = array($offset, $limit);
+		$param = array((int)$offset, (int)$limit);
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $param);
@@ -79,6 +81,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
 		$sql = 'select count(*) cnt from ('.$sql.') t';
 
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
+
 		// SQLを実行
 		$res = $db->db->query($sql);
 
@@ -114,21 +118,20 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SORT条件
 		if ('1' == $sort) {
-			$sql_sort = ' order by date_of_registration asc ';
+			$sql_sort = ' order by date_of_registration desc ';
 		} else {
 			$sql_sort = ' order by fair_title_jp asc ';
 		}
 
 		// OFFSET、LIMIT
 		$sql_limit = ' limit ?, ? ';
-		array_push($data, $offset, $limit);
-
-		var_dump($data);
+		array_push($data, (int)$offset, (int)$limit);
 
 		// Prepare Statement化
 		$sql .= ' and ('.$sql_ext.')'.$sql_sort.$sql_limit;
-		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 		$stmt =& $db->db->prepare($sql);
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
@@ -170,6 +173,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_makeWhere($data);
 
 		$sql = 'select count(*) cnt from ('.$sql.' and ('.$sql_ext.')) t';
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
+
 		$stmt =& $db->db->prepare($sql);
 
 		// SQLを実行
@@ -249,7 +255,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 国・地域
 		$sql_tmp_2 = '';
 		if ('' != $search_cond['v_3']) {
-			$sql_tmp_2 .= ' city = ? ';
+			$sql_tmp_2 .= ' country = ? ';
 			array_push($data, $search_cond['v_3']);
 		}
 		// 都市
@@ -333,6 +339,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				array_push($data, $check_region[$i]);
 			}
 		}
+		if ('' != $sql_tmp_1) {
+			$sql_tmp_1 = ' region in ('.$sql_tmp_1.') ';
+		}
 		// 国・地域
 		$sql_tmp_2 = '';
 		$check_country = $search_cond['check_country'];
@@ -344,6 +353,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				$sql_tmp_2 .= " ? ";
 				array_push($data, $check_country[$i]);
 			}
+		}
+		if ('' != $sql_tmp_2) {
+			$sql_tmp_2 = ' country in ('.$sql_tmp_2.') ';
 		}
 		// 都市
 		$sql_tmp_3 = '';
@@ -357,27 +369,46 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				array_push($data, $check_city[$i]);
 			}
 		}
+		if ('' != $sql_tmp_3) {
+			$sql_tmp_3 = ' city in ('.$sql_tmp_3.') ';
+		}
 		$ary_sql = array($sql_tmp_1, $sql_tmp_2, $sql_tmp_3);
 		$sql_tmp = $this->_addWhereRelation($ary_sql, 'o');
+		if ('' != $sql_tmp) {
+			if ('' != $sql_ext) {
+				$sql_ext .= ' and ';
+			}
+			$sql_ext .= ' ('.$sql_tmp.') ';
+		}
 
 		// キーワード
+		$sql_tmp = '';
 		$keyword = $search_cond['keyword'];
 		if ('' != $keyword) {
 			$ary_keyword = explode(' ', $keyword);
 			for ($i = 0; $i < count($ary_keyword); $i++) {
 				if ('' != $ary_keyword[$i]) {
-					if ('' != $sql_ext) {
-						$sql_ext .= ' or ';
+					if ('' != $sql_tmp) {
+						$sql_tmp .= ' or ';
 					}
-					$sql_ext .= ' search_key like ? ';
+					$sql_tmp .= ' search_key like ? ';
 					array_push($data, '%'.$ary_keyword[$i].'%');
 				}
 			}
 		}
+		if ('' != $sql_tmp) {
+			if ('' != $sql_ext) {
+				$sql_ext .= ' and ';
+			}
+			$sql_ext .= ' ('.$sql_tmp.') ';
+		}
 
 		// これから or 含む過去
-		if ('u' == $search_cond['year']) {
-			$sql_ext .= " and concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
+		if ('a' != $search_cond['year']) {
+			if ('' != $sql_ext) {
+				$sql_ext .= ' and ';
+			}
+			$sql_ext .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
 		}
 
 		return $sql_ext;
@@ -525,24 +556,28 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// SQL作成
 		$sql = "select jf.mihon_no, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_jp, jcm_1.discription_en region_en, jcm_2.discription_jp country_jp, jcm_2.discription_en country_en, jcm_3.discription_jp city_jp, jcm_3.discription_en city_en from jm_fair jf, jm_user ju, (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1, (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2, (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 where jf.user_id = ju.user_id and jf.region = jcm_1.kbn_2 and jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 and jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 and jf.confirm_flag = ? order by ";
 
-		// Prepare Statement化
-		$stmt =& $db->db->prepare($sql);
-
 		// 検索条件をArray化
 		$param = array($confirm_flag);
 
 		// ソート条件を追加
-		$sort = '';
+		$sql_sort = '';
 		for ($i = 0; $i < count($sort_list); $i++) {
 			if (null != $sort_list[$i] && '' != $sort_list[$i]) {
 				if ('' != $sort) {
-					$sort .= ', ?';
+					$sql_sort .= ', ? ';
 				} else {
-					$sort = '?';
+					$sql_sort = ' ? ';
 				}
 			}
 			array_push($param, $sort_list[$i]);
 		}
+
+		// ページング
+		$sql_limit = ' limit ?, ? ';
+		array_push($param, (int)$offset, (int)$limit);
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql.$sql_sort.$sql_limit);
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $param);
@@ -610,7 +645,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}
 
 		// ページング
-		$sql_limit = ' limit '.$offset.', '.$limit;
+		$sql_limit = ' limit ?, ? ';
+		array_push($data, (int)$offset, (int)$limit);
 
 		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_sort.$sql_limit);
 
