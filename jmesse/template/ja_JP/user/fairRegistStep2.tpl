@@ -138,144 +138,173 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
 		<div class="bgbox_set">
 			<div class="bgbox_base">
-
-			<div class="h1"><h1>見本市・展示会データベース</h1></div>
-
-<div class="h2">
-		<h2>見本市登録</h2>
-</div>
-
-<div class="in_main">
-<h3 class="img t_center"><img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2"></h3>
-
-
-
-<!-- left -->
-<p class="t_right">ユーザー：aaa@bbb.co.jp</a></p>
-<form>
-<table id="registration">
-<tr>
-<th class="item">見本市名</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="60" name="name"><br /></td>
-</tr>
-</table>
-
-<h4>過去の実績</h4>
-<table id="registration">
-<tr>
-<th class="item">対象年</th>
-<th class="required"></th>
-<td>
-<select name="performed_year" size="1" id="performed_year"><option value=""></option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option></select> 年実績
-	</td>
-</tr>
-<tr>
-<th class="item">総来場者数</th>
-<th class="required"></th>
-<td><input type="text" value="" size="10" name="visitor1"> <strong>人</strong> うち海外から <input type="text" value="" size="10" name="visitor2"> <strong>人</strong><br />
-半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
-	</td>
-</tr>
-<tr>
-<th class="item">総出展者数</th>
-<th class="required"></th>
-<td><input type="text" value="" size="10" name="exhibitor"> <strong>社</strong> うち海外から <input type="text" value="" size="10" name="exhibitor2"> <strong>社</strong><br />
-半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
-	</td>
-</tr>
-<tr>
-<th class="item">展示面積</th>
-<th class="required"></th>
-<td><input type="text" value="" size="10" name="exhibitarea"> <strong>sqm (NET)</strong><br />
-半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
-</td>
-</tr>
-</table>
-
-<h4>PR・キャッチフレーズ</h4>
-<table id="registration">
-<tr>
-<th class="item">キャッチフレーズ</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><textarea cols="60" rows="2" name="catchcopy"></textarea>
-100文字以内で簡潔に。例：20年の歴史をもつ○○で最大の環境機器の展示会。
-</td>
-</tr>
-<tr>
-<th class="item">PR・紹介文</th>
-<th class="required"></th>
-<td><textarea cols="60" rows="6" name="pr"></textarea>
-400文字以内で。
-	</td>
-</tr>
-<tr>
-<th class="item">見本市の紹介写真</th>
-<th class="required"></th>
-<td><input type="file" onblur="" size="40" value="" name="picture1"><br />
-<input type="file" onblur="" size="40" value="" name="picture2"><br />
-<input type="file" onblur="" size="40" value="" name="picture3"><br />
-画像ファイルはgif,jpegで縦・横600ピクセル以内のもの</td>
-</tr>
-</table>
-<h4>主催者</h4>
-<table id="registration">
-<tr>
-<th class="item">主催者</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="60" name="sponsor"></td>
-</tr>
-<th class="item">主催者連絡先</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><strong>TEL: </strong><input type="text" value="" size="30" name="sponsor-tel"><br />
-<strong>FAX: </strong><input type="text" value="" size="30" name="sponsor-fax"><br />
-
-電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
-例：東京の場合　+81-3-1234-5678<br />
-<strong>Email: </strong><input type="text" value="" size="60" name="sponsor-email"><br />
-</td>
-</tr>
-<tr>
-
-<tr>
-<th class="item">日本国内の照会先</th>
-<th class="required"></th>
-<td><strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
-<strong>団体名等： </strong><input type="text" value="" size="60" name="referrals"><br />
-<strong>TEL: </strong><input type="text" value="" size="30" name="sponsor-tel"><br />
-<strong>FAX: </strong><input type="text" value="" size="30" name="sponsor-fax"><br />
-電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
-例：東京の場合　+81-3-1234-5678<br />
-<strong>Email: </strong><input type="text" value="" size="60" name="sponsor-email"><br />
-</td>
-</tr>
-
-</table>
-
-<div class="line_dot">
-	<hr />
-</div>
-<table width="100%">
-<tr><td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
-<td align="right"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td></tr>
-</table>
-</form>
-
-
-
-</div>
-
+				<div class="h1"><h1>見本市・展示会データベース</h1></div>
+				<div class="h2"><h2>見本市登録</h2></div>
+				<div class="in_main">
+					<h3 class="img t_center"><img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2"></h3>
+					<p class="t_right">ユーザー：aaa@bbb.co.jp</p>
+					<form>
+						<h4>過去の実績</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">対象年</th>
+								<th class="required"></th>
+								<td>
+								<select name="performed_year" size="1" id="performed_year"><option value=""></option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option></select> 年実績
+								</td>
+							</tr>
+							<tr>
+								<th class="item">総来場者数</th>
+								<th class="required"></th>
+								<td><input type="text" value="" size="10" name="visitor1"> <strong>人</strong> うち海外から <input type="text" value="" size="10" name="visitor2"> <strong>人</strong><br />
+								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
+								</td>
+							</tr>
+							<tr>
+								<th class="item">総出展社数</th>
+								<th class="required"></th>
+								<td><input type="text" value="" size="10" name="exhibitor"> <strong>社</strong> うち海外から <input type="text" value="" size="10" name="exhibitor2"> <strong>社</strong><br />
+								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
+								</td>
+							</tr>
+							<tr>
+								<th class="item">展示面積</th>
+								<th class="required"></th>
+								<td><input type="text" value="" size="10" name="exhibitarea"> <strong>sqm (NET)</strong><br />
+								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
+								</td>
+							</tr>
+						</table>
+						<h4>PR・キャッチフレーズ</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">キャッチフレーズ</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><textarea cols="60" rows="2" name="catchcopy"></textarea>
+								500文字以内で簡潔に。例：20年の歴史をもつ○○で最大の環境機器の展示会。
+								</td>
+							</tr>
+							<tr>
+								<th class="item">PR・紹介文</th>
+								<th class="required"></th>
+								<td><textarea cols="60" rows="6" name="pr"></textarea>
+								1000文字以内で。
+								</td>
+							</tr>
+							<tr>
+								<th class="item">見本市の紹介写真</th>
+								<th class="required"></th>
+								<td><input type="file" onblur="" size="40" value="" name="picture1"><br />
+								<input type="file" onblur="" size="40" value="" name="picture2"><br />
+								<input type="file" onblur="" size="40" value="" name="picture3"><br />
+								画像ファイルはgif,jpegで縦・横600ピクセル以内のもの</td>
+							</tr>
+						</table>
+						<h4>主催者</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">主催者</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><input type="text" value="" size="60" name="sponsor"></td>
+							</tr>
+							<tr>
+								<th class="item">主催者連絡先</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><strong>TEL: </strong><input type="text" value="" size="30" name="sponsor-tel"><br />
+								<strong>FAX: </strong><input type="text" value="" size="30" name="sponsor-fax"><br />
+								電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
+								例：東京の場合　+81-3-1234-5678<br />
+								<strong>Email: </strong><input type="text" value="" size="60" name="sponsor-email"><br />
+								</td>
+							</tr>
+							<tr>
+								<th class="item">日本国内の照会先</th>
+								<th class="required"></th>
+								<td><strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
+								<strong>団体名等： </strong><input type="text" value="" size="60" name="referrals"><br />
+								<strong>TEL: </strong><input type="text" value="" size="30" name="sponsor-tel"><br />
+								<strong>FAX: </strong><input type="text" value="" size="30" name="sponsor-fax"><br />
+								電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
+								例：東京の場合　+81-3-1234-5678<br />
+								<strong>Email: </strong><input type="text" value="" size="60" name="sponsor-email"><br />
+								</td>
+							</tr>
+						</table>
+						<div class="line_dot"><hr /></div>
+						<table width="100%">
+							<tr>
+								<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
+								<td align="right"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
+							</tr>
+						</table>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
+	<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
 </div>
 <!-- /center -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 <!-- /contents -->

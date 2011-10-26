@@ -138,141 +138,163 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
 		<div class="bgbox_set">
 			<div class="bgbox_base">
+				<div class="h1"><h1>見本市・展示会データベース(J-messe)</h1></div>
+				<div class="h2"><h2>見本市登録</h2></div>
+				<div class="in_main">
+					<h3 class="img t_center"><img src="/j-messe/images/db/fair04.jpg" alt="見本市登録　ステップ3"></h3>
+					<p class="t_right">ユーザー：aaa@bbb.co.jp</a></p>
+					<form>
+						<h4>英文情報 - 海外へ見本市をPRしませんか -</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">海外への紹介を希望しますか</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>
+								<input name="english" value="yes" type="radio" onclick="engform_on(this);">希望する&nbsp;
+								<input name="english" value="no" type="radio" onclick="engform_off(this);">希望しない&nbsp;
+								</td>
+							</tr>
+						</table>
+						<div class="regist_english" id="engform">
+							<table id="registration">
+								<tr>
+									<th class="item">Fair Title<br />見本市名</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><input type="text" value="" size="50" name="e-name"> <br />
+									</td>
+								</tr>
+								<tr>
+									<th class="item">Teaser Copy<br />キャッチフレーズ</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><textarea cols="60" rows="2" name="catchcopy"></textarea>
+									500文字以内で簡潔に。
+									</td>
+								</tr>
+								<tr>
+									<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
+									<th class="required"></th>
+									<td><textarea cols="60" rows="6" name="pr"></textarea>
+									1000文字以内で。
+									</td>
+								</tr>
 
-			<div class="h1"><h1>見本市・展示会データベース(J-messe)</h1></div>
-
-<div class="h2">
-		<h2>見本市登録</h2>
-</div>
-
-<div class="in_main">
-<h3 class="img t_center"><img src="/j-messe/images/db/fair04.jpg" alt="見本市登録　ステップ3"></h3>
-
-
-
-<!-- left -->
-<p class="t_right">ユーザー：aaa@bbb.co.jp</a></p>
-<form>
-<table id="registration">
-<tr>
-<th class="item">見本市名</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="60" name="name"><br /></td>
-</tr>
-</table>
-
-<h4>英文情報 - 海外へ見本市をPRしませんか -</h4>
-<table id="registration">
-<tr>
-<th class="item">海外への紹介を希望しますか</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>
-<input name="english" value="yes" type="radio" onclick="engform_on(this);">希望する&nbsp;
-<input name="english" value="no" type="radio" onclick="engform_off(this);">希望しない&nbsp;
-	</td>
-</tr>
-</table>
-<div class="regist_english" id="engform">
-
-<table id="registration">
-<tr>
-<th class="item">Fair Title<br />見本市名</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="50" name="e-name"> <br />
-	</td>
-</tr>
-<tr>
-<th class="item">Teaser Copy<br />キャッチフレーズ</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><textarea cols="60" rows="2" name="catchcopy"></textarea>
-200文字以内で簡潔に。
-	</td>
-</tr>
-<tr>
-<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
-<th class="required"></th>
-<td><textarea cols="60" rows="6" name="pr"></textarea>
-800文字以内で。
-	</td>
-</tr>
-
-<tr>
-<th class="item">Exhibits<br />出品物</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><textarea cols="60" rows="2" name="e-items"></textarea>
-300文字以内で。
-	</td>
-</tr>
-<tr>
-<th class="item">City (other)<br />開催都市（その他）</th>
-<th class="required"></th>
-<td><input type="text" value="" size="50" name="e-city-other"><br />
-「開催都市」でその他にチェックをした方のみ入力してください。
-	</td>
-</tr>
-<tr>
-<th class="item">Venue<br />会場</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="50" name="e-venue"></td>
-</tr>
-<tr>
-<th class="item">Transportation<br />交通手段</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="50" name="e-transportation"> <br />
-例：30 minutes by bus from xxx airport.
-	</td>
-</tr>
-<tr>
-<th class="item">Admission ticket(other)<br />チケット入手法（その他)</th>
-<th class="required"></th>
-<td><input type="text" value="" size="50" name="e-transportation"> <br />
-「チケットの入手方法」でその他にチェックをした方のみ入力してください。
-	</td>
-</tr>
-<tr>
-<th class="item">Show Management<br />主催者</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="50" name="e-venue"></td>
-</tr>
-<tr>
-<th class="item">Agency in Japan<br />日本国内の連絡先</th>
-<th class="required"></th>
-<td><input type="text" value="" size="50" name="e-venue"><br />
-海外で開催される見本市で、日本国内に問合せ先がある場合のみ入力ください。</td>
-</tr>
-<tr>
-<th class="item">Details of last fair audited by<br />承認機関</th>
-<th class="required"></th>
-<td><input type="text" value="" size="50" name="e-venue"><br />
-「過去の実績」について承認機関がある場合は入力してください。<br />
-例：FKM, OJS</td>
-</tr>
-</table>
-</div>
-
-<div class="line_dot">
-	<hr />
-</div>
-<table width="100%">
-<tr><td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
-<td align="right"><img src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ" width="180" height="37" class="over" /></td></tr>
-</table>
-</form>
-
-
-</div>
-
+								<tr>
+									<th class="item">Exhibits<br />出品物</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><textarea cols="60" rows="2" name="e-items"></textarea>
+									300文字以内で。
+									</td>
+								</tr>
+								<tr>
+									<th class="item">City (other)<br />開催都市（その他）</th>
+									<th class="required"></th>
+									<td><input type="text" value="" size="50" name="e-city-other"><br />
+									「開催都市」でその他にチェックをした方のみ入力してください。
+									</td>
+								</tr>
+								<tr>
+									<th class="item">Venue<br />会場</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><input type="text" value="" size="50" name="e-venue"></td>
+								</tr>
+								<tr>
+									<th class="item">Transportation<br />交通手段</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><input type="text" value="" size="50" name="e-transportation"> <br />
+									例：30 minutes by bus from xxx airport.
+									</td>
+								</tr>
+								<tr>
+									<th class="item">Admission ticket(other)<br />チケット入手法（その他)</th>
+									<th class="required"></th>
+									<td><input type="text" value="" size="50" name="e-transportation"> <br />
+									「チケットの入手方法」でその他にチェックをした方のみ入力してください。
+									</td>
+								</tr>
+								<tr>
+									<th class="item">Show Management<br />主催者</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><input type="text" value="" size="50" name="e-venue"></td>
+								</tr>
+								<tr>
+									<th class="item">Agency in Japan<br />日本国内の連絡先</th>
+									<th class="required"></th>
+									<td><input type="text" value="" size="50" name="e-venue"><br />
+									海外で開催される見本市で、日本国内に問合せ先がある場合のみ入力ください。</td>
+								</tr>
+								<tr>
+									<th class="item">Details of last fair audited by<br />承認機関</th>
+									<th class="required"></th>
+									<td><input type="text" value="" size="50" name="e-venue"><br />
+									「過去の実績」について承認機関がある場合は入力してください。<br />
+									例：FKM, OJS</td>
+								</tr>
+							</table>
+						</div>
+						<div class="line_dot"><hr /></div>
+						<table width="100%">
+							<tr>
+								<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
+								<td align="right"><img src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ" width="180" height="37" class="over" /></td>
+							</tr>
+						</table>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
+	<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
 </div>
 <!-- /center -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 <!-- /contents -->

@@ -134,177 +134,194 @@
 </div>
 <!-- /left -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- center -->
 <div id="center">
 	<div id="main">
 		<div class="bgbox_set">
 			<div class="bgbox_base">
-
-			<div class="h1"><h1>見本市・展示会データベース</h1></div>
-
-<div class="h2">
-		<h2>見本市登録</h2>
-</div>
-
-<div class="in_main">
-<h3 class="img t_center"><img src="/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1"></h3>
-
-
-
-<!-- left -->
-<p class="t_right">ユーザー：abcdef123</a>
-<form>
-<h4>基本情報</h4>
-<table id="registration">
-<tr>
-<th class="item">見本市名</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="60" name="name"><br /></td>
-</tr>
-<tr>
-<th class="item">見本市略称</th>
-<th class="required"></th>
-<td><input type="text" value="" size="30" name="abbreviation"><br />
-<strong>半角英数</strong>で入力してください。　例：Ambiente。
-</td>
-</tr>
-
-<tr>
-<th class="item">見本市公式サイトURL</th>
-<th class="required"></th>
-<td><input type="text" value="http://" size="60" name="website">
-<br />
-URLはhttp:// から入力して下さい。</td>
-</tr>
-<tr>
-<th class="item">会期</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><select name="from_yyyy" size="1" id="from_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年
-<select name="from_mm" size="1" id="from_mm">
-<option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月<option value=""></option>
-<select name="from_dd" size="1" id="from_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日　～
-<select name="to_yyyy" size="1" id="to_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年 <select name="to_mm" size="1" id="to_mm"><option value="" selected="selected"></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月
-<select name="to_dd" size="1" id="to_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日まで
-</td>
-</tr>
-<tr>
-<th class="item">開催頻度</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="radio" value="毎年" name="freq">毎年&nbsp;
-<input type="radio" value="1年に2回" name="freq">1年に2回&nbsp;
-<input type="radio" value="1年に3回以上" name="freq">1年に3回以上&nbsp;
-<input type="radio" value="2年に1回" name="freq">2年に1回&nbsp;
-<input type="radio" value="3年に1回" name="freq">3年に1回&nbsp;<br />
-<input type="radio" value="4年に1回" name="freq">4年に1回&nbsp;
-<input type="radio" value="5年に1回" name="freq">5年に1回&nbsp;
-<input type="radio" value="不定期" name="freq">不定期&nbsp;
-<input type="radio" value="その他" name="freq">その他&nbsp;
-</td>
-</tr>
-</table>
-
-<h4>業種・取扱品目</h4>
-<table id="registration">
-<tr>
-<th class="item">業種</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td>
-現在、以下の業種が選択されています。<br />
-家具・インテリア用品<br />
-家庭用品、食卓用品、陶磁器等<br />
-<button class="modalInput" rel="#prompt">業種選択</button>
-
-
-
-	</td>
-</tr>
-<tr>
-<th class="item">取扱品目</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><textarea cols="60" rows="3" name="items"></textarea><br />
-150文字以内で、具体的な品目名を記載ください。
-	</td>
-</tr>
-</table>
-
-<h4>開催地・会場</h4>
-<table id="registration">
-<tr>
-<th class="item">開催地</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><br />
-	</td>
-</tr>
-<tr>
-<th class="item">会場名</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="50" name="venue">
-	</td>
-</tr>
-<tr>
-<th class="item">同展示会で使用する面積</th>
-<th class="required"></th>
-<td><input type="text" value="" size="5" name="netarea"> <strong>sqm（NET）</strong><br />
-半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
-	</td>
-</tr>
-<tr>
-<th class="item">会場までの交通手段</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input type="text" value="" size="60" name="trafic"><br />
-例：成田空港からA12バスで30分</td>
-</tr>
-<tr>
-
-<th class="item">入場資格</th>
-<th class="required"></th>
-<td>
-<input name="qualification" value="一般" type="radio">一般&nbsp;
-<input name="qualification" value="ビジネス関係者＆一般" type="radio">ビジネス関係者＆一般&nbsp;
-<input name="qualification" value="ビジネス関係者のみ" type="radio">ビジネス関係者のみ
-</td>
-</tr>
-
-<tr>
-
-<th class="item">チケットの入手方法</th>
-<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-<td><input name="ticket" value="登録の必要なし" type="checkbox">登録の必要なし　<input name="ticket" value="WEBからの事前登録" type="checkbox">WEBからの事前登録　<br /><input name="ticket" value="主催者・日本の照会先へ問い合わせ" type="checkbox">主催者・日本の照会先へ問い合わせ　<input name="ticket" value="当日会場で入手" type="checkbox">当日会場で入手　<br /><input name="ticket" value="その他" type="checkbox">その他　<input name="ticket-other" value="" size="50" type="text">
-<br />複数選択可能
-</td>
-</tr>
-<tr>
-
-<th class="item">出展申込締切日</th>
-<th class="required"></th>
-<td>
-<select name="deadline_yyyy" size="1" id="deadline_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年
-<select name="deadline_mm" size="1" id="deadlinem_mm">
-<option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月<option value=""></option>
-<select name="deadline_dd" size="1" id="deadline_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日</td>
-</tr>
-
-
-</table>
-
-<div class="line_dot">
-	<hr />
-</div>
-<table width="100%">
-<tr><td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
-<td align="right"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td></tr>
-</table>
-</form>
-
-
-</div>
-
+				<div class="h1"><h1>見本市・展示会データベース</h1></div>
+				<div class="h2"><h2>見本市登録</h2></div>
+				<div class="in_main">
+					<h3 class="img t_center"><img src="/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1"></h3>
+					<p class="t_right">ユーザー：abcdef123</a>
+					<form>
+						<h4>基本情報</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">見本市名</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><input type="text" value="" size="60" name="name"><br /></td>
+							</tr>
+							<tr>
+								<th class="item">見本市略称</th>
+								<th class="required"></th>
+								<td><input type="text" value="" size="30" name="abbreviation"><br />
+								<strong>半角英数</strong>で入力してください。　例：Ambiente。
+								</td>
+							</tr>
+							<tr>
+								<th class="item">見本市公式サイトURL</th>
+								<th class="required"></th>
+								<td><input type="text" value="http://" size="60" name="website">
+								<br />
+								URLはhttp:// から入力して下さい。</td>
+							</tr>
+							<tr>
+								<th class="item">会期</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><select name="from_yyyy" size="1" id="from_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年
+								<select name="from_mm" size="1" id="from_mm">
+								<option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月<option value=""></option>
+								<select name="from_dd" size="1" id="from_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日　～
+								<select name="to_yyyy" size="1" id="to_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年 <select name="to_mm" size="1" id="to_mm"><option value="" selected="selected"></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月
+								<select name="to_dd" size="1" id="to_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日まで
+								</td>
+							</tr>
+							<tr>
+								<th class="item">開催頻度</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><input type="radio" value="毎年" name="freq">毎年&nbsp;
+								<input type="radio" value="1年に2回" name="freq">1年に2回&nbsp;
+								<input type="radio" value="1年に3回以上" name="freq">1年に3回以上&nbsp;
+								<input type="radio" value="2年に1回" name="freq">2年に1回&nbsp;
+								<input type="radio" value="3年に1回" name="freq">3年に1回&nbsp;<br />
+								<input type="radio" value="4年に1回" name="freq">4年に1回&nbsp;
+								<input type="radio" value="5年に1回" name="freq">5年に1回&nbsp;
+								<input type="radio" value="不定期" name="freq">不定期&nbsp;
+								<input type="radio" value="その他" name="freq">その他&nbsp;
+								</td>
+							</tr>
+						</table>
+						<h4>業種・取扱品目</h4>
+						<table id="registration">
+							<tr>
+								<th class="item">業種</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>
+									現在、以下の業種が選択されています。<br />
+									家具・インテリア用品<br />
+									家庭用品、食卓用品、陶磁器等<br />
+									<button class="modalInput" rel="#prompt">業種選択</button>
+								</td>
+							</tr>
+							<tr>
+								<th class="item">取扱品目</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><textarea cols="60" rows="3" name="items"></textarea><br />
+								300文字以内で、具体的な品目名を記載ください。
+								</td>
+							</tr>
+						</table>
+							<h4>開催地・会場</h4>
+							<table id="registration">
+								<tr>
+									<th class="item">開催地</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<th class="item">会場名</th>
+									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+									<td><input type="text" value="" size="50" name="venue"></td>
+							</tr>
+							<tr>
+								<th class="item">同展示会で使用する面積</th>
+								<th class="required"></th>
+								<td><input type="text" value="" size="5" name="netarea"> <strong>sqm（NET）</strong><br />
+								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
+								</td>
+							</tr>
+							<tr>
+								<th class="item">会場までの交通手段</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><input type="text" value="" size="60" name="trafic"><br />
+								例：成田空港からA12バスで30分</td>
+							</tr>
+							<tr>
+								<th class="item">入場資格</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td>
+								<input name="qualification" value="一般" type="radio">一般&nbsp;
+								<input name="qualification" value="ビジネス関係者＆一般" type="radio">ビジネス関係者＆一般&nbsp;
+								<input name="qualification" value="ビジネス関係者のみ" type="radio">ビジネス関係者のみ
+								</td>
+							</tr>
+							<tr>
+								<th class="item">チケットの入手方法</th>
+								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+								<td><input name="ticket" value="登録の必要なし" type="checkbox">登録の必要なし　<input name="ticket" value="WEBからの事前登録" type="checkbox">WEBからの事前登録　<br /><input name="ticket" value="主催者・日本の照会先へ問い合わせ" type="checkbox">主催者・日本の照会先へ問い合わせ　<input name="ticket" value="当日会場で入手" type="checkbox">当日会場で入手　<br /><input name="ticket" value="その他" type="checkbox">その他　<input name="ticket-other" value="" size="50" type="text">
+								<br />複数選択可能
+								</td>
+							</tr>
+							<tr>
+								<th class="item">出展申込締切日</th>
+								<th class="required"></th>
+								<td>
+								<select name="deadline_yyyy" size="1" id="deadline_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年
+								<select name="deadline_mm" size="1" id="deadlinem_mm">
+								<option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月<option value=""></option>
+								<select name="deadline_dd" size="1" id="deadline_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日</td>
+							</tr>
+						</table>
+						<div class="line_dot"><hr /></div>
+						<table width="100%">
+							<tr>
+								<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
+								<td align="right"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
+							</tr>
+						</table>
+					</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
+	<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
 </div>
 <!-- /center -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 <!-- /contents -->
