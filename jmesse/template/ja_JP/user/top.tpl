@@ -15,8 +15,8 @@
 					<a href="{$config.url}?action_user_userDetail=true">ユーザ登録内容確認</a>
 					<br/><br/><br/>
 					<b>展示会情報メニュー</b><br/>
-					<a href="{$config.url}?action_user_fairRegist=true">新規展示会情報登録</a><br/>
-					<a href="{$config.url}?action_user_fairSearch=true">登録済みの展示会情報確認</a><br/>
+					<a href="{$config.url}?action_user_fairRegistStep1=true">新規展示会情報登録</a><br/>
+					<a href="{$config.url}?action_user_fairlist=true">My展示会情報一覧</a><br/>
 				</td>
 			</tr>
 		</table>
