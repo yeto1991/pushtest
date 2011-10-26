@@ -1,6 +1,6 @@
 <?php
 /**
- *  User/FairRegistStep2.php
+ *  User/FairRegistStep1.php
  *
  *  @author     {$author}
  *  @package    Jmesse
@@ -8,13 +8,13 @@
  */
 
 /**
- *  user_fairRegistStep2 Form implementation.
+ *  user_fairRegistStep1 Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_UserFairRegistStep2 extends Jmesse_ActionForm
+class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 {
     /**
      *  @access private
@@ -28,16 +28,16 @@ class Jmesse_Form_UserFairRegistStep2 extends Jmesse_ActionForm
 }
 
 /**
- *  user_fairRegistStep2 action implementation.
+ *  user_fairRegistStep1 action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
+class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 {
     /**
-     *  preprocess of user_fairRegistStep2 Action.
+     *  preprocess of user_fairRegistStep1 Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -49,14 +49,14 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
     }
 
     /**
-     *  user_fairRegistStep2 action implementation.
+     *  user_fairRegistStep1 action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     function perform()
     {
-		return 'user_fairRegistStep2';
+		return 'user_fairRegistStep1';
     }
 }
 
