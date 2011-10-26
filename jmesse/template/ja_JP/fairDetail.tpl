@@ -139,13 +139,11 @@
 								{/if}
 
 								<p>{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
+								{if ('' != $app.fair_detail.fair_url)}
 								<p class="t_right">
-									{if ('' != $app.fair_detail.fair_url)}
 									<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">公式ウェブサイト</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
-									{else}
-									公式ウェブサイト<img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
-									{/if}
 								</p>
+								{/if}
 								<!-- left -->
 								{if ('' != $app.fair_detail.photos_1 || '' != $app.fair_detail.photos_2 || '' != $app.fair_detail.photos_3)}
 								<div class="left" id="detail">
