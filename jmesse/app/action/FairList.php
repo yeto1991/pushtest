@@ -177,6 +177,19 @@ class Jmesse_Form_FairList extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'check_region_country' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => '選択（地域・国）', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 7,               // Maximum value
+			'regexp'      => '/^[0-9_]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'year' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_RADIO,  // Form type
@@ -379,6 +392,9 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$this->_dispZero();
 		}
 
+		// sessionの内容をformに設定
+		$this->_setSessionToForm();
+
 		return 'fairList';
 	}
 
@@ -464,6 +480,9 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		// パンくず
 		$this->_getPan();
 
+		// sessionの内容をformに設定
+		$this->_setSessionToForm();
+
 		return 'fairList';
 	}
 
@@ -532,6 +551,9 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		// パンくず
 		$this->_getPan();
 
+		// sessionの内容をformに設定
+		$this->_setSessionToForm();
+
 		return 'fairList';
 	}
 
@@ -553,6 +575,7 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		$search_cond['check_region'] = $this->af->get('check_region');
 		$search_cond['check_country'] = $this->af->get('check_country');
 		$search_cond['check_city'] = $this->af->get('check_city');
+		$search_cond['check_region_country'] = $this->af->get('check_region_country');
 		$search_cond['year'] = $this->af->get('year');
 		$search_cond['keyword'] = $this->af->get('keyword');
 		if (!$this->session->isStart()) {
@@ -562,10 +585,10 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 	}
 
 	/**
-	 * 検索条件を破棄。
+	 * 検索条件をFORMに設定。
 	 *
 	 */
-	function _clearSession() {
+	function _setSessionToForm() {
 		if (!$this->session->isStart()) {
 			return;
 		}
@@ -573,20 +596,22 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		if (null == $search_cond) {
 			return;
 		}
-		$search_cond['type'] ='';
-		$search_cond['i_2'] = '';
-		$search_cond['i_3'] = '';
-		$search_cond['v_2'] = '';
-		$search_cond['v_3'] = '';
-		$search_cond['v_4'] = '';
-		$search_cond['check_main_industory'] = '';
-		$search_cond['check_sub_industory'] = '';
-		$search_cond['check_region'] = '';
-		$search_cond['check_country'] = '';
-		$search_cond['check_city'] = '';
-		$search_cond['year'] = '';
-		$search_cond['keyword'] = '';
-		$this->session->set('search_cond', $search_cond);
+		$this->af->set('type', $search_cond['type']);
+		$this->af->set('i_2', $search_cond['i_2']);
+		$this->af->set('i_3', $search_cond['i_3']);
+		$this->af->set('v_2', $search_cond['v_2']);
+		$this->af->set('v_3', $search_cond['v_3']);
+		$this->af->set('v_4', $search_cond['v_4']);
+		$this->af->set('check_main_industory', $search_cond['check_main_industory']);
+		$this->af->set('check_sub_industory', $search_cond['check_sub_industory']);
+		$this->af->set('check_region', $search_cond['check_region']);
+		$this->af->set('check_country', $search_cond['check_country']);
+		$this->af->set('check_city', $search_cond['check_city']);
+		$this->af->set('check_region_country', $search_cond['check_region_country']);
+		$this->af->set('year', $search_cond['year']);
+		$this->af->set('keyword', $search_cond['keyword']);
+		$this->af->set('limit', $search_cond['limit']);
+		$this->af->set('sort', $search_cond['sort']);
 	}
 
 	/**
@@ -644,13 +669,6 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory());
 		}
 
-		// formに設定
-		$this->af->set('type', $search_cond['type']);
-		$this->af->set('i_2', $search_cond['i_2']);
-		$this->af->set('i_3', $search_cond['i_3']);
-		$this->af->set('v_2', $search_cond['v_2']);
-		$this->af->set('v_3', $search_cond['v_3']);
-		$this->af->set('v_4', $search_cond['v_4']);
 	}
 
 	/**
@@ -735,6 +753,10 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 	 */
 	function _setLimit() {
 		$search_cond = $this->session->get('search_cond');
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■formのlimit : '.$this->af->get('limit'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■sessionのlimit : '.$search_cond['limit']);
+
 		if (null != $this->af->get('limit') && '' != $this->af->get('limit') && 0 != $this->af->get('limit')) {
 			$search_cond['limit'] =  $this->af->get('limit');
 		}
@@ -742,6 +764,10 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$search_cond['limit'] =  20;
 		}
 		$this->session->set('search_cond', $search_cond);
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■formのlimit : '.$this->af->get('limit'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■sessionのlimit : '.$search_cond['limit']);
+
 		return $search_cond['limit'];
 	}
 
@@ -855,6 +881,12 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 
 	}
 
+	/**
+	 * フレンドリーURLの表示作成。
+	 *
+	 * @param array $list 見本市検索結果リスト
+	 * @return array 見本市検索結果リスト
+	 */
 	function _makeDetailUrl($list) {
 		for ($i = 0; $i < count($list); $i++) {
 			$url = '';

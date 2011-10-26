@@ -16,8 +16,61 @@
  */
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
+	/**
+	 * 見本市詳細情報取得SQL。
+	 *
+	 * @var string
+	 */
+	var $sql_get_fair_detail = "select jf.mihon_no, jf.keyword, jf.abbrev_title, jf.fair_title_jp, jf.fair_title_en, jf.profile_jp, jf.fair_url, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.venue_jp, jf.venue_en, jf.gross_floor_area, jf.transportation_jp, jf.exhibits_jp, jf.open_to, jf.admission_ticket_1, jf.admission_ticket_2, jf.admission_ticket_3, jf.admission_ticket_4, jf.other_admission_ticket_jp, jf.detailed_information_jp, jf.organizer_jp, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.photos_1, jf.photos_2, jf.photos_3, jcm_v1.discription_jp region_name, jcm_v2.discription_jp country_name, jcm_v3.discription_jp city_name, jcm_o.discription_jp open_to_name, jcm_mi1.discription_jp main_industory_name_1, jcm_si1.discription_jp sub_industory_name_1, jcm_mi2.discription_jp main_industory_name_2, jcm_si2.discription_jp sub_industory_name_2, jcm_mi3.discription_jp main_industory_name_3, jcm_si3.discription_jp sub_industory_name_3, jcm_mi4.discription_jp main_industory_name_4, jcm_si4.discription_jp sub_industory_name_4, jcm_mi5.discription_jp main_industory_name_5, jcm_si5.discription_jp sub_industory_name_5, jcm_mi6.discription_jp main_industory_name_6, jcm_si6.discription_jp sub_industory_name_6 from jm_fair jf left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_v1 on jf.region = jcm_v1.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_v2 on jf.region = jcm_v2.kbn_2 and jf.country = jcm_v2.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '003') jcm_v3 on jf.region = jcm_v3.kbn_2 and jf.country = jcm_v3.kbn_3 and jf.city = jcm_v3.kbn_4 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') jcm_o on jf.open_to = jcm_o.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi1 on jf.main_industory_1 = jcm_mi1.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si1 on jf.main_industory_1 = jcm_si1.kbn_2 and jf.sub_industory_1 = jcm_si1.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi2 on jf.main_industory_2 = jcm_mi2.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si2 on jf.main_industory_2 = jcm_si2.kbn_2 and jf.sub_industory_2 = jcm_si2.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi3 on jf.main_industory_3 = jcm_mi3.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si3 on jf.main_industory_3 = jcm_si3.kbn_2 and jf.sub_industory_3 = jcm_si3.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi4 on jf.main_industory_4 = jcm_mi4.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si4 on jf.main_industory_4 = jcm_si4.kbn_2 and jf.sub_industory_4 = jcm_si4.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi5 on jf.main_industory_5 = jcm_mi5.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si5 on jf.main_industory_5 = jcm_si5.kbn_2 and jf.sub_industory_5 = jcm_si5.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi6 on jf.main_industory_6 = jcm_mi6.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si6 on jf.main_industory_6 = jcm_si6.kbn_2 and jf.sub_industory_6 = jcm_si6.kbn_3 where jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') and jf.confirm_flag = '1' and mihon_no = ?";
+
+	function getFairDetail($mihon_no) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = $this->sql_get_fair_detail;
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array((int)$mihon_no);
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		return $res->fetchRow(DB_FETCHMODE_ASSOC);
+	}
+
+	/**
+	 * 見本市情報リスト取得SQL。
+	 */
 	var $sql_get_fair_list = "select jf.mihon_no, jf.fair_title_jp, abbrev_title, jf.fair_title_en, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.date_of_application, jf.date_of_registration, jf.negate_comment, jf.exhibits_jp, jf.exhibits_en, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name, jcm_1.discription_en region_name_en, jcm_2.discription_en country_name_en, jcm_3.discription_en city_name_en from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
 
+	/**
+	 * すべての有効な見本市情報の取得。
+	 *
+	 * @param unknown_type $offset
+	 * @param unknown_type $limit
+	 * @param unknown_type $sort
+	 */
 	function getFairListAll($offset, $limit, $sort) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
@@ -72,6 +125,10 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		return $list;
 	}
 
+	/**
+	 * すべての有効な見本市情報の件数を取得。
+	 *
+	 */
 	function getFairListAllCnt() {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
@@ -135,6 +192,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -180,6 +238,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -200,216 +259,259 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		return $row['cnt'];
 	}
 
+	/**
+	 * 見本市情報一覧検索条件WHERE句作成。
+	 *
+	 * @param array $data
+	 * @return string WHERE句
+	 */
 	function _makeWhere(&$data) {
 		$sql_ext = '';
 		$search_cond = $this->session->get('search_cond');
-		// 各リンク
-		// 業種（大分類）
-		$sql_tmp_1 = '';
-		if ('' != $search_cond['i_2']) {
-			$sql_tmp_1 .= ' main_industory_1 = ? or ';
-			$sql_tmp_1 .= ' main_industory_2 = ? or ';
-			$sql_tmp_1 .= ' main_industory_3 = ? or ';
-			$sql_tmp_1 .= ' main_industory_4 = ? or ';
-			$sql_tmp_1 .= ' main_industory_5 = ? or ';
-			$sql_tmp_1 .= ' main_industory_6 = ? ';
-			array_push($data, $search_cond['i_2']);
-			array_push($data, $search_cond['i_2']);
-			array_push($data, $search_cond['i_2']);
-			array_push($data, $search_cond['i_2']);
-			array_push($data, $search_cond['i_2']);
-			array_push($data, $search_cond['i_2']);
-		}
-		// 業種（小分類）
-		$sql_tmp_2 = '';
-		if ('' != $search_cond['i_3']) {
-			$sql_tmp_2 .= ' sub_industory_1 = ? or ';
-			$sql_tmp_2 .= ' sub_industory_2 = ? or ';
-			$sql_tmp_2 .= ' sub_industory_3 = ? or ';
-			$sql_tmp_2 .= ' sub_industory_4 = ? or ';
-			$sql_tmp_2 .= ' sub_industory_5 = ? or ';
-			$sql_tmp_2 .= ' sub_industory_6 = ? ';
-			array_push($data, $search_cond['i_3']);
-			array_push($data, $search_cond['i_3']);
-			array_push($data, $search_cond['i_3']);
-			array_push($data, $search_cond['i_3']);
-			array_push($data, $search_cond['i_3']);
-			array_push($data, $search_cond['i_3']);
-		}
-		$ary_sql = array($sql_tmp_1, $sql_tmp_2);
-		$sql_tmp = $this->_addWhereRelation($ary_sql, 'a');
-		if ('' != $sql_tmp) {
-			if ('' != $sql_ext) {
-				$sql_ext .= ' and ';
-			}
-			$sql_ext .= ' ( '.$sql_tmp.' ) ';
-		}
 
-		// リンクの場合ここはAND
-		// 地域
-		$sql_tmp_1 = '';
-		if ('' != $search_cond['v_2']) {
-			$sql_tmp_1 .= ' region = ? ';
-			array_push($data, $search_cond['v_2']);
-		}
-		// 国・地域
-		$sql_tmp_2 = '';
-		if ('' != $search_cond['v_3']) {
-			$sql_tmp_2 .= ' country = ? ';
-			array_push($data, $search_cond['v_3']);
-		}
-		// 都市
-		$sql_tmp_3 = '';
-		if ('' != $search_cond['v_4']) {
-			$sql_tmp_3 .= ' city = ? ';
-			array_push($data, $search_cond['v_4']);
-		}
-		$ary_sql = array($sql_tmp_1, $sql_tmp_2, $sql_tmp_3);
-		$sql_tmp = $this->_addWhereRelation($ary_sql, 'a');
-		if ('' != $sql_tmp) {
-			if ('' != $sql_ext) {
-				$sql_ext .= ' and ';
+		// 各リンク
+		$sql_tmp_l = '';
+		if ('i1' == $search_cond['type']) {
+			// 業種（大分類）
+			$sql_tmp_lmi = '';
+			if ('' != $search_cond['i_2']) {
+				$sql_tmp_lmi .= ' main_industory_1 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_2 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_3 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_4 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_5 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_6 = ? ';
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
 			}
-			$sql_ext .= ' ( '.$sql_tmp.' ) ';
+
+			// 業種（小分類）
+			$sql_tmp_lsi = '';
+			if ('' != $search_cond['i_3']) {
+				$sql_tmp_lsi .= ' sub_industory_1 = ? or ';
+				$sql_tmp_lsi .= ' sub_industory_2 = ? or ';
+				$sql_tmp_lsi .= ' sub_industory_3 = ? or ';
+				$sql_tmp_lsi .= ' sub_industory_4 = ? or ';
+				$sql_tmp_lsi .= ' sub_industory_5 = ? or ';
+				$sql_tmp_lsi .= ' sub_industory_6 = ? ';
+				array_push($data, $search_cond['i_3']);
+				array_push($data, $search_cond['i_3']);
+				array_push($data, $search_cond['i_3']);
+				array_push($data, $search_cond['i_3']);
+				array_push($data, $search_cond['i_3']);
+				array_push($data, $search_cond['i_3']);
+			}
+
+			// ANDで連結
+			$ary_sql = array($sql_tmp_lmi, $sql_tmp_lsi);
+			$sql_tmp_l = $this->_addWhereRelation($ary_sql, 'a');
+
+		} elseif ('v1' == $search_cond['type'] || 'v2' == $search_cond['type']) {
+			// 地域
+			$sql_tmp_lr = '';
+			if ('' != $search_cond['v_2']) {
+				$sql_tmp_lr .= ' region = ? ';
+				array_push($data, $search_cond['v_2']);
+			}
+
+			// 国・地域
+			$sql_tmp_lc = '';
+			if ('' != $search_cond['v_3']) {
+				$sql_tmp_lc .= ' country = ? ';
+				array_push($data, $search_cond['v_3']);
+			}
+
+			// 都市
+			$sql_tmp_lt = '';
+			if ('' != $search_cond['v_4']) {
+				$sql_tmp_lt .= ' city = ? ';
+				array_push($data, $search_cond['v_4']);
+			}
+
+			// ANDで連結
+			$ary_sql = array($sql_tmp_lr, $sql_tmp_lc, $sql_tmp_lt);
+			$sql_tmp_l = $this->_addWhereRelation($ary_sql, 'a');
 		}
 
 		// 各種チェックボックス
-		// 業種（大分類）
-		$sql_tmp_1 = '';
-		$check_main_industory = $search_cond['check_main_industory'];
-		for ($i = 0; $i < count($check_main_industory); $i++) {
-			if ('' != $check_main_industory[$i]) {
-				if ('' != $sql_tmp_1) {
-					$sql_tmp_1 .= ' or ';
+		$sql_tmp_c = '';
+		if ('i1' == $search_cond['type']) {
+			// 業種（小分類）
+			$sql_tmp_csi = '';
+			$check_sub_industory = $search_cond['check_sub_industory'];
+			for ($i = 0; $i < count($check_sub_industory); $i++) {
+				if ('' != $check_sub_industory[$i]) {
+					if ('' != $sql_tmp_csi) {
+						$sql_tmp_csi .= ' or ';
+					}
+					$sql_tmp_csi .= ' sub_industory_1 = ? or ';
+					$sql_tmp_csi .= ' sub_industory_2 = ? or ';
+					$sql_tmp_csi .= ' sub_industory_3 = ? or ';
+					$sql_tmp_csi .= ' sub_industory_4 = ? or ';
+					$sql_tmp_csi .= ' sub_industory_5 = ? or ';
+					$sql_tmp_csi .= ' sub_industory_6 = ? ';
+					array_push($data, $check_sub_industory[$i]);
+					array_push($data, $check_sub_industory[$i]);
+					array_push($data, $check_sub_industory[$i]);
+					array_push($data, $check_sub_industory[$i]);
+					array_push($data, $check_sub_industory[$i]);
+					array_push($data, $check_sub_industory[$i]);
 				}
-				$sql_tmp_1 .= ' main_industory_1 = ? or ';
-				$sql_tmp_1 .= ' main_industory_2 = ? or ';
-				$sql_tmp_1 .= ' main_industory_3 = ? or ';
-				$sql_tmp_1 .= ' main_industory_4 = ? or ';
-				$sql_tmp_1 .= ' main_industory_5 = ? or ';
-				$sql_tmp_1 .= ' main_industory_6 = ? ';
-				array_push($data, $check_main_industory[$i]);
-				array_push($data, $check_main_industory[$i]);
-				array_push($data, $check_main_industory[$i]);
-				array_push($data, $check_main_industory[$i]);
-				array_push($data, $check_main_industory[$i]);
-				array_push($data, $check_main_industory[$i]);
 			}
-		}
-		// 業種（小分類）
-		$sql_tmp_2 = '';
-		$check_sub_industory = $search_cond['check_sub_industory'];
-		for ($i = 0; $i < count($check_sub_industory); $i++) {
-			if ('' != $check_sub_industory[$i]) {
-				if ('' != $sql_tmp_2) {
-					$sql_tmp_2 .= ' or ';
-				}
-				$sql_tmp_2 .= ' sub_industory_1 = ? or ';
-				$sql_tmp_2 .= ' sub_industory_2 = ? or ';
-				$sql_tmp_2 .= ' sub_industory_3 = ? or ';
-				$sql_tmp_2 .= ' sub_industory_4 = ? or ';
-				$sql_tmp_2 .= ' sub_industory_5 = ? or ';
-				$sql_tmp_2 .= ' sub_industory_6 = ? ';
-				array_push($data, $check_sub_industory[$i]);
-				array_push($data, $check_sub_industory[$i]);
-				array_push($data, $check_sub_industory[$i]);
-				array_push($data, $check_sub_industory[$i]);
-				array_push($data, $check_sub_industory[$i]);
-				array_push($data, $check_sub_industory[$i]);
-			}
-		}
-		$ary_sql = array($sql_tmp_1, $sql_tmp_2);
-		$sql_tmp = $this->_addWhereRelation($ary_sql, 'a');
-		if ('' != $sql_tmp) {
-			if ('' != $sql_ext) {
-				$sql_ext .= ' and ';
-			}
-			$sql_ext .= ' ( '.$sql_tmp.' ) ';
-		}
 
-		// 地域
-		$sql_tmp_1 = '';
-		$check_region = $search_cond['check_region'];
-		for ($i = 0; $i < count($check_region); $i++) {
-			if ('' != $check_region[$i]) {
-				if ('' != $sql_tmp_1) {
-					$sql_tmp_1 .= ',';
+			// 地域
+			$sql_tmp_cr = '';
+			$check_region = $search_cond['check_region'];
+			for ($i = 0; $i < count($check_region); $i++) {
+				if ('' != $check_region[$i]) {
+					if ('' != $sql_tmp_cr) {
+						$sql_tmp_cr .= ',';
+					}
+					$sql_tmp_cr .= " ? ";
+					array_push($data, $check_region[$i]);
 				}
-				$sql_tmp_1 .= " ? ";
-				array_push($data, $check_region[$i]);
 			}
-		}
-		if ('' != $sql_tmp_1) {
-			$sql_tmp_1 = ' region in ('.$sql_tmp_1.') ';
-		}
-		// 国・地域
-		$sql_tmp_2 = '';
-		$check_country = $search_cond['check_country'];
-		for ($i = 0; $i < count($check_country); $i++) {
-			if ('' != $check_country[$i]) {
-				if ('' != $sql_tmp_2) {
-					$sql_tmp_2 .= ',';
+			if ('' != $sql_tmp_cr) {
+				$sql_tmp_cr = ' region in ('.$sql_tmp_cr.') ';
+			}
+
+			// 国・地域
+			$sql_tmp_cc = '';
+			$check_region_country = $search_cond['check_region_country'];
+			for ($i = 0; $i < count($check_region_country); $i++) {
+				if ('' != $check_region_country[$i]) {
+					$region_country = explode('_', $check_region_country[$i]);
+					if ('' != $sql_tmp_cc) {
+						$sql_tmp_cc .= ' or ';
+					}
+					$sql_tmp_cc .= " (region = ? and country = ?) ";
+					array_push($data, $region_country[0], $region_country[1]);
 				}
-				$sql_tmp_2 .= " ? ";
-				array_push($data, $check_country[$i]);
 			}
-		}
-		if ('' != $sql_tmp_2) {
-			$sql_tmp_2 = ' country in ('.$sql_tmp_2.') ';
-		}
-		// 都市
-		$sql_tmp_3 = '';
-		$check_city = $search_cond['check_city'];
-		for ($i = 0; $i < count($check_city); $i++) {
-			if ('' != $check_city[$i]) {
-				if ('' != $sql_tmp_3) {
-					$sql_tmp_3 .= ',';
+
+			// 地域と国はOR
+			$ary_sql = array($sql_tmp_cr, $sql_tmp_cc);
+			$sql_tmp = $this->_addWhereRelation($ary_sql, 'o');
+
+			// 業種（小）とはAND
+			$ary_sql = array($sql_tmp_csi, $sql_tmp);
+			$sql_tmp_c = $this->_addWhereRelation($ary_sql, 'a');
+
+		} elseif ('v1' == $search_cond['type']) {
+			// 国・地域
+			$sql_tmp_cc = '';
+			$check_country = $search_cond['check_country'];
+			for ($i = 0; $i < count($check_country); $i++) {
+				if ('' != $check_country[$i]) {
+					if ('' != $sql_tmp_cc) {
+						$sql_tmp_cc .= ',';
+					}
+					$sql_tmp_cc .= " ? ";
+					array_push($data, $check_country[$i]);
 				}
-				$sql_tmp_3 .= " ? ";
-				array_push($data, $check_city[$i]);
 			}
-		}
-		if ('' != $sql_tmp_3) {
-			$sql_tmp_3 = ' city in ('.$sql_tmp_3.') ';
-		}
-		$ary_sql = array($sql_tmp_1, $sql_tmp_2, $sql_tmp_3);
-		$sql_tmp = $this->_addWhereRelation($ary_sql, 'o');
-		if ('' != $sql_tmp) {
-			if ('' != $sql_ext) {
-				$sql_ext .= ' and ';
+			if ('' != $sql_tmp_cc) {
+				$sql_tmp_cc = ' country in ('.$sql_tmp_cc.') ';
 			}
-			$sql_ext .= ' ('.$sql_tmp.') ';
+
+			// 業種（大分類）
+			$sql_tmp_cmi = '';
+			$check_main_industory = $search_cond['check_main_industory'];
+			for ($i = 0; $i < count($check_main_industory); $i++) {
+				if ('' != $check_main_industory[$i]) {
+					if ('' != $sql_tmp_cmi) {
+						$sql_tmp_cmi .= ' or ';
+					}
+					$sql_tmp_cmi .= ' main_industory_1 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_2 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_3 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_4 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_5 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_6 = ? ';
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+				}
+			}
+
+			$ary_sql = array($sql_tmp_cc, $sql_tmp_cmi);
+			$sql_tmp_c = $this->_addWhereRelation($ary_sql, 'a');
+		} elseif ('v2' == $search_cond['type']) {
+			// 都市
+			$sql_tmp_ct = '';
+			$check_city = $search_cond['check_city'];
+			for ($i = 0; $i < count($check_city); $i++) {
+				if ('' != $check_city[$i]) {
+					if ('' != $sql_tmp_ct) {
+						$sql_tmp_ct .= ',';
+					}
+					$sql_tmp_ct .= " ? ";
+					array_push($data, $check_city[$i]);
+				}
+			}
+			if ('' != $sql_tmp_ct) {
+				$sql_tmp_ct = ' city in ('.$sql_tmp_ct.') ';
+			}
+
+			// 業種（大分類）
+			$sql_tmp_cmi = '';
+			$check_main_industory = $search_cond['check_main_industory'];
+			for ($i = 0; $i < count($check_main_industory); $i++) {
+				if ('' != $check_main_industory[$i]) {
+					if ('' != $sql_tmp_cmi) {
+						$sql_tmp_cmi .= ' or ';
+					}
+					$sql_tmp_cmi .= ' main_industory_1 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_2 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_3 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_4 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_5 = ? or ';
+					$sql_tmp_cmi .= ' main_industory_6 = ? ';
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+					array_push($data, $check_main_industory[$i]);
+				}
+			}
+
+			$ary_sql = array($sql_tmp_ct, $sql_tmp_cmi);
+			$sql_tmp_c = $this->_addWhereRelation($ary_sql, 'a');
 		}
 
 		// キーワード
-		$sql_tmp = '';
+		$sql_tmp_kw = '';
 		$keyword = $search_cond['keyword'];
 		if ('' != $keyword) {
 			$ary_keyword = explode(' ', $keyword);
 			for ($i = 0; $i < count($ary_keyword); $i++) {
 				if ('' != $ary_keyword[$i]) {
-					if ('' != $sql_tmp) {
-						$sql_tmp .= ' or ';
+					if ('' != $sql_tmp_kw) {
+						$sql_tmp_kw .= ' or ';
 					}
-					$sql_tmp .= ' search_key like ? ';
+					$sql_tmp_kw .= ' search_key like ? ';
 					array_push($data, '%'.$ary_keyword[$i].'%');
 				}
 			}
 		}
-		if ('' != $sql_tmp) {
-			if ('' != $sql_ext) {
-				$sql_ext .= ' and ';
-			}
-			$sql_ext .= ' ('.$sql_tmp.') ';
-		}
 
 		// これから or 含む過去
+		$sql_tmp_y = '';
 		if ('a' != $search_cond['year']) {
-			if ('' != $sql_ext) {
-				$sql_ext .= ' and ';
-			}
-			$sql_ext .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
+			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
 		}
+
+		// リンク、チェックボックス、キーワード、これから？をAND
+		$ary_sql = array($sql_tmp_l, $sql_tmp_c, $sql_tmp_kw, $sql_tmp_y);
+		$sql_ext = $this->_addWhereRelation($ary_sql, 'a');
 
 		return $sql_ext;
 	}
@@ -655,6 +757,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -705,6 +808,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -768,6 +872,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -836,6 +941,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {

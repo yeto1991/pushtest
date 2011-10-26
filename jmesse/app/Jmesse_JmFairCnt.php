@@ -247,7 +247,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '1' group by jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num order by jcm.kbn_2 asc, jcm.disp_num asc";
+		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, concat(jcm.kbn_2, '_', jcm.kbn_3) region_country, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '1' group by jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num order by jcm.kbn_2 asc, jcm.disp_num asc";
 
 		$res = $db->db->query($sql);
 
@@ -286,7 +286,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '0' group by jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num order by jcm.kbn_2 asc, jcm.disp_num asc";
+		$sql = "select jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, concat(jcm.kbn_2, '_', jcm.kbn_3) region_country, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num, ifnull(sum(jfc.fair_cnt), 0) fair_cnt from (select * from jm_code_m where kbn_1 = '003') jcm left outer join (select * from jm_fair_cnt where kbn_1 = '003') jfc on jcm.kbn_2 = jfc.kbn_2 and jcm.kbn_3 = jfc.kbn_3 and jcm.kbn_4 = jfc.kbn_4 where jcm.kbn_2 <> '001' and jcm.kbn_3 not in ('000', '001') and jcm.kbn_4 = '000' and jcm.disp_cd = '0' group by jcm.kbn_2, jcm.kbn_3, jcm.kbn_4, jcm.discription_jp, jcm.discription_en, jcm.disp_cd, jcm.disp_num order by jcm.kbn_2 asc, jcm.disp_num asc";
 
 		$res = $db->db->query($sql);
 

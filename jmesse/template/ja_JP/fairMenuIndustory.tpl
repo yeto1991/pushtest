@@ -9,9 +9,9 @@
 	<h4>絞り込む</h4>
 		<p>
 			{section name=it loop=$app.sub_industory_cnt}
-			<input type="checkbox" name="check_sub_industory[]" id="check_sub_industory[]" value="{$app.sub_industory_cnt[it].kbn_2}"
-				{section name=it2 loop=$form.check_sub_industry}
-					{if ($form.check_sub_industry[it2] == $app.sub_industory_cnt[it].kbn_2)}
+			<input type="checkbox" name="check_sub_industory[]" id="check_sub_industory[]" value="{$app.sub_industory_cnt[it].kbn_3}"
+				{section name=it2 loop=$form.check_sub_industory}
+					{if ($form.check_sub_industory[it2] == $app.sub_industory_cnt[it].kbn_3)}
 						checked
 					{/if}
 				{/section}
@@ -39,13 +39,25 @@
 			<div class="area1">
 			{/if}
 				<p>
-					<input type="checkbox" name="check_region[]" id="check_region[]" value="{$app.region_cnt[it].kbn_2}">{$app.region_cnt[it].discription_jp} ({$app.region_cnt[it].fair_cnt})
+					<input type="checkbox" name="check_region[]" id="check_region[]" value="{$app.region_cnt[it].kbn_2}"
+					{section name=it3 loop=$form.check_region}
+						{if ($form.check_region[it3] == $app.region_cnt[it].kbn_2)}
+						checked
+						{/if}
+					{/section}
+					/>{$app.region_cnt[it].discription_jp} ({$app.region_cnt[it].fair_cnt})
 				</p>
 				<div>
 					<p>
 						{section name=it2 loop=$app.country_disp_cnt}
 						{if ($app.region_cnt[it].kbn_2 == $app.country_disp_cnt[it2].kbn_2)}
-						<input type="checkbox" name="check_country[]" id="check_country[]" value="{$app.country_disp_cnt[it2].kbn_3}">{$app.country_disp_cnt[it2].discription_jp}
+						<input type="checkbox" name="check_region_country[]" id="check_region_country[]" value="{$app.country_disp_cnt[it2].region_country}"
+						{section name=it3 loop=$form.check_region_country}
+							{if ($form.check_region_country[it3] == $app.country_disp_cnt[it2].region_country)}
+							checked
+							{/if}
+						{/section}
+						/>{$app.country_disp_cnt[it2].discription_jp}
 						{/if}
 						{/section}
 					</p>
@@ -57,7 +69,13 @@
 						<span class="close">
 						{section name=it2 loop=$app.country_close_cnt}
 						{if ($app.region_cnt[it].kbn_2 == $app.country_close_cnt[it2].kbn_2)}
-						<input type="checkbox" name="check_country[]" id="check_country[]" value="{$app.country_close_cnt[it2].kbn_3}">{$app.country_close_cnt[it2].discription_jp}
+						<input type="checkbox" name="check_region_country[]" id="check_region_country[]" value="{$app.country_close_cnt[it2].region_country}"
+						{section name=it3 loop=$form.check_region_country}
+							{if ($form.check_region_country[it3] == $app.country_close_cnt[it2].region_country)}
+								checked
+							{/if}
+						{/section}
+						/>{$app.country_close_cnt[it2].discription_jp}
 						{/if}
 						{/section}
 					</p>
