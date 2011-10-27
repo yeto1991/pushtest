@@ -21,6 +21,19 @@ class Jmesse_Form_UserUserDetail extends Jmesse_ActionForm
 	*  @var    array   form definition.
 	*/
 	var $form = array(
+		'print' => array(
+			'type'        => VAR_TYPE_INT,    // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'プリント用表示', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_HIDDEN,
