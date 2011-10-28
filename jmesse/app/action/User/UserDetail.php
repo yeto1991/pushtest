@@ -244,7 +244,7 @@ class Jmesse_Action_UserUserDetail extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録テーブル検索エラー');
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル検索エラー');
 			return 'error';
 		}
 		//Form値設定
