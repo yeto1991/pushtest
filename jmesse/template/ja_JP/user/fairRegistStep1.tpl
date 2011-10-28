@@ -4,520 +4,753 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
-<title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
-<script type="text/javascript" src="/js/jquery.js"></script>
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
+{if ('1' == $form.print)}
+<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
+{/if}
 
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript">
+<!--
+{literal}
+	function init(url, region, country, city) {
+		if ('' != region) {
+			dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0', '', '#country', country);
+			if ('' != country) {
+				dynamicpulldownlist(url+'?action_json_getCity=true&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=0', '', '#city', city);
+			}
+		}
+	}
+
+
+	$(function(){
+		$("#include_header").load("http://localhost/jmesse/www/header.html");
+	});
+
+	$(function(){
+		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
+	});
+
+	$(function(){
+		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
+	});
+
+	$(document).ready(function() {
+		var triggers = $(".modalInput").overlay({
+			// some mask tweaks suitable for modal dialogs
+			mask : {
+				color : '#ebecff',
+				loadSpeed : 200,
+				opacity : 0.9
+			},
+			top : 20,
+			close : null,
+			closeOnClick : true
+		});
+		alert(JSON.stringify(triggers.eq(1)));
+		$("#FIN_SELECT").click(function(e) {
+			// close the overlay
+			triggers.overlay().close();
+			// get user input
+			var input = $("#prompt input");
+			// do something with the answer
+			alert(JSON.stringify(input));
+			//選択値の洗い替え
+			$('表示先のCSSセレクター').empty();
+			$('表示先のCSSセレクター').html(input);
+		});
+		$('.close').click(function(){
+			triggers.overlay().close();
+		});
+	});
+
+	function selected_industory() {
+		var sub_industory_list = document.getElementsByName('check_sub_industory');
+		var j = 1;
+		for (var i = 0; i < sub_industory_list.length; i++) {
+			if (true == sub_industory_list[i].checked) {
+				industory = sub_industory_list[i].split('_');
+				document.getElementById('main_industory_' + j++).value = industory[0];
+				document.getElementById('sub_industory_' + j++).value = industory[1];
+				document.getElementById('main_industory_name_' + j++).value = industory[0];
+				document.getElementById('sub_industory_name_' + j++).value = industory[1];
+			}
+		}
+	}
+
+	function set_country(url) {
+		var region = document.getElementById('region').options[document.getElementById('region').selectedIndex].value;
+		dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0', '', '#country', null);
+		clear_city();
+	}
+
+	function set_city(url) {
+		var region = document.getElementById('region').options[document.getElementById('region').selectedIndex].value;
+		var country = document.getElementById('country').options[document.getElementById('country').selectedIndex].value;
+		dynamicpulldownlist(url+'?action_json_getCity=true&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=0', '', '#city', null);
+	}
+
+	function clear_city() {
+		var select_city = document.getElementById('city');
+		for (var i = select_city.length -1; i >= 0 ; i--) {
+			select_city.remove(i);
+		}
+		var op = document.createElement('option');
+		op.value = '';
+		op.innerHTML = '...';
+		document.getElementById('city').appendChild(op);
+
+	}
+
+	function next() {
+		document.getElementById('form_fairRegistStep1').submit();
+	}
+{/literal}
+// -->
+</script>
+<title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 </head>
+<body class="layout-LC highlight-match j-messe" onload="init('{$config.url}', '{$form.region}', '{$form.country}', '{$form.city}')">
+	<!-- header -->
+	<div id="include_header"></div>
+	<!-- /header -->
 
-
-<body class="layout-LC highlight-match j-messe">
-<!-- header -->
-<div id="skip_menu"><a href="#center">skip to contents.</a></div>
-<div id="header">
-<div class="area">
-	<p id="logo"><a href="/indexj.html"><img src="/images/jp/logo.gif" alt="JETRO 日本貿易振興機構（ジェトロ）" height="41" width="283" /></a></p>
-	<div id="headlink">
-		<ul class="clearfix">
-			<li><a href="/contact/"><img src="/images/jp/headmenu01.gif" alt="お問い合わせ" height="9" width="67" /></a></li>
-			<li><a href="/guide/"><img src="/images/jp/headmenu05.gif" alt="サイト活用ガイド" height="9" width="82" /></a></li>
-			<li><a href="/sitemap/"><img src="/images/jp/headmenu02.gif" alt="サイトマップ" height="9" width="62" /></a></li>
-			<li class="end"><a href="/"><img src="/images/jp/headmenu03.gif" alt="Global Home" height="9" width="74" /></a></li>
+	<!-- bread -->
+	<div id="bread">
+		<ul>
+			<li><a href="/indexj.html">HOME</a></li>
+			<li><a href="/database/">引き合い・展示会検索</a></li>
+			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
+			<li>見本市登録</li>
 		</ul>
 	</div>
-	<div id="headbox">
-		<!-- Site Search Box Begins  -->
-		<form method="get" action="http://search.jetro.go.jp/ja_all/search.x">
-		<div id="search">
-		<input type="text" name="q" value="サイト内検索" id="MF_form_phrase" class="search_area" autocomplete="off" onclick="if(this.value=='サイト内検索') this.value=''; this.style.color = '#555555';" onblur="if(!this.value) this.value='サイト内検索';" style="color: #555555;" />
-		<input type="image" class="search_btn" alt="検索" src="/images/jp/btn-search.gif" value="search" name="sa" />
-		<input type="hidden" name="ie" value="UTF-8" />
-		<input type="hidden" name="page" value="1" />
-		<a href="/search/"><img src="/images/jp/icon-question.gif" alt="HELP" width="14" height="14" /></a>
-		</div>
-		</form>
-		<!-- Site Search Box eEnd  -->
+	<!-- /bread -->
 
-		<div id="fontsizech">
-			<div><img src="/images/jp/fontsizech.gif" alt="文字のサイズを変更できます" width="45" height="9" /></div>
-			<ul>
-				<li id="fontsizech_small"><a href="#"><img src="/images/jp/fontsizech_small.gif" alt="標準の文字サイズ" width="23" height="45" /></a></li>
-				<li id="fontsizech_large"><a href="#"><img src="/images/jp/fontsizech_large.gif" alt="大きい文字サイズ" width="23" height="45" /></a></li>
-			</ul>
-		</div>
-		<noscript id="fontsizech_noscriptalert">
-			<p>文字サイズの変更機能にJavascriptを使用しています。Javascriptがお使いになれない環境では、ブラウザの機能を使用して文字サイズの変更を行ってください。</p>
-		</noscript>
-	</div>
-</div>
-</div>
-<!-- global -->
-<div id="globalnavi">
-<ul>
-	<li class="g01"><a href="/indexj.html"><img src="/images/jp/global01.gif" alt="ホーム" height="37" width="104" /></a></li>
-	<li class="g02"><a href="/biz/"><img src="/images/jp/global02.gif" alt="海外ビジネス情報" height="37" width="177" /></a></li>
-	<li class="g03"><a href="/database/"><img src="/images/jp/global03.gif" alt="引き合い・展示会検索" height="37" width="168" /></a></li>
-	<li class="g04"><a href="/news_events/"><img src="/images/jp/global04.gif" alt="ニュース・イベント" height="37" width="158" /></a></li>
-	<li class="g05"><a href="/support_services/"><img src="/images/jp/global05.gif" alt="サポート&amp;サービス" height="37" width="178" /></a></li>
-	<li class="g06"><a href="/jetro/"><img src="/images/jp/global06.gif" alt="ジェトロについて" height="37" width="159" /></a></li>
-</ul>
-</div>
-<!-- /global -->
-<!-- /header -->
+	<!-- contents -->
+	<div id="contents">
+		<div class="area">
 
-<!-- bread -->
-<div id="bread">
-<ul>
-	<li><a href="/indexj.html">HOME</a></li>
-	<li><a href="/database/">引き合い・展示会検索</a></li>
-	<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-	<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-	<li>見本市登録</li>
-</ul>
-</div>
-<!-- /bread -->
+			<!-- left -->
+			<div id="include_left_menu"></div>
+			<!-- /left -->
 
-<!-- contents -->
-<div id="contents">
+			<!-- center -->
+			<div id="center">
+				<div id="main">
+					<div class="bgbox_set">
+						<div class="bgbox_base">
+							<div class="h1">
+								<h1>見本市・展示会データベース</h1>
+							</div>
+							<div class="h2">
+								<h2>見本市登録</h2>
+							</div>
+							<div class="in_main">
+								<h3 class="img t_center">
+									<img src="/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1" />
+								</h3>
+								<p class="t_right">
+									ユーザー：{$session.email}
+								</p>
 
+								{* エラー表示 *}
+								{if count($errors)}
+									{foreach from=$errors item=error}
+										<p class="error-message" id="error-pagetop">{$error}</p>
+									{/foreach}
+								{/if}
 
+								<form name="form_fairRegistStep1" id="form_fairRegistStep1" method="post" action="">
+									<!-- HIDDEN -->
+									<input type="hidden" name="action_user_fairRegistStep2" id="action_user_fairRegistStep2" value="dummy" />
 
-<div class="area">
-<!-- left -->
-<div id="left">
-	<div class="bgbox_set">
-	<p id="title"><a href="/j-messe/">見本市・展示会データベース(J-messe)</a></p>
-	<div class="bgbox_base">
-		<div class="bgbox_in">
-			<div class="submenu no_border">
-<ul class="navi">
-	<li class="lv01_title"><a href="/j-messe/tradefair/industry/">業種別に見る</a></li>
-	<li class="lv01_title"><a href="/j-messe/tradefair/country/">開催地別に見る</a></li>
-	<li class="lv01_title"><a href="/j-messe/tradefair/">詳細検索</a></li>
-	<li class="lv01_title"><a href="/j-messe/new_fair/">新着見本市</a></li>
-	<li class="lv01_title"><a href="/j-messe/ranking/">月間ランキング</a></li>
-</ul>
+									<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
+									<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
+									<input type="hidden" name="main_industory_2" id="main_industory_2" value="{$form.main_industory_2}" />
+									<input type="hidden" name="sub_industory_2" id="sub_industory_2" value="{$form.sub_industory_2}" />
+									<input type="hidden" name="main_industory_3" id="main_industory_3" value="{$form.main_industory_3}" />
+									<input type="hidden" name="sub_industory_3" id="sub_industory_3" value="{$form.sub_industory_3}" />
+									<input type="hidden" name="main_industory_4" id="main_industory_4" value="{$form.main_industory_4}" />
+									<input type="hidden" name="sub_industory_4" id="sub_industory_4" value="{$form.sub_industory_4}" />
+									<input type="hidden" name="main_industory_5" id="main_industory_5" value="{$form.main_industory_5}" />
+									<input type="hidden" name="sub_industory_5" id="sub_industory_5" value="{$form.sub_industory_5}" />
+									<input type="hidden" name="main_industory_6" id="main_industory_6" value="{$form.main_industory_6}" />
+									<input type="hidden" name="sub_industory_6" id="sub_industory_6" value="{$form.sub_industory_6}" />
 
-<ul class="navi">
-	<li class="lv01_label">出展お役立ち情報</li>
-	<li class="lv02_title"><a href="/j-messe/w-info/">見本市レポート</a></li>
-	<li class="lv02_title"><a href="/services/tradefair/">出展支援</a></li>
-	<li class="lv02_title"><a href="/j-messe/center/">世界の展示会場</a></li>
-	<li class="lv02_title"><a href="/j-messe/business/">世界の見本市ビジネス動向</a></li>
-</ul>
-<ul class="navi no_border">
-	<li class="lv01_label">出展者向け</li>
-	<li class="lv02_title on"><a href="/j-messe/registration/">見本市登録</a></li>
-</ul>
-			</div>
-		</div>
-	</div>
-</div>
+									<input type="hidden" name="main_industory_name_1" id="main_industory_name_1" value="{$form.main_industory_name_1}" />
+									<input type="hidden" name="sub_industory_name_1" id="sub_industory_name_1" value="{$form.sub_industory_name_1}" />
+									<input type="hidden" name="main_industory_name_2" id="main_industory_name_2" value="{$form.main_industory_name_2}" />
+									<input type="hidden" name="sub_industory_name_2" id="sub_industory_name_2" value="{$form.sub_industory_name_2}" />
+									<input type="hidden" name="main_industory_name_3" id="main_industory_name_3" value="{$form.main_industory_name_3}" />
+									<input type="hidden" name="sub_industory_name_3" id="sub_industory_name_3" value="{$form.sub_industory_name_3}" />
+									<input type="hidden" name="main_industory_name_4" id="main_industory_name_4" value="{$form.main_industory_name_4}" />
+									<input type="hidden" name="sub_industory_name_4" id="sub_industory_name_4" value="{$form.sub_industory_name_4}" />
+									<input type="hidden" name="main_industory_name_5" id="main_industory_name_5" value="{$form.main_industory_name_5}" />
+									<input type="hidden" name="sub_industory_name_5" id="sub_industory_name_5" value="{$form.sub_industory_name_5}" />
+									<input type="hidden" name="main_industory_name_6" id="main_industory_name_6" value="{$form.main_industory_name_6}" />
+									<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_name_6}" />
+									<!-- /HIDDEN -->
 
-<div id="sub_inquiry">
-	<div class="bgbox_set">
-		<dl class="frame_beige">
-			<dt>お問い合わせ<br />ご意見・ご感想</dt>
-			<dd>ジェトロ展示事業課<br />
-			（TEL:03-3582-5541）<br />
-			<a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form/fm/faa/inquiry_j');" class="icon_arrow">お問い合わせ</a></dd>
-		</dl>
-	</div>
-</div>
-</div>
-<!-- /left -->
+									<h4>基本情報</h4>
+									<table id="registration">
+										<tr>
+											<th class="item">見本市名</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td><input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br /></td>
+										</tr>
+										<tr>
+											<th class="item">見本市略称</th>
+											<th class="required"></th>
+											<td>
+												<input type="text" value="{$form.abbrev_title}" size="30"  name="abbrev_title" id="abbrev_title" maxlength="255" /><br />
+												<strong>半角英数</strong>で入力してください。 例：Ambiente。
+											</td>
+										</tr>
+										<tr>
+											<th class="item">見本市公式サイトURL</th>
+											<th class="required"></th>
+											<td>
+												<input type="text" value="{if ('' == $form.fair_url)}http://{else}{$form.fair_url}{/if}" size="60" name="fair_url" id="fair_url" maxlength="255" /><br />
+												URLはhttp:// から入力して下さい。
+											</td>
+										</tr>
+										<tr>
+											<th class="item">会期</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												<select name="date_from_yyyy" size="1" id="date_from_yyyy">
+													<option value=""></option>
+													{section name=it loop=$app.year_list}
+													<option value="{$app.year_list[it]}" {if $app.year_list[it]==$form.date_from_yyyy}selected{/if}>{$app.year_list[it]}</option>
+													{/section}
+												</select> 年
+												<select name="date_from_mm" size="1" id="date_from_mm">
+													<option value=""></option>
+													<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>1</option>
+													<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>2</option>
+													<option value="03" {if ('03' == $form.date_from_mm)}selected{/if}>3</option>
+													<option value="04" {if ('04' == $form.date_from_mm)}selected{/if}>4</option>
+													<option value="05" {if ('05' == $form.date_from_mm)}selected{/if}>5</option>
+													<option value="06" {if ('06' == $form.date_from_mm)}selected{/if}>6</option>
+													<option value="07" {if ('07' == $form.date_from_mm)}selected{/if}>7</option>
+													<option value="08" {if ('08' == $form.date_from_mm)}selected{/if}>8</option>
+													<option value="09" {if ('09' == $form.date_from_mm)}selected{/if}>9</option>
+													<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
+													<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
+													<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
+												</select> 月
+												<select name="date_from_dd" size="1" id="date_from_dd">
+													<option value=""></option>
+													<option value="01" {if ('01' == $form.date_from_dd)}selected{/if}>1</option>
+													<option value="02" {if ('02' == $form.date_from_dd)}selected{/if}>2</option>
+													<option value="03" {if ('03' == $form.date_from_dd)}selected{/if}>3</option>
+													<option value="04" {if ('04' == $form.date_from_dd)}selected{/if}>4</option>
+													<option value="05" {if ('05' == $form.date_from_dd)}selected{/if}>5</option>
+													<option value="06" {if ('06' == $form.date_from_dd)}selected{/if}>6</option>
+													<option value="07" {if ('07' == $form.date_from_dd)}selected{/if}>7</option>
+													<option value="08" {if ('08' == $form.date_from_dd)}selected{/if}>8</option>
+													<option value="09" {if ('09' == $form.date_from_dd)}selected{/if}>9</option>
+													<option value="10" {if ('10' == $form.date_from_dd)}selected{/if}>10</option>
+													<option value="11" {if ('11' == $form.date_from_dd)}selected{/if}>11</option>
+													<option value="12" {if ('12' == $form.date_from_dd)}selected{/if}>12</option>
+													<option value="13" {if ('13' == $form.date_from_dd)}selected{/if}>13</option>
+													<option value="14" {if ('14' == $form.date_from_dd)}selected{/if}>14</option>
+													<option value="15" {if ('15' == $form.date_from_dd)}selected{/if}>15</option>
+													<option value="16" {if ('16' == $form.date_from_dd)}selected{/if}>16</option>
+													<option value="17" {if ('17' == $form.date_from_dd)}selected{/if}>17</option>
+													<option value="18" {if ('18' == $form.date_from_dd)}selected{/if}>18</option>
+													<option value="19" {if ('19' == $form.date_from_dd)}selected{/if}>19</option>
+													<option value="20" {if ('20' == $form.date_from_dd)}selected{/if}>20</option>
+													<option value="21" {if ('21' == $form.date_from_dd)}selected{/if}>21</option>
+													<option value="22" {if ('22' == $form.date_from_dd)}selected{/if}>22</option>
+													<option value="23" {if ('23' == $form.date_from_dd)}selected{/if}>23</option>
+													<option value="24" {if ('24' == $form.date_from_dd)}selected{/if}>24</option>
+													<option value="25" {if ('25' == $form.date_from_dd)}selected{/if}>25</option>
+													<option value="26" {if ('26' == $form.date_from_dd)}selected{/if}>26</option>
+													<option value="27" {if ('27' == $form.date_from_dd)}selected{/if}>27</option>
+													<option value="28" {if ('28' == $form.date_from_dd)}selected{/if}>28</option>
+													<option value="29" {if ('29' == $form.date_from_dd)}selected{/if}>29</option>
+													<option value="30" {if ('30' == $form.date_from_dd)}selected{/if}>30</option>
+													<option value="31" {if ('31' == $form.date_from_dd)}selected{/if}>31</option>
+												</select> 日 ～
+												<select name="date_to_yyyy" size="1" id="date_to_yyyy">
+													<option value=""></option>
+													{section name=it loop=$app.year_list}
+													<option value="{$app.year_list[it]}" {if ($app.year_list[it]==$form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
+													{/section}
+												</select> 年
+												<select name="date_to_mm" size="1" id="date_to_mm">
+													<option value="" ></option>
+													<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
+													<option value="02" {if ('02' == $form.date_to_mm)}selected{/if}>2</option>
+													<option value="03" {if ('03' == $form.date_to_mm)}selected{/if}>3</option>
+													<option value="04" {if ('04' == $form.date_to_mm)}selected{/if}>4</option>
+													<option value="05" {if ('05' == $form.date_to_mm)}selected{/if}>5</option>
+													<option value="06" {if ('06' == $form.date_to_mm)}selected{/if}>6</option>
+													<option value="07" {if ('07' == $form.date_to_mm)}selected{/if}>7</option>
+													<option value="08" {if ('08' == $form.date_to_mm)}selected{/if}>8</option>
+													<option value="09" {if ('09' == $form.date_to_mm)}selected{/if}>9</option>
+													<option value="10" {if ('10' == $form.date_to_mm)}selected{/if}>10</option>
+													<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
+													<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
+												</select> 月
+												<select name="date_to_dd" size="1" id="date_to_dd">
+													<option value="" ></option>
+													<option value="01" {if ('01' == $form.date_to_dd)}selected{/if}>1</option>
+													<option value="02" {if ('02' == $form.date_to_dd)}selected{/if}>2</option>
+													<option value="03" {if ('03' == $form.date_to_dd)}selected{/if}>3</option>
+													<option value="04" {if ('04' == $form.date_to_dd)}selected{/if}>4</option>
+													<option value="05" {if ('05' == $form.date_to_dd)}selected{/if}>5</option>
+													<option value="06" {if ('06' == $form.date_to_dd)}selected{/if}>6</option>
+													<option value="07" {if ('07' == $form.date_to_dd)}selected{/if}>7</option>
+													<option value="08" {if ('08' == $form.date_to_dd)}selected{/if}>8</option>
+													<option value="09" {if ('09' == $form.date_to_dd)}selected{/if}>9</option>
+													<option value="10" {if ('10' == $form.date_to_dd)}selected{/if}>10</option>
+													<option value="11" {if ('11' == $form.date_to_dd)}selected{/if}>11</option>
+													<option value="12" {if ('12' == $form.date_to_dd)}selected{/if}>12</option>
+													<option value="13" {if ('13' == $form.date_to_dd)}selected{/if}>13</option>
+													<option value="14" {if ('14' == $form.date_to_dd)}selected{/if}>14</option>
+													<option value="15" {if ('15' == $form.date_to_dd)}selected{/if}>15</option>
+													<option value="16" {if ('16' == $form.date_to_dd)}selected{/if}>16</option>
+													<option value="17" {if ('17' == $form.date_to_dd)}selected{/if}>17</option>
+													<option value="18" {if ('18' == $form.date_to_dd)}selected{/if}>18</option>
+													<option value="19" {if ('19' == $form.date_to_dd)}selected{/if}>19</option>
+													<option value="20" {if ('20' == $form.date_to_dd)}selected{/if}>20</option>
+													<option value="21" {if ('21' == $form.date_to_dd)}selected{/if}>21</option>
+													<option value="22" {if ('22' == $form.date_to_dd)}selected{/if}>22</option>
+													<option value="23" {if ('23' == $form.date_to_dd)}selected{/if}>23</option>
+													<option value="24" {if ('24' == $form.date_to_dd)}selected{/if}>24</option>
+													<option value="25" {if ('25' == $form.date_to_dd)}selected{/if}>25</option>
+													<option value="26" {if ('26' == $form.date_to_dd)}selected{/if}>26</option>
+													<option value="27" {if ('27' == $form.date_to_dd)}selected{/if}>27</option>
+													<option value="28" {if ('28' == $form.date_to_dd)}selected{/if}>28</option>
+													<option value="29" {if ('29' == $form.date_to_dd)}selected{/if}>29</option>
+													<option value="30" {if ('30' == $form.date_to_dd)}selected{/if}>30</option>
+													<option value="31" {if ('31' == $form.date_to_dd)}selected{/if}>31</option>
+												</select> 日まで</td>
+										</tr>
+										<tr>
+											<th class="item">開催頻度</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												{section name=it loop=$app.frequency_list}
+												<input type="radio" value="{$app.frequency_list[it].kbn_2}" name="frequency" id="frequency" {if ($app.frequency_list[it].kbn_2 == $form.frequency)}checked{/if} />{$app.frequency_list[it].discription_jp}&nbsp;
+												{if (0 == (($smarty.section.it.index + 1) % 5))}<br/>{/if}
+												{/section}
+											</td>
+										</tr>
+									</table>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- center -->
-<div id="center">
-	<div id="main">
-		<div class="bgbox_set">
-			<div class="bgbox_base">
-				<div class="h1"><h1>見本市・展示会データベース</h1></div>
-				<div class="h2"><h2>見本市登録</h2></div>
-				<div class="in_main">
-					<h3 class="img t_center"><img src="/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1"></h3>
-					<p class="t_right">ユーザー：abcdef123</a>
-					<form>
-						<h4>基本情報</h4>
-						<table id="registration">
-							<tr>
-								<th class="item">見本市名</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td><input type="text" value="" size="60" name="name"><br /></td>
-							</tr>
-							<tr>
-								<th class="item">見本市略称</th>
-								<th class="required"></th>
-								<td><input type="text" value="" size="30" name="abbreviation"><br />
-								<strong>半角英数</strong>で入力してください。　例：Ambiente。
-								</td>
-							</tr>
-							<tr>
-								<th class="item">見本市公式サイトURL</th>
-								<th class="required"></th>
-								<td><input type="text" value="http://" size="60" name="website">
-								<br />
-								URLはhttp:// から入力して下さい。</td>
-							</tr>
-							<tr>
-								<th class="item">会期</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td><select name="from_yyyy" size="1" id="from_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年
-								<select name="from_mm" size="1" id="from_mm">
-								<option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月<option value=""></option>
-								<select name="from_dd" size="1" id="from_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日　～
-								<select name="to_yyyy" size="1" id="to_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年 <select name="to_mm" size="1" id="to_mm"><option value="" selected="selected"></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月
-								<select name="to_dd" size="1" id="to_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日まで
-								</td>
-							</tr>
-							<tr>
-								<th class="item">開催頻度</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td><input type="radio" value="毎年" name="freq">毎年&nbsp;
-								<input type="radio" value="1年に2回" name="freq">1年に2回&nbsp;
-								<input type="radio" value="1年に3回以上" name="freq">1年に3回以上&nbsp;
-								<input type="radio" value="2年に1回" name="freq">2年に1回&nbsp;
-								<input type="radio" value="3年に1回" name="freq">3年に1回&nbsp;<br />
-								<input type="radio" value="4年に1回" name="freq">4年に1回&nbsp;
-								<input type="radio" value="5年に1回" name="freq">5年に1回&nbsp;
-								<input type="radio" value="不定期" name="freq">不定期&nbsp;
-								<input type="radio" value="その他" name="freq">その他&nbsp;
-								</td>
-							</tr>
-						</table>
-						<h4>業種・取扱品目</h4>
-						<table id="registration">
-							<tr>
-								<th class="item">業種</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td>
-									現在、以下の業種が選択されています。<br />
-									家具・インテリア用品<br />
-									家庭用品、食卓用品、陶磁器等<br />
-									<button class="modalInput" rel="#prompt">業種選択</button>
-								</td>
-							</tr>
-							<tr>
-								<th class="item">取扱品目</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td><textarea cols="60" rows="3" name="items"></textarea><br />
-								300文字以内で、具体的な品目名を記載ください。
-								</td>
-							</tr>
-						</table>
-							<h4>開催地・会場</h4>
-							<table id="registration">
-								<tr>
-									<th class="item">開催地</th>
-									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<th class="item">会場名</th>
-									<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-									<td><input type="text" value="" size="50" name="venue"></td>
-							</tr>
-							<tr>
-								<th class="item">同展示会で使用する面積</th>
-								<th class="required"></th>
-								<td><input type="text" value="" size="5" name="netarea"> <strong>sqm（NET）</strong><br />
-								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
-								</td>
-							</tr>
-							<tr>
-								<th class="item">会場までの交通手段</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td><input type="text" value="" size="60" name="trafic"><br />
-								例：成田空港からA12バスで30分</td>
-							</tr>
-							<tr>
-								<th class="item">入場資格</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td>
-								<input name="qualification" value="一般" type="radio">一般&nbsp;
-								<input name="qualification" value="ビジネス関係者＆一般" type="radio">ビジネス関係者＆一般&nbsp;
-								<input name="qualification" value="ビジネス関係者のみ" type="radio">ビジネス関係者のみ
-								</td>
-							</tr>
-							<tr>
-								<th class="item">チケットの入手方法</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td><input name="ticket" value="登録の必要なし" type="checkbox">登録の必要なし　<input name="ticket" value="WEBからの事前登録" type="checkbox">WEBからの事前登録　<br /><input name="ticket" value="主催者・日本の照会先へ問い合わせ" type="checkbox">主催者・日本の照会先へ問い合わせ　<input name="ticket" value="当日会場で入手" type="checkbox">当日会場で入手　<br /><input name="ticket" value="その他" type="checkbox">その他　<input name="ticket-other" value="" size="50" type="text">
-								<br />複数選択可能
-								</td>
-							</tr>
-							<tr>
-								<th class="item">出展申込締切日</th>
-								<th class="required"></th>
-								<td>
-								<select name="deadline_yyyy" size="1" id="deadline_yyyy"><option value=""></option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select> 年
-								<select name="deadline_mm" size="1" id="deadlinem_mm">
-								<option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 月<option value=""></option>
-								<select name="deadline_dd" size="1" id="deadline_dd"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> 日</td>
-							</tr>
-						</table>
-						<div class="line_dot"><hr /></div>
-						<table width="100%">
-							<tr>
-								<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></td>
-								<td align="right"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
-							</tr>
-						</table>
-					</form>
+									<h4>業種・取扱品目</h4>
+									<table id="registration">
+										<tr>
+											<th class="item">業種</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												現在、以下の業種が選択されています。<br />
+												{if ('' != $form.sub_industory_name_1)}
+												{$form.sub_industory_name_1}<br />
+												{/if}
+												{if ('' != $form.sub_industory_name_2)}
+												{$form.sub_industory_name_2}<br />
+												{/if}
+												{if ('' != $form.sub_industory_name_3)}
+												{$form.sub_industory_name_3}<br />
+												{/if}
+												{if ('' != $form.sub_industory_name_4)}
+												{$form.sub_industory_name_4}<br />
+												{/if}
+												{if ('' != $form.sub_industory_name_5)}
+												{$form.sub_industory_name_5}<br />
+												{/if}
+												{if ('' != $form.sub_industory_name_6)}
+												{$form.sub_industory_name_6}<br />
+												{/if}
+												<button class="modalInput" rel="#prompt">業種選択</button>
+											</td>
+										</tr>
+										<tr>
+											<th class="item">取扱品目</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												<textarea cols="60" rows="3" name="exhibits_jp" id="exhibits_jp">{$form.exhibits_jp}</textarea><br />
+												300文字以内で、具体的な品目名を記載ください。
+											</td>
+										</tr>
+									</table>
+									<h4>開催地・会場</h4>
+									<table id="registration">
+										<tr>
+											<th class="item">開催地</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												地域：
+												<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
+													<option value="">...</option>
+													{section name=it loop=$app.region_list}
+														<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_jp}</option>
+													{/section}
+													</select>
+												国・地域：
+													<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
+														<option value="">...</option>'
+													</select><br/>
+												都市：
+													<select name="city" id="city" style="width:200px;">
+														<option value="">...</option>'
+													</select>
+												その他：
+													<input type="checkbox" name="check_other_city_jp" id="check_other_city_jp" value="1" {if ('1' == $form.check_other_city_jp)}checked{/if} //>
+													<input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city}" size="30" maxlength="100" />
+											</td>
+										</tr>
+										<tr>
+											<th class="item">会場名</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td><input type="text" value="{$form.venue_jp}" size="50" name="venue_jp" id="venue_jp" maxlength="255" /></td>
+										</tr>
+										<tr>
+											<th class="item">同展示会で使用する面積</th>
+											<th class="required"></th>
+											<td>
+												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
+												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
+											</td>
+										</tr>
+										<tr>
+											<th class="item">会場までの交通手段</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												<input type="text" value="{$form.transportation_jp}" size="60" name="transportation_jp" id="transportation_jp" maxlength="500"><br />
+												例：成田空港からA12バスで30分
+											</td>
+										</tr>
+										<tr>
+											<th class="item">入場資格</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												{section name=it loop=$app.open_to_list}
+												<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if}>{$app.open_to_list[it].discription_jp}&nbsp;
+												{/section}
+											</td>
+										</tr>
+										<tr>
+											<th class="item">チケットの入手方法</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<td>
+												<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />登録の必要なし
+												<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />WEBからの事前登録 <br />
+												<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />主催者・日本の照会先へ問い合わせ
+												<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />当日会場で入手 <br />
+												<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />その他<input name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" size="50" type="text" maxlength="500" /> <br />
+												複数選択可能
+											</td>
+										</tr>
+										<tr>
+											<th class="item">出展申込締切日</th>
+											<th class="required"></th>
+											<td>
+												<select name="app_dead_yyyy" size="1" id="app_dead_yyyy">
+													<option value=""></option>
+													{section name=it loop=$app.year_list}
+													<option value="{$app.year_list[it]}" {if ($app.year_list[it]==$form.app_dead_yyyy)}selected{/if}>{$app.year_list[it]}</option>
+													{/section}
+												</select> 年
+												<select name="app_dead_mm" size="1" id="app_dead_mm">
+													<option value=""></option>
+													<option value="01" {if ('01' == $form.app_dead_mm)}selected{/if}>1</option>
+													<option value="02" {if ('02' == $form.app_dead_mm)}selected{/if}>2</option>
+													<option value="03" {if ('03' == $form.app_dead_mm)}selected{/if}>3</option>
+													<option value="04" {if ('04' == $form.app_dead_mm)}selected{/if}>4</option>
+													<option value="05" {if ('05' == $form.app_dead_mm)}selected{/if}>5</option>
+													<option value="06" {if ('06' == $form.app_dead_mm)}selected{/if}>6</option>
+													<option value="07" {if ('07' == $form.app_dead_mm)}selected{/if}>7</option>
+													<option value="08" {if ('08' == $form.app_dead_mm)}selected{/if}>8</option>
+													<option value="09" {if ('09' == $form.app_dead_mm)}selected{/if}>9</option>
+													<option value="10" {if ('10' == $form.app_dead_mm)}selected{/if}>10</option>
+													<option value="11" {if ('11' == $form.app_dead_mm)}selected{/if}>11</option>
+													<option value="12" {if ('12' == $form.app_dead_mm)}selected{/if}>12</option>
+												</select> 月
+												<select name="app_dead_dd" size="1" id="app_dead_dd">
+													<option value=""></option>
+													<option value="01" {if ('01' == $form.app_dead_dd)}selected{/if}>1</option>
+													<option value="02" {if ('02' == $form.app_dead_dd)}selected{/if}>2</option>
+													<option value="03" {if ('03' == $form.app_dead_dd)}selected{/if}>3</option>
+													<option value="04" {if ('04' == $form.app_dead_dd)}selected{/if}>4</option>
+													<option value="05" {if ('05' == $form.app_dead_dd)}selected{/if}>5</option>
+													<option value="06" {if ('06' == $form.app_dead_dd)}selected{/if}>6</option>
+													<option value="07" {if ('07' == $form.app_dead_dd)}selected{/if}>7</option>
+													<option value="08" {if ('08' == $form.app_dead_dd)}selected{/if}>8</option>
+													<option value="09" {if ('09' == $form.app_dead_dd)}selected{/if}>9</option>
+													<option value="10" {if ('10' == $form.app_dead_dd)}selected{/if}>10</option>
+													<option value="11" {if ('11' == $form.app_dead_dd)}selected{/if}>11</option>
+													<option value="12" {if ('12' == $form.app_dead_dd)}selected{/if}>12</option>
+													<option value="13" {if ('13' == $form.app_dead_dd)}selected{/if}>13</option>
+													<option value="14" {if ('14' == $form.app_dead_dd)}selected{/if}>14</option>
+													<option value="15" {if ('15' == $form.app_dead_dd)}selected{/if}>15</option>
+													<option value="16" {if ('16' == $form.app_dead_dd)}selected{/if}>16</option>
+													<option value="17" {if ('17' == $form.app_dead_dd)}selected{/if}>17</option>
+													<option value="18" {if ('18' == $form.app_dead_dd)}selected{/if}>18</option>
+													<option value="19" {if ('19' == $form.app_dead_dd)}selected{/if}>19</option>
+													<option value="20" {if ('20' == $form.app_dead_dd)}selected{/if}>20</option>
+													<option value="21" {if ('21' == $form.app_dead_dd)}selected{/if}>21</option>
+													<option value="22" {if ('22' == $form.app_dead_dd)}selected{/if}>22</option>
+													<option value="23" {if ('23' == $form.app_dead_dd)}selected{/if}>23</option>
+													<option value="24" {if ('24' == $form.app_dead_dd)}selected{/if}>24</option>
+													<option value="25" {if ('25' == $form.app_dead_dd)}selected{/if}>25</option>
+													<option value="26" {if ('26' == $form.app_dead_dd)}selected{/if}>26</option>
+													<option value="27" {if ('27' == $form.app_dead_dd)}selected{/if}>27</option>
+													<option value="28" {if ('28' == $form.app_dead_dd)}selected{/if}>28</option>
+													<option value="29" {if ('29' == $form.app_dead_dd)}selected{/if}>29</option>
+													<option value="30" {if ('30' == $form.app_dead_dd)}selected{/if}>30</option>
+													<option value="21" {if ('31' == $form.app_dead_dd)}selected{/if}>31</option>
+												</select> 日
+											</td>
+										</tr>
+									</table>
+									<div class="line_dot">
+										<hr />
+									</div>
+									<table width="100%">
+										<tr>
+											<td width="250px"><a href="{$config.url}?action_user_fairManu=true}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											<td align="right"><a href="javascript:next();"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></a></td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
+				<p class="totop">
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
+				</p>
 			</div>
+			<!-- /center -->
 		</div>
-	<p class="totop"><a href="?print=1" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a><a href="#header"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a></p>
-</div>
-<!-- /center -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-</div>
-<!-- /contents -->
-
-<!-- footer -->
-<div id="footer">
-	<div class="area">
-
-		<ul id="footlink">
-			<li class="start"><a href="/privacy/">個人情報保護</a></li>
-			<li><a href="/legal/">利用規約・免責事項</a></li>
-			<li><a href="/disclosure/">情報公開</a></li>
-			<li><a href="/contact/">FAQ/お問い合わせ</a></li>
-			<li class="end"><a href="/links/">リンク</a></li>
-		</ul>
-		<p id="copyright">Copyright (C) 1995-2011 Japan External Trade Organization(JETRO). All rights reserved.</p>
 	</div>
-</div>
+	<!-- /contents -->
 
-<!-- select_industries dialog -->
-<div class="modal" id="prompt">
-	<a class="close" id="btn_close"></a>
-	<h2>業種選択 <span>業種は6つまで選択できます。</span></h2>
-	<form>
-<div class="industries clearfix">
-<div class="column">
-        <h5>総合</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 総合見本市</li>
-        </ul>
-        <h5>基礎産業</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 農林水産業</li>
-        <li><input type="checkbox" value="" name="industries"> 鉱業、エネルギー</li>
-        <li><input type="checkbox" value="" name="industries"> 鉱物、土石、ガラス,セラミック</li>
-        </ul>
-        <h5>建築</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 建築・建設、不動産</li>
-        <li><input type="checkbox" value="" name="industries"> 衛生設備、空調、給排水、照明</li>
-        <li><input type="checkbox" value="" name="industries"> 公共施設用機器・備品、都市計画</li>
+	<!-- select_industries dialog -->
+	<div class="modal" id="prompt">
+		<a class="close" id="btn_close"></a>
+		<h2>
+			業種選択 <span>業種は6つまで選択できます。</span>
+		</h2>
+		<form>
+			<div class="industries clearfix">
+				<div class="column">
+					<h5>総合</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('001' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>基礎産業</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('002' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>建築</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('003' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>機械・工業技術</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('004' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>情報・通信</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('005' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
 
-        <li><input type="checkbox" value="" name="industries"> ビル保守管理、営繕、清掃</li>
-        </ul>
-       <h5>機械・工業技術</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 金属製品、工具、金型</li>
+				</div>
 
-        <li><input type="checkbox" value="" name="industries"> 工作機械・金属加工</li>
-        <li><input type="checkbox" value="" name="industries"> 木材加工機械、家具製造機械</li>
-        <li><input type="checkbox" value="" name="industries"> マテハン機器、圧力機器</li>
-        <li><input type="checkbox" value="" name="industries"> 精密・測定・試験機器</li>
-        <li><input type="checkbox" value="" name="industries"> 電気・電子（製品、機器）</li>
-        <li><input type="checkbox" value="" name="industries"> その他の産業用機器・設備</li>
-        <li><input type="checkbox" value="" name="industries"> 製造・生産技術、品質管理</li>
-        <li><input type="checkbox" value="" name="industries"> 先端技術、新素材、合成物、R&amp;D</li>
-        </ul>
-        <h5>情報・通信</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 通信、情報処理、コンピュータ</li>
-        <li><input type="checkbox" value="" name="industries"> 光学、光工学、レーザー技術・機器</li>
-        <li><input type="checkbox" value="" name="industries"> 事務用品・機器、OA機器</li>
-        <li><input type="checkbox" value="" name="industries"> 新聞、放送、映像（映画、フォト）</li>
-        </ul>
+				<div class="column">
+					<h5>輸送・物流・包装</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('006' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
 
-</div>
+					<h5>医療・健康</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('007' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>サービス</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('010' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>その他</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('012' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+				</div>
 
-<div class="column">
-        <h5>輸送・物流・包装</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 自動車（部品・製造関連機器含む）</li>
-        <li><input type="checkbox" value="" name="industries"> 自動車補修・サービス用品</li>
-        <li><input type="checkbox" value="" name="industries"> 自転車、自動二輪車（部品含む）</li>
-        <li><input type="checkbox" value="" name="industries"> 海運、造船、港湾関連機器</li>
-        <li><input type="checkbox" value="" name="industries"> ボート、ボート用品、各種小型船舶</li>
-        <li><input type="checkbox" value="" name="industries"> 航空・宇宙関連機器、設備</li>
-        <li><input type="checkbox" value="" name="industries"> 鉄道、その他の輸送用機器、交通</li>
-        <li><input type="checkbox" value="" name="industries"> 物流、貯蔵、保蔵</li>
-        <li><input type="checkbox" value="" name="industries"> 包装（資材、関連機器）</li>
-
-        </ul>
-
-        <h5>医療・健康</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 医療・病院用機器、医療技術</li>
-
-        <li><input type="checkbox" value="" name="industries"> 歯科用・眼科用機器・用品</li>
-        <li><input type="checkbox" value="" name="industries"> 福祉・介護・リハビリ用機器・用具</li>
-        <li><input type="checkbox" value="" name="industries"> 医薬品、製薬・製剤、薬学</li>
-        <li><input type="checkbox" value="" name="industries"> ヘルスケア、保健産業、保健用品</li>
-        <li><input type="checkbox" value="" name="industries"> フィットネス</li>
-        </ul>
-        <h5>サービス</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> ホテル、レストラン、ケータリング</li>
-        <li><input type="checkbox" value="" name="industries"> 店舗用設備・機器、ディスプレイ</li>
-        <li><input type="checkbox" value="" name="industries"> 広告、マーケティング、経営管理</li>
-        <li><input type="checkbox" value="" name="industries"> 金融、保険、財務</li>
-        <li><input type="checkbox" value="" name="industries"> 流通業、フランチャイズビジネス</li>
-        <li><input type="checkbox" value="" name="industries"> 流通業、フランチャイズビジネス</li>
-        <li><input type="checkbox" value="" name="industries"> デザイン(工業デザイン）</li>
-        <li><input type="checkbox" value="" name="industries"> 見本市・コンベンション産業関連</li>
-        </ul>
-                <h5>その他</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> その他</li>
-        </ul>
-</div>
-
-<div class="column">
-        <h5>生活</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 食・飲料、食品加工</li>
-        <li><input type="checkbox" value="" name="industries"> 皮革（素材、製品、機器）、履物</li>
-        <li><input type="checkbox" value="" name="industries"> 繊維・衣料（素材、製品、機器）</li>
-        <li><input type="checkbox" value="" name="industries"> 紙・紙製品、製紙機械、印刷・出版</li>
-        <li><input type="checkbox" value="" name="industries"> 家具・インテリア用品</li>
-        <li><input type="checkbox" value="" name="industries"> 家庭用品、食卓用品、陶磁器等</li>
-        <li><input type="checkbox" value="" name="industries"> ギフト用品、手工芸品、販促用品</li>
-        <li><input type="checkbox" value="" name="industries"> 時計、カメラ</li>
-        <li><input type="checkbox" value="" name="industries"> 宝石、貴金属、アクセサリー</li>
-        <li><input type="checkbox" value="" name="industries"> 化粧品、美容関連用品、香水</li>
-        <li><input type="checkbox" value="" name="industries"> 子供用品、ベビー用品</li>
-        <li><input type="checkbox" value="" name="industries"> ランドリー、染色</li>
-        <li><input type="checkbox" value="" name="industries"> 防災、警備、消防、防衛</li>
-        <li><input type="checkbox" value="" name="industries"> 冠婚葬祭、宗教関連</li>
-        </ul>
-        <h5>趣味・教育</h5>
-        <ul>
-        <li><input type="checkbox" value="" name="industries"> 音楽（楽器、音盤、楽譜等）</li>
-        <li><input type="checkbox" value="" name="industries"> 玩具、遊戯用具、ゲーム用品</li>
-        <li><input type="checkbox" value="" name="industries"> 趣味、DIY</li>
-        <li><input type="checkbox" value="" name="industries"> スポーツ(用品・施設)</li>
-        <li><input type="checkbox" value="" name="industries"> アミューズメント（機器・施設）</li>
-        <li><input type="checkbox" value="" name="industries"> 教育・訓練、学校用品、文房具</li>
-        <li><input type="checkbox" value="" name="industries"> 書籍（ブックフェア）、図書館設備</li>
-        <li><input type="checkbox" value="" name="industries"> 美術工芸品、骨董品</li>
-        <li><input type="checkbox" value="" name="industries"> 観光・旅行（施設、用品等含む）</li>
-        <li><input type="checkbox" value="" name="industries"> ペット</li>
-        <li><input type="checkbox" value="" name="industries"> 園芸・造園</li>
-        </ul>
+				<div class="column">
+					<h5>生活</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('008' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+					<h5>趣味・教育</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('009' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+				</div>
+			</div>
+			<div class="btn">
+				<button type="button" id="FIN_SELECT">選択終了</button>
+				<button type="button" class="close">キャンセル</button>
+			</div>
+		</form>
+		<br />
 	</div>
-</div>
-	<div class="btn">
-		<button type="submit"> 選択終了 </button>
-		<button type="button" class="close"> キャンセル </button>
-	</div>
-	</form>
-	<br />
 
-</div>
-<script>
-$(document).ready(function() {
+	<!-- footer -->
+	<div id="include_footer"></div>
+	<!-- /footer -->
 
-var triggers = $(".modalInput").overlay({
-
-	// some mask tweaks suitable for modal dialogs
-	mask: {
-		color: '#ebecff',
-		loadSpeed: 200,
-		opacity: 0.9
-	},
-	top: 20,
-	close:null,
-	closeOnClick: true
-});
-
-$("#prompt form").submit(function(e) {
-
-	// close the overlay
-	triggers.eq(1).overlay().close();
-
-	// get user input
-	var input = $("input", this).val();
-
-	// do something with the answer
-	triggers.eq(1).html(input);
-
-	// do not submit the form
-	return e.preventDefault();
-});
-
-});
-</script>
-<!-- /select industries dialog -->
-<!-- form_script -->
-<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
-<script src="/j-messe/js/j-messe-form.js" type="text/javascript" charset="utf-8"></script>
-<!-- /form_script -->
-<!-- footer_script -->
-<script src="http://search.jetro.go.jp/site/js/suggest_ext.js#unitid=ja_all" type="text/javascript" charset=" UTF-8"></script>
-<script type="text/javascript" src="/js/galink.js"></script>
-<script type="text/javascript" src="/js/matc.js"></script>
-<script type="text/javascript" src="/js/gatrack.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-<!-- /footer_script -->
-<!-- /footer -->
-
-</body></html>
+</body>
+</html>
+{debug}

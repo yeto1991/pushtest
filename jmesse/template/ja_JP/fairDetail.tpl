@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="見本市、展示会、商談会、{$app.fair_detail.exhibits_jp|replace:'&lt;br/&gt;':', '}, {$app.fair_detail.keyword}" />
+<meta name="Keywords" content="見本市、展示会、商談会、{$app.fair_detail.exhibits_jp|replace:'&lt;br/&gt;':''}, {$app.fair_detail.keyword}" />
 
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
@@ -39,7 +39,7 @@
 	});
 
 	$(function(){
-		$("#include_contact_us").load("http://localhost/jmesse/www/contact_us.html");
+		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
 	});
 {/literal}
 // -->
@@ -69,48 +69,9 @@
 	<div id="contents">
 
 		<div class="area">
+
 			<!-- left -->
-
-			<div id="left">
-				<div class="bgbox_set">
-					<p id="title">
-						<a href="/j-messe/">見本市・展示会データベース</a>
-					</p>
-					<div class="bgbox_base">
-						<div class="bgbox_in">
-							<div class="submenu no_border">
-								<ul class="navi">
-									<li class="lv01_title on"><a href="/j-messe/tradefair/industry/">業種別に見る</a></li>
-									<li class="lv01_title"><a href="/j-messe/tradefair/country/">開催地別に見る</a></li>
-
-									<li class="lv01_title"><a href="/j-messe/tradefair/">詳細検索</a></li>
-									<li class="lv01_title"><a href="/j-messe/newarraivals/">新着見本市</a></li>
-									<li class="lv01_title"><a href="/j-messe/ranking/">月間ランキング</a></li>
-								</ul>
-
-								<ul class="navi">
-									<li class="lv01_label">出展お役立ち情報</li>
-									<li class="lv02_title"><a href="/j-messe/w-info/">見本市レポート</a></li>
-
-									<li class="lv02_title"><a href="/services/tradefair/">出展支援</a></li>
-									<li class="lv02_title"><a href="/j-messe/center/">世界の展示会場</a></li>
-									<li class="lv02_title"><a href="/j-messe/business/">世界の見本市ビジネス動向</a></li>
-								</ul>
-								<ul class="navi no_border">
-									<li class="lv01_label">出展者向け</li>
-									<li class="lv02_title"><a href="/j-messe/registration/">見本市登録</a></li>
-
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- contact_us -->
-				<div id="include_contact_us"></div>
-				<!-- /contact_us -->
-
-			</div>
+			<div id="include_left_menu"></div>
 			<!-- /left -->
 
 			<!-- center -->

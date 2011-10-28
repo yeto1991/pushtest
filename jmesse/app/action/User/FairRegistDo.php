@@ -7,6 +7,8 @@
  *  @version    $Id: 6dbb28cac61a23f06dba884c38c304aed3dcc84b $
  */
 
+require_once 'FairRegistStep1.php';
+
 /**
  *  user_fairRegistDo Form implementation.
  *
@@ -14,1236 +16,8 @@
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_UserFairRegistDo extends Jmesse_ActionForm
+class Jmesse_Form_UserFairRegistDo extends Jmesse_Form_UserFairRegistStep1
 {
-    /**
-     *  @access private
-     *  @var    array   form definition.
-     */
-	var $form = array(
-		'mode' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '登録モード',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'email' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'Eメール',      // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'mihon_no' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市番号',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'fair_title_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市名（日）', // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'abbrev_title' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市略称',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => '/^[a-zA-Z1-9 ]+$/',            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'fair_url' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市URL',     // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'date_from_yyyy' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会期開始年',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'date_from_mm' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会期開始月',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'date_from_dd' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会期開始日',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'date_to_yyyy' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会期終了年',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'date_to_mm' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会期終了月',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'date_to_dd' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会期終了日',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'frequency_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '開催頻度',      // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_1' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類', // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_1' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類', // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_name_1' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名', // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_name_1' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名', // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(2)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(2)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_name_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(2)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_name_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(2)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(3)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(3)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_name_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(3)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_name_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(3)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_4' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(4)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_4' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(4)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_name_4' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(4)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_name_4' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(4)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_5' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(5)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_5' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(5)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_name_5' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(5)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_name_5' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(5)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_6' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(6)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_6' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(6)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,               // Minimum value
-			'max'         => 3,    // Maximum value
-			'regexp'      => '/^[0-9]+$/',            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'main_industory_name_6' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(6)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'sub_industory_name_6' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(6)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'exhibits_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => '出品物(日)',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 300,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'region_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '開催地地域',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'country_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '開催地国地域',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'city_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '開催地都市',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'city_name_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT, // Form type
-			'name'        => '開催地都市',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'othercity_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '開催地その他（日）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'other_city_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催地その他（日）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 100,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'venue_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会場名(日)',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'gross_floor_area' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '展示会で使用する面積（Net）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,              // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'transportation_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '交通手段(日)',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'open_to_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '入場資格',      // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_1_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '登録の必要なし', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_2_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'WEBからの事前登録', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_3_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '主催者・日本の照会先へ問い合わせ', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_4_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '当日会場で入手', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'admission_ticket_5_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'その他',        // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'other_admission_ticket_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'その他のチケットの入手方法(日)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_yyyy' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(年)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_mm' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(月)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_dd' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(日)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'year_of_the_trade_fair' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績年',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'total_number_of_visitor' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績来場者数', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'number_of_foreign_visitor' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績海外来場者数', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'total_number_of_exhibitors' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績出展社数', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'number_of_foreign_exhibitors' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績海外出展社数', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'net_square_meters' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績展示面積(㎡)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'profile_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => 'キャッチフレーズ（日）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'detailed_information_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXTAREA,  // Form type
-			'name'        => 'ＰＲ・紹介文（日）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 1000,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'photos_1' => array(
-			'type'        => VAR_TYPE_FILE,   // Input type
-			'form_type'   => FORM_TYPE_FILE,  // Form type
-			'name'        => '展示会に係わる画像（1）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'photos_2' => array(
-			'type'        => VAR_TYPE_FILE,   // Input type
-			'form_type'   => FORM_TYPE_FILE,  // Form type
-			'name'        => '展示会に係わる画像（2）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'photos_3' => array(
-			'type'        => VAR_TYPE_FILE,   // Input type
-			'form_type'   => FORM_TYPE_FILE,  // Form type
-			'name'        => '展示会に係わる画像（3）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'photos_name_1' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '展示会に係わる画像名（1）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'photos_name_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '展示会に係わる画像名（2）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'photos_name_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '展示会に係わる画像名（3）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'del_photos_name' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '削除した画像ファイル', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'organizer_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先名称（日）', // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'organizer_tel' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先TEL', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 100,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'organizer_fax' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先FAX', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 100,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'organizer_email' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先E-Mail', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'agency_in_japan_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先名称（日）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'agency_in_japan_tel' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先TEL', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 100,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'agency_in_japan_fax' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先FAX', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 100,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'agency_in_japan_email' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先E-Mail', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'select_language_info' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '言語選択情報',  // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'fair_title_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市名（英）', // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'profile_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => 'キャッチフレーズ（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'detailed_information_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXTAREA,  // Form type
-			'name'        => 'ＰＲ・紹介文（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 1000,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'exhibits_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => '出品物(英)',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 300,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'othercity_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '開催地その他（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'other_city_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催地その他（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 100,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'venue_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会場名(英)',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'transportation_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '交通手段(英)',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'admission_ticket_5_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'Others',        // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'other_admission_ticket_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'その他のチケットの入手方法(英)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'organizer_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先名称（英）', // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'agency_in_japan_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先名称（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'spare_field1' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績認証機関', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-    );
 }
 
 /**
@@ -1255,28 +29,225 @@ class Jmesse_Form_UserFairRegistDo extends Jmesse_ActionForm
  */
 class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 {
-    /**
-     *  preprocess of user_fairRegistDo Action.
-     *
-     *  @access public
-     *  @return string    forward name(null: success.
-     *                                false: in case you want to exit.)
-     */
-    function prepare()
-    {
-		return null;
-    }
+	/**
+	 *  preprocess of user_fairRegistDo Action.
+	 *
+	 *  @access public
+	 *  @return string    forward name(null: success.
+	 *                                false: in case you want to exit.)
+	 */
+	function prepare()
+	{
+		// ログインチェック
+		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
+			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
+			$this->af->set('');
+			return 'user_Login';
+		}
 
-    /**
-     *  user_fairRegistDo action implementation.
-     *
-     *  @access public
-     *  @return string  forward name.
-     */
-    function perform()
-    {
+		// 入力チェック（必須）
+		if ($this->af->validate() > 0) {
+			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
+			return 'user_fairRegistStep1';
+		}
+
+		if ('2' == $this->af->get('select_language_info')) {
+			// 海外への紹介を希望する。
+
+			// Fair Title
+			if ('' == $this->af->get('fair_title_en')) {
+				$this->ae->add('error', 'Fair Title が入力されていません');
+			}
+
+			// Teaser Copy
+			if ('' == $this->af->get('profile_en')) {
+				$this->ae->add('error', 'Teaser Copy が入力されていません');
+			}
+			if (500 < mb_strlen($this->af->get('profile_en'))) {
+				$this->ae->add('error', 'Teaser Copy は500文字以内にして下さい');
+			}
+
+			// Organizer's statement,special features. etc.
+			if ('' != $this->af->get('detailed_information_en')) {
+				if (1000 < mb_strlen($this->af->get('detailed_information_en'))) {
+					$this->ae->add('error', "Organizer's statement,special features. etc. は1000文字以内にして下さい");
+				}
+			}
+
+			// Exhibits
+			if ('' == $this->af->get('exhibits_en')) {
+				$this->ae->add('error', 'Exhibits が入力されていません');
+			}
+			if (300 < mb_strlen($this->af->get('exhibits_en'))) {
+				$this->ae->add('error', 'Exhibits は300文字以内にして下さい');
+			}
+
+			// City (other)
+
+			// Venue
+			if ('' == $this->af->get('venue_en')) {
+				$this->ae->add('error', 'Venue が入力されていません');
+			}
+
+			// Transportation
+			if ('' == $this->af->get('transportation_en')) {
+				$this->ae->add('error', 'Transportation が入力されていません');
+			}
+
+			// Admission ticket(other)
+			$regist_param_1 = $this->session->get('regist_param_1');
+			if ('1' != $regist_param_1['admission_ticket_5']) {
+				$this->ae->add('error', '「チケットの入手方法」でその他にチェックされていません');
+			}
+
+			// Show Management
+			if ('' == $this->af->get('organizer_en')) {
+				$this->ae->add('error', 'Show Management が入力されていません');
+			}
+
+			// Agency in Japan
+
+			// Details of last fair audited by
+		}
+
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
+			return 'user_fairRegistStep1';
+		}
+
+		return null;
+	}
+
+	/**
+	 *  user_fairRegistDo action implementation.
+	 *
+	 *  @access public
+	 *  @return string  forward name.
+	 */
+	function perform()
+	{
+		// formの情報をsessionに設定
+		$this->_setFormToSession();
+
+		// 表示項目をSESSIONからAPPに設定
+		$this->_setSessionToApp();
+
 		return 'user_fairRegistDo';
-    }
+	}
+
+	function _setFromToSession() {
+		$regist_param_3 = $this->session->get('regist_param_3');
+		if (null == $regist_param_3) {
+			$regist_param_3 = array();
+		}
+		$regist_param_3['fair_title_en'] = $this->af->get('fair_title_en');
+		$regist_param_3['profile_en'] = $this->af->get('profile_en');
+		$regist_param_3['detailed_information_en'] = $this->af->get('detailed_information_en');
+		$regist_param_3['exhibits_en'] = $this->af->get('exhibits_en');
+		$regist_param_3['check_other_city_en'] = $this->af->get('check_other_city_en');
+		$regist_param_3['other_city_en'] = $this->af->get('other_city_en');
+		$regist_param_3['venue_en'] = $this->af->get('venue_en');
+		$regist_param_3['transportation_en'] = $this->af->get('transportation_en');
+		$regist_param_3['other_admission_ticket_en'] = $this->af->get('other_admission_ticket_en');
+		$regist_param_3['organizer_en'] = $this->af->get('organizer_en');
+		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
+		$regist_param_3['spare_field1'] = $this->af->get('spare_field1');
+		$this->session->get('regist_param_3', $regist_param_3);
+	}
+
+	function _setSessionToApp() {
+		$regist_param_1 = $this->session->get('regist_param_1');
+		$this->af->setApp('fair_title_jp', $regist_param_1['fair_title_jp']);
+		$this->af->setApp('abbrev_title', $regist_param_1['abbrev_title']);
+		$this->af->setApp('fair_url', $regist_param_1['fair_url']);
+		$this->af->setApp('date_from_yyyy', $regist_param_1['date_from_yyyy']);
+		$this->af->setApp('date_from_mm', $regist_param_1['date_from_mm']);
+		$this->af->setApp('date_from_dd', $regist_param_1['date_from_dd']);
+		$this->af->setApp('date_to_yyyy', $regist_param_1['date_to_yyyy']);
+		$this->af->setApp('date_to_mm', $regist_param_1['date_to_mm']);
+		$this->af->setApp('date_to_dd', $regist_param_1['date_to_dd']);
+		$this->af->setApp('frequency', $regist_param_1['frequency']);
+		$this->af->setApp('main_industory_1', $regist_param_1['main_industory_1']);
+		$this->af->setApp('sub_industory_1', $regist_param_1['sub_industory_1']);
+		$this->af->setApp('main_industory_name_1', $regist_param_1['main_industory_name_1']);
+		$this->af->setApp('sub_industory_name_1', $regist_param_1['sub_industory_name_1']);
+		$this->af->setApp('main_industory_2', $regist_param_1['main_industory_2']);
+		$this->af->setApp('sub_industory_2', $regist_param_1['sub_industory_2']);
+		$this->af->setApp('main_industory_name_2', $regist_param_1['main_industory_name_2']);
+		$this->af->setApp('sub_industory_name_2', $regist_param_1['sub_industory_name_2']);
+		$this->af->setApp('main_industory_3', $regist_param_1['main_industory_3']);
+		$this->af->setApp('sub_industory_3', $regist_param_1['sub_industory_3']);
+		$this->af->setApp('main_industory_name_3', $regist_param_1['main_industory_name_3']);
+		$this->af->setApp('sub_industory_name_3', $regist_param_1['sub_industory_name_3']);
+		$this->af->setApp('main_industory_4', $regist_param_1['main_industory_4']);
+		$this->af->setApp('sub_industory_4', $regist_param_1['sub_industory_4']);
+		$this->af->setApp('main_industory_name_4', $regist_param_1['main_industory_name_4']);
+		$this->af->setApp('sub_industory_name_4', $regist_param_1['sub_industory_name_4']);
+		$this->af->setApp('main_industory_5', $regist_param_1['main_industory_5']);
+		$this->af->setApp('sub_industory_5', $regist_param_1['sub_industory_5']);
+		$this->af->setApp('main_industory_name_5', $regist_param_1['main_industory_name_5']);
+		$this->af->setApp('sub_industory_name_5', $regist_param_1['sub_industory_name_5']);
+		$this->af->setApp('main_industory_6', $regist_param_1['main_industory_6']);
+		$this->af->setApp('sub_industory_6', $regist_param_1['sub_industory_6']);
+		$this->af->setApp('main_industory_name_6', $regist_param_1['main_industory_name_6']);
+		$this->af->setApp('sub_industory_name_6', $regist_param_1['sub_industory_name_6']);
+		$this->af->setApp('check_sub_industory', $regist_param_1['check_sub_industory']);
+		$this->af->setApp('exhibits_jp', $regist_param_1['exhibits_jp']);
+		$this->af->setApp('region', $regist_param_1['region']);
+		$this->af->setApp('country', $regist_param_1['country']);
+		$this->af->setApp('city', $regist_param_1['city']);
+		$this->af->setApp('other_city_jp', $regist_param_1['other_city_jp']);
+		$this->af->setApp('check_other_city_jp', $regist_param_1['check_other_city_jp']);
+		$this->af->setApp('venue_jp', $regist_param_1['venue_jp']);
+		$this->af->setApp('gross_floor_area', $regist_param_1['gross_floor_area']);
+		$this->af->setApp('transportation_jp', $regist_param_1['transportation_jp']);
+		$this->af->setApp('open_to', $regist_param_1['open_to']);
+		$this->af->setApp('admission_ticket_1', $regist_param_1['admission_ticket_1']);
+		$this->af->setApp('admission_ticket_2', $regist_param_1['admission_ticket_2']);
+		$this->af->setApp('admission_ticket_3', $regist_param_1['admission_ticket_3']);
+		$this->af->setApp('admission_ticket_4', $regist_param_1['admission_ticket_4']);
+		$this->af->setApp('admission_ticket_5', $regist_param_1['admission_ticket_5']);
+		$this->af->setApp('other_admission_ticket_jp', $regist_param_1['other_admission_ticket_jp']);
+		$this->af->setApp('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
+		$this->af->setApp('app_dead_mm', $regist_param_1['app_dead_mm']);
+		$this->af->setApp('app_dead_dd', $regist_param_1['app_dead_dd']);
+
+		$regist_param_2 = $this->session->get('regist_param_2');
+		$this->af->setApp('year_of_the_trade_fair', $regist_param_2['year_of_the_trade_fair']);
+		$this->af->setApp('total_number_of_visitor', $regist_param_2['total_number_of_visitor']);
+		$this->af->setApp('number_of_foreign_visitor', $regist_param_2['number_of_foreign_visitor']);
+		$this->af->setApp('total_number_of_exhibitors', $regist_param_2['total_number_of_exhibitors']);
+		$this->af->setApp('number_of_foreign_exhibitors', $regist_param_2['number_of_foreign_exhibitors']);
+		$this->af->setApp('net_square_meters', $regist_param_2['net_square_meters']);
+		$this->af->setApp('profile_jp', $regist_param_2['profile_jp']);
+		$this->af->setApp('detailed_information_jp', $regist_param_2['detailed_information_jp']);
+		$this->af->setApp('photos_1', $regist_param_2['photos_1']);
+		$this->af->setApp('photos_2', $regist_param_2['photos_2']);
+		$this->af->setApp('photos_3', $regist_param_2['photos_3']);
+		$this->af->setApp('organizer_jp', $regist_param_2['organizer_jp']);
+		$this->af->setApp('organizer_tel', $regist_param_2['organizer_tel']);
+		$this->af->setApp('organizer_fax', $regist_param_2['organizer_fax']);
+		$this->af->setApp('organizer_email', $regist_param_2['organizer_email']);
+		$this->af->setApp('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
+		$this->af->setApp('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
+		$this->af->setApp('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
+		$this->af->setApp('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
+
+		$regist_param_3 = $this->session->get('regist_param_3');
+		$this->af->setApp('select_language_info', $regist_param_3['select_language_info']);
+		$this->af->setApp('fair_title_en', $regist_param_3['fair_title_en']);
+		$this->af->setApp('profile_en', $regist_param_3['profile_en']);
+		$this->af->setApp('detailed_information_en', $regist_param_3['detailed_information_en']);
+		$this->af->setApp('exhibits_en', $regist_param_3['exhibits_en']);
+		$this->af->setApp('check_other_city_en', $regist_param_3['check_other_city_en']);
+		$this->af->setApp('other_city_en', $regist_param_3['other_city_en']);
+		$this->af->setApp('venue_en', $regist_param_3['venue_en']);
+		$this->af->setApp('transportation_en', $regist_param_3['transportation_en']);
+		$this->af->setApp('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
+		$this->af->setApp('organizer_en', $regist_param_3['organizer_en']);
+		$this->af->setApp('agency_in_japan_en', $regist_param_3['agency_in_japan_en']);
+		$this->af->setApp('spare_field1', $regist_param_3['spare_field1']);
+	}
 }
 
 ?>

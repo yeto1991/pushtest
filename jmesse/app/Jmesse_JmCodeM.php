@@ -574,6 +574,48 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 
 		return $list;
 	}
+
+	/**
+	 * 業種（大分類_小分類）を取得する。
+	 *
+	 */
+	function getMainSubIndustory() {
+
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select si.kbn_2, si.kbn_3, mi.discription_jp main_industory_name, si.discription_jp sub_industory_name, concat(si.kbn_2, '_', si.kbn_3, '_', mi.discription_jp, '_', si.discription_jp) sub_industory_code from (select kbn_2, kbn_3, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 <> '000') si left outer join (select kbn_2, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') mi on si.kbn_2 = mi.kbn_2 order by kbn_2, kbn_3";
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
+
+		// SQLを実行
+		$res = $db->db->query($sql);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
 }
 
 /**

@@ -29,7 +29,7 @@
 	});
 
 	$(function(){
-		$("#include_contact_us").load("http://localhost/jmesse/www/contact_us.html");
+		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
 	});
 
 	function search(form_name) {
@@ -132,59 +132,9 @@
 
 
 		<div class="area">
+
 			<!-- left -->
-			<div id="left">
-				<div class="bgbox_set">
-					<p id="title">
-						<a href="/j-messe/">見本市・展示会データベース</a>
-					</p>
-					<div class="bgbox_base">
-						<div class="bgbox_in">
-							<div class="submenu no_border">
-								<ul class="navi">
-									<li class="lv01_title"><a href="/j-messe/tradeshow/industry/">業種別に見る</a></li>
-
-									<li class="lv01_title"><a href="/j-messe/country/">開催地別に見る</a></li>
-									<li class="lv02_title"><a href="/j-messe/asia/">アジア</a></li>
-									<li class="lv02_title"><a href="/j-messe/oceania/">オセアニア</a></li>
-									<li class="lv02_title"><a href="/j-messe/n_america/">北米</a></li>
-									<li class="lv02_title"><a href="/j-messe/cs_america/">中南米</a></li>
-									<li class="lv02_title on"><a href="/j-messe/europe/">欧州</a></li>
-
-									<li class="lv02_title"><a href="/j-messe/russia_cis/">ロシア・CIS</a></li>
-									<li class="lv02_title"><a href="/j-messe/middle_east/">中東</a></li>
-									<li class="lv02_title"><a href="/j-messe/africa/">アフリカ</a></li>
-
-									<li class="lv01_title"><a href="/j-messe/tradeshow/">詳細検索</a></li>
-									<li class="lv01_title"><a href="/j-messe/new_fair/">新着見本市</a></li>
-									<li class="lv01_title"><a href="/j-messe/ranking/">月間ランキング</a></li>
-
-								</ul>
-
-								<!-- 外部ファイルにして随時修正可能にする -->
-								<ul class="navi">
-									<li class="lv01_label">出展お役立ち情報</li>
-									<li class="lv02_title"><a href="/j-messe/w-info/">見本市レポート</a></li>
-									<li class="lv02_title"><a href="/services/tradefair/">出展支援</a></li>
-									<li class="lv02_title"><a href="/j-messe/center/">世界の展示会場</a></li>
-									<li class="lv02_title"><a href="/j-messe/business/">世界の見本市ビジネス動向</a></li>
-
-								</ul>
-								<ul class="navi no_border">
-									<li class="lv01_label">出展者向け</li>
-									<li class="lv02_title"><a href="/j-messe/registration/">見本市登録</a></li>
-								</ul>
-								<!-- ここまで -->
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- contact_us -->
-				<div id="include_contact_us"></div>
-				<!-- /contact_us -->
-
-			</div>
+			<div id="include_left_menu"></div>
 			<!-- /left -->
 
 			<!-- center -->
