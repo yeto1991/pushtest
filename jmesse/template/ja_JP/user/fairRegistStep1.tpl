@@ -58,17 +58,60 @@
 			close : null,
 			closeOnClick : true
 		});
-		alert(JSON.stringify(triggers.eq(1)));
 		$("#FIN_SELECT").click(function(e) {
+			// get user input
+			var input = $("#prompt input:checkbox:checked").map(function() {
+				return this.value;
+			}).get();
+			if (6 < input.length) {
+				window.alert('業種は6個まで選択できます');
+				return;
+			}
 			// close the overlay
 			triggers.overlay().close();
-			// get user input
-			var input = $("#prompt input");
-			// do something with the answer
-			alert(JSON.stringify(input));
-			//選択値の洗い替え
-			$('表示先のCSSセレクター').empty();
-			$('表示先のCSSセレクター').html(input);
+			// 件数チェック
+			// 選択値の洗い替え
+			$('#INDUSOTRY_LIST').empty();
+			$('#main_industory_1').val('');
+			$('#sub_industory_1').val('');
+			$('#main_industory_name_1').val('');
+			$('#sub_industory_name_1').val('');
+
+			$('#main_industory_2').val('');
+			$('#sub_industory_2').val('');
+			$('#main_industory_name_2').val('');
+			$('#sub_industory_name_2').val('');
+
+			$('#main_industory_3').val('');
+			$('#sub_industory_3').val('');
+			$('#main_industory_name_3').val('');
+			$('#sub_industory_name_3').val('');
+
+			$('#main_industory_4').val('');
+			$('#sub_industory_4').val('');
+			$('#main_industory_name_4').val('');
+			$('#sub_industory_name_4').val('');
+
+			$('#main_industory_5').val('');
+			$('#sub_industory_5').val('');
+			$('#main_industory_name_5').val('');
+			$('#sub_industory_name_5').val('');
+
+			$('#main_industory_6').val('');
+			$('#sub_industory_6').val('');
+			$('#main_industory_name_6').val('');
+			$('#sub_industory_name_6').val('');
+
+			var txt = '';
+			for (i in input) {
+				arry_item = input[i].split('_');
+				txt += arry_item[3] + '<br/>';
+				$('#main_industory_' + i).val(arry_item[0]);
+				$('#sub_industory_' + i).val(arry_item[1]);
+				$('#main_industory_name_' + i).val(arry_item[2]);
+				$('#sub_industory_name_' + i).val(arry_item[3]);
+			}
+			$('#INDUSOTRY_LIST').html(txt);
 		});
 		$('.close').click(function(){
 			triggers.overlay().close();
@@ -360,6 +403,7 @@
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												現在、以下の業種が選択されています。<br />
+												<div id="INDUSOTRY_LIST">
 												{if ('' != $form.sub_industory_name_1)}
 												{$form.sub_industory_name_1}<br />
 												{/if}
@@ -378,6 +422,7 @@
 												{if ('' != $form.sub_industory_name_6)}
 												{$form.sub_industory_name_6}<br />
 												{/if}
+												</div>
 												<button class="modalInput" rel="#prompt">業種選択</button>
 											</td>
 										</tr>
@@ -753,4 +798,3 @@
 
 </body>
 </html>
-{debug}

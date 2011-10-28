@@ -93,9 +93,9 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		}
 
 		// 業種
-// 		if ('' == $this->af->get('main_industory_1') || '' == $this->af->get('sub_industory_1')) {
-// 			$this->ae->add('error', '業種が入力されていません');
-// 		}
+		if ('' == $this->af->get('main_industory_1') || '' == $this->af->get('sub_industory_1')) {
+			$this->ae->add('error', '業種が入力されていません');
+		}
 
 		// 取扱品目
 		if ('' == $this->af->get('exhibits_jp')) {
