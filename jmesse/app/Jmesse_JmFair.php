@@ -17,6 +17,101 @@
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
 	/**
+	* フロントサイト（My展示会一覧情報取得用）
+	*
+	* @param user_id ログインユーザID
+	* @return list 検索情報結果
+	*/
+	function getMyFairInfoList($user_id) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+		$sql .= " select ";
+		$sql .= " jf.user_id, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.mihon_no, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, ";
+		$sql .= " jf.date_to_dd, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, ";
+		$sql .= " jf.exhibits_jp, jf.exhibits_en, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.confirm_flag, jf.regist_date, jf.update_date, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name, ";
+		$sql .= " jcm_4_1.discription_jp main_indust_name1, jcm_4_2.discription_jp main_indust_name2, jcm_4_3.discription_jp main_indust_name3, jcm_4_4.discription_jp main_indust_name4, jcm_4_5.discription_jp main_indust_name5, jcm_4_6.discription_jp main_indust_name6, ";
+		$sql .= " jcm_5_1.discription_jp sub_indust_name1, jcm_5_2.discription_jp sub_indust_name2, jcm_5_3.discription_jp sub_indust_name3, jcm_5_4.discription_jp sub_indust_name4, jcm_5_5.discription_jp sub_indust_name5, jcm_5_6.discription_jp sub_indust_name6 ";
+		$sql .= " from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_4_1 on jf.main_industory_1 = jcm_4_1.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_4_2 on jf.main_industory_2 = jcm_4_2.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_4_3 on jf.main_industory_3 = jcm_4_3.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_4_4 on jf.main_industory_4 = jcm_4_4.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_4_5 on jf.main_industory_5 = jcm_4_5.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_4_6 on jf.main_industory_6 = jcm_4_6.kbn_2 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_5_1 on jf.main_industory_1 = jcm_5_1.kbn_2 and jf.sub_industory_1 = jcm_5_1.kbn_3 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_5_2 on jf.main_industory_2 = jcm_5_2.kbn_2 and jf.sub_industory_2 = jcm_5_2.kbn_3 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_5_3 on jf.main_industory_3 = jcm_5_3.kbn_2 and jf.sub_industory_3 = jcm_5_3.kbn_3 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_5_4 on jf.main_industory_4 = jcm_5_4.kbn_2 and jf.sub_industory_4 = jcm_5_4.kbn_3 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_5_5 on jf.main_industory_5 = jcm_5_5.kbn_2 and jf.sub_industory_5 = jcm_5_5.kbn_3 ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_5_6 on jf.main_industory_6 = jcm_5_6.kbn_2 and jf.sub_industory_6 = jcm_5_6.kbn_3 ";
+		$sql .= " where jf.user_id = ? and jf.del_flg = ? order by concat( jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd) ";
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array($user_id,'0');
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// リスト化
+		$i = 0;
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+		return $list;
+	}
+
+	/**
+	* フロントサイト（My展示会一覧情報 総件数取得用）
+	*
+	* @param user_id ログインユーザID
+	* @return list 検索情報結果
+	*/
+	function getMyFairInfoListCount($user_id) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+		$sql .= " select count(*) cnt from jm_fair where user_id = ? and del_flg = ? ";
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array($user_id,'0');
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
+
+	/**
 	 * 見本市詳細情報取得SQL。
 	 *
 	 * @var string
