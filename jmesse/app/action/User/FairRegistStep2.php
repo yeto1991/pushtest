@@ -95,6 +95,8 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		// 業種
 		if ('' == $this->af->get('main_industory_1') || '' == $this->af->get('sub_industory_1')) {
 			$this->ae->add('error', '業種が入力されていません');
+		} else {
+			$this->af->set('check_sub_industory', $this->_mekaCheckSubIndustory());
 		}
 
 		// 取扱品目
@@ -274,6 +276,16 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			return;
 		}
 		$this->af->set('fair_title_jp', $regist_param_1['fair_title_jp']);
+	}
+
+	function _mekaCheckSubIndustory() {
+		$industory_tmp_1 = $this->af->get('main_industory_1').'_'.$this->af->get('sub_industory_1').'_'.$this->af->get('main_industory_name_1').'_'.$this->af->get('sub_industory_name_1');
+		$industory_tmp_2 = $this->af->get('main_industory_2').'_'.$this->af->get('sub_industory_2').'_'.$this->af->get('main_industory_name_2').'_'.$this->af->get('sub_industory_name_2');
+		$industory_tmp_3 = $this->af->get('main_industory_3').'_'.$this->af->get('sub_industory_3').'_'.$this->af->get('main_industory_name_3').'_'.$this->af->get('sub_industory_name_3');
+		$industory_tmp_4 = $this->af->get('main_industory_4').'_'.$this->af->get('sub_industory_4').'_'.$this->af->get('main_industory_name_4').'_'.$this->af->get('sub_industory_name_4');
+		$industory_tmp_5 = $this->af->get('main_industory_5').'_'.$this->af->get('sub_industory_5').'_'.$this->af->get('main_industory_name_5').'_'.$this->af->get('sub_industory_name_5');
+		$industory_tmp_6 = $this->af->get('main_industory_6').'_'.$this->af->get('sub_industory_6').'_'.$this->af->get('main_industory_name_6').'_'.$this->af->get('sub_industory_name_6');
+		return array($industory_tmp_1, $industory_tmp_2, $industory_tmp_3, $industory_tmp_4, $industory_tmp_5, $industory_tmp_6);
 	}
 }
 

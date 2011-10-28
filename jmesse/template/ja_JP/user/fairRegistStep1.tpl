@@ -72,6 +72,7 @@
 			// 件数チェック
 			// 選択値の洗い替え
 			$('#INDUSOTRY_LIST').empty();
+
 			$('#main_industory_1').val('');
 			$('#sub_industory_1').val('');
 			$('#main_industory_name_1').val('');
@@ -103,13 +104,15 @@
 			$('#sub_industory_name_6').val('');
 
 			var txt = '';
+			var n = 1;
 			for (i in input) {
 				arry_item = input[i].split('_');
 				txt += arry_item[3] + '<br/>';
-				$('#main_industory_' + i).val(arry_item[0]);
-				$('#sub_industory_' + i).val(arry_item[1]);
-				$('#main_industory_name_' + i).val(arry_item[2]);
-				$('#sub_industory_name_' + i).val(arry_item[3]);
+				$('#main_industory_' + n).val(arry_item[0]);
+				$('#sub_industory_' + n).val(arry_item[1]);
+				$('#main_industory_name_' + n).val(arry_item[2]);
+				$('#sub_industory_name_' + n).val(arry_item[3]);
+				n++;
 			}
 			$('#INDUSOTRY_LIST').html(txt);
 		});
@@ -117,20 +120,6 @@
 			triggers.overlay().close();
 		});
 	});
-
-	function selected_industory() {
-		var sub_industory_list = document.getElementsByName('check_sub_industory');
-		var j = 1;
-		for (var i = 0; i < sub_industory_list.length; i++) {
-			if (true == sub_industory_list[i].checked) {
-				industory = sub_industory_list[i].split('_');
-				document.getElementById('main_industory_' + j++).value = industory[0];
-				document.getElementById('sub_industory_' + j++).value = industory[1];
-				document.getElementById('main_industory_name_' + j++).value = industory[0];
-				document.getElementById('sub_industory_name_' + j++).value = industory[1];
-			}
-		}
-	}
 
 	function set_country(url) {
 		var region = document.getElementById('region').options[document.getElementById('region').selectedIndex].value;
@@ -798,3 +787,4 @@
 
 </body>
 </html>
+{debug}
