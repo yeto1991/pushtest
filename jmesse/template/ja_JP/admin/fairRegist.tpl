@@ -548,7 +548,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap>見本市URL</td>
+							<td nowrap>見本市URL <font color="#CC3333">●</font></td>
 							<!-- 見本市ＵＲＬ -->
 							<td nowrap><input type="text" name="fair_url" id="fair_url" value="{$form.fair_url}" maxlength="255" size="100" /></td>
 						</tr>
@@ -907,20 +907,9 @@
 						</tr>
 
 						<tr>
-							<td nowrap>展示会で使用する面積（Ｎｅｔ） <font color="#CC3333">○</font></td>
-							<!-- 会場の展示面積 -->
+							<td nowrap>開催予定規模 <font color="#CC3333">○</font></td>
+							<!-- 開催予定規模 -->
 							<td nowrap><input type="text" name="gross_floor_area" id="gross_floor_area" value="{$form.gross_floor_area}" maxlength="10" size="10" /><br> <font size="-1">■半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
-						</tr>
-
-						<tr>
-							<td nowrap rowspan="2">交通手段</td>
-							<!-- 交通手段(日) -->
-							<!-- 交通手段(英) -->
-							<td nowrap>日：<input type="text" name="transportation_jp" id="transportation_jp" value="{$form.transportation_jp}" maxlength="500" size="100" /><br> <font size="-1">■例：成田空港からA12バスで30分</font>
-							</td>
-						</tr>
-						<tr>
-							<td nowrap>英：<input type="text" name="transportation_en" id="transportation_en" value="{$form.transportation_en}" maxlength="500" size="100" /></td>
 						</tr>
 
 						<tr>
@@ -1005,7 +994,7 @@
 							<!-- 海外からの入場者数(人) -->
 							<!-- 総出典者数(社) -->
 							<!-- 海外からの出典者数(社) -->
-							<!-- 展示面積(㎡) -->
+							<!-- 開催規模(㎡) -->
 							<!-- 予備域１ -->
 							<td nowrap>
 								<table border="0">
@@ -1029,7 +1018,7 @@
 										<td>&nbsp;</td>
 									</tr>
 									<tr>
-										<td>展示面積</td>
+										<td>開催規模</td>
 										<td colspan="4"><input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" maxlength="50" size="50">㎡</td>
 									</tr>
 									<tr>
@@ -1038,13 +1027,6 @@
 									</tr>
 								</table> <font size="-1">■出展者数の多いデータが検索結果で上位に表示されます。</font>
 							</td>
-						</tr>
-
-						<tr>
-							<td nowrap>出展申込締切日</td>
-							<!-- 出典申込締切日 -->
-							<td><input type="text" name="app_dead_yyyy" id="app_dead_yyyy" value="{$form.app_dead_yyyy}" maxlength="4" size="4" />年<input type="text" name="app_dead_mm" id="app_dead_mm" value="{$form.app_dead_mm}" maxlength="2" size="2" />月<input type="text" name="app_dead_dd" id="app_dead_dd" value="{$form.app_dead_dd}" maxlength="2" size="2" />日<br>
-							<font size="-1">■例：2002年8月1日の場合には半角数字で、2002 08 01 と入力してください。</font></td>
 						</tr>
 
 						<tr>

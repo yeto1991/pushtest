@@ -330,19 +330,9 @@
 						</tr>
 
 						<tr>
-							<td nowrap>展示会で使用する面積（Ｎｅｔ）</td>
-							<!-- 会場の展示面積 -->
+							<td nowrap>開催予定規模</td>
+							<!-- 開催予定規模 -->
 							<td nowrap>{$form.gross_floor_area}</td>
-						</tr>
-
-						<tr>
-							<td nowrap rowspan="2">交通手段</td>
-							<!-- 交通手段(日) -->
-							<!-- 交通手段(英) -->
-							<td nowrap>{$form.transportation_jp}</td>
-						</tr>
-						<tr>
-							<td nowrap>{$form.transportation_en}</td>
 						</tr>
 
 						<tr>
@@ -397,7 +387,7 @@
 							<!-- 海外からの入場者数(人) -->
 							<!-- 総出典者数(社) -->
 							<!-- 海外からの出典者数(社) -->
-							<!-- 展示面積(㎡) -->
+							<!-- 開催規模(㎡) -->
 							<!-- 予備域１ -->
 							<td nowrap>
 								<table border="0">
@@ -421,7 +411,7 @@
 										<td>&nbsp;</td>
 									</tr>
 									<tr>
-										<td>展示面積</td>
+										<td>開催規模</td>
 										<td colspan="4">{$form.net_square_meters} ㎡</td>
 									</tr>
 									<tr>
@@ -429,16 +419,6 @@
 										<td colspan="4">{$form.spare_field1}</td>
 									</tr>
 								</table>
-							</td>
-						</tr>
-
-						<tr>
-							<td nowrap>出展申込締切日</td>
-							<!-- 出典申込締切日 -->
-							<td>
-								{$form.app_dead_yyyy}年
-								{$form.app_dead_mm}月
-								{$form.app_dead_dd}日
 							</td>
 						</tr>
 

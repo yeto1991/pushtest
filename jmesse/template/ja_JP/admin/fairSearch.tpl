@@ -606,8 +606,8 @@
 						</tr>
 
 						<tr>
-							<td nowrap>同展示場で使用する面積（Ｎｅｔ）</td>
-							<!-- 会場の展示面積 -->
+							<td nowrap>開催予定規模</td>
+							<!-- 開催予定規模 -->
 							<td nowrap>
 								<input type="text" name="gross_floor_area_from" id="gross_floor_area_from" value="{$form.gross_floor_area_from}" size=20>～<input type="text" name="gross_floor_area_to" id="gross_floor_area_to" value="{$form.gross_floor_area_to}" size=20>
 								<select name="gross_floor_area_cond" id ="gross_floor_area_cond">
@@ -615,36 +615,6 @@
 									<option value="11" {if ('11' == $form.gross_floor_area_cond)}selected{/if}>範囲外</option>
 									<option value="1" {if ('1' == $form.gross_floor_area_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.gross_floor_area_cond)}selected{/if}>不一致</option>
-								</select>
-							</td>
-						</tr>
-
-						<tr>
-							<td nowrap rowspan="2">交通手段</td>
-							<!-- 交通手段(日) -->
-							<!-- 交通手段(英) -->
-							<td nowrap>日：
-								<input type="text" name="transportation_jp" id="transportation_jp" value="{$form.transportation_jp}" size="50" />
-								<select name="transportation_jp_cond" id="transportation_jp_cond">
-									<option value="1" {if ('1' == $form.transportation_jp_cond)}selected{/if}>一致</option>
-									<option value="2" {if ('2' == $form.transportation_jp_cond)}selected{/if}>不一致</option>
-									<option value="3" {if ('3' == $form.transportation_jp_cond)}selected{/if}>前一致</option>
-									<option value="4" {if ('4' == $form.transportation_jp_cond)}selected{/if}>前不一</option>
-									<option value="5" {if ('5' == $form.transportation_jp_cond || '' == $form.transportation_jp_cond)}selected{/if}>含む</option>
-									<option value="6" {if ('6' == $form.transportation_jp_cond)}selected{/if}>含まず</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td nowrap>英：
-								<input type="text" name="transportation_en" id="transportation_en" value="{$form.transportation_en}" size="50" />
-								<select name="transportation_en_cond" id="transportation_en_cond">
-									<option value="1" {if ('1' == $form.transportation_en_cond)}selected{/if}>一致</option>
-									<option value="2" {if ('2' == $form.transportation_en_cond)}selected{/if}>不一致</option>
-									<option value="3" {if ('3' == $form.transportation_en_cond)}selected{/if}>前一致</option>
-									<option value="4" {if ('4' == $form.transportation_en_cond)}selected{/if}>前不一</option>
-									<option value="5" {if ('5' == $form.transportation_en_cond || '' == $form.transportation_en_cond)}selected{/if}>含む</option>
-									<option value="6" {if ('6' == $form.transportation_en_cond)}selected{/if}>含まず</option>
 								</select>
 							</td>
 						</tr>
@@ -721,7 +691,7 @@
 							<!-- 海外からの入場者数(人) -->
 							<!-- 総出典者数(社) -->
 							<!-- 海外からの出典者数(社) -->
-							<!-- 展示面積(㎡) -->
+							<!-- 開催規模(㎡) -->
 							<td nowrap>
 								<table border="0">
 									<tr>
@@ -787,7 +757,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td>展示面積</td>
+										<td>開催規模</td>
 										<td>
 											<input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" size="50" />
 											<select name="net_square_meters_cond" id="net_square_meters_cond">
@@ -815,19 +785,6 @@
 										</td>
 									</tr>
 								</table>
-							</td>
-						</tr>
-
-						<tr>
-							<td nowrap>出展申込締切日</td>
-							<!-- 出典申込締切日 -->
-							<td nowrap>
-								<input type="text" name="app_dead_yyyy_from" id="app_dead_yyyy_from" value="{$form.app_dead_yyyy_from}" maxlength="4" size="4" />年
-								<input type="text" name="app_dead_mm_from" id="app_dead_mm_from" value="{$form.app_dead_mm_from}" maxlength="2" size="2" />月
-								<input type="text" name="app_dead_dd_from" id="app_dead_dd_from" value="{$form.app_dead_dd_from}" maxlength="2" size="2" />日から&nbsp;
-								<input type="text" name="app_dead_yyyy_to" id="app_dead_yyyy_to" value="{$form.app_dead_yyyy_to}" maxlength="4" size="4" />年
-								<input type="text" name="app_dead_mm_to" id="app_dead_mm_to" value="{$form.app_dead_mm_to}" maxlength="2" size="2" />月
-								<input type="text" name="app_dead_dd_to" id="app_dead_dd_to" value="{$form.app_dead_dd_to}" maxlength="2" size="2" />日まで
 							</td>
 						</tr>
 
