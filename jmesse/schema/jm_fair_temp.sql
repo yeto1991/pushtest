@@ -5,7 +5,7 @@ create table jmesse.jm_fair_temp(
   , fair_title_jp varchar (255) not null
   , fair_title_en varchar (255)
   , abbrev_title varchar (255)
-  , fair_url varchar (255)
+  , fair_url varchar (255) not null
   , mihon_no int not null
   , seq_num int not null auto_increment
   , profile_jp text
