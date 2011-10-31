@@ -1024,7 +1024,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'gross_floor_area_from' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '展示会で使用する面積（Net）', // Display name
+			'name'        => '開催予定規模', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,              // Maximum value
@@ -1037,7 +1037,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'gross_floor_area_to' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '展示会で使用する面積（Net）', // Display name
+			'name'        => '開催予定規模', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,              // Maximum value
@@ -1050,7 +1050,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'gross_floor_area_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '展示会で使用する面積（Net）（条件）', // Display name
+			'name'        => '開催予定規模（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1060,60 +1060,6 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
-		'transportation_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '交通手段(日)',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'transportation_jp_cond' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '交通手段(日)（条件）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'transportation_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '交通手段(英)',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
-		'transportation_en_cond' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '交通手段(英)（条件）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-
 		'open_to' => array(
 			'type'        => array(VAR_TYPE_STRING), // Input type
 			'form_type'   => array(FORM_TYPE_CHECKBOX), // Form type
@@ -1436,7 +1382,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'net_square_meters' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績展示面積(㎡)', // Display name
+			'name'        => '過去の実績開催規模(㎡)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1449,7 +1395,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'net_square_meters_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '過去の実績展示面積(㎡)（条件）', // Display name
+			'name'        => '過去の実績開催規模(㎡)（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1486,86 +1432,6 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
-		'app_dead_yyyy_from' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(年)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_mm_from' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(月)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_dd_from' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(日)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_yyyy_to' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(年)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_mm_to' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(月)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_dd_to' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(日)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-
 		'organizer_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
@@ -2220,10 +2086,6 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 			$this->af->set('gross_floor_area_from', $search_cond['gross_floor_area_from']);
 			$this->af->set('gross_floor_area_to', $search_cond['gross_floor_area_to']);
 			$this->af->set('gross_floor_area_cond', $search_cond['gross_floor_area_cond']);
-			$this->af->set('transportation_jp', $search_cond['transportation_jp']);
-			$this->af->set('transportation_jp_cond', $search_cond['transportation_jp_cond']);
-			$this->af->set('transportation_en', $search_cond['transportation_en']);
-			$this->af->set('transportation_en_cond', $search_cond['transportation_en_cond']);
 			$this->af->set('open_to', $search_cond['open_to']);
 			$this->af->set('admission_ticket_1', $search_cond['admission_ticket_1']);
 			$this->af->set('admission_ticket_2', $search_cond['admission_ticket_2']);
@@ -2252,12 +2114,6 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 			$this->af->set('net_square_meters_cond', $search_cond['net_square_meters_cond']);
 			$this->af->set('spare_field1', $search_cond['spare_field1']);
 			$this->af->set('spare_field1_cond', $search_cond['spare_field1_cond']);
-			$this->af->set('app_dead_yyyy_from', $search_cond['app_dead_yyyy_from']);
-			$this->af->set('app_dead_mm_from', $search_cond['app_dead_mm_from']);
-			$this->af->set('app_dead_dd_from', $search_cond['app_dead_dd_from']);
-			$this->af->set('app_dead_yyyy_to', $search_cond['app_dead_yyyy_to']);
-			$this->af->set('app_dead_mm_to', $search_cond['app_dead_mm_to']);
-			$this->af->set('app_dead_dd_to', $search_cond['app_dead_dd_to']);
 			$this->af->set('organizer_jp', $search_cond['organizer_jp']);
 			$this->af->set('organizer_jp_cond', $search_cond['organizer_jp_cond']);
 			$this->af->set('organizer_en', $search_cond['organizer_en']);
