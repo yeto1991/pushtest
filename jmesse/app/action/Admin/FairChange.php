@@ -199,12 +199,8 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('venue_jp', $jm_fair->get('venue_jp'));
 		$this->af->set('venue_en', $jm_fair->get('venue_en'));
 
-		// 展示会で使用する面積（Ｎｅｔ）
+		// 開催予定規模
 		$this->af->set('gross_floor_area', $this->_isZero($jm_fair->get('gross_floor_area')));
-
-		// 交通手段
-		$this->af->set('transportation_jp', $jm_fair->get('transportation_jp'));
-		$this->af->set('transportation_en', $jm_fair->get('transportation_en'));
 
 		// 入場資格
 // 		if ('0' == $use_language_flag) {
@@ -242,11 +238,6 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('number_of_foreign_exhibitors', $this->_isZero($jm_fair->get('number_of_foreign_exhibitors')));
 		$this->af->set('net_square_meters', $this->_isZero($jm_fair->get('net_square_meters')));
 		$this->af->set('spare_field1', $jm_fair->get('spare_field1'));
-
-		// 出展申込締切日
-		$this->af->set('app_dead_yyyy', $jm_fair->get('app_dead_yyyy'));
-		$this->af->set('app_dead_mm', $jm_fair->get('app_dead_mm'));
-		$this->af->set('app_dead_dd', $jm_fair->get('app_dead_dd'));
 
 		// 主催者・問合せ先
 		$this->af->set('organizer_jp', $jm_fair->get('organizer_jp'));

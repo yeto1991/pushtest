@@ -146,15 +146,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
 			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません（開始 > 終了）', E_INPUT_TYPE));
 		}
-		// 出展申込締切日
-		if ((null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy'))
-			|| (null != $this->af->get('app_dead_mm') && '' != $this->af->get('app_dead_mm'))
-			|| (null != $this->af->get('app_dead_dd') && '' != $this->af->get('app_dead_dd'))) {
-			if (!checkdate($this->af->get('app_dead_mm'), $this->af->get('app_dead_dd'), $this->af->get('app_dead_yyyy'))) {
-				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません', E_INPUT_TYPE));
-			}
-		}
-
 		// URLチェック
 		// 見本市URL
 		if (null != $this->af->get('fair_url') && '' != $this->af->get('fair_url')) {
@@ -329,12 +320,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('venue_jp', $this->af->get('venue_jp'));
 		$jm_fair->set('venue_en', $this->af->get('venue_en'));
 
-		// 展示会で使用する面積（Ｎｅｔ）
+		// 開催予定規模
 		$jm_fair->set('gross_floor_area', $this->af->get('gross_floor_area'));
-
-		// 交通手段
-		$jm_fair->set('transportation_jp', $this->af->get('transportation_jp'));
-		$jm_fair->set('transportation_en', $this->af->get('transportation_en'));
 
 		// 入場資格
 // 		if ('0' == $use_language_flag) {
@@ -366,11 +353,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('number_of_foreign_exhibitors', $this->af->get('number_of_foreign_exhibitors'));
 		$jm_fair->set('net_square_meters', $this->af->get('net_square_meters'));
 		$jm_fair->set('spare_field1', $this->af->get('spare_field1'));
-
-		// 出展申込締切日
-		$jm_fair->set('app_dead_yyyy', $this->af->get('app_dead_yyyy'));
-		$jm_fair->set('app_dead_mm', $this->af->get('app_dead_mm'));
-		$jm_fair->set('app_dead_dd', $this->af->get('app_dead_dd'));
 
 		// 主催者・問合せ先
 		$jm_fair->set('organizer_jp', $this->af->get('organizer_jp'));
@@ -510,11 +492,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// 会場名
 		$search_key .= $this->af->get('venue_jp').' ';
 		$search_key .= $this->af->get('venue_en').' ';
-		// 展示会で使用する面積（Ｎｅｔ）
+		// 開催予定規模
 		$search_key .= $this->af->get('gross_floor_area').' ';
-		// 交通手段
-		$search_key .= $this->af->get('transportation_jp').' ';
-		$search_key .= $this->af->get('transportation_en').' ';
 		// 入場資格
 		$code = $jm_code_m_mgr->getCode('004', $this->af->get('open_to'), '000', '000');
 		$search_key .= $code['discription_jp'].' ';
@@ -542,8 +521,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$search_key .= $this->af->get('number_of_foreign_exhibitors').' ';
 		$search_key .= $this->af->get('net_square_meters').' ';
 		$search_key .= $this->af->get('spare_field1').' ';
-		// 出展申込締切日
-		$search_key .= $this->af->get('app_dead_yyyy').'年'.$this->af->get('app_dead_mm').'月'.$this->af->get('app_dead_dd').'日 ';
 		// 主催者・問合せ先
 		$search_key .= $this->af->get('organizer_jp').' ';
 		$search_key .= $this->af->get('organizer_en').' ';

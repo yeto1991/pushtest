@@ -130,33 +130,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません（開始 > 終了）', E_INPUT_TYPE));
 			}
 		}
-		// 出展申込締切日
-		if ((null != $this->af->get('app_dead_yyyy_from') && '' != $this->af->get('app_dead_yyyy_from'))
-			|| (null != $this->af->get('app_dead_mm_from') && '' != $this->af->get('app_dead_mm_from'))
-			|| (null != $this->af->get('app_dead_dd_from') && '' != $this->af->get('app_dead_dd_from'))) {
-			if (!checkdate($this->af->get('app_dead_mm_from'), $this->af->get('app_dead_dd_from'), $this->af->get('app_dead_yyyy_from'))) {
-				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（開始）', E_INPUT_TYPE));
-			}
-		}
-		if ((null != $this->af->get('app_dead_yyyy_to') && '' != $this->af->get('app_dead_yyyy_to'))
-			|| (null != $this->af->get('app_dead_mm_to') && '' != $this->af->get('app_dead_mm_to'))
-			|| (null != $this->af->get('app_dead_dd_to') && '' != $this->af->get('app_dead_dd_to'))) {
-			if (!checkdate($this->af->get('app_dead_mm_to'), $this->af->get('app_dead_dd_to'), $this->af->get('app_dead_yyyy_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（終了）', E_INPUT_TYPE));
-			}
-		}
-		if (((null != $this->af->get('app_dead_yyyy_from') && '' != $this->af->get('app_dead_yyyy_from'))
-		|| (null != $this->af->get('app_dead_mm_from') && '' != $this->af->get('app_dead_mm_from'))
-		|| (null != $this->af->get('app_dead_dd_from') && '' != $this->af->get('app_dead_dd_from')))
-			&& ((null != $this->af->get('app_dead_yyyy_to') && '' != $this->af->get('app_dead_yyyy_to'))
-			|| (null != $this->af->get('app_dead_mm_to') && '' != $this->af->get('app_dead_mm_to'))
-			|| (null != $this->af->get('app_dead_dd_to') && '' != $this->af->get('app_dead_dd_to')))) {
-			if (mktime(0, 0, 0, $this->af->get('app_dead_mm_from'), $this->af->get('app_dead_dd_from'), $this->af->get('app_dead_yyyy_from'))
-				> mktime(0, 0, 0, $this->af->get('app_dead_mm_to'), $this->af->get('app_dead_dd_to'), $this->af->get('app_dead_yyyy_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('出展申込締切日が正しくありません（開始 > 終了）', E_INPUT_TYPE));
-			}
-		}
-
 		// 数値の大小
 		// 見本市番号
 		if (null != $this->af->get('mihon_no_from') && '' != $this->af->get('mihon_no_from')
@@ -166,11 +139,11 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			}
 		}
 
-		// 同展示場で使用する面積（Ｎｅｔ）
+		// 開催予定規模
 		if (null != $this->af->get('gross_floor_area_from') && '' != $this->af->get('gross_floor_area_from')
 			&& null != $this->af->get('gross_floor_area_to') && '' != $this->af->get('gross_floor_area_to')) {
 			if ($this->af->get('gross_floor_area_from') > $this->af->get('gross_floor_area_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('同展示場で使用する面積（Ｎｅｔ）が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->addObject('error', Ethna::raiseError('開催予定規模が正しくありません（開始 > 終了）', E_INPUT_TYPE));
 			}
 		}
 
@@ -368,10 +341,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['gross_floor_area_from'] = $this->af->get('gross_floor_area_from');
 				$search_cond['gross_floor_area_to'] = $this->af->get('gross_floor_area_to');
 				$search_cond['gross_floor_area_cond'] = $this->af->get('gross_floor_area_cond');
-				$search_cond['transportation_jp'] = $this->af->get('transportation_jp');
-				$search_cond['transportation_jp_cond'] = $this->af->get('transportation_jp_cond');
-				$search_cond['transportation_en'] = $this->af->get('transportation_en');
-				$search_cond['transportation_en_cond'] = $this->af->get('transportation_en_cond');
 				$search_cond['open_to'] = $this->af->get('open_to');
 				$search_cond['admission_ticket_1'] = $this->af->get('admission_ticket_1');
 				$search_cond['admission_ticket_2'] = $this->af->get('admission_ticket_2');
@@ -400,12 +369,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['net_square_meters_cond'] = $this->af->get('net_square_meters_cond');
 				$search_cond['spare_field1'] = $this->af->get('spare_field1');
 				$search_cond['spare_field1_cond'] = $this->af->get('spare_field1_cond');
-				$search_cond['app_dead_yyyy_from'] = $this->af->get('app_dead_yyyy_from');
-				$search_cond['app_dead_mm_from'] = $this->af->get('app_dead_mm_from');
-				$search_cond['app_dead_dd_from'] = $this->af->get('app_dead_dd_from');
-				$search_cond['app_dead_yyyy_to'] = $this->af->get('app_dead_yyyy_to');
-				$search_cond['app_dead_mm_to'] = $this->af->get('app_dead_mm_to');
-				$search_cond['app_dead_dd_to'] = $this->af->get('app_dead_dd_to');
 				$search_cond['organizer_jp'] = $this->af->get('organizer_jp');
 				$search_cond['organizer_jp_cond'] = $this->af->get('organizer_jp_cond');
 				$search_cond['organizer_en'] = $this->af->get('organizer_en');
