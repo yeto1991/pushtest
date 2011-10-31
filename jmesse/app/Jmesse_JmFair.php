@@ -1247,15 +1247,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_tmp = $this->_mkSqlNumber('gross_floor_area', 'gross_floor_area', $search_cond['gross_floor_area_from'], $search_cond['gross_floor_area_to'], $search_cond['gross_floor_area_cond'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
-		// 交通手段(日)
-		$sql_tmp_1 = $this->_mkSqlText('transportation_jp', $search_cond['transportation_jp'], $search_cond['transportation_jp_cond'], $search_cond['relation'], $data);
-		// 交通手段(英)
-		$sql_tmp_2 = $this->_mkSqlText('transportation_en', $search_cond['transportation_en'], $search_cond['transportation_en_cond'], $search_cond['relation'], $data);
-		// 同一項目なので
-		$ary_sql = array($sql_tmp_1, $sql_tmp_2);
-		$sql_tmp = $this->_addWhereRelation($ary_sql, $search_cond['relation']);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
-
 		// 入場資格
 		$sql_tmp = $this->_mkSqlCheckBox1('open_to', $search_cond['open_to'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
@@ -1290,20 +1281,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 同一項目なので
 		$ary_sql = array($sql_tmp_1, $sql_tmp_2, $sql_tmp_3, $sql_tmp_4, $sql_tmp_5, $sql_tmp_6, $sql_tmp_7);
 		$sql_tmp = $this->_addWhereRelation($ary_sql, $search_cond['relation']);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
-
-		// 出展申込締切日
-		if ('' != $search_cond['app_dead_yyyy_from']) {
-			$date_from = $search_cond['app_dead_yyyy_from'].'/'.$search_cond['app_dead_mm_from'].'/'.$search_cond['app_dead_dd_from'].' 00:00:00';
-		} else {
-			$date_from = '';
-		}
-		if ('' != $search_cond['app_dead_yyyy_to']) {
-			$date_to = $search_cond['app_dead_yyyy_to'].'/'.$search_cond['app_dead_mm_to'].'/'.$search_cond['app_dead_dd_to'].' 23:59:59';
-		} else {
-			$date_to = '';
-		}
-		$sql_tmp = $this->_mkSqlDate1("concat(app_dead_yyyy, '/', app_dead_mm, '/', app_dead_dd, ' 00:00:00')", $date_from, $date_to, $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 主催者・問合せ先(名称(日))
@@ -1676,7 +1653,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 *
 	 * 申請年月日
 	 * 登録日(承認日)
-	 * 出展申込締切日
 	 * ※日付は yyyy/mm/dd 00:00:00 から yyyy/mm/dd 23:59:59 とする
 	 *
 	 * @param string $column_from カラム名
