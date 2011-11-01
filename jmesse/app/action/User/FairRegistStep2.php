@@ -45,10 +45,22 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			return 'user_Login';
 		}
 
+		// 戻った場合
+		if ('1' == $this->af->get('back')) {
+			return null;
+		}
+
+		// 見本市番号
+		if ('c' == $this->af->get('mode')) {
+			if ('' == $this->af->get('mihon_no')) {
+				$this->ae->add('error', '見本市番号がありません');
+			}
+		}
+
 		// 入力チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'user_fairRegistStep1';
+//			return 'user_fairRegistStep1';
 		}
 
 		// 詳細チェック
@@ -59,11 +71,13 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 
 		// 見本市略称
 
-		// 見本市URL
-		if (null != $this->af->get('fair_url') && '' != $this->af->get('fair_url')) {
-			if (0 !== strpos($this->af->get('fair_url'), 'http')) {
-				$this->ae->add('error', '見本市URLはhttp～として下さい');
-			}
+		// 見本市公式サイトURL
+		$this->backend->getLogger()->log(LOG_DEBUG, '■fair_url : '.$this->af->get('fair_url'));
+		if ('' == $this->af->get('fair_url') || 'http://' == $this->af->get('fair_url')) {
+			$this->ae->add('error', '見本市公式サイトURLが入力されていません');
+		}
+		if (0 !== strpos($this->af->get('fair_url'), 'http')) {
+			$this->ae->add('error', '見本市公式サイトURLはhttp～として下さい');
 		}
 
 		// 会期
@@ -120,12 +134,12 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			$this->ae->add('error', '会場名が入力されていません');
 		}
 
-		// 同展示会で使用する面積
+		// 開催予定規模
 
 		// 会場までの交通手段
-		if ('' == $this->af->get('transportation_jp')) {
-			$this->ae->add('error', '会場までの交通手段が入力されていません');
-		}
+// 		if ('' == $this->af->get('transportation_jp')) {
+// 			$this->ae->add('error', '会場までの交通手段が入力されていません');
+// 		}
 
 		// 入場資格
 		if ('' == $this->af->get('open_to')) {
@@ -142,13 +156,13 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		}
 
 		// 出展申込締切日
-		if ((null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy'))
-			|| (null != $this->af->get('app_dead_mm') && '' != $this->af->get('app_dead_mm'))
-			|| (null != $this->af->get('app_dead_dd') && '' != $this->af->get('app_dead_dd'))) {
-			if (!checkdate($this->af->get('app_dead_mm'), $this->af->get('app_dead_dd'), $this->af->get('app_dead_yyyy'))) {
-				$this->ae->add('error', '出展申込締切日が正しくありません');
-			}
-		}
+// 		if ((null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy'))
+// 			|| (null != $this->af->get('app_dead_mm') && '' != $this->af->get('app_dead_mm'))
+// 			|| (null != $this->af->get('app_dead_dd') && '' != $this->af->get('app_dead_dd'))) {
+// 			if (!checkdate($this->af->get('app_dead_mm'), $this->af->get('app_dead_dd'), $this->af->get('app_dead_yyyy'))) {
+// 				$this->ae->add('error', '出展申込締切日が正しくありません');
+// 			}
+// 		}
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
@@ -165,19 +179,47 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		if ('b' == $this->af->get('mode')) {
+		if ('1' == $this->af->get('back')) {
 			// 戻った場合
 			$this->backend->getLogger()->log(LOG_DEBUG, '■戻った場合');
+
 			// sessionの情報をformに設定
 			$this->_setSessionToForm();
-		} elseif ('c' == $this->af->get('mode')) {
-			// 修正の場合
-			$this->backend->getLogger()->log(LOG_DEBUG, '■修正場合');
-			// sessionの情報をformに設定
-			$this->_setSessionToForm();
-		} else {
-			// formの情報をsessionに設定
-			$this->_setFormToSession();
+
+			// 画像ファイルの削除
+			if ('' != $this->session->get('img_tmp_path')) {
+				if ('' != $this->af->get('photos_name_1')) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_1'));
+					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_1'));
+				}
+				if ('' != $this->af->get('photos_name_2')) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_2'));
+					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_2'));
+				}
+				if ('' != $this->af->get('photos_name_3')) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_3'));
+					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_3'));
+				}
+				rmdir($this->session->get('img_tmp_path'));
+				$this->session->set('img_tmp_path', '');
+			}
+		} else	{
+			if ('c' == $this->af->get('mode')) {
+				// 修正の場合
+				$this->backend->getLogger()->log(LOG_DEBUG, '■修正の場合');
+
+				// formの情報をsessionに設定
+				$this->_setFormToSession();
+
+				// sessionの情報をformに設定
+				$this->_setSessionToForm();
+			} else {
+				// formの情報をsessionに設定
+				$this->_setFormToSession();
+
+				// sessionの情報をformに設定
+				$this->_setSessionToForm();
+			}
 		}
 
 		return 'user_fairRegistStep2';
@@ -227,8 +269,12 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$regist_param_1['region'] = $this->af->get('region');
 		$regist_param_1['country'] = $this->af->get('country');
 		$regist_param_1['city'] = $this->af->get('city');
-		$regist_param_1['other_city_jp'] = $this->af->get('other_city_jp');
-		$regist_param_1['check_other_city_jp'] = $this->af->get('check_other_city_jp');
+		$regist_param_1['check_other_city'] = $this->af->get('check_other_city');
+		if ('1' == $this->af->get('check_other_city')) {
+			$regist_param_1['other_city_jp'] = $this->af->get('other_city_jp');
+		} else {
+			$regist_param_1['other_city_jp'] = '';
+		}
 		$regist_param_1['venue_jp'] = $this->af->get('venue_jp');
 		$regist_param_1['gross_floor_area'] = $this->af->get('gross_floor_area');
 		$regist_param_1['transportation_jp'] = $this->af->get('transportation_jp');
@@ -238,7 +284,11 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$regist_param_1['admission_ticket_3'] = $this->af->get('admission_ticket_3');
 		$regist_param_1['admission_ticket_4'] = $this->af->get('admission_ticket_4');
 		$regist_param_1['admission_ticket_5'] = $this->af->get('admission_ticket_5');
-		$regist_param_1['other_admission_ticket_jp'] = $this->af->get('other_admission_ticket_jp');
+		if ('1' == $this->af->get('admission_ticket_5')) {
+			$regist_param_1['other_admission_ticket_jp'] = $this->af->get('other_admission_ticket_jp');
+		} else {
+			$regist_param_1['other_admission_ticket_jp'] = '';
+		}
 		$regist_param_1['app_dead_yyyy'] = $this->af->get('app_dead_yyyy');
 		$regist_param_1['app_dead_mm'] = $this->af->get('app_dead_mm');
 		$regist_param_1['app_dead_dd'] = $this->af->get('app_dead_dd');
@@ -258,18 +308,19 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('net_square_meters', $regist_param_2['net_square_meters']);
 		$this->af->set('profile_jp', $regist_param_2['profile_jp']);
 		$this->af->set('detailed_information_jp', $regist_param_2['detailed_information_jp']);
-// 		$this->af->set('photos_1', $regist_param_2['photos_1']);
-// 		$this->af->set('photos_2', $regist_param_2['photos_2']);
-// 		$this->af->set('photos_3', $regist_param_2['photos_3']);
+		$this->af->set('photos_name_1', $regist_param_2['photos_1']['name']);
+		$this->af->set('photos_name_2', $regist_param_2['photos_2']['name']);
+		$this->af->set('photos_name_3', $regist_param_2['photos_3']['name']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
+		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
 		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
+		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$this->af->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$this->af->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$this->af->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
-		$this->session->set('regist_param_2', null);
 
 		$regist_param_1 = $this->session->get('regist_param_1');
 		if (null == $regist_param_1) {

@@ -21,7 +21,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		// '':first、'b':back、'c':change
+		// '':regist、'c':change、'd':detail
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -29,14 +29,27 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
-			'regexp'      => '/^[bc]+$/',     // String by Regexp
+			'regexp'      => '/^[cd]+$/',     // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
-		//
+		// '1':戻る
+		'back' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '戻ってきた',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[01]+$/',            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		// 見本市番号
 		'mihon_no' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
@@ -50,7 +63,6 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
 		// 改行コード
 		'br' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -65,13 +77,27 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		// プリント画面
+		'print' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'プリント画面',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 
 		// Step.1
 		// 基本情報
 		'fair_title_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市名（日）', // Display name
+			'name'        => '見本市名', // Display name
 			'required'    => false,          // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -97,7 +123,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'fair_url' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市URL',     // Display name
+			'name'        => '見本市公式サイトURL', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -110,7 +136,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'date_from_yyyy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '会期開始年',    // Display name
+			'name'        => '会期(開始年)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
@@ -123,7 +149,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'date_from_mm' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '会期開始月',    // Display name
+			'name'        => '会期(開始月)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
@@ -136,7 +162,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'date_from_dd' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '会期開始日',    // Display name
+			'name'        => '会期(開始日)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
@@ -149,7 +175,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'date_to_yyyy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '会期終了年',    // Display name
+			'name'        => '会期(終了年)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
@@ -162,7 +188,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'date_to_mm' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '会期終了月',    // Display name
+			'name'        => '会期(終了月)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
@@ -175,7 +201,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'date_to_dd' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '会期終了日',    // Display name
+			'name'        => '会期(終了日)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
@@ -203,7 +229,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類',    // Display name
+			'name'        => '業種',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -216,7 +242,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -229,7 +255,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -242,7 +268,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -255,7 +281,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(2)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -268,7 +294,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(2)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -281,7 +307,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_name_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(2)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -294,7 +320,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_name_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(2)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -307,7 +333,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(3)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -320,7 +346,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(3)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -333,7 +359,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_name_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(3)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -346,7 +372,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_name_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(3)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -359,7 +385,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(4)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -372,7 +398,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(4)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -385,7 +411,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_name_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(4)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -398,7 +424,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_name_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(4)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -411,7 +437,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(5)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -424,7 +450,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(5)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -437,7 +463,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_name_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(5)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -450,7 +476,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_name_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(5)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -463,7 +489,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類(6)', // Display name
+			'name'        => '業種', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -476,11 +502,11 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類(6)', // Display name
+			'name'        => '業種',          // Display name
 			'required'    => false,           // Required Option(true/false)
-			'min'         => null,               // Minimum value
-			'max'         => 3,    // Maximum value
-			'regexp'      => '/^[0-9]+$/',            // String by Regexp
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -489,7 +515,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'main_industory_name_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種大分類名(6)', // Display name
+			'name'        => '業種',          // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -502,7 +528,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'sub_industory_name_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '業種小分類名(6)', // Display name
+			'name'        => '業種',          // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -515,7 +541,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'check_sub_industory' => array(
 			'type'        => array(VAR_TYPE_STRING), // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '業種小分類（選択）', // Display name
+			'name'        => '業種(選択)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -528,7 +554,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'exhibits_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => '出品物(日)',    // Display name
+			'name'        => '取扱品目',      // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 300,             // Maximum value
@@ -543,7 +569,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'region' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '開催地地域',    // Display name
+			'name'        => '開催地(地域)',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -556,7 +582,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'country' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '開催地国地域',  // Display name
+			'name'        => '開催地(国・地域)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -569,7 +595,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'city' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '開催地都市',    // Display name
+			'name'        => '開催地(都市)',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
@@ -582,7 +608,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'other_city_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催地その他（日）', // Display name
+			'name'        => '開催地(その他)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -592,13 +618,13 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'check_other_city_jp' => array(
+		'check_other_city' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '開催地その他（日）', // Display name
+			'name'        => '開催地(その他)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,             // Maximum value
+			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -608,7 +634,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'venue_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会場名(日)',    // Display name
+			'name'        => '会場名',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -621,7 +647,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'gross_floor_area' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '展示会で使用する面積（Net）', // Display name
+			'name'        => '開催予定規模', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,              // Maximum value
@@ -634,7 +660,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'transportation_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '交通手段(日)',  // Display name
+			'name'        => '会場までの交通手段', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -660,7 +686,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '登録の必要なし', // Display name
+			'name'        => 'チケットの入手方法(登録の必要なし)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -673,7 +699,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'WEBからの事前登録', // Display name
+			'name'        => 'チケットの入手方法(WEBからの事前登録)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -686,7 +712,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '主催者・日本の照会先へ問い合わせ', // Display name
+			'name'        => 'チケットの入手方法(主催者・日本の照会先へ問い合わせ)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -699,7 +725,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '当日会場で入手', // Display name
+			'name'        => 'チケットの入手方法(当日会場で入手)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -712,7 +738,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'その他',        // Display name
+			'name'        => 'チケットの入手方法(その他)',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -725,7 +751,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'other_admission_ticket_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'その他のチケットの入手方法(日)', // Display name
+			'name'        => 'チケットの入手方法(その他)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -781,7 +807,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'year_of_the_trade_fair' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '過去の実績年',  // Display name
+			'name'        => '対象年',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 4,               // Maximum value
@@ -794,7 +820,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'total_number_of_visitor' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績来場者数', // Display name
+			'name'        => '総来場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -807,7 +833,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'number_of_foreign_visitor' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績海外来場者数', // Display name
+			'name'        => '総来場者数(うち海外から)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -820,7 +846,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'total_number_of_exhibitors' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績出展社数', // Display name
+			'name'        => '総出展社数',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -833,7 +859,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'number_of_foreign_exhibitors' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績海外出展社数', // Display name
+			'name'        => '総出展社数(うち海外から)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -846,7 +872,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'net_square_meters' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績展示面積(㎡)', // Display name
+			'name'        => '開催規模',      // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -861,7 +887,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'profile_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => 'キャッチフレーズ（日）', // Display name
+			'name'        => 'キャッチフレーズ', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -874,7 +900,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'detailed_information_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA,  // Form type
-			'name'        => 'ＰＲ・紹介文（日）', // Display name
+			'name'        => 'PR・紹介文',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1000,            // Maximum value
@@ -887,7 +913,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'photos_1' => array(
 			'type'        => VAR_TYPE_FILE,   // Input type
 			'form_type'   => FORM_TYPE_FILE,  // Form type
-			'name'        => '展示会に係わる画像（1）', // Display name
+			'name'        => '見本市の紹介写真', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -900,7 +926,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'photos_2' => array(
 			'type'        => VAR_TYPE_FILE,   // Input type
 			'form_type'   => FORM_TYPE_FILE,  // Form type
-			'name'        => '展示会に係わる画像（2）', // Display name
+			'name'        => '見本市の紹介写真', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -913,7 +939,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'photos_3' => array(
 			'type'        => VAR_TYPE_FILE,   // Input type
 			'form_type'   => FORM_TYPE_FILE,  // Form type
-			'name'        => '展示会に係わる画像（3）', // Display name
+			'name'        => '見本市の紹介写真', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -928,7 +954,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'organizer_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先名称（日）', // Display name
+			'name'        => '主催者(日)',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -938,10 +964,23 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'organizer_en' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '主催者(英)',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 500,             // Maximum value
+			'regexp'      => '/^[ -~]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'organizer_tel' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先TEL', // Display name
+			'name'        => '主催者連絡先(TEL)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -954,7 +993,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'organizer_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先FAX', // Display name
+			'name'        => '主催者連絡先(FAX)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -967,7 +1006,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'organizer_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先E-Mail', // Display name
+			'name'        => '主催者連絡先(Email)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -980,7 +1019,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先名称（日）', // Display name
+			'name'        => '日本国内の照会先(名称(日))', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -990,10 +1029,23 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'agency_in_japan_en' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '日本国内の照会先(名称(英))', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 255,             // Maximum value
+			'regexp'      => '/^[ -~]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'agency_in_japan_tel' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先TEL', // Display name
+			'name'        => '日本国内の照会先(TEL)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1006,7 +1058,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先FAX', // Display name
+			'name'        => '日本国内の照会先(FAX)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1019,7 +1071,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先E-Mail', // Display name
+			'name'        => '日本国内の照会先(Email)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1034,7 +1086,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'select_language_info' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_RADIO, // Form type
-			'name'        => '言語選択情報',  // Display name
+			'name'        => '海外への紹介を希望しますか',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1047,7 +1099,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'fair_title_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市名（英）', // Display name
+			'name'        => 'Fair Title',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1060,7 +1112,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'profile_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => 'キャッチフレーズ（英）', // Display name
+			'name'        => 'Teaser Copy',   // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -1073,7 +1125,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'detailed_information_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA,  // Form type
-			'name'        => 'ＰＲ・紹介文（英）', // Display name
+			'name'        => "Organizer's statement,special features. etc.", // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1000,            // Maximum value
@@ -1086,7 +1138,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'exhibits_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
-			'name'        => '出品物(英)',    // Display name
+			'name'        => 'Exhibits',      // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 300,             // Maximum value
@@ -1096,23 +1148,10 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'check_other_city_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '開催地その他（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
 		'other_city_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催地その他（英）', // Display name
+			'name'        => 'City (other)',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1125,7 +1164,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'venue_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会場名(英)',    // Display name
+			'name'        => 'Venue',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1138,7 +1177,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'transportation_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '交通手段(英)',  // Display name
+			'name'        => 'Transportation', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -1151,36 +1190,10 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'other_admission_ticket_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'その他のチケットの入手方法(英)', // Display name
+			'name'        => 'Admission ticket(other)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
-			'regexp'      => '/^[ -~]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null, // Optional method name which
-		),
-		'organizer_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者・問合せ先名称（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => '/^[ -~]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'agency_in_japan_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先名称（英）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
 			'regexp'      => '/^[ -~]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -1190,7 +1203,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'spare_field1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '過去の実績認証機関', // Display name
+			'name'        => 'Details of last fair audited by', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1228,10 +1241,15 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 			return 'user_Login';
 		}
 
+		// 戻った場合
+		if ('1' == $this->af->get('back')) {
+			return null;
+		}
+
 		// 見本市番号
 		if ('c' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', '見本市番号が入力されていません');
+				$this->ae->add('error', '見本市番号がありません');
 			}
 		}
 
@@ -1252,39 +1270,46 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 	function perform()
 	{
 		// typeの判定
-		if ('b' == $this->af->get('mode')) {
+		if ('1' == $this->af->get('back')) {
 			// 戻った場合
 			$this->backend->getLogger()->log(LOG_DEBUG, '■戻った場合');
 
 			// 入力情報の復元
 			$this->_setSessionToForm();
-		} elseif ('c' == $this->af->get('mode')) {
-			// 修正の場合
-			$this->backend->getLogger()->log(LOG_DEBUG, '■修正場合');
+		} else {
+			if ('c' == $this->af->get('mode')) {
+				// 修正の場合
+				$this->backend->getLogger()->log(LOG_DEBUG, '■修正の場合');
 
-			// オブジェクトの取得
-			$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->session->get('mihon_no'));
-			if (null == $jm_fair_obj) {
-				$this->backend->getLogger()->log(LOG_DEBUG, '■見本市情報が存在しません。');
-				$this->ae->add('error', '見本市情報が存在しません');
-				return 'error';
+				// オブジェクトの取得
+				$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
+				if (null == $jm_fair_obj) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■見本市情報が存在しません。');
+					$this->ae->add('error', '見本市情報が存在しません');
+					return 'error';
+				}
+				if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■他人の見本市情報です。'.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
+					$this->ae->add('error', '他人の見本市情報なので編集できません');
+					return 'error';
+				}
+
+				// オブジェクトの内容をSESSIONに設定する。
+				$this->_setObjToSession($jm_fair_obj);
+
+				// 表示項目をSESSIONからFORMに設定する。
+				$this->_setSessionToForm();
 			}
 
-			// オブジェクトの内容をSESSIONに設定する。
-			$this->_setObjToSession($jm_fair_obj);
-
-			// 表示項目をSESSIONからFORMに設定する。
-			$this->_setSessionToForm();
+			// 表示用Eメールの取得
+			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+			if (null == $user_obj) {
+				$this->backend->getLogger()->log(LOG_DEBUG, '■ユーザ情報が存在しません。');
+				$this->ae->add('error', 'ユーザ情報が存在しません');
+				return 'error';
+			}
+			$this->session->set('email', $user_obj->get('email'));
 		}
-
-		// 表示用Eメールの取得
-		$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
-		if (null == $user_obj) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '■ユーザ情報が存在しません。');
-			$this->ae->add('error', 'ユーザ情報が存在しません');
-			return 'error';
-		}
-		$this->session->set('email', $user_obj->get('email'));
 
 		return 'user_fairRegistStep1';
 	}
@@ -1348,7 +1373,6 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$this->af->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
 		$this->af->set('app_dead_mm', $regist_param_1['app_dead_mm']);
 		$this->af->set('app_dead_dd', $regist_param_1['app_dead_dd']);
-		$this->session->set('regist_param_1', null);
 	}
 
 	function _setObjToSession($obj) {
@@ -1394,9 +1418,9 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_1['city'] = $obj->get('city');
 		$regist_param_1['other_city_jp'] = $obj->get('other_city_jp');
 		if ('' != $obj->get('other_city_jp')) {
-			$regist_param_1['check_other_city_jp'] = '1';
+			$regist_param_1['check_other_city'] = '1';
 		} else {
-			$regist_param_1['check_other_city_jp'] = '';
+			$regist_param_1['check_other_city'] = '';
 		}
 		$regist_param_1['venue_jp'] = $obj->get('venue_jp');
 		$regist_param_1['gross_floor_area'] = $obj->get('gross_floor_area');
@@ -1430,10 +1454,12 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_2['photos_2'] = $obj->get('photos_2');
 		$regist_param_2['photos_3'] = $obj->get('photos_3');
 		$regist_param_2['organizer_jp'] = $obj->get('organizer_jp');
+		$regist_param_2['organizer_en'] = $obj->get('organizer_en');
 		$regist_param_2['organizer_tel'] = $obj->get('organizer_tel');
 		$regist_param_2['organizer_fax'] = $obj->get('organizer_fax');
 		$regist_param_2['organizer_email'] = $obj->get('organizer_email');
 		$regist_param_2['agency_in_japan_jp'] = $obj->get('agency_in_japan_jp');
+		$regist_param_2['agency_in_japan_en'] = $obj->get('agency_in_japan_en');
 		$regist_param_2['agency_in_japan_tel'] = $obj->get('agency_in_japan_tel');
 		$regist_param_2['agency_in_japan_fax'] = $obj->get('agency_in_japan_fax');
 		$regist_param_2['agency_in_japan_email'] = $obj->get('agency_in_japan_email');
@@ -1445,13 +1471,10 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_3['profile_en'] = $obj->get('profile_en');
 		$regist_param_3['detailed_information_en'] = $obj->get('detailed_information_en');
 		$regist_param_3['exhibits_en'] = $obj->get('exhibits_en');
-		$regist_param_3['check_other_city_en'] = $obj->get('check_other_city_en');
 		$regist_param_3['other_city_en'] = $obj->get('other_city_en');
 		$regist_param_3['venue_en'] = $obj->get('venue_en');
 		$regist_param_3['transportation_en'] = $obj->get('transportation_en');
 		$regist_param_3['other_admission_ticket_en'] = $obj->get('other_admission_ticket_en');
-		$regist_param_3['organizer_en'] = $obj->get('organizer_en');
-		$regist_param_3['agency_in_japan_en'] = $obj->get('agency_in_japan_en');
 		$regist_param_3['spare_field1'] = $obj->get('spare_field1');
 		$this->session->set('regist_param_3', $regist_param_3);
 	}

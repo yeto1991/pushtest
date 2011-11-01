@@ -45,6 +45,13 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 			return 'user_Login';
 		}
 
+		// 見本市番号
+		if ('c' == $this->af->get('mode')) {
+			if ('' == $this->af->get('mihon_no')) {
+				$this->ae->add('error', '見本市番号がありません');
+			}
+		}
+
 		// SESSIONのチェック
 		if (null == $this->session->get('regist_param_1')) {
 			$this->ae->add('error', '登録画面Step.1の情報がありません');
@@ -72,7 +79,11 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		$url = $this->config->get('url').'?action_user_fairRegistFinish=true';
+		if ('c' == $this->af->get('mode')) {
+			$url = $this->config->get('url').'?action_user_fairRegistFinish=true&msg=c';
+		} else {
+			$url = $this->config->get('url').'?action_user_fairRegistFinish=true&msg=r';
+		}
 
 		if (Ethna_Util::isDuplicatePost()) {
 			// 二重POSTの場合
@@ -87,9 +98,17 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$db->begin();
 
 		// オブジェクトの取得
-		$jm_fair =& $this->backend->getObject('JmFair');
+		if ('c' == $this->af->get('mode')) {
+			$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
+		} else {
+			$jm_fair =& $this->backend->getObject('JmFair');
+		}
 
 		// SESSIONからOBJECTに設定
+		$regist_param_1 = $this->session->get('regist_param_1');
+		$regist_param_2 = $this->session->get('regist_param_2');
+		$regist_param_3 = $this->session->get('regist_param_3');
+		$jm_fair->set('user_id', $this->session->get('user_id'));
 		$jm_fair->set('fair_title_jp', $regist_param_1['fair_title_jp']);
 		$jm_fair->set('abbrev_title', $regist_param_1['abbrev_title']);
 		$jm_fair->set('fair_url', $regist_param_1['fair_url']);
@@ -142,10 +161,12 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('photos_2', $regist_param_2['photos_2']['name']);
 		$jm_fair->set('photos_3', $regist_param_2['photos_3']['name']);
 		$jm_fair->set('organizer_jp', $regist_param_2['organizer_jp']);
+		$jm_fair->set('organizer_en', $regist_param_2['organizer_en']);
 		$jm_fair->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$jm_fair->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$jm_fair->set('organizer_email', $regist_param_2['organizer_email']);
 		$jm_fair->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
+		$jm_fair->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$jm_fair->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$jm_fair->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$jm_fair->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
@@ -159,8 +180,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('venue_en', $regist_param_3['venue_en']);
 		$jm_fair->set('transportation_en', $regist_param_3['transportation_en']);
 		$jm_fair->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
-		$jm_fair->set('organizer_en', $regist_param_3['organizer_en']);
-		$jm_fair->set('agency_in_japan_en', $regist_param_3['agency_in_japan_en']);
 		$jm_fair->set('spare_field1', $regist_param_3['spare_field1']);
 
 		// 付加情報
@@ -174,8 +193,13 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// フリーワード検索用カラム作成
 		$jm_fair->set('search_key', $this->_makeSearchKey($jm_fair));
 
-		// INSERT
-		$ret = $jm_fair->add();
+		if ('c' == $this->af->get('mode')) {
+			// UPDATE
+			$ret = $jm_fair->update();
+		} else {
+			// INSERT
+			$ret = $jm_fair->add();
+		}
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_FAIRテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
@@ -183,20 +207,22 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
-		$this->backend->getLogger()->log(LOG_DEBUG, '■new mihon_no : '.$jm_fair->get('mihon_no'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$jm_fair->get('mihon_no'));
 
 
 		// 画像ファイルの保存
 		mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
-		if (null != $regist_param_2['photos_1']) {
-			rename($regist_param_2['photos_1']['tmp_name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_1']['name']);
+		if ('' != $regist_param_2['photos_1']['name']) {
+			rename($this->session->get('img_tmp_path').'/'.$regist_param_2['photos_1']['name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_1']['name']);
 		}
-		if (null != $regist_param_2['photos_2']) {
-			rename($regist_param_2['photos_2']['tmp_name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_2']['name']);
+		if ('' != $regist_param_2['photos_2']['name']) {
+			rename($this->session->get('img_tmp_path').'/'.$regist_param_2['photos_2']['name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_2']['name']);
 		}
-		if (null != $regist_param_2['photos_3']) {
-			rename($regist_param_2['photos_3']['tmp_name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_3']['name']);
+		if ('' != $regist_param_2['photos_3']['name']) {
+			rename($this->session->get('img_tmp_path').'/'.$regist_param_2['photos_3']['name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_3']['name']);
 		}
+		rmdir($this->session->get('img_tmp_path'));
+
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('adminCommon');
@@ -216,6 +242,8 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$this->session->set('regist_param_1', null);
 		$this->session->set('regist_param_2', null);
 		$this->session->set('regist_param_3', null);
+		$this->session->set('img_tmp_path', '');
+		$this->session->set('email', '');
 
 		// 画面遷移
 		header('Location: '.$url);
@@ -230,9 +258,9 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$search_key = '';
 
 		// 申請年月日
-		$search_key .= $jm_fair->get('date_of_application_y').'年'.$jm_fair->get('date_of_application_m').'月'.$jm_fair->get('date_of_application_d').'日 ';
+		$search_key .= date('Y年m月d日').' ';
 		// 登録日(承認日)
-		$search_key .= $jm_fair->get('date_of_registration_y').'年'.$jm_fair->get('date_of_registration_m').'月'.$jm_fair->get('date_of_registration_d').'日 ';
+		$search_key .= date('Y年m月d日').' ';
 		// 見本市番号
  		$search_key .= $jm_fair->get('mihon_no').' ';
 		// 見本市名

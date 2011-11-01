@@ -145,9 +145,6 @@
 
 	}
 
-	function next() {
-		document.getElementById('form_fairRegistStep1').submit();
-	}
 {/literal}
 // -->
 </script>
@@ -199,14 +196,16 @@
 
 								{* エラー表示 *}
 								{if count($errors)}
-									{foreach from=$errors item=error}
-										<p class="error-message" id="error-pagetop">{$error}</p>
-									{/foreach}
+								<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
 								{/if}
 
 								<form name="form_fairRegistStep1" id="form_fairRegistStep1" method="post" action="">
 									<!-- HIDDEN -->
 									<input type="hidden" name="action_user_fairRegistStep2" id="action_user_fairRegistStep2" value="dummy" />
+									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+									{if ('c' == $form.mode)}
+									<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
+									{/if}
 
 									<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
 									<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
@@ -240,22 +239,45 @@
 										<tr>
 											<th class="item">見本市名</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td><input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br /></td>
+											<td>
+												<input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br />
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*見本市名.*/i':'見本市名' eq '見本市名'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
+											</td>
 										</tr>
 										<tr>
 											<th class="item">見本市略称</th>
 											<th class="required"></th>
 											<td>
 												<input type="text" value="{$form.abbrev_title}" size="30"  name="abbrev_title" id="abbrev_title" maxlength="255" /><br />
-												<strong>半角英数</strong>で入力してください。 例：Ambiente。
+												<strong>半角英数</strong>で入力してください。 例：Ambiente。<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*見本市略称.*/i':'見本市略称' eq '見本市略称'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 										<tr>
 											<th class="item">見本市公式サイトURL</th>
-											<th class="required"></th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<input type="text" value="{if ('' == $form.fair_url)}http://{else}{$form.fair_url}{/if}" size="60" name="fair_url" id="fair_url" maxlength="255" /><br />
-												URLはhttp:// から入力して下さい。
+												URLはhttp:// から入力して下さい。<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*見本市公式サイトURL.*/i':'見本市公式サイトURL' eq '見本市公式サイトURL'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 										<tr>
@@ -371,7 +393,15 @@
 													<option value="29" {if ('29' == $form.date_to_dd)}selected{/if}>29</option>
 													<option value="30" {if ('30' == $form.date_to_dd)}selected{/if}>30</option>
 													<option value="31" {if ('31' == $form.date_to_dd)}selected{/if}>31</option>
-												</select> 日まで</td>
+												</select> 日まで<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*会期.*/i':'会期' eq '会期'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
+											</td>
 										</tr>
 										<tr>
 											<th class="item">開催頻度</th>
@@ -380,7 +410,14 @@
 												{section name=it loop=$app.frequency_list}
 												<input type="radio" value="{$app.frequency_list[it].kbn_2}" name="frequency" id="frequency" {if ($app.frequency_list[it].kbn_2 == $form.frequency)}checked{/if} />{$app.frequency_list[it].discription_jp}&nbsp;
 												{if (0 == (($smarty.section.it.index + 1) % 5))}<br/>{/if}
-												{/section}
+												{/section}<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*開催頻度.*/i':'開催頻度' eq '開催頻度'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 									</table>
@@ -412,7 +449,14 @@
 												{$form.sub_industory_name_6}<br />
 												{/if}
 												</div>
-												<button class="modalInput" rel="#prompt">業種選択</button>
+												<button class="modalInput" rel="#prompt">業種選択</button><br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*業種.*/i':'業種' eq '業種'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 										<tr>
@@ -420,7 +464,14 @@
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<textarea cols="60" rows="3" name="exhibits_jp" id="exhibits_jp">{$form.exhibits_jp}</textarea><br />
-												300文字以内で、具体的な品目名を記載ください。
+												300文字以内で、具体的な品目名を記載ください。<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*取扱品目.*/i':'取扱品目' eq '取扱品目'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 									</table>
@@ -446,38 +497,77 @@
 														<option value="">...</option>'
 													</select>
 												その他：
-													<input type="checkbox" name="check_other_city_jp" id="check_other_city_jp" value="1" {if ('1' == $form.check_other_city_jp)}checked{/if} //>
-													<input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city}" size="30" maxlength="100" />
+													<input type="checkbox" name="check_other_city" id="check_other_city" value="1" {if ('1' == $form.check_other_city)}checked{/if} //>
+													<input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" size="30" maxlength="100" /><br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*開催地.*/i':'開催地' eq '開催地'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 										<tr>
 											<th class="item">会場名</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td><input type="text" value="{$form.venue_jp}" size="50" name="venue_jp" id="venue_jp" maxlength="255" /></td>
+											<td>
+												<input type="text" value="{$form.venue_jp}" size="50" name="venue_jp" id="venue_jp" maxlength="255" /><br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*会場名.*/i':'会場名' eq '会場名'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
+											</td>
 										</tr>
 										<tr>
-											<th class="item">同展示会で使用する面積</th>
+											<th class="item">開催予定規模</th>
 											<th class="required"></th>
 											<td>
 												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
-												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000
+												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*開催予定規模.*/i':'開催予定規模' eq '開催予定規模'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
+{*
 										<tr>
 											<th class="item">会場までの交通手段</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<input type="text" value="{$form.transportation_jp}" size="60" name="transportation_jp" id="transportation_jp" maxlength="500"><br />
-												例：成田空港からA12バスで30分
+												例：成田空港からA12バスで30分<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*会場までの交通手段.*/i':'会場までの交通手段' eq '会場までの交通手段'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
+*}
 										<tr>
 											<th class="item">入場資格</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{section name=it loop=$app.open_to_list}
 												<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if}>{$app.open_to_list[it].discription_jp}&nbsp;
-												{/section}
+												{/section}<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*入場資格.*/i':'入場資格' eq '入場資格'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
 										<tr>
@@ -489,9 +579,17 @@
 												<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />主催者・日本の照会先へ問い合わせ
 												<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />当日会場で入手 <br />
 												<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />その他<input name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" size="50" type="text" maxlength="500" /> <br />
-												複数選択可能
+												複数選択可能<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*チケットの入手方法.*/i':'チケットの入手方法' eq 'チケットの入手方法'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
+{*
 										<tr>
 											<th class="item">出展申込締切日</th>
 											<th class="required"></th>
@@ -550,17 +648,25 @@
 													<option value="29" {if ('29' == $form.app_dead_dd)}selected{/if}>29</option>
 													<option value="30" {if ('30' == $form.app_dead_dd)}selected{/if}>30</option>
 													<option value="21" {if ('31' == $form.app_dead_dd)}selected{/if}>31</option>
-												</select> 日
+												</select> 日<br/>
+												{if count($errors)}
+													{foreach from=$errors item=error}
+														{if $error|regex_replace:'/.*出展申込締切日.*/i':'出展申込締切日' eq '出展申込締切日'}
+														<span class="error-message">{$error}</span><br />
+														{/if}
+													{/foreach}
+												{/if}
 											</td>
 										</tr>
+*}
 									</table>
 									<div class="line_dot">
 										<hr />
 									</div>
 									<table width="100%">
 										<tr>
-											<td width="250px"><a href="{$config.url}?action_user_fairManu=true}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
-											<td align="right"><a href="javascript:next();"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></a></td>
+											<td width="250px"><a href="{$config.url}?action_user_fairManu=true"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											<td align="right"><input type="image" src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
 										</tr>
 									</table>
 								</form>
@@ -569,7 +675,19 @@
 					</div>
 				</div>
 				<p class="totop">
+					{if ('c' ==$form.mode)}
+						{if ('1' == $form.back)}
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+						{else}
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+						{/if}
+					{else}
+						{if ('1' == $form.back)}
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+						{else}
 					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+						{/if}
+					{/if}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

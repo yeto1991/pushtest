@@ -16,7 +16,7 @@ require_once 'FairRegistStep1.php';
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_UserFairDetail extends Jmesse_ActionForm
+class Jmesse_Form_UserFairDetail extends Jmesse_Form_UserFairRegistStep1
 {
 }
 
@@ -63,7 +63,6 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		}
 
 		//Form値設定
-		$this->af->set('mode', 'change'); //編集開始遷移用
 		$this->af->set('user_id', $this->session->get('user_id'));
 		$this->af->set('fair_title_jp', $jm_fair->get('fair_title_jp'));
 		$this->af->set('abbrev_title', $jm_fair->get('abbrev_title'));
