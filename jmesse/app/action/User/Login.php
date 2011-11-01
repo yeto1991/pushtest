@@ -25,27 +25,27 @@ class Jmesse_Form_UserLogin extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => 'Eメール',       // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'required'    => true,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => '/^[!-~]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
 		),
 		'password' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_PASSWORD, // Form type
-			'name'        => 'パスワード',    // Display name
-			'required'    => true,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
+			'name'        => 'パスワード',
+			'required'    => true,
+			'min'         => 4,
+			'max'         => 8,
+			'regexp'      => '/^[!-~]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
 		),
 		'function' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -81,7 +81,6 @@ class Jmesse_Action_UserLogin extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ここには何も記述しないで下さい。
 		return null;
 	}
 

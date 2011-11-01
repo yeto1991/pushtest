@@ -95,7 +95,8 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 				$this->ae->addObject('error', $ret);
 				return 'error';
 			}
-			$this->ae->add('error', 'Eメールまたはパスワードが間違っています。');
+			$this->ae->add('email', 'ログイン認証エラー');
+			$this->ae->add('password', 'ログイン認証エラー');
 			return 'user_login';
 		}
 
