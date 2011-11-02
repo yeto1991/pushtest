@@ -1117,7 +1117,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	/**
 	* 入力された追加集計項目の範囲設定
 	*
-	* 会期
 	* ※日付は yyyy/mm/dd 00:00:00 から yyyy/mm/dd 23:59:59 とする
 	*
 	* @param string $cond 範囲条件
@@ -1163,7 +1162,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* 集計対象リスト総件数取得
+	* 集計対象リスト総件数取得  //TODO
 	*
 	* @return int 集計対象リスト総件数
 	*/
@@ -1186,22 +1185,18 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		} else {
 			$date_to = '';
 		}
-		if($search_cond['summary_value'] == '89'){
-			//削除日時の場合
-			$column = "del_date";
-		}elseif($search_cond['summary_value'] == '90'){
-			//登録日の場合
-			$column = "regist_date";
-		}elseif($search_cond['summary_value'] == '91'){
-			//更新日の場合
-			$column = "update_date";
-		}
+		$column = $this->sort_summary_column[$this->af->get('summary_value')];
+
 		$sql_tmp = $this->_mkSqlAddSummary($search_cond['summary_value_hani_cond'], $column, $date_from, $date_to, $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
-
-		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : select count(*) cnt from ('.$sql.$sql_ext.') t');
 		// Prepare Statement化
 		$stmt =& $db->db->prepare('select count(*) cnt from ('.$sql.$sql_ext.') t');
+
+
+		$this->backend->getLogger()->log(LOG_DEBUG, '$column★★★★★★★★★★★★ : '.$column);
+		$this->backend->getLogger()->log(LOG_DEBUG, '$sql_tmp★★★★★★★★★★★★ : '.$sql_tmp);
+		$this->backend->getLogger()->log(LOG_DEBUG, '$sql_ext★★★★★★★★★★★★ : '.$sql_ext);
+		$this->backend->getLogger()->log(LOG_DEBUG, '$stmt★★★★★★★★★★★★ : '.$stmt);
 		$res = $db->db->execute($stmt, $data);
 		// 結果の判定
 		if (null == $res) {
@@ -1223,13 +1218,28 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* 集計対象リスト取得（表示用）。
+	* 集計対象リスト取得（表示用）。  //TODO
 	*
 	* @return array 見本市リスト
 	*/
 	function getFairSummarySearch($offset, $limit, $ary_sort, $ary_sort_cond) {
 		$db = $this->backend->getDB();
-		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+
+		//SELECT句 集計キーによって可変
+		$sql_select = '';
+		for ($i = 0; $i < count($ary_sort); $i++) {
+			if ('' != $ary_sort[$i]) {
+				if ('' == $sql_select) {
+					$sql_select .= ' select ';
+				} else {
+					$sql_select .= ' , ';
+				}
+				$sql_select .= $this->sort_summary_column[$ary_sort[$i]];
+			}
+		}
+
+		//$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+		$sql = $sql_select." from jm_fair ";
 		$data = array();
 		$sql_ext =$this->_getWhere($data);
 
@@ -1244,17 +1254,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		} else {
 			$date_to = '';
 		}
-		//カラム設定
-		if($search_cond['summary_value'] == '89'){
-			//削除日時の場合
-			$column = "del_date";
-		}elseif($search_cond['summary_value'] == '90'){
-			//登録日の場合
-			$column = "regist_date";
-		}elseif($search_cond['summary_value'] == '91'){
-			//更新日の場合
-			$column = "update_date";
-		}
+		$column = $this->sort_summary_column[$this->af->get('summary_value')];
 		$sql_tmp = $this->_mkSqlAddSummary($search_cond['summary_value_hani_cond'], $column, $date_from, $date_to, $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
@@ -1270,6 +1270,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				$sql_groupby .= $this->sort_summary_column[$ary_sort[$i]];
 			}
 		}
+
 		//Order By
 		$sql_sort = '';
 		for ($i = 0; $i < count($ary_sort); $i++) {
@@ -1283,11 +1284,12 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
 			}
 		}
+
 		// ページング
 		$sql_limit = ' limit ?, ? ';
 		array_push($data, (int)$offset, (int)$limit);
 
-		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_groupby.$sql_sort.$sql_limit);
+		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL★★★★★★★★★★★★★★ : '.$sql.$sql_ext.$sql_groupby.$sql_sort.$sql_limit);
 
 		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_groupby.$sql_sort.$sql_limit);
 
