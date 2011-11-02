@@ -186,23 +186,23 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			// sessionの情報をformに設定
 			$this->_setSessionToForm();
 
-			// 画像ファイルの削除
-			if ('' != $this->session->get('img_tmp_path')) {
-				if ('' != $this->af->get('photos_name_1')) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_1'));
-					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_1'));
-				}
-				if ('' != $this->af->get('photos_name_2')) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_2'));
-					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_2'));
-				}
-				if ('' != $this->af->get('photos_name_3')) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_3'));
-					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_3'));
-				}
-				rmdir($this->session->get('img_tmp_path'));
-				$this->session->set('img_tmp_path', '');
-			}
+ 			// 画像ファイルの削除
+// 			if ('' != $this->session->get('img_tmp_path')) {
+// 				if ('' != $this->af->get('photos_name_1')) {
+// 					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_1'));
+// 					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_1'));
+// 				}
+// 				if ('' != $this->af->get('photos_name_2')) {
+// 					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_2'));
+// 					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_2'));
+// 				}
+// 				if ('' != $this->af->get('photos_name_3')) {
+// 					$this->backend->getLogger()->log(LOG_DEBUG, '■unlink : '.$this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_3'));
+// 					unlink($this->session->get('img_tmp_path').'/'.$this->af->get('photos_name_3'));
+// 				}
+// 				rmdir($this->session->get('img_tmp_path'));
+// 				$this->session->set('img_tmp_path', '');
+// 			}
 		} else	{
 			if ('c' == $this->af->get('mode')) {
 				// 修正の場合
@@ -308,9 +308,9 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('net_square_meters', $regist_param_2['net_square_meters']);
 		$this->af->set('profile_jp', $regist_param_2['profile_jp']);
 		$this->af->set('detailed_information_jp', $regist_param_2['detailed_information_jp']);
-		$this->af->set('photos_name_1', $regist_param_2['photos_1']['name']);
-		$this->af->set('photos_name_2', $regist_param_2['photos_2']['name']);
-		$this->af->set('photos_name_3', $regist_param_2['photos_3']['name']);
+		$this->af->set('photos_name_1', $regist_param_2['photos_name_1']);
+		$this->af->set('photos_name_2', $regist_param_2['photos_name_2']);
+		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);

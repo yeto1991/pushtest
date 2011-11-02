@@ -23,6 +23,16 @@
 <!--
 {literal}
 
+	function init() {
+		// 展示会に係わる画像(3点)
+		document.getElementById('photos_name_1').value = '';
+		document.getElementById('photos_name_2').value = '';
+		document.getElementById('photos_name_3').value = '';
+	}
+
+	/**
+	 * htmlのインクルード。
+	 */
 	$(function(){
 		$("#include_header").load("http://localhost/jmesse/www/header.html");
 	});
@@ -35,13 +45,73 @@
 		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
 	});
 
+
+	/**
+	 * 展示会に係わる画像(3点)関連。
+	 */
+	function delete_photos_list() {
+		if (window.confirm('選択された画像ファイルを削除しますか？')) {
+			var delfiletag;
+			for (var i = document.getElementById('photos_list').length - 1; i >= 0; i--) {
+				if (document.getElementById('photos_list').options[i].selected) {
+					delfiletag = document.createElement('input');
+					delfiletag.type = 'hidden';
+					delfiletag.name = 'del_photos_name[]';
+					delfiletag.id = 'del_photos_name[]';
+					delfiletag.value = document.getElementById('photos_list').options[i].value;
+					document.getElementById('form_fairRegistStep2').appendChild(delfiletag);
+					document.getElementById('photos_list').remove(i);
+				}
+			}
+		}
+	}
+
+	function add_photos(photos) {
+		var path = document.getElementById(photos).value;
+		if ('' == path) {
+			return;
+		}
+
+		var paths = path.split('\\');
+		if (1 == paths.length) {
+			paths = path.split('/');
+		}
+		var filename = paths[paths.length - 1];
+
+		for (i = 0; i < document.getElementById('photos_list').length; i++) {
+			if (filename == document.getElementById('photos_list').options[i].value) {
+				window.alert('画像ファイル名が重複しました。');
+				return;
+			}
+		}
+		if (3 <= document.getElementById('photos_list').length) {
+			window.alert('画像ファイルの登録は3件までです。');
+			return;
+		}
+
+		var op = document.createElement('option');
+		op.value = filename;
+		op.innerHTML = filename;
+		document.getElementById('photos_list').appendChild(op);
+	}
+
+	// submit
+	function next() {
+		// 展示会に係わる画像(3点)
+		for (i = 0; i < document.getElementById('photos_list').length; i++) {
+			no = i + 1;
+			document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
+		}
+		document.getElementById('form_fairRegistStep2').submit();
+	}
+
 {/literal}
 // -->
 </script>
 <title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 </head>
 
-<body class="layout-LC highlight-match j-messe">
+<body class="layout-LC highlight-match j-messe" onload="init()">
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -92,6 +162,11 @@
 								<form name="form_fairRegistStep2" id="form_fairRegistStep2" method="post" action=""  enctype="multipart/form-data">
 									<input type="hidden" name="action_user_fairRegistStep3" id="action_user_fairRegistStep3" value="dummy" />
 									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+
+									<input type="hidden" name="photos_name_1" id="photos_name_1" value="{$form.photos_name_1}" />
+									<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
+									<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
+									<input type="hidden" name="del_photos_name[]" id="del_photos_name[]" value="" />
 									{if ('c' == $form.mode)}
 									<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 									{/if}
@@ -216,10 +291,22 @@
 											<th class="item">見本市の紹介写真</th>
 											<th class="required"></th>
 											<td>
-												<input type="file" size="40" name="photos_1" id="photos_1" /><br />
-												<input type="file" size="40" name="photos_2" id="photos_2" /><br />
-												<input type="file" size="40" name="photos_3" id="photos_3" /><br />
+												<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="登録" onclick="add_photos('photos_1')"/><br />
+												<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="登録" onclick="add_photos('photos_2')"/><br />
+												<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="登録" onclick="add_photos('photos_3')"/><br />
 												画像ファイルはgif,jpegで縦・横600ピクセル以内のもの<br/>
+												<select name="photos_list" id="photos_list" size="3" style="width:200px">
+													{if ('' != $form.photos_name_1) }
+													<option value="{$form.photos_name_1}">{$form.photos_name_1}</option>
+													{/if}
+													{if ('' != $form.photos_name_2) }
+													<option value="{$form.photos_name_2}">{$form.photos_name_2}</option>
+													{/if}
+													{if ('' != $form.photos_name_3) }
+													<option value="{$form.photos_name_3}">{$form.photos_name_3}</option>
+													{/if}
+												</select><br/>
+												<input type="button" value="選択画像を削除" onclick="delete_photos_list()" /><br/>
 												{if count($errors)}
 													{foreach from=$errors item=error}
 														{if $error|regex_replace:'/.*見本市の紹介写真.*/i':'見本市の紹介写真' eq '見本市の紹介写真'}
@@ -310,7 +397,7 @@
 											{else}
 											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{/if}
-											<td align="right"><input type="image" src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
+											<td align="right"><a href="javascript:next();"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></a></td>
 										</tr>
 									</table>
 								</form>

@@ -105,6 +105,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		}
 
 		// SESSIONからOBJECTに設定
+		$br = $this->af->get('br');
 		$regist_param_1 = $this->session->get('regist_param_1');
 		$regist_param_2 = $this->session->get('regist_param_2');
 		$regist_param_3 = $this->session->get('regist_param_3');
@@ -131,7 +132,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('sub_industory_5', $regist_param_1['sub_industory_5']);
 		$jm_fair->set('main_industory_6', $regist_param_1['main_industory_6']);
 		$jm_fair->set('sub_industory_6', $regist_param_1['sub_industory_6']);
-		$jm_fair->set('check_sub_industory', $regist_param_1['check_sub_industory']);
 		$jm_fair->set('exhibits_jp', str_replace($br, '<br/>', $regist_param_1['exhibits_jp']));
 		$jm_fair->set('region', $regist_param_1['region']);
 		$jm_fair->set('country', $regist_param_1['country']);
@@ -157,9 +157,9 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('net_square_meters', $regist_param_2['net_square_meters']);
 		$jm_fair->set('profile_jp', str_replace($br, '<br/>', $regist_param_2['profile_jp']));
 		$jm_fair->set('detailed_information_jp', str_replace($br, '<br/>', $regist_param_2['detailed_information_jp']));
-		$jm_fair->set('photos_1', $regist_param_2['photos_1']['name']);
-		$jm_fair->set('photos_2', $regist_param_2['photos_2']['name']);
-		$jm_fair->set('photos_3', $regist_param_2['photos_3']['name']);
+		$jm_fair->set('photos_1', $regist_param_2['photos_name_1']);
+		$jm_fair->set('photos_2', $regist_param_2['photos_name_2']);
+		$jm_fair->set('photos_3', $regist_param_2['photos_name_3']);
 		$jm_fair->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$jm_fair->set('organizer_en', $regist_param_2['organizer_en']);
 		$jm_fair->set('organizer_tel', $regist_param_2['organizer_tel']);
@@ -175,7 +175,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('profile_en', str_replace($br, '<br/>', $regist_param_3['profile_en']));
 		$jm_fair->set('detailed_information_en', str_replace($br, '<br/>', $regist_param_3['detailed_information_en']));
 		$jm_fair->set('exhibits_en', str_replace($br, '<br/>', $regist_param_3['exhibits_en']));
-		$jm_fair->set('check_other_city_en', $regist_param_3['check_other_city_en']);
 		$jm_fair->set('other_city_en', $regist_param_3['other_city_en']);
 		$jm_fair->set('venue_en', $regist_param_3['venue_en']);
 		$jm_fair->set('transportation_en', $regist_param_3['transportation_en']);
@@ -209,20 +208,32 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$jm_fair->get('mihon_no'));
 
-
 		// 画像ファイルの保存
-		mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
-		if ('' != $regist_param_2['photos_1']['name']) {
-			rename($this->session->get('img_tmp_path').'/'.$regist_param_2['photos_1']['name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_1']['name']);
+		if ('c' == $this->af->get('mode')) {
+			// 削除
+			$ary_del_photos_name = $regist_param_2['del_photos_name'];
+			for ($i = 0; $i < count($ary_del_photos_name); $i++) {
+				if ('' != $ary_del_photos_name[$i]) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■rm '.$this->config->get('img_path').$ary_del_photos_name[$i]);
+					unlink($this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$ary_del_photos_name[$i]);
+				}
+			}
+		} else {
+			// ディレクトリ作成
+			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
 		}
-		if ('' != $regist_param_2['photos_2']['name']) {
-			rename($this->session->get('img_tmp_path').'/'.$regist_param_2['photos_2']['name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_2']['name']);
-		}
-		if ('' != $regist_param_2['photos_3']['name']) {
-			rename($this->session->get('img_tmp_path').'/'.$regist_param_2['photos_3']['name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$regist_param_2['photos_3']['name']);
-		}
-		rmdir($this->session->get('img_tmp_path'));
 
+		// 保存
+		$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+		for ($i = 0; $i < count($ary_photos_name); $i++) {
+			$photos_name = $ary_photos_name[$i];
+			if ('' != $photos_name) {
+				rename($this->session->get('img_tmp_path').'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
+			}
+		}
+
+		// 一時保存フォルダの削除
+		rmdir($this->session->get('img_tmp_path'));
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('adminCommon');
@@ -280,7 +291,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$search_key .= $jm_fair->get('date_from_yyyy').'年'.$jm_fair->get('date_from_mm').'月'.$jm_fair->get('date_from_dd').'日 ';
 		$search_key .= $jm_fair->get('date_to_yyyy').'年'.$jm_fair->get('date_to_mm').'月'.$jm_fair->get('date_to_dd').'日 ';
 		// 開催頻度
-		$code = $jm_code_m_mgr->getCode('001', $jm_fair->get('frequency_jp'), '000', '000');
+		$code = $jm_code_m_mgr->getCode('001', $jm_fair->get('frequency'), '000', '000');
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
 		// 業種
@@ -300,13 +311,13 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$search_key .= str_replace($br, '', $jm_fair->get('exhibits_jp')).' ';
 		$search_key .= str_replace($br, '', $jm_fair->get('exhibits_en')).' ';
 		// 開催地
-		$code = $jm_code_m_mgr->getCode('003', $jm_fair->get('region_jp'), '000', '000');
+		$code = $jm_code_m_mgr->getCode('003', $jm_fair->get('region'), '000', '000');
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
-		$code = $jm_code_m_mgr->getCode('003', $jm_fair->get('region_jp'), $jm_fair->get('country_jp'), '000');
+		$code = $jm_code_m_mgr->getCode('003', $jm_fair->get('region'), $jm_fair->get('country'), '000');
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
-		$code = $jm_code_m_mgr->getCode('003', $jm_fair->get('region_jp'), $jm_fair->get('country_jp'), $jm_fair->get('city_jp'));
+		$code = $jm_code_m_mgr->getCode('003', $jm_fair->get('region'), $jm_fair->get('country'), $jm_fair->get('city'));
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
 		$search_key .= $jm_fair->get('other_city_jp').' ';

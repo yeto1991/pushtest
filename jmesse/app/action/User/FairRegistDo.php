@@ -246,9 +246,9 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('net_square_meters', $regist_param_2['net_square_meters']);
 		$this->af->set('profile_jp', $regist_param_2['profile_jp']);
 		$this->af->set('detailed_information_jp', $regist_param_2['detailed_information_jp']);
-		$this->af->set('photos_1', $regist_param_2['photos_1']['name']);
-		$this->af->set('photos_2', $regist_param_2['photos_2']['name']);
-		$this->af->set('photos_3', $regist_param_2['photos_3']['name']);
+		$this->af->set('photos_name_1', $regist_param_2['photos_name_1']);
+		$this->af->set('photos_name_2', $regist_param_2['photos_name_2']);
+		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);

@@ -949,6 +949,58 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'photos_name_1' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '見本市の紹介写真(リスト)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'photos_name_2' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '見本市の紹介写真(リスト)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'photos_name_3' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN,  // Form type
+			'name'        => '見本市の紹介写真(リスト)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'del_photos_name' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_HIDDEN,  // Form type
+			'name'        => '見本市の紹介写真(削除)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 
 		// 主催者
 		'organizer_jp' => array(
@@ -1284,12 +1336,17 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 				// オブジェクトの取得
 				$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 				if (null == $jm_fair_obj) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■見本市情報が存在しません。');
+					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報が存在しません。');
 					$this->ae->add('error', '見本市情報が存在しません');
 					return 'error';
 				}
+				if ('1' == $jm_fair_obj->get('del_flg')) {
+					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報は削除されました。削除時刻('.$this->session->get('del_date').')');
+					$this->ae->add('error', '見本市情報は'.$this->session->get('del_date').'に削除されました');
+					return 'error';
+				}
 				if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■他人の見本市情報です。'.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
+					$this->backend->getLogger()->log(LOG_ERR, '■他人の見本市情報です。('.$this->session->get('user_id').', '.$jm_fair_obj->get('user_id').')');
 					$this->ae->add('error', '他人の見本市情報なので編集できません');
 					return 'error';
 				}
@@ -1450,9 +1507,9 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_2['net_square_meters'] = $obj->get('net_square_meters');
 		$regist_param_2['profile_jp'] = $obj->get('profile_jp');
 		$regist_param_2['detailed_information_jp'] = $obj->get('detailed_information_jp');
-		$regist_param_2['photos_1'] = $obj->get('photos_1');
-		$regist_param_2['photos_2'] = $obj->get('photos_2');
-		$regist_param_2['photos_3'] = $obj->get('photos_3');
+		$regist_param_2['photos_name_1'] = $obj->get('photos_1');
+		$regist_param_2['photos_name_2'] = $obj->get('photos_2');
+		$regist_param_2['photos_name_3'] = $obj->get('photos_3');
 		$regist_param_2['organizer_jp'] = $obj->get('organizer_jp');
 		$regist_param_2['organizer_en'] = $obj->get('organizer_en');
 		$regist_param_2['organizer_tel'] = $obj->get('organizer_tel');

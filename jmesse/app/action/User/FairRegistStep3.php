@@ -109,22 +109,19 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 
 		// 見本市の紹介写真
 		// gifとjpgのみ
-		$photos_1 = $this->af->get('photos_1');
-		if ('' != $photos_1['name']) {
-			if ('image/jpeg' != $photos_1['type'] && 'image/gif' != $photos_1['type']) {
-				$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい');
-			}
-		}
-		$photos_2 = $this->af->get('photos_2');
-		if ('' != $photos_2['name']) {
-			if ('image/jpeg' != $photos_2['type'] && 'image/gif' != $photos_2['type']) {
-				$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい');
-			}
-		}
-		$photos_3 = $this->af->get('photos_3');
-		if ('' != $photos_3['name']) {
-			if ('image/jpeg' != $photos_3['type'] && 'image/gif' != $photos_3['type']) {
-				$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい');
+		$ary_photos = array($this->af->get('photos_1'), $this->af->get('photos_2'), $this->af->get('photos_3'));
+		$ary_photos_name = array($this->af->get('photos_name_1'), $this->af->get('photos_name_2'), $this->af->get('photos_name_3'));
+		for ($i = 0; $i < count($ary_photos_name); $i++) {
+			$photos_name = $ary_photos_name[$i];
+			$this->backend->getLogger()->log(LOG_DEBUG, '■$photos_name : '.$photos_name);
+			for ($j = 0; $j < count($ary_photos); $j++) {
+				$photos = $ary_photos[$j];
+				if ('' != $photos_name && $photos['name'] == $photos_name) {
+					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type']) {
+						$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい');
+						break;
+					}
+				}
 			}
 		}
 
@@ -189,6 +186,9 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 
 				// sessionの情報をformに設定
 				$this->_setSessionToForm();
+
+				// 画像の保存
+				$this->_savePhotos();
 			} else {
 				// formの情報をsessionに設定
 				$this->_setFormToSession();
@@ -197,22 +197,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 				$this->_setSessionToForm();
 
 				// 画像の保存
-				$img_tmp_path = $this->config->get('img_path').$this->session->get('user_id').'_'.date(YmdHis);
-				$this->backend->getLogger()->log(LOG_DEBUG, '■img_tmp_path : '.$img_tmp_path);
-				mkdir($img_tmp_path);
-				$this->session->set('img_tmp_path', $img_tmp_path);
-				$photos_1 = $this->af->get('photos_1');
-				$photos_2 = $this->af->get('photos_2');
-				$photos_3 = $this->af->get('photos_3');
-				if ('' != $photos_1['name']) {
-					rename($photos_1['tmp_name'], $img_tmp_path.'/'.$photos_1['name']);
-				}
-				if ('' != $photos_2['name']) {
-					rename($photos_2['tmp_name'], $img_tmp_path.'/'.$photos_2['name']);
-				}
-				if ('' != $photos_3['name']) {
-					rename($photos_3['tmp_name'], $img_tmp_path.'/'.$photos_3['name']);
-				}
+				$this->_savePhotos();
 			}
 		}
 
@@ -235,6 +220,10 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		$regist_param_2['photos_1'] = $this->af->get('photos_1');
 		$regist_param_2['photos_2'] = $this->af->get('photos_2');
 		$regist_param_2['photos_3'] = $this->af->get('photos_3');
+		$regist_param_2['photos_name_1'] = $this->af->get('photos_name_1');
+		$regist_param_2['photos_name_2'] = $this->af->get('photos_name_2');
+		$regist_param_2['photos_name_3'] = $this->af->get('photos_name_3');
+		$regist_param_2['del_photos_name'] = $this->af->get('del_photos_name');
 		$regist_param_2['organizer_jp'] = $this->af->get('organizer_jp');
 		$regist_param_2['organizer_en'] = $this->af->get('organizer_en');
 		$regist_param_2['organizer_tel'] = $this->af->get('organizer_tel');
@@ -276,6 +265,36 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			return;
 		}
 		$this->af->set('fair_title_jp', $regist_param_1['fair_title_jp']);
+	}
+
+	function _savePhotos() {
+		// 一時保存ディレクトリ
+		if (null == $this->session->get('img_tmp_path') || '' == $this->session->get('img_tmp_path')) {
+			$img_tmp_path = $this->config->get('img_path').$this->session->get('user_id').'_'.date(YmdHis);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■img_tmp_path : '.$img_tmp_path);
+			mkdir($img_tmp_path);
+			$this->session->set('img_tmp_path', $img_tmp_path);
+		}
+
+		// 削除
+		$ary_del_photos_name = $this->af->get('del_photos_name');
+		for ($i = 0; $i < count($ary_del_photos_name); $i++) {
+			unlink($this->session->get('img_tmp_path').'/'.$ary_del_photos_name[$i]);
+		}
+
+		// 保存
+		$ary_photos = array($this->af->get('photos_1'), $this->af->get('photos_2'), $this->af->get('photos_3'));
+		$ary_photos_name = array($this->af->get('photos_name_1'), $this->af->get('photos_name_2'), $this->af->get('photos_name_3'));
+		for ($i = 0; $i < count($ary_photos_name); $i++) {
+			$photos_name = $ary_photos_name[$i];
+			for ($j = 0; $j < count($ary_photos); $j++) {
+				$photos = $ary_photos[$j];
+				if ('' != $photos_name && $photos['name'] == $photos_name) {
+					rename($photos['tmp_name'], $this->session->get('img_tmp_path').'/'.$photos_name);
+					break;
+				}
+			}
+		}
 	}
 }
 

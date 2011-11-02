@@ -263,9 +263,9 @@
 											<tr>
 												<th class="item">見本市の紹介写真</th>
 												<td>
-													画像(1)：{$form.photos_1}<br />
-													画像(2)：{$form.photos_2}<br />
-													画像(3)：{$form.photos_3}<br />
+													画像(1)：{$form.photos_name_1}<br />
+													画像(2)：{$form.photos_name_2}<br />
+													画像(3)：{$form.photos_name_3}<br />
 												</td>
 											</tr>
 										</table>

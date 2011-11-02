@@ -255,12 +255,12 @@
 
 		for (i = 0; i < document.getElementById('photos_list').length; i++) {
 			if (filename == document.getElementById('photos_list').options[i].value) {
-				window.alert('重複。')
+				window.alert('画像ファイル名が重複しました。');
 				return;
 			}
 		}
 		if (3 <= document.getElementById('photos_list').length) {
-			window.alert('3件まで。')
+			window.alert('画像ファイルの登録は3件までです。');
 			return;
 		}
 

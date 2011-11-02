@@ -151,7 +151,7 @@
 									<table id="registration">
 										<tr>
 											<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}"><font size="2">&nbsp;&nbsp;見本市名(日)</font></th>
-											<td><a href="{$config.url}?action_user_fairDetail=true&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_jp}</font></a></td>
+											<td><a href="{$config.url}?action_user_fairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_jp}</font></a></td>
 										</tr>
 										<tr>
 											<th class="item"><font size="2">会期</font></th>
