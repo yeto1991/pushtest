@@ -620,7 +620,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	var $sort_cond = array(' asc', ' desc');
 
 	/**
-	 * ソート項目（管理画面）
+	 * ソート項目（管理 展示会検索結果一覧画面）
 	 *
 	 * 0:見本市番号
 	 * 1:見本市名
@@ -642,6 +642,195 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		'date_of_application',
 		'date_of_registration',
 		'negate_comment'
+	);
+
+	/**
+	* ソート項目（管理 展示会集計画面）
+	*
+	* "0" :ユーザID
+	* "1" :Webページの表示／非表示
+	* "2" :承認フラグ
+	* "3" :否認コメント
+	* "4" :メール送信フラグ
+	* "5" :ユーザ使用言語フラグ
+	* "6" :Eメール
+	* "7" :申請年月日
+	* "8" :登録日(承認日)
+	* "9" :言語選択情報
+	* "10":見本市番号
+	* "11":見本市名(日)
+	* "12":見本市名(英)
+	* "13":見本市略称
+	* "14":見本市URL
+	* "15":キャッチフレーズ(日)
+	* "16":キャッチフレーズ(英)
+	* "17":ＰＲ・紹介文(日)
+	* "18":ＰＲ・紹介文(英)
+	* "19":会期開始年
+	* "20":会期開始月
+	* "21":会期開始日
+	* "22":会期終了年
+	* "23":会期終了月
+	* "24":会期終了日
+	* "25":開催頻度
+	* "26":業種大分類(1)
+	* "27":業種小分類(1)
+	* "28":業種大分類(2)
+	* "29":業種小分類(2)
+	* "30":業種大分類(3)
+	* "31":業種小分類(3)
+	* "32":業種大分類(4)
+	* "33":業種小分類(4)
+	* "34":業種大分類(5)
+	* "35":業種小分類(5)
+	* "36":業種大分類(6)
+	* "37":業種小分類(6)
+	* "38":出品物(日)
+	* "39":出品物(英)
+	* "40":開催地地域
+	* "41":開催地国地域
+	* "42":開催地都市
+	* "43":開催地その他(日)
+	* "44":開催地その他(英)
+	* "45":会場名(日)
+	* "46":会場名(英)
+	* "47":開催予定規模
+	* "48":入場資格
+	* "49":チケットの入手方法(1)
+	* "50":チケットの入手方法(2)
+	* "51":チケットの入手方法(3)
+	* "52":チケットの入手方法(4)
+	* "53":チケットの入手方法その他(日)
+	* "54":チケットの入手方法Others(英)
+	* "55":過去の実績年実績
+	* "56":過去の実績来場者数
+	* "57":過去の実績海外来場者数
+	* "58":過去の実績出展社数
+	* "59":過去の実績海外出展社数
+	* "60":過去の実績開催規模
+	* "61":過去の実績認証機関
+	* "62":主催者・問合せ先名称(日)
+	* "63":主催者・問合せ先名称(英)
+	* "64":主催者・問合せ先TEL
+	* "65":主催者・問合せ先FAX
+	* "66":主催者・問合せ先Email
+	* "67":主催者・問合せ先住所
+	* "68":主催者・問合せ先担当部課
+	* "69":主催者・問合せ先担当者
+	* "70":日本国内の照会先名称(日)
+	* "71":日本国内の照会先名称(英)
+	* "72":日本国内の照会先TEL
+	* "73":日本国内の照会先FAX
+	* "74":日本国内の照会先Email
+	* "75":日本国内の照会先住所
+	* "76":日本国内の照会先担当部課
+	* "77":日本国内の照会先担当者
+	* "78":見本市レポートURL
+	* "79":世界の展示会場URL
+	* "80":展示会に係わる画像名称1
+	* "81":展示会に係わる画像名称2
+	* "82":展示会に係わる画像名称3
+	* "83":システム管理者備考欄
+	* "84":データ管理者備考欄
+	* "85":削除フラグ
+	* "86":登録者ID
+	* "87":更新者ID
+	* "88":削除日時
+	* "89":登録日
+	* "90":更新日
+	*/
+	var $sort_summary_column = array(
+		'user_id',
+		'web_display_type',
+		'confirm_flag',
+		'negate_comment',
+		'mail_send_flag',
+		'use_language_flag',
+		'email',
+		'date_of_application',
+		'date_of_registration',
+		'select_language_info',
+		'mihon_no',
+		'fair_title_jp',
+		'fair_title_en',
+		'abbrev_title',
+		'fair_url',
+		'profile_jp',
+		'profile_en',
+		'detailed_information_jp',
+		'detailed_information_en',
+		'date_from_yyyy',
+		'date_from_mm',
+		'date_from_dd',
+		'date_to_yyyy',
+		'date_to_mm',
+		'date_to_dd',
+		'frequency',
+		'main_industory_1',
+		'sub_industory_1',
+		'main_industory_2',
+		'sub_industory_2',
+		'main_industory_3',
+		'sub_industory_3',
+		'main_industory_4',
+		'sub_industory_4',
+		'main_industory_5',
+		'sub_industory_5',
+		'main_industory_6',
+		'sub_industory_6',
+		'exhibits_jp',
+		'exhibits_en',
+		'region',
+		'country',
+		'city',
+		'other_city_jp',
+		'other_city_en',
+		'venue_jp',
+		'venue_en',
+		'gross_floor_area',
+		'open_to',
+		'admission_ticket_1',
+		'admission_ticket_2',
+		'admission_ticket_3',
+		'admission_ticket_4',
+		'other_admission_ticket_jp',
+		'other_admission_ticket_en',
+		'year_of_the_trade_fair',
+		'total_number_of_visitor',
+		'number_of_foreign_visitor',
+		'total_number_of_exhibitors',
+		'number_of_foreign_exhibitors',
+		'net_square_meters',
+		'spare_field1',
+		'organizer_jp',
+		'organizer_en',
+		'organizer_tel',
+		'organizer_fax',
+		'organizer_email',
+		'organizer_addr',
+		'organizer_div',
+		'organizer_pers',
+		'agency_in_japan_jp',
+		'agency_in_japan_en',
+		'agency_in_japan_tel',
+		'agency_in_japan_fax',
+		'agency_in_japan_email',
+		'agency_in_japan_addr',
+		'agency_in_japan_div',
+		'agency_in_japan_pers',
+		'report_link',
+		'venue_link',
+		'photos_1',
+		'photos_2',
+		'photos_3',
+		'note_for_system_manager',
+		'note_for_data_manager',
+		'del_flg',
+		'regist_user_id',
+		'update_user_id',
+		'del_date',
+		'regist_date',
+		'update_date'
 	);
 
 	/**
@@ -888,7 +1077,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
-		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";;
+		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
 
 		// 入力値
 		$data = array();
@@ -923,6 +1112,207 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 結果の取り出し
 		$row =& $res->fetchRow(DB_FETCHMODE_ASSOC);
 		return $row['cnt'];
+	}
+
+	/**
+	* 入力された追加集計項目の範囲設定
+	*
+	* 会期
+	* ※日付は yyyy/mm/dd 00:00:00 から yyyy/mm/dd 23:59:59 とする
+	*
+	* @param string $cond 範囲条件
+	* @param string $column カラム
+	* @param string $num_from 入力値小
+	* @param string $num_to 入力値大
+	* @param string $data values
+	* @return string 成功:作成SQL 失敗:空文字
+	*/
+	function _mkSqlAddSummary($cond, $column, $date_from, $date_to, &$data) {
+		$sql = '';
+		if('10' == $cond){
+			//範囲内の場合
+			if ('' != $date_from && '' != $date_to) {
+				$sql = " $column <= ? and $column >= ? ";
+				array_push($data, $date_to, $date_from);
+			} elseif ('' != $date_from) {
+				$sql = " $column >= ? ";
+				array_push($data, $date_from);
+			} elseif ('' != $date_to) {
+				$sql = " $column <= ? ";
+				array_push($data, $date_to);
+			} else {
+				return '';
+			}
+			return $sql;
+		}elseif('11' == $cond){
+			//範囲外の場合
+			if ('' != $date_from && '' != $date_to) {
+				$sql = " $column >= ? and $column <= ? ";
+				array_push($data, $date_to, $date_from);
+			} elseif ('' != $date_from) {
+				$sql = " $column <= ? ";
+				array_push($data, $date_from);
+			} elseif ('' != $date_to) {
+				$sql = " $column >= ? ";
+				array_push($data, $date_to);
+			} else {
+				return '';
+			}
+			return $sql;
+		}
+	}
+
+	/**
+	* 集計対象リスト総件数取得
+	*
+	* @return int 集計対象リスト総件数
+	*/
+	function getFairSummarySearchCnt() {
+		$db = $this->backend->getDB();
+		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+
+		$data = array();
+		$sql_ext =$this->_getWhere($data);
+
+		// 集計期間項目 追加条件
+		// YYYY/MM/DDに形成
+		if ('' != $search_cond['summary_value_from_yyyy']) {
+			$date_from = $search_cond['summary_value_from_yyyy'].'/'.$search_cond['summary_value_from_mm'].'/'.$search_cond['summary_value_from_dd'].' 00:00:00';
+		} else {
+			$date_from = '';
+		}
+		if ('' != $search_cond['summary_value_to_yyyy']) {
+			$date_to = $search_cond['summary_value_to_yyyy'].'/'.$search_cond['summary_value_to_mm'].'/'.$search_cond['summary_value_to_dd'].' 23:59:59';
+		} else {
+			$date_to = '';
+		}
+		if($search_cond['summary_value'] == '89'){
+			//削除日時の場合
+			$column = "del_date";
+		}elseif($search_cond['summary_value'] == '90'){
+			//登録日の場合
+			$column = "regist_date";
+		}elseif($search_cond['summary_value'] == '91'){
+			//更新日の場合
+			$column = "update_date";
+		}
+		$sql_tmp = $this->_mkSqlAddSummary($search_cond['summary_value_hani_cond'], $column, $date_from, $date_to, $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+
+		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : select count(*) cnt from ('.$sql.$sql_ext.') t');
+		// Prepare Statement化
+		$stmt =& $db->db->prepare('select count(*) cnt from ('.$sql.$sql_ext.') t');
+		$res = $db->db->execute($stmt, $data);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// 結果の取り出し
+		$row =& $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
+
+	/**
+	* 集計対象リスト取得（表示用）。
+	*
+	* @return array 見本市リスト
+	*/
+	function getFairSummarySearch($offset, $limit, $ary_sort, $ary_sort_cond) {
+		$db = $this->backend->getDB();
+		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+		$data = array();
+		$sql_ext =$this->_getWhere($data);
+
+		// 集計期間項目 追加条件
+		if ('' != $search_cond['summary_value_from_yyyy']) {
+			$date_from = $search_cond['summary_value_from_yyyy'].'/'.$search_cond['summary_value_from_mm'].'/'.$search_cond['summary_value_from_dd'].' 00:00:00';
+		} else {
+			$date_from = '';
+		}
+		if ('' != $search_cond['summary_value_to_yyyy']) {
+			$date_to = $search_cond['summary_value_to_yyyy'].'/'.$search_cond['summary_value_to_mm'].'/'.$search_cond['summary_value_to_dd'].' 23:59:59';
+		} else {
+			$date_to = '';
+		}
+		//カラム設定
+		if($search_cond['summary_value'] == '89'){
+			//削除日時の場合
+			$column = "del_date";
+		}elseif($search_cond['summary_value'] == '90'){
+			//登録日の場合
+			$column = "regist_date";
+		}elseif($search_cond['summary_value'] == '91'){
+			//更新日の場合
+			$column = "update_date";
+		}
+		$sql_tmp = $this->_mkSqlAddSummary($search_cond['summary_value_hani_cond'], $column, $date_from, $date_to, $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+
+		//Group By
+		$sql_groupby = '';
+		for ($i = 0; $i < count($ary_sort); $i++) {
+			if ('' != $ary_sort[$i]) {
+				if ('' == $sql_groupby) {
+					$sql_groupby .= ' group by ';
+				} else {
+					$sql_groupby .= ', ';
+				}
+				$sql_groupby .= $this->sort_summary_column[$ary_sort[$i]];
+			}
+		}
+		//Order By
+		$sql_sort = '';
+		for ($i = 0; $i < count($ary_sort); $i++) {
+			if ('' != $ary_sort[$i]) {
+				if ('' == $sql_sort) {
+					$sql_sort .= ' order by ';
+				} else {
+					$sql_sort .= ', ';
+				}
+				$sql_sort .= $this->sort_summary_column[$ary_sort[$i]];
+				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
+			}
+		}
+		// ページング
+		$sql_limit = ' limit ?, ? ';
+		array_push($data, (int)$offset, (int)$limit);
+
+		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_groupby.$sql_sort.$sql_limit);
+
+		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_groupby.$sql_sort.$sql_limit);
+
+		$res = $db->db->execute($stmt, $data);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->ae->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// リスト化
+		$i = 0;
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+		return $list;
 	}
 
 	/**
