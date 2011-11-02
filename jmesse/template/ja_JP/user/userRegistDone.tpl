@@ -135,7 +135,7 @@
 								<div class="finish-navi">
 									{if ("delete" != $form.mode)}
 									<div class="btn">
-										<a href="/j-messe/registration/??" ><span class="title">続いて見本市を登録する</span>
+										<a href="{$config.url}?action_user_fairRegistStep1=true" ><span class="title">続いて見本市を登録する</span>
 										<span class="description">見本市新規登録ページを開きます。</span></a>
 									</div>
 									{/if}
