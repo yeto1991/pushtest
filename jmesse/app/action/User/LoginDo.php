@@ -40,9 +40,23 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 	function prepare()
 	{
 		if ($this->af->validate() > 0) {
+			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
 			return 'user_login';
+		}else{
+			//入力チェック詳細
+			//Eメール
+			if($this->af->get('email') != null && $this->af->get('email') != ''){
+				//Eメール
+				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
+					$this->ae->add('email', "Eメール 「@」の位置が不正です");
+					return 'user_login';
+				}
+				if(substr_count($this->af->get('email'),"@") != 1){
+					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					return 'user_login';
+				}
+			}
 		}
-
 		return null;
 	}
 

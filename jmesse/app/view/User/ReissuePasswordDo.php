@@ -1,6 +1,6 @@
 <?php
 /**
- *  User/ReissuePassworDo.php
+ *  User/ReissuePasswordDo.php
  *
  *  @author     {$author}
  *  @package    Jmesse

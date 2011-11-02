@@ -21,11 +21,11 @@ class Jmesse_Form_UserReissuePassword extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		'email' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'Eメール',       // Display name
-			'required'    => true,            // Required Option(true/false)
+		'print' => array(
+			'type'        => VAR_TYPE_INT,    // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'プリント用表示', // Display name
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -33,6 +33,19 @@ class Jmesse_Form_UserReissuePassword extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+		),
+		'email' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'Eメール',       // Display name
+			'required'    => true,
+			'min'         => null,
+			'max'         => 255,
+			'regexp'      => '/^[!-~]+$/',
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
 		),
 	);
 }
