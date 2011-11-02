@@ -1581,10 +1581,10 @@
 							</td>
 						</tr>
 					</table>
+					<hr/>
 					<input type="button" value="検索実行" onclick="search()" />
 					<input type="button" value="集計実行" onclick="summary()" />
 					<input type="reset" value="リセット" />
-					<hr/>
 				</td>
 			</tr>
 		</table>
