@@ -46,7 +46,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		}
 
 		// 見本市番号
-		if ('c' == $this->af->get('mode')) {
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
 			}
@@ -172,7 +172,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$regist_param_3['exhibits_en'] = $this->af->get('exhibits_en');
 		$regist_param_3['other_city_en'] = $this->af->get('other_city_en');
 		$regist_param_3['venue_en'] = $this->af->get('venue_en');
-		$regist_param_3['transportation_en'] = $this->af->get('transportation_en');
+// 		$regist_param_3['transportation_en'] = $this->af->get('transportation_en');
 		$regist_param_3['other_admission_ticket_en'] = $this->af->get('other_admission_ticket_en');
 		$regist_param_3['organizer_en'] = $this->af->get('organizer_en');
 		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
@@ -225,7 +225,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('check_other_city', $regist_param_1['check_other_city']);
 		$this->af->set('venue_jp', $regist_param_1['venue_jp']);
 		$this->af->set('gross_floor_area', $regist_param_1['gross_floor_area']);
-		$this->af->set('transportation_jp', $regist_param_1['transportation_jp']);
+//		$this->af->set('transportation_jp', $regist_param_1['transportation_jp']);
 		$this->af->set('open_to', $regist_param_1['open_to']);
 		$this->af->set('admission_ticket_1', $regist_param_1['admission_ticket_1']);
 		$this->af->set('admission_ticket_2', $regist_param_1['admission_ticket_2']);
@@ -233,9 +233,9 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('admission_ticket_4', $regist_param_1['admission_ticket_4']);
 		$this->af->set('admission_ticket_5', $regist_param_1['admission_ticket_5']);
 		$this->af->set('other_admission_ticket_jp', $regist_param_1['other_admission_ticket_jp']);
-		$this->af->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
-		$this->af->set('app_dead_mm', $regist_param_1['app_dead_mm']);
-		$this->af->set('app_dead_dd', $regist_param_1['app_dead_dd']);
+// 		$this->af->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
+// 		$this->af->set('app_dead_mm', $regist_param_1['app_dead_mm']);
+// 		$this->af->set('app_dead_dd', $regist_param_1['app_dead_dd']);
 
 		$regist_param_2 = $this->session->get('regist_param_2');
 		$this->af->set('year_of_the_trade_fair', $regist_param_2['year_of_the_trade_fair']);
@@ -250,10 +250,12 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('photos_name_2', $regist_param_2['photos_name_2']);
 		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
+		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
 		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
+		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$this->af->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$this->af->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$this->af->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
@@ -266,10 +268,8 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('exhibits_en', $regist_param_3['exhibits_en']);
 		$this->af->set('other_city_en', $regist_param_3['other_city_en']);
 		$this->af->set('venue_en', $regist_param_3['venue_en']);
-		$this->af->set('transportation_en', $regist_param_3['transportation_en']);
+//		$this->af->set('transportation_en', $regist_param_3['transportation_en']);
 		$this->af->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
-		$this->af->set('organizer_en', $regist_param_3['organizer_en']);
-		$this->af->set('agency_in_japan_en', $regist_param_3['agency_in_japan_en']);
 		$this->af->set('spare_field1', $regist_param_3['spare_field1']);
 
 		// コード名

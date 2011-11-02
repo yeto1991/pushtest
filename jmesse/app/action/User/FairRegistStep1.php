@@ -21,7 +21,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		// '':regist、'c':change、'd':detail
+		// '':regist(登録)、'c':change(修正)、'd':detail(詳細表示)、'e':edit(編集登録)
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -29,13 +29,13 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
-			'regexp'      => '/^[cd]+$/',     // String by Regexp
+			'regexp'      => '/^[cde]+$/',     // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		// '1':戻る
+		// '1':戻るボタンから
 		'back' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -44,20 +44,6 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
 			'regexp'      => '/^[01]+$/',            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		// 見本市番号
-		'mihon_no' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市番号',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -85,6 +71,21 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[01]+$/',            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
+		// 見本市番号
+		'mihon_no' => array(
+			'type'        => VAR_TYPE_INT,    // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '見本市番号',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
 			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
@@ -657,19 +658,19 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'transportation_jp' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '会場までの交通手段', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'transportation_jp' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => '会場までの交通手段', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => 500,             // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 		'open_to' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_RADIO, // Form type
@@ -761,45 +762,45 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'app_dead_yyyy' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(年)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 4,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_mm' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(月)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'app_dead_dd' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '出展申込締切日(日)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'app_dead_yyyy' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => '出展申込締切日(年)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => 4,               // Maximum value
+// 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'app_dead_mm' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => '出展申込締切日(月)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => 2,               // Maximum value
+// 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
+// 		'app_dead_dd' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => '出展申込締切日(日)', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => 2,               // Maximum value
+// 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 
 
 		// Step.2
@@ -1226,19 +1227,19 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'transportation_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'Transportation', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => '/^[ -~]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'transportation_en' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => 'Transportation', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => 500,             // Maximum value
+// 			'regexp'      => '/^[ -~]+$/',    // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 		'other_admission_ticket_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
@@ -1299,7 +1300,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		}
 
 		// 見本市番号
-		if ('c' == $this->af->get('mode')) {
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
 			}
@@ -1329,7 +1330,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 			// 入力情報の復元
 			$this->_setSessionToForm();
 		} else {
-			if ('c' == $this->af->get('mode')) {
+			if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 				// 修正の場合
 				$this->backend->getLogger()->log(LOG_DEBUG, '■修正の場合');
 
@@ -1419,7 +1420,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$this->af->set('check_other_city', $regist_param_1['check_other_city']);
 		$this->af->set('venue_jp', $regist_param_1['venue_jp']);
 		$this->af->set('gross_floor_area', $regist_param_1['gross_floor_area']);
-		$this->af->set('transportation_jp', $regist_param_1['transportation_jp']);
+// 		$this->af->set('transportation_jp', $regist_param_1['transportation_jp']);
 		$this->af->set('open_to', $regist_param_1['open_to']);
 		$this->af->set('admission_ticket_1', $regist_param_1['admission_ticket_1']);
 		$this->af->set('admission_ticket_2', $regist_param_1['admission_ticket_2']);
@@ -1427,12 +1428,14 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$this->af->set('admission_ticket_4', $regist_param_1['admission_ticket_4']);
 		$this->af->set('admission_ticket_5', $regist_param_1['admission_ticket_5']);
 		$this->af->set('other_admission_ticket_jp', $regist_param_1['other_admission_ticket_jp']);
-		$this->af->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
-		$this->af->set('app_dead_mm', $regist_param_1['app_dead_mm']);
-		$this->af->set('app_dead_dd', $regist_param_1['app_dead_dd']);
+// 		$this->af->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
+// 		$this->af->set('app_dead_mm', $regist_param_1['app_dead_mm']);
+// 		$this->af->set('app_dead_dd', $regist_param_1['app_dead_dd']);
 	}
 
 	function _setObjToSession($obj) {
+		$jm_code_m_mgr =& $this->backend->getManager('JmCodeM');
+
 		$regist_param_1 = array();
 		$regist_param_1['fair_title_jp'] = $obj->get('fair_title_jp');
 		$regist_param_1['abbrev_title'] = $obj->get('abbrev_title');
@@ -1446,29 +1449,16 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_1['frequency'] = $obj->get('frequency');
 		$regist_param_1['main_industory_1'] = $obj->get('main_industory_1');
 		$regist_param_1['sub_industory_1'] = $obj->get('sub_industory_1');
-		$regist_param_1['main_industory_name_1'] = $obj->get('main_industory_name_1');
-		$regist_param_1['sub_industory_name_1'] = $obj->get('sub_industory_name_1');
 		$regist_param_1['main_industory_2'] = $obj->get('main_industory_2');
 		$regist_param_1['sub_industory_2'] = $obj->get('sub_industory_2');
-		$regist_param_1['main_industory_name_2'] = $obj->get('main_industory_name_2');
-		$regist_param_1['sub_industory_name_2'] = $obj->get('sub_industory_name_2');
 		$regist_param_1['main_industory_3'] = $obj->get('main_industory_3');
 		$regist_param_1['sub_industory_3'] = $obj->get('sub_industory_3');
-		$regist_param_1['main_industory_name_3'] = $obj->get('main_industory_name_3');
-		$regist_param_1['sub_industory_name_3'] = $obj->get('sub_industory_name_3');
 		$regist_param_1['main_industory_4'] = $obj->get('main_industory_4');
 		$regist_param_1['sub_industory_4'] = $obj->get('sub_industory_4');
-		$regist_param_1['main_industory_name_4'] = $obj->get('main_industory_name_4');
-		$regist_param_1['sub_industory_name_4'] = $obj->get('sub_industory_name_4');
 		$regist_param_1['main_industory_5'] = $obj->get('main_industory_5');
 		$regist_param_1['sub_industory_5'] = $obj->get('sub_industory_5');
-		$regist_param_1['main_industory_name_5'] = $obj->get('main_industory_name_5');
-		$regist_param_1['sub_industory_name_5'] = $obj->get('sub_industory_name_5');
 		$regist_param_1['main_industory_6'] = $obj->get('main_industory_6');
 		$regist_param_1['sub_industory_6'] = $obj->get('sub_industory_6');
-		$regist_param_1['main_industory_name_6'] = $obj->get('main_industory_name_6');
-		$regist_param_1['sub_industory_name_6'] = $obj->get('sub_industory_name_6');
-		$regist_param_1['check_sub_industory'] = $obj->get('check_sub_industory');
 		$regist_param_1['exhibits_jp'] = $obj->get('exhibits_jp');
 		$regist_param_1['region'] = $obj->get('region');
 		$regist_param_1['country'] = $obj->get('country');
@@ -1480,8 +1470,8 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 			$regist_param_1['check_other_city'] = '';
 		}
 		$regist_param_1['venue_jp'] = $obj->get('venue_jp');
-		$regist_param_1['gross_floor_area'] = $obj->get('gross_floor_area');
-		$regist_param_1['transportation_jp'] = $obj->get('transportation_jp');
+		$regist_param_1['gross_floor_area'] = $this->_isZero($obj->get('gross_floor_area'));
+// 		$regist_param_1['transportation_jp'] = $obj->get('transportation_jp');
 		$regist_param_1['open_to'] = $obj->get('open_to');
 		$regist_param_1['admission_ticket_1'] = $obj->get('admission_ticket_1');
 		$regist_param_1['admission_ticket_2'] = $obj->get('admission_ticket_2');
@@ -1493,17 +1483,53 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 			$regist_param_1['admission_ticket_5'] = '';
 		}
 		$regist_param_1['other_admission_ticket_jp'] = $obj->get('other_admission_ticket_jp');
-		$regist_param_1['app_dead_yyyy'] = $obj->get('app_dead_yyyy');
-		$regist_param_1['app_dead_mm'] = $obj->get('app_dead_mm');
-		$regist_param_1['app_dead_dd'] = $obj->get('app_dead_dd');
+// 		$regist_param_1['app_dead_yyyy'] = $obj->get('app_dead_yyyy');
+// 		$regist_param_1['app_dead_mm'] = $obj->get('app_dead_mm');
+// 		$regist_param_1['app_dead_dd'] = $obj->get('app_dead_dd');
+
+		$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_1'), '000', '000');
+		$regist_param_1['main_industory_name_1'] = $code['discription_jp'];
+		$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_1'), $obj->get('sub_industory_1'), '000');
+		$regist_param_1['sub_industory_name_1'] = $code['discription_jp'];
+		if ('' != $obj->get('main_industory_2')) {
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_2'), '000', '000');
+			$regist_param_1['main_industory_name_2'] = $code['discription_jp'];
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_2'), $obj->get('sub_industory_2'), '000');
+			$regist_param_1['sub_industory_name_2'] = $code['discription_jp'];
+		}
+		if ('' != $obj->get('main_industory_3')) {
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_3'), '000', '000');
+			$regist_param_1['main_industory_name_3'] = $code['discription_jp'];
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_3'), $obj->get('sub_industory_3'), '000');
+			$regist_param_1['sub_industory_name_3'] = $code['discription_jp'];
+		}
+		if ('' != $obj->get('main_industory_4')) {
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_4'), '000', '000');
+			$regist_param_1['main_industory_name_4'] = $code['discription_jp'];
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_4'), $obj->get('sub_industory_4'), '000');
+			$regist_param_1['sub_industory_name_4'] = $code['discription_jp'];
+		}
+		if ('' != $obj->get('main_industory_5')) {
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_5'), '000', '000');
+			$regist_param_1['main_industory_name_5'] = $code['discription_jp'];
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_5'), $obj->get('sub_industory_5'), '000');
+			$regist_param_1['sub_industory_name_5'] = $code['discription_jp'];
+		}
+		if ('' != $obj->get('main_industory_6')) {
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_6'), '000', '000');
+			$regist_param_1['main_industory_name_6'] = $code['discription_jp'];
+			$code = $jm_code_m_mgr->getCode('002', $obj->get('main_industory_6'), $obj->get('sub_industory_6'), '000');
+			$regist_param_1['sub_industory_name_6'] = $code['discription_jp'];
+		}
+		$regist_param_1['check_sub_industory'] = $this->_mekaCheckSubIndustory($regist_param_1);
 		$this->session->set('regist_param_1', $regist_param_1);
 
 		$regist_param_2 = array();
 		$regist_param_2['year_of_the_trade_fair'] = $obj->get('year_of_the_trade_fair');
-		$regist_param_2['total_number_of_visitor'] = $obj->get('total_number_of_visitor');
-		$regist_param_2['number_of_foreign_visitor'] = $obj->get('number_of_foreign_visitor');
-		$regist_param_2['total_number_of_exhibitors'] = $obj->get('total_number_of_exhibitors');
-		$regist_param_2['number_of_foreign_exhibitors'] = $obj->get('number_of_foreign_exhibitors');
+		$regist_param_2['total_number_of_visitor'] = $this->_isZero($obj->get('total_number_of_visitor'));
+		$regist_param_2['number_of_foreign_visitor'] = $this->_isZero($obj->get('number_of_foreign_visitor'));
+		$regist_param_2['total_number_of_exhibitors'] = $this->_isZero($obj->get('total_number_of_exhibitors'));
+		$regist_param_2['number_of_foreign_exhibitors'] = $this->_isZero($obj->get('number_of_foreign_exhibitors'));
 		$regist_param_2['net_square_meters'] = $obj->get('net_square_meters');
 		$regist_param_2['profile_jp'] = $obj->get('profile_jp');
 		$regist_param_2['detailed_information_jp'] = $obj->get('detailed_information_jp');
@@ -1530,11 +1556,36 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_3['exhibits_en'] = $obj->get('exhibits_en');
 		$regist_param_3['other_city_en'] = $obj->get('other_city_en');
 		$regist_param_3['venue_en'] = $obj->get('venue_en');
-		$regist_param_3['transportation_en'] = $obj->get('transportation_en');
+// 		$regist_param_3['transportation_en'] = $obj->get('transportation_en');
 		$regist_param_3['other_admission_ticket_en'] = $obj->get('other_admission_ticket_en');
 		$regist_param_3['spare_field1'] = $obj->get('spare_field1');
 		$this->session->set('regist_param_3', $regist_param_3);
 	}
+
+	function _mekaCheckSubIndustory($regist_param_1) {
+		$industory_tmp_1 = $regist_param_1['main_industory_1'].'_'.$regist_param_1['sub_industory_1'].'_'.$regist_param_1['main_industory_name_1'].'_'.$regist_param_1['sub_industory_name_1'];
+		$industory_tmp_2 = $regist_param_1['main_industory_2'].'_'.$regist_param_1['sub_industory_2'].'_'.$regist_param_1['main_industory_name_2'].'_'.$regist_param_1['sub_industory_name_2'];
+		$industory_tmp_3 = $regist_param_1['main_industory_3'].'_'.$regist_param_1['sub_industory_3'].'_'.$regist_param_1['main_industory_name_3'].'_'.$regist_param_1['sub_industory_name_3'];
+		$industory_tmp_4 = $regist_param_1['main_industory_4'].'_'.$regist_param_1['sub_industory_4'].'_'.$regist_param_1['main_industory_name_4'].'_'.$regist_param_1['sub_industory_name_4'];
+		$industory_tmp_5 = $regist_param_1['main_industory_5'].'_'.$regist_param_1['sub_industory_5'].'_'.$regist_param_1['main_industory_name_5'].'_'.$regist_param_1['sub_industory_name_5'];
+		$industory_tmp_6 = $regist_param_1['main_industory_6'].'_'.$regist_param_1['sub_industory_6'].'_'.$regist_param_1['main_industory_name_6'].'_'.$regist_param_1['sub_industory_name_6'];
+		return array($industory_tmp_1, $industory_tmp_2, $industory_tmp_3, $industory_tmp_4, $industory_tmp_5, $industory_tmp_6);
+	}
+
+	/**
+	 * INT型の項目が0の場合''空文字を返す。
+	 *
+	 * @param int $param 対象パラメータ
+	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+	 */
+	function _isZero($param) {
+		$ret = $param;
+		if ("0" == $param) {
+			$ret = '';
+		}
+		return $ret;
+	}
+
 }
 
 ?>

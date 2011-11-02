@@ -51,7 +51,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		}
 
 		// 見本市番号
-		if ('c' == $this->af->get('mode')) {
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
 			}
@@ -204,7 +204,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 // 				$this->session->set('img_tmp_path', '');
 // 			}
 		} else	{
-			if ('c' == $this->af->get('mode')) {
+			if ('c' == $this->af->get('mode') || 'e'  == $this->af->get('mode')) {
 				// 修正の場合
 				$this->backend->getLogger()->log(LOG_DEBUG, '■修正の場合');
 
@@ -277,7 +277,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		}
 		$regist_param_1['venue_jp'] = $this->af->get('venue_jp');
 		$regist_param_1['gross_floor_area'] = $this->af->get('gross_floor_area');
-		$regist_param_1['transportation_jp'] = $this->af->get('transportation_jp');
+// 		$regist_param_1['transportation_jp'] = $this->af->get('transportation_jp');
 		$regist_param_1['open_to'] = $this->af->get('open_to');
 		$regist_param_1['admission_ticket_1'] = $this->af->get('admission_ticket_1');
 		$regist_param_1['admission_ticket_2'] = $this->af->get('admission_ticket_2');
@@ -289,9 +289,9 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		} else {
 			$regist_param_1['other_admission_ticket_jp'] = '';
 		}
-		$regist_param_1['app_dead_yyyy'] = $this->af->get('app_dead_yyyy');
-		$regist_param_1['app_dead_mm'] = $this->af->get('app_dead_mm');
-		$regist_param_1['app_dead_dd'] = $this->af->get('app_dead_dd');
+// 		$regist_param_1['app_dead_yyyy'] = $this->af->get('app_dead_yyyy');
+// 		$regist_param_1['app_dead_mm'] = $this->af->get('app_dead_mm');
+// 		$regist_param_1['app_dead_dd'] = $this->af->get('app_dead_dd');
 		$this->session->set('regist_param_1', $regist_param_1);
 	}
 

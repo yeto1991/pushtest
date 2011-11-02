@@ -107,7 +107,7 @@
 			var n = 1;
 			for (i in input) {
 				arry_item = input[i].split('_');
-				txt += arry_item[3] + '<br/>';
+				txt += '・' + arry_item[3] + '<br/>';
 				$('#main_industory_' + n).val(arry_item[0]);
 				$('#sub_industory_' + n).val(arry_item[1]);
 				$('#main_industory_name_' + n).val(arry_item[2]);
@@ -203,7 +203,7 @@
 									<!-- HIDDEN -->
 									<input type="hidden" name="action_user_fairRegistStep2" id="action_user_fairRegistStep2" value="dummy" />
 									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
-									{if ('c' == $form.mode)}
+									{if ('c' == $form.mode || 'e' == $form.mode)}
 									<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 									{/if}
 
@@ -431,22 +431,22 @@
 												現在、以下の業種が選択されています。<br />
 												<div id="INDUSOTRY_LIST">
 												{if ('' != $form.sub_industory_name_1)}
-												{$form.sub_industory_name_1}<br />
+												・{$form.sub_industory_name_1}<br />
 												{/if}
 												{if ('' != $form.sub_industory_name_2)}
-												{$form.sub_industory_name_2}<br />
+												・{$form.sub_industory_name_2}<br />
 												{/if}
 												{if ('' != $form.sub_industory_name_3)}
-												{$form.sub_industory_name_3}<br />
+												・{$form.sub_industory_name_3}<br />
 												{/if}
 												{if ('' != $form.sub_industory_name_4)}
-												{$form.sub_industory_name_4}<br />
+												・{$form.sub_industory_name_4}<br />
 												{/if}
 												{if ('' != $form.sub_industory_name_5)}
-												{$form.sub_industory_name_5}<br />
+												・{$form.sub_industory_name_5}<br />
 												{/if}
 												{if ('' != $form.sub_industory_name_6)}
-												{$form.sub_industory_name_6}<br />
+												・{$form.sub_industory_name_6}<br />
 												{/if}
 												</div>
 												<button class="modalInput" rel="#prompt">業種選択</button><br/>
@@ -675,11 +675,11 @@
 					</div>
 				</div>
 				<p class="totop">
-					{if ('c' ==$form.mode)}
+					{if ('c' == $form.mode || 'e' == $form.mode)}
 						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{/if}
 					{else}
 						{if ('1' == $form.back)}
@@ -905,4 +905,3 @@
 
 </body>
 </html>
-{debug}

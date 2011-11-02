@@ -51,7 +51,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		}
 
 		// 見本市番号
-		if ('c' == $this->af->get('mode')) {
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
 			}
@@ -177,7 +177,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			// sessionの情報をformに設定
 			$this->_setSessionToForm();
 		} else {
-			if ('c' == $this->af->get('mode')) {
+			if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 				// 修正の場合
 				$this->backend->getLogger()->log(LOG_DEBUG, '■修正の場合');
 
@@ -256,7 +256,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		$this->af->set('exhibits_en', $regist_param_3['exhibits_en']);
 		$this->af->set('other_city_en', $regist_param_3['other_city_en']);
 		$this->af->set('venue_en', $regist_param_3['venue_en']);
-		$this->af->set('transportation_en', $regist_param_3['transportation_en']);
+// 		$this->af->set('transportation_en', $regist_param_3['transportation_en']);
 		$this->af->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$this->af->set('spare_field1', $regist_param_3['spare_field1']);
 

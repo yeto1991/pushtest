@@ -46,7 +46,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		}
 
 		// 見本市番号
-		if ('c' == $this->af->get('mode')) {
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
 			}
@@ -139,16 +139,16 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('other_city_jp', $regist_param_1['other_city_jp']);
 		$jm_fair->set('venue_jp', $regist_param_1['venue_jp']);
 		$jm_fair->set('gross_floor_area', $regist_param_1['gross_floor_area']);
-		$jm_fair->set('transportation_jp', $regist_param_1['transportation_jp']);
+// 		$jm_fair->set('transportation_jp', $regist_param_1['transportation_jp']);
 		$jm_fair->set('open_to', $regist_param_1['open_to']);
 		$jm_fair->set('admission_ticket_1', $regist_param_1['admission_ticket_1']);
 		$jm_fair->set('admission_ticket_2', $regist_param_1['admission_ticket_2']);
 		$jm_fair->set('admission_ticket_3', $regist_param_1['admission_ticket_3']);
 		$jm_fair->set('admission_ticket_4', $regist_param_1['admission_ticket_4']);
 		$jm_fair->set('other_admission_ticket_jp', $regist_param_1['other_admission_ticket_jp']);
-		$jm_fair->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
-		$jm_fair->set('app_dead_mm', $regist_param_1['app_dead_mm']);
-		$jm_fair->set('app_dead_dd', $regist_param_1['app_dead_dd']);
+// 		$jm_fair->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
+// 		$jm_fair->set('app_dead_mm', $regist_param_1['app_dead_mm']);
+// 		$jm_fair->set('app_dead_dd', $regist_param_1['app_dead_dd']);
 		$jm_fair->set('year_of_the_trade_fair', $regist_param_2['year_of_the_trade_fair']);
 		$jm_fair->set('total_number_of_visitor', $regist_param_2['total_number_of_visitor']);
 		$jm_fair->set('number_of_foreign_visitor', $regist_param_2['number_of_foreign_visitor']);
@@ -177,7 +177,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('exhibits_en', str_replace($br, '<br/>', $regist_param_3['exhibits_en']));
 		$jm_fair->set('other_city_en', $regist_param_3['other_city_en']);
 		$jm_fair->set('venue_en', $regist_param_3['venue_en']);
-		$jm_fair->set('transportation_en', $regist_param_3['transportation_en']);
+// 		$jm_fair->set('transportation_en', $regist_param_3['transportation_en']);
 		$jm_fair->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$jm_fair->set('spare_field1', $regist_param_3['spare_field1']);
 
@@ -195,9 +195,11 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		if ('c' == $this->af->get('mode')) {
 			// UPDATE
 			$ret = $jm_fair->update();
+			$ope_kbn = '3';
 		} else {
 			// INSERT
 			$ret = $jm_fair->add();
+			$ope_kbn = '2';
 		}
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_FAIRテーブルへの登録に失敗しました。';
@@ -237,7 +239,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('adminCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '3', '2', $jm_fair->get('mihon_no'));
+		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '2', $jm_fair->get('mihon_no'));
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
@@ -328,8 +330,8 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// 展示会で使用する面積（Ｎｅｔ）
 		$search_key .= $jm_fair->get('gross_floor_area').' ';
 		// 交通手段
-		$search_key .= $jm_fair->get('transportation_jp').' ';
-		$search_key .= $jm_fair->get('transportation_en').' ';
+// 		$search_key .= $jm_fair->get('transportation_jp').' ';
+// 		$search_key .= $jm_fair->get('transportation_en').' ';
 		// 入場資格
 		$code = $jm_code_m_mgr->getCode('004', $jm_fair->get('open_to'), '000', '000');
 		$search_key .= $code['discription_jp'].' ';
@@ -358,7 +360,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$search_key .= $jm_fair->get('net_square_meters').' ';
 		$search_key .= $jm_fair->get('spare_field1').' ';
 		// 出展申込締切日
-		$search_key .= $jm_fair->get('app_dead_yyyy').'年'.$jm_fair->get('app_dead_mm').'月'.$jm_fair->get('app_dead_dd').'日 ';
+// 		$search_key .= $jm_fair->get('app_dead_yyyy').'年'.$jm_fair->get('app_dead_mm').'月'.$jm_fair->get('app_dead_dd').'日 ';
 		// 主催者・問合せ先
 		$search_key .= $jm_fair->get('organizer_jp').' ';
 		$search_key .= $jm_fair->get('organizer_en').' ';

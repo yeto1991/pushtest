@@ -117,7 +117,7 @@
 								<form name="form_fairRegistStep3" id="form_fairRegistStep3" method="post" action="">
 									<input type="hidden" name="action_user_fairRegistDo" id="action_user_fairRegistDo" value="dummy" />
 									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
-									{if ('c' == $form.mode)}
+									{if ('c' == $form.mode || 'e' == $form.mode)}
 									<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 									{/if}
 									<table id="registration">
@@ -342,8 +342,8 @@
 									</div>
 									<table width="100%">
 										<tr>
-											{if ('c' == $form.mode)}
-											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											{if ('c' == $form.mode || 'e' == $form.mode)}
+											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep2=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{else}
 											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep2=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{/if}
@@ -356,11 +356,11 @@
 					</div>
 				</div>
 				<p class="totop">
-					{if ('c' == $form.mode)}
+					{if ('c' == $form.mode || 'e' == $form.mode)}
 						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&mode=c&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&mode={$form.mode}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&mode=c&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&mode={$form.mode}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{/if}
 					{else}
 						{if ('1' == $form.back)}
@@ -384,4 +384,3 @@
 
 </body>
 </html>
-{debug}

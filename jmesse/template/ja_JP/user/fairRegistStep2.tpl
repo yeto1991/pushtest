@@ -167,7 +167,7 @@
 									<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
 									<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
 									<input type="hidden" name="del_photos_name[]" id="del_photos_name[]" value="" />
-									{if ('c' == $form.mode)}
+									{if ('c' == $form.mode || 'e' == $form.mode)}
 									<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 									{/if}
 
@@ -358,19 +358,19 @@
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
 												<table style="border-style:none;border-collapse:collapse;">
-												<tr>
-												<td rowspan="2" style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-												<strong>名称： </strong>
-												</td>
-												<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-												日 <input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" /><br />
-												</td>
-												</tr>
-												<tr>
-												<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-												英 <input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" /><br />
-												</td>
-												</tr>
+													<tr>
+														<td rowspan="2" style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															<strong>名称： </strong>
+														</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															日 <input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" /><br />
+														</td>
+													</tr>
+													<tr>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															英 <input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" /><br />
+														</td>
+													</tr>
 												</table>
 												<strong>TEL: </strong><input type="text" value="{$form.agency_in_japan_tel}" size="30" name="agency_in_japan_tel" id="agency_in_japan_tel" /><br />
 												<strong>FAX: </strong><input type="text" value="{$form.agency_in_japan_fax}" size="30" name="agency_in_japan_fax" id="agency_in_japan_fax" /><br />
@@ -392,8 +392,8 @@
 									</div>
 									<table width="100%">
 										<tr>
-											{if ('c' == $form.mode)}
-											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											{if ('c' == $form.mode || 'e' == $form.mode)}
+											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{else}
 											<td width="250px"><a href="{$config.url}?action_user_fairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{/if}
@@ -406,11 +406,11 @@
 					</div>
 				</div>
 				<p class="totop">
-					{if ('c' == $form.mode)}
+					{if ('c' == $form.mode || 'e' == $form.mode)}
 						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{/if}
 					{else}
 						{if ('1' == $form.back)}
@@ -434,4 +434,3 @@
 
 </body>
 </html>
-{debug}
