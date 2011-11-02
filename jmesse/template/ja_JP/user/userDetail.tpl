@@ -29,7 +29,7 @@
 	});
 
 	$(function(){
-		$("#include_contact_us").load("http://localhost/jmesse/www/contact_us.html");
+		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
 	});
 {/literal}
 -->
@@ -57,48 +57,8 @@
 	<div id="contents">
 		<div class="area">
 			<!-- left -->
-			<div id="left">
-				<div class="bgbox_set">
-					<p id="title"><a href="/j-messe/">見本市・展示会データベース</a></p>
-					<div class="bgbox_base">
-						<div class="bgbox_in">
-							<div class="submenu no_border">
-								<ul class="navi">
-									<li class="lv01_title"><a href="/j-messe/tradefair/industry/">業種別に見る</a></li>
-									<li class="lv01_title"><a href="/j-messe/tradefair/country/">開催地別に見る</a></li>
-									<li class="lv01_title"><a href="/j-messe/tradefair/">詳細検索</a></li>
-									<li class="lv01_title"><a href="/j-messe/new_fair/">新着見本市</a></li>
-									<li class="lv01_title"><a href="/j-messe/ranking/">月間ランキング</a></li>
-								</ul>
-								<ul class="navi">
-									<li class="lv01_label">出展お役立ち情報</li>
-									<li class="lv02_title"><a href="/j-messe/w-info/">見本市レポート</a></li>
-									<li class="lv02_title"><a href="/services/tradefair/">出展支援</a></li>
-									<li class="lv02_title"><a href="/j-messe/center/">世界の展示会場</a></li>
-									<li class="lv02_title"><a href="/j-messe/business/">世界の見本市ビジネス動向</a></li>
-								</ul>
-								<ul class="navi no_border">
-									<li class="lv01_label">出展者向け</li>
-									<li class="lv02_title"><a href="/j-messe/registration/">見本市登録</a></li>
-									<li class="lv02_title on"><a href="/j-messe/user/">ユーザー登録・修正</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="sub_inquiry">
-					<div class="bgbox_set">
-						<dl class="frame_beige">
-							<dt>お問い合わせ<br />ご意見・ご感想</dt>
-							<dd>ジェトロ展示事業課<br />（TEL:03-3582-5541）<br />
-								<a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form/fm/faa/inquiry_j');" class="icon_arrow">お問い合わせ</a>
-							</dd>
-						</dl>
-					</div>
-				</div>
-			</div>
+			<div id="include_left_menu"></div>
 			<!-- /left -->
-
 			<!-- center -->
 			<div id="center">
 				<div id="main">
