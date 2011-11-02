@@ -41,15 +41,19 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 		//入力値チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
+			return 'user_userRegist';
+		}else{
 			//入力チェック詳細
 			//Eメール
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
 					$this->ae->add('email', "Eメール 「@」の位置が不正です");
+					return 'user_userRegist';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
 					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					return 'user_userRegist';
 				}
 			}
 			//Eメール確認
@@ -57,19 +61,20 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 				//Eメール
 				if(substr($this->af->get('email2'), 0, 1) == "@" || substr($this->af->get('email2'), -1) == "@"){
 					$this->ae->add('email2', "Eメール(確認) 「@」の位置が不正です");
+					return 'user_userRegist';
 				}
 				if(substr_count($this->af->get('email2'),"@") != 1){
 					$this->ae->add('email2', "Eメール(確認) 「@」は必ず１文字のみ入力してください。");
+					return 'user_userRegist';
 				}
 			}
 			//URL
 			if($this->af->get('url') != null && $this->af->get('url') != ''){
 				if (0 !== strpos($this->af->get('url'), 'http')) {
 					$this->ae->add('url', "URLは「http」から入力してください");
+					return 'user_userRegist';
 				}
 			}
-			return 'user_userRegist';
-		}else{
 			//Eメール2重登録チェック
 			if($this->af->get('email') != $this->af->get('email2')){
 				$this->ae->add('email2', "入力されたEメールと合致していません。");

@@ -47,71 +47,81 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		//入力値チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
+			return 'admin_userRegist';
+		}else{
 			//入力チェック詳細
 			//Eメール
 			if($this->af->get('email') != null || $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
 					$this->ae->add(null, "Eメール 「@」の位置が不正です");
+					return 'admin_userRegist';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
 					$this->ae->add(null, "Eメール 「@」は必ず１文字のみ入力してください。");
+					return 'admin_userRegist';
 				}
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('email')))){
 					$this->ae->add(null, "Eメールは半角英数字、半角記号で入力してください");
+					return 'admin_userRegist';
 				}
 			}
 			//パスワード
 			if($this->af->get('password') != null || $this->af->get('password') != ''){
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('password')))){
 					$this->ae->add(null, "パスワードは半角英数字、半角記号で入力してください");
+					return 'admin_userRegist';
 				}
 			}
 			//郵便番号
 			if($this->af->get('postCode') != null || $this->af->get('postCode') != ''){
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('postCode')))){
 					$this->ae->add(null, "郵便番号は半角英数字、半角記号で入力してください");
+					return 'admin_userRegist';
 				}
 			}
 			//TEL
 			if($this->af->get('tel') != null || $this->af->get('tel') != ''){
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('tel')))){
 					$this->ae->add(null, "TELは半角英数字、半角記号で入力してください");
+					return 'admin_userRegist';
 				}
 			}
 			//FAX
 			if($this->af->get('fax') != null || $this->af->get('fax') != ''){
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('fax')))){
 					$this->ae->add(null, "FAXは半角英数字、半角記号で入力してください");
+					return 'admin_userRegist';
 				}
 			}
 			//URL
 			if($this->af->get('url') != null && $this->af->get('url') != ''){
 				if (0 !== strpos($this->af->get('url'), 'http')) {
 					$this->ae->add(null, "URLは「http」から入力してください");
+					return 'admin_userRegist';
 				}
 				if(!(preg_match("/^[!-~]+$/", $this->af->get('url')))){
 					$this->ae->add(null, "URLは半角英数字、半角記号で入力してください");
+					return 'admin_userRegist';
 				}
 			}
-			return 'admin_userRegist';
-		}
-		//重複チェック
-		$jmUserMgr = $this->backend->getManager('jmUser');
-		$emailCheck = $jmUserMgr->getEmailForDoubleCheck($this->af->get('email'));
-		if (Ethna::isError($emailCheck)) {
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
-			return 'error';
-		}
-		if($emailCheck == "DOUBLE_CHECK_NG"){
-			$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
-			if($user->get('user_id') == $this->af->get('user_id')){
-				//Eメール重複するユーザIDと更新対象のユーザIDが同ユーザIDの場合
-				return null;
+			//重複チェック
+			$jmUserMgr = $this->backend->getManager('jmUser');
+			$emailCheck = $jmUserMgr->getEmailForDoubleCheck($this->af->get('email'));
+			if (Ethna::isError($emailCheck)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
+				return 'error';
 			}
-			$this->ae->add(null, "入力されたEメールは既に使用されています。");
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
-			return 'admin_userRegist';
+			if($emailCheck == "DOUBLE_CHECK_NG"){
+				$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+				if($user->get('user_id') == $this->af->get('user_id')){
+					//Eメール重複するユーザIDと更新対象のユーザIDが同ユーザIDの場合
+					return null;
+				}
+				$this->ae->add(null, "入力されたEメールは既に使用されています。");
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
+				return 'admin_userRegist';
+			}
 		}
 		return null;
 	}
