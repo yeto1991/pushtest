@@ -52,9 +52,6 @@ class Jmesse_Action_AdminErrMailDownload extends Jmesse_ActionClass
 		}
 
 		// 期間
-		$this->backend->getLogger()->log(LOG_DEBUG, '■date_from : '.$this->af->get('date_from_yyyy'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■date_from : '.$this->af->get('date_from_mm'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■date_from : '.$this->af->get('date_from_dd'));
 		if ('' != $this->af->get('date_from_yyyy') || '' != $this->af->get('date_from_mm') || '' != $this->af->get('date_from_dd')) {
 			if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
 				$this->ae->add('error', '期間(開始)が正しくありません');

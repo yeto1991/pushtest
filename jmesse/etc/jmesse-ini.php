@@ -105,6 +105,13 @@ $config = array(
 	'mail_title_user_confirm' => 'J-messe見本市ユーザのお知らせ',
 	'mail_title_fair_regist'  => 'J-messe見本市登録完了のお知らせ',
 	'mail_title_fair_change'  => 'J-messe見本市更新完了のお知らせ',
+
+	'mail_imap_host' => 'ssl://imap.gmail.com',
+	'mail_imap_port' => '993',
+	'mail_imap_user' => '',
+	'mail_imap_pass' => '',
+
+
 	//'mail_func_workaround' => false,
 
 	// Smarty

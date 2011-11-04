@@ -8,6 +8,8 @@
  */
 
 include_once('Mail.php');
+require_once('Net/IMAP.php');
+require_once('Net/IMAPProtocol.php');
 
 /**
  *  Jmesse_MailManager
@@ -137,21 +139,38 @@ class Jmesse_MailManager extends Ethna_AppManager
 		if (PEAR::isError($result)) {
 			$msg = 'メールの送信に失敗しました';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			echo "<pre>";
-			print_r($result);
-			echo "/<pre>";
-
-// 			var_dump($result);
-
-// 			$filename = 'C:/opt/j-messe.var_dump.txt';
-// 			ob_start();
-// 			print_r($result);
-// 			$out=ob_get_contents();
-// 			ob_end_clean();
-// 			file_put_contents($filename,$out,FILE_APPEND);
-
 			$this->backend->getActionError()->add('error', $msg);
 		}
+
+		return;
+	}
+
+	function getErrMail() {
+		// 言語と文字コードの設定
+		mb_language('Japanese');
+		mb_internal_encoding('UTF-8');
+
+		// IMAPサーバに接続する
+		$imap = new Net_IMAP($this->config->get('mail_imap_host'), $this->config->get('mail_imap_port'), false);
+		print_r($imap);
+		if(PEAR::isError($imap)) {
+			$msg = 'IMAPサーバへの接続に失敗しました';
+			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->backend->getActionError()->add('error', $msg);
+			print_r($imap);
+			return;
+		}
+		$res = $imap->login($this->config->get('mail_imap_user'), $this->config->get('mail_imap_pass'));
+		if(PEAR::isError($res)) {
+			$msg = 'IMAPサーバへのログインに失敗しました';
+			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->backend->getActionError()->add('error', $msg);
+			print_r($res);
+			return;
+		}
+
+		// IMAPサーバから切断
+		$imap->disconnect();
 
 		return;
 	}
