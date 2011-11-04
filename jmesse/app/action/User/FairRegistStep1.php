@@ -21,7 +21,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		// '':regist(登録)、'c':change(修正)、'd':detail(詳細表示)、'e':edit(編集登録)
+		// '':regist(登録)、'c':change(修正)、'd':detail(詳細表示)、'e':edit(修正登録)
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -115,7 +115,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
-			'regexp'      => '/^[a-zA-Z1-9 ]+$/',            // String by Regexp
+			'regexp'      => '/^[ -~]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1459,7 +1459,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_1['sub_industory_5'] = $obj->get('sub_industory_5');
 		$regist_param_1['main_industory_6'] = $obj->get('main_industory_6');
 		$regist_param_1['sub_industory_6'] = $obj->get('sub_industory_6');
-		$regist_param_1['exhibits_jp'] = $obj->get('exhibits_jp');
+		$regist_param_1['exhibits_jp'] = str_replace('<br/>', "\n", $obj->get('exhibits_jp'));
 		$regist_param_1['region'] = $obj->get('region');
 		$regist_param_1['country'] = $obj->get('country');
 		$regist_param_1['city'] = $obj->get('city');
@@ -1531,8 +1531,8 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_2['total_number_of_exhibitors'] = $this->_isZero($obj->get('total_number_of_exhibitors'));
 		$regist_param_2['number_of_foreign_exhibitors'] = $this->_isZero($obj->get('number_of_foreign_exhibitors'));
 		$regist_param_2['net_square_meters'] = $obj->get('net_square_meters');
-		$regist_param_2['profile_jp'] = $obj->get('profile_jp');
-		$regist_param_2['detailed_information_jp'] = $obj->get('detailed_information_jp');
+		$regist_param_2['profile_jp'] = str_replace('<br/>', "\n", $obj->get('profile_jp'));
+		$regist_param_2['detailed_information_jp'] = str_replace('<br/>', "\n", $obj->get('detailed_information_jp'));
 		$regist_param_2['photos_name_1'] = $obj->get('photos_1');
 		$regist_param_2['photos_name_2'] = $obj->get('photos_2');
 		$regist_param_2['photos_name_3'] = $obj->get('photos_3');
@@ -1551,9 +1551,9 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_3 = array();
 		$regist_param_3['select_language_info'] = $obj->get('select_language_info');
 		$regist_param_3['fair_title_en'] = $obj->get('fair_title_en');
-		$regist_param_3['profile_en'] = $obj->get('profile_en');
-		$regist_param_3['detailed_information_en'] = $obj->get('detailed_information_en');
-		$regist_param_3['exhibits_en'] = $obj->get('exhibits_en');
+		$regist_param_3['profile_en'] = str_replace('<br/>', "\n", $obj->get('profile_en'));
+		$regist_param_3['detailed_information_en'] = str_replace('<br/>', "\n", $obj->get('detailed_information_en'));
+		$regist_param_3['exhibits_en'] = str_replace('<br/>', "\n", $obj->get('exhibits_en'));;
 		$regist_param_3['other_city_en'] = $obj->get('other_city_en');
 		$regist_param_3['venue_en'] = $obj->get('venue_en');
 // 		$regist_param_3['transportation_en'] = $obj->get('transportation_en');

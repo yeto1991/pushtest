@@ -17,6 +17,7 @@
 					<b>展示会情報メニュー</b><br/>
 					<a href="{$config.url}?action_user_fairRegistStep1=true">新規展示会情報登録</a><br/>
 					<a href="{$config.url}?action_user_fairlist=true">My展示会情報一覧</a><br/>
+					<a href="{$config.url}?action_user_fairCopylist=true">見本市修正登録選択画面</a><br/>
 				</td>
 			</tr>
 		</table>

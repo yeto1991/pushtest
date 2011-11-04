@@ -25,7 +25,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	function getMyFairInfoList($user_id) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
-		$sql .= " select ";
+		$sql = " select ";
 		$sql .= " jf.user_id, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.mihon_no, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, ";
 		$sql .= " jf.date_to_dd, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, ";
 		$sql .= " jf.exhibits_jp, jf.exhibits_en, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.confirm_flag, jf.regist_date, jf.update_date, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name, ";
@@ -86,7 +86,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	function getMyFairInfoListCount($user_id) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
-		$sql .= " select count(*) cnt from jm_fair where user_id = ? and del_flg = ? ";
+		$sql = " select count(*) cnt from jm_fair where user_id = ? and del_flg = ? ";
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
 		// 検索条件をArray化

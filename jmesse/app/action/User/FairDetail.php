@@ -150,6 +150,60 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('agency_in_japan_en', $jm_fair->get('agency_in_japan_en'));
 		$this->af->set('spare_field1', $jm_fair->get('spare_field1'));
 
+
+		$jm_code_m_mgr =& $this->backend->getManager('JmCodeM');
+
+		// 業種
+		$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_1'), '000', '000');
+		$this->af->set('main_industory_name_1', $code['discription_jp']);
+		$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_1'), $jm_fair->get('sub_industory_1'), '000');
+		$this->af->set('sub_industory_name_1', $code['discription_jp']);
+		if ('' != $jm_fair->get('main_industory_2')) {
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_2'), '000', '000');
+			$this->af->set('main_industory_name_2', $code['discription_jp']);
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_2'), $jm_fair->get('sub_industory_2'), '000');
+			$this->af->set('sub_industory_name_2', $code['discription_jp']);
+		}
+		if ('' != $jm_fair->get('main_industory_3')) {
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_3'), '000', '000');
+			$this->af->set('main_industory_name_3', $code['discription_jp']);
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_3'), $jm_fair->get('sub_industory_3'), '000');
+			$this->af->set('sub_industory_name_3', $code['discription_jp']);
+		}
+		if ('' != $jm_fair->get('main_industory_4')) {
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_4'), '000', '000');
+			$this->af->set('main_industory_name_4', $code['discription_jp']);
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_4'), $jm_fair->get('sub_industory_4'), '000');
+			$this->af->set('sub_industory_name_4', $code['discription_jp']);
+		}
+		if ('' != $jm_fair->get('main_industory_5')) {
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_5'), '000', '000');
+			$this->af->set('main_industory_name_5', $code['discription_jp']);
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_5'), $jm_fair->get('sub_industory_5'), '000');
+			$this->af->set('sub_industory_name_5', $code['discription_jp']);
+		}
+		if ('' != $jm_fair->get('main_industory_6')) {
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_6'), '000', '000');
+			$this->af->set('main_industory_name_6', $code['discription_jp']);
+			$code = $jm_code_m_mgr->getCode('002', $jm_fair->get('main_industory_6'), $jm_fair->get('sub_industory_6'), '000');
+			$this->af->set('sub_industory_name_6', $code['discription_jp']);
+		}
+
+		// 開催頻度
+		$this->af->setApp('frequency_name', $jm_code_m_mgr->getCode('001', $jm_fair->get('frequency'), '000', '000'));
+
+		// 開催地
+		$this->af->setApp('region_name', $jm_code_m_mgr->getCode('003', $jm_fair->get('region'), '000', '000'));
+		$this->af->setApp('country_name', $jm_code_m_mgr->getCode('003', $jm_fair->get('region'), $jm_fair->get('country'), '000'));
+		if ('' != $jm_fair->get('city')) {
+			$this->af->setApp('city_name', $jm_code_m_mgr->getCode('003', $jm_fair->get('region'), $jm_fair->get('country'), $jm_fair->get('city')));
+		} else {
+			$this->af->setApp('city_name', '');
+		}
+
+		// 入場資格
+		$this->af->setApp('open_to_name', $jm_code_m_mgr->getCode('004', $jm_fair->get('open_to'), '000', '000'));
+
 		// ログテーブル登録
 		$mgr = $this->backend->getManager('userCommon');
 		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '2', $this->af->get('mihon_no'));

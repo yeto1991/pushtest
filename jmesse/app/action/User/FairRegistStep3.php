@@ -117,8 +117,8 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			for ($j = 0; $j < count($ary_photos); $j++) {
 				$photos = $ary_photos[$j];
 				if ('' != $photos_name && $photos['name'] == $photos_name) {
-					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type']) {
-						$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい');
+					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type'] && 'image/pjpeg' != $photos['type']) {
+						$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい('.$photos['type'].')');
 						break;
 					}
 				}

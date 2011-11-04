@@ -251,12 +251,30 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// COMMIT
 		$db->commit();
 
+		// メール送信
+		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+		$ary_value = array('user_nm' => $jm_user->get('user_nm'), 'fair_title_jp' => $jm_fair->get('fair_title_jp'));
+		$mail_mgr =& $this->backend->getManager('mail');
+		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
+		if ('c' == $this->af->get('mode')) {
+			$mail_mgr->sendmailFairChange($jm_user->get('email'), $ary_value);
+		} else {
+			$mail_mgr->sendmailFairReigst($jm_user->get('email'), $ary_value);
+		}
+		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
+
 		// SESSIONの削除
 		$this->session->set('regist_param_1', null);
 		$this->session->set('regist_param_2', null);
 		$this->session->set('regist_param_3', null);
 		$this->session->set('img_tmp_path', '');
 		$this->session->set('email', '');
+
+		// エラー画面
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'エラーが発生しました。');
+			return 'error';
+		}
 
 		// 画面遷移
 		header('Location: '.$url);

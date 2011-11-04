@@ -889,6 +889,23 @@
 							{/if}
 						{/section}
 					</ul>
+					<h5>環境</h5>
+					<ul>
+						{section name=it loop=$app.main_sub_industory_list}
+							{if ('011' == $app.main_sub_industory_list[it].kbn_2)}
+						<li>
+							<input type="checkbox" value="{$app.main_sub_industory_list[it].sub_industory_code}" name="check_sub_industory[]" id="check_sub_industory[]"
+								{section name=it2 loop=$form.check_sub_industory}
+									{if ($app.main_sub_industory_list[it].sub_industory_code == $form.check_sub_industory[it2])}
+							checked
+									{/if}
+								{/section}
+							/> {$app.main_sub_industory_list[it].sub_industory_name}
+						</li>
+							{/if}
+						{/section}
+					</ul>
+
 				</div>
 			</div>
 			<div class="btn">

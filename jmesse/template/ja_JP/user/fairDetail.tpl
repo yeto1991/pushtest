@@ -88,42 +88,88 @@
 								<h1>見本市・展示会データベース</h1>
 							</div>
 							<div class="h2">
+								{if ('d' == $form.mode)}
 								<h2>見本市情報詳細</h2>
+								{else}
+								<h2>見本市登録</h2>
+								{/if}
 							</div>
-							<div class="in_main">
-								<form name="form_user_fairDetail" id="form_user_fairDetail" method="post" action="" >
-									{uniqid}
-									{if ('d' == $form.mode)}
-									<input type="hidden" name="action_user_fairChangeStep1" id="action_user_fairChangeStep1" value="dummy" />
-									<input type="hidden" name="mode" id="mode" value="c" />
-									{else}
-									<input type="hidden" name="action_user_fairRegistDone" id="action_user_fairRegistDone" value="dummy" />
-									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
-										{if ('c' == $form.mode || 'e' == $form.mode)}
-									<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
-										{/if}
+
+							<form name="form_user_fairDetail" id="form_user_fairDetail" method="post" action="" >
+								{uniqid}
+								{if ('d' == $form.mode)}
+								<input type="hidden" name="action_user_fairChangeStep1" id="action_user_fairChangeStep1" value="dummy" />
+								<input type="hidden" name="mode" id="mode" value="c" />
+								{else}
+								<input type="hidden" name="action_user_fairRegistDone" id="action_user_fairRegistDone" value="dummy" />
+								<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
+									{if ('c' == $form.mode || 'e' == $form.mode)}
+								<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 									{/if}
-									<input type="hidden" name="" mihon_no"" id="mihon_no" value="{$form.mihon_no}" />
+								{/if}
+								<input type="hidden" name="" mihon_no"" id="mihon_no" value="{$form.mihon_no}" />
+
+								<div class="in_main">
+									<p class="t_right">ユーザー：{$session.email}</p>
+
+									{if ('' == $form.mode)}
+									<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
+									<p>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+									</p>
+									{elseif ('e' == $form.mode)}
+									<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
+									<p>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+									</p>
+									{elseif ('c' == $form.mode)}
+									<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
+									<p>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+									</p>
+									{elseif ('d' == $form.mode)}
+									<p></p>
+									<p>
+										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+									</p>
+									{else}
+									{/if}
+
+									<div class="line_dot">
+										<hr />
+									</div>
+								</div>
+
+								<div class="in_main">
 									<h4>基本情報</h4>
 									<table id="registration">
 										<tr>
 											<th class="item">見本市名</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.fair_title_jp}</td>
 										</tr>
 										<tr>
 											<th class="item">見本市略称</th>
+											<th class="required"></th>
 											<td>{$form.abbrev_title}</td>
 										</tr>
 										<tr>
 											<th class="item">見本市公式サイトURL</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.fair_url}</td>
 										</tr>
 										<tr>
 											<th class="item">会期</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.date_from_yyyy}年{$form.date_from_mm}月{$form.date_from_dd}日～{$form.date_to_yyyy}年{$form.date_to_mm}月{$form.date_to_dd}日</td>
 										</tr>
 										<tr>
 											<th class="item">開催頻度</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$app.frequency_name.discription_jp}</td>
 										</tr>
 									</table>
@@ -131,6 +177,7 @@
 									<table id="registration">
 										<tr>
 											<th class="item">業種</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{$form.main_industory_name_1}/{$form.sub_industory_name_1}<br />
 												{if ('' != $form.main_industory_name_2)}
@@ -152,6 +199,7 @@
 										</tr>
 										<tr>
 											<th class="item">取扱品目</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.exhibits_jp|nl2br}</td>
 										</tr>
 									</table>
@@ -159,6 +207,7 @@
 									<table id="registration">
 										<tr>
 											<th class="item">開催地</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{$app.region_name.discription_jp}
 												/ {$app.country_name.discription_jp}
@@ -172,10 +221,12 @@
 										</tr>
 										<tr>
 											<th class="item">会場名</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.venue_jp}</td>
 										</tr>
 										<tr>
 											<th class="item">同展示会で使用する面積</th>
+											<th class="required"></th>
 											<td>{$form.gross_floor_area}sqm（NET）</td>
 										</tr>
 {*
@@ -186,10 +237,12 @@
 *}
 										<tr>
 											<th class="item">入場資格</th>
+											<th class="required"></th>
 											<td>{$app.open_to_name.discription_jp}</td>
 										</tr>
 										<tr>
 											<th class="item">チケットの入手方法</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{if ('1' == $form.admission_ticket_1)}
 												登録の必要なし<br />
@@ -223,6 +276,7 @@
 									<table id="registration">
 										<tr>
 											<th class="item">対象年</th>
+											<th class="required"></th>
 											<td>
 												{if ('' != $form.year_of_the_trade_fair)}
 												{$form.year_of_the_trade_fair}年
@@ -231,6 +285,7 @@
 										</tr>
 										<tr>
 											<th class="item">総来場者数</th>
+											<th class="required"></th>
 											<td>
 												{if ('' != $form.total_number_of_visitor || '' != $form.number_of_foreign_visitor)}
 												{$form.total_number_of_visitor}人 うち海外から {$form.number_of_foreign_visitor}人
@@ -239,6 +294,7 @@
 										</tr>
 										<tr>
 											<th class="item">総出展社数</th>
+											<th class="required"></th>
 											<td>
 												{if ('' != $form.total_number_of_exhibitors || '' != $form.number_of_foreign_exhibitors)}
 												{$form.total_number_of_exhibitors}社 うち海外から {$form.number_of_foreign_exhibitors}社
@@ -247,6 +303,7 @@
 										</tr>
 										<tr>
 											<th class="item">展示面積</th>
+											<th class="required"></th>
 											<td>
 												{if ('' != $form.net_square_meters)}
 												{$form.net_square_meters} sqm (NET)
@@ -258,14 +315,17 @@
 									<table id="registration">
 										<tr>
 											<th class="item">キャッチフレーズ</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.profile_jp|nl2br}</td>
 										</tr>
 										<tr>
 											<th class="item">PR・紹介文</th>
+											<th class="required"></th>
 											<td>{$form.detailed_information_jp|nl2br}</td>
 										</tr>
 										<tr>
 											<th class="item">見本市の紹介写真</th>
+											<th class="required"></th>
 											<td>
 												画像(1)：{$form.photos_name_1}<br />
 												画像(2)：{$form.photos_name_2}<br />
@@ -277,6 +337,7 @@
 									<table id="registration">
 										<tr>
 											<th class="item">主催者</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{$form.organizer_jp}<br/>
 												{$form.organizer_en}
@@ -284,6 +345,7 @@
 										</tr>
 										<tr>
 											<th class="item">主催者連絡先</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<strong>TEL: </strong>{$form.organizer_tel}<br />
 												<strong>FAX: </strong>{$form.organizer_fax}<br />
@@ -292,6 +354,7 @@
 										</tr>
 										<tr>
 											<th class="item">日本国内の照会先</th>
+											<th class="required"></th>
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
 												<table style="border-style:none;border-collapse:collapse;">
@@ -315,6 +378,7 @@
 									<table id="registration">
 										<tr>
 											<th class="item">海外への紹介を希望</th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{if ('2' == $form.select_language_info)}
 												希望する
@@ -327,62 +391,59 @@
 									<div class="regist_english" id="engform">
 										<table id="registration">
 											<tr>
-												<th class="item">Fair Title<br />見本市名
-												</th>
+												<th class="item">Fair Title<br />見本市名</th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>{$form.fair_title_en}</td>
 											</tr>
 											<tr>
-												<th class="item">Teaser Copy<br />キャッチフレーズ
-												</th>
+												<th class="item">Teaser Copy<br />キャッチフレーズ</th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>{$form.profile_en|nl2br}</td>
 											</tr>
 											<tr>
-												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文
-												</th>
+												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
+												<th class="required"></th>
 												<td>{$form.detailed_information_en|nl2br}</td>
 											</tr>
 											<tr>
-												<th class="item">Exhibits<br />出品物
-												</th>
+												<th class="item">Exhibits<br />出品物</th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>{$form.exhibits_en|nl2br}</td>
 											</tr>
 											<tr>
-												<th class="item">City (other)<br />開催都市（その他）
-												</th>
+												<th class="item">City (other)<br />開催都市（その他）</th>
+												<th class="required"></th>
 												<td>{$form.other_city_en}</td>
 											</tr>
 											<tr>
-												<th class="item">Venue<br />会場
-												</th>
+												<th class="item">Venue<br />会場</th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>{$form.venue_en}</td>
 											</tr>
 {*
 											<tr>
-												<th class="item">Transportation<br />交通手段
-												</th>
+												<th class="item">Transportation<br />交通手段</th>
 												<td>{$form.transportation_en}</td>
 											</tr>
 *}
 											<tr>
-												<th class="item">Admission ticket(other)<br />チケット入手法（その他)
-												</th>
+												<th class="item">Admission ticket(other)<br />チケット入手法（その他)</th>
+												<th class="required"></th>
 												<td>{$form.other_admission_ticket_en}</td>
 											</tr>
 {*
 											<tr>
-												<th class="item">Show Management<br />主催者
-												</th>
+												<th class="item">Show Management<br />主催者</th>
 												<td>{$form.organizer_en}</td>
 											</tr>
 											<tr>
-												<th class="item">Agency in Japan<br />日本国内の連絡先
-												</th>
+												<th class="item">Agency in Japan<br />日本国内の連絡先</th>
 												<td>{$form.agency_in_japan_en}</td>
 											</tr>
 *}
 											<tr>
-												<th class="item">Details of last fair audited by<br />承認機関
-												</th>
+												<th class="item">Details of last fair audited by<br />承認機関</th>
+												<th class="required"></th>
 												<td>{$form.spare_field1}</td>
 											</tr>
 										</table>
@@ -390,6 +451,36 @@
 									<div class="line_dot">
 										<hr />
 									</div>
+
+									<div class="in_main">
+									{if ('' == $form.mode)}
+									<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
+									<p>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+									</p>
+									{elseif ('e' == $form.mode)}
+									<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
+									<p>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+									</p>
+									{elseif ('c' == $form.mode)}
+									<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
+									<p>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+									</p>
+									{elseif ('d' == $form.mode)}
+									<p></p>
+									<p>
+										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+									</p>
+									{else}
+									{/if}
+									</div>
+{*
 									<table width="100%">
 										<tr>
 											{if ('d' == $form.mode)}
@@ -407,6 +498,7 @@
 											{/if}
 										</tr>
 									</table>
+*}
 {* テキストエリアの改行コード *}
 <textarea name="br" id="br" style="display:none;">
 
