@@ -16,6 +16,32 @@
  */
 class Jmesse_JmErrMailManager extends Ethna_AppManager
 {
+	/**
+	 * テーブルのtruncate。
+	 *
+	 */
+	function truncate() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "truncate table jm_err_mail";
+
+		// SQLを実行
+		$res = $db->db->query($sql);
+	}
+
+	/**
+	 * エラーメール検索。
+	 *
+	 * @param string $date_from
+	 * @param string $date_to
+	 * @param string $email
+	 * @param string $address
+	 * @param string $server
+	 * @param string $other
+	 * @return array エラーメールリスト
+	 */
 	function getErrMailList($date_from, $date_to, $email, $address, $server, $other) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();

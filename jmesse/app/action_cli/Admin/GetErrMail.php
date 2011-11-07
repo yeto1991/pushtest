@@ -51,8 +51,19 @@ class Jmesse_Cli_Action_AdminGetErrMail extends Jmesse_ActionClass
 		$mail_mgr =& $this->backend->getManager('mail');
 		$list = $mail_mgr->getErrMail();
 
-		// メールをJM_ERR_MAILに登録する。
+		// jm_err_mailのtruncate
+		$jm_err_mail_mgr =& $this->backend->getManager('JmErrMail');
+		$jm_err_mail_mgr->truncate();
 
+		// メールをJM_ERR_MAILに登録する。
+		foreach ($list as $mail) {
+			$jm_err_mail =& $this->backend->getObject('JmErrMail');
+			$jm_err_mail->set('yyyymmdd',  $mail['yyyymmdd']);
+			$jm_err_mail->set('email',  $mail['email']);
+			$jm_err_mail->set('err_kind',  $mail['err_kind']);
+			$jm_err_mail->set('mail_contents',  $mail['mail_contents']);
+			$jm_err_mail->add();
+		}
 
 		// エラー表示
 		foreach ($this->ae->getErrorList() as $key => $value) {

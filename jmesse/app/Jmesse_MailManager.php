@@ -7,9 +7,7 @@
  *  @version    $Id: d4af361a99e2aaa95cedee2132d1ca3f10920c6b $
  */
 
-include_once('Mail.php');
-require_once('Net/IMAP.php');
-require_once('Net/IMAPProtocol.php');
+require_once('Mail.php');
 
 /**
  *  Jmesse_MailManager
@@ -133,9 +131,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 
 		// 送信
 		$mail_obj =& Mail::factory('smtp', $params);
-		$this->backend->getLogger()->log(LOG_DEBUG, '■CHECK!!!');
 		$result = $mail_obj->send($mail_to, $headers, $body);
-		$this->backend->getLogger()->log(LOG_DEBUG, '■CHECK!!!');
 		if (PEAR::isError($result)) {
 			$msg = 'メールの送信に失敗しました';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
@@ -145,34 +141,53 @@ class Jmesse_MailManager extends Ethna_AppManager
 		return;
 	}
 
+	/**
+	 * IMAP接続によりメールを取得する。
+	 *
+	 * @return array メールリスト
+	 */
 	function getErrMail() {
 		// 言語と文字コードの設定
 		mb_language('Japanese');
 		mb_internal_encoding('UTF-8');
 
-		// IMAPサーバに接続する
-		$imap = new Net_IMAP($this->config->get('mail_imap_host'), $this->config->get('mail_imap_port'), false);
-		print_r($imap);
-		if(PEAR::isError($imap)) {
-			$msg = 'IMAPサーバへの接続に失敗しました';
+		// メールボックスのオープン
+		$mbox = @imap_open('{'.$this->config->get('mail_imap_host').':'.$this->config->get('mail_imap_port').'/imap/ssl}INBOX',
+			$this->config->get('mail_imap_user'),
+			$this->config->get('mail_imap_pass')
+		);
+		if (null == $mbox) {
+			$msg = 'Failed to open the mailbox.';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->add('error', $msg);
-			print_r($imap);
-			return;
-		}
-		$res = $imap->login($this->config->get('mail_imap_user'), $this->config->get('mail_imap_pass'));
-		if(PEAR::isError($res)) {
-			$msg = 'IMAPサーバへのログインに失敗しました';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->backend->getActionError()->add('error', $msg);
-			print_r($res);
-			return;
+			return null;
 		}
 
-		// IMAPサーバから切断
-		$imap->disconnect();
+		// メールの取り込み
+		$err_mail_list = array();
+		for ($i = 1; $i <= imap_num_msg($mbox); $i++) {
+			if (false !== stripos(imap_qprint(imap_body($mbox, $i)), 'User unknown')) {
+				// アドレス不正
+				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => imap_headerinfo($mbox, $i)->to[0]->mailbox.'@'.imap_headerinfo($mbox, $i)->to[0]->host, 'err_kind' => '0', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
+				array_push($err_mail_list, $err_mail);
+			} elseif (false !== stripos(imap_qprint(imap_body($mbox, $i)), 'Host not found')) {
+				// メールサーバ不正
+				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => imap_headerinfo($mbox, $i)->to[0]->mailbox.'@'.imap_headerinfo($mbox, $i)->to[0]->host, 'err_kind' => '1', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
+				array_push($err_mail_list, $err_mail);
+			} else {
+				// その他
+				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => imap_headerinfo($mbox, $i)->to[0]->mailbox.'@'.imap_headerinfo($mbox, $i)->to[0]->host, 'err_kind' => '2', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
+				array_push($err_mail_list, $err_mail);
+ 			}
+		}
 
-		return;
+		// エラー表示
+		echo imap_last_error();
+
+		// メールボックスのクローズ
+		imap_close($mbox);
+
+		return $err_mail_list;
 	}
 }
 ?>
