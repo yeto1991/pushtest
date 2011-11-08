@@ -83,6 +83,9 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 		} else if ('1' != $user->get('auth_gen')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '管理権限なし');
 			$login_ok = false;
+		} else if ('0' != $user->get('use_language_cd')) {
+			$this->backend->getLogger()->log(LOG_DEBUG, '使用言語日本語ユーザ以外');
+			$login_ok = false;
 		} else if ('1' == $user->get('del_flg')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '削除済みユーザ');
 			$login_ok = false;
