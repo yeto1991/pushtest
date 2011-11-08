@@ -48,6 +48,7 @@ create table jmesse.jm_fair(
   , admission_ticket_2 char (1)
   , admission_ticket_3 char (1)
   , admission_ticket_4 char (1)
+  , sum_ticket char(1)
   , other_admission_ticket_jp text
   , other_admission_ticket_en text
   , year_of_the_trade_fair varchar (20)

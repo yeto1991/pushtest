@@ -52,6 +52,16 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 			}
 		}
 
+		// SESSIONのチェック
+		if (null == $this->session->get('regist_param_1')) {
+			$this->ae->add('error', '最初からやり直して下さい');
+			return 'error';
+		}
+		if (null == $this->session->get('regist_param_2')) {
+			$this->ae->add('error', '最初からやり直して下さい');
+			return 'error';
+		}
+
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');

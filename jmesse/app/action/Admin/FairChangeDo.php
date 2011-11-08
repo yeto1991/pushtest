@@ -270,6 +270,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('detailed_information_jp', str_replace($br, '<br/>', $this->af->get('detailed_information_jp')));
 		$jm_fair->set('detailed_information_en', str_replace($br, '<br/>', $this->af->get('detailed_information_en')));
 
+		// 検索キーワード
+		$jm_fair->set('keyword', $this->af->get('keyword'));
+
 		// 会期
 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
 		$jm_fair->set('date_from_mm', $this->af->get('date_from_mm'));
@@ -337,6 +340,7 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			$jm_fair->set('admission_ticket_3', $this->af->get('admission_ticket_3_jp'));
 			$jm_fair->set('admission_ticket_4', $this->af->get('admission_ticket_4_jp'));
 			$jm_fair->set('other_admission_ticket_jp', $this->af->get('other_admission_ticket_jp'));
+			$jm_fair->set('sum_ticket', $this->_getSumTicket());
 // 		} else {
 // 			$jm_fair->set('admission_ticket_1', $this->af->get('admission_ticket_1_en'));
 // 			$jm_fair->set('admission_ticket_2', $this->af->get('admission_ticket_2_en'));
@@ -405,7 +409,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 
 		// 入力項目なし
 		$jm_fair->set('venue_url', '');
-		$jm_fair->set('keyword', '');
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');
 		$jm_fair->set('regist_type', '');
@@ -434,6 +437,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// ＰＲ・紹介文
 		$search_key .= str_replace($br, '', $this->af->get('detailed_information_jp')).' ';
 		$search_key .= str_replace($br, '', $this->af->get('detailed_information_en')).' ';
+		// 検索キーワード
+		$search_key .= $this->af->get('keyword').' ';
 		// 会期
 		$search_key .= $this->af->get('date_from_yyyy').'年'.$this->af->get('date_from_mm').'月'.$this->af->get('date_from_dd').'日 ';
 		$search_key .= $this->af->get('date_to_yyyy').'年'.$this->af->get('date_to_mm').'月'.$this->af->get('date_to_dd').'日 ';
@@ -579,6 +584,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// 画像ファイルの保存
 		$photos_list = array();
 		$idx = 0;
+		if (!is_dir($this->config->get('img_path').$jm_fair->get('mihon_no'))) {
+			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
+		}
 		for ($i = 1; $i <= 3; $i++) {
 			$name_list = $this->af->get('photos_name_'.$i);
 			for ($j = 1; $j <=3; $j++) {
@@ -661,6 +669,26 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		return $ret;
 	}
 
+	/**
+	 * チケット入手方法の集計先を取得。
+	 *
+	 * @return string
+	 */
+	function _getSumTicket() {
+		if ('1' == $this->af->get('admission_ticket_1_jp')) {
+			return '1';
+		} elseif ('1' == $this->af->get('admission_ticket_2_jp')) {
+			return '2';
+		} elseif ('1' == $this->af->get('admission_ticket_3_jp')) {
+			return '3';
+		} elseif ('1' == $this->af->get('admission_ticket_4_jp')) {
+			return '4';
+		} elseif ('' != $this->af->get('other_admission_ticket_jp')) {
+			return '5';
+		} else {
+			return '0';
+		}
+	}
 }
 
 ?>

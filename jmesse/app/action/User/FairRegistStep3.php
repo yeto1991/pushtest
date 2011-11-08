@@ -45,6 +45,12 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			return 'user_Login';
 		}
 
+		// SESSIONのチェック
+		if (null == $this->session->get('regist_param_1')) {
+			$this->ae->add('error', '最初からやり直して下さい');
+			return 'error';
+		}
+
 		// 戻った場合
 		if ('1' == $this->af->get('back')) {
 			return null;

@@ -146,6 +146,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('admission_ticket_3', $regist_param_1['admission_ticket_3']);
 		$jm_fair->set('admission_ticket_4', $regist_param_1['admission_ticket_4']);
 		$jm_fair->set('other_admission_ticket_jp', $regist_param_1['other_admission_ticket_jp']);
+		$jm_fair->set('sum_ticket', $this->_getSumTicket($regist_param_1));
 // 		$jm_fair->set('app_dead_yyyy', $regist_param_1['app_dead_yyyy']);
 // 		$jm_fair->set('app_dead_mm', $regist_param_1['app_dead_mm']);
 // 		$jm_fair->set('app_dead_dd', $regist_param_1['app_dead_dd']);
@@ -210,6 +211,11 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$jm_fair->get('mihon_no'));
 
+		// ディレクトリ作成
+		if (!is_dir($this->config->get('img_path').$jm_fair->get('mihon_no'))) {
+			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
+		}
+
 		// 画像ファイルの保存
 		if ('c' == $this->af->get('mode')) {
 			// 削除
@@ -220,9 +226,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 					unlink($this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$ary_del_photos_name[$i]);
 				}
 			}
-		} else {
-			// ディレクトリ作成
-			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
 		}
 
 		// 保存
@@ -257,9 +260,9 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$mail_mgr =& $this->backend->getManager('mail');
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
 		if ('c' == $this->af->get('mode')) {
-			$mail_mgr->sendmailFairChange($jm_user->get('email'), $ary_value);
+// 			$mail_mgr->sendmailFairChange($jm_user->get('email'), $ary_value);
 		} else {
-			$mail_mgr->sendmailFairReigst($jm_user->get('email'), $ary_value);
+// 			$mail_mgr->sendmailFairReigst($jm_user->get('email'), $ary_value);
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
 
@@ -397,6 +400,28 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$search_key .= $jm_fair->get('photos_3').' ';
 
 		return $search_key;
+	}
+
+	/**
+	 * チケット入手方法の集計先を取得。
+	 *
+	 * @return string
+	 */
+	function _getSumTicket($regist_param_1) {
+		$ret = '0';
+		if ('1' == $regist_param_1['admission_ticket_1']) {
+			$ret = '1';
+		} elseif ('1' == $regist_param_1['admission_ticket_2']) {
+			$ret = '2';
+		} elseif ('1' == $regist_param_1['admission_ticket_3']) {
+			$ret = '3';
+		} elseif ('1' == $regist_param_1['admission_ticket_4']) {
+			$ret = '4';
+		} elseif ('' != $regist_param_1['other_admission_ticket_jp']) {
+			$ret = '5';
+		}
+		$this->backend->getLogger()->log(LOG_DEBUG, '■sum_ticket : '.$ret);
+		return $ret;
 	}
 
 }

@@ -891,7 +891,7 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		for ($i = 0; $i < count($list); $i++) {
 			$url = '';
 			if ('' != $list[$i]['abbrev_title']) {
-				$ary_abbrev_title = explode(' ', $list[$i]['abbrev_title']);
+				$ary_abbrev_title = explode(' ', ereg_replace("[^a-zA-Z0-9 ]", '', $list[$i]['abbrev_title']));
 				$url = $ary_abbrev_title[0];
 				if (2 <= count($ary_abbrev_title)) {
 					if ('' != $ary_abbrev_title[1]) {
@@ -900,7 +900,7 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 				}
 				$url .= '_'.$list[$i]['mihon_no'];
 			} elseif ('' != $list[$i]['fair_title_en']) {
-				$ary_fair_title_en = explode(' ', $list[$i]['fair_title_en']);
+				$ary_fair_title_en = explode(' ', ereg_replace("[^a-zA-Z0-9 ]", '', $list[$i]['fair_title_en']));
 				$url = $ary_fair_title_en[0];
 				if (2 <= count($ary_fair_title_en)) {
 					if ('' != $ary_fair_title_en[1]) {

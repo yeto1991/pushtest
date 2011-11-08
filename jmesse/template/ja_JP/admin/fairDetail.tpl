@@ -211,6 +211,12 @@
 						</tr>
 
 						<tr>
+							<td nowrap>検索キーワード</td>
+							<!-- 検索キーワード -->
+							<td>{$form.keyword}</td>
+						</tr>
+
+						<tr>
 							<td nowrap>会期</td>
 							<!-- 開始年月 -->
 							<!-- 開始日 -->

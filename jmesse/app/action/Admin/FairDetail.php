@@ -172,6 +172,9 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$this->af->set('detailed_information_jp', str_replace('<br/>', $br, $jm_fair->get('detailed_information_jp')));
 		$this->af->set('detailed_information_en', str_replace('<br/>', $br, $jm_fair->get('detailed_information_en')));
 
+		// 検索キーワード
+		$this->af->set('keyword', $jm_fair->get('keyword'));
+
 		// 会期
 		$this->af->set('date_from_yyyy', $jm_fair->get('date_from_yyyy'));
 		$this->af->set('date_from_mm', $jm_fair->get('date_from_mm'));

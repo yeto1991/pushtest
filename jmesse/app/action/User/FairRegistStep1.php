@@ -1357,6 +1357,11 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 
 				// 表示項目をSESSIONからFORMに設定する。
 				$this->_setSessionToForm();
+			} else {
+				// sessionの削除
+				$this->session->set('regist_param_1', null);
+				$this->session->set('regist_param_2', null);
+				$this->session->set('regist_param_3', null);
 			}
 
 			// 表示用Eメールの取得

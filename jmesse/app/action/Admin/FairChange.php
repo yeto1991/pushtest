@@ -143,6 +143,9 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('detailed_information_jp', str_replace('<br/>', $br, $jm_fair->get('detailed_information_jp')));
 		$this->af->set('detailed_information_en', str_replace('<br/>', $br, $jm_fair->get('detailed_information_en')));
 
+		// 検索キーワード
+		$this->af->set('keyword', $jm_fair->get('keyword'));
+
 		// 会期
 		$this->af->set('date_from_yyyy', $jm_fair->get('date_from_yyyy'));
 		$this->af->set('date_from_mm', $jm_fair->get('date_from_mm'));
@@ -290,7 +293,6 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 
 		// 表示項目なし
 // 		$this->af->set('venue_url', $jm_fair->get('venue_url'));
-// 		$this->af->set('keyword', $jm_fair->get('keyword'));
 // 		$this->af->set('jetro_suport', $jm_fair->get('jetro_suport'));
 // 		$this->af->set('jetro_suport_url', $jm_fair->get('jetro_suport_url'));
 // 		$this->af->set('regist_type', $jm_fair->get('regist_type'));

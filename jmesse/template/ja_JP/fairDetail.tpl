@@ -60,7 +60,11 @@
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
+			{if (''!= $app.fair_detail.abbrev_title)}
 			<li>{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})</li>
+			{else}
+			<li>{$app.fair_detail.fair_title_jp}</li>
+			{/if}
 		</ul>
 	</div>
 	<!-- /bread -->
@@ -93,10 +97,10 @@
 								{if ('' != $app.fair_detail.abbrev_title)}
 								<div class="h3">
 								<h3>{$app.fair_detail.abbrev_title}<br/>
-								<span>{$app.fair_detail.fair_title_en} ({$app.fair_detail.fair_title_jp})</span></h3>
+								<span>{$app.fair_detail.fair_title_jp}</span></h3>
 								</div>
 								{else}
-								<h3>{$app.fair_detail.fair_title_en} ({$app.fair_detail.fair_title_jp})</h3>
+								<h3>{$app.fair_detail.fair_title_jp}</h3>
 								{/if}
 
 								<p>{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
@@ -120,12 +124,14 @@
 										<tr>
 											<th>開催地</th>
 											<td>
-												<img src="/images/flag/es.gif" style="vertical-align: middle;">
+												{if ('' != $app.fair_detail.flag_image)}
+												<img src="{$config.url}{$config.flag_path}{$app.fair_detail.flag_image}" style="vertical-align: middle;">
+												{/if}
 												{if ('' != $app.fair_detail.city_other_jp)}
 												{$app.fair_detail.city_other_jp} /
 												{/if}
 												{if ('' != $app.fair_detail.city_name)}
-												{$app.fair_detail.city_name} /
+												<a href="{$config.url}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}&v_4={$app.fair_detail.city}">{$app.fair_detail.city_name}</a> /
 												{/if}
 												<a href="{$config.url}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}">{$app.fair_detail.country_name}</a> /
 												<a href="{$config.url}?action_fairList=true&type=v1&v_2={$app.fair_detail.region}">{$app.fair_detail.region_name}</a>
@@ -133,15 +139,17 @@
 										</tr>
 										<tr>
 											<th>会場</th>
-											<td>{$app.fair_detail.venue_en} ({$app.fair_detail.venue_jp})<br />
+											<td>{$app.fair_detail.venue_jp}<br />
 
 												<div style="padding-left: 15px;">
 													{if ('' != $app.fair_detail.gross_floor_area && 0 <$app.fair_detail.gross_floor_area)}
 													展示面積(net)：{$app.fair_detail.gross_floor_area|number_format}sqm<br />
 													{/if}
+{*
 													{if ('' != $app.fair_detail.transportation_jp)}
 													交通手段：{$app.fair_detail.transportation_jp}
 													{/if}
+*}
 												</div>
 											</td>
 										</tr>
@@ -186,16 +194,13 @@
 												{/if}
 											</td>
 										</tr>
-										{if ('' != $app.fair_detail.detailed_information_jp|replace)}
-										<tr>
-											<th>主催者より</th>
-											<td>{$app.fair_detail.detailed_information_jp|replace:"&lt;br/&gt;":"<br/>"}</td>
-										</tr>
-										{/if}
 										<tr>
 											<th>主催者</th>
 											<td>
 												{$app.fair_detail.organizer_jp}<br />
+												住所 : {$app.fair_detail.organizer_addr}<br/>
+												担当部課 : {$app.fair_detail.organizer_div}<br/>
+												担当者 : {$app.fair_detail.organizer_pers}<br/>
 												{if ('' != $app.fair_detail.organizer_tel)}
 												TEL : {$app.fair_detail.organizer_tel}<br />
 												{/if}
@@ -211,6 +216,47 @@
 												{/if}
 											</td>
 										</tr>
+										{if ('' != $app.fair_detail.detailed_information_jp|replace)}
+										<tr>
+											<th>主催者より</th>
+											<td>{$app.fair_detail.detailed_information_jp|replace:"&lt;br/&gt;":"<br/>"}</td>
+										</tr>
+										{/if}
+										{if ('' != $app.fair_detail.agency_in_japan_jp)
+											|| ('' != $app.fair_detail.agency_in_japan_addr)
+											|| ('' != $app.fair_detail.agency_in_japan_div)
+											|| ('' != $app.fair_detail.agency_in_japan_pers)
+											|| ('' != $app.fair_detail.agency_in_japan_tel)
+											|| ('' != $app.fair_detail.agency_in_japan_fax)
+											|| ('' != $app.fair_detail.agency_in_japan_email)
+										}
+										<tr>
+											<th>日本国内の連絡先</th>
+											<td>
+												{if ('' != $app.fair_detail.agency_in_japan_jp)}
+												{$app.fair_detail.agency_in_japan_jp}<br/>
+												{/if}
+												{if ('' != $app.fair_detail.agency_in_japan_addr)}
+												住所 : {$app.fair_detail.agency_in_japan_addr}<br/>
+												{/if}
+												{if ('' != $app.fair_detail.agency_in_japan_div)}
+												担当部課 : {$app.fair_detail.agency_in_japan_div}<br/>
+												{/if}
+												{if ('' != $app.fair_detail.agency_in_japan_pers)}
+												担当者 : {$app.fair_detail.agency_in_japan_pers}<br/>
+												{/if}
+												{if ('' != $app.fair_detail.agency_in_japan_tel)}
+												TEL : {$app.fair_detail.agency_in_japan_tel}<br/>
+												{/if}
+												{if ('' != $app.fair_detail.agency_in_japan_fax)}
+												FAX : {$app.fair_detail.agency_in_japan_fax}<br/>
+												{/if}
+												{if ('' != $app.fair_detail.agency_in_japan_email)}
+												E-mail : {$app.fair_detail.agency_in_japan_email}<br/>
+												{/if}
+											</td>
+										</tr>
+										{/if}
 										<tr>
 											<th>業種</th>
 
@@ -235,7 +281,22 @@
 												{/if}
 											</td>
 										</tr>
-										{if ('' != $app.fair_detail.year_of_the_trade_fair || ('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor))}
+										{if ('' != $app.fair_detail.frequency)}
+										<tr>
+											<th>開催頻度</th>
+											<td>
+												{$app.fair_detail.frequency_name}
+											</td>
+										</tr>
+										{/if}
+										{if ('' != $app.fair_detail.year_of_the_trade_fair
+											|| ('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor))
+											|| ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor)
+											|| ('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors)
+											|| ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors)
+											|| ('' != $app.fair_detail.net_square_meters && 0 < $app.fair_detail.net_square_meters)
+											|| ('' != $app.fair_detail.spare_field1)
+										}
 										<tr>
 											<th>過去の実績</th>
 											<td>
@@ -243,11 +304,44 @@
 												{$app.fair_detail.year_of_the_trade_fair}年実績<br />
 												{/if}
 												{if ('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor)}
-												来場者数 : {$app.fair_detail.total_number_of_visitor}人
+												来場者数 : {$app.fair_detail.total_number_of_visitor} 人
+												{/if}
+												{if ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor)}
+												（うち海外から：{$app.fair_detail.number_of_foreign_visitor} 人）
+												{/if}
+												<br/>
+												{if ('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors)}
+												出展者数 : {$app.fair_detail.total_number_of_exhibitors} 社
+												{/if}
+												{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors)}
+												（うち海外から : {$app.fair_detail.number_of_foreign_exhibitors} 社）
+												{/if}
+												<br/>
+												{if ('' != $app.fair_detail.net_square_meters && 0 < $app.fair_detail.net_square_meters)}
+												展示面積(net) : {$app.fair_detail.net_square_meters} ㎡<br/>
+												{/if}
+												{if ('' != $app.fair_detail.spare_field1)}
+												承認機関 : {$app.fair_detail.spare_field1}<br/>
 												{/if}
 											</td>
 										</tr>
 										{/if}
+										{if ('' != $app.fair_detail.keyword)}
+										<tr>
+											<th>キーワード</th>
+											<td>{$app.fair_detail.keyword}</td>
+										</tr>
+										{/if}
+										<tr>
+											<th>最終更新日</th>
+											<td>
+												{if ('' != $app.fair_detail.update_date)}
+													{$app.fair_detail.update_date|date_format:"%Y年 %m月 %d日"}
+												{else}
+													{$app.fair_detail.regist_date|date_format:"%Y年 %m月 %d日"}
+												{/if}
+											</td>
+										</tr>
 									</table>
 
 								</div>

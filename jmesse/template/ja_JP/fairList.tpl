@@ -37,7 +37,7 @@
 	}
 
 	function dosort(url) {
-		sort = document.getElementById('sort').options[document.getElementById('sort').selectedIndex].value;
+		var sort = document.getElementById('sort').options[document.getElementById('sort').selectedIndex].value;
 		document.location.href = url + "&sort=" + sort;
 	}
 
@@ -188,7 +188,7 @@
 											{else}
 											onchange="dosort('{$config.url}?action_fairList=ture&page=1')"
 											{/if}
-											">
+											>
 											<option value="">並び替え</option>
 											<option value="1" {if ('1' == $form.sort)}selected{/if}>新着順</option>
 											<option value="2" {if ('2' == $form.sort)}selected{/if}>名称順</option>

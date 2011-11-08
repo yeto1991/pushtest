@@ -576,6 +576,11 @@
 						</tr>
 
 						<tr>
+							<td nowrap>検索キーワード</td>
+							<td nowrap><input type="text" name="keyword" id="keyword" value="{$form.keyword}" maxlength="100" size="100" />
+						</tr>
+
+						<tr>
 							<td nowrap>会期 <font color="#CC3333">●</font></td>
 							<!-- 開始年月 -->
 							<!-- 開始日 -->
