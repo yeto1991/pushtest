@@ -169,6 +169,12 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			$this->session->set('user_id', $user->get('user_id'));
 			//更新モードで完了画面へ
 			$this->af->set('mode', 'change');
+
+			//TODO メール送信処理
+// 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
+// 			$mail_mgr =& $this->backend->getManager('mail');
+// 			$mail_mgr->sendmailUserReigst(strtolower($this->af->get('email')), $ary_value);
+
 			return user_userRegistDone;
 		}else{
 			//通常更新の場合
@@ -208,6 +214,12 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 				$db->rollback();
 				return 'error';
 			}
+
+			//TODO メール送信処理
+// 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
+// 			$mail_mgr =& $this->backend->getManager('mail');
+// 			$mail_mgr->sendmailUserReigst(strtolower($this->af->get('email')), $ary_value);
+
 			//更新モードで完了画面へ
 			$this->af->set('mode', 'change');
 			return user_userRegistDone;

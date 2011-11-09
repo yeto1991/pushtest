@@ -135,8 +135,9 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			return 'error';
 		}
 		//TODO メール送信処理
-		$ethna_mail =& new Ethna_MailSender($this->backend);
-		$ethna_mail->send(($this->af->get('email')),'userRegistMail.tpl',array('username' => $this->af->get('userNm'),'email' => $this->af->get('email'),'password' => $this->af->get('password')));
+// 		$ary_value = array('mail_send_user_name' => $this->af->get('userNm'), 'mail_send_user_email' => strtolower($this->af->get('email')), 'mail_send_user_password' => $this->af->get('password'));
+// 		$mail_mgr =& $this->backend->getManager('mail');
+// 		$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
 
 		// 完了画面へ遷移
 		// SESSIONに設定

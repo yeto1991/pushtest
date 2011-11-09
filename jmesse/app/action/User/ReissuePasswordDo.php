@@ -81,8 +81,12 @@ class Jmesse_Action_UserReissuePasswordDo extends Jmesse_ActionClass
 		}
 
 		// パスワード取得
-		//$this->af->set('email',$user->get('password'));
+		$this->af->set('email',$user->get('password'));
+
 		//TODO メール送信処理
+// 		$ary_value = array('mail_send_user_password' => $user->get('password'));
+// 		$mail_mgr =& $this->backend->getManager('mail');
+// 		$mail_mgr->sendmailUserConfirm(strtolower($this->af->get('email')), $ary_value);
 
 		return 'user_reissuePasswordDo';
 	}
