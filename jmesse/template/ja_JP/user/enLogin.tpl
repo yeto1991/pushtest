@@ -126,4 +126,5 @@
 	<!-- footer -->
 	<div id="include_footer" ></div>
 	<!-- /footer -->
-</body></html>
+</body>
+</html>
