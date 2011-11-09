@@ -46,12 +46,14 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
+		<!--
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			<li>Expobioenergia 11</li>
 		</ul>
+		 -->
 	</div>
 	<!-- /bread -->
 
@@ -62,91 +64,58 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2"><h2>Trade Fairs held in Japan and the World </h2></div>
 			<div class="in_main">
-				<h3>Expobioenergia 11</h3>
-				<!--<p>キャッチコピー</p>-->
-				<p class="t_right">
-					<a class="icon_arrow" target="_blank" href="">Official Website</a><img width="14" height="11" class="blank" alt="To other site" src="/images/en/icon-window.gif" />
-				</p>
-				<!-- data left-->
-				<div class="left" id="detail">
-					<table class="detail">
-						<tr>
-							<th>Date</th>
-							<td>18-OCT-2011 to 20-OCT-2011</td>
-						</tr>
-						<tr>
-							<th>City / Country</th>
-							<td>
-								<img src="/images/flag/es.gif" style="vertical-align: middle;" /> Valladolid /
-								<a href="/en/j-messe/europe/es/">Spain</a> / <a href="/en/j-messe/europe/">Europe</a>
-							</td>
-						</tr>
-						<tr>
-							<th>Venue</th>
-							<td>FERIA DE VALLADOLID <br />
-								<!--<div style="padding-left:15px;">Exhibition area：1,000sqm<br />
-								交通手段：バジャドリッドは、スペインの首都マドリッドから北へバスで2時間半、AVE（スペインの高速列車）なら1時間</div>-->
-							</td>
-						</tr>
-						<tr>
-						<th>Exhibits</th>
-							<td>
-								Agricultural and forestry exploitation, Domestic heating, Industrial heat and energy, Biogas,
-								Biofuels, Solid Biofuels, Bioenergetic services, Electric and thermal energy generation.
-							</td>
-						</tr>
-						<tr>
-						<th>For Visitors</th>
-							<td>
-								Open to: Trade & general public <br />
-								Admission/tickets:Web Registration / Available at the Gate / Others
-							</td>
-						</tr>
-						<!--<tr>
-							<th>From Exhibitors</th>
-							<td>エキスポ・バイオエネルギー’09展は、バイオエネルギーを高度なレベルで専門に扱うこの分野に携わる方々を対象とする国際科学技術展示会です。今回で第 4回目を迎える当展示会は、バイオエネルギー分野における特別な集いの場所となり、また国際的なレファレンスともなりました。また単なる一見本市ではなく、ご専門の来訪者のみなさまには充実した下記の各種催しも展示会と平行してご提供いたします。</td>
-						</tr>-->
-						<tr>
-						<th>Show Management</th>
-							<td>
-								Cesefor<br />
-								TEL : +34-975212453<br />
-								FAX : +34-975239677<br />
-								E-mail : <a href="mailto:marta.boillos@expobioenergia.com">marta.boillos@expobioenergia.com</a><br />
-							</td>
-						</tr>
-						<tr>
-						<th>Industry</th>
-							<td>
-								<a href="/en/j-messe/**/">Fundamental Industries / Mining, Energy</a><br />
-								<a href="/en/j-messe/**/">Machinery, Industrial Technology / Advanced Technology/Materials,Composites, R & D</a><br />
-								<a href="/en/j-messe/**/">Environment / Environmental Protection, Waste Disposal, Recycling</a><br />
-							</td>
-						</tr>
-						<!--<tr>
-							<th>過去の実績</th>
-							<td>2010年実績<br />
-								来場者数 : 1500人
-							</td>
-						</tr>-->
-					</table>
+				<h3>User Login</h3>
+				<div class="login">
+					<form name="form_user_enlogin" id="form_user_enlogin" method="post" action="">
+						<input type="hidden" name="action_user_enloginDo" id="action_user_enloginDo" value="dummy" />
+						<input type="hidden" name="function" id="function" value="{$form.function}" />
+						{* エラー表示 *}
+						{if count($errors)}
+						<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
+						{/if}
+						<table id="registration">
+							<tbody>
+								{if is_error('email')}
+								<tr class="errorcheck">
+								{else}
+								<tr>
+								{/if}
+									<th class="item">email address<br />(for your login)</th>
+									<td>
+										<input type="text" name="email" id="email" size="60" value="{$form.email}" /><br />
+										{if is_error('email')}
+										<span class="error-message">{message name="email"}</span><br />
+										{/if}
+									</td>
+								</tr>
+								{if is_error('password')}
+								<tr class="errorcheck">
+								{else}
+								<tr>
+								{/if}
+									<th class="item">Password<br /></th>
+									<td>
+										<input type="password" name="password" id="password" size="60" value="{$form.password}" /><br />
+										{if is_error('password')}
+										<span class="error-message">{message name="password"}</span><br />
+										{/if}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p class="t_right"><input type="image" src="/j-messe/images/db/btn-login.gif" alt="Login"  class="over" width="180" height="37"  /></p>
+					</form>
+					<div class="line_dot"><hr /></div>
+					<p><strong>Forgot your password?</strong><br />
+					<a href="{$config.url}?action_user_enReissuePassword=true"  class="icon_arrow">Login Password Confirmation</a></p><br />
+					<p><strong>To the first visiting person</strong><br />Please regist your account<br />
+					<a href="{$config.url}?action_user_enUserRegist=true" class="icon_arrow">User Registration</a></p>
 				</div>
-				<!-- /data left -->
-				<!-- picture picture -->
-				<div id="picture" class="right">
-					<a href="http://www.jetro.go.jp/cgi-bin/mw_mihon_search_jp/image|1|webuser5||10761|0|0|33188|142|37|0,16,0,17,0|136457,1|143848,20|147219,5|1,3,1,1" rel="prettyPhoto[gallery]" title="Expobioenergia 11"><img src="
-					http://www.jetro.go.jp/cgi-bin/mw_mihon_search_jp/image|1|webuser5||10761|0|0|33188|142|37|0,16,0,17,0|136457,1|143848,20|147219,5|1,3,1,1" width="200px" alt="" /></a>
-					<a href="http://www.jetro.go.jp/cgi-bin/mw_mihon_search_jp/image|1|webuser5||10761|0|0|33188|142|37|0,16,0,17,0|136457,1|143848,20|147219,5|2,3,1,1" rel="prettyPhoto[gallery]" title="Expobioenergia 11">
-					<img src="http://www.jetro.go.jp/cgi-bin/mw_mihon_search_jp/image|1|webuser5||10761|0|0|33188|142|37|0,16,0,17,0|136457,1|143848,20|147219,5|2,3,1,1" width="200px" alt="" /></a>
-					<a href="http://www.jetro.go.jp/cgi-bin/mw_mihon_search_jp/image|1|webuser5||10761|0|0|33188|142|37|0,16,0,17,0|136457,1|143848,20|147219,5|3,3,1,1" rel="prettyPhoto[gallery]" title="Expobioenergia 11">
-					<img src="http://www.jetro.go.jp/cgi-bin/mw_mihon_search_jp/image|1|webuser5||10761|0|0|33188|142|37|0,16,0,17,0|136457,1|143848,20|147219,5|3,3,1,1" width="200px" alt="" /></a>
-				</div>
-				<!-- /picture picture -->
 			</div>
 			<p class="totop">
-				<a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>
-				<a href="#header"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
-			</p>
+				<!-- <a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>  -->
+				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
+				</p>
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
