@@ -104,6 +104,7 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 			$this->session->start();
 			$this->session->set('user_id', $user->get('user_id'));
 			$this->session->set('auth_gen', $user->get('auth_gen'));
+			$this->session->set('use_language_cd', $user->get('use_language_cd'));
 			$ret_view = 'user_top';
 		} else {
 			// ログイン失敗画面へ遷移

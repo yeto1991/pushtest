@@ -104,7 +104,8 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			$this->session->start();
 			$this->session->set('user_id', $user->get('user_id'));
 			$this->session->set('auth_gen', $user->get('auth_gen'));
-			$ret_view = 'user_top';
+			$this->session->set('use_language_cd', $user->get('use_language_cd'));
+			$ret_view = 'user_enTop';
 		} else {
 			// ログイン失敗画面へ遷移
 			$ret = $mgr->regLog('0', '5', '3', 'Login failed.('.$this->af->get('email').':'.$_SERVER['REMOTE_ADDR'].')');
