@@ -14,9 +14,6 @@
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
 <script type="text/javascript">
 <!--
 {literal}
@@ -48,10 +45,19 @@
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
+			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
 			{if ("regist" == $form.mode)}
-				<li>ユーザー登録</li>
-				{else}
-				<li>ユーザー編集</li>
+				<li><a href="/database/j-messe/tradefair/">ユーザー登録</a></li>
+				<li><a href="/database/j-messe/tradefair/">ユーザー登録確認</a></li>
+				<li>ユーザー登録完了</li>
+			{elseif ("change" == $form.mode)}
+				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
+				<li><a href="/database/j-messe/tradefair/">ユーザー修正確認</a></li>
+				<li>ユーザー修正完了</li>
+			{else}
+				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
+				<li><a href="/database/j-messe/tradefair/">ユーザー削除確認</a></li>
+				<li>ユーザー削除完了</li>
 			{/if}
 		</ul>
 	</div>
@@ -74,7 +80,7 @@
 								<h2>ユーザー登録</h2>
 								{/if}
 								{if ("change" == $form.mode)}
-								<h2>ユーザー編集</h2>
+								<h2>ユーザー修正</h2>
 								{/if}
 								{if ("delete" == $form.mode)}
 								<h2>ユーザー削除</h2>
@@ -86,10 +92,10 @@
 								<p>ユーザー登録が完了しました。ありがとうございました。</p>
 								{/if}
 								{if ("change" == $form.mode)}
-								<p>ユーザー情報更新が完了しました。ありがとうございました。</p>
+								<p>ユーザー修正が完了しました。ありがとうございました。</p>
 								{/if}
 								{if ("delete" == $form.mode)}
-								<p>ユーザー情報削除が完了しました（退会処理完了）。ありがとうございました。</p>
+								<p>ユーザー削除が完了しました（退会処理完了）。ありがとうございました。</p>
 								{/if}
 								<div class="finish-navi">
 									{if ("delete" != $form.mode)}
@@ -108,11 +114,13 @@
 					</div>
 				</div>
 				<p class="totop">
+				<!--
 					{if ("regist" == $form.mode)}
 					<a href="javascript:window.open('{$config.url}?action_user_userRegistDone=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{else}
 					<a href="javascript:window.open('{$config.url}?action_user_userChangeDone=true&user_id={$form.user_id}&mode={$form.mode}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{/if}
+				 -->
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

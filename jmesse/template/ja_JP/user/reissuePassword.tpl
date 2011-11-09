@@ -14,9 +14,6 @@
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
 <script type="text/javascript">
 <!--
 {literal}
@@ -42,6 +39,7 @@
 	<!-- /header -->
 
 	<!-- bread -->
+	<!--
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
@@ -51,6 +49,7 @@
 			<li>パスワードお問い合わせ</li>
 		</ul>
 	</div>
+	 -->
 	<!-- /bread -->
 
 	<!-- contents -->
@@ -99,7 +98,7 @@
 					</div>
 				</div>
 				<p class="totop">
-					<a href="javascript:window.open('{$config.url}?action_user_reissuePassword=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<!-- <a href="javascript:window.open('{$config.url}?action_user_reissuePassword=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a> -->
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

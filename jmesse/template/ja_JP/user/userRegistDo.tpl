@@ -14,9 +14,6 @@
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
 <script type="text/javascript">
 <!--
 {literal}
@@ -49,10 +46,16 @@
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
+			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
 			{if ("regist" == $form.mode)}
-				<li>ユーザー登録</li>
-				{else}
-				<li>ユーザー編集</li>
+				<li><a href="/database/j-messe/tradefair/">ユーザー登録</a></li>
+				<li>ユーザー登録確認</li>
+			{elseif ("change" == $form.mode)}
+				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
+				<li>ユーザー修正確認</li>
+			{else}
+				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
+				<li>ユーザー削除確認</li>
 			{/if}
 		</ul>
 	</div>
@@ -74,7 +77,7 @@
 								{if ("regist" == $form.mode)}
 								<h2>ユーザー登録</h2>
 								{elseif ("change" == $form.mode)}
-								<h2>ユーザー編集</h2>
+								<h2>ユーザー修正</h2>
 								{else}
 								<h2>ユーザー削除</h2>
 								{/if}
@@ -221,11 +224,13 @@
 					</div>
 				</div>
 				<p class="totop">
+				<!--
 					{if ("regist" == $form.mode)}
 					<a href="javascript:window.open('{$config.url}?action_user_userRegistDo=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{else}
 					<a href="javascript:window.open('{$config.url}?action_user_userChangeDo=true&user_id={$form.user_id}&mode={$form.mode}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{/if}
+				 -->
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>
