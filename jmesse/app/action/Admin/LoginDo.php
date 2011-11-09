@@ -98,6 +98,12 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 			return 'admin_login';
 		}
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		// 転送
 		if (null != $this->af->get('function') && '' != $this->af->get('function')) {
 			header('Location: '.$this->af->get('function'));

@@ -327,6 +327,12 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$tpl = $this->_selectCond();
 		}
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return $tpl;
 	}
 

@@ -105,7 +105,7 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('other_city_jp', $jm_fair->get('other_city_jp'));
 		$this->af->set('check_other_city_jp', $jm_fair->get('check_other_city_jp'));
 		$this->af->set('venue_jp', $jm_fair->get('venue_jp'));
-		$this->af->set('gross_floor_area', $jm_fair->get('gross_floor_area'));
+		$this->af->set('gross_floor_area', $this->_isZero($jm_fair->get('gross_floor_area')));
 		$this->af->set('transportation_jp', $jm_fair->get('transportation_jp'));
 		$this->af->set('open_to', $jm_fair->get('open_to'));
 		$this->af->set('admission_ticket_1', $jm_fair->get('admission_ticket_1'));
@@ -118,10 +118,10 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('app_dead_mm', $jm_fair->get('app_dead_mm'));
 		$this->af->set('app_dead_dd', $jm_fair->get('app_dead_dd'));
 		$this->af->set('year_of_the_trade_fair', $jm_fair->get('year_of_the_trade_fair'));
-		$this->af->set('total_number_of_visitor', $jm_fair->get('total_number_of_visitor'));
-		$this->af->set('number_of_foreign_visitor', $jm_fair->get('number_of_foreign_visitor'));
-		$this->af->set('total_number_of_exhibitors', $jm_fair->get('total_number_of_exhibitors'));
-		$this->af->set('number_of_foreign_exhibitors', $jm_fair->get('number_of_foreign_exhibitors'));
+		$this->af->set('total_number_of_visitor', $this->_isZero($jm_fair->get('total_number_of_visitor')));
+		$this->af->set('number_of_foreign_visitor',$this->_isZero( $jm_fair->get('number_of_foreign_visitor')));
+		$this->af->set('total_number_of_exhibitors', $this->_isZero($jm_fair->get('total_number_of_exhibitors')));
+		$this->af->set('number_of_foreign_exhibitors', $this->_isZero($jm_fair->get('number_of_foreign_exhibitors')));
 		$this->af->set('net_square_meters', $jm_fair->get('net_square_meters'));
 		$this->af->set('profile_jp', $jm_fair->get('profile_jp'));
 		$this->af->set('detailed_information_jp', $jm_fair->get('detailed_information_jp'));
@@ -204,6 +204,17 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		// 入場資格
 		$this->af->setApp('open_to_name', $jm_code_m_mgr->getCode('004', $jm_fair->get('open_to'), '000', '000'));
 
+		// 表示用Eメールの取得
+		if (null == $this->session->get('email') || '' == $this->session->get('email')) {
+			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+			if (null == $user_obj) {
+				$this->backend->getLogger()->log(LOG_ERR, '■ユーザ情報が存在しません。');
+				$this->ae->add('error', 'ユーザ情報が存在しません');
+				return 'error';
+			}
+			$this->session->set('email', $user_obj->get('email'));
+		}
+
 		// ログテーブル登録
 		$mgr = $this->backend->getManager('userCommon');
 		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '2', $this->af->get('mihon_no'));
@@ -212,8 +223,30 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'user_fairDetail';
 	}
+
+	/**
+	* INT型の項目が0の場合''空文字を返す。
+	*
+	* @param int $param 対象パラメータ
+	* @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+	*/
+	function _isZero($param) {
+		$ret = $param;
+		if ("0" == $param) {
+			$ret = '';
+		}
+		return $ret;
+	}
+
 }
 
 ?>

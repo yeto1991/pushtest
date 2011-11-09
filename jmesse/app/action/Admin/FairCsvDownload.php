@@ -111,6 +111,12 @@ class Jmesse_Action_AdminFairCsvDownload extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 		$jm_fair_list = $jm_fair_mgr->getFairListDownload($ary_sort, $ary_sort_cond);
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		// ファイル名
 		$file = 'list.csv';
 

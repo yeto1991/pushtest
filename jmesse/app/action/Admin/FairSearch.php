@@ -1756,19 +1756,19 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 
-		'photos' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '展示会に係わる画像名', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
+// 		'photos' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => '展示会に係わる画像名', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => null,            // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => null,            // Optional method name which
+// 		),
 		'photos_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
@@ -2371,7 +2371,7 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 			$this->af->set('report_link_cond', $search_cond['report_link_cond']);
 			$this->af->set('venue_link', $search_cond['venue_link']);
 			$this->af->set('venue_link_cond', $search_cond['venue_link_cond']);
-			$this->af->set('photos', $search_cond['photos']);
+// 			$this->af->set('photos', $search_cond['photos']);
 			$this->af->set('photos_cond', $search_cond['photos_cond']);
 			$this->af->set('note_for_system_manager', $search_cond['note_for_system_manager']);
 			$this->af->set('note_for_system_manager_cond', $search_cond['note_for_system_manager_cond']);
@@ -2403,6 +2403,12 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 		if (null != $this->session->get('sort_cond')) {
 			// セッションを削除
 			$this->session->set('sort_cond', null);
+		}
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
 		}
 
 		return 'admin_fairSearch';

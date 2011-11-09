@@ -161,13 +161,20 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('photos_1', $regist_param_2['photos_name_1']);
 		$jm_fair->set('photos_2', $regist_param_2['photos_name_2']);
 		$jm_fair->set('photos_3', $regist_param_2['photos_name_3']);
+		$jm_fair->set('keyword', $regist_param_2['keyword']);
 		$jm_fair->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$jm_fair->set('organizer_en', $regist_param_2['organizer_en']);
+		$jm_fair->set('organizer_addr', $regist_param_2['organizer_addr']);
+		$jm_fair->set('organizer_div', $regist_param_2['organizer_div']);
+		$jm_fair->set('organizer_pers', $regist_param_2['organizer_pers']);
 		$jm_fair->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$jm_fair->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$jm_fair->set('organizer_email', $regist_param_2['organizer_email']);
 		$jm_fair->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
 		$jm_fair->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
+		$jm_fair->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
+		$jm_fair->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
+		$jm_fair->set('agency_in_japan_pers', $regist_param_2['agency_in_japan_pers']);
 		$jm_fair->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$jm_fair->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$jm_fair->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
@@ -187,18 +194,24 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('date_of_registration', date('Y/m/d H:i:s'));
 
 		$jm_fair->set('del_flg', '0');
-		$jm_fair->set('regist_user_id', $this->session->get('user_id'));
-		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
 
 		// フリーワード検索用カラム作成
 		$jm_fair->set('search_key', $this->_makeSearchKey($jm_fair));
 
 		if ('c' == $this->af->get('mode')) {
 			// UPDATE
+			$jm_fair->set('update_user_id', $this->session->get('user_id'));
+			$jm_fair->set('update_date', date('Y/m/d H:i:s'));
+
 			$ret = $jm_fair->update();
 			$ope_kbn = '3';
 		} else {
 			// INSERT
+			// 承認フラグ = 未承認
+			$jm_fair->set('confirm_flag', '0');
+			$jm_fair->set('regist_user_id', $this->session->get('user_id'));
+			$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
+
 			$ret = $jm_fair->add();
 			$ope_kbn = '2';
 		}
@@ -227,7 +240,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 				}
 			}
 		}
-
 		// 保存
 		$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
 		for ($i = 0; $i < count($ary_photos_name); $i++) {
@@ -273,9 +285,9 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$this->session->set('img_tmp_path', '');
 		$this->session->set('email', '');
 
-		// エラー画面
+		// エラー判定
 		if (0 < $this->ae->count()) {
-			$this->backend->getLogger()->log(LOG_ERR, 'エラーが発生しました。');
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
 			return 'error';
 		}
 
@@ -310,6 +322,8 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// ＰＲ・紹介文
 		$search_key .= str_replace($br, '', $jm_fair->get('detailed_information_jp')).' ';
 		$search_key .= str_replace($br, '', $jm_fair->get('detailed_information_en')).' ';
+		// 検索キーワード
+		$search_key .= $jm_fair->get('keyword').' ';
 		// 会期
 		$search_key .= $jm_fair->get('date_from_yyyy').'年'.$jm_fair->get('date_from_mm').'月'.$jm_fair->get('date_from_dd').'日 ';
 		$search_key .= $jm_fair->get('date_to_yyyy').'年'.$jm_fair->get('date_to_mm').'月'.$jm_fair->get('date_to_dd').'日 ';
@@ -385,12 +399,18 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// 主催者・問合せ先
 		$search_key .= $jm_fair->get('organizer_jp').' ';
 		$search_key .= $jm_fair->get('organizer_en').' ';
+		$search_key .= $jm_fair->get('organizer_addr').' ';
+		$search_key .= $jm_fair->get('organizer_div').' ';
+		$search_key .= $jm_fair->get('organizer_pers').' ';
 		$search_key .= $jm_fair->get('organizer_tel').' ';
 		$search_key .= $jm_fair->get('organizer_fax').' ';
 		$search_key .= $jm_fair->get('organizer_email').' ';
 		// 日本国内の照会先
 		$search_key .= $jm_fair->get('agency_in_japan_jp').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_en').' ';
+		$search_key .= $jm_fair->get('agency_in_japan_addr').' ';
+		$search_key .= $jm_fair->get('agency_in_japan_div').' ';
+		$search_key .= $jm_fair->get('agency_in_japan_pers').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_tel').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_fax').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_email').' ';

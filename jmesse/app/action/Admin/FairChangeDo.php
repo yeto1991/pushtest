@@ -621,6 +621,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// コミット
 		$db->commit();
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		// 変更画面へ遷移
 		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$this->af->get('mihon_no').'&mode=change&success=1');
 		return null;

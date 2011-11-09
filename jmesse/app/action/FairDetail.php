@@ -98,11 +98,24 @@ class Jmesse_Action_FairDetail extends Jmesse_ActionClass
 
 		$this->af->setApp('fair_detail', $fair_detail);
 
+		// 月間ランキング情報に登録
+		if ('009' == $fair_detail['region'] && '002' == $fair_detail['country']) {
+			// 国内
+			$venue_kbn = '0';
+		} else {
+			// 海外
+			$venue_kbn = '1';
+		}
+		$jm_ranking_mgr =& $this->backend->getManager('JmRanking');
+		$jm_ranking_mgr->countUp($this->af->get('mihon_no'), $venue_kbn);
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'fairDetail';
-	}
-
-	function _setIndustoryName($kbn_2, $kbn_3) {
-
 	}
 }
 

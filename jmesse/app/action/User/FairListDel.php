@@ -41,7 +41,7 @@ class Jmesse_Action_UserFairListDel extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
+			$this->af->set('function', '');
 			return 'user_Login';
 		}
 		return null;
@@ -99,7 +99,13 @@ class Jmesse_Action_UserFairListDel extends Jmesse_ActionClass
 		}
 		// コミット
 		$db->commit();
-		//header('Location: '.$this->config->get('url').'?action_user_fairList=true&user_id='.$this->session->get('user_id'));
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		header('Location: '.$this->config->get('url').'?action_user_fairList=true');
 		return null;
 	}

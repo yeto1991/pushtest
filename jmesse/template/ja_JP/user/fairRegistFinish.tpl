@@ -73,18 +73,18 @@
 							</div>
 							<div class="in_main">
 								<h3 class="img t_center">
-									<img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了"></a>
+									<img src="/j-messe/images/db/fair06.jpg" alt="見本市登録完了"></a>
 								</h3>
 								{if ('r' == $form.msg)}
-								<p>見本市登録が完了しました。ありがとうございました。</p>
+								<p>見本市の登録が完了しました。ありがとうございました。</p>
 								{elseif ('c' == $form.msg)}
-								<p>見本市更新が完了しました。ありがとうございました。</p>
+								<p>見本市の更新が完了しました。ありがとうございました。</p>
 								{elseif ('d' == $form.msg)}
-								<p>見本市削除が完了しました。ありがとうございました。</p>
+								<p>見本市の削除が完了しました。ありがとうございました。</p>
 								{/if}
 								<div class="finish-navi">
 									<div class="btn">
-										<a href="/j-messe/registration/??"><span class="title">続いて見本市を登録する</span> <span class="description">見本市新規登録ページを開きます。</span></a>
+										<a href="{$config.url}?action_user_fairRegistStep1=true"><span class="title">続いて見本市を登録する</span> <span class="description">見本市新規登録ページを開きます。</span></a>
 									</div>
 									<div class="btn">
 										<a href="/j-messe/"><span class="title">登録を終了する</span> <span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>

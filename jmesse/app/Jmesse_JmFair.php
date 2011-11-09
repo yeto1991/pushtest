@@ -1726,7 +1726,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 展示会に係わる画像(3点)
-		$sql_tmp = $this->_mkSqlPhotos($search_cond['photos'], $search_cond['photos_cond'], $search_cond['relation'], $data);
+ 		$sql_tmp = $this->_mkSqlPhotos($search_cond['photos_cond']);
+// 		$sql_tmp = $this->_mkSqlPhotos($search_cond['photos'], $search_cond['photos_cond'], $search_cond['relation'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// システム管理者備考欄
@@ -1740,13 +1741,13 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* キーワード。
-	*
-	* @param string $phrases キーワード
-	* @param string $phrase_connection 検索条件 'a': and  'o':or
-	* @param array $data values
-	* @return string 成功:作成SQL 失敗:空文字
-	*/
+	 * キーワード。
+	 *
+	 * @param string $phrases キーワード
+	 * @param string $phrase_connection 検索条件 'a': and  'o':or
+	 * @param array $data values
+	 * @return string 成功:作成SQL 失敗:空文字
+	 */
 	function _mkSqlKeyword($phrases, $phrase_connection, &$data) {
 		if ('' == $phrases) {
 			return '';
@@ -2123,217 +2124,227 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 * @param array $data values
 	 * @return string 成功:作成SQL 失敗:空文字
 	 */
-	function _mkSqlPhotos($photos, $photos_cond, $relation, &$data) {
-		if ('' == $photos && '12' != $photos_cond && '13' != $photos_cond) {
-			return '';
-		}
-
-		$value = explode(' ', $photos);
-
-		$sql ='';
-		if ('1' == $photos_cond) {
-			$sql_1 = '';
-			$sql_2 = '';
-			$sql_3 = '';
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_1) {
-						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_1 .= ' photos_1 = ? ';
-					array_push($data, $value[$i]);
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_2) {
-						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_2 .= ' photos_2 = ? ';
-					array_push($data, $value[$i]);
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_3) {
-						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_3 .= ' photos_3 = ? ';
-					array_push($data, $value[$i]);
-				}
-			}
-			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
-		} elseif ('2' == $photos_cond) {
-			$sql_1 = '';
-			$sql_2 = '';
-			$sql_3 = '';
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_1) {
-						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_1 .= ' photos_1 <> ? ';
-					array_push($data, $value[$i]);
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_2) {
-						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_2 .= ' photos_2 <> ? ';
-					array_push($data, $value[$i]);
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_3) {
-						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_3 .= ' photos_3 <> ? ';
-					array_push($data, $value[$i]);
-				}
-			}
-			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
-		} elseif ('3' == $photos_cond) {
-			$sql_1 = '';
-			$sql_2 = '';
-			$sql_3 = '';
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_1) {
-						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_1 .= ' photos_1 like ? ';
-					array_push($data, $value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_2) {
-						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_2 .= ' photos_2 like ? ';
-					array_push($data, $value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_3) {
-						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_3 .= ' photos_3 like ? ';
-					array_push($data, $value[$i].'%');
-				}
-			}
-			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
-		} elseif ('4' == $photos_cond) {
-			$sql_1 = '';
-			$sql_2 = '';
-			$sql_3 = '';
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_1) {
-						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_1 .= ' photos_1 not like ? ';
-					array_push($data, $value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_2) {
-						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_2 .= ' photos_2 not like ? ';
-					array_push($data, $value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_3) {
-						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_3 .= ' photos_3 not like ? ';
-					array_push($data, $value[$i].'%');
-				}
-			}
-			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
-		} elseif ('5' == $photos_cond) {
-			$sql_1 = '';
-			$sql_2 = '';
-			$sql_3 = '';
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_1) {
-						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_1 .= ' photos_1 like ? ';
-					array_push($data, '%'.$value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_2) {
-						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_2 .= ' photos_2 like ? ';
-					array_push($data, '%'.$value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_3) {
-						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_3 .= ' photos_3 like ? ';
-					array_push($data, '%'.$value[$i].'%');
-				}
-			}
-			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
-		} elseif ('6' == $photos_cond) {
-			$sql_1 = '';
-			$sql_2 = '';
-			$sql_3 = '';
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_1) {
-						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_1 .= ' photos_1 not like ? ';
-					array_push($data, '%'.$value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_2) {
-						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_2 .= ' photos_2 not like ? ';
-					array_push($data, '%'.$value[$i].'%');
-				}
-			}
-			for ($i = 0; $i < count($value); $i++) {
-				if ('' != $value[$i]) {
-					if ('' != $sql_3) {
-						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
-					}
-					$sql_3 .= ' photos_3 not like ? ';
-					array_push($data, '%'.$value[$i].'%');
-				}
-			}
-			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
-		} elseif ('7' == $photos_cond) {
-		} elseif ('8' == $photos_cond) {
-		} elseif ('9' == $photos_cond) {
-		} elseif ('12' == $photos_cond) {
+	function _mkSqlPhotos($photos_cond) {
+		if ('12' == $photos_cond) {
 			$sql = " photos_1 <> '' or photos_2 <> '' or photos_3 <> '' ";
 		} elseif ('13' == $photos_cond) {
 			$sql = " photos_1 = '' and photos_2 = '' and photos_3 = '' ";
 		}
 
 		return $sql;
-}
+
+	}
+// 	function _mkSqlPhotos($photos, $photos_cond, $relation, &$data) {
+// 		if ('' == $photos && '12' != $photos_cond && '13' != $photos_cond) {
+// 			return '';
+// 		}
+
+// 		$value = explode(' ', $photos);
+
+// 		$sql ='';
+// 		if ('1' == $photos_cond) {
+// 			$sql_1 = '';
+// 			$sql_2 = '';
+// 			$sql_3 = '';
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_1) {
+// 						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_1 .= ' photos_1 = ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_2) {
+// 						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_2 .= ' photos_2 = ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_3) {
+// 						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_3 .= ' photos_3 = ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
+// 			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+// 		} elseif ('2' == $photos_cond) {
+// 			$sql_1 = '';
+// 			$sql_2 = '';
+// 			$sql_3 = '';
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_1) {
+// 						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_1 .= ' photos_1 <> ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_2) {
+// 						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_2 .= ' photos_2 <> ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_3) {
+// 						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_3 .= ' photos_3 <> ? ';
+// 					array_push($data, $value[$i]);
+// 				}
+// 			}
+// 			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+// 		} elseif ('3' == $photos_cond) {
+// 			$sql_1 = '';
+// 			$sql_2 = '';
+// 			$sql_3 = '';
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_1) {
+// 						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_1 .= ' photos_1 like ? ';
+// 					array_push($data, $value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_2) {
+// 						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_2 .= ' photos_2 like ? ';
+// 					array_push($data, $value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_3) {
+// 						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_3 .= ' photos_3 like ? ';
+// 					array_push($data, $value[$i].'%');
+// 				}
+// 			}
+// 			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+// 		} elseif ('4' == $photos_cond) {
+// 			$sql_1 = '';
+// 			$sql_2 = '';
+// 			$sql_3 = '';
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_1) {
+// 						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_1 .= ' photos_1 not like ? ';
+// 					array_push($data, $value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_2) {
+// 						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_2 .= ' photos_2 not like ? ';
+// 					array_push($data, $value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_3) {
+// 						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_3 .= ' photos_3 not like ? ';
+// 					array_push($data, $value[$i].'%');
+// 				}
+// 			}
+// 			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+// 		} elseif ('5' == $photos_cond) {
+// 			$sql_1 = '';
+// 			$sql_2 = '';
+// 			$sql_3 = '';
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_1) {
+// 						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_1 .= ' photos_1 like ? ';
+// 					array_push($data, '%'.$value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_2) {
+// 						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_2 .= ' photos_2 like ? ';
+// 					array_push($data, '%'.$value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_3) {
+// 						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_3 .= ' photos_3 like ? ';
+// 					array_push($data, '%'.$value[$i].'%');
+// 				}
+// 			}
+// 			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+// 		} elseif ('6' == $photos_cond) {
+// 			$sql_1 = '';
+// 			$sql_2 = '';
+// 			$sql_3 = '';
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_1) {
+// 						$sql_1 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_1 .= ' photos_1 not like ? ';
+// 					array_push($data, '%'.$value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_2) {
+// 						$sql_2 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_2 .= ' photos_2 not like ? ';
+// 					array_push($data, '%'.$value[$i].'%');
+// 				}
+// 			}
+// 			for ($i = 0; $i < count($value); $i++) {
+// 				if ('' != $value[$i]) {
+// 					if ('' != $sql_3) {
+// 						$sql_3 .= ' '.$this->_changeRelation($relation).' ';
+// 					}
+// 					$sql_3 .= ' photos_3 not like ? ';
+// 					array_push($data, '%'.$value[$i].'%');
+// 				}
+// 			}
+// 			$sql = '('.$sql_1.') or ('.$sql_2.') or ('.$sql_3.')';
+// 		} elseif ('7' == $photos_cond) {
+// 		} elseif ('8' == $photos_cond) {
+// 		} elseif ('9' == $photos_cond) {
+// 		} elseif ('12' == $photos_cond) {
+// 			$sql = " photos_1 <> '' or photos_2 <> '' or photos_3 <> '' ";
+// 		} elseif ('13' == $photos_cond) {
+// 			$sql = " photos_1 = '' and photos_2 = '' and photos_3 = '' ";
+// 		}
+
+// 		return $sql;
+// 	}
 
 	/**
 	 * 項目内の関連を変換する。
@@ -2400,6 +2411,51 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$sql_ext .= ' ( '.$sql_tmp.' ) ';
 		}
 		return $sql_ext;
+	}
+
+
+	function getFairDateVenue($date_from, $date_to, $venue) {
+
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL
+		$sql = "select mihon_no, fair_title_jp, fair_title_en, concat(date_from_yyyy, date_from_mm, date_from_dd) date_from, concat(date_to_yyyy, date_to_mm, date_to_dd) date_to, concat(region, country, city) venue, concat(main_industory_1, sub_industory_1) industory_1, concat(main_industory_2, sub_industory_2) industory_2, concat(main_industory_3, sub_industory_3) industory_3, concat(main_industory_4, sub_industory_4) industory_4, concat(main_industory_5, sub_industory_5) industory_5, concat(main_industory_6, sub_industory_6) industory_6 from jm_fair jf where del_flg <> '1' and concat(date_from_yyyy, date_from_mm, date_from_dd) = ? and concat(date_to_yyyy, date_to_mm, date_to_dd) = ? and concat(region, country, city) = ? order by regist_date desc";
+
+		// Array化
+		$param = array($date_from, $date_to, $venue);
+
+		// Prepare Statement化
+		$this->backend->getLogger()->log(LOG_DEBUG, '■sql : '.$sql);
+		$stmt =& $db->db->prepare($sql);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$msg = '検索Errorが発生しました。';
+			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->ae->add('error', $msg);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($row =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $row;
+			$i++;
+		}
+
+		return $list;
 	}
 }
 

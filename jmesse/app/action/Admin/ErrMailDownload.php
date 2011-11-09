@@ -113,6 +113,13 @@ class Jmesse_Action_AdminErrMailDownload extends Jmesse_ActionClass
 		$jm_err_mail_mgr =& $this->backend->getManager('JmErrMail');
 		$list = $jm_err_mail_mgr->getErrMailList($date_from, $date_to, $this->af->get('email'), $this->af->get('address'), $this->af->get('server'), $this->af->get('other'));
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
+		// CSV出力
 		if (null == $list || 0 == count($list)) {
 			$this->ae->add('error', '検索結果が0件です');
 			return 'admin_errMail';

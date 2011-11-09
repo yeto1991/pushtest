@@ -70,7 +70,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 
 		// 見本市名
 		if ('' == $this->af->get('fair_title_jp')) {
-			$this->ae->add('error', '見本市名が入力されていません');
+			$this->ae->add('fair_title_jp', '見本市名が入力されていません');
 		}
 
 		$this->backend->getLogger()->log(LOG_DEBUG, '■select_language_info : '.$this->af->get('select_language_info'));
@@ -85,16 +85,16 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 
 			// Fair Title
 			if ('' == $this->af->get('fair_title_en')) {
-				$this->ae->add('error', 'Fair Title が入力されていません');
+				$this->ae->add('fair_title_en', 'Fair Title が入力されていません');
 			}
 
 			// Teaser Copy
 			if ('' == $this->af->get('profile_en')) {
-				$this->ae->add('error', 'Teaser Copy が入力されていません');
+				$this->ae->add('profile_en', 'Teaser Copy が入力されていません');
 			}
-			if (500 < mb_strlen($this->af->get('profile_en'))) {
-				$this->ae->add('error', 'Teaser Copy は500文字以内にして下さい');
-			}
+// 			if (500 < mb_strlen($this->af->get('profile_en'))) {
+// 				$this->ae->add('error', 'Teaser Copy は500文字以内にして下さい');
+// 			}
 
 			// Organizer's statement,special features. etc.
 // 			if ('' != $this->af->get('detailed_information_en')) {
@@ -105,7 +105,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 
 			// Exhibits
 			if ('' == $this->af->get('exhibits_en')) {
-				$this->ae->add('error', 'Exhibits が入力されていません');
+				$this->ae->add('exhibits_en', 'Exhibits が入力されていません');
 			}
 // 			if (300 < mb_strlen($this->af->get('exhibits_en'))) {
 // 				$this->ae->add('error', 'Exhibits は300文字以内にして下さい');
@@ -114,12 +114,12 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 			// City (other)
 			$regist_param_1 = $this->session->get('regist_param_1');
 			if ('1' != $regist_param_1['check_other_city'] && '' != $this->af->get('other_city_en')) {
-				$this->ae->add('error', 'City (other)は「開催都市」でその他にチェックされていません');
+				$this->ae->add('other_city_en', 'City (other)は「開催都市」でその他にチェックされていません');
 			}
 
 			// Venue
 			if ('' == $this->af->get('venue_en')) {
-				$this->ae->add('error', 'Venue が入力されていません');
+				$this->ae->add('venue_en', 'Venue が入力されていません');
 			}
 
 			// Transportation
@@ -129,7 +129,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 
 			// Admission ticket(other)
 			if ('1' != $regist_param_1['admission_ticket_5'] && '' != $this->af->get('other_admission_ticket_en')) {
-				$this->ae->add('error', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされていません');
+				$this->ae->add('other_admission_ticket_en', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされていません');
 			}
 
 			// Show Management
@@ -167,6 +167,18 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		// 詳細画面ボタン設定
 		$this->af->setApp('type', 'r');
 
+		// 重複チェック
+		if ('c' != $this->af->get('mode')) {
+			$duplication_list = $this->_duplicationCheck();
+			$this->af->setApp('duplication_list', $duplication_list);
+		}
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'user_fairDetail';
 	}
 
@@ -184,8 +196,8 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$regist_param_3['venue_en'] = $this->af->get('venue_en');
 // 		$regist_param_3['transportation_en'] = $this->af->get('transportation_en');
 		$regist_param_3['other_admission_ticket_en'] = $this->af->get('other_admission_ticket_en');
-		$regist_param_3['organizer_en'] = $this->af->get('organizer_en');
-		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
+// 		$regist_param_3['organizer_en'] = $this->af->get('organizer_en');
+// 		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
 		$regist_param_3['spare_field1'] = $this->af->get('spare_field1');
 		$this->session->set('regist_param_3', $regist_param_3);
 	}
@@ -259,13 +271,20 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('photos_name_1', $regist_param_2['photos_name_1']);
 		$this->af->set('photos_name_2', $regist_param_2['photos_name_2']);
 		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
+		$this->af->set('keyword', $regist_param_2['keyword']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
+		$this->af->set('organizer_addr', $regist_param_2['organizer_addr']);
+		$this->af->set('organizer_div', $regist_param_2['organizer_div']);
+		$this->af->set('organizer_pers', $regist_param_2['organizer_pers']);
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
 		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
 		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
+		$this->af->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
+		$this->af->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
+		$this->af->set('agency_in_japan_pers', $regist_param_2['agency_in_japan_pers']);
 		$this->af->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$this->af->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$this->af->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
@@ -303,6 +322,44 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->setApp('open_to_name', $jm_code_m_mgr->getCode('004', $this->af->get('open_to'), '000', '000'));
 
 	}
+
+	function _duplicationCheck() {
+		// 入力情報の連結
+		$regist_param_1 = $this->session->get('regist_param_1');
+		$date_from = $regist_param_1['date_from_yyyy'].$regist_param_1['date_from_mm'].$regist_param_1['date_from_dd'];
+		$date_to = $regist_param_1['date_to_yyyy'].$regist_param_1['date_to_mm'].$regist_param_1['date_to_dd'];
+		$venue = $regist_param_1['region'].$regist_param_1['country'].$regist_param_1['city'];
+		$industory_1 = $regist_param_1['main_industory_1'].$regist_param_1['sub_industory_1'];
+		$industory_2 = $regist_param_1['main_industory_2'].$regist_param_1['sub_industory_2'];
+		$industory_3 = $regist_param_1['main_industory_3'].$regist_param_1['sub_industory_3'];
+		$industory_4 = $regist_param_1['main_industory_4'].$regist_param_1['sub_industory_4'];
+		$industory_5 = $regist_param_1['main_industory_5'].$regist_param_1['sub_industory_5'];
+		$industory_6 = $regist_param_1['main_industory_6'].$regist_param_1['sub_industory_6'];
+		$ary_industory_mine = array($industory_1, $industory_2, $industory_3, $industory_4, $industory_5, $industory_6);
+		sort($ary_industory_mine);
+		$industory_mine = implode('', $ary_industory_mine);
+		$this->backend->getLogger()->log(LOG_DEBUG, '■industory_mine : '.$industory_mine);
+
+		$jm_fair_mgr =& $this->backend->getManager('JmFair');
+		$list = $jm_fair_mgr->getFairDateVenue($date_from, $date_to, $venue);
+
+		$duplication_list = array();
+		foreach ($list as $row) {
+			$ary_industory = array($row['industory_1'], $row['industory_2'], $row['industory_3'], $row['industory_4'], $row['industory_5'], $row['industory_6']);
+			sort($ary_industory);
+			$industory = implode('', $ary_industory);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■industory : '.$industory);
+			if ($industory_mine == $industory) {
+				array_push($duplication_list, $row);
+				if (10 <= count($duplication_list)) {
+					break;
+				}
+			}
+		}
+
+		return $duplication_list;
+	}
+
 }
 
 ?>

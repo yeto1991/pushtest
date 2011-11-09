@@ -23,9 +23,23 @@
 <!--
 {literal}
 
-	function init(select_language_info) {
+	function init(select_language_info, mode) {
 		if ('2' == select_language_info) {
 			var div = $("#engform").removeClass("regist_english");
+		}
+
+		// Changeモード以外では重複がある場合警告
+		if ('c' != mode) {
+			var msg = '';
+{/literal}
+			{section name=it loop=$app.duplication_list}
+			msg += "　・{$app.duplication_list[it].fair_title_jp}\n";
+			{/section}
+{literal}
+			if ('' != msg) {
+				msg = "下記の展示会と会期、開催地、業種が重複しています。\nご確認下さい。\n\n" + msg;
+				window.alert(msg);
+			}
 		}
 	}
 
@@ -53,7 +67,7 @@
 <title>見本市情報詳細 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 </head>
 
-<body class="layout-LC highlight-match j-messe" onload="init('{$form.select_language_info}')"">
+<body class="layout-LC highlight-match j-messe" onload="init('{$form.select_language_info}', '{$from.mode}')"">
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -110,6 +124,12 @@
 								<input type="hidden" name="" mihon_no"" id="mihon_no" value="{$form.mihon_no}" />
 
 								<div class="in_main">
+								{if ('d' != $form.mode)}
+								<h3 class="img t_center">
+									<img src="/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4">
+								</h3>
+								{/if}
+
 									<p class="t_right">ユーザー：{$session.email}</p>
 
 									{if ('' == $form.mode)}
@@ -200,7 +220,7 @@
 										<tr>
 											<th class="item">取扱品目</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td>{$form.exhibits_jp|nl2br}</td>
+											<td>{$form.exhibits_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 									</table>
 									<h4>開催地・会場</h4>
@@ -316,12 +336,12 @@
 										<tr>
 											<th class="item">キャッチフレーズ</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td>{$form.profile_jp|nl2br}</td>
+											<td>{$form.profile_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
 											<th class="item">PR・紹介文</th>
 											<th class="required"></th>
-											<td>{$form.detailed_information_jp|nl2br}</td>
+											<td>{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
 											<th class="item">見本市の紹介写真</th>
@@ -331,6 +351,11 @@
 												画像(2)：{$form.photos_name_2}<br />
 												画像(3)：{$form.photos_name_3}<br />
 											</td>
+										</tr>
+										<tr>
+											<th class="item">検索キーワード</th>
+											<th class="required"></th>
+											<td>{$form.keyword}</td>
 										</tr>
 									</table>
 									<h4>主催者</h4>
@@ -347,6 +372,9 @@
 											<th class="item">主催者連絡先</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
+												<strong>住所: </strong>{$form.organizer_addr}<br />
+												<strong>担当部課: </strong>{$form.organizer_div}<br />
+												<strong>担当者: </strong>{$form.organizer_pers}<br />
 												<strong>TEL: </strong>{$form.organizer_tel}<br />
 												<strong>FAX: </strong>{$form.organizer_fax}<br />
 												<strong>Email: </strong>{$form.organizer_email}<br />
@@ -368,6 +396,9 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">{$form.agency_in_japan_en}</td>
 													</tr>
 												</table>
+												<strong>住所: </strong>{$form.agency_in_japan_addr}<br />
+												<strong>担当部課: </strong>{$form.agency_in_japan_div}<br />
+												<strong>担当者: </strong>{$form.agency_in_japan_pers}<br />
 												<strong>TEL: </strong>{$form.agency_in_japan_tel}<br />
 												<strong>FAX: </strong>{$form.agency_in_japan_fax}<br />
 												<strong>Email: </strong>{$form.agency_in_japan_email}<br />
@@ -398,17 +429,17 @@
 											<tr>
 												<th class="item">Teaser Copy<br />キャッチフレーズ</th>
 												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-												<td>{$form.profile_en|nl2br}</td>
+												<td>{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
 												<th class="required"></th>
-												<td>{$form.detailed_information_en|nl2br}</td>
+												<td>{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">Exhibits<br />出品物</th>
 												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-												<td>{$form.exhibits_en|nl2br}</td>
+												<td>{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">City (other)<br />開催都市（その他）</th>

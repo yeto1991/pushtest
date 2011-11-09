@@ -41,7 +41,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
+			$this->af->set('function', '');
 			return 'user_Login';
 		}
 
@@ -54,19 +54,20 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
+				return 'error';
 			}
 		}
 
 		// 入力チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-//			return 'user_fairRegistStep1';
+			return 'user_fairRegistStep1';
 		}
 
 		// 詳細チェック
 		// 見本市名
 		if ('' == $this->af->get('fair_title_jp')) {
-			$this->ae->add('error', '見本市名が入力されていません');
+			$this->ae->add('fair_title_jp', '見本市名が入力されていません');
 		}
 
 		// 見本市略称
@@ -74,64 +75,76 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		// 見本市公式サイトURL
 		$this->backend->getLogger()->log(LOG_DEBUG, '■fair_url : '.$this->af->get('fair_url'));
 		if ('' == $this->af->get('fair_url') || 'http://' == $this->af->get('fair_url')) {
-			$this->ae->add('error', '見本市公式サイトURLが入力されていません');
-		}
-		if (0 !== strpos($this->af->get('fair_url'), 'http')) {
-			$this->ae->add('error', '見本市公式サイトURLはhttp～として下さい');
+			$this->ae->add('fair_url', '見本市公式サイトURLが入力されていません');
+		} else {
+			if (0 !== strpos($this->af->get('fair_url'), 'http')) {
+				$this->ae->add('fair_url', '見本市公式サイトURLはhttp～として下さい');
+			}
 		}
 
 		// 会期
 		if ('' == $this->af->get('date_from_yyyy') || '' == $this->af->get('date_from_mm') || '' == $this->af->get('date_from_dd')) {
-			$this->ae->add('error', '会期（開始）が入力されていません');
+			$this->ae->add('date_from_yyyy', '会期（開始）が入力されていません');
+		} else {
+			if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
+				$this->ae->add('date_from_yyyy', '会期（開始）が正しくありません');
+			}
 		}
 		if ('' == $this->af->get('date_to_yyyy') || '' == $this->af->get('date_to_mm') || '' == $this->af->get('date_to_dd')) {
-			$this->ae->add('error', '会期（終了）が入力されていません');
+			$this->ae->add('date_to_yyyy', '会期（終了）が入力されていません');
+		} else {
+			if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+				$this->ae->add('date_to_yyyy', '会期（終了）が正しくありません');
+			}
 		}
-		if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
-			$this->ae->add('error', '会期（開始）が正しくありません');
-		}
-		if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->add('error', '会期（終了）が正しくありません');
-		}
-		if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
-			> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
-		}
-		if (time() > mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->add('error', '会期（終了）は未来の日付を入力して下さい');
+		if ('' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_dd')
+			&& '' != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_dd')) {
+			if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
+				> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+				$this->ae->add('date_from_yyyy', '会期が正しくありません（開始 > 終了）');
+			}
+			if (time() > mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+				$this->ae->add('date_to_yyyy', '会期（終了）は未来の日付を入力して下さい');
+			}
 		}
 
 		// 開催頻度
 		if ('' == $this->af->get('frequency')) {
-			$this->ae->add('error', '開催頻度が入力されていません');
+			$this->ae->add('frequency', '開催頻度が入力されていません');
 		}
 
 		// 業種
 		if ('' == $this->af->get('main_industory_1') || '' == $this->af->get('sub_industory_1')) {
-			$this->ae->add('error', '業種が入力されていません');
+			$this->ae->add('main_industory_1', '業種が入力されていません');
 		} else {
 			$this->af->set('check_sub_industory', $this->_mekaCheckSubIndustory());
 		}
 
 		// 取扱品目
 		if ('' == $this->af->get('exhibits_jp')) {
-			$this->ae->add('error', '取扱品目が入力されていません');
+			$this->ae->add('exhibits_jp', '取扱品目が入力されていません');
 		}
-		if (300 < mb_strlen($this->af->get('exhibits_jp', 'UTF-8'))) {
-			$this->ae->add('error', '取扱品目は300文字以内にして下さい');
-		}
+// 		if (300 < mb_strlen($this->af->get('exhibits_jp', 'UTF-8'))) {
+// 			$this->ae->add('exhibits_jp', '取扱品目は300文字以内にして下さい');
+// 		}
 
 		// 開催地
-		if ('' == $this->af->get('region') || '' == $this->af->get('country')) {
-			$this->ae->add('error', '開催地が入力されていません');
+		if ('' == $this->af->get('region')) {
+			$this->ae->add('region', '開催地(地域)が選択されていません');
 		}
-		if ('' == $this->af->get('city') && '' == $this->af->get('other_city')) {
-			$this->ae->add('error', '開催地の都市を選択、または、入力して下さい');
+		if ('' == $this->af->get('country')) {
+			$this->ae->add('country', '開催地(国・地域)が選択されていません');
+		}
+		if ('' == $this->af->get('city') && '1' != $this->af->get('check_other_city')) {
+			$this->ae->add('city', '開催地(都市)が入力されていません');
+		}
+		if ('1' == $this->af->get('check_other_city') && '' == $this->af->get('other_city_jp')) {
+			$this->ae->add('other_city_jp', '開催地(都市(その他))が入力されていません');
 		}
 
 		// 会場名
 		if ('' == $this->af->get('venue_jp')) {
-			$this->ae->add('error', '会場名が入力されていません');
+			$this->ae->add('venue_jp', '会場名が入力されていません');
 		}
 
 		// 開催予定規模
@@ -143,7 +156,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 
 		// 入場資格
 		if ('' == $this->af->get('open_to')) {
-			$this->ae->add('error', '入場資格が入力されていません');
+			$this->ae->add('open_to', '入場資格が選択されていません');
 		}
 
 		// チケットの入手方法
@@ -151,8 +164,11 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			&& '1' != $this->af->get('admission_ticket_2')
 			&& '1' != $this->af->get('admission_ticket_3')
 			&& '1' != $this->af->get('admission_ticket_4')
+			&& '1' != $this->af->get('admission_ticket_5')
 			&& '' == $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('error', 'チケットの入手方法を選択、または、入力して下さい');
+			$this->ae->add('admission_ticket_1', 'チケットの入手方法が選択されていません');
+		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_jp')) {
+			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が入力されていません');
 		}
 
 		// 出展申込締切日
@@ -220,6 +236,12 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 				// sessionの情報をformに設定
 				$this->_setSessionToForm();
 			}
+		}
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
 		}
 
 		return 'user_fairRegistStep2';
@@ -311,13 +333,20 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('photos_name_1', $regist_param_2['photos_name_1']);
 		$this->af->set('photos_name_2', $regist_param_2['photos_name_2']);
 		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
+		$this->af->set('keyword', $regist_param_2['keyword']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
+		$this->af->set('organizer_addr', $regist_param_2['organizer_addr']);
+		$this->af->set('organizer_div', $regist_param_2['organizer_div']);
+		$this->af->set('organizer_pers', $regist_param_2['organizer_pers']);
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
 		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
 		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
+		$this->af->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
+		$this->af->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
+		$this->af->set('agency_in_japan_pers', $regist_param_2['agency_in_japan_pers']);
 		$this->af->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$this->af->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$this->af->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);

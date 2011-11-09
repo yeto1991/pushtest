@@ -412,6 +412,12 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'admin_fairDetail';
 	}
 

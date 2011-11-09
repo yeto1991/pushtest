@@ -107,6 +107,12 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		// 画面遷移
 		$url = $this->config->get('url').'?action_user_fairRegistFinish=true&msg=d';
 		header('Location: '.$url);

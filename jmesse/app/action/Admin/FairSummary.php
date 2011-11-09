@@ -690,6 +690,13 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 			$this->af->setApp('first_page', '1');
 			$this->af->setApp('last_page', '1');
 		}
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'admin_fairSummary';
 	}
 }

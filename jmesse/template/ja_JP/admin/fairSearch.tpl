@@ -1002,19 +1002,26 @@
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
 							<td nowrap>
+{*
 								<input type="text" name="photos" id="photos" value="{$form.photos}" size="50" />
+*}
 								<select name="photos_cond" id="photos_cond">
+									<option value="" {if ('' == $form.photos_cond)}selected{/if}>両方</option>
+{*
 									<option value="1" {if ('1' == $form.photos_cond)}selected{/if}>一致</option>
 									<option value="2" {if ('2' == $form.photos_cond)}selected{/if}>不一致</option>
 									<option value="3" {if ('3' == $form.photos_cond)}selected{/if}>前一致</option>
 									<option value="4" {if ('4' == $form.photos_cond)}selected{/if}>前不一</option>
 									<option value="5" {if ('5' == $form.photos_cond || '' == $form.photos_cond)}selected{/if}>含む</option>
 									<option value="6" {if ('6' == $form.photos_cond)}selected{/if}>含まず</option>
+*}
 									<option value="12" {if ('12' == $form.photos_cond)}selected{/if}>有り</option>
 									<option value="13" {if ('13' == $form.photos_cond)}selected{/if}>無し</option>
+{*
 									<option value="7" {if ('7' == $form.photos_cond)}selected{/if}>一致(全)</option>
 									<option value="8" {if ('8' == $form.photos_cond)}selected{/if}>前一致(全)</option>
 									<option value="9" {if ('9' == $form.photos_cond)}selected{/if}>含む(全)</option>
+*}
 								</select>
 							</td>
 						</tr>

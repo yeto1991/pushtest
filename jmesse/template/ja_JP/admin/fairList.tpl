@@ -125,7 +125,7 @@
 							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}">{$app.jm_fair_list[it].fair_title_jp}</a></td>
 							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}">{$app.jm_fair_list[it].abbrev_title}</a></td>
 							<td>{$app.jm_fair_list[it].date_from_yyyy}/{$app.jm_fair_list[it].date_from_mm}/{$app.jm_fair_list[it].date_from_dd} - {$app.jm_fair_list[it].date_to_yyyy}/{$app.jm_fair_list[it].date_to_mm}/{$app.jm_fair_list[it].date_to_dd}</td>
-							<td>{$app.jm_fair_list[it].region_name}/{$app.jm_fair_list[it].country_name}/{$app.jm_fair_list[it].city_name}/{$app.jm_fair_list[it].other_city}</td>
+							<td>{$app.jm_fair_list[it].region_name}/{$app.jm_fair_list[it].country_name}/{$app.jm_fair_list[it].city_name}/{$app.jm_fair_list[it].other_city_jp}</td>
 							<td>{$app.jm_fair_list[it].email}</td>
 							<td>{$app.jm_fair_list[it].date_of_application}</td>
 							<td>{$app.jm_fair_list[it].date_of_registration}</td>

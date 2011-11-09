@@ -143,7 +143,7 @@
 
 												<div style="padding-left: 15px;">
 													{if ('' != $app.fair_detail.gross_floor_area && 0 <$app.fair_detail.gross_floor_area)}
-													展示面積(net)：{$app.fair_detail.gross_floor_area|number_format}sqm<br />
+													展示面積(net)：{$app.fair_detail.gross_floor_area|number_format} sqm<br />
 													{/if}
 {*
 													{if ('' != $app.fair_detail.transportation_jp)}

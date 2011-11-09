@@ -97,6 +97,19 @@
 
 	// submit
 	function next() {
+		// 展示会に係わる画像(3点)ウイルスチェック判定
+		var path_1 = document.getElementById('photos_1').value;
+		var path_2 = document.getElementById('photos_2').value;
+		var path_3 = document.getElementById('photos_3').value;
+		if ('' != path_1 || '' != path_2 || '' != path_3) {
+			for (var i = 0; i < document.getElementsByName('virus_check').length; i++) {
+				if (document.getElementsByName('virus_check')[i].checked && '0' == document.getElementsByName('virus_check')[i].value) {
+					window.alert('アップロードする画像ファイルのウイルスチェックを行なって下さい')
+					return;
+				}
+			}
+		}
+
 		// 展示会に係わる画像(3点)
 		for (i = 0; i < document.getElementById('photos_list').length; i++) {
 			no = i + 1;
@@ -172,17 +185,17 @@
 									{/if}
 
 									<table id="registration">
+										{if is_error('fair_title_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">見本市名</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
-												<input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" /><br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*見本市名.*/i':'見本市名' eq '見本市名'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												<input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br/>
+												{if is_error('fair_title_jp')}
+												<span class="error-message">{message name="fair_title_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
@@ -191,7 +204,11 @@
 
 									<h4>過去の実績</h4>
 									<table id="registration">
+										{if is_error('year_of_the_trade_fair')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">対象年</th>
 											<th class="required"></th>
 											<td><select name="year_of_the_trade_fair" size="1" id="year_of_the_trade_fair">
@@ -200,94 +217,106 @@
 													<option value="{$app.year_list[it]}" {if $app.year_list[it]==$form.year_of_the_trade_fair}selected{/if}>{$app.year_list[it]}</option>
 													{/section}
 												</select> 年実績<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*対象年.*/i':'対象年' eq '対象年'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('year_of_the_trade_fair')}
+												<span class="error-message">{message name="year_of_the_trade_fair"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('total_number_of_visitor') || is_error('number_of_foreign_visitor')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">総来場者数</th>
 											<th class="required"></th>
 											<td>
-												<input type="text" value="{$form.total_number_of_visitor}" size="10" name="total_number_of_visitor" id="total_number_of_visitor" /> <strong>人</strong> うち海外から <input type="text" value="{$form.number_of_foreign_visitor}" size="10" name="number_of_foreign_visitor" id="number_of_foreign_visitor" /> <strong>人</strong><br />
+												<input type="text" value="{$form.total_number_of_visitor}" size="10" name="total_number_of_visitor" id="total_number_of_visitor" maxlength="10" /> <strong>人</strong> うち海外から <input type="text" value="{$form.number_of_foreign_visitor}" size="10" name="number_of_foreign_visitor" id="number_of_foreign_visitor" maxlength="10" /> <strong>人</strong><br />
 												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*総来場者数.*/i':'総来場者数' eq '総来場者数'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('total_number_of_visitor')}
+												<span class="error-message">{message name="total_number_of_visitor"}</span><br />
+												{/if}
+												{if is_error('number_of_foreign_visitor')}
+												<span class="error-message">{message name="number_of_foreign_visitor"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('total_number_of_exhibitors') || is_error('number_of_foreign_exhibitors')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
-											<th class="item">総出展社数</th>
+										{/if}
+											<th class="item">総出展者数</th>
 											<th class="required"></th>
 											<td>
-												<input type="text" value="{$form.total_number_of_exhibitors}" size="10" name="total_number_of_exhibitors" id="total_number_of_exhibitors" /> <strong>社</strong> うち海外から <input type="text" value="{$form.number_of_foreign_exhibitors}" size="10" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" /> <strong>社</strong><br />
+												<input type="text" value="{$form.total_number_of_exhibitors}" size="10" name="total_number_of_exhibitors" id="total_number_of_exhibitors" maxlength="10" /> <strong>社</strong> うち海外から <input type="text" value="{$form.number_of_foreign_exhibitors}" size="10" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" maxlength="10" /> <strong>社</strong><br />
 												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*総出展社数.*/i':'総出展社数' eq '総出展社数'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('total_number_of_exhibitors')}
+												<span class="error-message">{message name="total_number_of_exhibitors"}</span><br />
+												{/if}
+												{if is_error('number_of_foreign_exhibitors')}
+												<span class="error-message">{message name="number_of_foreign_exhibitors"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('net_square_meters')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">開催規模</th>
 											<th class="required"></th>
 											<td>
-												<input type="text" value="{$form.net_square_meters}" size="10" name="net_square_meters" id="net_square_meters" /> <strong>sqm (NET)</strong><br />
+												<input type="text" value="{$form.net_square_meters}" size="10" name="net_square_meters" id="net_square_meters" maxlength="10" /> <strong>sqm (NET)</strong><br />
 												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*開催規模.*/i':'開催規模' eq '開催規模'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('net_square_meters')}
+												<span class="error-message">{message name="net_square_meters"}</span><br />
 												{/if}
 											</td>
 										</tr>
 									</table>
+
 									<h4>PR・キャッチフレーズ</h4>
 									<table id="registration">
+										{if is_error('profile_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">キャッチフレーズ</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<textarea cols="60" rows="2" name="profile_jp" id="profile_jp">{$form.profile_jp}</textarea><br/>
 											 	500文字以内で簡潔に。例：20年の歴史をもつ○○で最大の環境機器の展示会。<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*キャッチフレーズ.*/i':'キャッチフレーズ' eq 'キャッチフレーズ'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('profile_jp')}
+												<span class="error-message">{message name="profile_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('detailed_information_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">PR・紹介文</th>
 											<th class="required"></th>
 											<td>
 												<textarea cols="60" rows="6" name="detailed_information_jp" id="detailed_information_jp">{$form.detailed_information_jp}</textarea><br/>
 												1000文字以内で。<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*PR・紹介文.*/i':'PR・紹介文' eq 'PR・紹介文'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('detailed_information_jp')}
+												<span class="error-message">{message name="detailed_information_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('photos_1') || is_error('photos_2') || is_error('photos_3')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">見本市の紹介写真</th>
 											<th class="required"></th>
 											<td>
@@ -314,75 +343,157 @@
 														{/if}
 													{/foreach}
 												{/if}
+												画像ファイルのウイルスチェックをしましたか？<br/>
+												<input type="radio" name="virus_check" id="virus_check_y" value="1" />はい
+												<input type="radio" name="virus_check" id="virus_check_n" value="0" checked />いいえ<br/>
+												{if is_error('photos_1')}
+												<span class="error-message">{message name="photos_1"}</span><br />
+												{/if}
+												{if is_error('photos_2')}
+												<span class="error-message">{message name="photos_2"}</span><br />
+												{/if}
+												{if is_error('photos_3')}
+												<span class="error-message">{message name="photos_3"}</span><br />
+												{/if}
+											</td>
+										</tr>
+
+										{if is_error('keyword')}
+										<tr class="errorcheck">
+										{else}
+										<tr>
+										{/if}
+											<th class="item">検索キーワード</th>
+											<th class="required"></th>
+											<td>
+												<input type="text" value="{$form.keyword}" size="60" name="keyword" id="keyword" maxlength="100" /><br/>
+												{if is_error('keyword')}
+												<span class="error-message">{message name="keyword"}</span><br />
+												{/if}
 											</td>
 										</tr>
 									</table>
+
 									<h4>主催者</h4>
 									<table id="registration">
+										{if is_error('organizer_jp') || is_error('organizer_en')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">主催者</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
-												日 <input type="text" value="{$form.organizer_jp}" size="60" name="organizer_jp" id="organizer_jp" /><br/>
-												英 <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" /><br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*主催者\(.*/i':'主催者\(' eq '主催者\('}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												日 <input type="text" value="{$form.organizer_jp}" size="60" name="organizer_jp" id="organizer_jp" maxlength="500" /><br/>
+												英 <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
+												{if is_error('organizer_jp')}
+												<span class="error-message">{message name="organizer_jp"}</span><br />
+												{/if}
+												{if is_error('organizer_en')}
+												<span class="error-message">{message name="organizer_en"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('organizer_addr') || is_error('organizer_div') || is_error('organizer_pers') || is_error('organizer_tel') || is_error('organizer_fax') || is_error('organizer_email')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">主催者連絡先</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
-												<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" /><br />
-												<strong>FAX: </strong><input type="text" value="{$form.organizer_fax}" size="30" name="organizer_fax" id="organizer_fax" /><br />
+												<strong>住所: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
+												<strong>担当部課: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />
+												<strong>担当者: </strong><input type="text" value="{$form.organizer_pers}" size="30" name="organizer_pers" id="organizer_pers" maxlength="100" /><br />
+												<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
+												<strong>FAX: </strong><input type="text" value="{$form.organizer_fax}" size="30" name="organizer_fax" id="organizer_fax" maxlength="100" /><br />
 												電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
 												例：東京の場合 +81-3-1234-5678<br />
-												<strong>Email: </strong><input type="text" value="{$form.organizer_email}" size="60" name="organizer_email" id="organizer_email" /><br />
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*主催者連絡先.*/i':'主催者連絡先' eq '主催者連絡先'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												<strong>Email: </strong><input type="text" value="{$form.organizer_email}" size="60" name="organizer_email" id="organizer_email" maxlength="255" /><br />
+												{if is_error('organizer_addr')}
+												<span class="error-message">{message name="organizer_addr"}</span><br />
+												{/if}
+												{if is_error('organizer_div')}
+												<span class="error-message">{message name="organizer_div"}</span><br />
+												{/if}
+												{if is_error('organizer_pers')}
+												<span class="error-message">{message name="organizer_pers"}</span><br />
+												{/if}
+												{if is_error('organizer_tel')}
+												<span class="error-message">{message name="organizer_tel"}</span><br />
+												{/if}
+												{if is_error('organizer_fax')}
+												<span class="error-message">{message name="organizer_fax"}</span><br />
+												{/if}
+												{if is_error('organizer_email')}
+												<span class="error-message">{message name="organizer_email"}</span><br />
 												{/if}
 											 </td>
 										</tr>
+										{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">日本国内の照会先</th>
 											<th class="required"></th>
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
 												<table style="border-style:none;border-collapse:collapse;">
+													{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
+													<tr class="errorcheck">
+													{else}
 													<tr>
+													{/if}
 														<td rowspan="2" style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 															<strong>名称： </strong>
 														</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															日 <input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" /><br />
+															日 <input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" maxlength="255" /><br />
 														</td>
 													</tr>
+													{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
+													<tr class="errorcheck">
+													{else}
 													<tr>
+													{/if}
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															英 <input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" /><br />
+															英 <input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="255" /><br />
 														</td>
 													</tr>
 												</table>
-												<strong>TEL: </strong><input type="text" value="{$form.agency_in_japan_tel}" size="30" name="agency_in_japan_tel" id="agency_in_japan_tel" /><br />
-												<strong>FAX: </strong><input type="text" value="{$form.agency_in_japan_fax}" size="30" name="agency_in_japan_fax" id="agency_in_japan_fax" /><br />
+												<strong>住所: </strong><input type="text" value="{$form.agency_in_japan_addr}" size="30" name="agency_in_japan_addr" id="agency_in_japan_addr" maxlength="255" /><br />
+												<strong>担当部課: </strong><input type="text" value="{$form.agency_in_japan_div}" size="30" name="agency_in_japan_div" id="agency_in_japan_div" maxlength="255" /><br />
+												<strong>担当者: </strong><input type="text" value="{$form.agency_in_japan_pers}" size="30" name="agency_in_japan_pers" id="agency_in_japan_pers" maxlength="100" /><br />
+												<strong>TEL: </strong><input type="text" value="{$form.agency_in_japan_tel}" size="30" name="agency_in_japan_tel" id="agency_in_japan_tel" maxlength="100" /><br />
+												<strong>FAX: </strong><input type="text" value="{$form.agency_in_japan_fax}" size="30" name="agency_in_japan_fax" id="agency_in_japan_fax" maxlength="100" /><br />
 												電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
 												例：東京の場合 +81-3-1234-5678<br />
-												<strong>Email: </strong><input type="text" value="{$form.agency_in_japan_email}" size="60" name="agency_in_japan_email" id="agency_in_japan_email" /><br />
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*日本国内の照会先.*/i':'日本国内の照会先' eq '日本国内の照会先'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												<strong>Email: </strong><input type="text" value="{$form.agency_in_japan_email}" size="60" name="agency_in_japan_email" id="agency_in_japan_email" maxlength="255" /><br />
+												{if is_error('agency_in_japan_jp')}
+												<span class="error-message">{message name="agency_in_japan_jp"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_en')}
+												<span class="error-message">{message name="agency_in_japan_en"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_addr')}
+												<span class="error-message">{message name="agency_in_japan_addr"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_div')}
+												<span class="error-message">{message name="agency_in_japan_div"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_pers')}
+												<span class="error-message">{message name="agency_in_japan_pers"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_tel')}
+												<span class="error-message">{message name="agency_in_japan_tel"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_fax')}
+												<span class="error-message">{message name="agency_in_japan_fax"}</span><br />
+												{/if}
+												{if is_error('agency_in_japan_email')}
+												<span class="error-message">{message name="agency_in_japan_email"}</span><br />
 												{/if}
 											</td>
 										</tr>

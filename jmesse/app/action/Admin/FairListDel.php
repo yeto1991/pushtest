@@ -102,6 +102,12 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 		// コミット
 		$db->commit();
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		header('Location: '.$this->config->get('url').'?action_admin_fairList=true&type='.$this->af->get('type').'&page='.$this->af->get('page'));
 		return null;
 	}

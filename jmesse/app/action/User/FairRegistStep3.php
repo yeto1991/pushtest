@@ -41,7 +41,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
+			$this->af->set('function', '');
 			return 'user_Login';
 		}
 
@@ -60,18 +60,19 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', '見本市番号がありません');
+				return 'error';
 			}
 		}
 
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-//			return 'user_fairRegistStep2';
+// 			return 'user_fairRegistStep2';
 		}
 
 		// 見本市名
 		if ('' == $this->af->get('fair_title_jp')) {
-			$this->ae->add('error', '見本市名が入力されていません');
+			$this->ae->add('fair_title_jp', '見本市名が入力されていません');
 		}
 
 		// 対象年
@@ -82,7 +83,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			&& '' != $this->af->get('number_of_foreign_visitor')
 			&& 0 < $this->af->get('number_of_foreign_visitor')) {
 			if ($this->af->get('total_number_of_visitor') < $this->af->get('number_of_foreign_visitor')) {
-				$this->ae->add('error', '総来場者数が正しくありません(全体<海外)');
+				$this->ae->add('total_number_of_visitor', '総来場者数が正しくありません(全体<海外)');
 			}
 		}
 
@@ -92,7 +93,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			&& '' != $this->af->get('number_of_foreign_exhibitors')
 			&& 0 < $this->af->get('number_of_foreign_exhibitors')) {
 			if ($this->af->get('total_number_of_exhibitors') < $this->af->get('number_of_foreign_exhibitors')) {
-				$this->ae->add('error', '総出展社数が正しくありません(全体<海外)');
+				$this->ae->add('total_number_of_exhibitors', '総出展社数が正しくありません(全体<海外)');
 			}
 		}
 
@@ -100,7 +101,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 
 		// キャッチフレーズ
 		if ('' == $this->af->get('profile_jp')) {
-			$this->ae->add('error', 'キャッチフレーズが入力されていません');
+			$this->ae->add('profile_jp', 'キャッチフレーズが入力されていません');
 		}
 // 		if (500 < mb_strlen($this->af->get('profile_jp'))) {
 // 			$this->ae->add('error', 'キャッチフレーズは500文字以内にして下さい');
@@ -124,7 +125,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 				$photos = $ary_photos[$j];
 				if ('' != $photos_name && $photos['name'] == $photos_name) {
 					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type'] && 'image/pjpeg' != $photos['type']) {
-						$this->ae->add('error', '見本市の紹介写真はgif、または、jpegのみにして下さい('.$photos['type'].')');
+						$this->ae->add('photos_1', '見本市の紹介写真はgif、または、jpegのみにして下さい('.$photos['type'].')');
 						break;
 					}
 				}
@@ -133,21 +134,25 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 
 		// 主催者
 		if ('' == $this->af->get('organizer_jp')) {
-			$this->ae->add('error', '主催者(日)が入力されていません');
+			$this->ae->add('organizer_jp', '主催者(日)が入力されていません');
 		}
 		if ('' == $this->af->get('organizer_en')) {
-			$this->ae->add('error', '主催者(英)が入力されていません');
+			$this->ae->add('organizer_en', '主催者(英)が入力されていません');
 		}
 
 		// 主催者連絡先
-		if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
-			$this->ae->add('error', '主催者連絡先が入力されていません');
+		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
+			$this->ae->add('organizer_addr', '主催者連絡先が入力されていません');
+		} else {
+			if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
+				$this->ae->add('organizer_tel', 'TEL、FAX、Emailを最低一つ入力して下さい');
+			}
 		}
 		if ('' != $this->af->get('organizer_email')) {
 			if (!strpos($this->af->get('organizer_email'), '@')
-				|| 0 === strpos($this->af->get('organizer_email'), '@')
-				|| strlen($this->af->get('organizer_email')) - 1 === strpos($this->af->get('organizer_email'), '@')) {
-				$this->ae->add('error', '主催者連絡先E-Mailが不正です');
+			|| 0 === strpos($this->af->get('organizer_email'), '@')
+			|| strlen($this->af->get('organizer_email')) - 1 === strpos($this->af->get('organizer_email'), '@')) {
+				$this->ae->add('organizer_email', '主催者連絡先(E-Mail)が不正です');
 			}
 		}
 
@@ -156,7 +161,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			if (!strpos($this->af->get('agency_in_japan_email'), '@')
 				|| 0 === strpos($this->af->get('agency_in_japan_email'), '@')
 				|| strlen($this->af->get('agency_in_japan_email')) - 1 === strpos($this->af->get('agency_in_japan_email'), '@')) {
-				$this->ae->add('error', '日本国内の照会先E-Mailが不正です');
+				$this->ae->add('agency_in_japan_email', '日本国内の照会先(E-Mail)が不正です');
 			}
 		}
 
@@ -207,6 +212,12 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			}
 		}
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'user_fairRegistStep3';
 	}
 
@@ -230,13 +241,20 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		$regist_param_2['photos_name_2'] = $this->af->get('photos_name_2');
 		$regist_param_2['photos_name_3'] = $this->af->get('photos_name_3');
 		$regist_param_2['del_photos_name'] = $this->af->get('del_photos_name');
+		$regist_param_2['keyword'] = $this->af->get('keyword');
 		$regist_param_2['organizer_jp'] = $this->af->get('organizer_jp');
 		$regist_param_2['organizer_en'] = $this->af->get('organizer_en');
+		$regist_param_2['organizer_addr'] = $this->af->get('organizer_addr');
+		$regist_param_2['organizer_div'] = $this->af->get('organizer_div');
+		$regist_param_2['organizer_pers'] = $this->af->get('organizer_pers');
 		$regist_param_2['organizer_tel'] = $this->af->get('organizer_tel');
 		$regist_param_2['organizer_fax'] = $this->af->get('organizer_fax');
 		$regist_param_2['organizer_email'] = $this->af->get('organizer_email');
 		$regist_param_2['agency_in_japan_jp'] = $this->af->get('agency_in_japan_jp');
 		$regist_param_2['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
+		$regist_param_2['agency_in_japan_addr'] = $this->af->get('agency_in_japan_addr');
+		$regist_param_2['agency_in_japan_div'] = $this->af->get('agency_in_japan_div');
+		$regist_param_2['agency_in_japan_pers'] = $this->af->get('agency_in_japan_pers');
 		$regist_param_2['agency_in_japan_tel'] = $this->af->get('agency_in_japan_tel');
 		$regist_param_2['agency_in_japan_fax'] = $this->af->get('agency_in_japan_fax');
 		$regist_param_2['agency_in_japan_email'] = $this->af->get('agency_in_japan_email');

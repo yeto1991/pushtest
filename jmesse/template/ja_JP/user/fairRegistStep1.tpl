@@ -236,51 +236,58 @@
 
 									<h4>基本情報</h4>
 									<table id="registration">
+										{if is_error('fair_title_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">見本市名</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br />
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*見本市名.*/i':'見本市名' eq '見本市名'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('fair_title_jp')}
+												<span class="error-message">{message name="fair_title_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('abbrev_title')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">見本市略称</th>
 											<th class="required"></th>
 											<td>
 												<input type="text" value="{$form.abbrev_title}" size="30"  name="abbrev_title" id="abbrev_title" maxlength="255" /><br />
 												<strong>半角英数</strong>で入力してください。 例：Ambiente。<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*見本市略称.*/i':'見本市略称' eq '見本市略称'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('abbrev_title')}
+												<span class="error-message">{message name="abbrev_title"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('fair_url')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">見本市公式サイトURL</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<input type="text" value="{if ('' == $form.fair_url)}http://{else}{$form.fair_url}{/if}" size="60" name="fair_url" id="fair_url" maxlength="255" /><br />
 												URLはhttp:// から入力して下さい。<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*見本市公式サイトURL.*/i':'見本市公式サイトURL' eq '見本市公式サイトURL'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('fair_url')}
+												<span class="error-message">{message name="fair_url"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('date_from_yyyy') || is_error('date_from_mm') || is_error('date_from_dd') || is_error('date_to_yyyy') || is_error('date_to_mm') || is_error('date_to_dd')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">会期</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
@@ -394,16 +401,32 @@
 													<option value="30" {if ('30' == $form.date_to_dd)}selected{/if}>30</option>
 													<option value="31" {if ('31' == $form.date_to_dd)}selected{/if}>31</option>
 												</select> 日まで<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*会期.*/i':'会期' eq '会期'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('date_from_yyyy')}
+												<span class="error-message">{message name="date_from_yyyy"}</span><br />
+												{/if}
+												{if is_error('date_from_mm')}
+												<span class="error-message">{message name="date_from_mm"}</span><br />
+												{/if}
+												{if is_error('date_from_dd')}
+												<span class="error-message">{message name="date_from_dd"}</span><br />
+												{/if}
+												{if is_error('date_to_yyyy')}
+												<span class="error-message">{message name="date_to_yyyy"}</span><br />
+												{/if}
+												{if is_error('date_to_mm')}
+												<span class="error-message">{message name="date_to_mm"}</span><br />
+												{/if}
+												{if is_error('date_to_dd')}
+												<span class="error-message">{message name="date_to_dd"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('frequency')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">開催頻度</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
@@ -411,12 +434,8 @@
 												<input type="radio" value="{$app.frequency_list[it].kbn_2}" name="frequency" id="frequency" {if ($app.frequency_list[it].kbn_2 == $form.frequency)}checked{/if} />{$app.frequency_list[it].discription_jp}&nbsp;
 												{if (0 == (($smarty.section.it.index + 1) % 5))}<br/>{/if}
 												{/section}<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*開催頻度.*/i':'開催頻度' eq '開催頻度'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('frequency')}
+												<span class="error-message">{message name="frequency"}</span><br />
 												{/if}
 											</td>
 										</tr>
@@ -424,7 +443,11 @@
 
 									<h4>業種・取扱品目</h4>
 									<table id="registration">
+										{if is_error('main_industory_1')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">業種</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
@@ -450,90 +473,137 @@
 												{/if}
 												</div>
 												<button class="modalInput" rel="#prompt">業種選択</button><br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*業種.*/i':'業種' eq '業種'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('main_industory_1')}
+												<span class="error-message">{message name="main_industory_1"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('exhibits_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">取扱品目</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<textarea cols="60" rows="3" name="exhibits_jp" id="exhibits_jp">{$form.exhibits_jp}</textarea><br />
 												300文字以内で、具体的な品目名を記載ください。<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*取扱品目.*/i':'取扱品目' eq '取扱品目'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('exhibits_jp')}
+												<span class="error-message">{message name="exhibits_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
 									</table>
+
 									<h4>開催地・会場</h4>
 									<table id="registration">
+										{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">開催地</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
-												地域：
-												<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
-													<option value="">...</option>
-													{section name=it loop=$app.region_list}
-														<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_jp}</option>
-													{/section}
-													</select>
-												国・地域：
-													<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
-														<option value="">...</option>'
-													</select><br/>
-												都市：
-													<select name="city" id="city" style="width:200px;">
-														<option value="">...</option>'
-													</select>
-												その他：
-													<input type="checkbox" name="check_other_city" id="check_other_city" value="1" {if ('1' == $form.check_other_city)}checked{/if} //>
-													<input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" size="30" maxlength="100" /><br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*開催地.*/i':'開催地' eq '開催地'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												<table style="border-style:none;border-collapse:collapse;">
+													{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+													<tr class="errorcheck">
+													{else}
+													<tr>
+													{/if}
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">地域</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
+																<option value="">...</option>
+																{section name=it loop=$app.region_list}
+																<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_jp}</option>
+																{/section}
+															</select>
+														</td>
+													</tr>
+													{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+													<tr class="errorcheck">
+													{else}
+													<tr>
+													{/if}
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">国・地域</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
+																<option value="">...</option>'
+															</select>
+														</td>
+													</tr>
+													{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+													<tr class="errorcheck">
+													{else}
+													<tr>
+													{/if}
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">都市</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															<select name="city" id="city" style="width:200px;">
+																<option value="">...</option>'
+															</select>
+														</td>
+													</tr>
+													{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+													<tr class="errorcheck">
+													{else}
+													<tr>
+													{/if}
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">都市(その他)</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
+														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
+															<input type="checkbox" name="check_other_city" id="check_other_city" value="1" {if ('1' == $form.check_other_city)}checked{/if} //>
+															<input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" size="30" maxlength="100" /><br/>
+														</td>
+													</tr>
+												</table>
+												{if is_error('region')}
+												<span class="error-message">{message name="region"}</span><br />
+												{/if}
+												{if is_error('country')}
+												<span class="error-message">{message name="country"}</span><br />
+												{/if}
+												{if is_error('city')}
+												<span class="error-message">{message name="city"}</span><br />
+												{/if}
+												{if is_error('other_city_jp')}
+												<span class="error-message">{message name="other_city_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('venue_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">会場名</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<input type="text" value="{$form.venue_jp}" size="50" name="venue_jp" id="venue_jp" maxlength="255" /><br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*会場名.*/i':'会場名' eq '会場名'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('venue_jp')}
+												<span class="error-message">{message name="venue_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('gross_floor_area')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">開催予定規模</th>
 											<th class="required"></th>
 											<td>
 												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
 												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*開催予定規模.*/i':'開催予定規模' eq '開催予定規模'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('gross_floor_area')}
+												<span class="error-message">{message name="gross_floor_area"}</span><br />
 												{/if}
 											</td>
 										</tr>
@@ -544,33 +614,32 @@
 											<td>
 												<input type="text" value="{$form.transportation_jp}" size="60" name="transportation_jp" id="transportation_jp" maxlength="500"><br />
 												例：成田空港からA12バスで30分<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*会場までの交通手段.*/i':'会場までの交通手段' eq '会場までの交通手段'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
-												{/if}
 											</td>
 										</tr>
 *}
+
+										{if is_error('open_to')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">入場資格</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{section name=it loop=$app.open_to_list}
 												<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if}>{$app.open_to_list[it].discription_jp}&nbsp;
 												{/section}<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*入場資格.*/i':'入場資格' eq '入場資格'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('open_to')}
+												<span class="error-message">{message name="open_to"}</span><br />
 												{/if}
 											</td>
 										</tr>
+
+										{if is_error('admission_ticket_1') || is_error('other_admission_ticket_jp')}
+										<tr class="errorcheck">
+										{else}
 										<tr>
+										{/if}
 											<th class="item">チケットの入手方法</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
@@ -580,12 +649,11 @@
 												<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />当日会場で入手 <br />
 												<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />その他<input name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" size="50" type="text" maxlength="500" /> <br />
 												複数選択可能<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*チケットの入手方法.*/i':'チケットの入手方法' eq 'チケットの入手方法'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
+												{if is_error('admission_ticket_1')}
+												<span class="error-message">{message name="admission_ticket_1"}</span><br />
+												{/if}
+												{if is_error('other_admission_ticket_jp')}
+												<span class="error-message">{message name="other_admission_ticket_jp"}</span><br />
 												{/if}
 											</td>
 										</tr>
@@ -649,13 +717,6 @@
 													<option value="30" {if ('30' == $form.app_dead_dd)}selected{/if}>30</option>
 													<option value="21" {if ('31' == $form.app_dead_dd)}selected{/if}>31</option>
 												</select> 日<br/>
-												{if count($errors)}
-													{foreach from=$errors item=error}
-														{if $error|regex_replace:'/.*出展申込締切日.*/i':'出展申込締切日' eq '出展申込締切日'}
-														<span class="error-message">{$error}</span><br />
-														{/if}
-													{/foreach}
-												{/if}
 											</td>
 										</tr>
 *}

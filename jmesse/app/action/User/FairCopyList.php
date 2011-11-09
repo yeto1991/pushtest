@@ -86,6 +86,12 @@ class Jmesse_Action_UserFairCopyList extends Jmesse_ActionClass
 		// My展示会情報の取得
 		$this->af->setApp('fair_list', $jm_fair_mgr->getMyFairInfoList($this->session->get('user_id')));
 
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'user_fairCopyList';
 	}
 }

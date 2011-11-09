@@ -393,7 +393,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['report_link_cond'] = $this->af->get('report_link_cond');
 				$search_cond['venue_link'] = $this->af->get('venue_link');
 				$search_cond['venue_link_cond'] = $this->af->get('venue_link_cond');
-				$search_cond['photos'] = $this->af->get('photos');
+//				$search_cond['photos'] = $this->af->get('photos');
 				$search_cond['photos_cond'] = $this->af->get('photos_cond');
 				$search_cond['note_for_system_manager'] = $this->af->get('note_for_system_manager');
 				$search_cond['note_for_system_manager_cond'] = $this->af->get('note_for_system_manager_cond');
@@ -535,6 +535,12 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			// 最初・最後？
 			$this->af->setApp('first_page', '1');
 			$this->af->setApp('last_page', '1');
+		}
+
+		// エラー判定
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
 		}
 
 		return 'admin_fairList';
