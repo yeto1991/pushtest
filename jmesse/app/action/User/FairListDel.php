@@ -74,6 +74,8 @@ class Jmesse_Action_UserFairListDel extends Jmesse_ActionClass
 				//項目設定
 				$jm_fair->set('del_flg', '1');
 				$jm_fair->set('del_date', date('Y/m/d H:i:s'));
+				$jm_fair->set('update_user_id', $this->session->get('user_id'));
+				$jm_fair->set('update_date', date('Y/m/d H:i:s'));
 
 				// UPDATE
 				$ret = $jm_fair->update();
