@@ -185,7 +185,7 @@
 										</tr>
 										<tr>
 											<th class="item"><font size="2">出品物</font></th>
-											<td><font size="2">{$app.my_fair_info_list[it].exhibits_jp}</font></td>
+											<td><font size="2">{$app.my_fair_info_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}</font></td>
 										</tr>
 										<tr>
 											<th class="item"><font size="2">承認ステータス</font></th>
