@@ -5,8 +5,8 @@
 <script type="text/javascript">
 {literal}
 <!--
-	function openDoc(url, mihon_no) {
-		document.location.href = url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no;
+	function openDoc(url, mihon_no, type, page) {
+		document.location.href = url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&type=' + type + '&page=' + page;
 	}
 
 	function openTemp(url, mihon_no, seq_no) {
@@ -19,6 +19,10 @@
 
 	function copyDoc(url, mihon_no) {
 		document.location.href = url + '?action_admin_fairChange=true&mode=copy&mihon_no=' + mihon_no;
+	}
+
+	function backToList(url, type, page) {
+		document.location.href = url + '?action_admin_fairList=true&type=' + type + '&page=' + page;
 	}
 // -->
 {/literal}
@@ -43,22 +47,24 @@
 						<tr>
 							<td>
 							{if ("" != $app.mihon_no_prev)}
-							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_prev}')" />
+							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_prev}', '{$form.type}', '{if ('' != $form.page)}{$form.page}{else}1{/if}')" />
 							{else}
 							<input type="button" value="前の文書" onclick="" disabled />
 							{/if}
 							</td>
 							<td>
 							{if ("" != $app.mihon_no_next)}
-							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_next}')" />
+							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_next}', '{$form.type}', '{if ('' != $form.page)}{$form.page}{else}1{/if}')" />
 							{else}
 							<input type="button" value="次の文書" onclick="" disabled />
 							{/if}
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><input type="button" value="修正・更新" onclick="changeDoc('{$config.url}', '{$form.mihon_no}')" /></td>
 							<td><input type="button" value="コピー編集登録" onclick="copyDoc('{$config.url}', '{$form.mihon_no}')" /></td>
+							<td><input type="button" value="一覧へ戻る" onclick="backToList('{$config.url}', '{$form.type}', '{if ('' != $form.page)}{$form.page}{else}1{/if}')" /></td>
 						</tr>
 					</table>
 					<hr/>
@@ -611,22 +617,24 @@
 						<tr>
 							<td>
 							{if ("" != $app.mihon_no_prev)}
-							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_prev}')" />
+							<input type="button" value="前の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_prev}', '{$form.type}', '{if ('' != $form.page)}{$form.page}{else}1{/if}')" />
 							{else}
 							<input type="button" value="前の文書" onclick="" disabled />
 							{/if}
 							</td>
 							<td>
 							{if ("" != $app.mihon_no_next)}
-							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_next}')" />
+							<input type="button" value="次の文書" onclick="openDoc('{$config.url}', '{$app.mihon_no_next}', '{$form.type}', '{if ('' != $form.page)}{$form.page}{else}1{/if}')" />
 							{else}
 							<input type="button" value="次の文書" onclick="" disabled />
 							{/if}
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><input type="button" value="修正・更新" onclick="changeDoc('{$config.url}', '{$form.mihon_no}')" /></td>
 							<td><input type="button" value="コピー編集登録" onclick="copyDoc('{$config.url}', '{$form.mihon_no}')" /></td>
+							<td><input type="button" value="一覧へ戻る" onclick="backToList('{$config.url}', '{$form.type}', '{if ('' != $form.page)}{$form.page}{else}1{/if}')" /></td>
 						</tr>
 					</table>
 					{/if}

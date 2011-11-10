@@ -79,6 +79,11 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+
 		// オブジェクトの取得
 		$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 		if (null == $jm_fair_obj) {
@@ -106,6 +111,20 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
+
+		// LOGに記録
+		$mgr =& $this->backend->getManager('userCommon');
+		$ret = $mgr->regLog($this->session->get('user_id'), '4', '2', $this->af->get('mihon_no'));
+		if (Ethna::isError($ret)) {
+			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
+			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->ae->add('error', $msg);
+			$db->rollback();
+			return 'error';
+		}
+
+		// COMMIT
+		$db->commit();
 
 		// エラー判定
 		if (0 < $this->ae->count()) {

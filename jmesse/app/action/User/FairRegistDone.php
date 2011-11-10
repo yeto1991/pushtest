@@ -272,9 +272,9 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$mail_mgr =& $this->backend->getManager('mail');
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
 		if ('c' == $this->af->get('mode')) {
-// 			$mail_mgr->sendmailFairChange($jm_user->get('email'), $ary_value);
+ 			$mail_mgr->sendmailFairChange($jm_user->get('email'), $ary_value);
 		} else {
-// 			$mail_mgr->sendmailFairReigst($jm_user->get('email'), $ary_value);
+ 			$mail_mgr->sendmailFairReigst($jm_user->get('email'), $ary_value);
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
 

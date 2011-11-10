@@ -8,6 +8,10 @@
 	function goto_page(url, type, page) {
 		document.location.href = url + '?action_admin_fairSummary=true&type=' + type + '&page=' + page;
 	}
+
+	function goto_list(url, index) {
+		document.location.href = url + '?action_admin_fairList=true&type=s&index=' + index;
+	}
 {/literal}
 -->
 </script>
@@ -48,21 +52,41 @@
 					{else}
 					<input type="button" value="次の一覧" onclick="" disabled />
 					{/if}
-					<hr /> {$app.total} 件中、{$app.begin} から {$app.limit} 件を表示
+					<hr />
+					{$app.total} 件中、{$app.begin} から {$app.limit} 件を表示
 					<table border="1">
 						<tr>
-							<th nowrap>件数</th>
-							{section name=it loop=$app.syukei_retu}
-							<th nowrap>{$app.syukei_retu[it]}</th>
+							{section name=it loop=$app.jm_fair_summary_column}
+							<th nowrap>{$app.jm_fair_summary_column[it]}</th>
 							{/section}
 						</tr>
+						{section name=it loop=$app.jm_fair_summary_list}
 						<tr>
-							<td><a href="">123</a></td>
-							{section name=it loop=$app.syukei_retu}
-							<td>{$app.jm_fair_summary_list[it]}ここに取得データを表示する!!</td>
+							{section name=it2 loop=$app.jm_fair_summary_list[it]}
+								{if ('' != $app.jm_fair_summary_list[it][it2])}
+									{if ($smarty.section.it2.index == $app.count_column)}
+							<td align="right"><a href="javascript:goto_list('{$config.url}', '{$smarty.section.it.index}');">{$app.jm_fair_summary_list[it][it2]}</a></td>
+									{else}
+							<td>{$app.jm_fair_summary_list[it][it2]}</td>
+									{/if}
+								{else}
+							<td>&nbsp;</td>
+								{/if}
 							{/section}
 						</tr>
+						{/section}
 					</table>
+					<hr/>
+					{if ('1' != $app.first_page)}
+					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}')" />
+					{else}
+					<input type="button" value="前の一覧" onclick="" disabled />
+					{/if}
+					{if ('1' != $app.last_page)}
+					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}')" />
+					{else}
+					<input type="button" value="次の一覧" onclick="" disabled />
+					{/if}
 				</td>
 			</tr>
 		</table>

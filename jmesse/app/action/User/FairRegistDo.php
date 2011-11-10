@@ -200,6 +200,13 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 // 		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
 		$regist_param_3['spare_field1'] = $this->af->get('spare_field1');
 		$this->session->set('regist_param_3', $regist_param_3);
+
+		$regist_param_1 = $this->session->get('regist_param_1');
+		if (null == $regist_param_1) {
+			$regist_param_1 = array();
+		}
+		$regist_param_1['fair_title_jp'] = $this->af->get('fair_title_jp');
+		$this->session->set('regist_param_1', $regist_param_1);
 	}
 
 	function _setSessionToForm() {

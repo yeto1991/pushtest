@@ -5,8 +5,8 @@
 <script type="text/javascript">{literal}
 	function init() {
 	}
-	function goto_page(url, type, page) {
-		document.location.href = url + '?action_admin_fairList=true&type=' + type + '&page=' + page;
+	function goto_page(url, type, page, index) {
+		document.location.href = url + '?action_admin_fairList=true&type=' + type + '&page=' + page + '&index=' + index;
 	}
 	function download() {
 		action = document.createElement('input');
@@ -66,6 +66,7 @@
 		<input type="hidden" name="type" id="type" value="{$app.type}" />
 		<input type="hidden" name="page" id="page" value="{$app.page}" />
 		<input type="hidden" name="sort" id="sort" value="" />
+		<input type="hidden" name="index" id="index" value="{$form.index}" />
 		<table style="width: 100%;">
 			<tr>
 				<td valign="top" style="width: 200px;">{include file="admin/menu.tpl"}</td>
@@ -87,18 +88,17 @@
 
 					<div align="center">一覧画面</div>
 					{if ('1' != $app.first_page)}
-					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}')" />
+					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}', '{$form.index}')" />
 					{else}
 					<input type="button" value="前の一覧" onclick="" disabled />
 					{/if}
 					{if ('1' != $app.last_page)}
-					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}')" />
+					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}', '{$form.index}')" />
 					{else}
 					<input type="button" value="次の一覧" onclick="" disabled />
 					{/if}
 					<input type="button" value="ダウンロード" onclick="download()" />
-					<input type="button" value="検索画面" onclick="search('{$config.url}')" />
-					<input type="button" value="集計画面" onclick="" /><br />
+					<input type="button" value="検索画面" onclick="search('{$config.url}')" /><br/>
 					<input type="button" value="削除" onclick="del()" /> <small> 選択した文書に対して処理を実行します。</small>
 					<hr /> {$app.total} 件中、{$app.begin} から {$app.limit} 件を表示
 
@@ -122,8 +122,8 @@
 							<td align="center"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.jm_fair_list[it].mihon_no}"></td>
 {*							<td></td> *}
 							<td align="right">{$app.jm_fair_list[it].mihon_no}</td>
-							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}">{$app.jm_fair_list[it].fair_title_jp}</a></td>
-							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}">{$app.jm_fair_list[it].abbrev_title}</a></td>
+							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].fair_title_jp}</a></td>
+							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].abbrev_title}</a></td>
 							<td>{$app.jm_fair_list[it].date_from_yyyy}/{$app.jm_fair_list[it].date_from_mm}/{$app.jm_fair_list[it].date_from_dd} - {$app.jm_fair_list[it].date_to_yyyy}/{$app.jm_fair_list[it].date_to_mm}/{$app.jm_fair_list[it].date_to_dd}</td>
 							<td>{$app.jm_fair_list[it].region_name}/{$app.jm_fair_list[it].country_name}/{$app.jm_fair_list[it].city_name}/{$app.jm_fair_list[it].other_city_jp}</td>
 							<td>{$app.jm_fair_list[it].email}</td>
@@ -223,20 +223,19 @@
 							<input type="reset" value="リセット" />
 					</dl>
 					<hr />
-					<input type="button" name="$DeleteDoc" value="削除" onClick="del()"><br />
+					<input type="button" name="$DeleteDoc" value="削除" onClick="del()"> <small> 選択した文書に対して処理を実行します。</small><br />
 					{if ('1' != $app.first_page)}
-					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}')" />
+					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}', '{$form.index}')" />
 					{else}
 					<input type="button" value="前の一覧" onclick="" disabled />
 					{/if}
 					{if ('1' != $app.last_page)}
-					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}')" />
+					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}', '{$form.index}')" />
 					{else}
 					<input type="button" value="次の一覧" onclick="" disabled />
 					{/if}
 					<input type="button" value="ダウンロード" onclick="download()" />
 					<input type="button" value="検索画面" onclick="search('{$config.url}')" />
-					<input type="button" value="集計画面" onclick="" />
 				</td>
 			</tr>
 		</table>

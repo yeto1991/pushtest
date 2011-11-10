@@ -401,6 +401,21 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['note_for_data_manager_cond'] = $this->af->get('note_for_data_manager_cond');
 				$this->session->set('search_cond', $search_cond);
 			}
+		} elseif ('s' == $this->af->get('type')) {
+			$index = $this->af->get('index');
+			$code_list = $this->session->get('code_list');
+			$code = $code_list[$index];
+			$sql_sum = '';
+			$data_sum = array();
+			foreach ($code as $key => $value) {
+				if ('' != $sql_sum) {
+					$sql_sum .= ' and ';
+				}
+				$sql_sum .= $key.' = ? ';
+				array_push($data_sum, $value);
+			}
+			$this->session->set('sql_sum', $sql_sum);
+			$this->session->set('data_sum', $data_sum);
 		} else {
 			$this->ae->add('error', 'typeの指定が不正です。');
 			return 'error';
@@ -543,7 +558,8 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			return 'error';
 		}
 
-		return 'admin_fairList';
+// 		return 'error';
+ 		return 'admin_fairList';
 	}
 }
 
