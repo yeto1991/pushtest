@@ -64,7 +64,13 @@
 {/literal}
 //-->
 </script>
-<title>見本市情報詳細 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+{if ('' == $form.mode) || ('e' == $form.mode)}
+<title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+{elseif ('c' == $form.mode)}
+<title>見本市修正 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+{else}
+<title>見本市詳細 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+{/if}
 </head>
 
 <body class="layout-LC highlight-match j-messe" onload="init('{$form.select_language_info}', '{$from.mode}')"">
@@ -80,7 +86,19 @@
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
-			<li>見本市情報詳細</li>
+			{if ('' == $form.mode) || ('e' == $form.mode)}
+			<li><a href="/database/j-messe/tradefair/">見本市登録(step1)</a></li>
+			<li><a href="/database/j-messe/tradefair/">見本市登録(step2)</a></li>
+			<li><a href="/database/j-messe/tradefair/">見本市登録(step3)</a></li>
+			<li>見本市登録確認</li>
+			{elseif ('c' == $form.mode)}
+			<li><a href="/database/j-messe/tradefair/">見本市修正(step1)</a></li>
+			<li><a href="/database/j-messe/tradefair/">見本市修正(step2)</a></li>
+			<li><a href="/database/j-messe/tradefair/">見本市修正(step3)</a></li>
+			<li>見本市修正確認</li>
+			{else}
+			<li><a href="/database/j-messe/tradefair/">見本市詳細</a></li>
+			{/if}
 		</ul>
 	</div>
 	<!-- /bread -->
@@ -110,10 +128,12 @@ $form.mode
 'e' : 修正登録モードStep.3 → 確認画面 (→ 登録)
 'p' : 修正登録一覧         → 詳細表示 (→ 修正登録モードStep.1)
 *}
-								{if ('d' == $form.mode)}
-								<h2>見本市情報詳細</h2>
-								{else}
+								{if ('' == $form.mode) || ('e' == $form.mode)}
 								<h2>見本市登録</h2>
+								{elseif ('c' == $form.mode)}
+								<h2>見本市修正</h2>
+								{else}
+								<h2>見本市詳細</h2>
 								{/if}
 							</div>
 
@@ -552,6 +572,7 @@ $form.mode
 					</div>
 				</div>
 				<p class="totop">
+				<!--
 					{if ('d' == $form.mode)}
 					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{elseif ('c' == $form.mode || 'e' == $form.mode)}
@@ -559,6 +580,10 @@ $form.mode
 					{else}
 					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{/if}
+				 -->
+				 	{if ('d' == $form.mode || 'p' == $form.mode)}
+				 	<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+				 	{/if}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

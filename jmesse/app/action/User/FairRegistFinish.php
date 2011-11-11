@@ -21,25 +21,11 @@ class Jmesse_Form_UserFairRegistFinish extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		// プリント画面
-		'print' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント画面',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 1,               // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
 		// メッセージ
 		'msg' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント画面',  // Display name
+			'name'        => 'メッセージ',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value

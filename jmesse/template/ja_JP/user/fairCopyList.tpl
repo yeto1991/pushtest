@@ -36,7 +36,7 @@
 //-->
 </script>
 
-<title>見本市登録 - 世界の見本市・展示会 - ジェトロ</title>
+<title>見本市修正登録選択一覧 - 世界の見本市・展示会 - ジェトロ</title>
 </head>
 
 <body class="layout-LC highlight-match j-messe">
@@ -51,8 +51,9 @@
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-
-			<li>見本市登録</li>
+			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
+			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li>見本市修正登録選択一覧</li>
 		</ul>
 	</div>
 	<!-- /bread -->
@@ -77,7 +78,7 @@
 							</div>
 
 							<div class="h2">
-								<h2>見本市登録</h2>
+								<h2>見本市修正登録選択一覧</h2>
 							</div>
 							<div class="in_main">
 
