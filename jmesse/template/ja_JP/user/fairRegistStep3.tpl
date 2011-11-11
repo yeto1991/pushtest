@@ -138,7 +138,7 @@
 										{if is_error('fair_title_jp')}
 										<tr class="errorcheck">
 										{else}
-										</tr>
+										<tr>
 										{/if}
 											<th class="item">見本市名</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
@@ -156,7 +156,7 @@
 										{if is_error('select_language_info')}
 										<tr class="errorcheck">
 										{else}
-										</tr>
+										<tr>
 										{/if}
 											<th class="item">海外への紹介を希望しますか</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
@@ -174,7 +174,7 @@
 											{if is_error('fair_title_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Fair Title<br />見本市名
 												</th>
@@ -190,7 +190,7 @@
 											{if is_error('profile_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Teaser Copy<br />キャッチフレーズ
 												</th>
@@ -207,7 +207,7 @@
 											{if is_error('detailed_information_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文
 												</th>
@@ -224,7 +224,7 @@
 											{if is_error('exhibits_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Exhibits<br />出品物
 												</th>
@@ -241,7 +241,7 @@
 											{if is_error('other_city_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">City (other)<br />開催都市（その他）
 												</th>
@@ -258,7 +258,7 @@
 											{if is_error('venue_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Venue<br />会場
 												</th>
@@ -286,7 +286,7 @@
 											{if is_error('other_admission_ticket_en')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Admission ticket(other)<br />チケット入手法（その他)
 												</th>
@@ -322,7 +322,7 @@
 											{if is_error('spare_field1')}
 											<tr class="errorcheck">
 											{else}
-											</tr>
+											<tr>
 											{/if}
 												<th class="item">Details of last fair audited by<br />承認機関
 												</th>
