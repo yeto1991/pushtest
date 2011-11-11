@@ -403,17 +403,32 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			}
 		} elseif ('s' == $this->af->get('type')) {
 			$index = $this->af->get('index');
+			if (null == $index || '' == $index) {
+				$index = $this->session->get('index');
+			}
+			$this->session->set('index', $index);
 			$code_list = $this->session->get('code_list');
 			$code = $code_list[$index];
 			$sql_sum = '';
 			$data_sum = array();
 			foreach ($code as $key => $value) {
+				$this->backend->getLogger()->log(LOG_DEBUG, '■value : '.$value);
 				if ('' != $sql_sum) {
 					$sql_sum .= ' and ';
 				}
-				$sql_sum .= $key.' = ? ';
-				array_push($data_sum, $value);
+				if ('' == $value) {
+					if ('update_user_id' == $key) {
+						$sql_sum .= $this->_getDuplicationColumn($key)." is null ";
+					} else {
+						$sql_sum .= $this->_getDuplicationColumn($key)." = '' ";
+					}
+// 					$sql_sum .= "(".$this->_getDuplicationColumn($key)." is null or ".$this->_getDuplicationColumn($key)." = '')";
+				} else {
+					$sql_sum .= $this->_getDuplicationColumn($key).' = ? ';
+					array_push($data_sum, $value);
+				}
 			}
+			$this->backend->getLogger()->log(LOG_DEBUG, '■sql_sum : '.$sql_sum);
 			$this->session->set('sql_sum', $sql_sum);
 			$this->session->set('data_sum', $data_sum);
 		} else {
@@ -561,6 +576,29 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 // 		return 'error';
  		return 'admin_fairList';
 	}
+
+	function _getDuplicationColumn($column) {
+		$ret = '';
+		if ('' == $this->duplication_column[$column]) {
+			$ret = $column;
+		} else {
+			$ret = $this->duplication_column[$column];
+		}
+		return $ret;
+	}
+
+	var $duplication_column = array(
+		'del_date' => 'jf.del_date',
+		'del_flg' => 'jf.del_flg',
+		'regist_date' => 'jf.regist_date',
+		'regist_user_id' => 'jf.regist_user_id',
+		'update_date' => 'jf.update_date',
+		'update_user_id' => 'jf.update_user_id',
+		'user_id' => 'jf.user_id'
+	);
+
+	var $int_column = array(
+	);
 }
 
 ?>

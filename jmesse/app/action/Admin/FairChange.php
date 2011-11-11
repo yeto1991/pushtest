@@ -203,7 +203,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('venue_en', $jm_fair->get('venue_en'));
 
 		// 開催予定規模
-		$this->af->set('gross_floor_area', $this->_isZero($jm_fair->get('gross_floor_area')));
+		$this->af->set('gross_floor_area', $jm_fair->get('gross_floor_area'));
 
 		// 入場資格
 // 		if ('0' == $use_language_flag) {
@@ -235,11 +235,11 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 
 		// 過去の実績
 		$this->af->set('year_of_the_trade_fair', $jm_fair->get('year_of_the_trade_fair'));
-		$this->af->set('total_number_of_visitor', $this->_isZero($jm_fair->get('total_number_of_visitor')));
-		$this->af->set('number_of_foreign_visitor', $this->_isZero($jm_fair->get('number_of_foreign_visitor')));
-		$this->af->set('total_number_of_exhibitors', $this->_isZero($jm_fair->get('total_number_of_exhibitors')));
-		$this->af->set('number_of_foreign_exhibitors', $this->_isZero($jm_fair->get('number_of_foreign_exhibitors')));
-		$this->af->set('net_square_meters', $this->_isZero($jm_fair->get('net_square_meters')));
+		$this->af->set('total_number_of_visitor', $jm_fair->get('total_number_of_visitor'));
+		$this->af->set('number_of_foreign_visitor', $jm_fair->get('number_of_foreign_visitor'));
+		$this->af->set('total_number_of_exhibitors', $jm_fair->get('total_number_of_exhibitors'));
+		$this->af->set('number_of_foreign_exhibitors', $jm_fair->get('number_of_foreign_exhibitors'));
+		$this->af->set('net_square_meters', $jm_fair->get('net_square_meters'));
 		$this->af->set('spare_field1', $jm_fair->get('spare_field1'));
 
 		// 主催者・問合せ先
@@ -416,19 +416,19 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		return $ret;
 	}
 
-	/**
-	 * INT型の項目が0の場合''空文字を返す。
-	 *
-	 * @param int $param 対象パラメータ
-	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
-	 */
-	function _isZero($param) {
-		$ret = $param;
-		if ("0" == $param) {
-			$ret = '';
-		}
-		return $ret;
-	}
+// 	/**
+// 	 * INT型の項目が0の場合''空文字を返す。
+// 	 *
+// 	 * @param int $param 対象パラメータ
+// 	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+// 	 */
+// 	function _isZero($param) {
+// 		$ret = $param;
+// 		if ("0" == $param) {
+// 			$ret = '';
+// 		}
+// 		return $ret;
+// 	}
 
 }
 

@@ -1035,26 +1035,26 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		),
 
 		'gross_floor_area_from' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催予定規模', // Display name
+			'name'        => '開催予定規模',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,              // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => null,            // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'gross_floor_area_to' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催予定規模', // Display name
+			'name'        => '開催予定規模',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,              // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => null,            // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1233,26 +1233,26 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		),
 
 		'total_number_of_visitor_from' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績入場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_visitor_to' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績入場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1273,26 +1273,26 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		),
 
 		'number_of_foreign_visitor_from' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外入場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_visitor_to' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外入場者数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1313,26 +1313,26 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		),
 
 		'total_number_of_exhibitors_from' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_exhibitors_to' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1353,26 +1353,26 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		),
 
 		'number_of_foreign_exhibitors_from' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_exhibitors_to' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1393,13 +1393,13 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		),
 
 		'net_square_meters' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績開催規模(㎡)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -2428,6 +2428,7 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 			$this->session->set('sql_sum', null);
 			$this->session->set('data_sum', null);
 			$this->session->set('code_list', null);
+			$this->session->set('index', null);
 // 		}
 // 		if (null != $this->session->get('sort_cond')) {
 // 			// セッションを削除
