@@ -334,6 +334,12 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'admin_Login';
 		}
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
 		return null;
 	}
 
@@ -374,6 +380,11 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		$this->af->set('registDate', $jm_user->get('regist_date'));
 		$this->af->set('updateDate', $jm_user->get('update_date'));
 
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+
 		// ログテーブル登録
 		$mgr = $this->backend->getManager('adminCommon');
 		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $this->af->get('email').'('.$this->af->get('user_id').')');
@@ -382,6 +393,16 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
+
+		// COMMIT
+		$db->commit();
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return 'admin_userDetail';
 	}
 }

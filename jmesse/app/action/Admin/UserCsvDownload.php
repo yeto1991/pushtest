@@ -44,6 +44,13 @@ class Jmesse_Action_AdminUserCsvDownload extends Jmesse_ActionClass
 			$this->af->set('function', '');
 			return 'admin_Login';
 		}
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		return null;
 	}
 

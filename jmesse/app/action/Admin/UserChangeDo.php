@@ -123,6 +123,12 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 				return 'admin_userRegist';
 			}
 		}
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
 		return null;
 	}
 
@@ -134,7 +140,6 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 	*/
 	function perform()
 	{
-
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
@@ -146,6 +151,12 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 			header('Location: '.$this->config->get('url').'?action_admin_userChange=true&user_id='.$this->af->get('user_id').'&mode=change');
 			return null;
 		}
+
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+
 		//更新項目 設定
 		$jm_user->set('email', strtolower($this->af->get('email'))); //メールアドレスを小文字変換
 		$jm_user->set('password', $this->af->get('password'));
@@ -208,6 +219,16 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
+
+		// COMMIT
+		$db->commit();
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+
 		// 更新画面へ遷移
 		header('Location: '.$this->config->get('url').'?action_admin_userChange=true&user_id='.$this->af->get('user_id').'&mode=change&success=1');
 		return null;

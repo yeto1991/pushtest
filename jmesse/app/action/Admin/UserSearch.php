@@ -532,6 +532,11 @@ class Jmesse_Action_AdminUserSearch extends Jmesse_ActionClass
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'admin_Login';
 		}
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
 		return null;
     }
 
