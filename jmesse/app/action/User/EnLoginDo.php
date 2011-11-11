@@ -91,12 +91,18 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			$login_ok = false;
 		}
 
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+		
 		$mgr = $this->backend->getManager('userCommon');
 		if ($login_ok) {
 			// ログに記録
 			$ret = $mgr->regLog($user->get('user_id'), '5', '3', 'Successful login.');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
+				$db->rollback();
 				return 'error';
 			}
 
@@ -111,6 +117,7 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			$ret = $mgr->regLog('0', '5', '3', 'Login failed.('.$this->af->get('email').':'.$_SERVER['REMOTE_ADDR'].')');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
+				$db->rollback();
 				return 'error';
 			}
 			$this->ae->add('email', 'login error');
@@ -118,6 +125,15 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			return 'user_enLogin';
 		}
 
+		// COMMIT
+		$db->commit();
+		
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+		
 		// 転送
 		if (null != $this->af->get('function') && '' != $this->af->get('function')) {
 			header('Location: '.$this->af->get('function'));

@@ -56,6 +56,12 @@ class Jmesse_Action_UserUserChange extends Jmesse_ActionClass
 			$this->ae->addObject('error', Ethna::raiseError('登録モードが入力されていません', E_REQUIRED));
 			return 'error';
 		}
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
 		return null;
 	}
 

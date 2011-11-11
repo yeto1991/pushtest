@@ -50,6 +50,12 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
 			return 'user_userRegist';
 		}
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
 		return null;
 	}
 
@@ -67,6 +73,12 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			header('Location: '.$this->config->get('url').'?action_user_userRegist=true');
 			return null;
 		}
+
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+
 		if($this->af->get('emailCheckFlg') == "DOUBLE_CHECK_DEL_FLG1"){
 			//Eメール重複チェック対象Eメールが削除済みである場合物理レコード削除
 			// 削除対象ユーザ情報取得
@@ -86,12 +98,14 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			$deleteResults1 = $this->backend->getManager('jmFair')->deleteUserInfo($user_id_target);
 			if ($deleteResults1 == "NG") {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIRレコード削除エラー');
+				$db->rollback();
 				return 'error';
 			}
 			//jm_fair_tempテーブル
 			$deleteResults2 = $this->backend->getManager('jmFairTemp')->deleteUserInfo($user_id_target);
 			if ($deleteResults2 == "NG") {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIR_TEMPレコード削除エラー');
+				$db->rollback();
 				return 'error';
 			}
 		}
@@ -134,17 +148,28 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
-		//TODO メール送信処理
-// 		$ary_value = array('mail_send_user_name' => $this->af->get('userNm'), 'mail_send_user_email' => strtolower($this->af->get('email')), 'mail_send_user_password' => $this->af->get('password'));
-// 		$mail_mgr =& $this->backend->getManager('mail');
-// 		$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
+
+		// COMMIT
+		$db->commit();
+
+		//TODOメール送信処理
+		$ary_value = array('mail_send_user_name' => $this->af->get('userNm'), 'mail_send_user_email' => strtolower($this->af->get('email')), 'mail_send_user_password' => $this->af->get('password'));
+		$mail_mgr =& $this->backend->getManager('mail');
+		//$mail_mgr->sendmailUserReigst(strtolower($this->af->get('email')), $ary_value);
 
 		// 完了画面へ遷移
 		// SESSIONに設定
 		$this->session->start();
 		$this->session->set('user_id', $user->get('user_id'));
 		$this->session->set('auth_gen', $user->get('auth_gen'));
-		return user_userRegistDone;
+		$this->session->set('use_language_cd', $user->get('use_language_cd'));
+
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
+		}
+		return 'user_userRegistDone';
 	}
 }
 

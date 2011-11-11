@@ -42,7 +42,12 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isEnLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_enLogin';
+		}
+		// 最終エラー確認
+		if (0 < $this->ae->count()) {
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+			return 'error';
 		}
 		return null;
 	}
@@ -61,6 +66,12 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			header('Location: '.$this->config->get('url').'?action_user_enUserChange=true');
 			return null;
 		}
+
+		// トランザクション開始
+		$db = $this->backend->getDB();
+		$db->db->autocommit(false);
+		$db->begin();
+
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
@@ -91,10 +102,20 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			// SESSIONの破棄。
 			$this->session->set('user_id', '');
 			$this->session->set('auth_gen', '');
+			$this->session->set('use_language_cd', '');
 			$this->session->destroy();
 
+			// COMMIT
+			$db->commit();
+
+			// 最終エラー確認
+			if (0 < $this->ae->count()) {
+				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+				return 'error';
+			}
+
 			//退会モードで完了画面へ
-			return user_enUserRegistDone;
+			return 'user_enUserRegistDone';
 		}
 		//新規登録の場合（Eメール重複チェック対象Eメールが削除済みである場合物理レコード削除）
 		if($this->af->get('emailCheckFlg') == "DOUBLE_CHECK_DEL_FLG1"){
@@ -116,6 +137,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			$deleteResults = $jmFairMgr->deleteUserInfo($user_id_target);
 			if (Ethna::isError($deleteResults)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIRレコード削除エラー');
+				$db->rollback();
 				return 'error';
 			}
 			//jm_fair_tempテーブル
@@ -123,6 +145,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			$deleteResults = $jmFairTempMgr->deleteUserInfo($user_id_target);
 			if (Ethna::isError($deleteResults)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIR_TEMPレコード削除エラー');
+				$db->rollback();
 				return 'error';
 			}
 			//新規登録
@@ -170,12 +193,20 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			//更新モードで完了画面へ
 			$this->af->set('mode', 'change');
 
-			//TODO メール送信処理
-// 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
-// 			$mail_mgr =& $this->backend->getManager('mail');
-// 			$mail_mgr->sendmailUserReigst(strtolower($this->af->get('email')), $ary_value);
+			// COMMIT
+			$db->commit();
 
-			return user_enUserRegistDone;
+			//TODOメール送信処理
+			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
+			$mail_mgr =& $this->backend->getManager('mail');
+			//$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
+
+			// 最終エラー確認
+			if (0 < $this->ae->count()) {
+				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+				return 'error';
+			}
+			return 'user_enUserRegistDone';
 		}else{
 			//通常更新の場合
 			$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
@@ -215,14 +246,23 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				return 'error';
 			}
 
+			// COMMIT
+			$db->commit();
+
 			//TODO メール送信処理
-// 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
-// 			$mail_mgr =& $this->backend->getManager('mail');
-// 			$mail_mgr->sendmailUserReigst(strtolower($this->af->get('email')), $ary_value);
+			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
+			$mail_mgr =& $this->backend->getManager('mail');
+			//$mail_mgr->sendmailEnUserChange(strtolower($this->af->get('email')), $ary_value);
 
 			//更新モードで完了画面へ
 			$this->af->set('mode', 'change');
-			return user_enUserRegistDone;
+
+			// 最終エラー確認
+			if (0 < $this->ae->count()) {
+				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+				return 'error';
+			}
+			return 'user_enUserRegistDone';
 		}
 	}
 }

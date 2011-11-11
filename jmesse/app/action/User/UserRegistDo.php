@@ -99,6 +99,12 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 			}
 			//チェックフラグ Formに設定
 			$this->af->set('emailCheckFlg', $emailCheck);
+
+			// 最終エラー確認
+			if (0 < $this->ae->count()) {
+				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
+				return 'error';
+			}
 			return null;
 		}
 	}
@@ -112,7 +118,7 @@ class Jmesse_Action_UserUserRegistDo extends Jmesse_ActionClass
 	function perform()
 	{
 		// 確認画面へ遷移
-		return user_userRegistDo;
+		return 'user_userRegistDo';
 	}
 }
 
