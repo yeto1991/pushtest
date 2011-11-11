@@ -138,11 +138,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('city', $regist_param_1['city']);
 		$jm_fair->set('other_city_jp', $regist_param_1['other_city_jp']);
 		$jm_fair->set('venue_jp', $regist_param_1['venue_jp']);
-		if ('' != $regist_param_1['gross_floor_area']) {
-			$jm_fair->set('gross_floor_area', $regist_param_1['gross_floor_area']);
-		} else {
-			$jm_fair->set('gross_floor_area', null);
-		}
+		$jm_fair->set('gross_floor_area', $regist_param_1['gross_floor_area']);
 // 		$jm_fair->set('transportation_jp', $regist_param_1['transportation_jp']);
 		$jm_fair->set('open_to', $regist_param_1['open_to']);
 		$jm_fair->set('admission_ticket_1', $regist_param_1['admission_ticket_1']);
@@ -155,26 +151,10 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 // 		$jm_fair->set('app_dead_mm', $regist_param_1['app_dead_mm']);
 // 		$jm_fair->set('app_dead_dd', $regist_param_1['app_dead_dd']);
 		$jm_fair->set('year_of_the_trade_fair', $regist_param_2['year_of_the_trade_fair']);
-		if ('' != $regist_param_2['total_number_of_visitor']) {
-			$jm_fair->set('total_number_of_visitor', $regist_param_2['total_number_of_visitor']);
-		} else {
-			$jm_fair->set('total_number_of_visitor', null);
-		}
-		if ('' != $regist_param_2['number_of_foreign_visitor']) {
-			$jm_fair->set('number_of_foreign_visitor', $regist_param_2['number_of_foreign_visitor']);
-		} else {
-			$jm_fair->set('number_of_foreign_visitor', null);
-		}
-		if ('' != $regist_param_2['total_number_of_exhibitors']) {
-			$jm_fair->set('total_number_of_exhibitors', $regist_param_2['total_number_of_exhibitors']);
-		} else {
-			$jm_fair->set('total_number_of_exhibitors', null);
-		}
-		if ('' != $regist_param_2['number_of_foreign_exhibitors']) {
-			$jm_fair->set('number_of_foreign_exhibitors', $regist_param_2['number_of_foreign_exhibitors']);
-		} else {
-			$jm_fair->set('number_of_foreign_exhibitors', null);
-		}
+		$jm_fair->set('total_number_of_visitor', $regist_param_2['total_number_of_visitor']);
+		$jm_fair->set('number_of_foreign_visitor', $regist_param_2['number_of_foreign_visitor']);
+		$jm_fair->set('total_number_of_exhibitors', $regist_param_2['total_number_of_exhibitors']);
+		$jm_fair->set('number_of_foreign_exhibitors', $regist_param_2['number_of_foreign_exhibitors']);
 		$jm_fair->set('net_square_meters', $regist_param_2['net_square_meters']);
 		$jm_fair->set('profile_jp', str_replace($br, '<br/>', $regist_param_2['profile_jp']));
 		$jm_fair->set('detailed_information_jp', str_replace($br, '<br/>', $regist_param_2['detailed_information_jp']));

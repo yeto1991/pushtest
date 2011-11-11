@@ -646,13 +646,13 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'gross_floor_area' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '開催予定規模', // Display name
+			'name'        => '開催予定規模',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,              // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 10,              // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -819,52 +819,52 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_visitor' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '総来場者数', // Display name
+			'name'        => '総来場者数',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 10,              // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_visitor' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '総来場者数(うち海外から)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 10,              // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'total_number_of_exhibitors' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '総出展社数',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 10,              // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_exhibitors' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '総出展社数(うち海外から)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 10,              // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1573,7 +1573,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 			$regist_param_1['check_other_city'] = '';
 		}
 		$regist_param_1['venue_jp'] = $obj->get('venue_jp');
-		$regist_param_1['gross_floor_area'] = $this->_isZero($obj->get('gross_floor_area'));
+		$regist_param_1['gross_floor_area'] = $obj->get('gross_floor_area');
 // 		$regist_param_1['transportation_jp'] = $obj->get('transportation_jp');
 		$regist_param_1['open_to'] = $obj->get('open_to');
 		$regist_param_1['admission_ticket_1'] = $obj->get('admission_ticket_1');
@@ -1629,10 +1629,10 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 
 		$regist_param_2 = array();
 		$regist_param_2['year_of_the_trade_fair'] = $obj->get('year_of_the_trade_fair');
-		$regist_param_2['total_number_of_visitor'] = $this->_isZero($obj->get('total_number_of_visitor'));
-		$regist_param_2['number_of_foreign_visitor'] = $this->_isZero($obj->get('number_of_foreign_visitor'));
-		$regist_param_2['total_number_of_exhibitors'] = $this->_isZero($obj->get('total_number_of_exhibitors'));
-		$regist_param_2['number_of_foreign_exhibitors'] = $this->_isZero($obj->get('number_of_foreign_exhibitors'));
+		$regist_param_2['total_number_of_visitor'] = $obj->get('total_number_of_visitor');
+		$regist_param_2['number_of_foreign_visitor'] = $obj->get('number_of_foreign_visitor');
+		$regist_param_2['total_number_of_exhibitors'] = $obj->get('total_number_of_exhibitors');
+		$regist_param_2['number_of_foreign_exhibitors'] = $obj->get('number_of_foreign_exhibitors');
 		$regist_param_2['net_square_meters'] = $obj->get('net_square_meters');
 		$regist_param_2['profile_jp'] = str_replace('<br/>', "\n", $obj->get('profile_jp'));
 		$regist_param_2['detailed_information_jp'] = str_replace('<br/>', "\n", $obj->get('detailed_information_jp'));
@@ -1682,20 +1682,20 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		return array($industory_tmp_1, $industory_tmp_2, $industory_tmp_3, $industory_tmp_4, $industory_tmp_5, $industory_tmp_6);
 	}
 
-	/**
-	 * INT型の項目がnullの場合''空文字を返す。
-	 *
-	 * @param int $param 対象パラメータ
-	 * @return string 対象パラメータがnullの場合は''、null以外の場合はそのまま
-	 */
-	function _isZero($param) {
-		$ret = $param;
-		if (null == $param) {
-// 		if ("0" == $param) {
-			$ret = '';
-		}
-		return $ret;
-	}
+// 	/**
+// 	 * INT型の項目がnullの場合''空文字を返す。
+// 	 *
+// 	 * @param int $param 対象パラメータ
+// 	 * @return string 対象パラメータがnullの場合は''、null以外の場合はそのまま
+// 	 */
+// 	function _isZero($param) {
+// 		$ret = $param;
+// 		if (null == $param) {
+// // 		if ("0" == $param) {
+// 			$ret = '';
+// 		}
+// 		return $ret;
+// 	}
 
 }
 

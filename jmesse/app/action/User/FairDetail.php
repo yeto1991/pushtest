@@ -105,7 +105,7 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('other_city_jp', $jm_fair->get('other_city_jp'));
 		$this->af->set('check_other_city_jp', $jm_fair->get('check_other_city_jp'));
 		$this->af->set('venue_jp', $jm_fair->get('venue_jp'));
-		$this->af->set('gross_floor_area', $this->_isZero($jm_fair->get('gross_floor_area')));
+		$this->af->set('gross_floor_area', $jm_fair->get('gross_floor_area'));
 		$this->af->set('transportation_jp', $jm_fair->get('transportation_jp'));
 		$this->af->set('open_to', $jm_fair->get('open_to'));
 		$this->af->set('admission_ticket_1', $jm_fair->get('admission_ticket_1'));
@@ -118,10 +118,10 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('app_dead_mm', $jm_fair->get('app_dead_mm'));
 		$this->af->set('app_dead_dd', $jm_fair->get('app_dead_dd'));
 		$this->af->set('year_of_the_trade_fair', $jm_fair->get('year_of_the_trade_fair'));
-		$this->af->set('total_number_of_visitor', $this->_isZero($jm_fair->get('total_number_of_visitor')));
-		$this->af->set('number_of_foreign_visitor',$this->_isZero( $jm_fair->get('number_of_foreign_visitor')));
-		$this->af->set('total_number_of_exhibitors', $this->_isZero($jm_fair->get('total_number_of_exhibitors')));
-		$this->af->set('number_of_foreign_exhibitors', $this->_isZero($jm_fair->get('number_of_foreign_exhibitors')));
+		$this->af->set('total_number_of_visitor', $jm_fair->get('total_number_of_visitor'));
+		$this->af->set('number_of_foreign_visitor',$jm_fair->get('number_of_foreign_visitor'));
+		$this->af->set('total_number_of_exhibitors', $jm_fair->get('total_number_of_exhibitors'));
+		$this->af->set('number_of_foreign_exhibitors', $jm_fair->get('number_of_foreign_exhibitors'));
 		$this->af->set('net_square_meters', $jm_fair->get('net_square_meters'));
 		$this->af->set('profile_jp', $jm_fair->get('profile_jp'));
 		$this->af->set('detailed_information_jp', $jm_fair->get('detailed_information_jp'));
@@ -235,20 +235,20 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		return 'user_fairDetail';
 	}
 
-	/**
-	* INT型の項目がnullの場合''空文字を返す。
-	*
-	* @param int $param 対象パラメータ
-	* @return string 対象パラメータがnullの場合は''、null以外の場合はそのまま。
-	*/
-	function _isZero($param) {
-		$ret = $param;
-		if (null == $param) {
-//		if ("0" == $param) {
-			$ret = '';
-		}
-		return $ret;
-	}
+// 	/**
+// 	* INT型の項目がnullの場合''空文字を返す。
+// 	*
+// 	* @param int $param 対象パラメータ
+// 	* @return string 対象パラメータがnullの場合は''、null以外の場合はそのまま。
+// 	*/
+// 	function _isZero($param) {
+// 		$ret = $param;
+// 		if (null == $param) {
+// //		if ("0" == $param) {
+// 			$ret = '';
+// 		}
+// 		return $ret;
+// 	}
 
 }
 

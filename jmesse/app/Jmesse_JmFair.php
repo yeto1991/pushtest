@@ -913,7 +913,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext =$this->_getWhere($data);
 
 		// 集計画面から来た場合
-		if (null != $this->session->get('sql_sum')) {
+		if (null != $this->session->get('sql_sum') && '' != $this->session->get('sql_sum')) {
 			$sql_ext = $this->_addWhere($sql_ext, $this->session->get('sql_sum'), 'a');
 			foreach ($this->session->get('data_sum') as $p) {
 				array_push($data, $p);
@@ -1000,7 +1000,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext =$this->_getWhere($data);
 
 		// 集計画面から来た場合
-		if (null != $this->session->get('sql_sum')) {
+		if (null != $this->session->get('sql_sum') && '' != $this->session->get('sql_sum')) {
 			$sql_ext = $this->_addWhere($sql_ext, $this->session->get('sql_sum'), 'a');
 			foreach ($this->session->get('data_sum') as $p) {
 				array_push($data, $p);
@@ -1073,7 +1073,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}elseif('11' == $cond){
 			//範囲外の場合
 			if ('' != $date_from && '' != $date_to) {
-				$sql = " $column >= ? and $column <= ? ";
+				$sql = " $column >= ? or $column <= ? ";
 				array_push($data, $date_to, $date_from);
 			} elseif ('' != $date_from) {
 				$sql = " $column <= ? ";
@@ -1293,7 +1293,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext =$this->_getWhere($data);
 
 		// 集計画面から来た場合
-		if (null != $this->session->get('sql_sum')) {
+		if (null != $this->session->get('sql_sum') && '' != $this->session->get('sql_sum')) {
 			$sql_ext = $this->_addWhere($sql_ext, $this->session->get('sql_sum'), 'a');
 			foreach ($this->session->get('data_sum') as $p) {
 				array_push($data, $p);
@@ -1317,6 +1317,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			// 見本市名(日) 昇順, 見本市番号 昇順
 			$sql_sort = ' order by '.$this->sort_column['1'].$this->sort_cond['0'].', '.$this->sort_column['0'].$this->sort_cond['0'];
 		}
+
+		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_sort);
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_sort);
@@ -1370,9 +1372,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext =$this->_getWhere($data);
 
 		// 集計画面から来た場合
-		if (null != $this->session->get('sql_sum')) {
+		if (null != $this->session->get('sql_sum') && '' != $this->session->get('sql_sum')) {
 			$sql_ext = $this->_addWhere($sql_ext, $this->session->get('sql_sum'), 'a');
-					foreach ($this->session->get('data_sum') as $p) {
+			foreach ($this->session->get('data_sum') as $p) {
 				array_push($data, $p);
 			}
 		}
@@ -1914,7 +1916,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				array_push($data, $num_from, $num_to);
 			} elseif ('11' == $cond) {
 				// 範囲外
-				$sql = " $column_from < ? and $column_to > ? ";
+				$sql = " $column_from < ? or $column_to > ? ";
 				array_push($data, $num_from, $num_to);
 			}
 		} elseif ('' != $num_from) {

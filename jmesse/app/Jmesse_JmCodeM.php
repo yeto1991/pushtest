@@ -118,7 +118,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by kbn_2 asc';
+		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -165,7 +165,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 <> ? and kbn_4 = ? order by kbn_3 asc';
+		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 <> ? and kbn_4 = ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -211,7 +211,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 <> ? and kbn_3 = ? and kbn_4 = ? order by kbn_2 asc';
+		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 <> ? and kbn_3 = ? and kbn_4 = ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -257,7 +257,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by kbn_2 asc';
+		$sql = 'select kbn_2, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -304,7 +304,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 not in (?, ?) and kbn_4 = ? order by kbn_3 asc';
+		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 not in (?, ?) and kbn_4 = ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -351,7 +351,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 <> ? and kbn_4 = ? order by kbn_3 asc';
+		$sql = 'select kbn_3, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 <> ? and kbn_4 = ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -399,7 +399,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = 'select kbn_4, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 = ? and kbn_4 <> ? order by kbn_4 asc';
+		$sql = 'select kbn_4, discription_jp, discription_en, disp_cd, disp_num, reserve_1, reserve_2, reserve_3, reserve_4, reserve_5, reserve_6 from jm_code_m where kbn_1 = ? and kbn_2 = ? and kbn_3 = ? and kbn_4 <> ? order by disp_num asc';
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -540,7 +540,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select si.kbn_2, si.kbn_3, mi.discription_jp main_industory_name, si.discription_jp sub_industory_name, concat(si.kbn_2, '_', si.kbn_3, '_', mi.discription_jp, '_', si.discription_jp) sub_industory_code from (select kbn_2, kbn_3, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 <> '000') si left outer join (select kbn_2, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') mi on si.kbn_2 = mi.kbn_2 order by kbn_2, kbn_3";
+		$sql = "select si.kbn_2, si.kbn_3, mi.discription_jp main_industory_name, si.discription_jp sub_industory_name, concat(si.kbn_2, '_', si.kbn_3, '_', mi.discription_jp, '_', si.discription_jp) sub_industory_code from (select kbn_2, kbn_3, discription_jp, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 <> '000') si left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') mi on si.kbn_2 = mi.kbn_2 order by mi.disp_num asc, si.disp_num asc";
 
 		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
