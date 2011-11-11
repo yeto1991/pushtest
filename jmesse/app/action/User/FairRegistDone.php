@@ -138,7 +138,11 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('city', $regist_param_1['city']);
 		$jm_fair->set('other_city_jp', $regist_param_1['other_city_jp']);
 		$jm_fair->set('venue_jp', $regist_param_1['venue_jp']);
-		$jm_fair->set('gross_floor_area', $regist_param_1['gross_floor_area']);
+		if ('' != $regist_param_1['gross_floor_area']) {
+			$jm_fair->set('gross_floor_area', $regist_param_1['gross_floor_area']);
+		} else {
+			$jm_fair->set('gross_floor_area', null);
+		}
 // 		$jm_fair->set('transportation_jp', $regist_param_1['transportation_jp']);
 		$jm_fair->set('open_to', $regist_param_1['open_to']);
 		$jm_fair->set('admission_ticket_1', $regist_param_1['admission_ticket_1']);
@@ -151,10 +155,26 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 // 		$jm_fair->set('app_dead_mm', $regist_param_1['app_dead_mm']);
 // 		$jm_fair->set('app_dead_dd', $regist_param_1['app_dead_dd']);
 		$jm_fair->set('year_of_the_trade_fair', $regist_param_2['year_of_the_trade_fair']);
-		$jm_fair->set('total_number_of_visitor', $regist_param_2['total_number_of_visitor']);
-		$jm_fair->set('number_of_foreign_visitor', $regist_param_2['number_of_foreign_visitor']);
-		$jm_fair->set('total_number_of_exhibitors', $regist_param_2['total_number_of_exhibitors']);
-		$jm_fair->set('number_of_foreign_exhibitors', $regist_param_2['number_of_foreign_exhibitors']);
+		if ('' != $regist_param_2['total_number_of_visitor']) {
+			$jm_fair->set('total_number_of_visitor', $regist_param_2['total_number_of_visitor']);
+		} else {
+			$jm_fair->set('total_number_of_visitor', null);
+		}
+		if ('' != $regist_param_2['number_of_foreign_visitor']) {
+			$jm_fair->set('number_of_foreign_visitor', $regist_param_2['number_of_foreign_visitor']);
+		} else {
+			$jm_fair->set('number_of_foreign_visitor', null);
+		}
+		if ('' != $regist_param_2['total_number_of_exhibitors']) {
+			$jm_fair->set('total_number_of_exhibitors', $regist_param_2['total_number_of_exhibitors']);
+		} else {
+			$jm_fair->set('total_number_of_exhibitors', null);
+		}
+		if ('' != $regist_param_2['number_of_foreign_exhibitors']) {
+			$jm_fair->set('number_of_foreign_exhibitors', $regist_param_2['number_of_foreign_exhibitors']);
+		} else {
+			$jm_fair->set('number_of_foreign_exhibitors', null);
+		}
 		$jm_fair->set('net_square_meters', $regist_param_2['net_square_meters']);
 		$jm_fair->set('profile_jp', str_replace($br, '<br/>', $regist_param_2['profile_jp']));
 		$jm_fair->set('detailed_information_jp', str_replace($br, '<br/>', $regist_param_2['detailed_information_jp']));
@@ -189,36 +209,55 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$jm_fair->set('spare_field1', $regist_param_3['spare_field1']);
 
-		// 付加情報
-		$jm_fair->set('date_of_application', date('Y/m/d H:i:s'));
-		$jm_fair->set('date_of_registration', date('Y/m/d H:i:s'));
-
-		$jm_fair->set('del_flg', '0');
+		// 登録種別
+		if ('e' == $this->af->get('mode')) {
+			// コピー
+			$jm_fair->set('regist_type', '1');
+		} elseif ('c' != $this->af->get('mode')) {
+			// 新規
+			$jm_fair->set('regist_type', '0');
+		}
 
 		// フリーワード検索用カラム作成
 		$jm_fair->set('search_key', $this->_makeSearchKey($jm_fair));
 
 		if ('c' == $this->af->get('mode')) {
-			// UPDATE
+			// 更新者ID
 			$jm_fair->set('update_user_id', $this->session->get('user_id'));
+			// 更新日
 			$jm_fair->set('update_date', date('Y/m/d H:i:s'));
 
+			// UPDATE
 			$ret = $jm_fair->update();
 			$ope_kbn = '3';
 		} else {
-			// INSERT
+			// ユーザ使用言語(日本語)
+			$jm_fair->set('use_language_flag', '0');
+			// Webページの表示/非表示(表示)
+			$jm_fair->set('web_display_type', '0');
+			// メール送信フラグ(送信する)
+			$jm_fair->set('mail_send_flag', '0');
+			// 削除フラグ(未削除)
+			$jm_fair->set('del_flg', '0');
+			// 申請年月日
+			$jm_fair->set('date_of_application', date('Y/m/d H:i:s'));
+			// 登録日（承認日）
+			$jm_fair->set('date_of_registration', date('Y/m/d H:i:s'));
 			// 承認フラグ = 未承認
 			$jm_fair->set('confirm_flag', '0');
+			// 登録者ID
 			$jm_fair->set('regist_user_id', $this->session->get('user_id'));
+			// 登録日
 			$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
 
+			// INSERT
 			$ret = $jm_fair->add();
 			$ope_kbn = '2';
 		}
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_FAIRテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
+			$this->ae->addObject('error', $ret);
 			$db->rollback();
 			return 'error';
 		}
@@ -258,7 +297,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
+			$this->ae->addObject('error', $ret);
 			$db->rollback();
 			return 'error';
 		}
@@ -296,6 +335,11 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		return null;
 	}
 
+	/**
+	 * 全文検索用文字列作成。
+	 *
+	 * @param unknown_type $jm_fair
+	 */
 	function _makeSearchKey($jm_fair) {
 		// 検索キーワードの作成
 		$br = $this->af->get('br');

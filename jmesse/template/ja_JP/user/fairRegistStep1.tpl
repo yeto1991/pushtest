@@ -726,7 +726,13 @@
 									</div>
 									<table width="100%">
 										<tr>
-											<td width="250px"><a href="{$config.url}?action_user_fairManu=true"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											{if ('c' == $form.mode)}
+											<td width="250px"><a href="{$config.url}?action_user_fairDetail=true&mode=d&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											{elseif ('e' == $form.mode)}
+											<td width="250px"><a href="{$config.url}?action_user_fairDetail=true&mode=p&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											{else}
+											<td width="250px"><a href="{$config.url}?action_user_Top=true"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+											{/if}
 											<td align="right"><input type="image" src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
 										</tr>
 									</table>

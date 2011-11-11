@@ -21,7 +21,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-		// '':regist(登録)、'c':change(修正)、'd':detail(詳細表示)、'e':edit(修正登録)
+		// '':regist(登録)、'c':change(修正)、'd':detail(修正前詳細表示)、'e':edit(修正登録)、'p':detail before copy(修正登録前詳細表示)
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -29,7 +29,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
-			'regexp'      => '/^[cde]+$/',     // String by Regexp
+			'regexp'      => '/^[cdep]+$/',     // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -871,13 +871,13 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'net_square_meters' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '開催規模',      // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,            // Maximum value
-			'regexp'      => null,            // String by Regexp
+			'max'         => 50,              // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1683,14 +1683,15 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 	}
 
 	/**
-	 * INT型の項目が0の場合''空文字を返す。
+	 * INT型の項目がnullの場合''空文字を返す。
 	 *
 	 * @param int $param 対象パラメータ
-	 * @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+	 * @return string 対象パラメータがnullの場合は''、null以外の場合はそのまま
 	 */
 	function _isZero($param) {
 		$ret = $param;
-		if ("0" == $param) {
+		if (null == $param) {
+// 		if ("0" == $param) {
 			$ret = '';
 		}
 		return $ret;

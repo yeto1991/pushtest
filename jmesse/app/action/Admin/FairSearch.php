@@ -2425,6 +2425,9 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 // 			$this->af->set('summary_value_sort_cond', $search_cond['summary_value_sort_cond']);
 			// セッションを削除
 			$this->session->set('search_cond', null);
+			$this->session->set('sql_sum', null);
+			$this->session->set('data_sum', null);
+			$this->session->set('code_list', null);
 // 		}
 // 		if (null != $this->session->get('sort_cond')) {
 // 			// セッションを削除

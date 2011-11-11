@@ -28,8 +28,8 @@
 			var div = $("#engform").removeClass("regist_english");
 		}
 
-		// Changeモード以外では重複がある場合警告
-		if ('c' != mode) {
+		// Changeモードと詳細表示以外では重複がある場合警告
+		if ('c' != mode && 'd' != mode && 'p' != mode) {
 			var msg = '';
 {/literal}
 			{section name=it loop=$app.duplication_list}
@@ -102,6 +102,14 @@
 								<h1>見本市・展示会データベース</h1>
 							</div>
 							<div class="h2">
+{*
+$form.mode
+''  : 新規登録モードStep.3 → 確認画面 (→ 登録)
+'c' : 修正モードStep.3     → 確認画面 (→ 更新)
+'d' : My展示会一覧         → 詳細表示 (→ 修正モードStep.1)
+'e' : 修正登録モードStep.3 → 確認画面 (→ 登録)
+'p' : 修正登録一覧         → 詳細表示 (→ 修正登録モードStep.1)
+*}
 								{if ('d' == $form.mode)}
 								<h2>見本市情報詳細</h2>
 								{else}
@@ -114,6 +122,9 @@
 								{if ('d' == $form.mode)}
 								<input type="hidden" name="action_user_fairChangeStep1" id="action_user_fairChangeStep1" value="dummy" />
 								<input type="hidden" name="mode" id="mode" value="c" />
+								{elseif ('p' == $form.mode)}
+								<input type="hidden" name="action_user_fairChangeStep1" id="action_user_fairChangeStep1" value="dummy" />
+								<input type="hidden" name="mode" id="mode" value="e" />
 								{else}
 								<input type="hidden" name="action_user_fairRegistDone" id="action_user_fairRegistDone" value="dummy" />
 								<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
@@ -124,7 +135,7 @@
 								<input type="hidden" name="" mihon_no"" id="mihon_no" value="{$form.mihon_no}" />
 
 								<div class="in_main">
-								{if ('d' != $form.mode)}
+								{if ('d' != $form.mode && 'p' != $form.mode)}
 								<h3 class="img t_center">
 									<img src="/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4">
 								</h3>
@@ -153,8 +164,16 @@
 									{elseif ('d' == $form.mode)}
 									<p></p>
 									<p>
+										<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+									</p>
+									{elseif ('p' == $form.mode)}
+									<p></p>
+									<p>
+										<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+										修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 									</p>
 									{else}
 									{/if}
@@ -247,7 +266,11 @@
 										<tr>
 											<th class="item">同展示会で使用する面積</th>
 											<th class="required"></th>
-											<td>{$form.gross_floor_area}sqm（NET）</td>
+											<td>
+											{if ('' != $form.gross_floor_area)}
+												{$form.gross_floor_area} sqm（NET）
+											{/if}
+											</td>
 										</tr>
 {*
 										<tr>
@@ -505,31 +528,20 @@
 									{elseif ('d' == $form.mode)}
 									<p></p>
 									<p>
+										<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+									</p>
+									{elseif ('p' == $form.mode)}
+									<p></p>
+									<p>
+										<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+										修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 									</p>
 									{else}
 									{/if}
 									</div>
-{*
-									<table width="100%">
-										<tr>
-											{if ('d' == $form.mode)}
-											<td></td>
-											<td align="right">
-												<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-finish.gif" alt="削除" class="over" /></a>
-												<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-finish.gif" alt="編集" class="over" /></a>
-											</td>
-											{elseif ('c' == $form.mode || 'e' == $form.mode)}
-											<td><a href="{$config.url}?action_user_fairRegistStep3=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
-											<td align="right"><input type="image" src="/j-messe/images/db/btn-finish.gif" alt="詳細" class="over" /></td>
-											{else}
-											<td><a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
-											<td align="right"><input type="image" src="/j-messe/images/db/btn-finish.gif" alt="詳細" class="over" /></td>
-											{/if}
-										</tr>
-									</table>
-*}
 {* テキストエリアの改行コード *}
 <textarea name="br" id="br" style="display:none;">
 

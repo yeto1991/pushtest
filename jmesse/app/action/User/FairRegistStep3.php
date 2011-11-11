@@ -153,6 +153,8 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			|| 0 === strpos($this->af->get('organizer_email'), '@')
 			|| strlen($this->af->get('organizer_email')) - 1 === strpos($this->af->get('organizer_email'), '@')) {
 				$this->ae->add('organizer_email', '主催者連絡先(E-Mail)が不正です');
+			} elseif (1 != substr_count($this->af->get('organizer_email'), '@')) {
+				$this->ae->add('organizer_email', '主催者連絡先(E-Mail)が不正です');
 			}
 		}
 
@@ -161,6 +163,9 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			if (!strpos($this->af->get('agency_in_japan_email'), '@')
 				|| 0 === strpos($this->af->get('agency_in_japan_email'), '@')
 				|| strlen($this->af->get('agency_in_japan_email')) - 1 === strpos($this->af->get('agency_in_japan_email'), '@')) {
+				$this->ae->add('agency_in_japan_email', '日本国内の照会先(E-Mail)が不正です');
+			}
+			if (1 != substr_count($this->af->get('agency_in_japan_email'), '@')) {
 				$this->ae->add('agency_in_japan_email', '日本国内の照会先(E-Mail)が不正です');
 			}
 		}

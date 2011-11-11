@@ -99,7 +99,7 @@
 								{/if}
 									<dl>
 										<dt>
-											<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$app.fair_list[it].mihon_no}">
+											<a href="{$config.url}?action_user_fairDetail=true&mode=p&mihon_no={$app.fair_list[it].mihon_no}">
 											{if ('' != $app.fair_list[it].abbrev_title)}
 											{$app.fair_list[it].abbrev_title} -
 											{/if}
@@ -111,6 +111,7 @@
 											{$app.fair_list[it].city_name} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
 											{$app.fair_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}
 										</dd>
+									</dl>
 								</div>
 								{/section}
 

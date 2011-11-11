@@ -116,6 +116,9 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 			if ('1' != $regist_param_1['check_other_city'] && '' != $this->af->get('other_city_en')) {
 				$this->ae->add('other_city_en', 'City (other)は「開催都市」でその他にチェックされていません');
 			}
+			if ('1' == $regist_param_1['check_other_city'] && '' == $this->af->get('other_city_en')) {
+				$this->ae->add('other_city_en', 'City (other)は「開催都市」でその他にチェックされています');
+			}
 
 			// Venue
 			if ('' == $this->af->get('venue_en')) {
@@ -130,6 +133,9 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 			// Admission ticket(other)
 			if ('1' != $regist_param_1['admission_ticket_5'] && '' != $this->af->get('other_admission_ticket_en')) {
 				$this->ae->add('other_admission_ticket_en', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされていません');
+			}
+			if ('1' == $regist_param_1['admission_ticket_5'] && '' == $this->af->get('other_admission_ticket_en')) {
+				$this->ae->add('other_admission_ticket_en', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされています');
 			}
 
 			// Show Management

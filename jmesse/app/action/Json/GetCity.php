@@ -108,7 +108,7 @@ class Jmesse_Action_JsonGetCity extends Jmesse_ActionClass
 			$jm_code_m_mgr = $this->backend->getManager('jmCodeM');
 			$list = $jm_code_m_mgr->getCityList($region, $country);
 			if (null != $list) {
-				$json = '[{"text":"その他","value":""}';
+				$json = '[{"text":"...","value":""}';
 				if ('0' == $use_language_flag) {
 					for ($i = 0; $i < count($list); $i++) {
 						$json .= ',{"text":"'.$list[$i]['discription_jp'].'","value":"'.$list[$i]['kbn_4'].'"}';

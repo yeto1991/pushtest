@@ -141,6 +141,9 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		if ('1' == $this->af->get('check_other_city') && '' == $this->af->get('other_city_jp')) {
 			$this->ae->add('other_city_jp', '開催地(都市(その他))が入力されていません');
 		}
+		if ('1' != $this->af->get('check_other_city') && '' != $this->af->get('other_city_jp')) {
+			$this->ae->add('other_city_jp', '開催地(都市(その他))がチェックされていません');
+		}
 
 		// 会場名
 		if ('' == $this->af->get('venue_jp')) {
@@ -169,6 +172,8 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			$this->ae->add('admission_ticket_1', 'チケットの入手方法が選択されていません');
 		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_jp')) {
 			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が入力されていません');
+		} elseif ('1' != $this->af->get('admission_ticket_5') && '' != $this->af->get('other_admission_ticket_jp')) {
+			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)がチェックされていません');
 		}
 
 		// 出展申込締切日

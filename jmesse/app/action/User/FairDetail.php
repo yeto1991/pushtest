@@ -216,12 +216,14 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		}
 
 		// ログテーブル登録
-		$mgr = $this->backend->getManager('userCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '2', $this->af->get('mihon_no'));
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'error';
+		if ('d' == $this->af->get('mode') || 'p' == $this->af->get('mode')) {
+			$mgr = $this->backend->getManager('userCommon');
+			$ret = $mgr->regLog($this->session->get('user_id'), '1' , '2', $this->af->get('mihon_no'));
+			if (Ethna::isError($ret)) {
+				$this->ae->addObject('error', $ret);
+				$db->rollback();
+				return 'error';
+			}
 		}
 
 		// エラー判定
@@ -234,14 +236,15 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 	}
 
 	/**
-	* INT型の項目が0の場合''空文字を返す。
+	* INT型の項目がnullの場合''空文字を返す。
 	*
 	* @param int $param 対象パラメータ
-	* @return string 対象パラメータが0の場合は''、0以外の場合は対象パラメータ
+	* @return string 対象パラメータがnullの場合は''、null以外の場合はそのまま。
 	*/
 	function _isZero($param) {
 		$ret = $param;
-		if ("0" == $param) {
+		if (null == $param) {
+//		if ("0" == $param) {
 			$ret = '';
 		}
 		return $ret;
