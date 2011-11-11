@@ -88,6 +88,7 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 
 		if (Ethna::isError($ret)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'JM_LOGの登録に失敗しました。');
+			$this->backend->getActionError()->addObject('error', $ret);
 			return $ret;
 		}
 

@@ -30,7 +30,7 @@ class Jmesse_JmFairTempManager extends Ethna_AppManager
 		$res = $db->db->execute($stmt, $param);
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'jm_fair_temp削除Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return "NG";
 		}
 		return null;
@@ -66,7 +66,7 @@ class Jmesse_JmFairTempManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'InsertでErrorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (1 != $res) {
@@ -98,7 +98,7 @@ class Jmesse_JmFairTempManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -138,7 +138,7 @@ class Jmesse_JmFairTempManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {

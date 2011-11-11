@@ -49,7 +49,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -90,7 +90,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -136,7 +136,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -183,7 +183,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -229,7 +229,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -275,7 +275,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -322,7 +322,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -369,7 +369,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -417,7 +417,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -466,7 +466,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -512,7 +512,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -554,7 +554,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {

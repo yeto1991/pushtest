@@ -133,7 +133,7 @@ class Jmesse_JmErrMailManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->add('error', '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {

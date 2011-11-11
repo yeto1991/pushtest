@@ -48,7 +48,7 @@ class Jmesse_JmRankingManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$msg = '検索Errorが発生しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
+			$this->backend->getActionError()->addObject('error', $res);
 			$db->rollback();
 			return null;
 		}

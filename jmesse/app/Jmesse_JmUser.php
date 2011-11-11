@@ -30,7 +30,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		$res = $db->db->execute($stmt, $param);
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
@@ -55,7 +55,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		$res = $db->db->execute($stmt, $param);
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
@@ -328,7 +328,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -366,7 +366,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
@@ -399,7 +399,7 @@ class Jmesse_JmUserManager extends Ethna_AppManager
 		}
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
-			$this->ae->addObject('error', $res);
+			$this->backend->getActionError()->addObject('error', $res);
 			return $res;
 		}
 		if (0 == $res->numRows()) {
