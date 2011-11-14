@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="" />
 
 {if ('' == $form.mode) || ('e' == $form.mode)}
 <title>見本市登録 - Online Trade Fair Database (J-messe) - JETRO</title>
@@ -13,18 +14,18 @@
 <title>見本市詳細 - Online Trade Fair Database (J-messe) - JETRO</title>
 {/if}
 
+
+
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
 <!--/テスト用-->
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
-
 <!--以下のCSSは最終的に削除します-->
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
@@ -41,11 +42,11 @@
 		// Changeモードと詳細表示以外では重複がある場合警告
 		if ('c' != mode && 'd' != mode && 'p' != mode) {
 			var msg = '';
-{/literal}
+	{/literal}
 			{section name=it loop=$app.duplication_list}
 			msg += "　・{$app.duplication_list[it].fair_title_jp}\n";
 			{/section}
-{literal}
+	{literal}
 			if ('' != msg) {
 				msg = "下記の展示会と会期、開催地、業種が重複しています。\nご確認下さい。\n\n" + msg;
 				window.alert(msg);
@@ -66,7 +67,7 @@
 
 	function fair_delete(url, mihon_no) {
 		if (window.confirm('削除します。よろしいですか？')) {
-			document.location.href = url + '?action_user_fairDel=true&mihon_no=' + mihon_no;
+			document.location.href = url + '?action_user_enFairDel=true&mihon_no=' + mihon_no;
 		}
 	}
 
@@ -135,7 +136,7 @@ $form.mode
 				<input type="hidden" name="action_user_enFairChangeStep1" id="action_user_enFairChangeStep1" value="dummy" />
 				<input type="hidden" name="mode" id="mode" value="e" />
 				{else}
-				<input type="hidden" name="action_user_enFairRegistDone" id="action_user_fenFairRegistDone" value="dummy" />
+				<input type="hidden" name="action_user_enFairRegistDone" id="action_user_enFairRegistDone" value="dummy" />
 				<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 					{if ('c' == $form.mode || 'e' == $form.mode)}
 				<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
@@ -161,13 +162,13 @@ $form.mode
 					<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
 					</p>
 					{elseif ('c' == $form.mode)}
 					<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
 					</p>
 					{elseif ('d' == $form.mode)}
 					<p></p>
@@ -185,7 +186,6 @@ $form.mode
 					</p>
 					{else}
 					{/if}
-
 					<div class="line_dot">
 						<hr />
 					</div>
@@ -321,73 +321,73 @@ $form.mode
 							</td>
 						</tr>
 *}
-						</table>
-						<h4>過去の実績</h4>
-						<table id="registration">
-							<tr>
-								<th class="item">対象年</th>
-								<th class="required"></th>
-								<td>
-									{if ('' != $form.year_of_the_trade_fair)}
-									{$form.year_of_the_trade_fair}年
-									{/if}
-								</td>
-							</tr>
-							<tr>
-								<th class="item">総来場者数</th>
-								<th class="required"></th>
-								<td>
-									{if ('' != $form.total_number_of_visitor || '' != $form.number_of_foreign_visitor)}
-									{$form.total_number_of_visitor}人 うち海外から {$form.number_of_foreign_visitor}人
-									{/if}
-								</td>
-							</tr>
-							<tr>
-								<th class="item">総出展社数</th>
-								<th class="required"></th>
-								<td>
-									{if ('' != $form.total_number_of_exhibitors || '' != $form.number_of_foreign_exhibitors)}
-									{$form.total_number_of_exhibitors}社 うち海外から {$form.number_of_foreign_exhibitors}社
-									{/if}
-								</td>
-							</tr>
-							<tr>
-								<th class="item">展示面積</th>
-								<th class="required"></th>
-								<td>
-									{if ('' != $form.net_square_meters)}
-									{$form.net_square_meters} sqm (NET)
-									{/if}
-								</td>
-							</tr>
-						</table>
-						<h4>PR・キャッチフレーズ</h4>
-						<table id="registration">
-							<tr>
-								<th class="item">キャッチフレーズ</th>
-								<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-								<td>{$form.profile_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
-							</tr>
-							<tr>
-								<th class="item">PR・紹介文</th>
-								<th class="required"></th>
-								<td>{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
-							</tr>
-							<tr>
-								<th class="item">見本市の紹介写真</th>
-								<th class="required"></th>
-								<td>
-									画像(1)：{$form.photos_name_1}<br />
-									画像(2)：{$form.photos_name_2}<br />
-									画像(3)：{$form.photos_name_3}<br />
-								</td>
-							</tr>
-							<tr>
-								<th class="item">検索キーワード</th>
-								<th class="required"></th>
-								<td>{$form.keyword}</td>
-							</tr>
-						</table>
+					</table>
+					<h4>過去の実績</h4>
+					<table id="registration">
+						<tr>
+							<th class="item">対象年</th>
+							<th class="required"></th>
+							<td>
+								{if ('' != $form.year_of_the_trade_fair)}
+								{$form.year_of_the_trade_fair}年
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<th class="item">総来場者数</th>
+							<th class="required"></th>
+							<td>
+								{if ('' != $form.total_number_of_visitor || '' != $form.number_of_foreign_visitor)}
+								{$form.total_number_of_visitor}人 うち海外から {$form.number_of_foreign_visitor}人
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<th class="item">総出展社数</th>
+							<th class="required"></th>
+							<td>
+								{if ('' != $form.total_number_of_exhibitors || '' != $form.number_of_foreign_exhibitors)}
+								{$form.total_number_of_exhibitors}社 うち海外から {$form.number_of_foreign_exhibitors}社
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<th class="item">展示面積</th>
+							<th class="required"></th>
+							<td>
+								{if ('' != $form.net_square_meters)}
+								{$form.net_square_meters} sqm (NET)
+								{/if}
+							</td>
+						</tr>
+					</table>
+					<h4>PR・キャッチフレーズ</h4>
+					<table id="registration">
+						<tr>
+							<th class="item">キャッチフレーズ</th>
+							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<td>{$form.profile_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+						</tr>
+						<tr>
+							<th class="item">PR・紹介文</th>
+							<th class="required"></th>
+							<td>{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+						</tr>
+						<tr>
+							<th class="item">見本市の紹介写真</th>
+							<th class="required"></th>
+							<td>
+								画像(1)：{$form.photos_name_1}<br />
+								画像(2)：{$form.photos_name_2}<br />
+								画像(3)：{$form.photos_name_3}<br />
+							</td>
+						</tr>
+						<tr>
+							<th class="item">検索キーワード</th>
+							<th class="required"></th>
+							<td>{$form.keyword}</td>
+						</tr>
+					</table>
 					<h4>主催者</h4>
 					<table id="registration">
 						<tr>
@@ -524,13 +524,13 @@ $form.mode
 					<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('c' == $form.mode)}
 					<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('d' == $form.mode)}
 					<p></p>
@@ -549,23 +549,23 @@ $form.mode
 					{else}
 					{/if}
 				</div>
-				{* テキストエリアの改行コード *}
-				<textarea name="br" id="br" style="display:none;">
+{* テキストエリアの改行コード *}
+			<textarea name="br" id="br" style="display:none;">
 
-				</textarea>
+			</textarea>
 			</form>
-			</div>
+			<p class="totop">
+				{if ('d' == $form.mode || 'p' == $form.mode)}
+					<a href="javascript:window.open('{$config.url}?action_user_enFairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')"  target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+				{/if}
+				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
+			</p>
 		</div>
-		<p class="totop">
-			{if ('d' == $form.mode || 'p' == $form.mode)}
-		 	<a href="javascript:window.open('{$config.url}?action_user_enFairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-		 	{/if}
-			<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
-		</p>
 		<!-- /main -->
 		<!-- submenu -->
 		<div id="include_left_menu"></div>
 		<!-- /submenu -->
+	</div>
 	<!-- /contents -->
 	<!-- footer -->
 	<div id="include_footer" ></div>

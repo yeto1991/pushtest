@@ -58,11 +58,11 @@
 		}
 		action = document.createElement('input');
 		action.type = 'hidden';
-		action.name = 'action_user_fairListDel';
-		action.id = 'action_user_fairListDel';
+		action.name = 'action_user_enFairListDel';
+		action.id = 'action_user_enFairListDel';
 		action.value = 'dummy';
-		document.getElementById('form_user_fairList').appendChild(action);
-		document.getElementById('form_user_fairList').submit();
+		document.getElementById('form_user_enFairList').appendChild(action);
+		document.getElementById('form_user_enFairList').submit();
 	}
 
 {/literal}

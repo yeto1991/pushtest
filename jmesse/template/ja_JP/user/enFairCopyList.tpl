@@ -66,13 +66,7 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
-				{if ('r' == $form.msg)}
-				<h2>見本市登録</h2>
-				{elseif ('c' == $form.msg)}
-				<h2>見本市修正</h2>
-				{elseif ('d' == $form.msg)}
-				<h2>見本市削除</h2>
-				{/if}
+				<h2>見本市修正登録選択一覧</h2>
 			</div>
 			<div class="in_main">
 				<p class="t_right">ユーザー：{$session.email}</p>
@@ -91,7 +85,7 @@
 				{/if}
 					<dl>
 						<dt>
-							<a href="{$config.url}?action_user_fairDetail=true&mode=p&mihon_no={$app.fair_list[it].mihon_no}">
+							<a href="{$config.url}?action_user_enFairDetail=true&mode=p&mihon_no={$app.fair_list[it].mihon_no}">
 							{if ('' != $app.fair_list[it].abbrev_title)}
 							{$app.fair_list[it].abbrev_title} -
 							{/if}
@@ -106,7 +100,6 @@
 					</dl>
 				</div>
 				{/section}
-				</div>
 			</div>
 			<p class="totop">
 				<a href="{$config.url}?action_user_enFairCopyList=true&print=1" target="print"><img src="/images/en/btn-print.gif"  alt="Print" height="14" width="46" /></a>

@@ -155,52 +155,52 @@ $form.mode
 								<input type="hidden" name="" mihon_no"" id="mihon_no" value="{$form.mihon_no}" />
 
 								<div class="in_main">
-								{if ('d' != $form.mode && 'p' != $form.mode)}
-								<h3 class="img t_center">
-									<img src="/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4">
-								</h3>
-								{/if}
-
-									<p class="t_right">ユーザー：{$session.email}</p>
-
-									{if ('' == $form.mode)}
-									<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
-									<p>
-										<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
-									</p>
-									{elseif ('e' == $form.mode)}
-									<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
-									<p>
-										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
-									</p>
-									{elseif ('c' == $form.mode)}
-									<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
-									<p>
-										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
-									</p>
-									{elseif ('d' == $form.mode)}
-									<p></p>
-									<p>
-										<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
-										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
-									</p>
-									{elseif ('p' == $form.mode)}
-									<p></p>
-									<p>
-										<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
-										修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
-									</p>
-									{else}
+									{if ('d' != $form.mode && 'p' != $form.mode)}
+									<h3 class="img t_center">
+										<img src="/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4">
+									</h3>
 									{/if}
 
-									<div class="line_dot">
-										<hr />
-									</div>
+										<p class="t_right">ユーザー：{$session.email}</p>
+
+										{if ('' == $form.mode)}
+										<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
+										<p>
+											<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+										</p>
+										{elseif ('e' == $form.mode)}
+										<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
+										<p>
+											<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+										</p>
+										{elseif ('c' == $form.mode)}
+										<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
+										<p>
+											<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+										</p>
+										{elseif ('d' == $form.mode)}
+										<p></p>
+										<p>
+											<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+											修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+										</p>
+										{elseif ('p' == $form.mode)}
+										<p></p>
+										<p>
+											<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+											修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+										</p>
+										{else}
+										{/if}
+
+										<div class="line_dot">
+											<hr />
+										</div>
 								</div>
 
 								<div class="in_main">
@@ -525,8 +525,8 @@ $form.mode
 									<div class="line_dot">
 										<hr />
 									</div>
-
-									<div class="in_main">
+								</div>
+								<div class="in_main">
 									{if ('' == $form.mode)}
 									<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
 									<p>
@@ -561,11 +561,11 @@ $form.mode
 									</p>
 									{else}
 									{/if}
-									</div>
+								</div>
 {* テキストエリアの改行コード *}
-<textarea name="br" id="br" style="display:none;">
+								<textarea name="br" id="br" style="display:none;">
 
-</textarea>
+								</textarea>
 								</form>
 							</div>
 						</div>
