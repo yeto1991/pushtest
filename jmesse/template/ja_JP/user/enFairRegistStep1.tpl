@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="" />
 
 {if ('' == $form.mode) || ('e' == $form.mode)}
 <title>見本市登録 - Online Trade Fair Database (J-messe) - JETRO</title>
@@ -14,18 +15,22 @@
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
 <!--/テスト用-->
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
 <!--以下のCSSは最終的に削除します-->
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
-
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
+
 	function init(url, region, country, city) {
 		if ('' != region) {
 			dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0', '', '#country', country);
@@ -482,7 +487,7 @@
 						<tr class="errorcheck">
 						{else}
 						<tr>
-							{/if}
+						{/if}
 							<th class="item">取扱品目</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
@@ -531,7 +536,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 											<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
-												<option value="">...</option>'
+												<option value="">...</option>
 											</select>
 										</td>
 									</tr>
@@ -544,7 +549,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 											<select name="city" id="city" style="width:200px;">
-												<option value="">...</option>'
+												<option value="">...</option>
 											</select>
 										</td>
 									</tr>
@@ -722,15 +727,6 @@
 					<div class="line_dot"><hr /></div>
 					<table width="100%">
 						<tr>
-							<!--
-							{if ('c' == $form.mode)}
-							<td width="250px"><a href="{$config.url}?action_user_enFairDetail=true&mode=d&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
-							{elseif ('e' == $form.mode)}
-							<td width="250px"><a href="{$config.url}?action_user_enFairDetail=true&mode=p&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
-							{else}
-							<td width="250px"><a href="{$config.url}?action_user_Top=true"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
-							{/if}
-							 -->
 							<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
 							<td align="right"><input type="image" src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
 						</tr>
