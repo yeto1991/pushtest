@@ -48,6 +48,7 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
+		<!--
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">引き合い・展示会検索</a></li>
@@ -56,6 +57,7 @@
 			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
 			<li>ユーザー詳細</li>
 		</ul>
+		 -->
 	</div>
 	<!-- /bread -->
 
