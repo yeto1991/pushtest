@@ -542,7 +542,7 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 															<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
-																<option value="">...</option>'
+																<option value="">...</option>
 															</select>
 														</td>
 													</tr>
@@ -555,7 +555,7 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 															<select name="city" id="city" style="width:200px;">
-																<option value="">...</option>'
+																<option value="">...</option>
 															</select>
 														</td>
 													</tr>
