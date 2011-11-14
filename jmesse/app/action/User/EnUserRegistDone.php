@@ -121,7 +121,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		$jm_user->set('tel', $this->af->get('tel'));
 		$jm_user->set('fax', $this->af->get('fax'));
 		$jm_user->set('url', $this->af->get('url'));
-		$jm_user->set('use_language_cd', '0');
+		$jm_user->set('use_language_cd', '1');
 		$jm_user->set('regist_result_notice_cd', '0');
 		$jm_user->set('auth_gen', '1');
 		$jm_user->set('auth_user', '0');

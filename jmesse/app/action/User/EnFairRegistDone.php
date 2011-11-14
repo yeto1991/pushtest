@@ -39,10 +39,10 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 	function prepare()
 	{
 		// ログインチェック
-		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
+		if (!$this->backend->getManager('userCommon')->isEnLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('');
-			return 'user_Login';
+			return 'user_enLogin';
 		}
 
 		// 見本市番号
@@ -292,7 +292,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		rmdir($this->session->get('img_tmp_path'));
 
 		// LOGに記録
-		$mgr =& $this->backend->getManager('adminCommon');
+		$mgr =& $this->backend->getManager('userCommon');
 		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '2', $jm_fair->get('mihon_no'));
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
