@@ -61,7 +61,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		// 入力チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'user_enFfairRegistStep1';
+			return 'user_enFairRegistStep1';
 		}
 
 		// 詳細チェック
