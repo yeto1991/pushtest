@@ -25,7 +25,7 @@ class Jmesse_Form_UserEnFairCopyList extends Jmesse_ActionForm
 		'print' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント画面',  // Display name
+			'name'        => 'print',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
@@ -81,10 +81,10 @@ class Jmesse_Action_UserEnFairCopyList extends Jmesse_ActionClass
 		$this->session->set('email', $jm_user->get('email'));
 
 		// My展示会総件数の取得
-		$this->af->setApp('cnt', $jm_fair_mgr->getMyFairInfoListCount($this->session->get('user_id')));
+		$this->af->setApp('cnt', $jm_fair_mgr->getMyFairInfoListCount($this->session->get('user_id'), 'E'));
 
 		// My展示会情報の取得
-		$this->af->setApp('fair_list', $jm_fair_mgr->getMyFairInfoList($this->session->get('user_id')));
+		$this->af->setApp('fair_list', $jm_fair_mgr->getMyFairInfoList($this->session->get('user_id'), 'E'));
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
