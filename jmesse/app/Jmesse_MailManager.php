@@ -19,7 +19,7 @@ require_once('Mail.php');
 class Jmesse_MailManager extends Ethna_AppManager
 {
 	/**
-	 * 見本市ユーザ情報登録完了メール送信。
+	 * 見本市ユーザ情報登録完了メール送信。（日本語メール）
 	 *
 	 * @access public
 	 * @param string $mail_to 送信先Eメール
@@ -30,7 +30,18 @@ class Jmesse_MailManager extends Ethna_AppManager
 	}
 
 	/**
-	 * 見本市ユーザ情報更新完了メール送信。
+	* 見本市ユーザ情報登録完了メール送信。（英語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailEnUserReigst($mail_to, $ary_param) {
+		$this->_sendmail('enUserRegist.tpl', $this->config->get('mail_title_user_regist_en'), $mail_to, $ary_param);
+	}
+
+	/**
+	 * 見本市ユーザ情報更新完了メール送信。（日本語メール）
 	 *
 	 * @access public
 	 * @param string $mail_to 送信先Eメール
@@ -41,7 +52,18 @@ class Jmesse_MailManager extends Ethna_AppManager
 	}
 
 	/**
-	 * ID/パスワード確認メール送信。
+	* 見本市ユーザ情報更新完了メール送信。（英語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailEnUserChange($mail_to, $ary_param) {
+		$this->_sendmail('enUserChange.tpl', $this->config->get('mail_title_user_change_en'), $mail_to, $ary_param);
+	}
+
+	/**
+	 * ID/パスワード確認メール送信。（日本語メール）
 	 *
 	 * @access public
 	 * @param string $mail_to 送信先Eメール
@@ -52,7 +74,18 @@ class Jmesse_MailManager extends Ethna_AppManager
 	}
 
 	/**
-	 * 見本市情報登録完了メール送信。
+	* ID/パスワード確認メール送信。（英語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailEnUserConfirm($mail_to, $ary_param) {
+		$this->_sendmail('enUserConfirm.tpl', $this->config->get('mail_title_user_confirm_en'), $mail_to, $ary_param);
+	}
+
+	/**
+	 * 見本市情報登録完了メール送信。（日本語メール）
 	 *
 	 * @access public
 	 * @param string $mail_to 送信先Eメール
@@ -63,7 +96,18 @@ class Jmesse_MailManager extends Ethna_AppManager
 	}
 
 	/**
-	 * 見本市情報更新完了メール送信。
+	* 見本市情報登録完了メール送信。（英語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailEnFairReigst($mail_to, $ary_param) {
+		$this->_sendmail('enFairRegist.tpl', $this->config->get('mail_title_fair_regist_en'), $mail_to, $ary_param);
+	}
+
+	/**
+	 * 見本市情報更新完了メール送信。（日本語メール）
 	 *
 	 * @access public
 	 * @param string $mail_to 送信先Eメール
@@ -71,6 +115,17 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 */
 	function sendmailFairChange($mail_to, $ary_param) {
 		$this->_sendmail('fairChange.tpl', $this->config->get('mail_title_fair_change'), $mail_to, $ary_param);
+	}
+
+	/**
+	* 見本市情報更新完了メール送信。（英語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailEnFairChange($mail_to, $ary_param) {
+		$this->_sendmail('enFairChange.tpl', $this->config->get('mail_title_fair_change_en'), $mail_to, $ary_param);
 	}
 
 	/**
