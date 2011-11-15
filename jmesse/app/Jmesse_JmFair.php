@@ -17,12 +17,13 @@
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
 	/**
-	* フロントサイト（My展示会一覧情報取得用）
+	* フロントサイト（展示会管理系一覧画面情報取得用）
 	*
 	* @param user_id ログインユーザID
+	* @param select_language_info 日英サイト判別
 	* @return list 検索情報結果
 	*/
-	function getMyFairInfoList($user_id) {
+	function getMyFairInfoList($user_id, $select_language_info) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 		$sql = " select ";
@@ -49,11 +50,16 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_5_4 on jf.main_industory_4 = jcm_5_4.kbn_2 and jf.sub_industory_4 = jcm_5_4.kbn_3 "; //(?-1)kbn_1 = '002' (?-2) kbn_4 = '000'
 		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_5_5 on jf.main_industory_5 = jcm_5_5.kbn_2 and jf.sub_industory_5 = jcm_5_5.kbn_3 "; //(?-1)kbn_1 = '002' (?-2) kbn_4 = '000'
 		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_5_6 on jf.main_industory_6 = jcm_5_6.kbn_2 and jf.sub_industory_6 = jcm_5_6.kbn_3 "; //(?-1)kbn_1 = '002' (?-2) kbn_4 = '000'
-		$sql .= " where jf.user_id = ? and jf.del_flg = ? order by concat( jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd) desc ";
+		$sql .= " where jf.user_id = ? and jf.del_flg = ? and jf.select_language_info <> ? order by concat( jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd) desc ";
+		if($select_language_info == 'E'){
+			$languageFlg = '0'; //日本語のみの見本市を対象外
+		}elseif($select_language_info == 'J'){
+			$languageFlg = '1'; //英語のみの見本市を対象外
+		}
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
 		// 検索条件をArray化
-		$param = array('003','000','000','003','000','003','002','000','000','002','000','000','002','000','000','002','000','000','002','000','000','002','000','000','002','000','002','000','002','000','002','000','002','000','002','000',$user_id,'0');
+		$param = array('003','000','000','003','000','003','002','000','000','002','000','000','002','000','000','002','000','000','002','000','000','002','000','000','002','000','002','000','002','000','002','000','002','000','002','000',$user_id,'0',$languageFlg);
 		// SQLを実行
 		$res = $db->db->execute($stmt, $param);
 		// 結果の判定
@@ -80,19 +86,25 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* フロントサイト（My展示会一覧情報 総件数取得用）
+	* フロントサイト（展示会管理系一覧画面情報取得用）
 	*
 	* @param user_id ログインユーザID
+	* @param select_language_info 日英サイト判別
 	* @return list 検索情報結果
 	*/
-	function getMyFairInfoListCount($user_id) {
+	function getMyFairInfoListCount($user_id, $select_language_info) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
-		$sql = " select count(*) cnt from jm_fair where user_id = ? and del_flg = ? ";
+		$sql = " select count(*) cnt from jm_fair where user_id = ? and del_flg = ? and select_language_info <> ? ";
+		if($select_language_info == 'E'){
+			$languageFlg = '0'; //日本語のみの見本市を対象外
+		}elseif($select_language_info == 'J'){
+			$languageFlg = '1'; //英語のみの見本市を対象外
+		}
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
 		// 検索条件をArray化
-		$param = array($user_id,'0');
+		$param = array($user_id,'0',$languageFlg);
 		// SQLを実行
 		$res = $db->db->execute($stmt, $param);
 		// 結果の判定
