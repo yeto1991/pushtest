@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 
-<title>見本市修正登録選択一覧 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>My fairs list for copy registration - Online Trade Fair Database (J-messe) - JETRO</title>
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -54,8 +54,8 @@
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
-			<li>見本市修正登録選択一覧</li>
+			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+			<li>My fairs list for copy registration</li>
 		</ul>
 	</div>
 	<!-- /bread -->
@@ -66,17 +66,16 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
-				<h2>見本市修正登録選択一覧</h2>
+				<h2>My fairs list for copy registration</h2>
 			</div>
 			<div class="in_main">
-				<p class="t_right">ユーザー：{$session.email}</p>
+				<p class="t_right">User：{$session.email}</p>
 				<p>
-					過去に登録した見本市情報をコピーして、新規の見本市情報として登録します。<br />
-					<strong><span class="red">元にする見本市を選択してください。</span></strong>
+					You can regist new fair by copying registed fair informations.<br />
+					<strong><span class="red">Please press fair title's link for copy registration.</span></strong>
 				</p>
-
-				<h4>登録済みの見本市一覧</h4>
-				<p>{$app.cnt}件中 1から{$app.cnt}件目</p>
+				<h4>My fairs list</h4>
+				<p>Result：{$app.cnt}</p>
 				{section name=it loop=$app.fair_list}
 				{if (0 == $smarty.section.it.index%2)}
 				<div class="list0">
@@ -89,13 +88,13 @@
 							{if ('' != $app.fair_list[it].abbrev_title)}
 							{$app.fair_list[it].abbrev_title} -
 							{/if}
-							{$app.fair_list[it].fair_title_jp}
+							{$app.fair_list[it].fair_title_en}
 							</a>
 						</dt>
 						<dd>
-							{$app.fair_list[it].date_from_yyyy}年{$app.fair_list[it].date_from_mm}月{$app.fair_list[it].date_from_dd}日～{$app.fair_list[it].date_to_yyyy}年{$app.fair_list[it].date_to_mm}月{$app.fair_list[it].date_to_dd}日<br />
-							{$app.fair_list[it].city_name} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
-							{$app.fair_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}
+							{$app.fair_list[it].date_from_dd}-{$app.fair_list[it].date_from_mm}-{$app.fair_list[it].date_from_yyyy}～{$app.fair_list[it].date_to_dd}-{$app.fair_list[it].date_to_mm}-{$app.fair_list[it].date_to_yyyy}<br />
+							{if $app.fair_list[it].city_name_en == ""}Other({$app.fair_list[it].other_city_en}){else}{$app.fair_list[it].city_name_en}{/if} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
+							{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}
 						</dd>
 					</dl>
 				</div>
@@ -113,7 +112,7 @@
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer" ></div>
+	<div id="include_footer"></div>
 	<!-- /footer -->
 </body>
 </html>

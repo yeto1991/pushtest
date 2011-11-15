@@ -119,7 +119,7 @@
 						</tr>
 						<tr>
 							<th class="item"><font size="2">Location</font></th>
-							<td><font size="2">{if $app.my_fair_info_list[it].city_name_en == ""}Other({$app.my_fair_info_list[it].other_city_en}){else}{$app.my_fair_info_list[it].city_name_en}{/if}&nbsp;/&nbsp;{$app.my_fair_info_list[it].country_name_en}&nbsp;/&nbsp;{$app.my_fair_info_list[it].region_name_en}</font></td>
+							<td><font size="2">{if $app.my_fair_info_list[it].city_name_en == ""}Other({$app.my_fair_info_list[it].other_city_en}){else}{$app.my_fair_info_list[it].city_name_en}{/if} / {$app.my_fair_info_list[it].country_name_en} / {$app.my_fair_info_list[it].region_name_en}</font></td>
 						</tr>
 						<tr>
 							<th class="item"><font size="2">Main/Sub industry </font></th>
