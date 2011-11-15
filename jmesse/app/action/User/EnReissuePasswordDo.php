@@ -48,11 +48,11 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
-					$this->ae->add('email', "Eメール 「@」の位置が不正です");
+					$this->ae->add('email', "Email is incorrect.");
 					return 'user_enReissuePassword';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email', "Email is incorrect.");
 					return 'user_enReissuePassword';
 				}
 			}
@@ -80,10 +80,10 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 
 		//ユーザ情報確認
 		if (null == $user || null == $user->get('user_id')) {
-			$this->ae->add('email', '入力された登録メールアドレスは存在しません。');
+			$this->ae->add('email', "The email doesn't exist.");
 			return 'user_enReissuePassword';
 		} else if ($user->get('del_flg') == '1') {
-			$this->ae->add('email', '入力された登録メールアドレスをもつユーザ情報は削除されています。');
+			$this->ae->add('email', "Already user's informations was being deleted.");
 			return 'user_enReissuePassword';
 		}
 
@@ -93,14 +93,14 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 		//TODO メール送信処理
 		$ary_value = array('mail_send_user_password' => $user->get('password'));
 		$mail_mgr =& $this->backend->getManager('mail');
-		//$mail_mgr->sendmailEnUserConfirm(strtolower($this->af->get('email')), $ary_value);
+		$mail_mgr->sendmailEnUserConfirm(strtolower($this->af->get('email')), $ary_value);
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
 			return 'error';
 		}
-		
+
 		return 'user_enReissuePasswordDo';
 	}
 }
