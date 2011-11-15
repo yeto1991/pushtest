@@ -17,7 +17,7 @@
 class Jmesse_UserCommonManager extends Ethna_AppManager
 {
 	/**
-	 * ユーザ個人ページを表示可能であるかチェック。(日本語サイト用)
+	 * ユーザ個人ページを表示可能であるかチェック
 	 *
 	 * @return true：可、false：否。
 	 */
@@ -29,31 +29,8 @@ class Jmesse_UserCommonManager extends Ethna_AppManager
 		} else if (null == $this->session->get('user_id') || '' == $this->session->get('user_id')) {
 			// ログインユーザが設定されていない。
 			$ret = false;
-		} else if ('0' != $this->session->get('use_language_cd')) {
-			// 使用言語日本語ユーザ以外
-			$ret = false;
-		}
-		return $ret;
-	}
-
-	/**
-	* ユーザ個人ページを表示可能であるかチェック。(英語サイト用)
-	*
-	* @return true：可、false：否。
-	*/
-	function isEnLoginUser() {
-		$ret = true;
-		if (!$this->session->isStart()) {
-			// Sessionが開始していない。
-			$ret = false;
-		} else if (null == $this->session->get('user_id') || '' == $this->session->get('user_id')) {
-			// ログインユーザが設定されていない。
-			$ret = false;
 		} else if ('1' != $this->session->get('auth_gen')) {
 			// 権限なし
-			$ret = false;
-		} else if ('1' != $this->session->get('use_language_cd')) {
-			// 使用言語英語ユーザ以外
 			$ret = false;
 		}
 		return $ret;
