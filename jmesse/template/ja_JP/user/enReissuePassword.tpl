@@ -4,8 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="">
 
-<title>Expobioenergia 11 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Password Confirmation - Online Trade Fair Database (J-messe) - JETRO</title>
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -64,13 +65,13 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2"><h2>Trade Fairs held in Japan and the World </h2></div>
 			<div class="in_main">
-				<p>ご登録いただいているメールアドレスを入力してください。</p>
+				<p>Please enter the e-mail address you registered with and press the send button</p>
 				<div class="login">
 					<form name="form_user_enReissuePassword" id="form_user_enReissuePassword" method="post" action="">
 						<input type="hidden" name="action_user_enReissuePasswordDo" id="action_user_enReissuePasswordDo" value="dummy" />
 						{* エラー表示 *}
 						{if count($errors)}
-						<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+						<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
 						{/if}
 						<table id="registration">
 							<tbody>
@@ -79,7 +80,7 @@
 								{else}
 								<tr>
 								{/if}
-									<th class="item">ご登録メールアドレス</th>
+									<th class="item">email</th>
 									<td><input name="email" id="email" size="60" type="text" value="{form.email}"><br>
 									{if is_error('email')}
 									<span class="error-message">{message name="email"}</span><br />
@@ -88,7 +89,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<p class="t_right"><input type="image" src="/j-messe/images/db/btn-send.gif"" alt="送信"  class="over" width="110" height="37"  /></p>
+						<p class="t_right"><input type="image" src="/j-messe/images/db/btn-send.gif"" alt="send"  class="over" width="110" height="37"  /></p>
 					</form>
 				</div>
 			</div>

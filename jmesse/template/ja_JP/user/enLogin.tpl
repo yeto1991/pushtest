@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 
-<title>Expobioenergia 11 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>User login - Online Trade Fair Database (J-messe) - JETRO</title>
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -51,7 +51,7 @@
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li>Expobioenergia 11</li>
+			<li>User Login</li>
 		</ul>
 		 -->
 	</div>
@@ -80,7 +80,7 @@
 								{else}
 								<tr>
 								{/if}
-									<th class="item">email address<br />(for your login)</th>
+									<th class="item">your email</th>
 									<td>
 										<input type="text" name="email" id="email" size="60" value="{$form.email}" /><br />
 										{if is_error('email')}
