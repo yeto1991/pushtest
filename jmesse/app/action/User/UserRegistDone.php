@@ -162,7 +162,6 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		$this->session->start();
 		$this->session->set('user_id', $user->get('user_id'));
 		$this->session->set('auth_gen', $user->get('auth_gen'));
-		$this->session->set('use_language_cd', $user->get('use_language_cd'));
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
