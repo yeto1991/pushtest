@@ -50,10 +50,10 @@
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
 			{if ("regist" == $form.mode)}
 				<li>ユーザー登録</li>
 				{else}
+				<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
 				<li>ユーザー修正</li>
 			{/if}
 		</ul>
