@@ -81,10 +81,10 @@ class Jmesse_Action_UserFairCopyList extends Jmesse_ActionClass
 		$this->session->set('email', $jm_user->get('email'));
 
 		// My展示会総件数の取得
-		$this->af->setApp('cnt', $jm_fair_mgr->getMyFairInfoListCount($this->session->get('user_id')));
+		$this->af->setApp('cnt', $jm_fair_mgr->getMyFairInfoListCount($this->session->get('user_id'), 'J'));
 
 		// My展示会情報の取得
-		$this->af->setApp('fair_list', $jm_fair_mgr->getMyFairInfoList($this->session->get('user_id')));
+		$this->af->setApp('fair_list', $jm_fair_mgr->getMyFairInfoList($this->session->get('user_id'), 'J'));
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
