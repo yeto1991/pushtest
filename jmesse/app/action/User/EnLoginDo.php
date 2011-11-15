@@ -83,9 +83,9 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 		} else if ('1' != $user->get('auth_gen')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '管理権限なし');
 			$login_ok = false;
-		} else if ('1' != $user->get('use_language_cd')) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '使用言語英語ユーザ以外');
-			$login_ok = false;
+// 		} else if ('1' != $user->get('use_language_cd')) {
+// 			$this->backend->getLogger()->log(LOG_DEBUG, '使用言語英語ユーザ以外');
+// 			$login_ok = false;
 		} else if ('1' == $user->get('del_flg')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '削除済みユーザ');
 			$login_ok = false;
@@ -95,7 +95,7 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 		$db = $this->backend->getDB();
 		$db->db->autocommit(false);
 		$db->begin();
-		
+
 		$mgr = $this->backend->getManager('userCommon');
 		if ($login_ok) {
 			// ログに記録
@@ -110,7 +110,6 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			$this->session->start();
 			$this->session->set('user_id', $user->get('user_id'));
 			$this->session->set('auth_gen', $user->get('auth_gen'));
-			$this->session->set('use_language_cd', $user->get('use_language_cd'));
 			$ret_view = 'user_enTop';
 		} else {
 			// ログイン失敗画面へ遷移
@@ -127,13 +126,13 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 
 		// COMMIT
 		$db->commit();
-		
+
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
 			return 'error';
 		}
-		
+
 		// 転送
 		if (null != $this->af->get('function') && '' != $this->af->get('function')) {
 			header('Location: '.$this->af->get('function'));
