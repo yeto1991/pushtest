@@ -102,7 +102,6 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			// SESSIONの破棄。
 			$this->session->set('user_id', '');
 			$this->session->set('auth_gen', '');
-			$this->session->set('use_language_cd', '');
 			$this->session->destroy();
 
 			// COMMIT
@@ -166,7 +165,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			$jm_user->set('auth_gen', '1');
 			$jm_user->set('auth_user', '0');
 			$jm_user->set('auth_fair', '0');
-			$jm_user->set('idpass_notice_cd', '0');
+			$jm_user->set('idpass_notice_cd', '1');
 			$jm_user->set('del_flg', '0');
 			$jm_user->set('regist_user_id', '0');
 			$jm_user->set('regist_date', date('Y/m/d H:i:s'));
@@ -199,7 +198,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			//TODOメール送信処理
 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
 			$mail_mgr =& $this->backend->getManager('mail');
-			//$mail_mgr->sendmailEnUserChange(strtolower($this->af->get('email')), $ary_value);
+			$mail_mgr->sendmailEnUserChange(strtolower($this->af->get('email')), $ary_value);
 
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
@@ -226,6 +225,8 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			$jm_user->set('tel', $this->af->get('tel'));
 			$jm_user->set('fax', $this->af->get('fax'));
 			$jm_user->set('url', $this->af->get('url'));
+			$jm_user->set('use_language_cd', '1');
+			$jm_user->set('idpass_notice_cd', '1');
 			$jm_user->set('update_user_id', $this->session->get('user_id'));
 			$jm_user->set('update_date', date('Y/m/d H:i:s'));
 			// UPDATE処理実行
@@ -252,7 +253,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			//TODO メール送信処理
 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
 			$mail_mgr =& $this->backend->getManager('mail');
-			//$mail_mgr->sendmailEnUserChange(strtolower($this->af->get('email')), $ary_value);
+			$mail_mgr->sendmailEnUserChange(strtolower($this->af->get('email')), $ary_value);
 
 			//更新モードで完了画面へ
 			$this->af->set('mode', 'change');
