@@ -1380,7 +1380,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 	function prepare()
 	{
 		// ログインチェック
-		if (!$this->backend->getManager('userCommon')->isEnLoginUser()) {
+		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'user_enLogin';

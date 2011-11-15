@@ -39,7 +39,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 	function prepare()
 	{
 		// ログインチェック
-		if (!$this->backend->getManager('userCommon')->isEnLoginUser()) {
+		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'user_enLogin';
@@ -199,7 +199,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			//TODOメール送信処理
 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
 			$mail_mgr =& $this->backend->getManager('mail');
-			//$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
+			//$mail_mgr->sendmailEnUserChange(strtolower($this->af->get('email')), $ary_value);
 
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {

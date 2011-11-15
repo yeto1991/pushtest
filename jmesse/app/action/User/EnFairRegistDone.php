@@ -39,7 +39,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 	function prepare()
 	{
 		// ログインチェック
-		if (!$this->backend->getManager('userCommon')->isEnLoginUser()) {
+		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('');
 			return 'user_enLogin';
@@ -311,9 +311,9 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		$mail_mgr =& $this->backend->getManager('mail');
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
 		if ('c' == $this->af->get('mode')) {
- 			$mail_mgr->sendmailFairChange($jm_user->get('email'), $ary_value);
+ 			$mail_mgr->sendmailEnFairChange($jm_user->get('email'), $ary_value);
 		} else {
- 			$mail_mgr->sendmailFairReigst($jm_user->get('email'), $ary_value);
+ 			$mail_mgr->sendmailEnFairReigst($jm_user->get('email'), $ary_value);
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
 
