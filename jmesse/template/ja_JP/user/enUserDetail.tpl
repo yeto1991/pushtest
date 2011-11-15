@@ -4,8 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="">
 
-<title>Expobioenergia 11 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>User Detail - Online Trade Fair Database (J-messe) - JETRO</title>
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -66,60 +67,60 @@
 		<!-- main -->
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
-			<div class="h2"><h2>ユーザー詳細</h2></div>
+			<div class="h2"><h2>User Detail</h2></div>
 			<div class="in_main">
-				<p>登録情報を変更したい場合、または退会をご希望の方は「編集画面へ」ボタンをクリックしてください。<br />
+				<p>If you want edit or delete the your user's information, please press the "TO EDIT" button.<br /></p>
 				<form name="form_user_enUserDetail" id="form_user_enUserDetail" method="post" action=""  enctype="multipart/form-data">
 					<input type="hidden" name="action_user_enUserChange" id="action_user_enUserChange" value="dummy">
 					<!-- モード -->
 					<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 					<!-- ユーザID -->
 					<input type="hidden" name="user_id" id="user_id" value="{$form.user_id}" />
-					<h4>Eメールとパスワード</h4>
+					<h4>Email and Password</h4>
 					<table id="registration">
 						<tr>
-							<th class="item">Eメール</th>
+							<th class="item">email</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.email}</td>
 						</tr>
 						<tr>
-							<th class="item">パスワード</th>
+							<th class="item">password</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.password}</td>
 						</tr>
 					</table><br />
-					<h4>お客様情報入力</h4>
+					<h4>User's Information</h4>
 					<table id="registration">
 						<tr>
-							<th class="item">会社名</th>
+							<th class="item">Company name</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.companyNm}</td>
 						</tr>
 						<tr>
-							<th class="item">部署名</th>
+							<th class="item">Division/Dept name</th>
 							<th class="required"></th>
 							<td>{$form.divisionDeptNm}<br /></td>
 						</tr>
 						<tr>
-							<th class="item">お名前</th>
+							<th class="item">Your name</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.userNm}</td>
 						</tr>
 						<tr>
-							<th class="item">性別</th>
+							<th class="item">Gender</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-							{if $form.genderCd == "0"}男性{/if}
-							{if $form.genderCd == "1"}女性{/if}
+							{if $form.genderCd == "0"}Male{/if}
+							{if $form.genderCd == "1"}Female{/if}
 							</td>
 						</tr>
 						<tr>
-							<th class="item">郵便番号</th>
+							<th class="item">Post Code</th>
 							<th class="required"></th>
 							<td>{$form.postCode}</td>
 						</tr>
 						<tr>
-							<th class="item">住所</th>
+							<th class="item">Address</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.address}</td>
 						</tr>
@@ -134,7 +135,7 @@
 							<td>{$form.fax}</td>
 						</tr>
 						<tr>
-							<th class="item">御社のウェブサイトURL</th>
+							<th class="item">URL</th>
 							<th class="required"></th>
 							<td>{$form.url}</td>
 						</tr>
@@ -142,8 +143,8 @@
 					<!-- navi area-->
 					<table width="100%">
 						<tr>
-							<td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-							<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="編集画面へ"  class="over" /></td>
+							<td><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" onclick="history.back()"/></td>
+							<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="TO EDIT"  class="over" /></td>
 						</tr>
 					</table>
 				</form>

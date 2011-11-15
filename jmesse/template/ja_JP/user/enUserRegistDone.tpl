@@ -4,8 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="">
 
-<title>Expobioenergia 11 - Online Trade Fair Database (J-messe) - JETRO</title>
+{if ("regist" == $form.mode)}
+	<title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
+{elseif ("change" == $form.mode)}
+	<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
+{else}
+	<title>User Deleting - Online Trade Fair Database (J-messe) - JETRO</title>
+{/if}
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -48,22 +55,23 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li><a href="/database/">Business Opportunities</a></li>
+			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if ("regist" == $form.mode)}
-				<li><a href="/database/j-messe/tradefair/">ユーザー登録</a></li>
-				<li><a href="/database/j-messe/tradefair/">ユーザー登録確認</a></li>
-				<li>ユーザー登録完了</li>
+				<li><a href="/database/j-messe/tradefair/">User Registration</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Registration Confirm</a></li>
+				<li>User Registration Complete</li>
 			{elseif ("change" == $form.mode)}
-				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
-				<li><a href="/database/j-messe/tradefair/">ユーザー修正確認</a></li>
-				<li>ユーザー修正完了</li>
+				<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Editing</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Editing Confirm</a></li>
+				<li>User Editing Complete</li>
 			{else}
-				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
-				<li><a href="/database/j-messe/tradefair/">ユーザー削除確認</a></li>
-				<li>ユーザー削除完了</li>
+				<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Editing</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Deleting Confirm</a></li>
+				<li>User Deleting Complete</li>
 			{/if}
 		</ul>
 	</div>
@@ -76,36 +84,36 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ("regist" == $form.mode)}
-				<h2>ユーザー登録</h2>
+				<h2>User Registration</h2>
 				{/if}
 				{if ("change" == $form.mode)}
-				<h2>ユーザー修正</h2>
+				<h2>User Editing</h2>
 				{/if}
 				{if ("delete" == $form.mode)}
-				<h2>ユーザー削除</h2>
+				<h2>User Deleting</h2>
 				{/if}
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了"></a></h3>
 				{if ("regist" == $form.mode)}
-				<p>ユーザー登録が完了しました。ありがとうございました。</p>
+				<p>User Registration complete. Thank you very much.</p>
 				{/if}
 				{if ("change" == $form.mode)}
-				<p>ユーザー修正が完了しました。ありがとうございました。</p>
+				<p>User Editing complete. Thank you very much.</p>
 				{/if}
 				{if ("delete" == $form.mode)}
-				<p>ユーザー削除が完了しました（退会処理完了）。ありがとうございました。</p>
+				<p>User Deleting complete. Thank you very much.</p>
 				{/if}
 				<div class="finish-navi">
 					{if ("delete" != $form.mode)}
 					<div class="btn">
-						<a href="{$config.url}?action_user_enFairRegistStep1=true" ><span class="title">続いて見本市を登録する</span>
-						<span class="description">見本市新規登録ページを開きます。</span></a>
+						<a href="{$config.url}?action_user_enFairRegistStep1=true" ><span class="title">New Fair Registration</span>
+						<span class="description">To new fair registration page</span></a>
 					</div>
 					{/if}
 					<div class="btn">
-						<a href="/j-messe/" ><span class="title">登録を終了する</span>
-						<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
+						<a href="/j-messe/" ><span class="title">To top page</span>
+						<span class="description">To jemmese top page</span></a>
 					</div>
 				</div>
 			</div>
@@ -121,7 +129,7 @@
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer" ></div>
+	<div id="include_footer"></div>
 	<!-- /footer -->
 </body>
 </html>

@@ -9,7 +9,11 @@
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
+{if ("regist" == $form.mode)}
 <title>ユーザー登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+{else}
+<title>ユーザー修正 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+{/if}
 <script type="text/javascript" src="/js/jquery.js"></script>
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />

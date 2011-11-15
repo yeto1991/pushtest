@@ -4,8 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="">
 
-<title>Expobioenergia 11 - Online Trade Fair Database (J-messe) - JETRO</title>
+{if ("regist" == $form.mode)}
+	<title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
+{elseif ("change" == $form.mode)}
+	<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
+{else}
+	<title>User Deleting - Online Trade Fair Database (J-messe) - JETRO</title>
+{/if}
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -48,19 +55,20 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li><a href="/database/">Business Opportunities</a></li>
+			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if ("regist" == $form.mode)}
-				<li><a href="/database/j-messe/tradefair/">ユーザー登録</a></li>
-				<li>ユーザー登録確認</li>
+				<li><a href="/database/j-messe/tradefair/">User Registration</a></li>
+				<li>User Registration Confirm</li>
 			{elseif ("change" == $form.mode)}
-				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
-				<li>ユーザー修正確認</li>
+				<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Editing</a></li>
+				<li>User Editing Confirm</li>
 			{else}
-				<li><a href="/database/j-messe/tradefair/">ユーザー修正</a></li>
-				<li>ユーザー削除確認</li>
+				<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+				<li><a href="/database/j-messe/tradefair/">User Editing</a></li>
+				<li>User Deleting Confirm</li>
 			{/if}
 		</ul>
 	</div>
@@ -73,21 +81,23 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ("regist" == $form.mode)}
-				<h2>ユーザー登録</h2>
+				<h2>User Registration</h2>
 				{elseif ("change" == $form.mode)}
-				<h2>ユーザー修正</h2>
+				<h2>User Editing</h2>
 				{else}
-				<h2>ユーザー削除</h2>
+				<h2>User Deleting</h2>
 				{/if}
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
 				{if ("delete" == $form.mode)}
-				<p><font color="red">「完了」ボタンをクリックすると、ユーザ情報が削除されます。<br />
-				ユーザ情報は元に戻せませんので、削除してもよいか再度ご確認ください。</font></p>
+				<p><font color="red">If you press the "Complete" button, user's informations can't restore because it is deleted.<br />
+				So please note when you withdraw from membership.</font></p>
 				{else}
-				<p>以下の内容に間違いがないかご確認の上、「完了」ボタンをクリックしてください。<br />
-				修正したい場合は「戻る」ボタンをクリックしてください。</p>
+				<p>
+				Please confirm the your entered informations.If it's ok, please press the "Complete" button.<br />
+				If you want to back the last page, please press the "back" button.
+				</p>
 				{/if}
 				<form name="form_user_enUserRegistDo" id="form_user_enUserRegistDo" method="post" action="">
 					{uniqid}
@@ -122,51 +132,51 @@
 						{/foreach}
 					</ul>
 					{/if}
-					<h4>Eメールとパスワード</h4>
+					<h4>Email and Password</h4>
 					<table id="registration">
 						<tr>
-							<th class="item">Eメール</th>
+							<th class="item">email</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.email}</td>
 						</tr>
 						<tr>
-							<th class="item">パスワード</th>
+							<th class="item">password</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.password}</td>
 						</tr>
 					</table><br />
-					<h4>お客様情報入力</h4>
+					<h4>User's Information</h4>
 					<table id="registration">
 						<tr>
-							<th class="item">会社名</th>
+							<th class="item">Company name</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.companyNm}</td>
 						</tr>
 						<tr>
-							<th class="item">部署名</th>
+							<th class="item">Division/Dept name</th>
 							<th class="required"></th>
 							<td>{$form.divisionDeptNm}<br /></td>
 						</tr>
 						<tr>
-							<th class="item">お名前</th>
+							<th class="item">Your name</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.userNm}</td>
 						</tr>
 						<tr>
-							<th class="item">性別</th>
+							<th class="item">Gender</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-							{if $form.genderCd == "0"}男性{/if}
-							{if $form.genderCd == "1"}女性{/if}
+							{if $form.genderCd == "0"}Male{/if}
+							{if $form.genderCd == "1"}Female{/if}
 							</td>
 						</tr>
 						<tr>
-							<th class="item">郵便番号</th>
+							<th class="item">Post Code</th>
 							<th class="required"></th>
 							<td>{$form.postCode}</td>
 						</tr>
 						<tr>
-							<th class="item">住所</th>
+							<th class="item">Address</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$form.address}</td>
 						</tr>
@@ -181,24 +191,23 @@
 							<td>{$form.fax}</td>
 						</tr>
 						<tr>
-							<th class="item">御社のウェブサイトURL</th>
+							<th class="item">URL</th>
 							<th class="required"></th>
 							<td>{$form.url}</td>
 						</tr>
 						{if ("1" == $form.delFlg)}
 						<tr>
-							<th class="item">退会希望</th>
+							<th class="item">Withdrawal from membership</th>
 							<th class="required"></th>
-							<td>退会を希望します。</td>
+							<td>Yes</td>
 						</tr>
 						{/if}
 					</table>
 					<!-- navi area-->
 					<table width="100%">
 						<tr>
-							<td><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-							<td align="right">
-							<input type="image" src="/j-messe/images/db/btn-finish.gif" alt="完了" class="over" /></td>
+							<td><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" onclick="history.back()"/></td>
+							<td align="right"><input type="image" src="/j-messe/images/db/btn-finish.gif" alt="complete" class="over" /></td>
 						</tr>
 					</table>
 				</form>
@@ -230,7 +239,7 @@
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer" ></div>
+	<div id="include_footer"></div>
 	<!-- /footer -->
 </body>
 </html>
