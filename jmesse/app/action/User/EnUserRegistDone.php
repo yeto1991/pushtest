@@ -38,19 +38,6 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		//重複チェック
-		$jmUserMgr = $this->backend->getManager('jmUser');
-		$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('email'));
-		if (Ethna::isError($emailCheck)) {
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
-			return 'error';
-		}
-		if($emailCheck == "DOUBLE_CHECK_NG"){
-			$this->ae->add(null, "入力されたEメールは既に使用されています。");
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
-			return 'user_enUserRegist';
-		}
-		
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
@@ -126,7 +113,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		$jm_user->set('auth_gen', '1');
 		$jm_user->set('auth_user', '0');
 		$jm_user->set('auth_fair', '0');
-		$jm_user->set('idpass_notice_cd', '0');
+		$jm_user->set('idpass_notice_cd', '1');
 		$jm_user->set('del_flg', '0');
 		$jm_user->set('regist_user_id', '0');
 		$jm_user->set('regist_date', date('Y/m/d H:i:s'));
@@ -162,7 +149,6 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		$this->session->start();
 		$this->session->set('user_id', $user->get('user_id'));
 		$this->session->set('auth_gen', $user->get('auth_gen'));
-		$this->session->set('use_language_cd', $user->get('use_language_cd'));
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
