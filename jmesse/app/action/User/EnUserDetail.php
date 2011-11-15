@@ -24,7 +24,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'print' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント用表示', // Display name
+			'name'        => 'print', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -37,7 +37,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_HIDDEN,
-			'name'        => '登録モード',
+			'name'        => 'mode',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -50,7 +50,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'user_id' => array(
 			'type'        => VAR_TYPE_INT,
 			'form_type'   => FORM_TYPE_HIDDEN,
-			'name'        => 'ユーザID',
+			'name'        => 'User Id',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -63,7 +63,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'email' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => 'Eメール',
+			'name'        => 'email',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -76,7 +76,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'password' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => 'パスワード',
+			'name'        => 'password',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -89,7 +89,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'companyNm' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '会社名',
+			'name'        => 'Company name',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -102,7 +102,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'divisionDeptNm' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '部署名',
+			'name'        => 'Division/Dept name',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -115,7 +115,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'userNm' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '氏名',
+			'name'        => 'Your name',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -128,7 +128,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'genderCd' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '性別',
+			'name'        => 'Gender',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -141,7 +141,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'postCode' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '郵便番号',
+			'name'        => 'Post Code',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -154,7 +154,7 @@ class Jmesse_Form_UserEnUserDetail extends Jmesse_ActionForm
 		'address' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '住所',
+			'name'        => 'Address',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
