@@ -24,7 +24,7 @@ class Jmesse_Form_UserEnFairList extends Jmesse_ActionForm
 		'print' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント用表示', // Display name
+			'name'        => 'print', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -37,7 +37,7 @@ class Jmesse_Form_UserEnFairList extends Jmesse_ActionForm
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '登録モード',    // Display name
+			'name'        => 'mode',    // Display name
 			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -50,7 +50,7 @@ class Jmesse_Form_UserEnFairList extends Jmesse_ActionForm
 		'check_mihon_no' => array(
 			'type'        => array(VAR_TYPE_STRING), // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => 'チェックされた見本市番号', // Display name
+			'name'        => 'check_mihon_no', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
@@ -63,7 +63,7 @@ class Jmesse_Form_UserEnFairList extends Jmesse_ActionForm
 		'mihon_no' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市番号',    // Display name
+			'name'        => 'mihon_no',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -116,6 +116,10 @@ class Jmesse_Action_UserEnFairList extends Jmesse_ActionClass
 	*/
 	function perform()
 	{
+		// ユーザ情報
+		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+		$this->session->set('email', $jm_user->get('email'));
+
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 		// My展示会総件数の取得
 		$this->af->setApp('my_fair_info_list_count', $jm_fair_mgr->getMyFairInfoListCount($this->session->get('user_id')));

@@ -116,6 +116,10 @@ class Jmesse_Action_UserFairList extends Jmesse_ActionClass
 	*/
 	function perform()
 	{
+		// ユーザ情報
+		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+		$this->session->set('email', $jm_user->get('email'));
+
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 		// My展示会総件数の取得
 		$this->af->setApp('my_fair_info_list_count', $jm_fair_mgr->getMyFairInfoListCount($this->session->get('user_id')));
