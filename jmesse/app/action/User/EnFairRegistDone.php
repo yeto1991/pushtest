@@ -198,7 +198,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('agency_in_japan_tel', $regist_param_2['agency_in_japan_tel']);
 		$jm_fair->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$jm_fair->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
-		$jm_fair->set('select_language_info', $regist_param_3['select_language_info']);
+		$jm_fair->set('select_language_info', '1'); //英語
 		$jm_fair->set('fair_title_en', $regist_param_3['fair_title_en']);
 		$jm_fair->set('profile_en', str_replace($br, '<br/>', $regist_param_3['profile_en']));
 		$jm_fair->set('detailed_information_en', str_replace($br, '<br/>', $regist_param_3['detailed_information_en']));
