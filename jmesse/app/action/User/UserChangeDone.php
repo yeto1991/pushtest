@@ -102,7 +102,6 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			// SESSIONの破棄。
 			$this->session->set('user_id', '');
 			$this->session->set('auth_gen', '');
-			$this->session->set('use_language_cd', '');
 			$this->session->destroy();
 
 			// COMMIT
@@ -226,6 +225,8 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			$jm_user->set('tel', $this->af->get('tel'));
 			$jm_user->set('fax', $this->af->get('fax'));
 			$jm_user->set('url', $this->af->get('url'));
+			$jm_user->set('use_language_cd', '0');
+			$jm_user->set('idpass_notice_cd', '0');
 			$jm_user->set('update_user_id', $this->session->get('user_id'));
 			$jm_user->set('update_date', date('Y/m/d H:i:s'));
 			// UPDATE処理実行
@@ -238,7 +239,7 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			}
 			$this->af->setApp('user_id', $jm_user->get('user_id'));
 			// ログテーブル登録
-			$mgr = $this->backend->getManager('adminCommon');
+			$mgr = $this->backend->getManager('userCommon');
 			$ret = $mgr->regLog($this->session->get('user_id'), '3', '1', strtolower($this->af->get('email').'('.$this->af->get('user_id').')'));
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
