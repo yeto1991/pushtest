@@ -24,7 +24,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'mode' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '画面モード',    // Display name
+			'name'        => 'mode',    // Display name
 			'required'    => true,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -37,7 +37,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'user_id' => array(
 			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN,  // Form type
-			'name'        => 'ユーザID',    // Display name
+			'name'        => 'User Id',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -50,7 +50,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'emailCheckFlg' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_HIDDEN,
-			'name'        => 'Eメール重複チェック判定フラグ',
+			'name'        => 'emailCheckFlg',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
@@ -63,7 +63,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'email' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => 'Eメール',
+			'name'        => 'email',
 			'required'    => true,
 			'min'         => null,
 			'max'         => 255,
@@ -76,7 +76,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'email2' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => 'Eメール(確認)',
+			'name'        => 'email(Confirm)',
 			'required'    => true,
 			'min'         => null,
 			'max'         => 255,
@@ -89,7 +89,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'password' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_PASSWORD,
-			'name'        => 'パスワード',
+			'name'        => 'password',
 			'required'    => true,
 			'min'         => 4,
 			'max'         => 8,
@@ -102,7 +102,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'password2' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_PASSWORD,
-			'name'        => 'パスワード(確認)',
+			'name'        => 'password(Confirm)',
 			'required'    => true,
 			'min'         => 4,
 			'max'         => 8,
@@ -115,7 +115,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'companyNm' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '会社名',
+			'name'        => 'Company name',
 			'required'    => true,
 			'min'         => null,
 			'max'         => 500,
@@ -128,7 +128,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'divisionDeptNm' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '部署名',
+			'name'        => 'Division/Dept name',
 			'required'    => false,
 			'min'         => null,
 			'max'         => 255,
@@ -141,7 +141,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'userNm' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '氏名',
+			'name'        => 'Your name',
 			'required'    => true,
 			'min'         => null,
 			'max'         => 100,
@@ -154,7 +154,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'genderCd' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_RADIO,
-			'name'        => '性別',
+			'name'        => 'Gender',
 			'required'    => true,
 			'min'         => null,
 			'max'         => null,
@@ -167,7 +167,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'postCode' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '郵便番号',
+			'name'        => 'Post Code',
 			'required'    => false,
 			'min'         => null,
 			'max'         => 20,
@@ -180,7 +180,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'address' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_TEXT,
-			'name'        => '住所',
+			'name'        => 'Address',
 			'required'    => true,
 			'min'         => null,
 			'max'         => 255,
@@ -232,7 +232,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'delFlg' => array(
 			'type'        => VAR_TYPE_STRING,
 			'form_type'   => FORM_TYPE_RADIO,
-			'name'        => '削除フラグ',
+			'name'        => 'delFlg',
 			'required'    => false,
 			'min'         => null,
 			'max'         => null,
