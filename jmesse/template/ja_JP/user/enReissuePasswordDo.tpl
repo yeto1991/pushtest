@@ -4,8 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="">
 
-<title>Expobioenergia 11 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Password Confirmation Complete - Online Trade Fair Database (J-messe) - JETRO</title>
 
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -51,7 +52,7 @@
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li>Expobioenergia 11</li>
+			<li>Password Confirmation</li>
 		</ul>
 		 -->
 	</div>
@@ -67,7 +68,7 @@
 				<div class="bgbox_set">
 					<div class="bgbox_base">
 						<div class="in_main">
-							<p>メール送信致しました。ご確認ください。</p>
+								<p>Your User ID and Password have been mailed to you.<br />receipt of this mail may take up to five minutes.<br />If you entered information incorrectly, this mail will not be sent. <br /></p>
 						</div>
 					</div>
 				</div>
