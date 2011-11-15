@@ -75,11 +75,11 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
-					$this->ae->add('email', "Eメール 「@」の位置が不正です");
+					$this->ae->add('email', "Email is incorrect.");
 					return 'user_enUserRegist';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email', "Email is incorrect.");
 					return 'user_enUserRegist';
 				}
 			}
@@ -87,29 +87,29 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			if($this->af->get('email2') != null && $this->af->get('email2') != ''){
 				//Eメール
 				if(substr($this->af->get('email2'), 0, 1) == "@" || substr($this->af->get('email2'), -1) == "@"){
-					$this->ae->add('email2', "Eメール(確認) 「@」の位置が不正です");
+					$this->ae->add('email2', "Email(Confirm) is incorrect.");
 					return 'user_enUserRegist';
 				}
 				if(substr_count($this->af->get('email2'),"@") != 1){
-					$this->ae->add('email2', "Eメール(確認) 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email2', "Email(Confirm) is incorrect.");
 					return 'user_enUserRegist';
 				}
 			}
 			//URL
 			if($this->af->get('url') != null && $this->af->get('url') != ''){
 				if (0 !== strpos($this->af->get('url'), 'http')) {
-					$this->ae->add('url', "URLは「http」から入力してください");
+					$this->ae->add('url', "URL is incorrect.");
 					return 'user_enUserRegist';
 				}
 			}
 			//Eメール2重登録チェック
 			if($this->af->get('email') != $this->af->get('email2')){
-				$this->ae->add('email2', "入力されたEメールと合致していません。");
+				$this->ae->add('email2', "Email doesn't match.");
 				return 'user_enUserRegist';
 			}
 			//パスワード2重登録チェック
 			if($this->af->get('password') != $this->af->get('password2')){
-				$this->ae->add('password2', "入力されたパスワードと合致していません。");
+				$this->ae->add('password2', "Password doesn't match.");
 				return 'user_enUserRegist';
 			}
 			//重複チェック
@@ -120,7 +120,7 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 				return 'error';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
-				$this->ae->add('email', "入力されたEメールは既に使用されています。");
+				$this->ae->add('email', "Someone already is using the email.");
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
 				return 'user_enUserRegist';
 			}
