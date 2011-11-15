@@ -71,27 +71,20 @@
 				<div id="main">
 					<div class="bgbox_set">
 						<div class="bgbox_base">
-
-
 							<div class="h1">
 								<h1>見本市・展示会データベース（J-messe)</h1>
 							</div>
-
 							<div class="h2">
 								<h2>見本市修正登録選択一覧</h2>
 							</div>
 							<div class="in_main">
-
 								<p class="t_right">ユーザー：{$session.email}</p>
-
 								<p>
 									過去に登録した見本市情報をコピーして、新規の見本市情報として登録します。<br />
 									<strong><span class="red">元にする見本市を選択してください。</span></strong>
 								</p>
-
 								<h4>登録済みの見本市一覧</h4>
-								<p>{$app.cnt}件中 1から{$app.cnt}件目</p>
-
+								<p>総件数：{$app.cnt}件</p>
 								{section name=it loop=$app.fair_list}
 								{if (0 == $smarty.section.it.index%2)}
 								<div class="list0">
@@ -109,7 +102,7 @@
 										</dt>
 										<dd>
 											{$app.fair_list[it].date_from_yyyy}年{$app.fair_list[it].date_from_mm}月{$app.fair_list[it].date_from_dd}日～{$app.fair_list[it].date_to_yyyy}年{$app.fair_list[it].date_to_mm}月{$app.fair_list[it].date_to_dd}日<br />
-											{$app.fair_list[it].city_name} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
+											{if $app.fair_list[it].city_name == ""}Other({$app.fair_list[it].other_city_jp}){else}{$app.fair_list[it].city_name}{/if} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
 											{$app.fair_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}
 										</dd>
 									</dl>
