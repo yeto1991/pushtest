@@ -25,7 +25,7 @@ class Jmesse_Form_UserEnFairRegistFinish extends Jmesse_ActionForm
 		'msg' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'メッセージ',  // Display name
+			'name'        => 'msg',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
