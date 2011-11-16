@@ -4,11 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="" />
 
 {if ('' == $form.mode) || ('e' == $form.mode)}
-<title>見本市登録 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Fair Registration - Online Trade Fair Database (J-messe) - JETRO</title>
 {elseif ('c' == $form.mode)}
-<title>見本市修正 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
 {/if}
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -49,7 +50,7 @@
 	 * 展示会に係わる画像(3点)関連。
 	 */
 	function delete_photos_list() {
-		if (window.confirm('選択された画像ファイルを削除しますか？')) {
+		if (window.confirm('Do you delete the selected photos？')) {
 			var delfiletag;
 			for (var i = document.getElementById('photos_list').length - 1; i >= 0; i--) {
 				if (document.getElementById('photos_list').options[i].selected) {
@@ -79,12 +80,12 @@
 
 		for (i = 0; i < document.getElementById('photos_list').length; i++) {
 			if (filename == document.getElementById('photos_list').options[i].value) {
-				window.alert('画像ファイル名が重複しました。');
+				window.alert('same photo's file name can not regist.');
 				return;
 			}
 		}
 		if (3 <= document.getElementById('photos_list').length) {
-			window.alert('画像ファイルの登録は3件までです。');
+			window.alert('photo can regist up to 3 photos.');
 			return;
 		}
 
@@ -103,7 +104,7 @@
 		if ('' != path_1 || '' != path_2 || '' != path_3) {
 			for (var i = 0; i < document.getElementsByName('virus_check').length; i++) {
 				if (document.getElementsByName('virus_check')[i].checked && '0' == document.getElementsByName('virus_check')[i].value) {
-					window.alert('アップロードする画像ファイルのウイルスチェックを行なって下さい')
+					window.alert('please virus check your selected photos for registing');
 					return;
 				}
 			}
@@ -130,16 +131,16 @@
 	<div id="bread">
 		<ul class="clearfix">
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
+			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
-			<li><a href="/database/j-messe/tradefair/">見本市登録(step1)</a></li>
-			<li>見本市登録(step2)</li>
+			<li><a href="/database/j-messe/tradefair/">Fair Registration(step1)</a></li>
+			<li>Fair Registration(step2)</li>
 			{elseif ('c' == $form.mode)}
-			<li><a href="/database/j-messe/tradefair/">見本市修正(step1)</a></li>
-			<li>見本市修正(step2)</li>
+			<li><a href="/database/j-messe/tradefair/">Fair Editing(step1)</a></li>
+			<li>Fair Editing(step2)</li>
 			{/if}
 		</ul>
 	</div>
@@ -152,26 +153,25 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ('' == $form.mode) || ('e' == $form.mode)}
-				<h2>見本市登録</h2>
+				<h2>Fair Registration</h2>
 				{elseif ('c' == $form.mode)}
-				<h2>見本市修正</h2>
+				<h2>Fair Editing</h2>
 				{/if}
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center">
-					<img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2">
+					<img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2" />
 				</h3>
-				<p class="t_right">ユーザー：{$session.email}</p>
+				<p class="t_right">user：{$session.email}</p>
 
 				{* エラー表示 *}
 				{if count($errors)}
-				<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+				<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
 				{/if}
 
 				<form name="form_enFairRegistStep2" id="form_enFairRegistStep2" method="post" action=""  enctype="multipart/form-data">
-					<input type="hidden" name="action_user_enFairRegistStep3" id="action_user_enFairRegistStep3" value="dummy" />
+					<input type="hidden" name="action_user_enFairRegistDo" id="action_user_enFairRegistDo" value="dummy" />
 					<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
-
 					<input type="hidden" name="photos_name_1" id="photos_name_1" value="{$form.photos_name_1}" />
 					<input type="hidden" name="photos_name_2" id="photos_name_2" value="{$form.photos_name_2}" />
 					<input type="hidden" name="photos_name_3" id="photos_name_3" value="{$form.photos_name_3}" />
@@ -179,40 +179,38 @@
 					{if ('c' == $form.mode || 'e' == $form.mode)}
 					<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 					{/if}
-
 					<table id="registration">
-						{if is_error('fair_title_jp')}
+						{if is_error('fair_title_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">見本市名</th>
+							<th class="item">Fair title</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br/>
-								{if is_error('fair_title_jp')}
-								<span class="error-message">{message name="fair_title_jp"}</span><br />
+								<input type="text" value="{$form.fair_title_en}" size="60" name="fair_title_en" id="fair_title_en" maxlength="255" /><br/>
+								{if is_error('fair_title_en')}
+								<span class="error-message">{message name="fair_title_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
 					</table>
 
-
-					<h4>過去の実績</h4>
+					<h4>last fair information</h4>
 					<table id="registration">
 						{if is_error('year_of_the_trade_fair')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">対象年</th>
+							<th class="item">year</th>
 							<th class="required"></th>
 							<td><select name="year_of_the_trade_fair" size="1" id="year_of_the_trade_fair">
 									<option value=""></option>
 									{section name=it loop=$app.year_list}
 									<option value="{$app.year_list[it]}" {if $app.year_list[it]==$form.year_of_the_trade_fair}selected{/if}>{$app.year_list[it]}</option>
 									{/section}
-								</select> 年実績<br/>
+								</select> Year<br/>
 								{if is_error('year_of_the_trade_fair')}
 								<span class="error-message">{message name="year_of_the_trade_fair"}</span><br />
 								{/if}
@@ -224,11 +222,11 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">総来場者数</th>
+							<th class="item">Total number of visitors</th>
 							<th class="required"></th>
 							<td>
-								<input type="text" value="{$form.total_number_of_visitor}" size="10" name="total_number_of_visitor" id="total_number_of_visitor" maxlength="10" /> <strong>人</strong> うち海外から <input type="text" value="{$form.number_of_foreign_visitor}" size="10" name="number_of_foreign_visitor" id="number_of_foreign_visitor" maxlength="10" /> <strong>人</strong><br />
-								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
+								<input type="text" value="{$form.total_number_of_visitor}" size="10" name="total_number_of_visitor" id="total_number_of_visitor" maxlength="10" /> <strong> (including </strong><input type="text" value="{$form.number_of_foreign_visitor}" size="10" name="number_of_foreign_visitor" id="number_of_foreign_visitor" maxlength="10" /> <strong>  foreign visitors) </strong><br />
+								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
 								{if is_error('total_number_of_visitor')}
 								<span class="error-message">{message name="total_number_of_visitor"}</span><br />
 								{/if}
@@ -237,17 +235,16 @@
 								{/if}
 							</td>
 						</tr>
-
 						{if is_error('total_number_of_exhibitors') || is_error('number_of_foreign_exhibitors')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">総出展者数</th>
+							<th class="item">Total number of exhibitors</th>
 							<th class="required"></th>
 							<td>
-								<input type="text" value="{$form.total_number_of_exhibitors}" size="10" name="total_number_of_exhibitors" id="total_number_of_exhibitors" maxlength="10" /> <strong>社</strong> うち海外から <input type="text" value="{$form.number_of_foreign_exhibitors}" size="10" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" maxlength="10" /> <strong>社</strong><br />
-								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
+								<input type="text" value="{$form.total_number_of_exhibitors}" size="10" name="total_number_of_exhibitors" id="total_number_of_exhibitors" maxlength="10" /> <strong>(including </strong><input type="text" value="{$form.number_of_foreign_exhibitors}" size="10" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" maxlength="10" /> <strong>  foreign exhibitors) </strong><br />
+								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
 								{if is_error('total_number_of_exhibitors')}
 								<span class="error-message">{message name="total_number_of_exhibitors"}</span><br />
 								{/if}
@@ -262,13 +259,29 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">開催規模</th>
+							<th class="item">Net square meters</th>
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.net_square_meters}" size="50" name="net_square_meters" id="net_square_meters" maxlength="50" /> <strong>sqm (NET)</strong><br />
-								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
+								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
 								{if is_error('net_square_meters')}
 								<span class="error-message">{message name="net_square_meters"}</span><br />
+								{/if}
+							</td>
+						</tr>
+
+						{if is_error('spare_field1')}
+						<tr class="errorcheck">
+						{else}
+						<tr>
+						{/if}
+							<th class="item">Data verified</th>
+							<th class="required"></th>
+							<td>
+								<input type="text" value="{$form.spare_field1}" size="50" name="spare_field1" id="spare_field1" maxlength="255" /><br />
+								Example: FKM (Society for Voluntary Control of Trade Fair and Exhibition Statistics) <br />and UFI (Global Association of the Exhibition Industry) <br/>
+								{if is_error('spare_field1')}
+								<span class="error-message">{message name="spare_field1"}</span><br />
 								{/if}
 							</td>
 						</tr>
@@ -276,34 +289,34 @@
 
 					<h4>PR・キャッチフレーズ</h4>
 					<table id="registration">
-						{if is_error('profile_jp')}
+						{if is_error('profile_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">キャッチフレーズ</th>
+							<th class="item">Catchphrase</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<textarea cols="60" rows="2" name="profile_jp" id="profile_jp">{$form.profile_jp}</textarea><br/>
-							 	500文字以内で簡潔に。例：20年の歴史をもつ○○で最大の環境機器の展示会。<br/>
-								{if is_error('profile_jp')}
-								<span class="error-message">{message name="profile_jp"}</span><br />
+								<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
+							 	Maximum of 500 characters<br/>
+								{if is_error('profile_en')}
+								<span class="error-message">{message name="profile_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
 
-						{if is_error('detailed_information_jp')}
+						{if is_error('detailed_information_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">PR・紹介文</th>
+							<th class="item">Organizer's statement, special features. etc. </th>
 							<th class="required"></th>
 							<td>
-								<textarea cols="60" rows="6" name="detailed_information_jp" id="detailed_information_jp">{$form.detailed_information_jp}</textarea><br/>
-								1000文字以内で。<br/>
-								{if is_error('detailed_information_jp')}
-								<span class="error-message">{message name="detailed_information_jp"}</span><br />
+								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
+								Maximum of 1000 characters<br/>
+								{if is_error('detailed_information_en')}
+								<span class="error-message">{message name="detailed_information_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
@@ -313,13 +326,13 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">見本市の紹介写真</th>
+							<th class="item">Photos</th>
 							<th class="required"></th>
 							<td>
-								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="登録" onclick="add_photos('photos_1')"/><br />
-								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="登録" onclick="add_photos('photos_2')"/><br />
-								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="登録" onclick="add_photos('photos_3')"/><br />
-								画像ファイルはgif,jpegで縦・横600ピクセル以内のもの<br/>
+								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="regist" onclick="add_photos('photos_1')"/><br />
+								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="regist" onclick="add_photos('photos_2')"/><br />
+								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="regist" onclick="add_photos('photos_3')"/><br />
+								Register up to three images. (JPEG, GIF or TIFF format only and size is 600px×600px.) <br/>
 								<select name="photos_list" id="photos_list" size="3" style="width:200px">
 									{if ('' != $form.photos_name_1) }
 									<option value="{$form.photos_name_1}">{$form.photos_name_1}</option>
@@ -331,17 +344,17 @@
 									<option value="{$form.photos_name_3}">{$form.photos_name_3}</option>
 									{/if}
 								</select><br/>
-								<input type="button" value="選択画像を削除" onclick="delete_photos_list()" /><br/>
+								<input type="button" value="Delete" onclick="delete_photos_list()" /><br/>
 								{if count($errors)}
 									{foreach from=$errors item=error}
-										{if $error|regex_replace:'/.*見本市の紹介写真.*/i':'見本市の紹介写真' eq '見本市の紹介写真'}
+										{if $error|regex_replace:'/.*Photos.*/i':'Photos' eq 'Photos'}
 										<span class="error-message">{$error}</span><br />
 										{/if}
 									{/foreach}
 								{/if}
-								画像ファイルのウイルスチェックをしましたか？<br/>
-								<input type="radio" name="virus_check" id="virus_check_y" value="1" />はい
-								<input type="radio" name="virus_check" id="virus_check_n" value="0" checked />いいえ<br/>
+								Did you virus check your selected photos?<br/>
+								<input type="radio" name="virus_check" id="virus_check_y" value="1" />Yes
+								<input type="radio" name="virus_check" id="virus_check_n" value="0" checked />No<br/>
 								{if is_error('photos_1')}
 								<span class="error-message">{message name="photos_1"}</span><br />
 								{/if}
@@ -359,7 +372,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">検索キーワード</th>
+							<th class="item">Search Keyword</th>
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.keyword}" size="60" name="keyword" id="keyword" maxlength="100" /><br/>
@@ -370,21 +383,17 @@
 						</tr>
 					</table>
 
-					<h4>主催者</h4>
+					<h4>Show Management</h4>
 					<table id="registration">
-						{if is_error('organizer_jp') || is_error('organizer_en')}
+						{if is_error('organizer_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">主催者</th>
+							<th class="item">Show Management</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								日 <input type="text" value="{$form.organizer_jp}" size="60" name="organizer_jp" id="organizer_jp" maxlength="500" /><br/>
-								英 <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
-								{if is_error('organizer_jp')}
-								<span class="error-message">{message name="organizer_jp"}</span><br />
-								{/if}
+								 Name: <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
 								{if is_error('organizer_en')}
 								<span class="error-message">{message name="organizer_en"}</span><br />
 								{/if}
@@ -396,16 +405,16 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">主催者連絡先</th>
+							<th class="item">Show Management Information</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<strong>住所: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
-								<strong>担当部課: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />
-								<strong>担当者: </strong><input type="text" value="{$form.organizer_pers}" size="30" name="organizer_pers" id="organizer_pers" maxlength="100" /><br />
+								<strong>Address: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
+								<strong>Department: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />
+								<strong>Person: </strong><input type="text" value="{$form.organizer_pers}" size="30" name="organizer_pers" id="organizer_pers" maxlength="100" /><br />
 								<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
+								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
 								<strong>FAX: </strong><input type="text" value="{$form.organizer_fax}" size="30" name="organizer_fax" id="organizer_fax" maxlength="100" /><br />
-								電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
-								例：東京の場合 +81-3-1234-5678<br />
+								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
 								<strong>Email: </strong><input type="text" value="{$form.organizer_email}" size="60" name="organizer_email" id="organizer_email" maxlength="255" /><br />
 								{if is_error('organizer_addr')}
 								<span class="error-message">{message name="organizer_addr"}</span><br />
@@ -427,49 +436,28 @@
 								{/if}
 							 </td>
 						</tr>
-						{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
+
+						{if is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">日本国内の照会先</th>
+							<th class="item">Agency in Japan</th>
 							<th class="required"></th>
 							<td>
-								<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
-								<table style="border-style:none;border-collapse:collapse;">
-									{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
-									<tr class="errorcheck">
-									{else}
-									<tr>
-									{/if}
-										<td rowspan="2" style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											<strong>名称： </strong>
-										</td>
-										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											日 <input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" maxlength="255" /><br />
-										</td>
-									</tr>
-									{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
-									<tr class="errorcheck">
-									{else}
-									<tr>
-									{/if}
-										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											英 <input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="255" /><br />
-										</td>
-									</tr>
-								</table>
-								<strong>住所: </strong><input type="text" value="{$form.agency_in_japan_addr}" size="30" name="agency_in_japan_addr" id="agency_in_japan_addr" maxlength="255" /><br />
-								<strong>担当部課: </strong><input type="text" value="{$form.agency_in_japan_div}" size="30" name="agency_in_japan_div" id="agency_in_japan_div" maxlength="255" /><br />
-								<strong>担当者: </strong><input type="text" value="{$form.agency_in_japan_pers}" size="30" name="agency_in_japan_pers" id="agency_in_japan_pers" maxlength="100" /><br />
-								<strong>TEL: </strong><input type="text" value="{$form.agency_in_japan_tel}" size="30" name="agency_in_japan_tel" id="agency_in_japan_tel" maxlength="100" /><br />
-								<strong>FAX: </strong><input type="text" value="{$form.agency_in_japan_fax}" size="30" name="agency_in_japan_fax" id="agency_in_japan_fax" maxlength="100" /><br />
-								電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
-								例：東京の場合 +81-3-1234-5678<br />
-								<strong>Email: </strong><input type="text" value="{$form.agency_in_japan_email}" size="60" name="agency_in_japan_email" id="agency_in_japan_email" maxlength="255" /><br />
-								{if is_error('agency_in_japan_jp')}
-								<span class="error-message">{message name="agency_in_japan_jp"}</span><br />
+								<strong>Use only if your trade fair is outside of Japan, <br />but you have an agent in Japan for inquiries.</strong><br />
+								<input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="100" /><br/>
+								{if is_error('agency_in_japan_en')}
+								<span class="error-message">{message name="agency_in_japan_en"}</span><br />
 								{/if}
+								<strong>Address: </strong><input type="text" value="{$form.agency_in_japan_addr}" size="30" name="agency_in_japan_addr" id="agency_in_japan_addr" maxlength="255" /><br />
+								<strong>Department: </strong><input type="text" value="{$form.agency_in_japan_div}" size="30" name="agency_in_japan_div" id="agency_in_japan_div" maxlength="255" /><br />
+								<strong>Person: </strong><input type="text" value="{$form.agency_in_japan_pers}" size="30" name="agency_in_japan_pers" id="agency_in_japan_pers" maxlength="100" /><br />
+								<strong>TEL: </strong><input type="text" value="{$form.agency_in_japan_tel}" size="30" name="agency_in_japan_tel" id="agency_in_japan_tel" maxlength="100" /><br />
+								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
+								<strong>FAX: </strong><input type="text" value="{$form.agency_in_japan_fax}" size="30" name="agency_in_japan_fax" id="agency_in_japan_fax" maxlength="100" /><br />
+								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
+								<strong>Email: </strong><input type="text" value="{$form.agency_in_japan_email}" size="60" name="agency_in_japan_email" id="agency_in_japan_email" maxlength="255" /><br />
 								{if is_error('agency_in_japan_en')}
 								<span class="error-message">{message name="agency_in_japan_en"}</span><br />
 								{/if}
@@ -500,11 +488,11 @@
 					<table width="100%">
 						<tr>
 							{if ('c' == $form.mode || 'e' == $form.mode)}
-							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{else}
 							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 							{/if}
-							<td align="right"><a href="javascript:next();"><img src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></a></td>
+							<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ" width="180" height="37" class="over" /></td>
 						</tr>
 					</table>
 				</form>

@@ -66,8 +66,8 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 
 		// 詳細チェック
 		// 見本市名
-		if ('' == $this->af->get('fair_title_jp')) {
-			$this->ae->add('fair_title_jp', '見本市名が入力されていません');
+		if ('' == $this->af->get('fair_title_en')) {
+			$this->ae->add('fair_title_en', '見本市名が入力されていません');
 		}
 
 		// 見本市略称
@@ -121,10 +121,10 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		}
 
 		// 取扱品目
-		if ('' == $this->af->get('exhibits_jp')) {
-			$this->ae->add('exhibits_jp', '取扱品目が入力されていません');
+		if ('' == $this->af->get('exhibits_en')) {
+			$this->ae->add('exhibits_en', '取扱品目が入力されていません');
 		}
-// 		if (300 < mb_strlen($this->af->get('exhibits_jp', 'UTF-8'))) {
+// 		if (300 < mb_strlen($this->af->get('exhibits_en', 'UTF-8'))) {
 // 			$this->ae->add('exhibits_jp', '取扱品目は300文字以内にして下さい');
 // 		}
 
@@ -138,16 +138,16 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		if ('' == $this->af->get('city') && '1' != $this->af->get('check_other_city')) {
 			$this->ae->add('city', '開催地(都市)が入力されていません');
 		}
-		if ('1' == $this->af->get('check_other_city') && '' == $this->af->get('other_city_jp')) {
-			$this->ae->add('other_city_jp', '開催地(都市(その他))が入力されていません');
+		if ('1' == $this->af->get('check_other_city') && '' == $this->af->get('other_city_en')) {
+			$this->ae->add('other_city_en', '開催地(都市(その他))が入力されていません');
 		}
-		if ('1' != $this->af->get('check_other_city') && '' != $this->af->get('other_city_jp')) {
-			$this->ae->add('other_city_jp', '開催地(都市(その他))がチェックされていません');
+		if ('1' != $this->af->get('check_other_city') && '' != $this->af->get('other_city_en')) {
+			$this->ae->add('other_city_en', '開催地(都市(その他))がチェックされていません');
 		}
 
 		// 会場名
-		if ('' == $this->af->get('venue_jp')) {
-			$this->ae->add('venue_jp', '会場名が入力されていません');
+		if ('' == $this->af->get('venue_en')) {
+			$this->ae->add('venue_en', '会場名が入力されていません');
 		}
 
 		// 開催予定規模
@@ -168,22 +168,13 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 			&& '1' != $this->af->get('admission_ticket_3')
 			&& '1' != $this->af->get('admission_ticket_4')
 			&& '1' != $this->af->get('admission_ticket_5')
-			&& '' == $this->af->get('other_admission_ticket_jp')) {
+			&& '' == $this->af->get('other_admission_ticket_en')) {
 			$this->ae->add('admission_ticket_1', 'チケットの入手方法が選択されていません');
-		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が入力されていません');
-		} elseif ('1' != $this->af->get('admission_ticket_5') && '' != $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)がチェックされていません');
+		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_en')) {
+			$this->ae->add('other_admission_ticket_en', 'チケットの入手方法(その他)が入力されていません');
+		} elseif ('1' != $this->af->get('admission_ticket_5') && '' != $this->af->get('other_admission_ticket_en')) {
+			$this->ae->add('other_admission_ticket_en', 'チケットの入手方法(その他)がチェックされていません');
 		}
-
-		// 出展申込締切日
-// 		if ((null != $this->af->get('app_dead_yyyy') && '' != $this->af->get('app_dead_yyyy'))
-// 			|| (null != $this->af->get('app_dead_mm') && '' != $this->af->get('app_dead_mm'))
-// 			|| (null != $this->af->get('app_dead_dd') && '' != $this->af->get('app_dead_dd'))) {
-// 			if (!checkdate($this->af->get('app_dead_mm'), $this->af->get('app_dead_dd'), $this->af->get('app_dead_yyyy'))) {
-// 				$this->ae->add('error', '出展申込締切日が正しくありません');
-// 			}
-// 		}
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
@@ -257,7 +248,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		if (null == $regist_param_1) {
 			$regist_param_1 = array();
 		}
-		$regist_param_1['fair_title_jp'] = $this->af->get('fair_title_jp');
+		$regist_param_1['fair_title_en'] = $this->af->get('fair_title_en');
 		$regist_param_1['abbrev_title'] = $this->af->get('abbrev_title');
 		$regist_param_1['fair_url'] = $this->af->get('fair_url');
 		$regist_param_1['date_from_yyyy'] = $this->af->get('date_from_yyyy');
@@ -292,19 +283,18 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		$regist_param_1['main_industory_name_6'] = $this->af->get('main_industory_name_6');
 		$regist_param_1['sub_industory_name_6'] = $this->af->get('sub_industory_name_6');
 		$regist_param_1['check_sub_industory'] = $this->af->get('check_sub_industory');
-		$regist_param_1['exhibits_jp'] = $this->af->get('exhibits_jp');
+		$regist_param_1['exhibits_en'] = $this->af->get('exhibits_en');
 		$regist_param_1['region'] = $this->af->get('region');
 		$regist_param_1['country'] = $this->af->get('country');
 		$regist_param_1['city'] = $this->af->get('city');
 		$regist_param_1['check_other_city'] = $this->af->get('check_other_city');
 		if ('1' == $this->af->get('check_other_city')) {
-			$regist_param_1['other_city_jp'] = $this->af->get('other_city_jp');
+			$regist_param_1['other_city_en'] = $this->af->get('other_city_en');
 		} else {
-			$regist_param_1['other_city_jp'] = '';
+			$regist_param_1['other_city_en'] = '';
 		}
-		$regist_param_1['venue_jp'] = $this->af->get('venue_jp');
+		$regist_param_1['venue_en'] = $this->af->get('venue_en');
 		$regist_param_1['gross_floor_area'] = $this->af->get('gross_floor_area');
-// 		$regist_param_1['transportation_jp'] = $this->af->get('transportation_jp');
 		$regist_param_1['open_to'] = $this->af->get('open_to');
 		$regist_param_1['admission_ticket_1'] = $this->af->get('admission_ticket_1');
 		$regist_param_1['admission_ticket_2'] = $this->af->get('admission_ticket_2');
@@ -312,13 +302,10 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		$regist_param_1['admission_ticket_4'] = $this->af->get('admission_ticket_4');
 		$regist_param_1['admission_ticket_5'] = $this->af->get('admission_ticket_5');
 		if ('1' == $this->af->get('admission_ticket_5')) {
-			$regist_param_1['other_admission_ticket_jp'] = $this->af->get('other_admission_ticket_jp');
+			$regist_param_1['other_admission_ticket_en'] = $this->af->get('other_admission_ticket_en');
 		} else {
-			$regist_param_1['other_admission_ticket_jp'] = '';
+			$regist_param_1['other_admission_ticket_en'] = '';
 		}
-// 		$regist_param_1['app_dead_yyyy'] = $this->af->get('app_dead_yyyy');
-// 		$regist_param_1['app_dead_mm'] = $this->af->get('app_dead_mm');
-// 		$regist_param_1['app_dead_dd'] = $this->af->get('app_dead_dd');
 		$this->session->set('regist_param_1', $regist_param_1);
 	}
 
@@ -333,13 +320,13 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('total_number_of_exhibitors', $regist_param_2['total_number_of_exhibitors']);
 		$this->af->set('number_of_foreign_exhibitors', $regist_param_2['number_of_foreign_exhibitors']);
 		$this->af->set('net_square_meters', $regist_param_2['net_square_meters']);
-		$this->af->set('profile_jp', $regist_param_2['profile_jp']);
-		$this->af->set('detailed_information_jp', $regist_param_2['detailed_information_jp']);
+		$this->af->set('spare_field1', $regist_param_2['spare_field1']);
+		$this->af->set('profile_en', $regist_param_2['profile_en']);
+		$this->af->set('detailed_information_en', $regist_param_2['detailed_information_en']);
 		$this->af->set('photos_name_1', $regist_param_2['photos_name_1']);
 		$this->af->set('photos_name_2', $regist_param_2['photos_name_2']);
 		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
 		$this->af->set('keyword', $regist_param_2['keyword']);
-		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
 		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
 		$this->af->set('organizer_addr', $regist_param_2['organizer_addr']);
 		$this->af->set('organizer_div', $regist_param_2['organizer_div']);
@@ -347,7 +334,6 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('organizer_tel', $regist_param_2['organizer_tel']);
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
-		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
 		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$this->af->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
 		$this->af->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
@@ -360,7 +346,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		if (null == $regist_param_1) {
 			return;
 		}
-		$this->af->set('fair_title_jp', $regist_param_1['fair_title_jp']);
+// 		$this->af->set('fair_title_en', $regist_param_1['fair_title_jp']);
 	}
 
 	function _mekaCheckSubIndustory() {
