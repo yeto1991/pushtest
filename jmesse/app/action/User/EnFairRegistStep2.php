@@ -342,11 +342,11 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('agency_in_japan_fax', $regist_param_2['agency_in_japan_fax']);
 		$this->af->set('agency_in_japan_email', $regist_param_2['agency_in_japan_email']);
 
-// 		$regist_param_1 = $this->session->get('regist_param_1');
-// 		if (null == $regist_param_1) {
-// 			return;
-// 		}
-// 		$this->af->set('fair_title_en', $regist_param_1['fair_title_jp']);
+		$regist_param_1 = $this->session->get('regist_param_1');
+		if (null == $regist_param_1) {
+			return;
+		}
+		$this->af->set('fair_title_en', $regist_param_1['fair_title_en']);
 	}
 
 	function _mekaCheckSubIndustory() {
