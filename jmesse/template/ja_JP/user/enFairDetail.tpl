@@ -334,7 +334,7 @@ $form.mode
 							<th class="required"></th>
 							<td>
 								{if ('' != $form.year_of_the_trade_fair)}
-								{$form.year_of_the_trade_fair}year
+								{$form.year_of_the_trade_fair} year
 								{/if}
 							</td>
 						</tr>
@@ -343,7 +343,7 @@ $form.mode
 							<th class="required"></th>
 							<td>
 								{if ('' != $form.total_number_of_visitor || '' != $form.number_of_foreign_visitor)}
-								{$form.total_number_of_visitor}(including {$form.number_of_foreign_visitor}foreign visitors)
+								{$form.total_number_of_visitor} (including {$form.number_of_foreign_visitor} foreign visitors)
 								{/if}
 							</td>
 						</tr>
@@ -352,7 +352,7 @@ $form.mode
 							<th class="required"></th>
 							<td>
 								{if ('' != $form.total_number_of_exhibitors || '' != $form.number_of_foreign_exhibitors)}
-								{$form.total_number_of_exhibitors}(including  {$form.number_of_foreign_exhibitors}foreign exhibitors)
+								{$form.total_number_of_exhibitors} (including {$form.number_of_foreign_exhibitors} foreign exhibitors)
 								{/if}
 							</td>
 						</tr>
@@ -418,7 +418,6 @@ $form.mode
 							<th class="item">Agency in Japan</th>
 							<th class="required"></th>
 							<td>
-								<strong>Use only if your trade fair is outside of Japan, <br />but you have an agent in Japan for inquiries.</strong><br />
 								<strong>Name: </strong>{$form.agency_in_japan_en}<br />
 								<strong>Address: </strong>{$form.agency_in_japan_addr}<br />
 								<strong>Department: </strong>{$form.agency_in_japan_div}<br />
