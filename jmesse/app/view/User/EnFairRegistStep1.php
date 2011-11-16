@@ -44,7 +44,7 @@ class Jmesse_View_UserEnFairRegistStep1 extends Jmesse_ViewClass
 		$this->af->setApp('main_industory', $this->backend->getManager('JmCodeM')->getMainIndustoryList());
 
 		// 業種（大分類_小分類）
-		$this->af->setApp('main_sub_industory_list', $this->backend->getManager('JmCodeM')->getMainSubIndustory());
+		$this->af->setApp('main_sub_industory_list', $this->backend->getManager('JmCodeM')->getEnMainSubIndustory());
 	}
 }
 
