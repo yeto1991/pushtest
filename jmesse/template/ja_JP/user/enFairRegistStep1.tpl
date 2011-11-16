@@ -7,9 +7,9 @@
 <meta name="Keywords" content="" />
 
 {if ('' == $form.mode) || ('e' == $form.mode)}
-<title>見本市登録 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Fair Registration - Online Trade Fair Database (J-messe) - JETRO</title>
 {elseif ('c' == $form.mode)}
-<title>見本市修正 - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
 {/if}
 
 <!--テスト用-->
@@ -30,15 +30,15 @@
 <script type="text/javascript">
 <!--
 {literal}
-
 	function init(url, region, country, city) {
 		if ('' != region) {
-			dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0', '', '#country', country);
+			dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1', '', '#country', country);
 			if ('' != country) {
-				dynamicpulldownlist(url+'?action_json_getCity=true&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=0', '', '#city', city);
+				dynamicpulldownlist(url+'?action_json_getCity=true&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=1', '', '#city', city);
 			}
 		}
 	}
+
 
 	$(function(){
 		$("#include_header").load("http://localhost/jmesse/www/enHeader.html");
@@ -51,7 +51,6 @@
 	$(function(){
 		$("#include_left_menu").load("http://localhost/jmesse/www/enLeft_menu.html");
 	});
-
 
 	$(document).ready(function() {
 		var triggers = $(".modalInput").overlay({
@@ -71,7 +70,7 @@
 				return this.value;
 			}).get();
 			if (6 < input.length) {
-				window.alert('業種は6個まで選択できます');
+				window.alert('you can select up to 6 industorys.');
 				return;
 			}
 			// close the overlay
@@ -130,14 +129,14 @@
 
 	function set_country(url) {
 		var region = document.getElementById('region').options[document.getElementById('region').selectedIndex].value;
-		dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=0', '', '#country', null);
+		dynamicpulldownlist(url+'?action_json_getCountry=true&kbn_2='+region+'&use_language_flag=1', '', '#country', null);
 		clear_city();
 	}
 
 	function set_city(url) {
 		var region = document.getElementById('region').options[document.getElementById('region').selectedIndex].value;
 		var country = document.getElementById('country').options[document.getElementById('country').selectedIndex].value;
-		dynamicpulldownlist(url+'?action_json_getCity=true&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=0', '', '#city', null);
+		dynamicpulldownlist(url+'?action_json_getCity=true&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=1', '', '#city', null);
 	}
 
 	function clear_city() {
@@ -153,11 +152,11 @@
 	}
 
 {/literal}
-//-->
+// -->
 </script>
 </head>
 
-<body class="layout-LC highlight-database j-messe">
+<body class="layout-LC highlight-database j-messe" onload="init('{$config.url}', '{$form.region}', '{$form.country}', '{$form.city}')">
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -165,14 +164,14 @@
 	<div id="bread">
 		<ul class="clearfix">
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
+			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
-			<li>見本市登録(step1)</li>
+			<li>Fair Registration(step1)</li>
 			{elseif ('c' == $form.mode)}
-			<li>見本市修正(step1)</li>
+			<li>Fair Editing(step1)</li>
 			{/if}
 		</ul>
 	</div>
@@ -185,9 +184,9 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ('' == $form.mode) || ('e' == $form.mode)}
-				<h2>見本市登録</h2>
+				<h2>Fair Registration</h2>
 				{elseif ('c' == $form.mode)}
-				<h2>見本市修正</h2>
+				<h2>Fair Editing</h2>
 				{/if}
 			</div>
 			<div class="in_main">
@@ -195,12 +194,12 @@
 					<img src="/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1" />
 				</h3>
 				<p class="t_right">
-					ユーザー：{$session.email}
+					user：{$session.email}
 				</p>
 
 				{* エラー表示 *}
 				{if count($errors)}
-				<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+				<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
 				{/if}
 
 				<form name="form_enFairRegistStep1" id="form_enFairRegistStep1" method="post" action="">
@@ -210,7 +209,6 @@
 					{if ('c' == $form.mode || 'e' == $form.mode)}
 					<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 					{/if}
-
 					<input type="hidden" name="main_industory_1" id="main_industory_1" value="{$form.main_industory_1}" />
 					<input type="hidden" name="sub_industory_1" id="sub_industory_1" value="{$form.sub_industory_1}" />
 					<input type="hidden" name="main_industory_2" id="main_industory_2" value="{$form.main_industory_2}" />
@@ -238,19 +236,19 @@
 					<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_name_6}" />
 					<!-- /HIDDEN -->
 
-					<h4>基本情報</h4>
+					<h4>basic information</h4>
 					<table id="registration">
-						{if is_error('fair_title_jp')}
+						{if is_error('fair_title_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">見本市名</th>
+							<th class="item">Fair title</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<input type="text" value="{$form.fair_title_jp}" size="60" name="fair_title_jp" id="fair_title_jp" maxlength="255" /><br />
-								{if is_error('fair_title_jp')}
-								<span class="error-message">{message name="fair_title_jp"}</span><br />
+								<input type="text" value="{$form.fair_title_en}" size="60" name="fair_title_en" id="fair_title_en" maxlength="255" /><br />
+								{if is_error('fair_title_en')}
+								<span class="error-message">{message name="fair_title_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
@@ -260,11 +258,11 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">見本市略称</th>
+							<th class="item">Abbreviated title</th>
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.abbrev_title}" size="30"  name="abbrev_title" id="abbrev_title" maxlength="255" /><br />
-								<strong>半角英数</strong>で入力してください。 例：Ambiente。<br/>
+								<strong>（one-byte alphabet and numbers)</strong> Example: Ambiente<br/>
 								{if is_error('abbrev_title')}
 								<span class="error-message">{message name="abbrev_title"}</span><br />
 								{/if}
@@ -276,11 +274,11 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">見本市公式サイトURL</th>
+							<th class="item">URL</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<input type="text" value="{if ('' == $form.fair_url)}http://{else}{$form.fair_url}{/if}" size="60" name="fair_url" id="fair_url" maxlength="255" /><br />
-								URLはhttp:// から入力して下さい。<br/>
+								Enter URLs beginning with http(s)://. <br/>
 								{if is_error('fair_url')}
 								<span class="error-message">{message name="fair_url"}</span><br />
 								{/if}
@@ -292,7 +290,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">会期</th>
+							<th class="item">Date</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<select name="date_from_yyyy" size="1" id="date_from_yyyy">
@@ -300,7 +298,7 @@
 									{section name=it loop=$app.year_list}
 									<option value="{$app.year_list[it]}" {if $app.year_list[it]==$form.date_from_yyyy}selected{/if}>{$app.year_list[it]}</option>
 									{/section}
-								</select> 年
+								</select> Year
 								<select name="date_from_mm" size="1" id="date_from_mm">
 									<option value=""></option>
 									<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>1</option>
@@ -315,7 +313,7 @@
 									<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
 									<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
 									<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
-								</select> 月
+								</select> Month
 								<select name="date_from_dd" size="1" id="date_from_dd">
 									<option value=""></option>
 									<option value="01" {if ('01' == $form.date_from_dd)}selected{/if}>1</option>
@@ -349,13 +347,13 @@
 									<option value="29" {if ('29' == $form.date_from_dd)}selected{/if}>29</option>
 									<option value="30" {if ('30' == $form.date_from_dd)}selected{/if}>30</option>
 									<option value="31" {if ('31' == $form.date_from_dd)}selected{/if}>31</option>
-								</select> 日 ～
+								</select> Day ～
 								<select name="date_to_yyyy" size="1" id="date_to_yyyy">
 									<option value=""></option>
 									{section name=it loop=$app.year_list}
 									<option value="{$app.year_list[it]}" {if ($app.year_list[it]==$form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
 									{/section}
-								</select> 年
+								</select> Year
 								<select name="date_to_mm" size="1" id="date_to_mm">
 									<option value="" ></option>
 									<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
@@ -370,7 +368,7 @@
 									<option value="10" {if ('10' == $form.date_to_mm)}selected{/if}>10</option>
 									<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
 									<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
-								</select> 月
+								</select> Month
 								<select name="date_to_dd" size="1" id="date_to_dd">
 									<option value="" ></option>
 									<option value="01" {if ('01' == $form.date_to_dd)}selected{/if}>1</option>
@@ -404,7 +402,7 @@
 									<option value="29" {if ('29' == $form.date_to_dd)}selected{/if}>29</option>
 									<option value="30" {if ('30' == $form.date_to_dd)}selected{/if}>30</option>
 									<option value="31" {if ('31' == $form.date_to_dd)}selected{/if}>31</option>
-								</select> 日まで<br/>
+								</select> Day<br/>
 								{if is_error('date_from_yyyy')}
 								<span class="error-message">{message name="date_from_yyyy"}</span><br />
 								{/if}
@@ -431,12 +429,12 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">開催頻度</th>
+							<th class="item">Frequency</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.frequency_list}
-								<input type="radio" value="{$app.frequency_list[it].kbn_2}" name="frequency" id="frequency" {if ($app.frequency_list[it].kbn_2 == $form.frequency)}checked{/if} />{$app.frequency_list[it].discription_jp}&nbsp;
-								{if (0 == (($smarty.section.it.index + 1) % 5))}<br/>{/if}
+								<input type="radio" value="{$app.frequency_list[it].kbn_2}" name="frequency" id="frequency" {if ($app.frequency_list[it].kbn_2 == $form.frequency)}checked{/if} />{$app.frequency_list[it].discription_en}&nbsp;
+								{if (0 == (($smarty.section.it.index + 1) % 4))}<br/>{/if}
 								{/section}<br/>
 								{if is_error('frequency')}
 								<span class="error-message">{message name="frequency"}</span><br />
@@ -445,17 +443,17 @@
 						</tr>
 					</table>
 
-					<h4>業種・取扱品目</h4>
+					<h4>Industry and Exhibits</h4>
 					<table id="registration">
 						{if is_error('main_industory_1')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">業種</th>
+							<th class="item">Main/Sub Industry</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								現在、以下の業種が選択されています。<br />
+								<!-- 現在、以下の業種が選択されています。<br /> -->
 								<div id="INDUSOTRY_LIST">
 								{if ('' != $form.sub_industory_name_1)}
 								・{$form.sub_industory_name_1}<br />
@@ -476,63 +474,63 @@
 								・{$form.sub_industory_name_6}<br />
 								{/if}
 								</div>
-								<button class="modalInput" rel="#prompt">業種選択</button><br/>
+								<button class="modalInput" rel="#prompt">select</button><br/>
 								{if is_error('main_industory_1')}
 								<span class="error-message">{message name="main_industory_1"}</span><br />
 								{/if}
 							</td>
 						</tr>
 
-						{if is_error('exhibits_jp')}
+						{if is_error('exhibits_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">取扱品目</th>
+							<th class="item">Exhibits</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<textarea cols="60" rows="3" name="exhibits_jp" id="exhibits_jp">{$form.exhibits_jp}</textarea><br />
-								300文字以内で、具体的な品目名を記載ください。<br/>
-								{if is_error('exhibits_jp')}
-								<span class="error-message">{message name="exhibits_jp"}</span><br />
+								<textarea cols="60" rows="3" name="exhibits_en" id="exhibits_en">{$form.exhibits_en}</textarea><br />
+								Maximum of 300 characters<br/>
+								{if is_error('exhibits_en')}
+								<span class="error-message">{message name="exhibits_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
 					</table>
 
-					<h4>開催地・会場</h4>
+					<h4>Location and Venue</h4>
 					<table id="registration">
-						{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+						{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">開催地</th>
+							<th class="item">Location</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<table style="border-style:none;border-collapse:collapse;">
-									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
 									<tr class="errorcheck">
 									{else}
 									<tr>
 									{/if}
-										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">地域</td>
+										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">Region</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 											<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
 												<option value="">...</option>
 												{section name=it loop=$app.region_list}
-												<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_jp}</option>
+												<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_en}</option>
 												{/section}
 											</select>
 										</td>
 									</tr>
-									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
 									<tr class="errorcheck">
 									{else}
 									<tr>
 									{/if}
-										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">国・地域</td>
+										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">Country/Area</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 											<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
@@ -540,12 +538,12 @@
 											</select>
 										</td>
 									</tr>
-									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
 									<tr class="errorcheck">
 									{else}
 									<tr>
 									{/if}
-										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">都市</td>
+										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">City</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 											<select name="city" id="city" style="width:200px;">
@@ -553,16 +551,16 @@
 											</select>
 										</td>
 									</tr>
-									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_jp')}
+									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
 									<tr class="errorcheck">
 									{else}
 									<tr>
 									{/if}
-										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">都市(その他)</td>
+										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">City(Other)</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
 											<input type="checkbox" name="check_other_city" id="check_other_city" value="1" {if ('1' == $form.check_other_city)}checked{/if} //>
-											<input type="text" name="other_city_jp" id="other_city_jp" value="{$form.other_city_jp}" size="30" maxlength="100" /><br/>
+											<input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" size="30" maxlength="100" /><br/>
 										</td>
 									</tr>
 								</table>
@@ -575,23 +573,23 @@
 								{if is_error('city')}
 								<span class="error-message">{message name="city"}</span><br />
 								{/if}
-								{if is_error('other_city_jp')}
-								<span class="error-message">{message name="other_city_jp"}</span><br />
+								{if is_error('other_city_en')}
+								<span class="error-message">{message name="other_city_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
 
-						{if is_error('venue_jp')}
+						{if is_error('venue_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">会場名</th>
+							<th class="item">Venue</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<input type="text" value="{$form.venue_jp}" size="50" name="venue_jp" id="venue_jp" maxlength="255" /><br/>
-								{if is_error('venue_jp')}
-								<span class="error-message">{message name="venue_jp"}</span><br />
+								<input type="text" value="{$form.venue_en}" size="50" name="venue_en" id="venue_en" maxlength="255" /><br/>
+								{if is_error('venue_en')}
+								<span class="error-message">{message name="venue_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
@@ -601,11 +599,11 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">開催予定規模</th>
+							<th class="item">Net square meters</th>
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
-								半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
+								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
 								{if is_error('gross_floor_area')}
 								<span class="error-message">{message name="gross_floor_area"}</span><br />
 								{/if}
@@ -616,7 +614,7 @@
 							<th class="item">会場までの交通手段</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<input type="text" value="{$form.transportation_jp}" size="60" name="transportation_jp" id="transportation_jp" maxlength="500"><br />
+								<input type="text" value="{$form.transportation_en}" size="60" name="transportation_en" id="transportation_en" maxlength="500"><br />
 								例：成田空港からA12バスで30分<br/>
 							</td>
 						</tr>
@@ -626,11 +624,11 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">入場資格</th>
+							<th class="item">Open to</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.open_to_list}
-								<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if}>{$app.open_to_list[it].discription_jp}&nbsp;
+								<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if}>{$app.open_to_list[it].discription_en}&nbsp;
 								{/section}<br/>
 								{if is_error('open_to')}
 								<span class="error-message">{message name="open_to"}</span><br />
@@ -638,25 +636,25 @@
 							</td>
 						</tr>
 
-						{if is_error('admission_ticket_1') || is_error('other_admission_ticket_jp')}
+						{if is_error('admission_ticket_1') || is_error('other_admission_ticket_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">チケットの入手方法</th>
+							<th class="item">Admission/tickets</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />登録の必要なし
-								<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />WEBからの事前登録 <br />
-								<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />主催者・日本の照会先へ問い合わせ
-								<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />当日会場で入手 <br />
-								<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />その他<input name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" size="50" type="text" maxlength="500" /> <br />
-								複数選択可能<br/>
+								<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />Free
+								<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />Apply/register online<br />
+								<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />Contact organizer/agency in Japan
+								<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />Available at event<br />
+								<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />Other<input name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" size="50" type="text" maxlength="500" /> <br />
+								(Multiple selections accepted) <br/>
 								{if is_error('admission_ticket_1')}
 								<span class="error-message">{message name="admission_ticket_1"}</span><br />
 								{/if}
-								{if is_error('other_admission_ticket_jp')}
-								<span class="error-message">{message name="other_admission_ticket_jp"}</span><br />
+								{if is_error('other_admission_ticket_en')}
+								<span class="error-message">{message name="other_admission_ticket_en"}</span><br />
 								{/if}
 							</td>
 						</tr>
@@ -747,12 +745,12 @@
 	<div class="modal" id="prompt">
 		<a class="close" id="btn_close"></a>
 		<h2>
-			業種選択 <span>業種は6つまで選択できます。</span>
+			Industrory <span>you can select up to 6 industorys.</span>
 		</h2>
 		<form>
 			<div class="industries clearfix">
 				<div class="column">
-					<h5>総合</h5>
+					<h5>General Exhibition </h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('001' == $app.main_sub_industory_list[it].kbn_2)}
@@ -768,7 +766,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>基礎産業</h5>
+					<h5>Fundamental Industries </h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('002' == $app.main_sub_industory_list[it].kbn_2)}
@@ -784,7 +782,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>建築</h5>
+					<h5>Building, Construction </h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('003' == $app.main_sub_industory_list[it].kbn_2)}
@@ -800,7 +798,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>機械・工業技術</h5>
+					<h5>Machinery, Industrial Technology</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('004' == $app.main_sub_industory_list[it].kbn_2)}
@@ -816,7 +814,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>情報・通信</h5>
+					<h5>Information, Telecommunication</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('005' == $app.main_sub_industory_list[it].kbn_2)}
@@ -836,7 +834,7 @@
 				</div>
 
 				<div class="column">
-					<h5>輸送・物流・包装</h5>
+					<h5>Transportation, Logistics, Packaging</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('006' == $app.main_sub_industory_list[it].kbn_2)}
@@ -853,7 +851,7 @@
 						{/section}
 					</ul>
 
-					<h5>医療・健康</h5>
+					<h5>Medical Care, Health</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('007' == $app.main_sub_industory_list[it].kbn_2)}
@@ -869,7 +867,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>サービス</h5>
+					<h5>Services</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('010' == $app.main_sub_industory_list[it].kbn_2)}
@@ -885,7 +883,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>その他</h5>
+					<h5>Others</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('012' == $app.main_sub_industory_list[it].kbn_2)}
@@ -904,7 +902,7 @@
 				</div>
 
 				<div class="column">
-					<h5>生活</h5>
+					<h5>Living</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('008' == $app.main_sub_industory_list[it].kbn_2)}
@@ -920,7 +918,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>趣味・教育</h5>
+					<h5>Hobby, Education</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('009' == $app.main_sub_industory_list[it].kbn_2)}
@@ -936,7 +934,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>環境</h5>
+					<h5>Environment</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('011' == $app.main_sub_industory_list[it].kbn_2)}
@@ -956,14 +954,14 @@
 				</div>
 			</div>
 			<div class="btn">
-				<button type="button" id="FIN_SELECT">選択終了</button>
-				<button type="button" class="close">キャンセル</button>
+				<button type="button" id="FIN_SELECT">OK</button>
+				<button type="button" class="close">Cancel</button>
 			</div>
 		</form>
 		<br />
 	</div>
 	<!-- footer -->
-	<div id="include_footer" ></div>
+	<div id="include_footer"></div>
 	<!-- /footer -->
 </body>
 </html>
