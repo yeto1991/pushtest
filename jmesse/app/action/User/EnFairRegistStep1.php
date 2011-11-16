@@ -788,7 +788,7 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(その他)',        // Display name
+			'name'        => 'Admission/ticket Other',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
