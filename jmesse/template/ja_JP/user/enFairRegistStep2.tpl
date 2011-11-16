@@ -14,8 +14,6 @@
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
 <!--/テスト用-->
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
@@ -23,6 +21,10 @@
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
 
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="{$config.url}/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript">
 <!--
 {literal}
@@ -80,7 +82,7 @@
 
 		for (i = 0; i < document.getElementById('photos_list').length; i++) {
 			if (filename == document.getElementById('photos_list').options[i].value) {
-				window.alert('same photo's file name can not regist.');
+				window.alert('same photo file name can not regist.');
 				return;
 			}
 		}
@@ -123,7 +125,7 @@
 </script>
 </head>
 
-<body class="layout-LC highlight-database j-messe">
+<body class="layout-LC highlight-database j-messe" onload="init()">
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -287,7 +289,7 @@
 						</tr>
 					</table>
 
-					<h4>PR・キャッチフレーズ</h4>
+					<h4>PR・Catchphrase</h4>
 					<table id="registration">
 						{if is_error('profile_en')}
 						<tr class="errorcheck">
@@ -329,9 +331,9 @@
 							<th class="item">Photos</th>
 							<th class="required"></th>
 							<td>
-								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="regist" onclick="add_photos('photos_1')"/><br />
-								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="regist" onclick="add_photos('photos_2')"/><br />
-								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="regist" onclick="add_photos('photos_3')"/><br />
+								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="Regist" onclick="add_photos('photos_1')"/><br />
+								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="Regist" onclick="add_photos('photos_2')"/><br />
+								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="Regist" onclick="add_photos('photos_3')"/><br />
 								Register up to three images. (JPEG, GIF or TIFF format only and size is 600px×600px.) <br/>
 								<select name="photos_list" id="photos_list" size="3" style="width:200px">
 									{if ('' != $form.photos_name_1) }
@@ -446,7 +448,7 @@
 							<th class="required"></th>
 							<td>
 								<strong>Use only if your trade fair is outside of Japan, <br />but you have an agent in Japan for inquiries.</strong><br />
-								<input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="100" /><br/>
+								<strong>Name: </strong><input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="100" /><br/>
 								{if is_error('agency_in_japan_en')}
 								<span class="error-message">{message name="agency_in_japan_en"}</span><br />
 								{/if}
@@ -490,9 +492,9 @@
 							{if ('c' == $form.mode || 'e' == $form.mode)}
 							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{else}
-							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
+							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{/if}
-							<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="確認画面へ" width="180" height="37" class="over" /></td>
+							<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></td>
 						</tr>
 					</table>
 				</form>
