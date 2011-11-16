@@ -494,7 +494,7 @@
 							{else}
 							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{/if}
-							<td align="right"><a href="javascript:next();"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></a></td>
+							<td align="right"><a href="javascript:next();"><img src="/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></a></td>
 						</tr>
 					</table>
 				</form>
