@@ -974,11 +974,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			// DEBUG-S
-			echo '<pre>';
-			var_dump($data);
-			echo '</pre><br/><hr/>';
-			// DEBUG-E
 			return null;
 		}
 		if (0 == $res->numRows()) {
@@ -1038,11 +1033,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			// DEBUG-S
-			echo '<pre>';
-			var_dump($data);
-			echo '</pre><br/><hr/>';
-			// DEBUG-E
 			return null;
 		}
 		if (0 == $res->numRows()) {
@@ -1152,8 +1142,13 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$this->backend->getLogger()->log(LOG_DEBUG, '■sql_where : '.$sql_where);
 
 		// Prepare Statement化
-		$stmt =& $db->db->prepare('select count(*) cnt from (select '.$sql_select.' from '.$sql_from.$sql_where.' group by '.$sql_gourp_by.') t');
-		$this->backend->getLogger()->log(LOG_DEBUG, '■sql : '.'select count(*) cnt from (select '.$sql_select.' from '.$sql_from.$sql_where.' group by '.$sql_gourp_by.') t');
+		if ('' != $sql_gourp_by) {
+			$sql = 'select count(*) cnt from (select '.$sql_select.' from '.$sql_from.$sql_where.' group by '.$sql_gourp_by.') t';
+		} else {
+			$sql = 'select count(*) cnt from (select '.$sql_select.' from '.$sql_from.$sql_where.') t';
+		}
+		$stmt =& $db->db->prepare($sql);
+		$this->backend->getLogger()->log(LOG_DEBUG, '■sql : '.$sql);
 
 		// SQLの実行
 		$res = $db->db->execute($stmt, $data);
@@ -1163,22 +1158,12 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$msg = '検索結果が取得できません。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->add('error', $msg);
-			// DEBUG-S
-			echo '<pre>';
-			var_dump($data);
-			echo '</pre><br/><hr/>';
-			// DEBUG-E
 			return null;
 		}
 		if (DB::isError($res)) {
 			$msg = '検索Errorが発生しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->addObject('error', $res);
-			// DEBUG-S
-			echo '<pre>';
-			var_dump($data);
-			echo '</pre><br/><hr/>';
-			// DEBUG-E
 			return null;
 		}
 		if (0 == $res->numRows()) {
@@ -1241,7 +1226,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		array_push($data, (int)$offset, (int)$limit);
 
 		// SQL作成
-		$sql = 'select '.$sql_select.' from '.$sql_from.$sql_where.' group by '.$sql_gourp_by.' order by '.$sql_order_by.$sql_limit;
+		if ('' != $sql_gourp_by) {
+			$sql = 'select '.$sql_select.' from '.$sql_from.$sql_where.' group by '.$sql_gourp_by.' order by '.$sql_order_by.$sql_limit;
+		} else {
+			$sql = 'select '.$sql_select.' from '.$sql_from.$sql_where.' order by '.$sql_order_by.$sql_limit;
+		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■sql : '.$sql);
 
 		// Prepare Statement化
@@ -1255,22 +1244,12 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$msg = '検索結果が取得できません。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->add('error', $msg);
-			// DEBUG-S
-			echo '<pre>';
-			var_dump($data);
-			echo '</pre><br/><hr/>';
-			// DEBUG-E
 			return null;
 		}
 		if (DB::isError($res)) {
 			$msg = '検索Errorが発生しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->add('error', $msg);
-			// DEBUG-S
-			echo '<pre>';
-			var_dump($data);
-			echo '</pre><br/><hr/>';
-			// DEBUG-E
 			return null;
 		}
 		if (0 == $res->numRows()) {

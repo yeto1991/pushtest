@@ -401,12 +401,12 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
 
 		// 入力項目なし
-		$jm_fair->set('venue_url', '');
-		$jm_fair->set('jetro_suport', '');
-		$jm_fair->set('jetro_suport_url', '');
-		$jm_fair->set('regist_type', '');
-		$jm_fair->set('update_user_id', '');
-		$jm_fair->set('update_date', '');
+// 		$jm_fair->set('venue_url', '');
+// 		$jm_fair->set('jetro_suport', '');
+// 		$jm_fair->set('jetro_suport_url', '');
+// 		$jm_fair->set('regist_type', '');
+// 		$jm_fair->set('update_user_id', '');
+// 		$jm_fair->set('update_date', '');
 
 		// 検索キーワードの作成
 		$search_key = '';

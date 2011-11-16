@@ -633,11 +633,13 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 
 			// コードを取得
 			$sql_select_code = $this->_makeSelectCode($ary_summary_key);
-			$code_list = $jm_fair_mgr->getFairSummarySearch($sql_select_code, $sql_gourp_by, $sql_order_by, $offset, $limit); //TODO
+			if ('' != $sql_select_code) {
+				$code_list = $jm_fair_mgr->getFairSummarySearch($sql_select_code, $sql_gourp_by, $sql_order_by, $offset, $limit); //TODO
 
-			// コードのリストをセッションに設定
-			// 一覧表示の検索条件とする。
-			$this->session->set('code_list', $code_list);
+				// コードのリストをセッションに設定
+				// 一覧表示の検索条件とする。
+				$this->session->set('code_list', $code_list);
+			}
 
 			// コードの置き換え
 			$disp_list = array();

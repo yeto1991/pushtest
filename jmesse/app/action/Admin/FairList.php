@@ -408,29 +408,31 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			}
 			$this->session->set('index', $index);
 			$code_list = $this->session->get('code_list');
-			$code = $code_list[$index];
-			$sql_sum = '';
-			$data_sum = array();
-			foreach ($code as $key => $value) {
-				$this->backend->getLogger()->log(LOG_DEBUG, '■value : '.$value);
-				if ('' != $sql_sum) {
-					$sql_sum .= ' and ';
-				}
-				if ('' == $value) {
-					if ('update_user_id' == $key) {
-						$sql_sum .= $this->_getDuplicationColumn($key)." is null ";
-					} else {
-						$sql_sum .= $this->_getDuplicationColumn($key)." = '' ";
+			if (null != $code_list) {
+				$code = $code_list[$index];
+				$sql_sum = '';
+				$data_sum = array();
+				foreach ($code as $key => $value) {
+					$this->backend->getLogger()->log(LOG_DEBUG, '■value : '.$value);
+					if ('' != $sql_sum) {
+						$sql_sum .= ' and ';
 					}
-// 					$sql_sum .= "(".$this->_getDuplicationColumn($key)." is null or ".$this->_getDuplicationColumn($key)." = '')";
-				} else {
-					$sql_sum .= $this->_getDuplicationColumn($key).' = ? ';
-					array_push($data_sum, $value);
+					if ('' == $value) {
+						if ('update_user_id' == $key) {
+							$sql_sum .= $this->_getDuplicationColumn($key)." is null ";
+						} else {
+							$sql_sum .= $this->_getDuplicationColumn($key)." = '' ";
+						}
+// 						$sql_sum .= "(".$this->_getDuplicationColumn($key)." is null or ".$this->_getDuplicationColumn($key)." = '')";
+					} else {
+						$sql_sum .= $this->_getDuplicationColumn($key).' = ? ';
+						array_push($data_sum, $value);
+					}
 				}
+				$this->backend->getLogger()->log(LOG_DEBUG, '■sql_sum : '.$sql_sum);
+				$this->session->set('sql_sum', $sql_sum);
+				$this->session->set('data_sum', $data_sum);
 			}
-			$this->backend->getLogger()->log(LOG_DEBUG, '■sql_sum : '.$sql_sum);
-			$this->session->set('sql_sum', $sql_sum);
-			$this->session->set('data_sum', $data_sum);
 		} else {
 			$this->ae->add('error', 'typeの指定が不正です。');
 			return 'error';
