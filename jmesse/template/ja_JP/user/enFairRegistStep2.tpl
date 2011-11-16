@@ -61,7 +61,7 @@
 					delfiletag.name = 'del_photos_name[]';
 					delfiletag.id = 'del_photos_name[]';
 					delfiletag.value = document.getElementById('photos_list').options[i].value;
-					document.getElementById('form_fairRegistStep2').appendChild(delfiletag);
+					document.getElementById('form_enFairRegistStep2').appendChild(delfiletag);
 					document.getElementById('photos_list').remove(i);
 				}
 			}
@@ -117,7 +117,7 @@
 			no = i + 1;
 			document.getElementById('photos_name_' + String(no)).value = document.getElementById('photos_list').options[i].value;
 		}
-		document.getElementById('form_fairRegistStep2').submit();
+		document.getElementById('form_enFairRegistStep2').submit();
 	}
 
 {/literal}
@@ -494,7 +494,7 @@
 							{else}
 							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{/if}
-							<td align="right"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></td>
+							<td align="right"><a href="javascript:next();"><input type="image" src="/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></a></td>
 						</tr>
 					</table>
 				</form>
