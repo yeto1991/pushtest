@@ -128,11 +128,18 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('photos_1', $jm_fair->get('photos_1'));
 		$this->af->set('photos_2', $jm_fair->get('photos_2'));
 		$this->af->set('photos_3', $jm_fair->get('photos_3'));
+		$this->af->set('keyword', $jm_fair->get('keyword'));
 		$this->af->set('organizer_jp', $jm_fair->get('organizer_jp'));
+		$this->af->set('organizer_addr', $jm_fair->get('organizer_addr'));
+		$this->af->set('organizer_div', $jm_fair->get('organizer_div'));
+		$this->af->set('organizer_pers', $jm_fair->get('organizer_pers'));
 		$this->af->set('organizer_tel', $jm_fair->get('organizer_tel'));
 		$this->af->set('organizer_fax', $jm_fair->get('organizer_fax'));
 		$this->af->set('organizer_email', $jm_fair->get('organizer_email'));
 		$this->af->set('agency_in_japan_jp', $jm_fair->get('agency_in_japan_jp'));
+		$this->af->set('agency_in_japan_addr', $jm_fair->get('agency_in_japan_addr'));
+		$this->af->set('agency_in_japan_div', $jm_fair->get('agency_in_japan_div'));
+		$this->af->set('agency_in_japan_pers', $jm_fair->get('agency_in_japan_pers'));
 		$this->af->set('agency_in_japan_tel', $jm_fair->get('agency_in_japan_tel'));
 		$this->af->set('agency_in_japan_fax', $jm_fair->get('agency_in_japan_fax'));
 		$this->af->set('agency_in_japan_email', $jm_fair->get('agency_in_japan_email'));
