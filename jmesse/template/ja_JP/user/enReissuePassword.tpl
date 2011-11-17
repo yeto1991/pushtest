@@ -65,7 +65,7 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2"><h2>Trade Fairs held in Japan and the World </h2></div>
 			<div class="in_main">
-				<p>Please enter the e-mail address you registered with and press the send button</p>
+				<p>Please enter the registered email address and press the send button</p>
 				<div class="login">
 					<form name="form_user_enReissuePassword" id="form_user_enReissuePassword" method="post" action="">
 						<input type="hidden" name="action_user_enReissuePasswordDo" id="action_user_enReissuePasswordDo" value="dummy" />
