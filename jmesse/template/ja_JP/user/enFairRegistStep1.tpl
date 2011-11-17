@@ -559,7 +559,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">City(Other)</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											<input type="checkbox" name="check_other_city" id="check_other_city" value="1" {if ('1' == $form.check_other_city)}checked{/if} //>
+											<input type="checkbox" name="check_other_city" id="check_other_city" value="1" {if ('1' == $form.check_other_city)}checked{/if} />
 											<input type="text" name="other_city_en" id="other_city_en" value="{$form.other_city_en}" size="30" maxlength="100" /><br/>
 										</td>
 									</tr>
@@ -628,7 +628,7 @@
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.open_to_list}
-								<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if}>{$app.open_to_list[it].discription_en}&nbsp;
+								<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if} />{$app.open_to_list[it].discription_en}&nbsp;
 								{/section}<br/>
 								{if is_error('open_to')}
 								<span class="error-message">{message name="open_to"}</span><br />
