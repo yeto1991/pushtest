@@ -33,6 +33,11 @@ class Jmesse_Form_UserEnReissuePassword extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'=> '{form} is incorrect.',
+			'min_error'=> '{form} is incorrect.',
+			'max_error'=> '{form} is incorrect.',
+			'regexp_error'=> '{form} is incorrect.',
 		),
 	);
 }

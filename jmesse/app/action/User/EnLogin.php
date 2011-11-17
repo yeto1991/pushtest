@@ -33,6 +33,11 @@ class Jmesse_Form_UserEnLogin extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'=> '{form} is incorrect.',
+			'min_error'=> '{form} is incorrect.',
+			'max_error'=> '{form} is incorrect.',
+			'regexp_error'=> '{form} is incorrect.',
 		),
 		'password' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -46,6 +51,11 @@ class Jmesse_Form_UserEnLogin extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'=> '{form} is incorrect.',
+			'min_error'=> '{form} is incorrect.',
+			'max_error'=> '{form} is incorrect.',
+			'regexp_error'=> '{form} is incorrect.',
 		),
 		'function' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -59,6 +69,11 @@ class Jmesse_Form_UserEnLogin extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error'=> '{form} is incorrect.',
+			'type_error'=> '{form} is incorrect.',
+			'min_error'=> '{form} is incorrect.',
+			'max_error'=> '{form} is incorrect.',
+			'regexp_error'=> '{form} is incorrect.',
 		),
 	);
 }
