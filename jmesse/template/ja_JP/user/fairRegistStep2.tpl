@@ -175,7 +175,7 @@
 							</div>
 							<div class="in_main">
 								<h3 class="img t_center">
-									<img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2">
+									<img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2" />
 								</h3>
 								<p class="t_right">ユーザー：{$session.email}</p>
 
