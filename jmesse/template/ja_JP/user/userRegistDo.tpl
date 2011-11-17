@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
@@ -90,7 +90,7 @@
 								{/if}
 							</div>
 							<div class="in_main">
-								<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
+								<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認" /></h3>
 								{if ("delete" == $form.mode)}
 								<p><font color="red">「完了」ボタンをクリックすると、ユーザ情報が削除されます。<br />
 								ユーザ情報は元に戻せませんので、削除してもよいか再度ご確認ください。</font></p>
