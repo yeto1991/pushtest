@@ -33,6 +33,11 @@ class Jmesse_Form_UserEnFairDel extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 	);
 }
@@ -111,6 +116,9 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
+		// JM_FAIR_TEMPにコピー
+		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('userCommon');
