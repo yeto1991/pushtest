@@ -24,7 +24,7 @@ class Jmesse_Form_UserEnReissuePassword extends Jmesse_ActionForm
 		'email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'email',       // Display name
+			'name'        => 'Email',       // Display name
 			'required'    => true,
 			'min'         => null,
 			'max'         => 255,
