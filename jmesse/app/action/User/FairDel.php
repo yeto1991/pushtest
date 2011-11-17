@@ -111,6 +111,9 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
+		// JM_FAIR_TEMPにコピー
+		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('userCommon');
