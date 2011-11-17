@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
@@ -82,7 +82,7 @@
 												<tr>
 												{/if}
 													<th class="item">ご登録メールアドレス</th>
-													<td><input name="email" id="email" size="60" type="text" value="{form.email}"><br>
+													<td><input name="email" id="email" size="60" type="text" value="{form.email}" /><br>
 													{if is_error('email')}
 													<span class="error-message">{message name="email"}</span><br />
 													{/if}
