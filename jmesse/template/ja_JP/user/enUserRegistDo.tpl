@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 {if ("regist" == $form.mode)}
 	<title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
@@ -89,7 +89,7 @@
 				{/if}
 			</div>
 			<div class="in_main">
-				<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3>
+				<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認" /></h3>
 				{if ("delete" == $form.mode)}
 				<p><font color="red">If you press the "Complete" button, user's informations can't restore because it is deleted.<br />
 				So please note when you withdraw from membership.</font></p>

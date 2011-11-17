@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 {if ("regist" == $form.mode)}
 <title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
@@ -39,7 +39,7 @@
 	$(function(){
 		$("#include_left_menu").load("http://localhost/jmesse/www/enLeft_menu.html");
 	});
-	
+
 {/literal}
 //-->
 </script>
@@ -105,7 +105,7 @@
 						{/if}
 							<th class="item">email</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="text" value="{$form.email}" size="50" name="email" id="email"><br />
+							<td><input type="text" value="{$form.email}" size="50" name="email" id="email" /><br />
 							{if is_error('email')}
 							<span class="error-message">{message name="email"}</span><br />
 							{/if}
@@ -118,7 +118,7 @@
 						{/if}
 							<th class="item">email（Confirm）</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="text" value="{$form.email2}" size="50" name="email2" id="email2"><br />
+							<td><input type="text" value="{$form.email2}" size="50" name="email2" id="email2" /><br />
 							{if is_error('email2')}
 							<span class="error-message">{message name="email2"}</span><br />
 							{/if}
@@ -131,7 +131,7 @@
 						{/if}
 							<th class="item">password</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="password" value="{$form.password}" size="20" name="password" id="password"><br />
+							<td><input type="password" value="{$form.password}" size="20" name="password" id="password" /><br />
 							{if is_error('password')}
 							<span class="error-message">{message name="password"}</span><br />
 							{/if}
@@ -144,7 +144,7 @@
 						{/if}
 							<th class="item">password（Confirm）</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2"><br />
+							<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2" /><br />
 							{if is_error('password2')}
 							<span class="error-message">{message name="password2"}</span><br />
 							{/if}
@@ -160,7 +160,7 @@
 						{/if}
 							<th class="item">Company name</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="text" value="{$form.companyNm}" size="60" name="companyNm" id="companyNm"><br />
+							<td><input type="text" value="{$form.companyNm}" size="60" name="companyNm" id="companyNm" /><br />
 							{if is_error('companyNm')}
 							<span class="error-message">{message name="companyNm"}</span><br />
 							{/if}
@@ -173,7 +173,7 @@
 						{/if}
 							<th class="item">Division/Dept name</th>
 							<th class="required"></th>
-							<td><input type="text" value="{$form.divisionDeptNm}" size="60" name="divisionDeptNm" id="divisionDeptNm"><br />
+							<td><input type="text" value="{$form.divisionDeptNm}" size="60" name="divisionDeptNm" id="divisionDeptNm" /><br />
 							{if is_error('divisionDeptNm')}
 							<span class="error-message">{message name="divisionDeptNm"}</span><br />
 							{/if}
@@ -186,7 +186,7 @@
 						{/if}
 							<th class="item">Your name</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="text" value="{$form.userNm}" size="60" name="userNm" id="userNm"><br />
+							<td><input type="text" value="{$form.userNm}" size="60" name="userNm" id="userNm" /><br />
 							{if is_error('userNm')}
 							<span class="error-message">{message name="userNm"}</span><br />
 							{/if}
@@ -200,8 +200,8 @@
 							<th class="item">Gender</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-							<input type="radio" size="60" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0" } checked {/if}>Male
-							<input type="radio" size="60" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if}>Female<br />
+							<input type="radio" size="60" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0" } checked {/if} />Male
+							<input type="radio" size="60" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if} />Female<br />
 							{if is_error('genderCd')}
 							<span class="error-message">{message name="genderCd"}</span><br />
 							{/if}
@@ -215,7 +215,7 @@
 							<th class="item">Post Code</th>
 							<th class="required"></th>
 							<td>
-							<input type="text" maxlength="20" value="{$form.postCode}" size="10" name="postCode" id="postCode">（one-byte alphabet and numbers)<br />
+							<input type="text" maxlength="20" value="{$form.postCode}" size="10" name="postCode" id="postCode" />（one-byte alphabet and numbers)<br />
 							{if is_error('postCode')}
 							<span class="error-message">{message name="postCode"}</span><br />Example: For Tokyo, enter 123-4567
 							{/if}
@@ -228,7 +228,7 @@
 						{/if}
 							<th class="item">Address</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-							<td><input type="text" value="{$form.address}" size="80" name="address" id="address"><br />
+							<td><input type="text" value="{$form.address}" size="80" name="address" id="address" /><br />
 							{if is_error('address')}
 							<span class="error-message">{message name="address"}</span><br />
 							{/if}
@@ -242,7 +242,7 @@
 							<th class="item">TEL</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-							<input type="text" value="{$form.tel}" size="30" name="tel" id="tel">（one-byte alphabet and numbers)<br />
+							<input type="text" value="{$form.tel}" size="30" name="tel" id="tel" />（one-byte alphabet and numbers)<br />
 							{if is_error('tel')}
 							<span class="error-message">{message name="tel"}</span><br />
 							{/if}
@@ -257,7 +257,7 @@
 							<th class="item">FAX</th>
 							<th class="required"></th>
 							<td>
-							<input type="text" value="{$form.fax}" size="30" name="fax" id="fax" >（one-byte alphabet and numbers)<br />
+							<input type="text" value="{$form.fax}" size="30" name="fax" id="fax" />（one-byte alphabet and numbers)<br />
 							{if is_error('fax')}
 							<span class="error-message">{message name="fax"}</span><br />
 							{/if}
@@ -271,7 +271,7 @@
 						{/if}
 							<th class="item">URL</th>
 							<th class="required"></th>
-							<td><input type="text" value="{$form.url}" size="60" name="url" id="url"><br />
+							<td><input type="text" value="{$form.url}" size="60" name="url" id="url" /><br />
 							{if is_error('url')}
 							<span class="error-message">{message name="url"}</span><br />
 							{/if}
@@ -282,7 +282,7 @@
 						<tr>
 							<th class="item">Withdrawal from membership</th>
 							<th class="required"></th>
-							<td><input type="checkbox" size="60" name="delFlg" id="delFlg" value="1"> YES<br />
+							<td><input type="checkbox" size="60" name="delFlg" id="delFlg" value="1" /> YES<br />
 							※If you want to withdraw from membership, please check the select box.<br />
 							</td>
 						</tr>

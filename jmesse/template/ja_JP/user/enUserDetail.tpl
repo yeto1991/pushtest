@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 <title>User Detail - Online Trade Fair Database (J-messe) - JETRO</title>
 
@@ -71,7 +71,7 @@
 			<div class="in_main">
 				<p>If you want edit or delete the your user's information, please press the "TO EDIT" button.<br /></p>
 				<form name="form_user_enUserDetail" id="form_user_enUserDetail" method="post" action=""  enctype="multipart/form-data">
-					<input type="hidden" name="action_user_enUserChange" id="action_user_enUserChange" value="dummy">
+					<input type="hidden" name="action_user_enUserChange" id="action_user_enUserChange" value="dummy" />
 					<!-- モード -->
 					<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 					<!-- ユーザID -->
