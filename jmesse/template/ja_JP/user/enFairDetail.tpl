@@ -74,7 +74,7 @@
 </script>
 </head>
 
-<body class="layout-LC highlight-database j-messe">
+<body class="layout-LC highlight-database j-messe" onload="init('{$form.select_language_info}', '{$from.mode}')"">
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
