@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 <title>Password Confirmation - Online Trade Fair Database (J-messe) - JETRO</title>
 
@@ -81,7 +81,7 @@
 								<tr>
 								{/if}
 									<th class="item">email</th>
-									<td><input name="email" id="email" size="60" type="text" value="{form.email}"><br>
+									<td><input name="email" id="email" size="60" type="text" value="{form.email}" /><br />
 									{if is_error('email')}
 									<span class="error-message">{message name="email"}</span><br />
 									{/if}
@@ -89,7 +89,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<p class="t_right"><input type="image" src="/j-messe/images/db/btn-send.gif"" alt="send"  class="over" width="110" height="37"  /></p>
+						<p class="t_right"><input type="image" src="/j-messe/images/db/btn-send.gif" alt="send"  class="over" width="110" height="37"  /></p>
 					</form>
 				</div>
 			</div>
