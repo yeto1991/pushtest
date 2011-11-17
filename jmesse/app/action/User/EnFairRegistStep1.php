@@ -34,6 +34,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		// '1':戻るボタンから
 		'back' => array(
@@ -48,6 +53,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		// 改行コード
 		'br' => array(
@@ -62,6 +72,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		// プリント画面
 		'print' => array(
@@ -76,6 +91,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 
 		// 見本市番号
@@ -91,6 +111,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		// Step.1
 		// 基本情報
@@ -106,6 +131,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'abbrev_title' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -119,6 +149,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'fair_url' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -132,6 +167,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'date_from_yyyy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -145,6 +185,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'date_from_mm' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -158,6 +203,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'date_from_dd' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -171,6 +221,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'date_to_yyyy' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -184,6 +239,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'date_to_mm' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -197,6 +257,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'date_to_dd' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -210,6 +275,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'frequency' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -223,6 +293,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		// 業種・取扱品目
 		'main_industory_1' => array(
@@ -237,6 +312,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -250,6 +330,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -263,6 +348,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -276,6 +366,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -289,6 +384,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -302,6 +402,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_name_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -315,6 +420,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_name_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -328,6 +438,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -341,6 +456,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -354,6 +474,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_name_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -367,6 +492,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_name_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -380,6 +510,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -393,6 +528,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -406,6 +546,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_name_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -419,6 +564,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_name_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -432,6 +582,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -445,6 +600,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -458,6 +618,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_name_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -471,6 +636,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_name_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -484,6 +654,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -497,6 +672,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -510,6 +690,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'main_industory_name_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -523,6 +708,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sub_industory_name_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -536,6 +726,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'check_sub_industory' => array(
 			'type'        => array(VAR_TYPE_STRING), // Input type
@@ -549,6 +744,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'exhibits_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -562,6 +762,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'exhibits_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -575,6 +780,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		// 開催地・会場
 		'region' => array(
@@ -589,6 +799,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'country' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -602,6 +817,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'city' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -615,6 +835,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'other_city_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -628,6 +853,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'other_city_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -641,6 +871,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'check_other_city' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -654,6 +889,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'venue_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -667,6 +907,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'venue_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -680,6 +925,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'gross_floor_area' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -693,6 +943,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'transportation_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -706,6 +961,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 // 		'transportation_en' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -719,6 +979,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'open_to' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -732,6 +997,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'admission_ticket_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -745,6 +1015,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'admission_ticket_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -758,6 +1033,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'admission_ticket_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -771,6 +1051,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'admission_ticket_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -784,6 +1069,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'admission_ticket_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -797,6 +1087,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'other_admission_ticket_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -810,6 +1105,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'other_admission_ticket_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -823,6 +1123,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'app_dead_yyyy' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -836,6 +1141,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 // 		'app_dead_mm' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -849,6 +1159,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 // 		'app_dead_dd' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -862,6 +1177,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 
 		// Step.2
@@ -878,6 +1198,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'total_number_of_visitor' => array(
 			'type'        => VAR_TYPE_STRING,    // Input type
@@ -891,6 +1216,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'number_of_foreign_visitor' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -904,6 +1234,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'total_number_of_exhibitors' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -917,6 +1252,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'number_of_foreign_exhibitors' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -930,6 +1270,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'net_square_meters' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -943,6 +1288,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'spare_field1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -956,6 +1306,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 
 		// PR・キャッチフレーズ
@@ -971,6 +1326,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'profile_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -984,6 +1344,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'detailed_information_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -997,6 +1362,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'detailed_information_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1010,6 +1380,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 
 		'photos_1' => array(
@@ -1024,6 +1399,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'photos_2' => array(
 			'type'        => VAR_TYPE_FILE,   // Input type
@@ -1037,6 +1417,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'photos_3' => array(
 			'type'        => VAR_TYPE_FILE,   // Input type
@@ -1050,6 +1435,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'photos_name_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1063,6 +1453,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'photos_name_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1076,6 +1471,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'photos_name_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1089,6 +1489,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'del_photos_name' => array(
 			'type'        => array(VAR_TYPE_STRING), // Input type
@@ -1102,8 +1507,12 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
-
 		'keyword' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
@@ -1116,6 +1525,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 
 		// 主催者
@@ -1131,6 +1545,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'organizer_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1144,6 +1563,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'organizer_addr' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1157,6 +1581,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'organizer_div' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1170,6 +1599,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'organizer_pers' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1183,6 +1617,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'organizer_tel' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1196,6 +1635,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'organizer_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1209,6 +1653,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'organizer_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1222,6 +1671,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'agency_in_japan_jp' => array(
 // 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1235,6 +1689,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 		'agency_in_japan_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1248,6 +1707,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'agency_in_japan_addr' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1261,6 +1725,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'agency_in_japan_div' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1274,6 +1743,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'agency_in_japan_pers' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1287,6 +1761,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'agency_in_japan_tel' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1300,6 +1779,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'agency_in_japan_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1313,6 +1797,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'agency_in_japan_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
@@ -1326,6 +1815,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 // 		'select_language_info' => array(
 // 			'type'        => VAR_TYPE_INT,    // Input type
@@ -1339,6 +1833,11 @@ class Jmesse_Form_UserEnFairRegistStep1 extends Jmesse_ActionForm
 // 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 // 			'filter'      => null,            // Optional Input filter to convert input
 // 			'custom'      => null,            // Optional method name which
+// 			'required_error' => '{form} is incorrect.',
+// 			'type_error'     => '{form} is incorrect.',
+// 			'min_error'      => '{form} is incorrect.',
+// 			'max_error'      => '{form} is incorrect.',
+// 			'regexp_error'   => '{form} is incorrect.',
 // 		),
 	);
 }
