@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 {if ("regist" == $form.mode)}
 	<title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
@@ -94,7 +94,7 @@
 				{/if}
 			</div>
 			<div class="in_main">
-				<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了"></a></h3>
+				<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了" /></h3>
 				{if ("regist" == $form.mode)}
 				<p>User Registration complete. Thank you very much.</p>
 				{/if}
