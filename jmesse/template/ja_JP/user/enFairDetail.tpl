@@ -74,7 +74,7 @@
 </script>
 </head>
 
-<body class="layout-LC highlight-database j-messe" onload="init('{$form.select_language_info}', '{$from.mode}')"">
+<body class="layout-LC highlight-database j-messe" onload="init('{$form.select_language_info}', '{$from.mode}')">
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -443,13 +443,13 @@ $form.mode
 					<p><strong><span class="red">Do you regist on a base the fair? </span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif">
+						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('c' == $form.mode)}
 					<p><strong><span class="red">Do you edit this fair?</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif">
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('d' == $form.mode)}
 					<p></p>
