@@ -41,7 +41,7 @@ create table jmesse.jm_fair_temp(
   , venue_jp varchar (255) not null
   , venue_en varchar (255) not null
   , venue_url varchar (255)
-  , gross_floor_area int
+  , gross_floor_area varchar(10)
   , transportation_jp text
   , transportation_en text
   , open_to varchar (3) not null
@@ -52,10 +52,10 @@ create table jmesse.jm_fair_temp(
   , other_admission_ticket_jp text
   , other_admission_ticket_en text
   , year_of_the_trade_fair varchar (20)
-  , total_number_of_visitor int
-  , number_of_foreign_visitor int
-  , total_number_of_exhibitors int
-  , number_of_foreign_exhibitors int
+  , total_number_of_visitor varchar(10)
+  , number_of_foreign_visitor varchar(10)
+  , total_number_of_exhibitors varchar(10)
+  , number_of_foreign_exhibitors varchar(10)
   , net_square_meters varchar (50)
   , spare_field1 varchar (255)
   , app_dead_yyyy varchar (4)
