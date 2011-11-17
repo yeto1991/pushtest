@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="Keywords" content="">
+<meta name="Keywords" content="" />
 
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
@@ -74,7 +74,7 @@
 								<!-- <h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3> -->
 								<p>登録情報を変更したい場合、または退会をご希望の方は「編集画面へ」ボタンをクリックしてください。<br />
 								<form name="form_user_userDetail" id="form_user_userDetail" method="post" action=""  enctype="multipart/form-data">
-									<input type="hidden" name="action_user_userChange" id="action_user_userChange" value="dummy">
+									<input type="hidden" name="action_user_userChange" id="action_user_userChange" value="dummy" >
 									<!-- モード -->
 									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 									<!-- ユーザID -->
