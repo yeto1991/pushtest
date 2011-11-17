@@ -33,6 +33,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'user_id' => array(
 			'type'        => VAR_TYPE_INT, // Input type
@@ -46,6 +51,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'emailCheckFlg' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -59,6 +69,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'email' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -72,6 +87,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'email2' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -85,6 +105,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'password' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -98,6 +123,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'password2' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -111,6 +141,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'companyNm' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -124,6 +159,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'divisionDeptNm' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -137,6 +177,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'userNm' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -150,6 +195,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'genderCd' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -163,6 +213,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'postCode' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -176,6 +231,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'address' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -189,6 +249,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'tel' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -202,6 +267,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'fax' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -215,6 +285,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'url' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -228,6 +303,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
 		'delFlg' => array(
 			'type'        => VAR_TYPE_STRING,
@@ -241,6 +321,11 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',
 			'filter'      => null,
 			'custom'      => null,
+			'required_error'=> '{form} is incorrect.',
+			'type_error'    => '{form} is incorrect.',
+			'min_error'     => '{form} is incorrect.',
+			'max_error'     => '{form} is incorrect.',
+			'regexp_error'  => '{form} is incorrect.',
 		),
     );
 }
