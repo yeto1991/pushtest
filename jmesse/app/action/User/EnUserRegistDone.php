@@ -142,7 +142,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		//TODOメール送信処理
 		$ary_value = array('mail_send_user_name' => $this->af->get('userNm'), 'mail_send_user_email' => strtolower($this->af->get('email')), 'mail_send_user_password' => $this->af->get('password'));
 		$mail_mgr =& $this->backend->getManager('mail');
-		//$mail_mgr->sendmailEnUserReigst(strtolower($this->af->get('email')), $ary_value);
+		$mail_mgr->sendmailEnUserReigst(strtolower($this->af->get('email')), $ary_value);
 
 		// 完了画面へ遷移
 		// SESSIONに設定
