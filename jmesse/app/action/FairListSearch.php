@@ -46,16 +46,16 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 
 		// 会期
 		if ('e' == $this->af->get('year')) {
-			if ('' == $this->af->get('date_from_yyyy')) {
+			if ('' == $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')) {
 				$this->ae->add('date_from_yyyy', '会期(開始・年)が未入力です');
 			}
-			if ('' == $this->af->get('date_from_mm')) {
+			if ('' != $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')) {
 				$this->ae->add('date_from_mm', '会期(開始・月)が未入力です');
 			}
-			if ('' == $this->af->get('date_to_yyyy')) {
+			if ('' == $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')) {
 				$this->ae->add('date_to_yyyy', '会期(終了・年)が未入力です');
 			}
-			if ('' == $this->af->get('date_to_mm')) {
+			if ('' != $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')) {
 				$this->ae->add('date_to_mm', '会期(終了・月)が未入力です');
 			}
 			if ('' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')
@@ -65,6 +65,12 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 				if ($this->af->get('date_from_yyyy').$this->af->get('date_from_mm') > $this->af->get('date_to_yyyy').$this->af->get('date_to_mm')) {
 					$this->ae->add('date_from_yyyy', '会期が正しくありません(開始>終了)');
 				}
+			}
+			if ('' == $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')
+				&& '' == $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')
+				&& '' == $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')
+				&& '' == $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')) {
+				$this->ae->add('date_to_mm', '会期が未入力です');
 			}
 		}
 
@@ -148,7 +154,7 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 			// 出力項目
 
 			// ページャー作成
-			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairList=true&page=', $page, $max_page));
+			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairListSearch=true&detail=1&page=', $page, $max_page));
 			// 検索実行
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort)));
 			// META Keyword
@@ -223,7 +229,7 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 			// 出力項目
 
 			// ページャー作成
-			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairList=true&page=', $page, $max_page));
+			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairListSearch=true&detail=1&page=', $page, $max_page));
 			// 検索実行
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort)));
 			// META Keyword
@@ -363,15 +369,18 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 		$vanue_list = array();
 		if ('1' == $search_cond['venue_selected']) {
 			// 詳細検索画面にて開催地を設定した場合。
+			$this->backend->getLogger()->log(LOG_DEBUG, '■select_region  : '.$search_cond['select_region']);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■select_country : '.$search_cond['select_country']);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■select_city    : '.$search_cond['select_city']);
 			if ('' != $search_cond['select_region'] && '' == $search_cond['select_country'] && '' == $search_cond['select_city']) {
 				// 地域
-				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000'));
+				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/すべて/すべて');
 			} elseif ('' != $search_cond['select_region'] && '' != $search_cond['select_country'] && '' == $search_cond['select_city']) {
 				// 国・地域
-				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'_'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000'));
+				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000').'/すべて');
 			} elseif ('' != $search_cond['select_region'] && '' != $search_cond['select_country'] && '' != $search_cond['select_city']) {
 				// 都市
-				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'_'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000').'_'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], $search_cond['select_city']));
+				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], $search_cond['select_city']));
 			} else {
 				array_push($vanue_list, 'すべて/すべて/すべて');
 			}

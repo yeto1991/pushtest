@@ -313,6 +313,13 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 開催地
 		$sql_tmp_v = '';
 		if ('1' == $search_cond['venue_selected']) {
+			// 「すべて」を置き換え
+			if ('001' == $search_cond['select_region']) {
+				$search_cond['select_region'] = '';
+					}
+			if ('001' == $search_cond['select_country']) {
+				$search_cond['select_country'] = '';
+			}
 			if ('' != $search_cond['select_region'] && '' == $search_cond['select_country'] && '' == $search_cond['select_city']) {
 				// 地域
 				$sql_tmp_v .= " region = ? ";
