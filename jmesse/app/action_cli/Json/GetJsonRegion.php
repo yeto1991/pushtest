@@ -79,7 +79,7 @@ class Jmesse_Cli_Action_JsonGetJsonRegion extends Jmesse_ActionClass
 			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_ary);
 
 			// FILE出力
-			$filename = $this->config->get('url').$this->config->get('jsonfile_path').'a.json';
+			$filename = $this->config->get('url').$this->config->get('jsonfile_path').'region_jp.json';
 			file_put_contents($filename, $jm_fair_cnt_region_json);
  		}
 

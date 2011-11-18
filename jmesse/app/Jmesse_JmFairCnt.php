@@ -17,6 +17,54 @@
 class Jmesse_JmFairCntManager extends Ethna_AppManager
 {
 	/**
+	* JSONファイル(region_jp.json)作成用
+	*
+	* @return array 取得データ
+	*/
+	function getJsonRegion() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql =  " select ";
+		$sql .= " jcm_1.discription_jp region_jp, jcm_1.discription_en region_en, jf.fair_cnt count ";
+		$sql .= " from jm_fair_cnt jf ";
+		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '003' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+		$sql .= " where jf.kbn_1 = ? and jf.kbn_2 <> ? and jf.kbn_3 = ? and jf.kbn_4 = ? "; //(?-1)kbn_1 = '003' (?-2)kbn_2 <> '001' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array('003','000','000','003','001','000','000');
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+	/**
 	 * 業種（大分類）の集計値リストを取得する。
 	 *
 	 * @return array 集計値リスト
