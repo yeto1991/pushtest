@@ -12,7 +12,9 @@ $config = array(
 	'host_path' => 'http://localhost',
 	'img_path' => 'img/',
 	'flag_path' => 'img/flag/',
-	'jsonfile_path' => 'jsonfile/',
+
+	//JSONファイル作成格納場所
+	'jsonfile_path' => 'C:/Program Files/Apache Software Foundation/Apache2.2/htdocs/jmesse/www/json/',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)

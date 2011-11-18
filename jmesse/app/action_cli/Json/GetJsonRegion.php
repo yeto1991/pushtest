@@ -52,35 +52,25 @@ class Jmesse_Cli_Action_JsonGetJsonRegion extends Jmesse_ActionClass
 
 		// DB検索
 		$jm_fair_cnt_mgr = $this->backend->getManager('JmFairCnt');
-		$jm_fair_cnt_region_list = $jm_fair_cnt_mgr->getJsonRegion();
 
-		if (null != $jm_fair_cnt_region_list) {
-
-			// DBの項目名がJSONの項目名と異なる場合、連想配列のキーを置き換え
-			$jm_fair_cnt_region_ary = array();
-			foreach ($jm_fair_cnt_region_list as $jm_fair_cnt_row) {
-				$row = array();
-				foreach ($jm_fair_cnt_row as $key => $value) {
-					switch ($key) {
-						case 'region_jp':
-							array_push($row, array('region' => $value));
-							break;
-						case 'region_en':
-							//array_push($row, array('region' => $value));
-							break;
-						default:
-							array_push($row, array($key => $value));
-							break;
-					}
-				}
-				array_push($jm_fair_cnt_region_ary, $row);
-			}
+		//日本語用
+		$jm_fair_cnt_region_list_jp = $jm_fair_cnt_mgr->getJsonRegionJP();
+		if (null != $jm_fair_cnt_region_list_jp) {
 			// JSON化
-			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_ary);
-
+			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list_jp);
 			// FILE出力
-			$filename = $this->config->get('url').$this->config->get('jsonfile_path').'region_jp.json';
+			$filename = $this->config->get('jsonfile_path').'region_jp.json';
 			file_put_contents($filename, $jm_fair_cnt_region_json);
+ 		}
+
+ 		//英語用
+ 		$jm_fair_cnt_region_list_en = $jm_fair_cnt_mgr->getJsonRegionEN();
+ 		if (null != $jm_fair_cnt_region_list_en) {
+ 			// JSON化
+ 			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list_en);
+ 			// FILE出力
+ 			$filename = $this->config->get('jsonfile_path').'region_en.json';
+ 			file_put_contents($filename, $jm_fair_cnt_region_json);
  		}
 
 		return null;
