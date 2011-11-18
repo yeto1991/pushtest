@@ -160,7 +160,13 @@
 										</tr>
 										<tr>
 											<th class="item"><font size="2">更新日</font></th>
-											<td><font size="2">{$app.my_fair_info_list[it].update_date}</font></td>
+											<td>
+												{if $app.my_fair_info_list[it].update_date == ""}
+													<font size="2">{$app.my_fair_info_list[it].regist_date}</font>
+												{else}
+													<font size="2">{$app.my_fair_info_list[it].update_date}</font>
+												{/if}
+											</td>
 										</tr>
 									</table>
 									{/section}
