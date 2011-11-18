@@ -54,25 +54,23 @@ class Jmesse_Cli_Action_JsonGetJsonRegion extends Jmesse_ActionClass
 		$jm_fair_cnt_mgr = $this->backend->getManager('JmFairCnt');
 
 		//日本語用
-		$jm_fair_cnt_region_list_jp = $jm_fair_cnt_mgr->getJsonRegionJP();
-		if (null != $jm_fair_cnt_region_list_jp) {
+		$jm_fair_cnt_region_list = $jm_fair_cnt_mgr->getJsonRegionJP();
+		if (null != $jm_fair_cnt_region_list) {
 			// JSON化
-			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list_jp);
+			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list);
 			// FILE出力
 			$filename = $this->config->get('jsonfile_path').'region_jp.json';
 			file_put_contents($filename, $jm_fair_cnt_region_json);
  		}
-
  		//英語用
- 		$jm_fair_cnt_region_list_en = $jm_fair_cnt_mgr->getJsonRegionEN();
- 		if (null != $jm_fair_cnt_region_list_en) {
+ 		$jm_fair_cnt_region_list = $jm_fair_cnt_mgr->getJsonRegionEN();
+ 		if (null != $jm_fair_cnt_region_list) {
  			// JSON化
- 			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list_en);
+ 			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list);
  			// FILE出力
  			$filename = $this->config->get('jsonfile_path').'region_en.json';
  			file_put_contents($filename, $jm_fair_cnt_region_json);
  		}
-
 		return null;
 	}
 }
