@@ -184,8 +184,6 @@ class Jmesse_MailManager extends Ethna_AppManager
 		$body = mb_convert_encoding($body_tmp, "ISO-2022-JP", "UTF-8");
 		$this->backend->getLogger()->log(LOG_DEBUG, '■本文(JIS) : '.$body);
 
-		return;
-
 		// 送信
 		$mail_obj =& Mail::factory('smtp', $params);
 		$result = $mail_obj->send($mail_to, $headers, $body);
