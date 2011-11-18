@@ -98,7 +98,11 @@ class Jmesse_Action_JsonGetCountry extends Jmesse_ActionClass
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			echo '[{"text":"...","value":""}]';
+			if ('1' == $this->af->get('search')) {
+				echo '[{"text":"すべて","value":""}]';
+			} else {
+				echo '[{"text":"...","value":""}]';
+			}
 			return null;
 		}
 

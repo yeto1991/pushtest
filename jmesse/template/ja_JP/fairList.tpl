@@ -76,17 +76,23 @@
 <title>
 {if ('1' == $form.all)}
 すべての見本市・展示会(J-messe) -ジェトロ
+{elseif ('1' == $form.detail)}
+世界の見本市・展示会(J-messe) -ジェトロ
 {else}
 	{if ('i1' == $form.type || 'i2' == $form.type)}
 {$app.title} - 世界の見本市・展示会(J-messe) -ジェトロ
-	{else}
+	{elseif ('v1' == $form.type || 'v2' == $form.type || 'v3' == $form.type)}
 {$app.title}で開催される見本市・展示会(J-messe) -ジェトロ
 	{/if}
 {/if}
 </title>
 </head>
 
+{if ('1' == $form.detail)}
+<body class="layout-LC highlight-match  j-messe" onload="init('{$config.url}', '{$form.select_region}', '{$form.select_country}', '{$form.select_city}')">
+{else}
 <body class="layout-LC highlight-match  j-messe">
+{/if}
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -155,8 +161,12 @@
 
 
 								<div class="h3">
+									{if ('1' == $form.detail)}
+									<h3>世界の見本市・展示会</h3>
+									{else}
 									<h3>{$app.list_name}</h3>
 									<span class="right"><a href="{$config.url}?action_top=true" class="icon_arrow">他の地域を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
+									{/if}
 
 								</div>
 
@@ -168,23 +178,33 @@
 								<div class="left" id="list">
 
 									<div class="h4 clearfix">
-										{if ('a' != $form.year)}
-										<h4>これから開催される見本市・展示会一覧</h4>
+										{if ('1' == $form.detail)}
+										<h4>見本市・展示会 絞込み検索結果一覧</h4>
 										{else}
+											{if ('a' != $form.year)}
+										<h4>これから開催される見本市・展示会一覧</h4>
+											{else}
 										<h4>過去のものを含む見本市・展示会一覧</h4>
+											{/if}
 										{/if}
+										{if ('1' != $form.detail)}
 										<span class="right"><a href="{$config.url}?action_fairList=true&all=1&page=1" class="icon_arrow">すべての見本市・展示会</a></span>
+										{/if}
 									</div>
 
 									<p class="t_right">
 										{if ('1' == $form.all)}
 										表示件数：<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
+										{elseif ('1' == $form.detail)}
+										表示件数：<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
 										{else}
 										表示件数：<a href="{$config.url}?action_fairList=true&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
 										{/if}
 										<select name="sort" id="sort"
 											{if ('1' == $form.all)}
 											onchange="dosort('{$config.url}?action_fairList=ture&page=1&all=1')"
+											{elseif ('1' == $form.detail)}
+											onchange="dosort('{$config.url}?action_fairListSearch=ture&detail=1&page=1')"
 											{else}
 											onchange="dosort('{$config.url}?action_fairList=ture&page=1')"
 											{/if}
@@ -226,15 +246,20 @@
 								<!-- /result -->
 
 								<!-- breakdown -->
-								{if ('i1' == $form.type)}
-									<!-- 業種選択 -->
-									{include file="fairMenuIndustory.tpl"}
-								{elseif ('v1' == $form.type)}
-									<!-- 地域選択 -->
-									{include file="fairMenuRegion.tpl"}
-								{elseif ('v2' == $form.type)}
-									<!-- 国・地域選択 -->
-									{include file="fairMenuCountry.tpl"}
+								{if ('1' == $form.detail)}
+									<!-- 詳細検索 -->
+									{include file="fairMenuDetail.tpl"}
+								{else}
+									{if ('i1' == $form.type)}
+										<!-- 業種選択 -->
+										{include file="fairMenuIndustory.tpl"}
+									{elseif ('v1' == $form.type)}
+										<!-- 地域選択 -->
+										{include file="fairMenuRegion.tpl"}
+									{elseif ('v2' == $form.type)}
+										<!-- 国・地域選択 -->
+										{include file="fairMenuCountry.tpl"}
+									{/if}
 								{/if}
 								<!-- /breakdown -->
 
@@ -244,8 +269,13 @@
 
 				</div>
 				<p class="totop">
+					{if ('1' == $form.detail)}
+					<a href="{$config.url}?action_fairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url}?action_fairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					{else}
 					<a href="{$config.url}?action_fairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
 					<a href="javascript:window.open('{$config.url}?action_fairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					{/if}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>
@@ -254,9 +284,12 @@
 	</div>
 	<!-- /contents -->
 
+
 	<!-- footer -->
 	<div id="include_footer"></div>
 	<!-- /footer -->
 
 </body>
 </html>
+{debug}
+

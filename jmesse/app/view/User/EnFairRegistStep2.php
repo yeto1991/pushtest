@@ -26,7 +26,7 @@ class Jmesse_View_UserEnFairRegistStep2 extends Jmesse_ViewClass
 		// 10年前までの西暦リスト
 		$now = (int) date('Y');
 		$year_list = array();
-		for ($i = -10; $i < 0; $i++) {
+		for ($i = -10; $i <= 0; $i++) {
 			$year_list[$i + 10] = $now + $i;
 		}
 		$this->af->setApp('year_list', $year_list);

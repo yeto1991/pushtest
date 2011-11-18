@@ -14,6 +14,7 @@
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
 
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
@@ -60,13 +61,13 @@
 			var input = $("#prompt input:checkbox:checked").map(function() {
 				return this.value;
 			}).get();
+			// 件数チェック
 			if (6 < input.length) {
 				window.alert('業種は6個まで選択できます');
 				return;
 			}
 			// close the overlay
 			triggers.overlay().close();
-			// 件数チェック
 			// 選択値の洗い替え
 			$('#INDUSOTRY_LIST').empty();
 

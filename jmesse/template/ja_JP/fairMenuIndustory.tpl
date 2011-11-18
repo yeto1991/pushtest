@@ -1,7 +1,8 @@
 <!-- menu -->
 <form name="form_fairMenuIndusory" id="form_fairMenuIndusory" method="post" action="">
-<input type="hidden" name="action_fairList" id="action_fairList" value="dummy" />
+<input type="hidden" name="action_fairListSearch" id="action_fairListSearch" value="dummy" />
 <input type="hidden" name="type" id="type" value="{$form.type}" />
+<input type="hidden" name="detail" id="detail" value="1" />
 <input type="hidden" name="i_2" id="i_2" value="{$form.i_2}" />
 <input type="hidden" name="i_3" id="i_3" value="{$form.i_3}" />
 
@@ -9,7 +10,7 @@
 	<h4>絞り込む</h4>
 		<p>
 			{section name=it loop=$app.sub_industory_cnt}
-			<input type="checkbox" name="check_sub_industory[]" id="check_sub_industory[]" value="{$app.sub_industory_cnt[it].kbn_3}"
+			<input type="checkbox" name="check_sub_industory[]" id="check_sub_industory_{$app.sub_industory_cnt[it].kbn_3}" value="{$app.sub_industory_cnt[it].kbn_3}"
 				{section name=it2 loop=$form.check_sub_industory}
 					{if ($form.check_sub_industory[it2] == $app.sub_industory_cnt[it].kbn_3)}
 						checked
@@ -39,7 +40,7 @@
 			<div class="area1">
 			{/if}
 				<p>
-					<input type="checkbox" name="check_region[]" id="check_region[]" value="{$app.region_cnt[it].kbn_2}"
+					<input type="checkbox" name="check_region[]" id="check_region_{$app.region_cnt[it].kbn_2}" value="{$app.region_cnt[it].kbn_2}"
 					{section name=it3 loop=$form.check_region}
 						{if ($form.check_region[it3] == $app.region_cnt[it].kbn_2)}
 						checked
@@ -51,7 +52,7 @@
 					<p>
 						{section name=it2 loop=$app.country_disp_cnt}
 						{if ($app.region_cnt[it].kbn_2 == $app.country_disp_cnt[it2].kbn_2)}
-						<input type="checkbox" name="check_region_country[]" id="check_region_country[]" value="{$app.country_disp_cnt[it2].region_country}"
+						<input type="checkbox" name="check_region_country[]" id="check_region_country_{$app.country_disp_cnt[it2].region_country}" value="{$app.country_disp_cnt[it2].region_country}"
 						{section name=it3 loop=$form.check_region_country}
 							{if ($form.check_region_country[it3] == $app.country_disp_cnt[it2].region_country)}
 							checked
@@ -69,7 +70,7 @@
 						<span class="close">
 						{section name=it2 loop=$app.country_close_cnt}
 						{if ($app.region_cnt[it].kbn_2 == $app.country_close_cnt[it2].kbn_2)}
-						<input type="checkbox" name="check_region_country[]" id="check_region_country[]" value="{$app.country_close_cnt[it2].region_country}"
+						<input type="checkbox" name="check_region_country[]" id="check_region_country_{$app.country_close_cnt[it2].region_country}" value="{$app.country_close_cnt[it2].region_country}"
 						{section name=it3 loop=$form.check_region_country}
 							{if ($form.check_region_country[it3] == $app.country_close_cnt[it2].region_country)}
 								checked
@@ -88,8 +89,8 @@
 
 	<p>
 		<strong>会期</strong><br />
-		<input type="radio" name="year" id="year" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if}>これから開催のもの<br />
-		<input type="radio" name="year" id="year" value="a" {if ('a' == $form.year)}checked{/if}>過去のものを含む
+		<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if}>これから開催のもの<br />
+		<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if}>過去のものを含む
 	</p>
 
 	<p>

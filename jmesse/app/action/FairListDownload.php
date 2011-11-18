@@ -38,14 +38,6 @@ class Jmesse_Action_FairListDownload extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ページ番号
-		if ('' == $this->af->get('page')) {
-			$msg = 'ページ番号が設定されていません。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
-			return 'error';
-		}
-
 		return null;
 	}
 
@@ -57,9 +49,6 @@ class Jmesse_Action_FairListDownload extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		// ページ設定
-		$page = $this->af->get('page');
-
 		// ソート順
 		$sort = $this->_setSort();
 
@@ -68,7 +57,11 @@ class Jmesse_Action_FairListDownload extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// 検索実行
-		$jm_fair_list = $jm_fair_mgr->getFairListCsv($sort);
+		if ('1' == $this->af->get('detail')) {
+			$jm_fair_list = $jm_fair_mgr->getFairListSearchDetailCsv($sort);
+		} else {
+			$jm_fair_list = $jm_fair_mgr->getFairListCsv($sort);
+		}
 
 		// エラー判定
 		if (0 < $this->ae->count()) {

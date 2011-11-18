@@ -27,8 +27,8 @@ class Jmesse_Form_FairList extends Jmesse_ActionForm
 			'name'        => '全表示',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => null,               // Maximum value
-			'regexp'      => null,    // String by Regexp
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -41,7 +41,20 @@ class Jmesse_Form_FairList extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
-			'regexp'      => '/^[0-9a-z]+$/',    // String by Regexp
+			'regexp'      => '/^[0-9a-z]+$/', // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'detail' => array(
+			'type'        => VAR_TYPE_INT,    // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'メニュータイプ(詳細)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -269,6 +282,141 @@ class Jmesse_Form_FairList extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+
+		'select_region' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '開催地(地域)',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'select_country' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '開催地(国・地域)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'select_city' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '開催地(都市)',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
+		'date_from_yyyy' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '会期(開始・年)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 4,               // Minimum value
+			'max'         => 4,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'date_from_mm' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '会期(開始・月)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 2,               // Minimum value
+			'max'         => 2,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'date_to_yyyy' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => '会期(終了・年)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 4,               // Minimum value
+			'max'         => 4,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'date_to_mm' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT , // Form type
+			'name'        => '会期(終了・月)', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 2,               // Minimum value
+			'max'         => 2,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
+		'check_main_sub_industory' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => '選択(業種)',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
+		'industory_selected' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '業種選択済',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'venue_selected' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => '開催地選択済',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
 	);
 }
 
@@ -296,12 +444,12 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			return 'error';
 		}
 
-		$this->backend->getLogger()->log(LOG_DEBUG, '■type : '.$this->af->get('type'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■i_2 : '.$this->af->get('i_2'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■i_3 : '.$this->af->get('i_3'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■v_2 : '.$this->af->get('v_2'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■v_3 : '.$this->af->get('v_3'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■v_4 : '.$this->af->get('v_4'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■type   : '.$this->af->get('type'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■i_2    : '.$this->af->get('i_2'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■i_3    : '.$this->af->get('i_3'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■v_2    : '.$this->af->get('v_2'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■v_3    : '.$this->af->get('v_3'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■v_4    : '.$this->af->get('v_4'));
 
 		return null;
 	}
@@ -576,14 +724,14 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		$search_cond['v_2'] = $this->af->get('v_2');
 		$search_cond['v_3'] = $this->af->get('v_3');
 		$search_cond['v_4'] = $this->af->get('v_4');
-		$search_cond['check_main_industory'] = $this->af->get('check_main_industory');
-		$search_cond['check_sub_industory'] = $this->af->get('check_sub_industory');
-		$search_cond['check_region'] = $this->af->get('check_region');
-		$search_cond['check_country'] = $this->af->get('check_country');
-		$search_cond['check_city'] = $this->af->get('check_city');
-		$search_cond['check_region_country'] = $this->af->get('check_region_country');
-		$search_cond['year'] = $this->af->get('year');
-		$search_cond['keyword'] = $this->af->get('keyword');
+// 		$search_cond['check_main_industory'] = $this->af->get('check_main_industory');
+// 		$search_cond['check_sub_industory'] = $this->af->get('check_sub_industory');
+// 		$search_cond['check_region'] = $this->af->get('check_region');
+// 		$search_cond['check_country'] = $this->af->get('check_country');
+// 		$search_cond['check_city'] = $this->af->get('check_city');
+// 		$search_cond['check_region_country'] = $this->af->get('check_region_country');
+// 		$search_cond['year'] = $this->af->get('year');
+// 		$search_cond['keyword'] = $this->af->get('keyword');
 		if (!$this->session->isStart()) {
 			$this->session->start();
 		}
@@ -608,14 +756,14 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 		$this->af->set('v_2', $search_cond['v_2']);
 		$this->af->set('v_3', $search_cond['v_3']);
 		$this->af->set('v_4', $search_cond['v_4']);
-		$this->af->set('check_main_industory', $search_cond['check_main_industory']);
-		$this->af->set('check_sub_industory', $search_cond['check_sub_industory']);
-		$this->af->set('check_region', $search_cond['check_region']);
-		$this->af->set('check_country', $search_cond['check_country']);
-		$this->af->set('check_city', $search_cond['check_city']);
-		$this->af->set('check_region_country', $search_cond['check_region_country']);
-		$this->af->set('year', $search_cond['year']);
-		$this->af->set('keyword', $search_cond['keyword']);
+// 		$this->af->set('check_main_industory', $search_cond['check_main_industory']);
+// 		$this->af->set('check_sub_industory', $search_cond['check_sub_industory']);
+// 		$this->af->set('check_region', $search_cond['check_region']);
+// 		$this->af->set('check_country', $search_cond['check_country']);
+// 		$this->af->set('check_city', $search_cond['check_city']);
+// 		$this->af->set('check_region_country', $search_cond['check_region_country']);
+// 		$this->af->set('year', $search_cond['year']);
+// 		$this->af->set('keyword', $search_cond['keyword']);
 		$this->af->set('limit', $search_cond['limit']);
 		$this->af->set('sort', $search_cond['sort']);
 	}

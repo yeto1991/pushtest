@@ -1,15 +1,17 @@
 <!-- menu -->
 <form name="form_fairMenuCountry" id="form_fairMenuCountry" method="post" action="">
-<input type="hidden" name="action_fairList" id="action_fairList" value="dummy" />
+<input type="hidden" name="action_fairListSearch" id="action_fairListSearch" value="dummy" />
 <input type="hidden" name="type" id="type" value="{$form.type}" />
+<input type="hidden" name="detail" id="detail" value="1" />
 <input type="hidden" name="v_2" id="v_2" value="{$form.v_2}" />
 <input type="hidden" name="v_3" id="v_3" value="{$form.v_3}" />
+<input type="hidden" name="v_4" id="v_4" value="{$form.v_4}" />
 
 <div id="breakdown" class="right">
 	<h4>絞り込む</h4>
 	<p>
 		{section name=it loop=$app.city_cnt}
-		<input type="checkbox" name="check_city[]" id="check_city[]" value="{$app.city_cnt[it].kbn_4}"
+		<input type="checkbox" name="check_city[]" id="check_city_{$app.city_cnt[it].kbn_4}" value="{$app.city_cnt[it].kbn_4}"
 			{if (0 == $app.city_cnt[it].fair_cnt)}
 		disabled
 			{else}
@@ -37,7 +39,7 @@
 	<p>
 		<strong>業種</strong><br />
 		{section name=it loop=$app.main_industory_cnt}
-		<input type="checkbox" name="check_main_industory[]" id="check_main_industory[]" value="{$app.main_industory_cnt[it].kbn_2}"
+		<input type="checkbox" name="check_main_industory[]" id="check_main_industory_{$app.main_industory_cnt[it].kbn_2}" value="{$app.main_industory_cnt[it].kbn_2}"
 			{if (0 == $app.main_industory_cnt[it].fair_cnt)}
 				disabled
 			{else}
@@ -54,8 +56,8 @@
 
 	<p>
 		<strong>会期</strong><br />
-		<input type="radio" name="year" id="year" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if}>これから開催のもの<br />
-		<input type="radio" name="year" id="year" value="a" {if ('a' == $form.year)}checked{/if}>過去のものを含む
+		<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if}>これから開催のもの<br />
+		<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if}>過去のものを含む
 	</p>
 
 	<p>

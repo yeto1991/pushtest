@@ -60,6 +60,20 @@ class Jmesse_Form_JsonGetCity extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'search' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '検索画面用',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
 	);
 
 }
@@ -103,25 +117,41 @@ class Jmesse_Action_JsonGetCity extends Jmesse_ActionClass
 		$region = $this->af->get('kbn_2');
 		$country = $this->af->get('kbn_3');
 		$use_language_flag = $this->af->get('use_language_flag');
+		$search = $this->af->get('search');
 
-		if ('' != $region && '' != $country && '' != $use_language_flag) {
+		if ('1' == $search) {
 			$jm_code_m_mgr = $this->backend->getManager('jmCodeM');
 			$list = $jm_code_m_mgr->getCityList($region, $country);
-			if (null != $list) {
-				$json = '[{"text":"...","value":""}';
+			$json_list = array(array('text' => 'すべて', 'value' => ''));
+			foreach ($list as $row) {
 				if ('0' == $use_language_flag) {
-					for ($i = 0; $i < count($list); $i++) {
-						$json .= ',{"text":"'.$list[$i]['discription_jp'].'","value":"'.$list[$i]['kbn_4'].'"}';
-					}
+					$json_row = array('text' => $row['discription_jp'], 'value' => $row['kbn_4']);
 				} elseif ('1' == $use_language_flag) {
-					for ($i = 0; $i < count($list); $i++) {
-						$json .= ',{"text":"'.$list[$i]['discription_en'].'","value":"'.$list[$i]['kbn_4'].'"}';
-					}
+					$json_row = array('text' => $row['discription_en'], 'value' => $row['kbn_4']);
 				}
-				$json .= ']';
-			} else {
-				$this->backend->getLogger()->log(LOG_WARNING, '検索件数[0]');
-				$json = '[{"text":"...","value":""}]';
+				array_push($json_list, $json_row);
+			}
+			$json = json_encode($json_list);
+		} else {
+			if ('' != $region && '' != $country && '' != $use_language_flag) {
+				$jm_code_m_mgr = $this->backend->getManager('jmCodeM');
+				$list = $jm_code_m_mgr->getCityList($region, $country);
+				if (null != $list) {
+					$json = '[{"text":"...","value":""}';
+					if ('0' == $use_language_flag) {
+						for ($i = 0; $i < count($list); $i++) {
+							$json .= ',{"text":"'.$list[$i]['discription_jp'].'","value":"'.$list[$i]['kbn_4'].'"}';
+						}
+					} elseif ('1' == $use_language_flag) {
+						for ($i = 0; $i < count($list); $i++) {
+							$json .= ',{"text":"'.$list[$i]['discription_en'].'","value":"'.$list[$i]['kbn_4'].'"}';
+						}
+					}
+					$json .= ']';
+				} else {
+					$this->backend->getLogger()->log(LOG_WARNING, '検索件数[0]');
+					$json = '[{"text":"...","value":""}]';
+				}
 			}
 		}
 
