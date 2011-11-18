@@ -35,6 +35,10 @@
 
 <div id="breakdown" class="right">
 	<h4>絞り込む</h4>
+	{* エラー表示 *}
+	{if count($errors)}
+	<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+	{/if}
 	<table class="detail">
 		<tr>
 			<th>業種</th>
@@ -108,6 +112,18 @@
 					<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
 					<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
 				</select>月<br/>
+				{if is_error('date_from_yyyy')}
+				<span class="error-message">{message name="date_from_yyyy"}</span><br />
+				{/if}
+				{if is_error('date_from_mm')}
+				<span class="error-message">{message name="date_from_mm"}</span><br />
+				{/if}
+				{if is_error('date_to_yyyy')}
+				<span class="error-message">{message name="date_to_yyyy"}</span><br />
+				{/if}
+				{if is_error('date_to_mm')}
+				<span class="error-message">{message name="date_to_mm"}</span><br />
+				{/if}
 			</td>
 		</tr>
 		<tr>
