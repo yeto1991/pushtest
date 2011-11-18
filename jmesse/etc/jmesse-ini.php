@@ -12,6 +12,7 @@ $config = array(
 	'host_path' => 'http://localhost',
 	'img_path' => 'img/',
 	'flag_path' => 'img/flag/',
+	'jsonfile_path' => 'jsonfile/',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
