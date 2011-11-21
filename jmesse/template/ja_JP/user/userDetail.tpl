@@ -17,23 +17,7 @@
 {if ('1' == $form.print)}
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
-<script type="text/javascript">
-<!--
-{literal}
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/header.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
-	});
-{/literal}
--->
-</script>
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include.js"></script>
 </head>
 
 <body class="layout-LC highlight-match j-messe">
