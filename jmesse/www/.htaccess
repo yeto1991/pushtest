@@ -7,3 +7,7 @@ RewriteRule ^tradefair/([0-9]+)/print/1/$ ?action_fairDetail=true&mihon_no=$1&pr
 RewriteRule ^tradefair/([0-9]+)$ ?action_fairDetail=true&mihon_no=$1 [L]
 RewriteRule ^tradefair/(.+)_([0-9]+)/print/1/$ ?action_fairDetail=true&mihon_no=$2&print=1 [L]
 RewriteRule ^tradefair/(.+)_([0-9]+)$ ?action_fairDetail=true&mihon_no=$2 [L]
+RewriteRule ^tradefair_en/([0-9]+)/print/1/$ ?action_enFairDetail=true&mihon_no=$1&print=1 [L]
+RewriteRule ^tradefair_en/([0-9]+)$ ?action_enFairDetail=true&mihon_no=$1 [L]
+RewriteRule ^tradefair_en/(.+)_([0-9]+)/print/1/$ ?action_enFairDetail=true&mihon_no=$2&print=1 [L]
+RewriteRule ^tradefair_en/(.+)_([0-9]+)$ ?action_enFairDetail=true&mihon_no=$2 [L]
