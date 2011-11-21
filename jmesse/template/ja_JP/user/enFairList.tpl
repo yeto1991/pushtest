@@ -22,22 +22,11 @@
 <!--以下のCSSは最終的に削除します-->
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_enInclude.js"></script>
 
 <script type="text/javascript">
 <!--
 {literal}
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/enHeader.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/enFooter.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/enLeft_menu.html");
-	});
-
 	function del() {
 		// 選択チェック
 		var check_mihon_no = document.getElementsByName('check_mihon_no[]');

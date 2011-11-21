@@ -25,6 +25,7 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="{$config.url}/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_enInclude.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
@@ -34,19 +35,6 @@
 		document.getElementById('photos_name_2').value = '';
 		document.getElementById('photos_name_3').value = '';
 	}
-
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/enHeader.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/enFooter.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/enLeft_menu.html");
-	});
-
 
 	/**
 	 * 展示会に係わる画像(3点)関連。
