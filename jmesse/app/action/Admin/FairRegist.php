@@ -246,7 +246,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市名（日）', // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -259,7 +259,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '見本市名（英）', // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -786,7 +786,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
 			'name'        => '出品物(日)',    // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 300,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -799,7 +799,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type
 			'name'        => '出品物(英)',    // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 300,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -971,7 +971,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '会場名(日)',    // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -984,7 +984,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '会場名(英)',    // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp

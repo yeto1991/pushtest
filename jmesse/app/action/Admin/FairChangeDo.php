@@ -184,6 +184,38 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			}
 		}
 
+		$select_language_info = $this->af->get('select_language_info');
+		// 日本語
+		if ('0' == $select_language_info || '2' == $select_language_info) {
+			// 見本市名
+			if ('' == $this->af->get('fair_title_jp')) {
+				$this->ae->add('error', '見本市名(日)が入力されていません');
+			}
+			// 出品物
+			if ('' == $this->af->get('exhibits_jp')) {
+				$this->ae->add('error', '出品物(日)が入力されていません');
+			}
+			// 会場名
+			if ('' == $this->af->get('venue_jp')) {
+				$this->ae->add('error', '会場名(日)が入力されていません');
+			}
+		}
+		// 英語
+		if ('1' == $select_language_info || '2' == $select_language_info) {
+			// 見本市名
+			if ('' == $this->af->get('fair_title_en')) {
+				$this->ae->add('error', '見本市名(英)が入力されていません');
+			}
+			// 出品物
+			if ('' == $this->af->get('exhibits_en')) {
+				$this->ae->add('error', '出品物(英)が入力されていません');
+			}
+			// 会場名
+			if ('' == $this->af->get('venue_en')) {
+				$this->ae->add('error', '会場名(英)が入力されていません');
+			}
+		}
+
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
 			return 'admin_fairRegist';

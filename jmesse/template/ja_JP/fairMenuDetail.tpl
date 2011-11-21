@@ -1,6 +1,6 @@
 <!-- menu -->
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
 
 <form name="form_fairMenuDetail" id="form_fairMenuDetail" method="post" action="">
@@ -483,7 +483,7 @@
 			<tr>
 				<th>地域</th>
 				<td>
-					<select name="select_region" id="select_region" onchange="set_country('{$config.url}')" style="width:200px;">
+					<select name="select_region" id="select_region" onchange="set_country('{$config.url_pub}')" style="width:200px;">
 						<option value="">すべて</option>
 						{section name=it loop=$app.region_list}
 						<option value="{$app.region_list[it].kbn_2}" {if $app.region_list[it].kbn_2 == $form.select_region}selected{/if}>{$app.region_list[it].discription_jp}</option>
@@ -494,7 +494,7 @@
 			<tr>
 				<th>国・地域</th>
 				<td>
-					<select name="select_country" id="select_country" onchange="set_city('{$config.url}')" style="width:200px;">
+					<select name="select_country" id="select_country" onchange="set_city('{$config.url_pub}')" style="width:200px;">
 						<option value="">すべて</option>
 					</select>
 				</td>

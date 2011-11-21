@@ -5,17 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.fair_detail.exhibits_jp|replace:'&lt;br/&gt;':''}, {$app.fair_detail.keyword}" />
-
-<!--テスト用-->
-<base href="http://dev.jetro.go.jp" />
-<!--/テスト用-->
-<title>
-{if ('' != $app.fair_detail.abbrev_title)}
-{$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_jp} - 世界の見本市・展示会 - ジェトロ
-{else}
-{$app.fair_detail.fair_title_jp} - 世界の見本市・展示会 - ジェトロ
-{/if}
-</title>
+<base href="{$config.base}" />
 <script type="text/javascript" src="/js/jquery.js"></script>
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -23,28 +13,18 @@
 {if ('1' == $form.print)}
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
-
 <link rel="stylesheet" href="/css/js/prettyphoto/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-<!--
-{literal}
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/header.html");
-	});
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include_pub.js"></script>
 
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
-	});
-{/literal}
-// -->
-</script>
-
+<title>
+{if ('' != $app.fair_detail.abbrev_title)}
+{$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_jp} - 世界の見本市・展示会 - ジェトロ
+{else}
+{$app.fair_detail.fair_title_jp} - 世界の見本市・展示会 - ジェトロ
+{/if}
+</title>
 </head>
 
 
@@ -125,16 +105,16 @@
 											<th>開催地</th>
 											<td>
 												{if ('' != $app.fair_detail.flag_image)}
-												<img src="{$config.url}{$config.flag_path}{$app.fair_detail.flag_image}" style="vertical-align: middle;">
+												<img src="{$config.url_pub}{$config.flag_path}{$app.fair_detail.flag_image}" style="vertical-align: middle;">
 												{/if}
 												{if ('' != $app.fair_detail.city_other_jp)}
 												{$app.fair_detail.city_other_jp} /
 												{/if}
 												{if ('' != $app.fair_detail.city_name)}
-												<a href="{$config.url}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}&v_4={$app.fair_detail.city}">{$app.fair_detail.city_name}</a> /
+												<a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}&v_4={$app.fair_detail.city}">{$app.fair_detail.city_name}</a> /
 												{/if}
-												<a href="{$config.url}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}">{$app.fair_detail.country_name}</a> /
-												<a href="{$config.url}?action_fairList=true&type=v1&v_2={$app.fair_detail.region}">{$app.fair_detail.region_name}</a>
+												<a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}">{$app.fair_detail.country_name}</a> /
+												<a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$app.fair_detail.region}">{$app.fair_detail.region_name}</a>
 											</td>
 										</tr>
 										<tr>
@@ -262,22 +242,22 @@
 
 											<td>
 												{if ('' != $app.fair_detail.main_industory_1 && '' != $app.fair_detail.sub_industory_1)}
-												<a href="{$config.url}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_1}&i_3={$app.fair_detail.sub_industory_1}">{$app.fair_detail.main_industory_name_1}／{$app.fair_detail.sub_industory_name_1}</a><br />
+												<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_1}&i_3={$app.fair_detail.sub_industory_1}">{$app.fair_detail.main_industory_name_1}／{$app.fair_detail.sub_industory_name_1}</a><br />
 												{/if}
 												{if ('' != $app.fair_detail.main_industory_2 && '' != $app.fair_detail.sub_industory_2)}
-												<a href="{$config.url}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_2}&i_3={$app.fair_detail.sub_industory_2}">{$app.fair_detail.main_industory_name_2}／{$app.fair_detail.sub_industory_name_2}</a><br />
+												<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_2}&i_3={$app.fair_detail.sub_industory_2}">{$app.fair_detail.main_industory_name_2}／{$app.fair_detail.sub_industory_name_2}</a><br />
 												{/if}
 												{if ('' != $app.fair_detail.main_industory_3 && '' != $app.fair_detail.sub_industory_3)}
-												<a href="{$config.url}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_3}&i_3={$app.fair_detail.sub_industory_3}">{$app.fair_detail.main_industory_name_3}／{$app.fair_detail.sub_industory_name_3}</a><br />
+												<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_3}&i_3={$app.fair_detail.sub_industory_3}">{$app.fair_detail.main_industory_name_3}／{$app.fair_detail.sub_industory_name_3}</a><br />
 												{/if}
 												{if ('' != $app.fair_detail.main_industory_4 && '' != $app.fair_detail.sub_industory_4)}
-												<a href="{$config.url}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_4}&i_3={$app.fair_detail.sub_industory_4}">{$app.fair_detail.main_industory_name_4}／{$app.fair_detail.sub_industory_name_4}</a><br />
+												<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_4}&i_3={$app.fair_detail.sub_industory_4}">{$app.fair_detail.main_industory_name_4}／{$app.fair_detail.sub_industory_name_4}</a><br />
 												{/if}
 												{if ('' != $app.fair_detail.main_industory_5 && '' != $app.fair_detail.sub_industory_5)}
-												<a href="{$config.url}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_5}&i_3={$app.fair_detail.sub_industory_5}">{$app.fair_detail.main_industory_name_5}／{$app.fair_detail.sub_industory_name_5}</a><br />
+												<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_5}&i_3={$app.fair_detail.sub_industory_5}">{$app.fair_detail.main_industory_name_5}／{$app.fair_detail.sub_industory_name_5}</a><br />
 												{/if}
 												{if ('' != $app.fair_detail.main_industory_6 && '' != $app.fair_detail.sub_industory_6)}
-												<a href="{$config.url}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_6}&i_3={$app.fair_detail.sub_industory_6}">{$app.fair_detail.main_industory_name_6}／{$app.fair_detail.sub_industory_name_6}</a><br />
+												<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.fair_detail.main_industory_6}&i_3={$app.fair_detail.sub_industory_6}">{$app.fair_detail.main_industory_name_6}／{$app.fair_detail.sub_industory_name_6}</a><br />
 												{/if}
 											</td>
 										</tr>
@@ -350,36 +330,36 @@
 								{if ('' != $app.fair_detail.photos_1 || '' != $app.fair_detail.photos_2 || '' != $app.fair_detail.photos_3)}
 								<div id="picture" class="right">
 									{if ('' != $app.fair_detail.photos_1)}
-									<a href="{$config.url}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" rel="prettyPhoto[gallery]"
+									<a href="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" rel="prettyPhoto[gallery]"
 									{if ('' != $app.fair_detail.abbrev_title)}
 									title="{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})"
 									{else}
 									title="{$app.fair_detail.fair_title_jp}"
 									{/if}
 									>
-										<img src="{$config.url}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" width="200px" alt="" />
+										<img src="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" width="200px" alt="" />
 									</a>
 									{/if}
 									{if ('' != $app.fair_detail.photos_2)}
-									<a href="{$config.url}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" rel="prettyPhoto[gallery]"
+									<a href="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" rel="prettyPhoto[gallery]"
 									{if ('' != $app.fair_detail.abbrev_title)}
 									title="{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})"
 									{else}
 									title="{$app.fair_detail.fair_title_jp}"
 									{/if}
 									>
-										<img src="{$config.url}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" width="200px" alt="" />
+										<img src="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" width="200px" alt="" />
 									</a>
 									{/if}
 									{if ('' != $app.fair_detail.photos_3)}
-									<a href="{$config.url}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" rel="prettyPhoto[gallery]"
+									<a href="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" rel="prettyPhoto[gallery]"
 									{if ('' != $app.fair_detail.abbrev_title)}
 									title="{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})"
 									{else}
 									title="{$app.fair_detail.fair_title_jp}"
 									{/if}
 									>
-										<img src="{$config.url}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" width="200px" alt="" />
+										<img src="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" width="200px" alt="" />
 									</a>
 									{/if}
 								</div>
@@ -389,7 +369,7 @@
 					</div>
 				</div>
 				<p class="totop">
-					<a href="javascript:window.open('{$config.url}tradefair/{$app.fair_detail.mihon_no}/print/1/', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url_pub}tradefair/{$app.fair_detail.mihon_no}/print/1/', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

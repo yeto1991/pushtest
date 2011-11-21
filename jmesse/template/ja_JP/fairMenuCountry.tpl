@@ -28,7 +28,7 @@
 				{if $form.v_4 == $app.city_cnt[it].kbn_4}
 		<b>{$app.city_cnt[it].discription_jp} ({$app.city_cnt[it].fair_cnt})</b>
 				{else}
-		<a href="{$config.url}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}&v_4={$app.city_cnt[it].kbn_4}">
+		<a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}&v_4={$app.city_cnt[it].kbn_4}">
 		{$app.city_cnt[it].discription_jp} ({$app.city_cnt[it].fair_cnt})</a>
 				{/if}
 			{/if}

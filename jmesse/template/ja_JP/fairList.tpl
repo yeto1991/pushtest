@@ -5,9 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.meta_keyword}" />
-<!--テスト用-->
-<base href="http://dev.jetro.go.jp/" />
-<!--/テスト用-->
+<base href="{$config.base}" />
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
@@ -17,21 +15,10 @@
 
 <script type="text/javascript" src="/j-messe/js/j-messe.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include_pub.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/header.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
-	});
-
 	function search(form_name) {
 		document.getElementById(form_name).submit();
 	}
@@ -89,7 +76,7 @@
 </head>
 
 {if ('1' == $form.detail)}
-<body class="layout-LC highlight-match  j-messe" onload="init('{$config.url}', '{$form.select_region}', '{$form.select_country}', '{$form.select_city}')">
+<body class="layout-LC highlight-match  j-messe" onload="init('{$config.url_pub}', '{$form.select_region}', '{$form.select_country}', '{$form.select_city}')">
 {else}
 <body class="layout-LC highlight-match  j-messe">
 {/if}
@@ -102,14 +89,14 @@
 		<ul>
 			<li><a href="">HOME</a></li>
 			<li><a href="">引き合い・展示会検索</a></li>
-			<li><a href="{$config.url}">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="{$config.url_pub}">見本市・展示会データベース（J-messe）</a></li>
 			{if ('1' != $form.all)}
 				{if ('i1' == $form.type)}
 			<li><a href="">世界の見本市・展示会</a></li>
 					{if ('' == $form.i_3)}
 			<li>{$app.pan_1}</li>
 					{else}
-			<li><a href="{$config.url}?action_fairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
+			<li><a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
 			<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
@@ -118,11 +105,11 @@
 				{elseif ('v2' == $form.type)}
 			<li><a href="">開催地別に見る</a></li>
 					{if ('' == $form.v_4)}
-			<li><a href="{$config.url}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+			<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 			<li>{$app.pan_2}</li>
 					{else}
-			<li><a href="{$config.url}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
-			<li><a href="{$config.url}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
+			<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+			<li><a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
 			<li>{$app.pan_3}</li>
 					{/if}
 				{/if}
@@ -165,7 +152,7 @@
 									<h3>世界の見本市・展示会</h3>
 									{else}
 									<h3>{$app.list_name}</h3>
-									<span class="right"><a href="{$config.url}?action_top=true" class="icon_arrow">他の地域を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
+									<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の地域を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
 									{/if}
 
 								</div>
@@ -188,25 +175,25 @@
 											{/if}
 										{/if}
 										{if ('1' != $form.detail)}
-										<span class="right"><a href="{$config.url}?action_fairList=true&all=1&page=1" class="icon_arrow">すべての見本市・展示会</a></span>
+										<span class="right"><a href="{$config.url_pub}?action_fairList=true&all=1&page=1" class="icon_arrow">すべての見本市・展示会</a></span>
 										{/if}
 									</div>
 
 									<p class="t_right">
 										{if ('1' == $form.all)}
-										表示件数：<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
+										表示件数：<a href="{$config.url_pub}?action_fairList=true&all=1&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairList=true&all=1&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairList=true&all=1&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
 										{elseif ('1' == $form.detail)}
-										表示件数：<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
+										表示件数：<a href="{$config.url_pub}?action_fairListSearch=true&detail=1&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairListSearch=true&detail=1&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairListSearch=true&detail=1&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
 										{else}
-										表示件数：<a href="{$config.url}?action_fairList=true&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
+										表示件数：<a href="{$config.url_pub}?action_fairList=true&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairList=true&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairList=true&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
 										{/if}
 										<select name="sort" id="sort"
 											{if ('1' == $form.all)}
-											onchange="dosort('{$config.url}?action_fairList=ture&page=1&all=1')"
+											onchange="dosort('{$config.url_pub}?action_fairList=ture&page=1&all=1')"
 											{elseif ('1' == $form.detail)}
-											onchange="dosort('{$config.url}?action_fairListSearch=ture&detail=1&page=1')"
+											onchange="dosort('{$config.url_pub}?action_fairListSearch=ture&detail=1&page=1')"
 											{else}
-											onchange="dosort('{$config.url}?action_fairList=ture&page=1')"
+											onchange="dosort('{$config.url_pub}?action_fairList=ture&page=1')"
 											{/if}
 											>
 											<option value="">並び替え</option>
@@ -227,7 +214,7 @@
 									{/if}
 										<dl>
 											<dt>
-												<a href="{$config.url}tradefair/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_jp}</a>
+												<a href="{$config.url_pub}tradefair/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_jp}</a>
 											</dt>
 											<dd>
 												{$app.fair_list[it].date_from_yyyy}年{$app.fair_list[it].date_from_mm}月{$app.fair_list[it].date_from_dd}日～{$app.fair_list[it].date_to_yyyy}年{$app.fair_list[it].date_to_mm}月{$app.fair_list[it].date_to_dd}日<br />
@@ -270,11 +257,11 @@
 				</div>
 				<p class="totop">
 					{if ('1' == $form.detail)}
-					<a href="{$config.url}?action_fairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
-					<a href="javascript:window.open('{$config.url}?action_fairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="{$config.url_pub}?action_fairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url_pub}?action_fairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{else}
-					<a href="{$config.url}?action_fairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
-					<a href="javascript:window.open('{$config.url}?action_fairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					<a href="{$config.url_pub}?action_fairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url_pub}?action_fairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{/if}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>

@@ -23,6 +23,11 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	 */
 	function isLoginUser() {
 
+		// "https"判定
+		if ('on' != $_SERVER['HTTPS']) {
+			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+		}
+
 		$ret = true;
 
 		if (!$this->session->isStart()) {
@@ -45,6 +50,11 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	 * @return true：可、false：否。
 	 */
 	function isLoginFair() {
+
+		// "https"判定
+		if ('on' != $_SERVER['HTTPS']) {
+			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+		}
 
 		$ret = true;
 

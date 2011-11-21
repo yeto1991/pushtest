@@ -19,6 +19,7 @@
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
@@ -30,19 +31,6 @@
 			}
 		}
 	}
-
-
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/header.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
-	});
 
 	$(document).ready(function() {
 		var triggers = $(".modalInput").overlay({

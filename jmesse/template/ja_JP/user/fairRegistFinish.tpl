@@ -14,21 +14,7 @@
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
 
 <script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript">
-{literal}
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/header.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
-	});
-{/literal}
-</script>
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include.js"></script>
 {if ('r' == $form.msg)}
 <title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 {elseif ('c' == $form.msg)}

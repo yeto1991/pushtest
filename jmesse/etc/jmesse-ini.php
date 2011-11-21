@@ -6,15 +6,19 @@
 */
 $config = array(
 	// site
-	'url' => 'http://localhost/jmesse/www/',
+	'url'     => 'https://localhost/jmesse/www/',
+	'url_pub' => 'http://localhost/jmesse/www/',
+	'base'    => 'http://dev.jetro.go.jp/',
+	'base_en' => 'http://produce.jetro.go.jp/',
+	'base_pub'=> 'http://dev.jetro.go.jp/',
 
 	// path
-	'host_path' => 'http://localhost',
-	'img_path' => 'img/',
+	'host_path' => 'https://localhost',
+	'img_path'  => 'img/',
 	'flag_path' => 'img/flag/',
 
 	//JSONファイル作成格納場所
-	'jsonfile_path' => 'C:/Program Files/Apache Software Foundation/Apache2.2/htdocs/jmesse/www/json/',
+	'jsonfile_path' => 'C:/opt/Apache2.2/htdocs/jmesse/www/jsonfile/',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)

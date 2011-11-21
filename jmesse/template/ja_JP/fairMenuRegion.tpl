@@ -22,7 +22,7 @@
 			{if (0 == $app.country_cnt[it].fair_cnt)}
 		{$app.country_cnt[it].discription_jp} ({$app.country_cnt[it].fair_cnt})
 			{else}
-		<a href="{$config.url}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$app.country_cnt[it].kbn_3}" />{$app.country_cnt[it].discription_jp} ({$app.country_cnt[it].fair_cnt})</a>
+		<a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$app.country_cnt[it].kbn_3}" />{$app.country_cnt[it].discription_jp} ({$app.country_cnt[it].fair_cnt})</a>
 			{/if}
 		<br />
 		{/section}

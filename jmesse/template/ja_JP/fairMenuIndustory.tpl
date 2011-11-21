@@ -20,7 +20,7 @@
 				{if ($form.i_3 == $app.sub_industory_cnt[it].kbn_3)}
 			<b>{$app.sub_industory_cnt[it].discription_jp} ({$app.sub_industory_cnt[it].fair_cnt})</b>
 				{else}
-			<a href="{$config.url}?action_fairList=true&type=i1&i_2={$form.i_2}&i_3={$app.sub_industory_cnt[it].kbn_3}">
+			<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$form.i_2}&i_3={$app.sub_industory_cnt[it].kbn_3}">
 			{$app.sub_industory_cnt[it].discription_jp} ({$app.sub_industory_cnt[it].fair_cnt})
 			</a>
 				{/if}

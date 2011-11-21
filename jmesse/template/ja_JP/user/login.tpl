@@ -14,23 +14,7 @@
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-<script type="text/javascript">
-<!--
-{literal}
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/header.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/footer.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/left_menu.html");
-	});
-{/literal}
--->
-</script>
+<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include.js"></script>
 </head>
 
 

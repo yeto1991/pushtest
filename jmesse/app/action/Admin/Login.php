@@ -81,7 +81,11 @@ class Jmesse_Action_AdminLogin extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ここには何も記述しないで下さい。
+		// "https"判定
+		if ('on' != $_SERVER['HTTPS']) {
+			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+		}
+
 		return null;
 	}
 

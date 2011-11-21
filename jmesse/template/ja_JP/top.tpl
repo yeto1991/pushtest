@@ -19,7 +19,7 @@
 	{if (0 == $app.main_industory_cnt[it].fair_cnt)}
 ・{$app.main_industory_cnt[it].discription_jp} (0)
 	{else}
-・<a href="?action_fairList=true&type=i1&i_2={$app.main_industory_cnt[it].kbn_2}">{$app.main_industory_cnt[it].discription_jp} ({$app.main_industory_cnt[it].fair_cnt})</a>
+・<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.main_industory_cnt[it].kbn_2}">{$app.main_industory_cnt[it].discription_jp} ({$app.main_industory_cnt[it].fair_cnt})</a>
 	{/if}
 {/section}
 <br/>
@@ -29,7 +29,7 @@
 	{if (0 == $app.region_cnt[it].fair_cnt)}
 ・{$app.region_cnt[it].discription_jp} (0)
 	{else}
-・<a href="?action_fairList=true&type=v1&v_2={$app.region_cnt[it].kbn_2}">{$app.region_cnt[it].discription_jp} ({$app.region_cnt[it].fair_cnt})</a>
+・<a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$app.region_cnt[it].kbn_2}">{$app.region_cnt[it].discription_jp} ({$app.region_cnt[it].fair_cnt})</a>
 	{/if}
 {/section}
 
