@@ -745,12 +745,12 @@
 	<div class="modal" id="prompt">
 		<a class="close" id="btn_close"></a>
 		<h2>
-			Industrory <span>you can select up to 6 industorys.</span>
+			Industry <span>you can select up to 6 Industrys.</span>
 		</h2>
 		<form>
 			<div class="industries clearfix">
 				<div class="column">
-					<h5>General Exhibition </h5>
+					<h5>General Exhibition</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('001' == $app.main_sub_industory_list[it].kbn_2)}
@@ -766,7 +766,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>Fundamental Industries </h5>
+					<h5>Fundamental Industries</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('002' == $app.main_sub_industory_list[it].kbn_2)}
@@ -782,7 +782,7 @@
 							{/if}
 						{/section}
 					</ul>
-					<h5>Building, Construction </h5>
+					<h5>Building, Construction</h5>
 					<ul>
 						{section name=it loop=$app.main_sub_industory_list}
 							{if ('003' == $app.main_sub_industory_list[it].kbn_2)}
