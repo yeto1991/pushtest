@@ -197,7 +197,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 								<a href="{$config.url_pub}tradefair_en/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_en}</a>
 							</dt>
 							<dd>
-								{$app.fair_list[it].date_from_yyyy}/{$app.fair_list[it].date_from_mm}/{$app.fair_list[it].date_from_dd} to {$app.fair_list[it].date_to_yyyy}/{$app.fair_list[it].date_to_mm}/{$app.fair_list[it].date_to_dd}<br />
+								{$app.fair_list[it].date_from_format} to {$app.fair_list[it].date_to_format}<br />
 								{$app.fair_list[it].city_name_en} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
 								{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}
 							</dd>

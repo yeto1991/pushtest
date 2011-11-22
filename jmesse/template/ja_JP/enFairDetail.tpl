@@ -89,7 +89,7 @@
 					<table class="detail">
 						<tr>
 							<th>Date</th>
-							<td>{$app.fair_detail.date_from_yyyy}/{$app.fair_detail.date_from_mm}/{$app.fair_detail.date_from_dd} to {$app.fair_detail.date_to_yyyy}/{$app.fair_detail.date_to_mm}/{$app.fair_detail.date_to_dd}</td>
+							<td>{$app.fair_detail.date_from_format} to {$app.fair_detail.date_to_format}</td>
 						</tr>
 						<tr>
 							<th>City / Country</th>
@@ -305,9 +305,9 @@
 							<th>last update</th>
 							<td>
 								{if ('' != $app.fair_detail.update_date)}
-									{$app.fair_detail.update_date|date_format:"%Y年 %m月 %d日"}
+									{$app.fair_detail.update_date|date_format:"%e-%b-%Y"}
 								{else}
-									{$app.fair_detail.regist_date|date_format:"%Y年 %m月 %d日"}
+									{$app.fair_detail.regist_date|date_format:"%e-%b-%Y"}
 								{/if}
 							</td>
 						</tr>
