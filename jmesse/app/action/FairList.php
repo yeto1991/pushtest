@@ -528,7 +528,7 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			// 出力項目
 
 			// ページャー作成
-			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairList=true&all=1&page=', $page, $max_page));
+			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url_pub').'?action_fairList=true&all=1&page=', $page, $max_page));
 			// 検索実行
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListAll($offset, $limit, $sort, $lang)));
 			// META Keyword
@@ -615,7 +615,7 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			// 出力項目
 
 			// ページャー作成
-			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairList=true&page=', $page, $max_page));
+			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url_pub').'?action_fairList=true&page=', $page, $max_page));
 			// 検索実行
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairList($offset, $limit, $sort, $lang)));
 			// META Keyword
@@ -687,7 +687,7 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			// 出力項目
 
 			// ページャー作成
-			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairList=true&page=', $page, $max_page));
+			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url_pub').'?action_fairList=true&page=', $page, $max_page));
 			// 検索実行
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairList($offset, $limit, $sort, $lang)));
 			// META Keyword
