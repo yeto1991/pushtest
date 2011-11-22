@@ -137,7 +137,8 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// ページ計算
-		$total = $jm_fair_mgr->getFairListSearchDetailCnt();
+		$lang = 'J';
+		$total = $jm_fair_mgr->getFairListSearchDetailCnt($lang);
 		if (0 < $total) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■全件数 : '.$total);
 			$max_page = floor($total / $limit);
@@ -156,7 +157,7 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairListSearch=true&detail=1&page=', $page, $max_page));
 			// 検索実行
-			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort)));
+			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', $this->_getListName());
 			$this->af->setApp('title', $this->_getListName());
@@ -211,7 +212,8 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// ページ計算
-		$total = $jm_fair_mgr->getFairListSearchDetailCnt();
+		$lang = 'J';
+		$total = $jm_fair_mgr->getFairListSearchDetailCnt($lang);
 
 		if (0 < $total) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■全件数 : '.$total);
@@ -231,7 +233,7 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_fairListSearch=true&detail=1&page=', $page, $max_page));
 			// 検索実行
-			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort)));
+			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', $this->_getListName());
 			$this->af->setApp('title', $this->_getListName());
@@ -252,10 +254,6 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 
 		// sessionの内容をformに設定
 		$this->_setSessionToForm();
-
-		return 'fairList';
-
-
 
 		return 'fairList';
 	}
