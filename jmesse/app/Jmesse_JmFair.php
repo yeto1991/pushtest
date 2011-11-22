@@ -17,19 +17,122 @@
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
 	/**
+	* JSONファイル(new-mihonichi_jp.json)作成用 //TODO 作成中
+	*
+	* @return array 取得データ
+	*/
+	function getJsonNewMihonichiJP() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql  = " select ";
+		$sql .= " jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy,'年', jf.date_to_mm, '月', jf.date_to_dd,'日') end, jcm_2.discription_jp countory, CASE WHEN jf.city = '' THEN concat('その他(', jf.other_city_jp, ')') ELSE jcm_3.discription_jp END city, jf.fair_url url ";
+		$sql .= " from jm_fair jf  ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3  ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = ? ) jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 ";
+		$sql .= " where jf.confirm_flag = ? and jf.del_flg = ? and jf.web_display_type = ? and jf.select_language_info = ? order by jf.date_of_registration desc limit ?, ? ";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array('003','000','003','1','0','1','0','0','10');
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+	/**
+	* JSONファイル(new-mihonichi_en.json)作成用　//TODO 作成中
+	*
+	* @return array 取得データ
+	*/
+	function getJsonNewMihonichiEN() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql  = " select ";
+		$sql .= " jf.fair_title_en name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy,'年', jf.date_to_mm, '月', jf.date_to_dd,'日') end, jcm_2.discription_en countory, CASE WHEN jf.city = '' THEN concat('その他(', jf.other_city_en, ')') ELSE jcm_3.discription_en END city, jf.fair_url url ";
+		$sql .= " from jm_fair jf  ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3  ";
+		$sql .= " left outer join ( select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = ? ) jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 ";
+		$sql .= " where jf.confirm_flag = ? and jf.del_flg = ? and jf.web_display_type = ? and jf.select_language_info = ? order by jf.date_of_registration desc limit ?, ? ";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array('003','000','003','1','0','1','0','0','10');
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+	/**
 	 * フロント画面詳細検索用の見本市一覧取得。
 	 *
 	 * @param int $offset
 	 * @param int $limit
 	 * @param string $sort
+	 * @param string $language
 	 * @return NULL|unknown
 	 */
-	function getFairListSearchDetail($offset, $limit, $sort) {
+	function getFairListSearchDetail($offset, $limit, $sort, $language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_list;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		} else {
+			$sql = $this->sql_get_fair_list_en;
+		}
 
 		// WHERE句追加
 		$data = array();
@@ -39,7 +142,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if ('1' == $sort) {
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$sql_sort = ' order by fair_title_jp asc ';
+			if($language == 'J'){
+				$sql_sort = ' order by fair_title_jp asc ';
+			} else {
+				$sql_sort = ' order by fair_title_en asc ';
+			}
 		}
 
 		// OFFSET、LIMIT
@@ -87,17 +194,18 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	/**
 	 * フロント画面詳細検索用の見本市一覧の件数取得。
 	 *
-	 * @param unknown_type $offset
-	 * @param unknown_type $limit
-	 * @param unknown_type $sort
 	 * @return NULL|unknown
 	 */
-	function getFairListSearchDetailCnt() {
+	function getFairListSearchDetailCnt($language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_list;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
 
 		// WHERE句追加
 		$data = array();
@@ -141,13 +249,16 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 *
 	 * @return array 見本市リスト
 	 */
-	function getFairListSearchDetailCsv($sort) {
+	function getFairListSearchDetailCsv($sort, $language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jf.mihon_no, jf.abbrev_title, jf.fair_title_jp, jf.profile_jp, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日'), concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日'), rg.discription_jp region_name, co.discription_jp country_name, ci.discription_jp city_name, jf.venue_jp, jf.gross_floor_area, jf.exhibits_jp, co.discription_jp open_to_name, concat(case when jf.admission_ticket_1 = '1' then '登録の必要なし' else '' end, '/', case when jf.admission_ticket_2 = '1' then 'WEBからの事前登録' else '' end, '/', case when jf.admission_ticket_3 = '1' then '主催者・日本の登録先へ問合せ' else '' end, '/', case when jf.admission_ticket_4 = '1' then '当日会場で入手' else '' end, '/', jf.other_admission_ticket_jp) admission_ticket_name, jf.organizer_jp, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.detailed_information_jp, jf.agency_in_japan_jp, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, concat(m1.discription_jp, '/', s1.discription_jp) industory_1_name, concat(m2.discription_jp, '/', s2.discription_jp) industory_2_name, concat(m3.discription_jp, '/', s3.discription_jp) industory_3_name, concat(m4.discription_jp, '/', s4.discription_jp) industory_4_name, concat(m5.discription_jp, '/', s5.discription_jp) industory_5_name, concat(m6.discription_jp, '/', s6.discription_jp) industory_6_name, fq.discription_jp frequency_name, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.keyword, ifnull(jf.update_date, jf.regist_date) update_date, jf.date_of_registration from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') rg on jf.region = rg.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') ot on jf.open_to = ot.kbn_2 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m1 on jf.main_industory_1 = m1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s1 on jf.main_industory_1 = s1.kbn_2 and jf.sub_industory_1 = s1.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m2 on jf.main_industory_2 = m2.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s2 on jf.main_industory_2 = s2.kbn_2 and jf.sub_industory_2 = s2.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m3 on jf.main_industory_3 = m3.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s3 on jf.main_industory_3 = s3.kbn_2 and jf.sub_industory_3 = s3.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m4 on jf.main_industory_4 = m4.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s4 on jf.main_industory_4 = s4.kbn_2 and jf.sub_industory_4 = s4.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m5 on jf.main_industory_5 = m5.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s5 on jf.main_industory_5 = s5.kbn_2 and jf.sub_industory_5 = s5.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m6 on jf.main_industory_6 = m6.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s6 on jf.main_industory_6 = s6.kbn_2 and jf.sub_industory_6 = s6.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') fq on jf.frequency = fq.kbn_2 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
-
+		if($language == 'J'){
+			$sql = "select jf.mihon_no, jf.abbrev_title, jf.fair_title_jp, jf.profile_jp, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日'), concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日'), rg.discription_jp region_name, co.discription_jp country_name, ci.discription_jp city_name, jf.venue_jp, jf.gross_floor_area, jf.exhibits_jp, co.discription_jp open_to_name, concat(case when jf.admission_ticket_1 = '1' then '登録の必要なし' else '' end, '/', case when jf.admission_ticket_2 = '1' then 'WEBからの事前登録' else '' end, '/', case when jf.admission_ticket_3 = '1' then '主催者・日本の登録先へ問合せ' else '' end, '/', case when jf.admission_ticket_4 = '1' then '当日会場で入手' else '' end, '/', jf.other_admission_ticket_jp) admission_ticket_name, jf.organizer_jp, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.detailed_information_jp, jf.agency_in_japan_jp, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, concat(m1.discription_jp, '/', s1.discription_jp) industory_1_name, concat(m2.discription_jp, '/', s2.discription_jp) industory_2_name, concat(m3.discription_jp, '/', s3.discription_jp) industory_3_name, concat(m4.discription_jp, '/', s4.discription_jp) industory_4_name, concat(m5.discription_jp, '/', s5.discription_jp) industory_5_name, concat(m6.discription_jp, '/', s6.discription_jp) industory_6_name, fq.discription_jp frequency_name, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.keyword, ifnull(jf.update_date, jf.regist_date) update_date, jf.date_of_registration from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') rg on jf.region = rg.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') ot on jf.open_to = ot.kbn_2 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m1 on jf.main_industory_1 = m1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s1 on jf.main_industory_1 = s1.kbn_2 and jf.sub_industory_1 = s1.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m2 on jf.main_industory_2 = m2.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s2 on jf.main_industory_2 = s2.kbn_2 and jf.sub_industory_2 = s2.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m3 on jf.main_industory_3 = m3.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s3 on jf.main_industory_3 = s3.kbn_2 and jf.sub_industory_3 = s3.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m4 on jf.main_industory_4 = m4.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s4 on jf.main_industory_4 = s4.kbn_2 and jf.sub_industory_4 = s4.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m5 on jf.main_industory_5 = m5.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s5 on jf.main_industory_5 = s5.kbn_2 and jf.sub_industory_5 = s5.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m6 on jf.main_industory_6 = m6.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s6 on jf.main_industory_6 = s6.kbn_2 and jf.sub_industory_6 = s6.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') fq on jf.frequency = fq.kbn_2 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
+		} else {
+			$sql = "select jf.mihon_no, jf.abbrev_title, jf.fair_title_en, jf.profile_en, concat(jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd, '/'), concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, '/'), rg.discription_en region_name, co.discription_en country_name, ci.discription_en city_name, jf.venue_en, jf.gross_floor_area, jf.exhibits_en, co.discription_en open_to_name, concat(case when jf.admission_ticket_1 = '1' then 'Free' else '' end, '/', case when jf.admission_ticket_2 = '1' then 'Apply/register online' else '' end, '/', case when jf.admission_ticket_3 = '1' then 'Contact organizer/agency in Japan' else '' end, '/', case when jf.admission_ticket_4 = '1' then 'Available at event' else '' end, '/', jf.other_admission_ticket_en) admission_ticket_name, jf.organizer_en, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.detailed_information_en, jf.agency_in_japan_en, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, concat(m1.discription_en, '/', s1.discription_en) industory_1_name, concat(m2.discription_en, '/', s2.discription_en) industory_2_name, concat(m3.discription_en, '/', s3.discription_en) industory_3_name, concat(m4.discription_en, '/', s4.discription_en) industory_4_name, concat(m5.discription_en, '/', s5.discription_en) industory_5_name, concat(m6.discription_en, '/', s6.discription_en) industory_6_name, fq.discription_en frequency_name, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.keyword, ifnull(jf.update_date, jf.regist_date) update_date, jf.date_of_registration from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') rg on jf.region = rg.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') ot on jf.open_to = ot.kbn_2 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m1 on jf.main_industory_1 = m1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s1 on jf.main_industory_1 = s1.kbn_2 and jf.sub_industory_1 = s1.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m2 on jf.main_industory_2 = m2.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s2 on jf.main_industory_2 = s2.kbn_2 and jf.sub_industory_2 = s2.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m3 on jf.main_industory_3 = m3.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s3 on jf.main_industory_3 = s3.kbn_2 and jf.sub_industory_3 = s3.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m4 on jf.main_industory_4 = m4.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s4 on jf.main_industory_4 = s4.kbn_2 and jf.sub_industory_4 = s4.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m5 on jf.main_industory_5 = m5.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s5 on jf.main_industory_5 = s5.kbn_2 and jf.sub_industory_5 = s5.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m6 on jf.main_industory_6 = m6.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s6 on jf.main_industory_6 = s6.kbn_2 and jf.sub_industory_6 = s6.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') fq on jf.frequency = fq.kbn_2 where jf.select_language_info = '1' and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
+		}
 		// WHERE句追加
 		$data = array();
 		$sql_ext = $this->_makeWhereSearchDetail($data);
@@ -156,7 +267,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if ('1' == $sort) {
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$sql_sort = ' order by fair_title_jp asc ';
+			if($language == 'J'){
+				$sql_sort = ' order by fair_title_jp asc ';
+			}else{
+				$sql_sort = ' order by fair_title_en asc ';
+			}
 		}
 
 		// Prepare Statement化
@@ -557,14 +672,22 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 *
 	 * @var string
 	 */
+	//日本語用
 	var $sql_get_fair_detail = "select jf.mihon_no, jf.keyword, jf.abbrev_title, jf.fair_title_jp, jf.fair_title_en, jf.profile_jp, jf.fair_url, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.frequency, jf.region, jf.country, jf.city, jf.other_city_jp, jf.venue_jp, jf.venue_en, jf.gross_floor_area, jf.transportation_jp, jf.exhibits_jp, jf.open_to, jf.admission_ticket_1, jf.admission_ticket_2, jf.admission_ticket_3, jf.admission_ticket_4, jf.other_admission_ticket_jp, jf.detailed_information_jp, jf.organizer_jp, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.agency_in_japan_jp, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.photos_1, jf.photos_2, jf.photos_3, jf.regist_date, jf.update_date, jcm_v1.discription_jp region_name, jcm_v2.discription_jp country_name, jcm_v3.discription_jp city_name, jcm_v2.reserve_4 flag_image, jcm_o.discription_jp open_to_name, jcm_mi1.discription_jp main_industory_name_1, jcm_si1.discription_jp sub_industory_name_1, jcm_mi2.discription_jp main_industory_name_2, jcm_si2.discription_jp sub_industory_name_2, jcm_mi3.discription_jp main_industory_name_3, jcm_si3.discription_jp sub_industory_name_3, jcm_mi4.discription_jp main_industory_name_4, jcm_si4.discription_jp sub_industory_name_4, jcm_mi5.discription_jp main_industory_name_5, jcm_si5.discription_jp sub_industory_name_5, jcm_mi6.discription_jp main_industory_name_6, jcm_si6.discription_jp sub_industory_name_6, jcm_fq.discription_jp frequency_name from jm_fair jf left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_v1 on jf.region = jcm_v1.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp, reserve_4 from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_v2 on jf.region = jcm_v2.kbn_2 and jf.country = jcm_v2.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '003') jcm_v3 on jf.region = jcm_v3.kbn_2 and jf.country = jcm_v3.kbn_3 and jf.city = jcm_v3.kbn_4 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') jcm_o on jf.open_to = jcm_o.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi1 on jf.main_industory_1 = jcm_mi1.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si1 on jf.main_industory_1 = jcm_si1.kbn_2 and jf.sub_industory_1 = jcm_si1.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi2 on jf.main_industory_2 = jcm_mi2.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si2 on jf.main_industory_2 = jcm_si2.kbn_2 and jf.sub_industory_2 = jcm_si2.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi3 on jf.main_industory_3 = jcm_mi3.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si3 on jf.main_industory_3 = jcm_si3.kbn_2 and jf.sub_industory_3 = jcm_si3.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi4 on jf.main_industory_4 = jcm_mi4.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si4 on jf.main_industory_4 = jcm_si4.kbn_2 and jf.sub_industory_4 = jcm_si4.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi5 on jf.main_industory_5 = jcm_mi5.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si5 on jf.main_industory_5 = jcm_si5.kbn_2 and jf.sub_industory_5 = jcm_si5.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi6 on jf.main_industory_6 = jcm_mi6.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si6 on jf.main_industory_6 = jcm_si6.kbn_2 and jf.sub_industory_6 = jcm_si6.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') jcm_fq on jf.frequency = jcm_fq.kbn_2 where jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') and jf.confirm_flag = '1' and mihon_no = ?";
 
-	function getFairDetail($mihon_no) {
+	//英語用
+	var $sql_get_fair_detail_en = "select jf.mihon_no, jf.keyword, jf.abbrev_title, jf.fair_title_jp, jf.fair_title_en, jf.profile_en, jf.fair_url, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.frequency, jf.region, jf.country, jf.city, jf.other_city_en, jf.venue_en, jf.gross_floor_area, jf.transportation_en, jf.exhibits_en, jf.open_to, jf.admission_ticket_1, jf.admission_ticket_2, jf.admission_ticket_3, jf.admission_ticket_4, jf.other_admission_ticket_en, jf.detailed_information_en, jf.organizer_en, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.agency_in_japan_en, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.photos_1, jf.photos_2, jf.photos_3, jf.regist_date, jf.update_date, jcm_v1.discription_en region_name, jcm_v2.discription_en country_name, jcm_v3.discription_en city_name, jcm_v2.reserve_4 flag_image, jcm_o.discription_en open_to_name, jcm_mi1.discription_en main_industory_name_1, jcm_si1.discription_en sub_industory_name_1, jcm_mi2.discription_en main_industory_name_2, jcm_si2.discription_en sub_industory_name_2, jcm_mi3.discription_en main_industory_name_3, jcm_si3.discription_en sub_industory_name_3, jcm_mi4.discription_en main_industory_name_4, jcm_si4.discription_en sub_industory_name_4, jcm_mi5.discription_en main_industory_name_5, jcm_si5.discription_en sub_industory_name_5, jcm_mi6.discription_en main_industory_name_6, jcm_si6.discription_en sub_industory_name_6, jcm_fq.discription_en frequency_name from jm_fair jf left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_v1 on jf.region = jcm_v1.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en, reserve_4 from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_v2 on jf.region = jcm_v2.kbn_2 and jf.country = jcm_v2.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '003') jcm_v3 on jf.region = jcm_v3.kbn_2 and jf.country = jcm_v3.kbn_3 and jf.city = jcm_v3.kbn_4 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') jcm_o on jf.open_to = jcm_o.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi1 on jf.main_industory_1 = jcm_mi1.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si1 on jf.main_industory_1 = jcm_si1.kbn_2 and jf.sub_industory_1 = jcm_si1.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi2 on jf.main_industory_2 = jcm_mi2.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si2 on jf.main_industory_2 = jcm_si2.kbn_2 and jf.sub_industory_2 = jcm_si2.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi3 on jf.main_industory_3 = jcm_mi3.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si3 on jf.main_industory_3 = jcm_si3.kbn_2 and jf.sub_industory_3 = jcm_si3.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi4 on jf.main_industory_4 = jcm_mi4.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si4 on jf.main_industory_4 = jcm_si4.kbn_2 and jf.sub_industory_4 = jcm_si4.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi5 on jf.main_industory_5 = jcm_mi5.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si5 on jf.main_industory_5 = jcm_si5.kbn_2 and jf.sub_industory_5 = jcm_si5.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_mi6 on jf.main_industory_6 = jcm_mi6.kbn_2 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') jcm_si6 on jf.main_industory_6 = jcm_si6.kbn_2 and jf.sub_industory_6 = jcm_si6.kbn_3 left outer join (select kbn_1, kbn_2, kbn_3, kbn_4, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') jcm_fq on jf.frequency = jcm_fq.kbn_2 where jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info = '1' and jf.confirm_flag = '1' and mihon_no = ?";
+
+	function getFairDetail($mihon_no, $language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_detail;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_detail;
+		} else {
+			$sql = $this->sql_get_fair_detail_en;
+		}
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -596,9 +719,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	 * 見本市情報リスト取得SQL。
+	 * 見本市情報リスト取得SQL。(日本語用)
 	 */
 	var $sql_get_fair_list = "select jf.mihon_no, jf.fair_title_jp, abbrev_title, jf.fair_title_en, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.date_of_application, jf.date_of_registration, jf.negate_comment, jf.exhibits_jp, jf.exhibits_en, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name, jcm_1.discription_en region_name_en, jcm_2.discription_en country_name_en, jcm_3.discription_en city_name_en from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
+
+	/**
+	* 見本市情報リスト取得SQL。(英語用)
+	*/
+	var $sql_get_fair_list_en = "select jf.mihon_no, jf.fair_title_jp, abbrev_title, jf.fair_title_en, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_en, jf.date_of_application, jf.date_of_registration, jf.negate_comment, jf.exhibits_jp, jf.exhibits_en, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name, jcm_1.discription_en region_name_en, jcm_2.discription_en country_name_en, jcm_3.discription_en city_name_en from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.select_language_info = '1' and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
 
 	/**
 	 * すべての有効な見本市情報の取得。
@@ -606,20 +734,29 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 * @param unknown_type $offset
 	 * @param unknown_type $limit
 	 * @param unknown_type $sort
+	 * @param unknown_type $language
 	 */
-	function getFairListAll($offset, $limit, $sort) {
+	function getFairListAll($offset, $limit, $sort, $language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_list;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		} else {
+			$sql = $this->sql_get_fair_list_en;
+		}
 		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
 
 		// SORT条件
 		if ('1' == $sort) {
 			$sql .= ' order by date_of_registration desc ';
 		} elseif ('2' == $sort) {
-			$sql .= ' order by fair_title_jp asc ';
+			if($language == 'J'){
+				$sql .= ' order by fair_title_jp asc ';
+			}else{
+				$sql .= ' order by fair_title_en asc ';
+			}
 		}
 
 		// OFFSET、LIMIT
@@ -664,13 +801,18 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	/**
 	 * すべての有効な見本市情報の件数を取得。
 	 *
+	 * @param string $language
 	 */
-	function getFairListAllCnt() {
+	function getFairListAllCnt($language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_list;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
 		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
 		$sql = 'select count(*) cnt from ('.$sql.') t';
 
@@ -704,14 +846,19 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 * @param int $offset
 	 * @param int $limit
 	 * @param string $sort
+	 * @param string $language
 	 * @return NULL|unknown
 	 */
-	function getFairList($offset, $limit, $sort) {
+	function getFairList($offset, $limit, $sort, $language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_list;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
 
 		// WHERE句追加
 		$data = array();
@@ -721,7 +868,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if ('1' == $sort) {
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$sql_sort = ' order by fair_title_jp asc ';
+			if($language == 'J'){
+				$sql_sort = ' order by fair_title_jp asc ';
+			}else{
+				$sql_sort = ' order by fair_title_en asc ';
+			}
 		}
 
 		// OFFSET、LIMIT
@@ -736,7 +887,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
-		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -766,17 +916,19 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	/**
 	 * フロント画面用の見本市一覧の件数取得。
 	 *
-	 * @param unknown_type $offset
-	 * @param unknown_type $limit
-	 * @param unknown_type $sort
+	 * @param string language
 	 * @return NULL|unknown
 	 */
-	function getFairListCnt() {
+	function getFairListCnt($language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = $this->sql_get_fair_list;
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
 
 		// WHERE句追加
 		$data = array();
@@ -790,7 +942,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// SQLを実行
 		$res = $db->db->execute($stmt, $data);
-		// var_dump($data);
 
 		// 結果の判定
 		if (null == $res) {
@@ -816,22 +967,29 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	*
 	* @return array 見本市リスト
 	*/
-	function getFairListCsv($sort) {
+	function getFairListCsv($sort, $language) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jf.mihon_no, jf.abbrev_title, jf.fair_title_jp, jf.profile_jp, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日'), concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日'), rg.discription_jp region_name, co.discription_jp country_name, ci.discription_jp city_name, jf.venue_jp, jf.gross_floor_area, jf.exhibits_jp, co.discription_jp open_to_name, concat(case when jf.admission_ticket_1 = '1' then '登録の必要なし' else '' end, '/', case when jf.admission_ticket_2 = '1' then 'WEBからの事前登録' else '' end, '/', case when jf.admission_ticket_3 = '1' then '主催者・日本の登録先へ問合せ' else '' end, '/', case when jf.admission_ticket_4 = '1' then '当日会場で入手' else '' end, '/', jf.other_admission_ticket_jp) admission_ticket_name, jf.organizer_jp, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.detailed_information_jp, jf.agency_in_japan_jp, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, concat(m1.discription_jp, '/', s1.discription_jp) industory_1_name, concat(m2.discription_jp, '/', s2.discription_jp) industory_2_name, concat(m3.discription_jp, '/', s3.discription_jp) industory_3_name, concat(m4.discription_jp, '/', s4.discription_jp) industory_4_name, concat(m5.discription_jp, '/', s5.discription_jp) industory_5_name, concat(m6.discription_jp, '/', s6.discription_jp) industory_6_name, fq.discription_jp frequency_name, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.keyword, ifnull(jf.update_date, jf.regist_date) update_date, jf.date_of_registration from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') rg on jf.region = rg.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') ot on jf.open_to = ot.kbn_2 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m1 on jf.main_industory_1 = m1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s1 on jf.main_industory_1 = s1.kbn_2 and jf.sub_industory_1 = s1.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m2 on jf.main_industory_2 = m2.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s2 on jf.main_industory_2 = s2.kbn_2 and jf.sub_industory_2 = s2.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m3 on jf.main_industory_3 = m3.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s3 on jf.main_industory_3 = s3.kbn_2 and jf.sub_industory_3 = s3.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m4 on jf.main_industory_4 = m4.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s4 on jf.main_industory_4 = s4.kbn_2 and jf.sub_industory_4 = s4.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m5 on jf.main_industory_5 = m5.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s5 on jf.main_industory_5 = s5.kbn_2 and jf.sub_industory_5 = s5.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m6 on jf.main_industory_6 = m6.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s6 on jf.main_industory_6 = s6.kbn_2 and jf.sub_industory_6 = s6.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') fq on jf.frequency = fq.kbn_2 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
-
+		if($language == 'J'){
+			$sql = "select jf.mihon_no, jf.abbrev_title, jf.fair_title_jp, jf.profile_jp, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日'), concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日'), rg.discription_jp region_name, co.discription_jp country_name, ci.discription_jp city_name, jf.venue_jp, jf.gross_floor_area, jf.exhibits_jp, co.discription_jp open_to_name, concat(case when jf.admission_ticket_1 = '1' then '登録の必要なし' else '' end, '/', case when jf.admission_ticket_2 = '1' then 'WEBからの事前登録' else '' end, '/', case when jf.admission_ticket_3 = '1' then '主催者・日本の登録先へ問合せ' else '' end, '/', case when jf.admission_ticket_4 = '1' then '当日会場で入手' else '' end, '/', jf.other_admission_ticket_jp) admission_ticket_name, jf.organizer_jp, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.detailed_information_jp, jf.agency_in_japan_jp, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, concat(m1.discription_jp, '/', s1.discription_jp) industory_1_name, concat(m2.discription_jp, '/', s2.discription_jp) industory_2_name, concat(m3.discription_jp, '/', s3.discription_jp) industory_3_name, concat(m4.discription_jp, '/', s4.discription_jp) industory_4_name, concat(m5.discription_jp, '/', s5.discription_jp) industory_5_name, concat(m6.discription_jp, '/', s6.discription_jp) industory_6_name, fq.discription_jp frequency_name, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.keyword, ifnull(jf.update_date, jf.regist_date) update_date, jf.date_of_registration from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') rg on jf.region = rg.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') ot on jf.open_to = ot.kbn_2 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m1 on jf.main_industory_1 = m1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s1 on jf.main_industory_1 = s1.kbn_2 and jf.sub_industory_1 = s1.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m2 on jf.main_industory_2 = m2.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s2 on jf.main_industory_2 = s2.kbn_2 and jf.sub_industory_2 = s2.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m3 on jf.main_industory_3 = m3.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s3 on jf.main_industory_3 = s3.kbn_2 and jf.sub_industory_3 = s3.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m4 on jf.main_industory_4 = m4.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s4 on jf.main_industory_4 = s4.kbn_2 and jf.sub_industory_4 = s4.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m5 on jf.main_industory_5 = m5.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s5 on jf.main_industory_5 = s5.kbn_2 and jf.sub_industory_5 = s5.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m6 on jf.main_industory_6 = m6.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s6 on jf.main_industory_6 = s6.kbn_2 and jf.sub_industory_6 = s6.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') fq on jf.frequency = fq.kbn_2 where jf.select_language_info in ('0', '2') and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
+		}else{
+			$sql = "select jf.mihon_no, jf.abbrev_title, jf.fair_title_en, jf.profile_en, concat(jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd, '/'), concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, '/'), rg.discription_en region_name, co.discription_en country_name, ci.discription_en city_name, jf.venue_en, jf.gross_floor_area, jf.exhibits_en, co.discription_en open_to_name, concat(case when jf.admission_ticket_1 = '1' then 'Free' else '' end, '/', case when jf.admission_ticket_2 = '1' then 'Apply/register online' else '' end, '/', case when jf.admission_ticket_3 = '1' then 'Contact organizer/agency in Japan' else '' end, '/', case when jf.admission_ticket_4 = '1' then 'Available at event' else '' end, '/', jf.other_admission_ticket_en) admission_ticket_name, jf.organizer_en, jf.organizer_addr, jf.organizer_div, jf.organizer_pers, jf.organizer_tel, jf.organizer_fax, jf.organizer_email, jf.detailed_information_en, jf.agency_in_japan_en, jf.agency_in_japan_addr, jf.agency_in_japan_div, jf.agency_in_japan_pers, jf.agency_in_japan_tel, jf.agency_in_japan_fax, jf.agency_in_japan_email, concat(m1.discription_en, '/', s1.discription_en) industory_1_name, concat(m2.discription_en, '/', s2.discription_en) industory_2_name, concat(m3.discription_en, '/', s3.discription_en) industory_3_name, concat(m4.discription_en, '/', s4.discription_en) industory_4_name, concat(m5.discription_en, '/', s5.discription_en) industory_5_name, concat(m6.discription_en, '/', s6.discription_en) industory_6_name, fq.discription_en frequency_name, jf.year_of_the_trade_fair, jf.total_number_of_visitor, jf.number_of_foreign_visitor, jf.total_number_of_exhibitors, jf.number_of_foreign_exhibitors, jf.net_square_meters, jf.spare_field1, jf.keyword, ifnull(jf.update_date, jf.regist_date) update_date, jf.date_of_registration from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_en, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') rg on jf.region = rg.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '004' and kbn_3 = '000' and kbn_4 = '000') ot on jf.open_to = ot.kbn_2 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m1 on jf.main_industory_1 = m1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s1 on jf.main_industory_1 = s1.kbn_2 and jf.sub_industory_1 = s1.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m2 on jf.main_industory_2 = m2.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s2 on jf.main_industory_2 = s2.kbn_2 and jf.sub_industory_2 = s2.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m3 on jf.main_industory_3 = m3.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s3 on jf.main_industory_3 = s3.kbn_2 and jf.sub_industory_3 = s3.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m4 on jf.main_industory_4 = m4.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s4 on jf.main_industory_4 = s4.kbn_2 and jf.sub_industory_4 = s4.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m5 on jf.main_industory_5 = m5.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s5 on jf.main_industory_5 = s5.kbn_2 and jf.sub_industory_5 = s5.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') m6 on jf.main_industory_6 = m6.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '002' and kbn_4 = '000') s6 on jf.main_industory_6 = s6.kbn_2 and jf.sub_industory_6 = s6.kbn_3 left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '001' and kbn_3 = '000' and kbn_4 = '000') fq on jf.frequency = fq.kbn_2 where jf.select_language_info = '1' and jf.web_display_type = '1' and jf.confirm_flag = '1' and jf.del_flg = '0'";
+		}
 		// WHERE句追加
 		$data = array();
 		$sql_ext = $this->_makeWhere($data);
 
 		// SORT条件
 		if ('1' == $sort) {
-			$sql_sort = ' order by date_of_registration desc ';
+			$sql_sort = ' order by jf.date_of_registration desc ';
 		} else {
-			$sql_sort = ' order by fair_title_jp asc ';
+			if($language == 'J'){
+				$sql_sort =  ' order by fair_title_jp asc ';
+			}else{
+				$sql_sort =  ' order by fair_title_en asc ';
+			}
 		}
 
 		// Prepare Statement化
@@ -1533,7 +1691,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	);
 
 	/**
-	 * 集計対象リスト総件数取得  //TODO
+	 * 集計対象リスト総件数取得
 	 *
 	 * @return int 集計対象リスト総件数
 	 */
@@ -1605,7 +1763,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* 集計対象リスト取得（表示用）。  //TODO
+	* 集計対象リスト取得（表示用）。
 	*
 	* @return array 見本市リスト
 	*/
