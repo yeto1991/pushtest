@@ -47,8 +47,8 @@
 			<div class="in_main">
 				<h3>User Login</h3>
 				<div class="login">
-					<form name="form_user_enlogin" id="form_user_enlogin" method="post" action="">
-						<input type="hidden" name="action_user_enloginDo" id="action_user_enloginDo" value="dummy" />
+					<form name="form_user_enLogin" id="form_user_enLogin" method="post" action="">
+						<input type="hidden" name="action_user_enLoginDo" id="action_user_enLoginDo" value="dummy" />
 						<input type="hidden" name="function" id="function" value="{$form.function}" />
 						{* エラー表示 *}
 						{if count($errors)}

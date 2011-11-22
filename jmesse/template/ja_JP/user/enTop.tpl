@@ -16,8 +16,8 @@
 					<br/><br/><br/>
 					<b>Fair's Menu</b><br/>
 					<a href="{$config.url}?action_user_enFairRegistStep1=true">New Fair Regist</a><br/>
-					<a href="{$config.url}?action_user_enFairlist=true">your fair list</a><br/>
-					<a href="{$config.url}?action_user_enFairCopylist=true">select your fairs list for Edit</a><br/>
+					<a href="{$config.url}?action_user_enFairList=true">your fair list</a><br/>
+					<a href="{$config.url}?action_user_enFairCopyList=true">select your fairs list for Edit</a><br/>
 				</td>
 			</tr>
 		</table>
