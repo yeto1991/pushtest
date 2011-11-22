@@ -104,7 +104,7 @@
 						</tr>
 						<tr>
 							<th class="item"><font size="2">Dates</font></th>
-							<td><font size="2">{$app.my_fair_info_list[it].date_from_yyyy}-{$app.my_fair_info_list[it].date_from_mm}-{$app.my_fair_info_list[it].date_from_dd}～{$app.my_fair_info_list[it].date_to_yyyy}-{$app.my_fair_info_list[it].date_to_mm}-{$app.my_fair_info_list[it].date_to_dd}</font></td>
+							<td><font size="2">{$app.my_fair_info_list[it].date_from_format} to {$app.my_fair_info_list[it].date_to_format}</font></td>
 						</tr>
 						<tr>
 							<th class="item"><font size="2">Location</font></th>
@@ -150,9 +150,9 @@
 							<th class="item"><font size="2">update date</font></th>
 							<td>
 								{if $app.my_fair_info_list[it].update_date == ""}
-									<font size="2">{$app.my_fair_info_list[it].regist_date}</font>
+									<font size="2">{$app.my_fair_info_list[it].regist_date|date_format:"%e-%b-%Y"}</font>
 								{else}
-									<font size="2">{$app.my_fair_info_list[it].update_date}</font>
+									<font size="2">{$app.my_fair_info_list[it].update_date|date_format:"%e-%b-%Y"}</font>
 								{/if}
 							</td>
 						</tr>

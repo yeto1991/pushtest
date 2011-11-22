@@ -73,7 +73,7 @@
 							</a>
 						</dt>
 						<dd>
-							{$app.fair_list[it].date_from_dd}-{$app.fair_list[it].date_from_mm}-{$app.fair_list[it].date_from_yyyy}～{$app.fair_list[it].date_to_dd}-{$app.fair_list[it].date_to_mm}-{$app.fair_list[it].date_to_yyyy}<br />
+							{$app.fair_list[it].date_from_format} to {$app.fair_list[it].date_to_format}<br />
 							{if $app.fair_list[it].city_name_en == ""}Other({$app.fair_list[it].other_city_en}){else}{$app.fair_list[it].city_name_en}{/if} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
 							{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}
 						</dd>
