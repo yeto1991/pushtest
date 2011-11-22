@@ -36,20 +36,18 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
 <script type="text/javascript" src="{$config.url_pub}js/j-messe_enInclude_pub.js"></script>
-
 <script type="text/javascript">
 <!--
 {literal}
-
 	function search(form_name) {
 		document.getElementById(form_name).submit();
 	}
-	
+
 	function dosort(url) {
 		var sort = document.getElementById('sort').options[document.getElementById('sort').selectedIndex].value;
 		document.location.href = url + "&sort=" + sort;
 	}
-	
+
 	function resetAll() {
 		document.getElementById('keyword').value = '';
 		var i = 0;
@@ -85,7 +83,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 </head>
 
 {if ('1' == $form.detail)}
-<body class="layout-LC highlight-match  j-messe" onload="init('{$config.url}', '{$form.select_region}', '{$form.select_country}', '{$form.select_city}')">
+<body class="layout-LC highlight-match  j-messe" onload="init('{$config.url_pub}', '{$form.select_region}', '{$form.select_country}', '{$form.select_city}')">
 {else}
 <body class="layout-LC highlight-match  j-messe">
 {/if}
@@ -104,7 +102,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 					{if ('' == $form.i_3)}
 			<li>{$app.pan_1}</li>
 					{else}
-			<li><a href="{$config.url}?action_enFairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
+			<li><a href="{$config.url_pub}?action_enFairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
 			<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
@@ -113,11 +111,11 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 				{elseif ('v2' == $form.type)}
 			<li><a href="">開催地別に見る</a></li>
 					{if ('' == $form.v_4)}
-			<li><a href="{$config.url}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+			<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 			<li>{$app.pan_2}</li>
 					{else}
-			<li><a href="{$config.url}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
-			<li><a href="{$config.url}?action_enFairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
+			<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+			<li><a href="{$config.url_pub}?action_enFairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
 			<li>{$app.pan_3}</li>
 					{/if}
 				{/if}
@@ -141,11 +139,10 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 					<h3>Trade Fairs held in Japan and the World</h3>
 					{else}
 					<h3>{$app.list_name}</h3>
-					<span class="right"><a href="{$config.url}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+					<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="" class="icon_arrow">Advanced Search</a></span>
 					{/if}
 				</div>
 				<div id="skip_menu"><a href="#right">Skip to search refinement</a></div>
-
 				<!-- list of tradefairs -->
 				<div class="left" id="list">
 					<div class="h4 clearfix">
@@ -159,24 +156,24 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 							{/if}
 						{/if}
 						{if ('1' != $form.detail)}
-						<span class="right"><a href="{$config.url}?action_enFairList=true&all=1&page=1" class="icon_arrow">View All</a></span>
+						<span class="right"><a href="{$config.url_pub}?action_enFairList=true&all=1&page=1" class="icon_arrow">View All</a></span>
 						{/if}
 					</div>
 					<p class="t_right">
 						{if ('1' == $form.all)}
-						Items per page：<a href="{$config.url}?action_enFairList=true&all=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
+						Items per page：<a href="{$config.url_pub}?action_enFairList=true&all=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairList=true&all=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairList=true&all=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
 						{elseif ('1' == $form.detail)}
-						Items per page：<a href="{$config.url}?action_enFairListSearch=true&detail=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
+						Items per page：<a href="{$config.url_pub}?action_enFairListSearch=true&detail=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairListSearch=true&detail=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairListSearch=true&detail=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
 						{else}
-						Items per page：<a href="{$config.url}?action_enFairList=true&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
+						Items per page：<a href="{$config.url_pub}?action_enFairList=true&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairList=true&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairList=true&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
 						{/if}
 						<select name="sort" id="sort"
 							{if ('1' == $form.all)}
-							onchange="dosort('{$config.url}?action_enFairList=ture&page=1&all=1')"
+							onchange="dosort('{$config.url_pub}?action_enFairList=ture&page=1&all=1')"
 							{elseif ('1' == $form.detail)}
-							onchange="dosort('{$config.url}?action_enFairListSearch=ture&detail=1&page=1')"
+							onchange="dosort('{$config.url_pub}?action_enFairListSearch=ture&detail=1&page=1')"
 							{else}
-							onchange="dosort('{$config.url}?action_enFairList=ture&page=1')"
+							onchange="dosort('{$config.url_pub}?action_enFairList=ture&page=1')"
 							{/if}
 							>
 							<option value="">Sort by</option>
@@ -185,52 +182,57 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 						</select>
 					</p>
 					<p>Results {$app.start}-{$app.end} of {$app.total}</p>
-					<p class="number">{$app_ne.pager}<br/></p>
+					<p class="number">
+						{$app_ne.pager}<br/>
+					</p>
 					{section name=it loop=$app.fair_list}
-						{if (0 == $smarty.section.it.index%2)}
-						<div class="list0">
-						{else}
-						<div class="list1">
-						{/if}
-							<dl>
-								<dt>
-									<a href="{$config.url}tradefair_en/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_en}</a>
-								</dt>
-								<dd>
-									{$app.fair_list[it].date_from_yyyy}/{$app.fair_list[it].date_from_mm}/{$app.fair_list[it].date_from_dd}/～{$app.fair_list[it].date_to_yyyy}/{$app.fair_list[it].date_to_mm}/{$app.fair_list[it].date_to_dd}<br />
-									{$app.fair_list[it].city_name_en} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
-									{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}
-								</dd>
-							</dl>
-						</div>
+					{if (0 == $smarty.section.it.index%2)}
+					<div class="list0">
+					{else}
+					<div class="list1">
+					{/if}
+						<dl>
+							<dt>
+								<a href="{$config.url_pub}tradefair_en/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_en}</a>
+							</dt>
+							<dd>
+								{$app.fair_list[it].date_from_yyyy}/{$app.fair_list[it].date_from_mm}/{$app.fair_list[it].date_from_dd} to {$app.fair_list[it].date_to_yyyy}/{$app.fair_list[it].date_to_mm}/{$app.fair_list[it].date_to_dd}<br />
+								{$app.fair_list[it].city_name_en} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
+								{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}
+							</dd>
+						</dl>
+					</div>
 					{/section}
-					<p class="number">{$app_ne.pager}<br/></p>
+					<p class="number">
+						{$app_ne.pager}<br/>
+					</p>
 				</div>
-			<!-- breakdown -->
-			{if ('1' == $form.detail)}
-				<!-- 詳細検索 -->
-				{include file="enFairMenuDetail.tpl"}
-			{else}
-				{if ('i1' == $form.type)}
-					<!-- 業種選択 -->
-					{include file="enFairMenuIndustory.tpl"}
-				{elseif ('v1' == $form.type)}
-					<!-- 地域選択 -->
-					{include file="enFairMenuRegion.tpl"}
-				{elseif ('v2' == $form.type)}
-					<!-- 国・地域選択 -->
-					{include file="enFairMenuCountry.tpl"}
+				<!-- /result -->
+				<!-- breakdown -->
+				{if ('1' == $form.detail)}
+					<!-- 詳細検索 -->
+					{include file="enFairMenuDetail.tpl"}
+				{else}
+					{if ('i1' == $form.type)}
+						<!-- 業種選択 -->
+						{include file="enFairMenuIndustory.tpl"}
+					{elseif ('v1' == $form.type)}
+						<!-- 地域選択 -->
+						{include file="enFairMenuRegion.tpl"}
+					{elseif ('v2' == $form.type)}
+						<!-- 国・地域選択 -->
+						{include file="enFairMenuCountry.tpl"}
+					{/if}
 				{/if}
-			{/if}
-			<!-- /breakdown -->
+				<!-- /breakdown -->
 			</div>
 			<p class="totop">
 				{if ('1' == $form.detail)}
-				<a href="{$config.url}?action_enFairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
-				<a href="javascript:window.open('{$config.url}?action_enFairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+				<a href="{$config.url_pub}?action_enFairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
+				<a href="javascript:window.open('{$config.url_pub}?action_enFairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
 				{else}
-				<a href="{$config.url}?action_enFairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
-				<a href="javascript:window.open('{$config.url}?action_enFairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+				<a href="{$config.url_pub}?action_enFairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
+				<a href="javascript:window.open('{$config.url_pub}?action_enFairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
 				{/if}
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
 			</p>
@@ -242,7 +244,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer" ></div>
+	<div id="include_footer"></div>
 	<!-- /footer -->
 </body>
 </html>
