@@ -14,7 +14,7 @@
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_View_enFairDetail extends Jmesse_ViewClass
+class Jmesse_View_EnFairDetail extends Jmesse_ViewClass
 {
     /**
      *  preprocess before forwarding.
