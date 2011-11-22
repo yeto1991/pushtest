@@ -568,7 +568,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 		$sql = " select ";
-		$sql .= " jf.user_id, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.mihon_no, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, ";
+		$sql .= " date_format(concat(jf.date_from_yyyy, '/', jf.date_from_mm ,'/', jf.date_from_dd),'%e-%b-%Y') date_from_format, date_format(concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd),'%e-%b-%Y') date_to_format, jf.user_id, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.mihon_no, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, ";
 		$sql .= " jf.date_to_dd, jf.main_industory_1, jf.sub_industory_1, jf.main_industory_2, jf.sub_industory_2, jf.main_industory_3, jf.sub_industory_3, jf.main_industory_4, jf.sub_industory_4, jf.main_industory_5, jf.sub_industory_5, jf.main_industory_6, jf.sub_industory_6, ";
 		$sql .= " jf.exhibits_jp, jf.exhibits_en, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.confirm_flag, jf.regist_date, jf.update_date, jcm_1.discription_jp region_name, jcm_1.discription_en region_name_en, jcm_2.discription_jp country_name, jcm_2.discription_en country_name_en, jcm_3.discription_jp city_name, jcm_3.discription_en city_name_en, ";
 		$sql .= " jcm_4_1.discription_jp main_indust_name1, jcm_4_2.discription_jp main_indust_name2, jcm_4_3.discription_jp main_indust_name3, jcm_4_4.discription_jp main_indust_name4, jcm_4_5.discription_jp main_indust_name5, jcm_4_6.discription_jp main_indust_name6, ";
