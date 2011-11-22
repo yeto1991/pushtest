@@ -474,7 +474,7 @@
 	<div class="modal" id="prompt_venue">
 		<a class="close" id="btn_close"></a>
 		<h2>
-			Select location<span>Please select(region⇒country/Area⇒city</span>
+			Select location<span>Please select(region⇒country/Area⇒city)</span>
 		</h2>
 		<div class="venue clearfix">
 
