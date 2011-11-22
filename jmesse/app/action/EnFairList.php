@@ -24,7 +24,7 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 		'all' => array(
 			'type'        => VAR_TYPE_INT, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '全表示',        // Display name
+			'name'        => 'all',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,               // Maximum value
@@ -33,11 +33,16 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'type' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'メニュータイプ', // Display name
+			'name'        => 'type', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 2,               // Maximum value
@@ -46,167 +51,16 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
-		'i_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
+		'detail' => array(
+			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '区分2(業種)',   // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'i_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '区分3(業種)',   // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'v_2' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '区分2(開催地)', // Display name
-			'required'    => false,            // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'v_3' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '区分3(開催地)', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'v_4' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '区分4',         // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'check_main_industory' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '選択（業種(大分類)）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'check_sub_industory' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '選択（業種(小分類)）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'check_region' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '選択（地域）',  // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'check_country' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '選択（国・地域）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'check_city' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '選択（都市）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 3,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'check_region_country' => array(
-			'type'        => array(VAR_TYPE_STRING), // Input type
-			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => '選択（地域・国）', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 7,               // Maximum value
-			'regexp'      => '/^[0-9_]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'year' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_RADIO,  // Form type
-			'name'        => '開催時期',      // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 1,               // Maximum value
-			'regexp'      => '/^[a-z]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'keyword' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'キーワード',    // Display name
+			'name'        => 'detail', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -215,12 +69,251 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'i_2' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'Industory_section2',   // Display name
+			'required'    => false,            // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'i_3' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'Industory_section3',   // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'v_2' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'location_section2', // Display name
+			'required'    => false,            // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'v_3' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'location_section3', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'v_4' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'section4',         // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'check_main_industory' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_main_industory', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'check_sub_industory' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_sub_industory', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'check_region' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_region',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'check_country' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_country', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'check_city' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_city', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'check_region_country' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_region_country', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 7,               // Maximum value
+			'regexp'      => '/^[0-9_]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'year' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_RADIO,  // Form type
+			'name'        => 'year',      // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[a-z]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'keyword' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'keyword',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 
 		'page' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'ページ番号',    // Display name
+			'name'        => 'page',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -229,11 +322,16 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'limit' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '表示件数',      // Display name
+			'name'        => 'limit',      // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -242,11 +340,16 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'sort' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'ソート順',      // Display name
+			'name'        => 'sort',      // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,               // Maximum value
@@ -255,11 +358,16 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'print' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント用表示', // Display name
+			'name'        => 'print', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,               // Maximum value
@@ -268,6 +376,194 @@ class Jmesse_Form_EnFairList extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'select_region' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => 'select_region',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'select_country' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => 'select_country', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'select_city' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => 'select_city',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 3,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+
+		'date_from_yyyy' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => 'date_from_yyyy', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 4,               // Minimum value
+			'max'         => 4,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'date_from_mm' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => 'date_from_mm', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 2,               // Minimum value
+			'max'         => 2,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'date_to_yyyy' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT, // Form type
+			'name'        => 'date_to_yyyy', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 4,               // Minimum value
+			'max'         => 4,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'date_to_mm' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_SELECT , // Form type
+			'name'        => 'date_to_mm', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => 2,               // Minimum value
+			'max'         => 2,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+
+		'check_main_sub_industory' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => 'check_main_sub_industory',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+
+		'industory_selected' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'industory_selected',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
+		'venue_selected' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'venue_selected',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 1,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 	);
 }
@@ -296,12 +592,12 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			return 'error';
 		}
 
-		$this->backend->getLogger()->log(LOG_DEBUG, '■type : '.$this->af->get('type'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■i_2 : '.$this->af->get('i_2'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■i_3 : '.$this->af->get('i_3'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■v_2 : '.$this->af->get('v_2'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■v_3 : '.$this->af->get('v_3'));
-		$this->backend->getLogger()->log(LOG_DEBUG, '■v_4 : '.$this->af->get('v_4'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■type   : '.$this->af->get('type'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■i_2    : '.$this->af->get('i_2'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■i_3    : '.$this->af->get('i_3'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■v_2    : '.$this->af->get('v_2'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■v_3    : '.$this->af->get('v_3'));
+		$this->backend->getLogger()->log(LOG_DEBUG, '■v_4    : '.$this->af->get('v_4'));
 
 		return null;
 	}
@@ -362,7 +658,8 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// ページ計算
-		$total = $jm_fair_mgr->getFairListAllCnt();
+		$lang = 'E';
+		$total = $jm_fair_mgr->getFairListAllCnt($lang);
 		if (0 < $total) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■全件数 : '.$total);
 			$max_page = floor($total / $limit);
@@ -377,16 +674,16 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_DEBUG, '■最大ページ : '.$max_page);
 
 			// 出力項目
-
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_enFairList=true&all=1&page=', $page, $max_page));
 			// 検索実行
-			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListAll($offset, $limit, $sort)));
+			$lang = 'E';
+			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListAll($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', '');
 			$this->af->setApp('title', '');
 			// リスト部タイトル
-			$this->af->setApp('list_name', 'すべての見本市');
+			$this->af->setApp('list_name', 'View All');
 			// 表示件数
 			$this->af->setApp('total', $total);
 			$this->af->setApp('start', $offset + 1);
@@ -448,7 +745,8 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// ページ計算
-		$total = $jm_fair_mgr->getFairListCnt();
+		$lang = 'E';
+		$total = $jm_fair_mgr->getFairListCnt($lang);
 		if (0 < $total) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■全件数 : '.$total);
 			$max_page = floor($total / $limit);
@@ -467,7 +765,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_enFairList=true&page=', $page, $max_page));
 			// 検索実行
-			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairList($offset, $limit, $sort)));
+			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairList($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', $this->_getListName());
 			$this->af->setApp('title', $this->_getListName());
@@ -519,7 +817,8 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// ページ計算
-		$total = $jm_fair_mgr->getFairListCnt();
+		$lang = 'E';
+		$total = $jm_fair_mgr->getFairListCnt($lang);
 		if (0 < $total) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■全件数 : '.$total);
 			$max_page = floor($total / $limit);
@@ -538,7 +837,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_enFairList=true&page=', $page, $max_page));
 			// 検索実行
-			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairList($offset, $limit, $sort)));
+			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairList($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', $this->_getListName());
 			$this->af->setApp('title', $this->_getListName());
@@ -576,14 +875,14 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		$search_cond['v_2'] = $this->af->get('v_2');
 		$search_cond['v_3'] = $this->af->get('v_3');
 		$search_cond['v_4'] = $this->af->get('v_4');
-		$search_cond['check_main_industory'] = $this->af->get('check_main_industory');
-		$search_cond['check_sub_industory'] = $this->af->get('check_sub_industory');
-		$search_cond['check_region'] = $this->af->get('check_region');
-		$search_cond['check_country'] = $this->af->get('check_country');
-		$search_cond['check_city'] = $this->af->get('check_city');
-		$search_cond['check_region_country'] = $this->af->get('check_region_country');
-		$search_cond['year'] = $this->af->get('year');
-		$search_cond['keyword'] = $this->af->get('keyword');
+// 		$search_cond['check_main_industory'] = $this->af->get('check_main_industory');
+// 		$search_cond['check_sub_industory'] = $this->af->get('check_sub_industory');
+// 		$search_cond['check_region'] = $this->af->get('check_region');
+// 		$search_cond['check_country'] = $this->af->get('check_country');
+// 		$search_cond['check_city'] = $this->af->get('check_city');
+// 		$search_cond['check_region_country'] = $this->af->get('check_region_country');
+// 		$search_cond['year'] = $this->af->get('year');
+// 		$search_cond['keyword'] = $this->af->get('keyword');
 		if (!$this->session->isStart()) {
 			$this->session->start();
 		}
@@ -608,14 +907,14 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		$this->af->set('v_2', $search_cond['v_2']);
 		$this->af->set('v_3', $search_cond['v_3']);
 		$this->af->set('v_4', $search_cond['v_4']);
-		$this->af->set('check_main_industory', $search_cond['check_main_industory']);
-		$this->af->set('check_sub_industory', $search_cond['check_sub_industory']);
-		$this->af->set('check_region', $search_cond['check_region']);
-		$this->af->set('check_country', $search_cond['check_country']);
-		$this->af->set('check_city', $search_cond['check_city']);
-		$this->af->set('check_region_country', $search_cond['check_region_country']);
-		$this->af->set('year', $search_cond['year']);
-		$this->af->set('keyword', $search_cond['keyword']);
+// 		$this->af->set('check_main_industory', $search_cond['check_main_industory']);
+// 		$this->af->set('check_sub_industory', $search_cond['check_sub_industory']);
+// 		$this->af->set('check_region', $search_cond['check_region']);
+// 		$this->af->set('check_country', $search_cond['check_country']);
+// 		$this->af->set('check_city', $search_cond['check_city']);
+// 		$this->af->set('check_region_country', $search_cond['check_region_country']);
+// 		$this->af->set('year', $search_cond['year']);
+// 		$this->af->set('keyword', $search_cond['keyword']);
 		$this->af->set('limit', $search_cond['limit']);
 		$this->af->set('sort', $search_cond['sort']);
 	}
@@ -631,7 +930,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// 業種選択
 			if ('' == $search_cond['i_2']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', '業種（大区分）指定されていません。');
+				$this->ae->add('error', 'Please select Main Industory.');
 				return 'error';
 			}
 			// 業種（小分類）集計値
@@ -647,7 +946,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// 地域選択
 			if ('' == $search_cond['v_2']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', '地域が指定されていません。');
+				$this->ae->add('error', 'Please select the Region.');
 				return 'error';
 			}
 			// 開催地（国・地域）集計値
@@ -659,13 +958,13 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// 地域選択
 			if ('' == $search_cond['v_2']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', '地域が指定されていません。');
+				$this->ae->add('error', 'Please select the Region.');
 				return 'error';
 			}
 			// 地域選択
 			if ('' == $search_cond['v_3']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', '国・地域が指定されていません。');
+				$this->ae->add('error', 'Please select the Country.');
 				return 'error';
 			}
 			// 開催地（都市）集計値
@@ -689,7 +988,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		$pager = '';
 		if (1 < $page) {
 			$n = $page - 1;
-			$pager .= '<a href="'.$url.$n.'">前へ'.'</a>';
+			$pager .= '<a href="'.$url.$n.'">back'.'</a>';
 		}
 		if (5 >= $max_page) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■TYPE : 1 2 3 4 5');
@@ -746,7 +1045,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 		}
 		if ($page < $max_page) {
 			$n = $page + 1;
-			$pager .= '<a href="'.$url.$n.'">次へ'.'</a>';
+			$pager .= '<a href="'.$url.$n.'">next'.'</a>';
 		}
 
 		return $pager;
@@ -795,7 +1094,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 	}
 
 	/**
-	 * コード値取得（日本語）
+	 * コード値取得（英語）
 	 *
 	 * @param string $kbn_1 区分1
 	 * @param string $kbn_2 区分2
@@ -805,7 +1104,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 	function _getJmCodeM($kbn_1, $kbn_2, $kbn_3, $kbn_4) {
 		$jm_code_m_mgr =& $this->backend->getManager('JmCodeM');
 		$code = $jm_code_m_mgr->getCode($kbn_1, $kbn_2, $kbn_3, $kbn_4);
-		return $code['discription_jp'];
+		return $code['discription_en'];
 	}
 
 	/**

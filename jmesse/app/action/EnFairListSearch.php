@@ -157,7 +157,6 @@ class Jmesse_Action_EnFairListSearch extends Jmesse_ActionClass
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_enFairListSearch=true&detail=1&page=', $page, $max_page));
 			// 検索実行
-			$lang = 'E';
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', $this->_getListName());
@@ -234,7 +233,6 @@ class Jmesse_Action_EnFairListSearch extends Jmesse_ActionClass
 			// ページャー作成
 			$this->af->setAppNE('pager', $this->_makePager($this->config->get('url').'?action_enFairListSearch=true&detail=1&page=', $page, $max_page));
 			// 検索実行
-			$lang = 'E';
 			$this->af->setApp('fair_list', $this->_makeDetailUrl($jm_fair_mgr->getFairListSearchDetail($offset, $limit, $sort, $lang)));
 			// META Keyword
 			$this->af->setApp('meta_keyword', $this->_getListName());

@@ -24,7 +24,7 @@ class Jmesse_Form_EnFairDetail extends Jmesse_ActionForm
 		'mihon_no' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '見本市番号',    // Display name
+			'name'        => 'mihon_no',    // Display name
 			'required'    => true,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -33,11 +33,16 @@ class Jmesse_Form_EnFairDetail extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 		'print' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => 'プリント用表示', // Display name
+			'name'        => 'print', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -46,6 +51,11 @@ class Jmesse_Form_EnFairDetail extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 	);
 }
@@ -89,10 +99,10 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 	function perform()
 	{
 		$jm_fair_obj =& $this->backend->getManager('JmFair');
-
-		$fair_detail = $jm_fair_obj->getFairDetail($this->af->get('mihon_no'));
+		$lang = 'E';
+		$fair_detail = $jm_fair_obj->getFairDetail($this->af->get('mihon_no'), $lang);
 		if (null == $fair_detail) {
-			$this->ae->add('error', '見本市番号が間違っているか、情報が削除されたか、非表示指定になりました。');
+			$this->ae->add('error', "The fair's data can not display because the data is wrong or the fair's data was deleted.");
 			return 'error';
 		}
 

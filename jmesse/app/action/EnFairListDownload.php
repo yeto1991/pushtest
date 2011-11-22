@@ -7,7 +7,7 @@
  *  @version    $Id: 6dbb28cac61a23f06dba884c38c304aed3dcc84b $
  */
 
-require_once 'FairList.php';
+require_once 'EnFairList.php';
 
 /**
  *  enFairListDownload Form implementation.
@@ -16,7 +16,7 @@ require_once 'FairList.php';
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_EnFairListDownload extends Jmesse_Form_FairList
+class Jmesse_Form_EnFairListDownload extends Jmesse_Form_EnFairList
 {
 }
 
@@ -38,14 +38,6 @@ class Jmesse_Action_EnFairListDownload extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// ページ番号
-		if ('' == $this->af->get('page')) {
-			$msg = 'ページ番号が設定されていません。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
-			return 'error';
-		}
-
 		return null;
 	}
 
@@ -57,9 +49,6 @@ class Jmesse_Action_EnFairListDownload extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		// ページ設定
-		$page = $this->af->get('page');
-
 		// ソート順
 		$sort = $this->_setSort();
 
@@ -68,7 +57,12 @@ class Jmesse_Action_EnFairListDownload extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// 検索実行
-		$jm_fair_list = $jm_fair_mgr->getFairListCsv($sort);
+		$lang = 'E';
+		if ('1' == $this->af->get('detail')) {
+			$jm_fair_list = $jm_fair_mgr->getFairListSearchDetailCsv($sort, $lang);
+		} else {
+			$jm_fair_list = $jm_fair_mgr->getFairListCsv($sort, $lang);
+		}
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
@@ -97,7 +91,7 @@ class Jmesse_Action_EnFairListDownload extends Jmesse_ActionClass
 				echo "\n";
 			}
 		} else {
-			$this->ae->set('error', '検索件数が0件です。');
+			$this->ae->set('error', 'Search result is Zero.');
 			return 'enFairList';
 		}
 
