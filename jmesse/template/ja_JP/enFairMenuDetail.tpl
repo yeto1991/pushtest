@@ -1,6 +1,6 @@
 <!-- menu -->
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
 
 <form name="form_enFairMenuDetail" id="form_enFairMenuDetail" method="post" action="">
@@ -34,7 +34,7 @@
 {/section}
 
 <div id="breakdown" class="right">
-	<h4>絞り込む</h4>
+	<h4>Refine the Search</h4>
 	{* エラー表示 *}
 	{if count($errors)}
 	<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
@@ -127,13 +127,13 @@
 			</td>
 		</tr>
 		<tr>
-			<th>キーワード</th>
+			<th>Keywords</th>
 			<td><input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="30" /></td>
 		</tr>
 	</table>
-	<a href="javascript:search('form_fairMenuIndusory');"><img width="93" height="34" alt="Refine" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
+	<a href="javascript:search('form_enFairMenuDetail');"><img width="93" height="34" alt="絞り込む" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
 
-	<!-- Select Industry -->
+	<!-- 業種選択 -->
 	<script type="text/javascript">
 	{literal}
 	$(document).ready(function() {
@@ -482,7 +482,7 @@
 			<tr>
 				<th>Region</th>
 				<td>
-					<select name="select_region" id="select_region" onchange="set_country('{$config.url}')" style="width:200px;">
+					<select name="select_region" id="select_region" onchange="set_country('{$config.url_pub}')" style="width:200px;">
 						<option value="">すべて</option>
 						{section name=it loop=$app.region_list}
 						<option value="{$app.region_list[it].kbn_2}" {if $app.region_list[it].kbn_2 == $form.select_region}selected{/if}>{$app.region_list[it].discription_en}</option>
@@ -493,7 +493,7 @@
 			<tr>
 				<th>Country/Area</th>
 				<td>
-					<select name="select_country" id="select_country" onchange="set_city('{$config.url}')" style="width:200px;">
+					<select name="select_country" id="select_country" onchange="set_city('{$config.url_pub}')" style="width:200px;">
 						<option value="">All</option>
 					</select>
 				</td>
