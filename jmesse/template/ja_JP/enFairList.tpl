@@ -25,7 +25,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 <!--/テスト用-->
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="/j-messe/js/j-messe.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/en/j-messe.js"></script>
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />

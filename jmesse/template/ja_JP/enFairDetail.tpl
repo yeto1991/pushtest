@@ -225,7 +225,7 @@
 								{/if}
 							</td>
 						</tr>
-						{/if
+						{/if}
 						<tr>
 							<th>Industry</th>
 
@@ -249,7 +249,7 @@
 								<a href="{$config.url_pub}?action_enFairList=true&type=i1&i_2={$app.fair_detail.main_industory_6}&i_3={$app.fair_detail.sub_industory_6}">{$app.fair_detail.main_industory_name_6}／{$app.fair_detail.sub_industory_name_6}</a><br />
 								{/if}
 							</td>
-						</tr>}
+						</tr>
 						{if ('' != $app.fair_detail.frequency)}
 						<tr>
 							<th>Frequency</th>
@@ -350,6 +350,7 @@
 					</a>
 					{/if}
 				</div>
+				{/if}
 			</div>
 			<p class="totop">
 				<a href="javascript:window.open('{$config.url_pub}tradefair_en/{$app.fair_detail.mihon_no}/print/1/', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
