@@ -8,12 +8,14 @@
 
 <title>
 {if ('1' == $form.all)}
-すべての見本市・展示会(J-messe) - JETRO
+All Online Trade Fair Database (J-messe) - JETRO
+{elseif ('1' == $form.detail)}
+Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) - JETRO
 {else}
 	{if ('i1' == $form.type || 'i2' == $form.type)}
+{$app.title} - Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) - JETRO
+	{elseif ('v1' == $form.type || 'v2' == $form.type || 'v3' == $form.type)}
 {$app.title} - Online Trade Fair Database (J-messe) - JETRO
-	{else}
-{$app.title}で開催される見本市・展示会(J-messe) -ジェトロ
 	{/if}
 {/if}
 </title>
@@ -23,6 +25,7 @@
 <!--/テスト用-->
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe.js"></script>
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
@@ -37,6 +40,16 @@
 <script type="text/javascript">
 <!--
 {literal}
+
+	function search(form_name) {
+		document.getElementById(form_name).submit();
+	}
+	
+	function dosort(url) {
+		var sort = document.getElementById('sort').options[document.getElementById('sort').selectedIndex].value;
+		document.location.href = url + "&sort=" + sort;
+	}
+	
 	function resetAll() {
 		document.getElementById('keyword').value = '';
 		var i = 0;
@@ -66,13 +79,16 @@
 			}
 		}
 	}
-
 {/literal}
-//-->
+// -->
 </script>
 </head>
 
-<body class="layout-LC highlight-database j-messe">
+{if ('1' == $form.detail)}
+<body class="layout-LC highlight-match  j-messe" onload="init('{$config.url}', '{$form.select_region}', '{$form.select_country}', '{$form.select_city}')">
+{else}
+<body class="layout-LC highlight-match  j-messe">
+{/if}
 	<!-- header -->
 	<div id="include_header"></div>
 	<!-- /header -->
@@ -106,7 +122,7 @@
 					{/if}
 				{/if}
 			{else}
-			<li>すべての見本市</li>
+			<li>View All</li>
 			{/if}
 		</ul>
 	</div>
@@ -121,80 +137,101 @@
 			</div>
 			<div class="in_main">
 				<div class="h3 clearfix">
+					{if ('1' == $form.detail)}
+					<h3>Trade Fairs held in Japan and the World</h3>
+					{else}
 					<h3>{$app.list_name}</h3>
-					<span class="right"><a href="/j-messe/country/" class="icon_arrow">View Other Region/Country</a> <a href="/j-messe/tradefair/" class="icon_arrow">Advanced Search</a></span>
+					<span class="right"><a href="{$config.url}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+					{/if}
 				</div>
 				<div id="skip_menu"><a href="#right">Skip to search refinement</a></div>
 
 				<!-- list of tradefairs -->
 				<div class="left" id="list">
-
-				<div class="h4 clearfix">
-					{if ('a' != $form.year)}
-					<h4>List of Upcoming Trade Fairs and Exhibitions</h4>
-					{else}
-					<h4>Including Past Trade Fairs View All </h4>
-					{/if}
-					<span class="right"><a href="{$config.url}?action_enFairList=true&all=1&page=1" class="icon_arrow">View All</a></span>
-				</div>
-
-				<p class="t_right">
-					{if ('1' == $form.all)}
-					Items per page：<a href="{$config.url}?action_enFairList=true&all=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_enFairList=true&all=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_enFairList=true&all=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
-					{else}
-					Items per page：<a href="{$config.url}?action_enFairList=true&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_enFairList=true&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_enFairList=true&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
-					{/if}
-					<select name="sort" id="sort"
-						{if ('1' == $form.all)}
-						onchange="dosort('{$config.url}?action_enFairList=ture&page=1&all=1')"
+					<div class="h4 clearfix">
+						{if ('1' == $form.detail)}
+						<h4>Refine results fair list</h4>
 						{else}
-						onchange="dosort('{$config.url}?action_enFairList=ture&page=1')"
+							{if ('a' != $form.year)}
+							<h4>List of Upcoming Trade Fairs and Exhibitions</h4>
+							{else}
+							<h4>Including Past Trade Fairs View All</h4>
+							{/if}
 						{/if}
-						>
-						<option value="">Sort by</option>
-						<option value="1" {if ('1' == $form.sort)}selected{/if}>Newest</option>
-						<option value="2" {if ('2' == $form.sort)}selected{/if}>Name</option>
-					</select>
-				</p>
-
-				<p>Results {$app.start}-{$app.end} of {$app.total}</p>
-				<p class="number">{$app_ne.pager}<br/></p>
-				{section name=it loop=$app.fair_list}
-					{if (0 == $smarty.section.it.index%2)}
-					<div class="list0">
-					{else}
-					<div class="list1">
-					{/if}
-						<dl>
-							<dt>
-								<a href="{$config.url}tradefair/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_jp}</a>
-							</dt>
-							<dd>
-								{$app.fair_list[it].date_from_yyyy}年{$app.fair_list[it].date_from_mm}月{$app.fair_list[it].date_from_dd}日～{$app.fair_list[it].date_to_yyyy}年{$app.fair_list[it].date_to_mm}月{$app.fair_list[it].date_to_dd}日<br />
-								{$app.fair_list[it].city_name} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
-								{$app.fair_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}
-							</dd>
-						</dl>
+						{if ('1' != $form.detail)}
+						<span class="right"><a href="{$config.url}?action_enFairList=true&all=1&page=1" class="icon_arrow">View All</a></span>
+						{/if}
 					</div>
-				{/section}
-				<p class="number">{$app_ne.pager}<br/></p>
-			</div>
+					<p class="t_right">
+						{if ('1' == $form.all)}
+						Items per page：<a href="{$config.url}?action_enFairList=true&all=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&all=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
+						{elseif ('1' == $form.detail)}
+						Items per page：<a href="{$config.url}?action_enFairListSearch=true&detail=1&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairListSearch=true&detail=1&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
+						{else}
+						Items per page：<a href="{$config.url}?action_enFairList=true&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url}?action_fairList=true&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
+						{/if}
+						<select name="sort" id="sort"
+							{if ('1' == $form.all)}
+							onchange="dosort('{$config.url}?action_enFairList=ture&page=1&all=1')"
+							{elseif ('1' == $form.detail)}
+							onchange="dosort('{$config.url}?action_enFairListSearch=ture&detail=1&page=1')"
+							{else}
+							onchange="dosort('{$config.url}?action_enFairList=ture&page=1')"
+							{/if}
+							>
+							<option value="">Sort by</option>
+							<option value="1" {if ('1' == $form.sort)}selected{/if}>Newest</option>
+							<option value="2" {if ('2' == $form.sort)}selected{/if}>Name</option>
+						</select>
+					</p>
+					<p>Results {$app.start}-{$app.end} of {$app.total}</p>
+					<p class="number">{$app_ne.pager}<br/></p>
+					{section name=it loop=$app.fair_list}
+						{if (0 == $smarty.section.it.index%2)}
+						<div class="list0">
+						{else}
+						<div class="list1">
+						{/if}
+							<dl>
+								<dt>
+									<a href="{$config.url}tradefair_en/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_en}</a>
+								</dt>
+								<dd>
+									{$app.fair_list[it].date_from_yyyy}/{$app.fair_list[it].date_from_mm}/{$app.fair_list[it].date_from_dd}/～{$app.fair_list[it].date_to_yyyy}/{$app.fair_list[it].date_to_mm}/{$app.fair_list[it].date_to_dd}<br />
+									{$app.fair_list[it].city_name_en} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
+									{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}
+								</dd>
+							</dl>
+						</div>
+					{/section}
+					<p class="number">{$app_ne.pager}<br/></p>
+				</div>
 			<!-- breakdown -->
-			{if ('i1' == $form.type)}
-				<!-- 業種選択 -->
-				{include file="enFairMenuIndustory.tpl"}
-			{elseif ('v1' == $form.type)}
-				<!-- 地域選択 -->
-				{include file="enFairMenuRegion.tpl"}
-			{elseif ('v2' == $form.type)}
-				<!-- 国・地域選択 -->
-				{include file="enFairMenuCountry.tpl"}
+			{if ('1' == $form.detail)}
+				<!-- 詳細検索 -->
+				{include file="enFairMenuDetail.tpl"}
+			{else}
+				{if ('i1' == $form.type)}
+					<!-- 業種選択 -->
+					{include file="enFairMenuIndustory.tpl"}
+				{elseif ('v1' == $form.type)}
+					<!-- 地域選択 -->
+					{include file="enFairMenuRegion.tpl"}
+				{elseif ('v2' == $form.type)}
+					<!-- 国・地域選択 -->
+					{include file="enFairMenuCountry.tpl"}
+				{/if}
 			{/if}
 			<!-- /breakdown -->
 			</div>
 			<p class="totop">
-				<a href="{$config.url}?action_enFairListDownload=true&page={$app.page}">CSV downloadボタン</a>
+				{if ('1' == $form.detail)}
+				<a href="{$config.url}?action_enFairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
+				<a href="javascript:window.open('{$config.url}?action_enFairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+				{else}
+				<a href="{$config.url}?action_enFairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
 				<a href="javascript:window.open('{$config.url}?action_enFairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+				{/if}
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
 			</p>
 		</div>
