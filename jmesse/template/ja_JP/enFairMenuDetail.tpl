@@ -1,7 +1,7 @@
 <!-- menu -->
 <script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselectforjson.js"></script>
-<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/jquery/jquery.tools.min.js"></script>
 
 <form name="form_enFairMenuDetail" id="form_enFairMenuDetail" method="post" action="">
 <input type="hidden" name="action_enFairListSearch" id="action_enFairListSearch" value="dummy" />
@@ -35,7 +35,7 @@
 
 <div id="breakdown" class="right">
 	<h4>Refine the Search</h4>
-	{* エラー表示 *}
+	{* 繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ *}
 	{if count($errors)}
 	<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
 	{/if}
@@ -45,7 +45,7 @@
 			<td>
 				<div id="industory_disp">
 					{section name=it loop=$app.industory_list}
-						・{$app.industory_list[it]}<br/>
+						繝ｻ{$app.industory_list[it]}<br/>
 					{/section}
 				</div>
 				<button class="modalInputIndustory" rel="#prompt_industory">Change Industory</button>
@@ -56,7 +56,7 @@
 			<td>
 				<div id="venue_disp">
 					{section name=it loop=$app.vanue_list}
-						・{$app.vanue_list[it]}<br/>
+						繝ｻ{$app.vanue_list[it]}<br/>
 					{/section}
 				</div>
 				<button class="modalInputVenue" rel="#prompt_venue">Select Location</button>
@@ -89,7 +89,7 @@
 					<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
 					<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
 					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
-				</select>～<br/>
+				</select>��br/>
 				&nbsp;&nbsp;&nbsp;
 				<select name="date_to_yyyy" id="date_to_yyyy">
 					<option value=""></option>
@@ -133,7 +133,7 @@
 	</table>
 	<a href="javascript:search('form_enFairMenuDetail');"><img width="93" height="34" alt="Refine" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
 
-	<!-- 業種選択 -->
+	<!-- 讌ｭ遞ｮ驕ｸ謚�-->
 	<script type="text/javascript">
 	{literal}
 	$(document).ready(function() {
@@ -155,13 +155,13 @@
 			}).get();
 			// close the overlay
 			triggers.overlay().close();
-			// 選択値の洗い替え
+			// 驕ｸ謚槫�縺ｮ豢励＞譖ｿ縺�
 			$("#industory_disp").empty();
 			var txt = "";
 			var n = 1;
 			for (i in input) {
 				arry_item = input[i].split("_");
-				txt += "・" + arry_item[2] + "/" + arry_item[3] + "<br/>";
+				txt += "繝ｻ" + arry_item[2] + "/" + arry_item[3] + "<br/>";
 			}
 			$("#industory_disp").html(txt);
 			$("#industory_selected").val("1");
@@ -388,9 +388,9 @@
 		</div>
 		<br />
 	</div>
-	<!-- /業種選択 -->
+	<!-- /讌ｭ遞ｮ驕ｸ謚�-->
 
-	<!-- 開催地選択 -->
+	<!-- 髢句ぎ蝨ｰ驕ｸ謚�-->
 	<script type="text/javascript">
 	{literal}
 	$(document).ready(function() {
@@ -415,13 +415,13 @@
 			var city_name = $("#select_city option:selected").text();
 			// close the overlay
 			triggers.overlay().close();
-			// 設定
+			// 險ｭ螳�
 			$("#region").val(region);
 			$("#country").val(country);
 			$("#city").val(city);
-			// 選択値の洗い替え
+			// 驕ｸ謚槫�縺ｮ豢励＞譖ｿ縺�
 			$("#venue_disp").empty();
-			var txt = "・" + region_name;
+			var txt = "繝ｻ" + region_name;
 			if ("" != country_name) {
 				txt += "/" + country_name;
 				if ("" != city_name) {
@@ -474,7 +474,7 @@
 	<div class="modal" id="prompt_venue">
 		<a class="close" id="btn_close"></a>
 		<h2>
-			Select location<span>Please select(「Region」→「Country/Area」→「City」)</span>
+			Select location<span>Please select(縲軍egion縲坂�縲靴ountry/Area縲坂�縲靴ity縲�</span>
 		</h2>
 		<div class="venue clearfix">
 
@@ -483,7 +483,7 @@
 				<th>Region</th>
 				<td>
 					<select name="select_region" id="select_region" onchange="set_country('{$config.url_pub}')" style="width:200px;">
-						<option value="">すべて</option>
+						<option value="">縺吶∋縺ｦ</option>
 						{section name=it loop=$app.region_list}
 						<option value="{$app.region_list[it].kbn_2}" {if $app.region_list[it].kbn_2 == $form.select_region}selected{/if}>{$app.region_list[it].discription_en}</option>
 						{/section}
@@ -515,7 +515,7 @@
 		</div>
 		<br />
 	</div>
-	<!-- /開催地選択 -->
+	<!-- /髢句ぎ蝨ｰ驕ｸ謚�-->
 
 </div>
 </form>
