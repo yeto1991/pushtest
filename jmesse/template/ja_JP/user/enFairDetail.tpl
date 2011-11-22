@@ -27,7 +27,7 @@
 <!--以下のCSSは最終的に削除します-->
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
-<script type="text/javascript" src="{$config.url_pub}/js/j-messe_enInclude.js"></script>
+<script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
 
 <script type="text/javascript">
 <!--

@@ -15,7 +15,7 @@
 
 <script type="text/javascript" src="/j-messe/js/j-messe.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include_pub.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe_include_pub.js"></script>
 <script type="text/javascript">
 <!--
 {literal}

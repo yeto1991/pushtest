@@ -17,7 +17,7 @@
 {if ('1' == $form.print)}
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
-<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include.js"></script>
+<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
 <script type="text/javascript">
 <!--
 {literal}

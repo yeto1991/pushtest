@@ -32,23 +32,11 @@
 {if ('1' == $form.print)}
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
+<script type="text/javascript" src="{$config.url_pub}js/j-messe_enInclude_pub.js"></script>
 
 <script type="text/javascript">
 <!--
 {literal}
-
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/enHeader.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/enFooter.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/enLeft_menu.html");
-	});
-
 	function resetAll() {
 		document.getElementById('keyword').value = '';
 		var i = 0;

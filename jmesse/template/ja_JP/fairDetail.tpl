@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/css/js/prettyphoto/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="{$config.url_pub}/js/j-messe_include_pub.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe_include_pub.js"></script>
 
 <title>
 {if ('' != $app.fair_detail.abbrev_title)}

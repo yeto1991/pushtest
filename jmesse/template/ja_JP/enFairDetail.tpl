@@ -31,25 +31,7 @@
 <link rel="stylesheet" href="/css/js/prettyphoto/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-<!--
-{literal}
-
-	$(function(){
-		$("#include_header").load("http://localhost/jmesse/www/enHeader.html");
-	});
-
-	$(function(){
-		$("#include_footer").load("http://localhost/jmesse/www/enFooter.html");
-	});
-
-	$(function(){
-		$("#include_left_menu").load("http://localhost/jmesse/www/enLeft_menu.html");
-	});
-
-{/literal}
-//-->
-</script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe_enInclude_pub.js"></script>
 </head>
 
 <body class="layout-LC highlight-database j-messe">
