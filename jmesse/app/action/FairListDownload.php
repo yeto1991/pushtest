@@ -85,7 +85,7 @@ class Jmesse_Action_FairListDownload extends Jmesse_ActionClass
 					if (0 < $j) {
 						echo ',';
 					}
-					echo str_replace('<br/>', '', $value);
+					echo '"'.mb_convert_encoding(str_replace('<br/>', '', $value), 'CP932', 'UTF-8').'"';
 					$j++;
 				}
 				echo "\n";
