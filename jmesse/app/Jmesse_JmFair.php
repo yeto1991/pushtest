@@ -1275,9 +1275,9 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 // 		}
 
 // 		// これから or 含む過去
-// 		$sql_tmp_y = '';
+		$sql_tmp_y = '';
 // 		if ('u' == $search_cond['year']) {
- 			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
+			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
 // 		}
 
 // 		// リンク、チェックボックス、キーワード、これから？をAND
