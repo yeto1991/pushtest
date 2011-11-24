@@ -23,48 +23,7 @@ class Jmesse_Form_AdminFairCsvDownload extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
-	/*
-	 *  TODO: Write form definition which this action uses.
-	*  @see http://ethna.jp/ethna-document-dev_guide-form.html
-	*
-	*  Example(You can omit all elements except for "type" one) :
-	*
-	*  'sample' => array(
-	*      // Form definition
-	*      'type'        => VAR_TYPE_INT,    // Input type
-	*      'form_type'   => FORM_TYPE_TEXT,  // Form type
-	*      'name'        => 'Sample',        // Display name
-	*
-	*      //  Validator (executes Validator by written order.)
-	*      'required'    => true,            // Required Option(true/false)
-	*      'min'         => null,            // Minimum value
-	*      'max'         => null,            // Maximum value
-	*      'regexp'      => null,            // String by Regexp
-	*      'mbregexp'    => null,            // Multibype string by Regexp
-	*      'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-	*
-	*      //  Filter
-	*      'filter'      => 'sample',        // Optional Input filter to convert input
-	*      'custom'      => null,            // Optional method name which
-	*                                        // is defined in this(parent) class.
-	*  ),
-	*/
 	);
-
-	/**
-	 *  Form input value convert filter : sample
-	 *
-	 *  @access protected
-	 *  @param  mixed   $value  Form Input Value
-	 *  @return mixed           Converted result.
-	 */
-	/*
-	 function _filter_sample($value)
-	{
-	//  convert to upper case.
-	return strtoupper($value);
-	}
-	*/
 }
 
 /**
@@ -131,7 +90,7 @@ class Jmesse_Action_AdminFairCsvDownload extends Jmesse_ActionClass
 				if (0 < $j) {
 					echo ',';
 				}
-				echo $value;
+				echo '"'.mb_convert_encoding($value, 'CP932', 'UTF-8').'"';
 				$j++;
 			}
 			echo "\n";
