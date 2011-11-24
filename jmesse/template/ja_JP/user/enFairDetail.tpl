@@ -168,7 +168,7 @@ $form.mode
 					<p>
 						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
-						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{else}
 					{/if}
@@ -453,7 +453,7 @@ $form.mode
 					<p>
 						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
-						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{else}
 					{/if}
