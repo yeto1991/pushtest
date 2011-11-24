@@ -92,6 +92,11 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 			return null;
 		}
 
+		// 修正登録の場合、旧日本一番号を保持する。
+		if ('e' == $this->af->get('mode')) {
+			$mihon_no_old = $this->af->get('mihon_no');
+		}
+
 		// トランザクション開始
 		$db = $this->backend->getDB();
 		$db->db->autocommit(false);
@@ -264,6 +269,12 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		for ($i = 0; $i < count($ary_photos_name); $i++) {
 			$photos_name = $ary_photos_name[$i];
 			if ('' != $photos_name) {
+				if ('e' == $this->af->get('mode')) {
+					// 修正登録の場合、前の画像をコピーする。
+					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy From : '.$this->config->get('img_path').$mihon_no_old.'/'.$photos_name);
+					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy To   : '.$this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
+					copy($this->config->get('img_path').$mihon_no_old.'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
+				}
 				rename($this->session->get('img_tmp_path').'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
 			}
 		}

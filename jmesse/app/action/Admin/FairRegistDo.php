@@ -235,6 +235,9 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			return null;
 		}
 
+		// コピー登録の場合、旧見本市番号を保持する。
+		$mihon_no_old = $this->af->get('mihon_no');
+
 		// JM_FAIRオブジェクトの取得
 		$jm_fair =& $this->backend->getObject('JmFair');
 
@@ -600,6 +603,9 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
 		for ($i = 1; $i <= 3; $i++) {
 			$name_list = $this->af->get('photos_name_'.$i);
+			if ('copy' == $this->af->get('mode')) {
+				copy($this->config->get('img_path').$mihon_no_old.'/'.$name_list, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$name_list);
+			}
 			for ($j = 1; $j <=3; $j++) {
 				$file = $this->af->get('photos_'.$j);
 				if (null != $file && $name_list == $file['name']) {

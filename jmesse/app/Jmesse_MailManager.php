@@ -164,17 +164,9 @@ class Jmesse_MailManager extends Ethna_AppManager
 			'From'    => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8")),
 			'Subject' => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
 		);
-// 		echo "<pre>";
-// 		var_dump($headers);
-// 		echo "</pre>";
-// 		echo '<br/><br/>';
 
 		// メール本文
 		$ethna_mail =& new Ethna_MailSender($this->backend);
-// 		echo "<pre>";
-// 		var_dump($ary_value);
-// 		echo "</pre>";
-// 		echo '<br/><br/>';
 		$body_tmp = $ethna_mail->send(
 			null,
 			$template,
@@ -191,6 +183,14 @@ class Jmesse_MailManager extends Ethna_AppManager
 			$msg = 'メールの送信に失敗しました';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->add('error', $msg);
+			// DEBUG-S
+// 			echo '<pre>';
+// 			var_dump($headers);
+// 			echo '</pre><br/><br/>';
+// 			echo '<pre>';
+// 			var_dump($ary_value);
+// 			echo '</pre><br/><br/>';
+			// DEBUG-E
 		}
 
 		return;

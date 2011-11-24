@@ -6,11 +6,14 @@
 */
 $config = array(
 	// site
-	'url'     => 'https://localhost/jmesse/www/',
-	'url_pub' => 'http://localhost/jmesse/www/',
-	'base'    => 'http://dev.jetro.go.jp/',
-	'base_en' => 'http://produce.jetro.go.jp/',
-	'base_pub'=> 'http://dev.jetro.go.jp/',
+	'url'         => 'https://localhost/jmesse/www/',
+	'url_pub'     => 'http://localhost/jmesse/www/',
+
+	// base
+	'base'        => 'http://dev.jetro.go.jp/',
+	'base_en'     => 'http://produce.jetro.go.jp/',
+	'base_pub'    => 'http://dev.jetro.go.jp/',
+	'base_pub_en' => 'http://produce.jetro.go.jp/',
 
 	// path
 	'host_path' => 'https://localhost',
@@ -104,7 +107,7 @@ $config = array(
 	'mail_smtp_port' => '25',
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
-	'mail_from' => 'J-messe事務局 <m.sasaki@ids.co.jp>',
+	'mail_from' => 'J-messe事務局 <matsuura@ids.co.jp>',
 	'mail_bcc' => 'matsuura@ids.co.jp',
 // 	'mail_from' => 'J-messe事務局 <j-messe@jetro.go.jp>',
 // 	'mail_bcc' => 'j-messe@totec-net.com',
