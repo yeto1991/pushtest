@@ -56,8 +56,8 @@
 
 	<p>
 		<strong>Date</strong><br />
-		<input type="radio" name="year_u" id="year" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if}>Upcoming Trade Fairs View All<br />
-		<input type="radio" name="year_a" id="year" value="a" {if ('a' == $form.year)}checked{/if}>Including Past Trade Fairs View All
+		<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if}>Upcoming Trade Fairs View All<br />
+		<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if}>Including Past Trade Fairs View All
 	</p>
 
 	<p>
