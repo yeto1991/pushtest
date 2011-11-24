@@ -372,15 +372,15 @@ class Jmesse_Action_EnFairListSearch extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_DEBUG, '■select_city    : '.$search_cond['select_city']);
 			if ('' != $search_cond['select_region'] && '' == $search_cond['select_country'] && '' == $search_cond['select_city']) {
 				// 地域
-				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/All/All');
+				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/ALL/ALL');
 			} elseif ('' != $search_cond['select_region'] && '' != $search_cond['select_country'] && '' == $search_cond['select_city']) {
 				// 国・地域
-				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000').'/All');
+				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000').'/ALL');
 			} elseif ('' != $search_cond['select_region'] && '' != $search_cond['select_country'] && '' != $search_cond['select_city']) {
 				// 都市
 				array_push($vanue_list, $this->_getJmCodeM('003', $search_cond['select_region'], '000', '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], '000').'/'.$this->_getJmCodeM('003', $search_cond['select_region'], $search_cond['select_country'], $search_cond['select_city']));
 			} else {
-				array_push($vanue_list, 'All/All/All');
+				array_push($vanue_list, 'ALL/ALL/ALL');
 			}
 		} else {
 			// 詳細検索画面にて開催地を設定しない場合

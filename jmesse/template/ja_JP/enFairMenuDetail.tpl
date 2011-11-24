@@ -483,7 +483,7 @@
 				<th>Region</th>
 				<td>
 					<select name="select_region" id="select_region" onchange="set_country('{$config.url_pub}')" style="width:200px;">
-						<option value="">All</option>
+						<option value="">ALL</option>
 						{section name=it loop=$app.region_list}
 						<option value="{$app.region_list[it].kbn_2}" {if $app.region_list[it].kbn_2 == $form.select_region}selected{/if}>{$app.region_list[it].discription_en}</option>
 						{/section}
@@ -494,7 +494,7 @@
 				<th>Country/Area</th>
 				<td>
 					<select name="select_country" id="select_country" onchange="set_city('{$config.url_pub}')" style="width:200px;">
-						<option value="">All</option>
+						<option value="">ALL</option>
 					</select>
 				</td>
 			</tr>
@@ -502,7 +502,7 @@
 				<th>City</th>
 				<td>
 					<select name="select_city" id="select_city" style="width:200px;">
-						<option value="">All</option>
+						<option value="">ALL</option>
 					</select>
 				</td>
 			</tr>
