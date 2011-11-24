@@ -85,7 +85,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
 		// 検索条件をArray化
-		$param = array('003','000','003','1','0','1','0','0','10');
+		$param = array('003','000','003','1','0','1','1','0','10');
 		// SQLを実行
 		$res = $db->db->execute($stmt, $param);
 

@@ -39,6 +39,21 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 		return null;
 	}
 
+	var $file_name_list = array(
+		'ranking1_jp.json',
+		'ranking2_jp.json',
+		'ranking3_jp.json',
+		'ranking4_jp.json',
+		'ranking5_jp.json',
+		'ranking6_jp.json',
+		'ranking1_en.json',
+		'ranking2_en.json',
+		'ranking3_en.json',
+		'ranking4_en.json',
+		'ranking5_en.json',
+		'ranking6_en.json'
+	);
+
 	/**
 	 *  json_getJsonMonthlyRanking action implementation.
 	 *
@@ -47,7 +62,17 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		//TODO
+		$jm_ranking = $this->backend->getManager('JmRanking');
+
+		for ($i = 0; $i < count($this->file_name_list); $i++) {
+			$list = $jm_ranking->getJsonRanking($i);
+			if (null != $list) {
+				file_put_contents($this->config->get('jsonfile_path').$this->file_name_list[$i], json_encode($list));
+			} else {
+				file_put_contents($this->config->get('jsonfile_path').$this->file_name_list[$i], '');
+			}
+		}
+
 		return null;
 	}
 }

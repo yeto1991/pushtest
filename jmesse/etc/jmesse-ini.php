@@ -103,7 +103,7 @@ $config = array(
 	//'use_gettext' => false,
 
 	// mail
-	'mail_smtp_host' => 'tokyo',
+	'mail_smtp_host' => '210.161.156.130',
 	'mail_smtp_port' => '25',
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
