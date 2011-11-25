@@ -139,9 +139,9 @@ class Jmesse_Action_AdminErrMailDownload extends Jmesse_ActionClass
 						echo ',';
 					}
 					if ('err_kind' == $key) {
-						echo $this->err_kind[$value];
+						echo '"'.mb_convert_encoding($this->err_kind[$value], 'CP932', 'UTF-8').'"';
 					} else {
-						echo $value;
+						echo '"'.mb_convert_encoding($value, 'CP932', 'UTF-8').'"';
 					}
 					$j++;
 				}

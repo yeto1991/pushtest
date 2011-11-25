@@ -77,7 +77,8 @@ class Jmesse_Action_AdminUserCsvDownload extends Jmesse_ActionClass
 				if (0 < $j) {
 					echo ',';
 				}
-				echo $value;
+				//echo $value;
+				echo '"'.mb_convert_encoding($value, 'CP932', 'UTF-8').'"';
 				$j++;
 			}
 			echo "\n";
