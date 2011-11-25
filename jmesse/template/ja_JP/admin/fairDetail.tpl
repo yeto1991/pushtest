@@ -9,8 +9,8 @@
 		document.location.href = url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&type=' + type + '&page=' + page;
 	}
 
-	function openTemp(url, mihon_no, seq_no) {
-		window.open(url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&seq_num=' + seq_no, 'OLD_FAIR_DETAIL');
+	function openTemp(url, mihon_no, type, seq_no) {
+		window.open(url + '?action_admin_fairDetail=true&mihon_no=' + mihon_no + '&type=' + type + '&seq_num=' + seq_no, 'OLD_FAIR_DETAIL');
 	}
 
 	function changeDoc(url, mihon_no) {
@@ -595,7 +595,7 @@
 								<td>{$app.jm_fair_temp_list[it].update_user_email}</td>
 								{/if}
 							{/if}
-							<td><a href="javascript:openTemp('{$config.url}', '{$app.jm_fair_temp_list[it].mihon_no}', '{$app.jm_fair_temp_list[it].seq_num}');">
+							<td><a href="javascript:openTemp('{$config.url}', '{$app.jm_fair_temp_list[it].mihon_no}', '{$form.type}','{$app.jm_fair_temp_list[it].seq_num}');">
 							{if ("0" == $app.jm_fair_temp_list[it].confirm_flag)}
 							承認待ち
 							{elseif ("1" == $app.jm_fair_temp_list[it].confirm_flag)}
