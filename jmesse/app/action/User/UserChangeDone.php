@@ -195,7 +195,7 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			// COMMIT
 			$db->commit();
 
-			//TODOメール送信処理
+			//メール送信処理
 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
 			$mail_mgr =& $this->backend->getManager('mail');
 			$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
@@ -250,7 +250,7 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			// COMMIT
 			$db->commit();
 
-			//TODO メール送信処理
+			// メール送信処理
 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
 			$mail_mgr =& $this->backend->getManager('mail');
 			$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);

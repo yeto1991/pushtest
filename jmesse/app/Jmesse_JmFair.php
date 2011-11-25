@@ -17,7 +17,7 @@
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
 	/**
-	* JSONファイル(new-mihonichi_jp.json)作成用 //TODO 作成中
+	* JSONファイル(new-mihonichi_jp.json)作成用
 	*
 	* @return array 取得データ
 	*/
@@ -66,7 +66,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* JSONファイル(new-mihonichi_en.json)作成用　//TODO 作成中
+	* JSONファイル(new-mihonichi_en.json)作成用
 	*
 	* @return array 取得データ
 	*/

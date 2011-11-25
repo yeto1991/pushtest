@@ -582,7 +582,7 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		// マネージャの取得
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 		// 総件数の取得
-		$jm_fair_cnt = $jm_fair_mgr->getFairSummarySearchCnt($sql_select, $sql_gourp_by); //TODO
+		$jm_fair_cnt = $jm_fair_mgr->getFairSummarySearchCnt($sql_select, $sql_gourp_by);
 
 		if (0 < $jm_fair_cnt) {
 
@@ -629,12 +629,12 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 // 			$ary_sort_cond = array($sort_cond['summary_key1_sort_cond'], $sort_cond['summary_key2_sort_cond'], $sort_cond['summary_key3_sort_cond'], $sort_cond['summary_key4_sort_cond'], $sort_cond['summary_key5_sort_cond'], $sort_cond['summary_value_sort_cond']);
 
 			// 見本市リストの取得
-			$jm_fair_summary_list = $jm_fair_mgr->getFairSummarySearch($sql_select, $sql_gourp_by, $sql_order_by, $offset, $limit); //TODO
+			$jm_fair_summary_list = $jm_fair_mgr->getFairSummarySearch($sql_select, $sql_gourp_by, $sql_order_by, $offset, $limit);
 
 			// コードを取得
 			$sql_select_code = $this->_makeSelectCode($ary_summary_key);
 			if ('' != $sql_select_code) {
-				$code_list = $jm_fair_mgr->getFairSummarySearch($sql_select_code, $sql_gourp_by, $sql_order_by, $offset, $limit); //TODO
+				$code_list = $jm_fair_mgr->getFairSummarySearch($sql_select_code, $sql_gourp_by, $sql_order_by, $offset, $limit);
 
 				// コードのリストをセッションに設定
 				// 一覧表示の検索条件とする。
