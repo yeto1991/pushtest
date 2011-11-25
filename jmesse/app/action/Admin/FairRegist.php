@@ -1244,7 +1244,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 		'number_of_foreign_exhibitors' => array(
-			'type'        => VAR_TYPE_INT,    // Input type
+			'type'        => VAR_TYPE_STRING,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '過去の実績海外出展社数', // Display name
 			'required'    => false,           // Required Option(true/false)
