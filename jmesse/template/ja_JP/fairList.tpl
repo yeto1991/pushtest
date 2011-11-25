@@ -271,7 +271,7 @@
 
 
 	<!-- footer -->
-	{$app_ne.footer}</div>
+	{$app_ne.footer}
 	<!-- /footer -->
 
 </body>

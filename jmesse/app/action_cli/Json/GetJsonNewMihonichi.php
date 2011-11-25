@@ -47,17 +47,6 @@ class Jmesse_Cli_Action_JsonGetJsonNewMihonichi extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		
-		
-		
-		
-		//作成途中
-		
-		
-		
-		
-		
-		
 		// DB検索
 		$jm_fair_mgr = $this->backend->getManager('JmFair');
 
@@ -69,16 +58,16 @@ class Jmesse_Cli_Action_JsonGetJsonNewMihonichi extends Jmesse_ActionClass
 			// FILE出力
 			$filename = $this->config->get('jsonfile_path').'new-mihonichi_jp.json';
 			file_put_contents($filename, $jm_fair_new_mihonchi_json);
- 		}
- 		//英語用
-//  		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiEN();
-//  		if (null != $jm_fair_new_mihonichi_list) {
-//  			// JSON化
-//  			$jm_fair_new_mihonchi_json = json_encode($jm_fair_new_mihonichi_list);
-//  			// FILE出力
-//  			$filename = $this->config->get('jsonfile_path').'new-mihonichi_en.json';
-//  			file_put_contents($filename, $jm_fair_new_mihonchi_json);
-//  		}
+		}
+		//英語用
+		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiEN();
+		if (null != $jm_fair_new_mihonichi_list) {
+			// JSON化
+			$jm_fair_new_mihonchi_json = json_encode($jm_fair_new_mihonichi_list);
+			// FILE出力
+			$filename = $this->config->get('jsonfile_path').'new-mihonichi_en.json';
+			file_put_contents($filename, $jm_fair_new_mihonchi_json);
+		}
 		return null;
 	}
 }
