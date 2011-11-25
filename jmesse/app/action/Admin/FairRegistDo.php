@@ -439,7 +439,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 // 		$jm_fair->set('venue_url', '');
 // 		$jm_fair->set('jetro_suport', '');
 // 		$jm_fair->set('jetro_suport_url', '');
-// 		$jm_fair->set('regist_type', '');
+		if ('copy' == $this->af->get('mode')) {
+			$jm_fair->set('regist_type', '1');
+		}else{
+			$jm_fair->set('regist_type', '0');
+		}
 // 		$jm_fair->set('update_user_id', '');
 // 		$jm_fair->set('update_date', '');
 
