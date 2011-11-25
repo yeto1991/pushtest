@@ -5,26 +5,28 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-
+{include file="user/header.tpl"}
+{*
 <!--テスト用-->
-<base href="http://dev.jetro.go.jp" />
+<base href="https://dev.jetro.go.jp" />
 <!--/テスト用-->
-<title>ユーザーログイン - 世界の見本市・展示会 -ジェトロ</title>
-<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="{$config.url}js/jquery.js"></script>
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
 <script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
+*}
+<title>ユーザーログイン - 世界の見本市・展示会 -ジェトロ</title>
 </head>
 
 
 <body class="layout-LC highlight-match j-messe">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 
+{*
 	<!-- bread -->
-	<!--
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
@@ -34,13 +36,14 @@
 			<li>ユーザーログイン</li>
 		</ul>
 	</div>
-	 -->
 	<!-- /bread -->
+*}
+
 	<!-- contents -->
 	<div id="contents">
 		<div class="area">
 			<!-- left -->
-			<div id="include_left_menu"></div>
+			{$app_ne.left_menu}
 			<!-- /left -->
 			<!-- center -->
 			<div id="center">
@@ -111,7 +114,9 @@
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
+
+	</script>
 </body>
 </html>

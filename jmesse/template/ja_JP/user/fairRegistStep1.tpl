@@ -5,7 +5,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-
+{include file="user/header.tpl"}
+{*
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
@@ -14,9 +15,10 @@
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
 
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
+*}
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
-<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
@@ -140,9 +142,9 @@
 <title>見本市修正 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 {/if}
 </head>
-<body class="layout-LC highlight-match j-messe" onload="init('{$config.url}', '{$form.region}', '{$form.country}', '{$form.city}')">
+<body class="layout-LC highlight-match j-messe" onload="init('{$config.url_pub}', '{$form.region}', '{$form.country}', '{$form.city}')">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 
 	<!-- bread -->
@@ -167,7 +169,7 @@
 		<div class="area">
 
 			<!-- left -->
-			<div id="include_left_menu"></div>
+			{$app_ne.left_menu}
 			<!-- /left -->
 
 			<!-- center -->
@@ -514,7 +516,7 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">地域</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
+															<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url_pub}')">
 																<option value="">...</option>
 																{section name=it loop=$app.region_list}
 																<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_jp}</option>
@@ -530,7 +532,7 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">国・地域</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
+															<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url_pub}')">
 																<option value="">...</option>
 															</select>
 														</td>
@@ -725,7 +727,7 @@
 									</div>
 									<table width="100%">
 										<tr>
-											<!--
+{*
 											{if ('c' == $form.mode)}
 											<td width="250px"><a href="{$config.url}?action_user_fairDetail=true&mode=d&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{elseif ('e' == $form.mode)}
@@ -733,7 +735,7 @@
 											{else}
 											<td width="250px"><a href="{$config.url}?action_user_Top=true"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" /></a></td>
 											{/if}
-											 -->
+*}
 											<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
 											<td align="right"><input type="image" src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
 										</tr>
@@ -988,7 +990,7 @@
 	</div>
 
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 
 </body>

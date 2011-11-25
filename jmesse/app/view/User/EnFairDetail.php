@@ -16,14 +16,16 @@
  */
 class Jmesse_View_UserEnFairDetail extends Jmesse_ViewClass
 {
-    /**
-     *  preprocess before forwarding.
-     *
-     *  @access public
-     */
-    function preforward()
-    {
-    }
+	/**
+	 *  preprocess before forwarding.
+	 *
+	 *  @access public
+	 */
+	function preforward()
+	{
+		// 外部htmlの取得
+		$this->backend->getManager('Common')->setEnExtHtml();
+	}
 }
 
 ?>

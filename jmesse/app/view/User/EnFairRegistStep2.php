@@ -30,6 +30,9 @@ class Jmesse_View_UserEnFairRegistStep2 extends Jmesse_ViewClass
 			$year_list[$i + 10] = $now + $i;
 		}
 		$this->af->setApp('year_list', $year_list);
+
+		// 外部htmlの取得
+		$this->backend->getManager('Common')->setEnExtHtml();
 	}
 }
 

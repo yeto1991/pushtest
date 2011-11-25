@@ -23,6 +23,8 @@ class Jmesse_View_UserLogin extends Jmesse_ViewClass
 	 */
 	function preforward()
 	{
+		// 外部htmlの取得
+		$this->backend->getManager('Common')->setExtHtml();
 	}
 }
 

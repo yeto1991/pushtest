@@ -5,13 +5,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-
-{if ('' == $form.mode) || ('e' == $form.mode)}
-<title>Fair Registration - Online Trade Fair Database (J-messe) - JETRO</title>
-{elseif ('c' == $form.mode)}
-<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
-{/if}
-
+{include file="user/enHeader.tpl}
+{*
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
 <!--/テスト用-->
@@ -23,11 +18,14 @@
 <!--/-->
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
+*}
 <script type="text/javascript" src="{$config.url}/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
+
 <script type="text/javascript">
 <!--
 {literal}
@@ -142,11 +140,16 @@
 {/literal}
 // -->
 </script>
+{if ('' == $form.mode) || ('e' == $form.mode)}
+<title>Fair Registration - Online Trade Fair Database (J-messe) - JETRO</title>
+{elseif ('c' == $form.mode)}
+<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
+{/if}
 </head>
 
-<body class="layout-LC highlight-database j-messe" onload="init('{$config.url}', '{$form.region}', '{$form.country}', '{$form.city}')">
+<body class="layout-LC highlight-database j-messe" onload="init('{$config.url_pub}', '{$form.region}', '{$form.country}', '{$form.city}')">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
@@ -505,7 +508,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">Region</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
+											<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url_pub}')">
 												<option value="">...</option>
 												{section name=it loop=$app.region_list}
 												<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_en}</option>
@@ -521,7 +524,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">Country/Area</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
+											<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url_pub}')">
 												<option value="">...</option>
 											</select>
 										</td>
@@ -725,7 +728,7 @@
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
-		<div id="include_left_menu"></div>
+		{$app_ne.left_menu}
 		<!-- /submenu -->
 	</div>
 	<!-- /contents -->
@@ -949,7 +952,7 @@
 		<br />
 	</div>
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 </body>
 </html>

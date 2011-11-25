@@ -5,7 +5,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-
+{include file="user/header.tpl"}
+{*
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
@@ -14,9 +15,10 @@
 <link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
 
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
+*}
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
@@ -56,7 +58,7 @@
 
 <body class="layout-LC highlight-match j-messe" onload="init('{$form.select_language_info}')">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 
 	<!-- bread -->
@@ -86,7 +88,7 @@
 		<div class="area">
 
 			<!-- left -->
-			<div id="include_left_menu"></div>
+			{$app_ne.left_menu}
 			<!-- /left -->
 
 			<!-- center -->
@@ -371,7 +373,7 @@
 	<!-- /contents -->
 
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 
 </body>

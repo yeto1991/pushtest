@@ -16,8 +16,6 @@
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="{$config.url_pub}js/j-messe_include_pub.js"></script>
-
 <title>
 {if ('' != $app.fair_detail.abbrev_title)}
 {$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_jp} - 世界の見本市・展示会 - ジェトロ
@@ -30,7 +28,7 @@
 
 <body class="layout-LC highlight-match j-messe">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 
 	<!-- bread -->
@@ -55,7 +53,7 @@
 		<div class="area">
 
 			<!-- left -->
-			<div id="include_left_menu"></div>
+			{$app_ne.left_menu}
 			<!-- /left -->
 
 			<!-- center -->
@@ -381,7 +379,7 @@
 	<!-- /contents -->
 
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 
 </body>

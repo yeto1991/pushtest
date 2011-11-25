@@ -5,28 +5,9 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.meta_keyword}" />
-
-<title>
-{if ('1' == $form.all)}
-All Online Trade Fair Database (J-messe) - JETRO
-{elseif ('1' == $form.detail)}
-Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) - JETRO
-{else}
-	{if ('i1' == $form.type || 'i2' == $form.type)}
-{$app.title} - Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) - JETRO
-	{elseif ('v1' == $form.type || 'v2' == $form.type || 'v3' == $form.type)}
-{$app.title} - Online Trade Fair Database (J-messe) - JETRO
-	{/if}
-{/if}
-</title>
-
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp/" />
 <!--/テスト用-->
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="{$config.url_pub}js/j-messe.js"></script>
-<!-- <script type="text/javascript" src="{$config.url_pub}js/en/j-messe.js"></script> -->
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
@@ -36,6 +17,9 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 {if ('1' == $form.print)}
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe.js"></script>
 <script type="text/javascript" src="{$config.url_pub}js/j-messe_enInclude_pub.js"></script>
 <script type="text/javascript">
 <!--
@@ -81,6 +65,19 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 {/literal}
 // -->
 </script>
+<title>
+{if ('1' == $form.all)}
+All Online Trade Fair Database (J-messe) - JETRO
+{elseif ('1' == $form.detail)}
+Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) - JETRO
+{else}
+	{if ('i1' == $form.type || 'i2' == $form.type)}
+{$app.title} - Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) - JETRO
+	{elseif ('v1' == $form.type || 'v2' == $form.type || 'v3' == $form.type)}
+{$app.title} - Online Trade Fair Database (J-messe) - JETRO
+	{/if}
+{/if}
+</title>
 </head>
 
 {if ('1' == $form.detail)}
@@ -89,7 +86,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 <body class="layout-LC highlight-match  j-messe">
 {/if}
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
@@ -240,12 +237,12 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
-		<div id="include_left_menu"></div>
+		{$app_ne.left_menu}
 		<!-- /submenu -->
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 </body>
 </html>

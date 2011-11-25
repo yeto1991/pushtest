@@ -12,10 +12,8 @@
 {if ('1' == $form.print)}
 <link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
-
 <script type="text/javascript" src="/j-messe/js/j-messe.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="{$config.url_pub}js/j-messe_include_pub.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
@@ -81,7 +79,7 @@
 <body class="layout-LC highlight-match  j-messe">
 {/if}
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 
 	<!-- bread -->
@@ -127,7 +125,7 @@
 		<div class="area">
 
 			<!-- left -->
-			<div id="include_left_menu"></div>
+			{$app_ne.left_menu}
 			<!-- /left -->
 
 			<!-- center -->
@@ -273,7 +271,7 @@
 
 
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}</div>
 	<!-- /footer -->
 
 </body>

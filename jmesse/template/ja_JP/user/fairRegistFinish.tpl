@@ -5,7 +5,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-
+{include file="user/header.tpl"}
+{*
 <!--テスト用-->
 <base href="http://dev.jetro.go.jp" />
 <!--/テスト用-->
@@ -15,6 +16,7 @@
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
+*}
 {if ('r' == $form.msg)}
 <title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 {elseif ('c' == $form.msg)}
@@ -26,7 +28,7 @@
 
 <body class="layout-LC highlight-match j-messe">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 
 	<!-- bread -->
@@ -62,7 +64,7 @@
 		<div class="area">
 
 			<!-- left -->
-			<div id="include_left_menu"></div>
+			{$app_ne.left_menu}
 			<!-- /left -->
 
 			<!-- center -->
@@ -119,7 +121,7 @@
 	<!-- /contents -->
 
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 
 </body>

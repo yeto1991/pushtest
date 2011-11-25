@@ -23,6 +23,18 @@ $config = array(
 	//JSONファイル作成格納場所
 	'jsonfile_path' => 'C:/opt/Apache2.2/htdocs/jmesse/www/jsonfile/',
 
+	// 共通部分URL
+	'header_url'       => 'http://localhost/jmesse/www/header.html',
+//	'header_url'       => 'http://www.jetro.go.jp/header.html',
+	'footer_url'       => 'http://localhost/jmesse/www/footer.html',
+// 	'footer_url'       => 'http://www.jetro.go.jp/footer.html',
+	'left_menu_url'    => 'http://localhost/jmesse/www/left_menu.html',
+	'header_url_en'    => 'http://localhost/jmesse/www/enHeader.html',
+//	'header_url_en'    => 'http://www.jetro.go.jp/header.html',
+	'footer_url_en'    => 'http://localhost/jmesse/www/enFooter.html',
+// 	'footer_url_en'    => 'http://www.jetro.go.jp/footer.html',
+	'left_menu_url_en' => 'http://localhost/jmesse/www/enLeft_menu.html',
+
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
 	'debug' => true,

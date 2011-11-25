@@ -5,15 +5,6 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.fair_detail.exhibits_en|replace:'&lt;br/&gt;':''}, {$app.fair_detail.keyword}" />
-
-<title>
-{if ('' != $app.fair_detail.abbrev_title)}
-{$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_en} - Online Trade Fair Database (J-messe) - JETRO
-{else}
-{$app.fair_detail.fair_title_en} - Online Trade Fair Database (J-messe) - JETRO
-{/if}
-</title>
-
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
 <!--/テスト用-->
@@ -31,12 +22,18 @@
 <link rel="stylesheet" href="/css/js/prettyphoto/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="{$config.url_pub}js/j-messe_enInclude_pub.js"></script>
+<title>
+{if ('' != $app.fair_detail.abbrev_title)}
+{$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_en} - Online Trade Fair Database (J-messe) - JETRO
+{else}
+{$app.fair_detail.fair_title_en} - Online Trade Fair Database (J-messe) - JETRO
+{/if}
+</title>
 </head>
 
 <body class="layout-LC highlight-database j-messe">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
@@ -359,12 +356,12 @@
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
-		<div id="include_left_menu"></div>
+		{$app_ne.left_menu}
 		<!-- /submenu -->
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer" ></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 </body>
 </html>

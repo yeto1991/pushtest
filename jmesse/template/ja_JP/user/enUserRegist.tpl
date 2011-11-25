@@ -5,13 +5,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-
-{if ("regist" == $form.mode)}
-<title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
-{else}
-<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
-{/if}
-
+{include file="user/enHeader.tpl}
+{*
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
 <!--/テスト用-->
@@ -24,11 +19,17 @@
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
 <script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
+*}
+{if ("regist" == $form.mode)}
+<title>User Registration - Online Trade Fair Database (J-messe) - JETRO</title>
+{else}
+<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
+{/if}
 </head>
 
 <body class="layout-LC highlight-database j-messe">
 	<!-- header -->
-	<div id="include_header"></div>
+	{$app_ne.header}
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
@@ -301,12 +302,12 @@
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
-		<div id="include_left_menu"></div>
+		{$app_ne.left_menu}
 		<!-- /submenu -->
 	</div>
 	<!-- /contents -->
 	<!-- footer -->
-	<div id="include_footer"></div>
+	{$app_ne.footer}
 	<!-- /footer -->
 </body>
 </html>
