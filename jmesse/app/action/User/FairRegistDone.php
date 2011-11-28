@@ -254,7 +254,19 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		}
 
 		// 画像ファイルの保存
-		if ('c' == $this->af->get('mode')) {
+		if ('e' == $this->af->get('mode')) {
+			// 修正登録の場合コピー
+			$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+			for ($i = 0; $i < count($ary_photos_name); $i++) {
+				$photos_name = $ary_photos_name[$i];
+				// 修正登録の場合、前の画像をコピーする。
+				$this->backend->getLogger()->log(LOG_DEBUG, '■Copy From : '.$this->config->get('img_path').$mihon_no_old.'/'.$photos_name);
+				$this->backend->getLogger()->log(LOG_DEBUG, '■Copy To   : '.$this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
+				copy($this->config->get('img_path').$mihon_no_old.'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
+			}
+		}
+
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			// 削除
 			$ary_del_photos_name = $regist_param_2['del_photos_name'];
 			for ($i = 0; $i < count($ary_del_photos_name); $i++) {
@@ -264,17 +276,12 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 				}
 			}
 		}
+
 		// 保存
 		$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
 		for ($i = 0; $i < count($ary_photos_name); $i++) {
 			$photos_name = $ary_photos_name[$i];
 			if ('' != $photos_name) {
-				if ('e' == $this->af->get('mode')) {
-					// 修正登録の場合、前の画像をコピーする。
-					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy From : '.$this->config->get('img_path').$mihon_no_old.'/'.$photos_name);
-					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy To   : '.$this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
-					copy($this->config->get('img_path').$mihon_no_old.'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
-				}
 				rename($this->session->get('img_tmp_path').'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
 			}
 		}

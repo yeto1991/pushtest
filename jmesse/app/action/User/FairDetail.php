@@ -125,9 +125,9 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('net_square_meters', $jm_fair->get('net_square_meters'));
 		$this->af->set('profile_jp', $jm_fair->get('profile_jp'));
 		$this->af->set('detailed_information_jp', $jm_fair->get('detailed_information_jp'));
-		$this->af->set('photos_1', $jm_fair->get('photos_1'));
-		$this->af->set('photos_2', $jm_fair->get('photos_2'));
-		$this->af->set('photos_3', $jm_fair->get('photos_3'));
+		$this->af->set('photos_name_1', $jm_fair->get('photos_1'));
+		$this->af->set('photos_name_2', $jm_fair->get('photos_2'));
+		$this->af->set('photos_name_3', $jm_fair->get('photos_3'));
 		$this->af->set('keyword', $jm_fair->get('keyword'));
 		$this->af->set('organizer_jp', $jm_fair->get('organizer_jp'));
 		$this->af->set('organizer_addr', $jm_fair->get('organizer_addr'));

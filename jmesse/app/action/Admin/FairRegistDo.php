@@ -604,12 +604,35 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// 画像ファイルの保存
 		$photos_list = array();
 		$idx = 0;
-		mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
+
+		// ディレクトリ作成
+		if (!is_dir($this->config->get('img_path').$jm_fair->get('mihon_no'))) {
+			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
+		}
+
+		// 画像のコピー
+		if ('copy' == $this->af->get('mode')) {
+			// コピー登録の場合、旧から新へ画像をコピー
+			for ($i = 1; $i <= 3; $i++) {
+				$name_list = $this->af->get('photos_name_'.$i);
+				if (null != $name_list && '' != $name_list) {
+					copy($this->config->get('img_path').$mihon_no_old.'/'.$name_list, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$name_list);
+				}
+			}
+
+			// ユーザにより削除されたものを削除
+			$del_photos_name = $this->af->get('del_photos_name');
+			for ($i = 0; $i < count($del_photos_name); $i++) {
+				if (null != $del_photos_name[$i] && '' != $del_photos_name[$i]) {
+					$this->backend->getLogger()->log(LOG_DEBUG, $this->config->get('img_path').$del_photos_name[$i].'削除します。');
+					unlink($this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$del_photos_name[$i]);
+				}
+			}
+		}
+
+		// 画像の保存
 		for ($i = 1; $i <= 3; $i++) {
 			$name_list = $this->af->get('photos_name_'.$i);
-			if ('copy' == $this->af->get('mode')) {
-				copy($this->config->get('img_path').$mihon_no_old.'/'.$name_list, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$name_list);
-			}
 			for ($j = 1; $j <=3; $j++) {
 				$file = $this->af->get('photos_'.$j);
 				if (null != $file && $name_list == $file['name']) {
