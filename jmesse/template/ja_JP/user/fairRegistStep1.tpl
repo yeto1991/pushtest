@@ -6,22 +6,9 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
 {include file="user/header.tpl"}
-{*
-<!--テスト用-->
-<base href="http://dev.jetro.go.jp" />
-<!--/テスト用-->
-<link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
-*}
-<script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
+<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript">
 <!--
 {literal}
@@ -142,7 +129,7 @@
 <title>見本市修正 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 {/if}
 </head>
-<body class="layout-LC highlight-match j-messe" onload="init('{$config.url_pub}', '{$form.region}', '{$form.country}', '{$form.city}')">
+<body class="layout-LC highlight-match j-messe" onload="init('{$config.url}', '{$form.region}', '{$form.country}', '{$form.city}')">
 	<!-- header -->
 	{$app_ne.header}
 	<!-- /header -->
@@ -516,7 +503,7 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">地域</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url_pub}')">
+															<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
 																<option value="">...</option>
 																{section name=it loop=$app.region_list}
 																<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_jp}</option>
@@ -532,7 +519,7 @@
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">国・地域</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url_pub}')">
+															<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
 																<option value="">...</option>
 															</select>
 														</td>
@@ -746,7 +733,7 @@
 					</div>
 				</div>
 				<p class="totop">
-					<!--
+{*
 					{if ('c' == $form.mode || 'e' == $form.mode)}
 						{if ('1' == $form.back)}
 					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
@@ -760,7 +747,7 @@
 					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep1=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{/if}
 					{/if}
-					-->
+*}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>
