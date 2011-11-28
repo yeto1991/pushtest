@@ -39,10 +39,10 @@ class Jmesse_Action_AdminErrMailDownload extends Jmesse_ActionClass
 	function prepare()
 	{
 		// ログインチェック
-		if (!$this->backend->getManager('adminCommon')->isLoginUser()) {
+		if (!$this->backend->getManager('adminCommon')->isLoginError()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'admin_Login';
+			return 'admin_login';
 		}
 
 		// 入力チェック
