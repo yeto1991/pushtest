@@ -147,7 +147,7 @@
 {/if}
 </head>
 
-<body class="layout-LC highlight-database j-messe" onload="init('{$config.url_pub}', '{$form.region}', '{$form.country}', '{$form.city}')">
+<body class="layout-LC highlight-database j-messe" onload="init('{$config.url}', '{$form.region}', '{$form.country}', '{$form.city}')">
 	<!-- header -->
 	{$app_ne.header}
 	<!-- /header -->
@@ -508,7 +508,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">Region</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url_pub}')">
+											<select name="region" id="region" style="width:200px;" onchange="set_country('{$config.url}')">
 												<option value="">...</option>
 												{section name=it loop=$app.region_list}
 												<option value="{$app.region_list[it].kbn_2}" {if ($app.region_list[it].kbn_2 == $form.region)}selected{/if}>{$app.region_list[it].discription_en}</option>
@@ -524,7 +524,7 @@
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">Country/Area</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">：</td>
 										<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-											<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url_pub}')">
+											<select name="country" id="country" style="width:200px;" onchange="set_city('{$config.url}')">
 												<option value="">...</option>
 											</select>
 										</td>
