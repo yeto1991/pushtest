@@ -39,6 +39,11 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 		return null;
 	}
 
+	/**
+	 * 月間ランキング情報ファイル名。
+	 *
+	 * @var string
+	 */
 	var $file_name_list = array(
 		'ranking1_jp.json',
 		'ranking2_jp.json',
@@ -68,8 +73,8 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 			$list = $jm_ranking->getJsonRanking($i);
 			if (null != $list) {
 				file_put_contents($this->config->get('jsonfile_path').$this->file_name_list[$i], json_encode($list));
-			} else {
-				file_put_contents($this->config->get('jsonfile_path').$this->file_name_list[$i], '');
+//			} else {
+//				file_put_contents($this->config->get('jsonfile_path').$this->file_name_list[$i], '');
 			}
 		}
 

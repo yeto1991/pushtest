@@ -21,23 +21,29 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 	*
 	* @return array 取得データ
 	*/
-	function getJsonIndustoryJP($venue_kbn_value) {
+	function getJsonIndustoryJP() {
+// 	function getJsonIndustoryJP($venue_kbn_value) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql =  " select ";
-		$sql .= " jcm_1.discription_jp industory, jf.fair_cnt count ";
-		$sql .= " from jm_fair_cnt jf ";
-		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
-		$sql .= " where jf.kbn_1 = ? and jf.kbn_3 = ? and jf.kbn_4 = ? and jf.venue_kbn = ? "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000' (?-4)venue_kbn = (国内or海外)
+		$sql = "select jcm_1.discription_jp industory, jf.fair_cnt count from (select kbn_2, sum(fair_cnt) fair_cnt from jm_fair_cnt where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' group by kbn_2) jf left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
 
-		// Prepare Statement化
-		$stmt =& $db->db->prepare($sql);
-		// 検索条件をArray化
-		$param = array('002','000','000','002','000','000',$venue_kbn_value);
 		// SQLを実行
-		$res = $db->db->execute($stmt, $param);
+		$res = $db->db->query($sql);
+
+// 		$sql =  " select ";
+// 		$sql .= " jcm_1.discription_jp industory, jf.fair_cnt count ";
+// 		$sql .= " from jm_fair_cnt jf ";
+// 		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+// 		$sql .= " where jf.kbn_1 = ? and jf.kbn_3 = ? and jf.kbn_4 = ? and jf.venue_kbn = ? "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000' (?-4)venue_kbn = (国内or海外)
+
+// 		// Prepare Statement化
+// 		$stmt =& $db->db->prepare($sql);
+// 		// 検索条件をArray化
+// 		$param = array('002','000','000','002','000','000',$venue_kbn_value);
+// 		// SQLを実行
+// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {
@@ -69,23 +75,29 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 	*
 	* @return array 取得データ
 	*/
-	function getJsonIndustoryEN($venue_kbn_value) {
+	function getJsonIndustoryEN() {
+// 	function getJsonIndustoryEN($venue_kbn_value) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql =  " select ";
-		$sql .= " jcm_1.discription_en industory, jf.fair_cnt count ";
-		$sql .= " from jm_fair_cnt jf ";
-		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
-		$sql .= " where jf.kbn_1 = ? and jf.kbn_3 = ? and jf.kbn_4 = ? and jf.venue_kbn = ? "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000' (?-4)venue_kbn = (国内or海外)
+		$sql = "select jcm_1.discription_en industory, jf.fair_cnt count from (select kbn_2, sum(fair_cnt) fair_cnt from jm_fair_cnt where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' group by kbn_2) jf left outer join (select kbn_2, discription_en, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
 
-		// Prepare Statement化
-		$stmt =& $db->db->prepare($sql);
-		// 検索条件をArray化
-		$param = array('002','000','000','002','000','000',$venue_kbn_value);
 		// SQLを実行
-		$res = $db->db->execute($stmt, $param);
+		$res = $db->db->query($sql);
+
+// 		$sql =  " select ";
+// 		$sql .= " jcm_1.discription_en industory, jf.fair_cnt count ";
+// 		$sql .= " from jm_fair_cnt jf ";
+// 		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+// 		$sql .= " where jf.kbn_1 = ? and jf.kbn_3 = ? and jf.kbn_4 = ? and jf.venue_kbn = ? "; //(?-1)kbn_1 = '002' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000' (?-4)venue_kbn = (国内or海外)
+
+// 		// Prepare Statement化
+// 		$stmt =& $db->db->prepare($sql);
+// 		// 検索条件をArray化
+// 		$param = array('002','000','000','002','000','000',$venue_kbn_value);
+// 		// SQLを実行
+// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {
@@ -122,18 +134,23 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql =  " select ";
-		$sql .= " jcm_1.discription_jp region, jf.fair_cnt count ";
-		$sql .= " from jm_fair_cnt jf ";
-		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '003' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
-		$sql .= " where jf.kbn_1 = ? and jf.kbn_2 <> ? and jf.kbn_3 = ? and jf.kbn_4 = ? "; //(?-1)kbn_1 = '003' (?-2)kbn_2 <> '001' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+		$sql = "select jcm_1.discription_jp region, jf.fair_cnt count from (select kbn_2, fair_cnt from jm_fair_cnt where kbn_1 = '003' and kbn_2 <> '001' and kbn_3 = '000' and kbn_4 = '000') jf left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num asc";
 
-		// Prepare Statement化
-		$stmt =& $db->db->prepare($sql);
-		// 検索条件をArray化
-		$param = array('003','000','000','003','001','000','000');
 		// SQLを実行
-		$res = $db->db->execute($stmt, $param);
+		$res = $db->db->query($sql);
+
+// 		$sql =  " select ";
+// 		$sql .= " jcm_1.discription_jp region, jf.fair_cnt count ";
+// 		$sql .= " from jm_fair_cnt jf ";
+// 		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '003' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+// 		$sql .= " where jf.kbn_1 = ? and jf.kbn_2 <> ? and jf.kbn_3 = ? and jf.kbn_4 = ? "; //(?-1)kbn_1 = '003' (?-2)kbn_2 <> '001' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+
+// 		// Prepare Statement化
+// 		$stmt =& $db->db->prepare($sql);
+// 		// 検索条件をArray化
+// 		$param = array('003','000','000','003','001','000','000');
+// 		// SQLを実行
+// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {
@@ -170,18 +187,23 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql =  " select ";
-		$sql .= " jcm_1.discription_en region, jf.fair_cnt count ";
-		$sql .= " from jm_fair_cnt jf ";
-		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '003' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
-		$sql .= " where jf.kbn_1 = ? and jf.kbn_2 <> ? and jf.kbn_3 = ? and jf.kbn_4 = ? "; //(?-1)kbn_1 = '003' (?-2)kbn_2 <> '001' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+		$sql = "select jcm_1.discription_en region, jf.fair_cnt count from (select kbn_2, fair_cnt from jm_fair_cnt where kbn_1 = '003' and kbn_2 <> '001' and kbn_3 = '000' and kbn_4 = '000') jf left outer join (select kbn_2, discription_en, disp_num from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
 
-		// Prepare Statement化
-		$stmt =& $db->db->prepare($sql);
-		// 検索条件をArray化
-		$param = array('003','000','000','003','001','000','000');
 		// SQLを実行
-		$res = $db->db->execute($stmt, $param);
+		$res = $db->db->query($sql);
+
+// 		$sql =  " select ";
+// 		$sql .= " jcm_1.discription_en region, jf.fair_cnt count ";
+// 		$sql .= " from jm_fair_cnt jf ";
+// 		$sql .= " left outer join ( select kbn_2, discription_jp, discription_en, disp_num from jm_code_m where kbn_1 = ? and kbn_3 = ? and kbn_4 = ? order by disp_num) jcm_1 on jf.kbn_2 = jcm_1.kbn_2 "; //(?-1)kbn_1 = '003' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+// 		$sql .= " where jf.kbn_1 = ? and jf.kbn_2 <> ? and jf.kbn_3 = ? and jf.kbn_4 = ? "; //(?-1)kbn_1 = '003' (?-2)kbn_2 <> '001' (?-2) kbn_3 = '000' (?-3) kbn_4 = '000'
+
+// 		// Prepare Statement化
+// 		$stmt =& $db->db->prepare($sql);
+// 		// 検索条件をArray化
+// 		$param = array('003','000','000','003','001','000','000');
+// 		// SQLを実行
+// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {

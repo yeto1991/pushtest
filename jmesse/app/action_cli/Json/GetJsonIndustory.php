@@ -54,42 +54,63 @@ class Jmesse_Cli_Action_JsonGetJsonIndustory extends Jmesse_ActionClass
 		$area_jp = '0';
 		$area_world = '1';
 
-		//日本語（国内）用
-		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryJP($area_jp);
+		//日本語用
+		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryJP();
 		if (null != $jm_fair_cnt_indutory_list) {
 			// JSON化
 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
 			// FILE出力
-			$filename = $this->config->get('jsonfile_path').'industory_jp_venue0.json';
+			$filename = $this->config->get('jsonfile_path').'industory_jp.json';
 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
- 		}
- 		//日本語（海外）用
- 		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryJP($area_world);
- 		if (null != $jm_fair_cnt_indutory_list) {
- 			// JSON化
- 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
- 			// FILE出力
- 			$filename = $this->config->get('jsonfile_path').'industory_jp_venue1.json';
- 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
- 		}
- 		//英語（国内）用
- 		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryEN($area_jp);
- 		if (null != $jm_fair_cnt_indutory_list) {
- 			// JSON化
- 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
- 			// FILE出力
- 			$filename = $this->config->get('jsonfile_path').'industory_en_venue0.json';
- 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
- 		}
- 		//英語（海外）用
- 		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryEN($area_world);
- 		if (null != $jm_fair_cnt_indutory_list) {
- 			// JSON化
- 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
- 			// FILE出力
- 			$filename = $this->config->get('jsonfile_path').'industory_en_venue1.json';
- 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
- 		}
+		}
+
+		//英語用
+		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryEN();
+		if (null != $jm_fair_cnt_indutory_list) {
+			// JSON化
+			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
+			// FILE出力
+			$filename = $this->config->get('jsonfile_path').'industory_en.json';
+			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+		}
+
+// 		//日本語（国内）用
+// 		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryJP($area_jp);
+// 		if (null != $jm_fair_cnt_indutory_list) {
+// 			// JSON化
+// 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
+// 			// FILE出力
+// 			$filename = $this->config->get('jsonfile_path').'industory_jp_venue0.json';
+// 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+//  		}
+//  		//日本語（海外）用
+//  		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryJP($area_world);
+//  		if (null != $jm_fair_cnt_indutory_list) {
+//  			// JSON化
+//  			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
+//  			// FILE出力
+//  			$filename = $this->config->get('jsonfile_path').'industory_jp_venue1.json';
+//  			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+//  		}
+//  		//英語（国内）用
+//  		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryEN($area_jp);
+//  		if (null != $jm_fair_cnt_indutory_list) {
+//  			// JSON化
+//  			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
+//  			// FILE出力
+//  			$filename = $this->config->get('jsonfile_path').'industory_en_venue0.json';
+//  			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+//  		}
+//  		//英語（海外）用
+//  		$jm_fair_cnt_indutory_list = $jm_fair_cnt_mgr->getJsonIndustoryEN($area_world);
+//  		if (null != $jm_fair_cnt_indutory_list) {
+//  			// JSON化
+//  			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
+//  			// FILE出力
+//  			$filename = $this->config->get('jsonfile_path').'industory_en_venue1.json';
+//  			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+//  		}
+
 		return null;
 	}
 }
