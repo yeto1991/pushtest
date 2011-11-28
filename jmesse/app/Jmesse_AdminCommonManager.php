@@ -73,6 +73,31 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	}
 
 	/**
+	* エラーメールページを表示可能であるかチェック。
+	*
+	* @return true：可、false：否。
+	*/
+	function isLoginError() {
+
+		// "https"判定
+		if ('on' != $_SERVER['HTTPS']) {
+			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+		}
+
+		$ret = true;
+
+		if (!$this->session->isStart()) {
+			// Sessionが開始していない。
+			$ret = false;
+		} else if (null == $this->session->get('user_id') || '' == $this->session->get('user_id')) {
+			// ログインユーザが設定されていない。
+			$ret = false;
+		}
+
+		return $ret;
+	}
+
+	/**
 	 * ログテーブルに記録する。
 	 *
 	 * @param string $user_id ログインユーザID。
