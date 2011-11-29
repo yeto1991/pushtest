@@ -74,7 +74,6 @@
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
 			<li><a href="{$config.url}?action_user_enFairRegistStep1=true">Fair Registration(step1)</a></li>

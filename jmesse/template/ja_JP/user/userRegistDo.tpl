@@ -37,7 +37,6 @@
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			{if ("regist" == $form.mode)}
 				<li><a href="{$config.url}?action_user_userRegist=true">ユーザー登録</a></li>
 				<li>ユーザー登録確認</li>

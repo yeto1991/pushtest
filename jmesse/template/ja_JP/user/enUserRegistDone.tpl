@@ -40,7 +40,6 @@
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if ("regist" == $form.mode)}
 				<li><a href="/database/j-messe/tradefair/">User Registration</a></li>
 				<li><a href="/database/j-messe/tradefair/">User Registration Confirm</a></li>
