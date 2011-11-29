@@ -141,7 +141,7 @@
 			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
 			<li>見本市登録(step1)</li>
 			{elseif ('c' == $form.mode)}

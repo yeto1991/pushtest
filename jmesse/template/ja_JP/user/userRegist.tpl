@@ -39,7 +39,7 @@
 			{if ("regist" == $form.mode)}
 				<li>ユーザー登録</li>
 				{else}
-				<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+				<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
 				<li>ユーザー修正</li>
 			{/if}
 		</ul>

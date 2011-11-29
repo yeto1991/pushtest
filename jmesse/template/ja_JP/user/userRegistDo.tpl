@@ -43,11 +43,11 @@
 				<li>ユーザー登録確認</li>
 			{elseif ("change" == $form.mode)}
 				<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
-				<li><a href="{$config.url}?action_user_userChange=true">ユーザー修正</a></li>
+				<li><a href="{$config.url}?action_user_userChange=true&user_id={$form.user_id}&mode={$form.mode}">ユーザー修正</a></li>
 				<li>ユーザー修正確認</li>
 			{else}
 				<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
-				<li><a href="{$config.url}?action_user_userChange=true">ユーザー修正</a></li>
+				<li><a href="{$config.url}?action_user_userChange=true&user_id={$form.user_id}&mode={$form.mode}">ユーザー修正</a></li>
 				<li>ユーザー削除確認</li>
 			{/if}
 		</ul>
