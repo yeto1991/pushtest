@@ -64,6 +64,7 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
+{*
 		<ul class="clearfix">
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">Business Opportunities</a></li>
@@ -72,6 +73,7 @@
 			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
 			<li>Trade Fair List</li>
 		</ul>
+*}
 	</div>
 	<!-- /bread -->
 
