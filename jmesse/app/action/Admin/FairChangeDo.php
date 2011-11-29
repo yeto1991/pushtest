@@ -603,28 +603,34 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		}
 		$this->af->setApp('mihon_no', $jm_fair->get('mihon_no'));
 
+		// ディレクトリ作成
+		$dir_name = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no');
+		if (!is_dir($dir_name)) {
+			$this->backend->getLogger()->log(LOG_DEBUG, '■mkdir : '.$dir_name);
+			mkdir($dir_name, 0777, true);
+		}
+
 		// 画像ファイルの削除
 		$del_photos_name = $this->af->get('del_photos_name');
 		for ($i = 0; $i < count($del_photos_name); $i++) {
-			if (null == $del_photos_name[$i] || '' == $del_photos_name[$i]) {
-				continue;
+			if (null != $del_photos_name[$i] && '' != $del_photos_name[$i]) {
+				$filename_del = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$del_photos_name[$i];
+				$this->backend->getLogger()->log(LOG_DEBUG, '■削除 : '.$filename_del);
+				unlink($filename_del);
 			}
-			$this->backend->getLogger()->log(LOG_DEBUG, $this->config->get('img_path').$del_photos_name[$i].'削除します。');
-			unlink($this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$del_photos_name[$i]);
 		}
 
 		// 画像ファイルの保存
 		$photos_list = array();
 		$idx = 0;
-		if (!is_dir($this->config->get('img_path').$jm_fair->get('mihon_no'))) {
-			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
-		}
 		for ($i = 1; $i <= 3; $i++) {
 			$name_list = $this->af->get('photos_name_'.$i);
 			for ($j = 1; $j <=3; $j++) {
 				$file = $this->af->get('photos_'.$j);
-				if (null != $file && $name_list == $file['name']) {
-					rename($file['tmp_name'], $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$file['name']);
+				if (null != $file && '' !=  $name_list && $name_list == $file['name']) {
+					$filename_save = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$file['name'];
+					$this->backend->getLogger()->log(LOG_DEBUG, '■保存 : '.$filename_save);
+					rename($file['tmp_name'], $filename_save);
 					$photos_list[$idx++] = $name_list;
 					break;
 				}
@@ -727,6 +733,19 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			return '0';
 		}
 	}
+
+	/**
+	 * 見本市画像を保存するディレクトリ名を作成する。
+	 * 一つのフォルダに10000件保存する。
+	 * 0スタート。
+	 *
+	 * @param int $mihon_no 見本市番号
+	 * @return string
+	 */
+	function _getImageDir($mihon_no) {
+		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
+	}
+
 }
 
 ?>

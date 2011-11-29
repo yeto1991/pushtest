@@ -382,16 +382,20 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 	function _savePhotos() {
 		// 一時保存ディレクトリ
 		if (null == $this->session->get('img_tmp_path') || '' == $this->session->get('img_tmp_path')) {
-			$img_tmp_path = $this->config->get('img_path').$this->session->get('user_id').'_'.date(YmdHis);
+			$img_tmp_path = $this->config->get('img_tmp_path').$this->session->get('user_id').'_'.date(YmdHis);
 			$this->backend->getLogger()->log(LOG_DEBUG, '■img_tmp_path : '.$img_tmp_path);
-			mkdir($img_tmp_path);
+			mkdir($img_tmp_path, 0777, true);
 			$this->session->set('img_tmp_path', $img_tmp_path);
 		}
 
 		// 削除
 		$ary_del_photos_name = $this->af->get('del_photos_name');
 		for ($i = 0; $i < count($ary_del_photos_name); $i++) {
-			unlink($this->session->get('img_tmp_path').'/'.$ary_del_photos_name[$i]);
+			if ('' != $ary_del_photos_name[$i]) {
+				$filename_del = $this->session->get('img_tmp_path').'/'.$ary_del_photos_name[$i];
+				$this->backend->getLogger()->log(LOG_DEBUG, '■削除 : '.$filename_del);
+				unlink($filename_del);
+			}
 		}
 
 		// 保存
@@ -402,7 +406,9 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 			for ($j = 0; $j < count($ary_photos); $j++) {
 				$photos = $ary_photos[$j];
 				if ('' != $photos_name && $photos['name'] == $photos_name) {
-					rename($photos['tmp_name'], $this->session->get('img_tmp_path').'/'.$photos_name);
+					$filename_save = $this->session->get('img_tmp_path').'/'.$photos_name;
+					$this->backend->getLogger()->log(LOG_DEBUG, '■保存 : '.$filename_save);
+					rename($photos['tmp_name'], $filename_save);
 					break;
 				}
 			}

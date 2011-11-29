@@ -328,36 +328,36 @@
 								{if ('' != $app.fair_detail.photos_1 || '' != $app.fair_detail.photos_2 || '' != $app.fair_detail.photos_3)}
 								<div id="picture" class="right">
 									{if ('' != $app.fair_detail.photos_1)}
-									<a href="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" rel="prettyPhoto[gallery]"
+									<a href="{$config.url_pub}{$config.img_path}{$app.photos_dir}/{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" rel="prettyPhoto[gallery]"
 									{if ('' != $app.fair_detail.abbrev_title)}
 									title="{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})"
 									{else}
 									title="{$app.fair_detail.fair_title_jp}"
 									{/if}
 									>
-										<img src="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" width="200px" alt="" />
+										<img src="{$config.url_pub}{$config.img_path}{$app.photos_dir}/{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_1}" width="200px" alt="" />
 									</a>
 									{/if}
 									{if ('' != $app.fair_detail.photos_2)}
-									<a href="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" rel="prettyPhoto[gallery]"
+									<a href="{$config.url_pub}{$config.img_path}{$app.photos_dir}/{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" rel="prettyPhoto[gallery]"
 									{if ('' != $app.fair_detail.abbrev_title)}
 									title="{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})"
 									{else}
 									title="{$app.fair_detail.fair_title_jp}"
 									{/if}
 									>
-										<img src="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" width="200px" alt="" />
+										<img src="{$config.url_pub}{$config.img_path}{$app.photos_dir}/{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_2}" width="200px" alt="" />
 									</a>
 									{/if}
 									{if ('' != $app.fair_detail.photos_3)}
-									<a href="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" rel="prettyPhoto[gallery]"
+									<a href="{$config.url_pub}{$config.img_path}{$app.photos_dir}/{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" rel="prettyPhoto[gallery]"
 									{if ('' != $app.fair_detail.abbrev_title)}
 									title="{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})"
 									{else}
 									title="{$app.fair_detail.fair_title_jp}"
 									{/if}
 									>
-										<img src="{$config.url_pub}{$config.img_path}{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" width="200px" alt="" />
+										<img src="{$config.url_pub}{$config.img_path}{$app.photos_dir}/{$app.fair_detail.mihon_no}/{$app.fair_detail.photos_3}" width="200px" alt="" />
 									</a>
 									{/if}
 								</div>

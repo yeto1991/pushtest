@@ -315,6 +315,9 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		}
 		$this->af->setApp('photos', $photo_list);
 
+		// 画像保存フォルダ
+		$this->af->setApp('photos_dir', $this->_getImageDir($this->af->get('mihon_no')));
+
 		// システム管理者備考欄
 		$this->af->set('note_for_system_manager', $jm_fair->get('note_for_system_manager'));
 
@@ -502,6 +505,18 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 			$ret = '';
 		}
 		return $ret;
+	}
+
+	/**
+	 * 見本市画像を保存するディレクトリ名を作成する。
+	 * 一つのフォルダに10000件保存する。
+	 * 0スタート。
+	 *
+	 * @param int $mihon_no 見本市番号
+	 * @return string
+	 */
+	function _getImageDir($mihon_no) {
+		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
 	}
 
 }

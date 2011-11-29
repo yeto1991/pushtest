@@ -6,8 +6,8 @@
 */
 $config = array(
 	// site
-	'url'         => 'https://192.168.0.229/',
-	'url_pub'     => 'http://192.168.0.229/',
+	'url'         => 'https://192.168.0.229/j-messe/',
+	'url_pub'     => 'http://192.168.0.229/j-messe/',
 
 	// base
 	'base'        => 'http://dev.jetro.go.jp/',
@@ -16,9 +16,11 @@ $config = array(
 	'base_pub_en' => 'http://produce.jetro.go.jp/',
 
 	// path
-	'host_path' => 'https://192.168.0.229',
-	'img_path'  => 'img/',
-	'flag_path' => 'img/flag/',
+	'host_path'      => 'https://192.168.0.229',
+	'img_path'       => 'img/user/',
+	'img_tmp_path'   => 'img/user/tmp/',
+	'flag_path'      => 'img/flag/',
+	'photos_dir_max' => 10000,
 
 	//JSONファイル作成格納場所
 	'jsonfile_path' => '/home/j-messe/app/jmesse/www/jsonfile/',

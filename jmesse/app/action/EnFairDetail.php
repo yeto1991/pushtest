@@ -108,6 +108,9 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 
 		$this->af->setApp('fair_detail', $fair_detail);
 
+		// 画像保存フォルダ
+		$this->af->setApp('photos_dir', $this->_getImageDir($this->af->get('mihon_no')));
+
 		// 月間ランキング情報に登録
 		if ('009' == $fair_detail['region'] && '002' == $fair_detail['country']) {
 			// 国内
@@ -127,6 +130,19 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 
 		return 'enFairDetail';
 	}
+	
+	/**
+	 * 見本市画像を保存するディレクトリ名を作成する。
+	 * 一つのフォルダに10000件保存する。
+	 * 0スタート。
+	 *
+	 * @param int $mihon_no 見本市番号
+	 * @return string
+	 */
+	function _getImageDir($mihon_no) {
+		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
+	}
+	
 }
 
 ?>

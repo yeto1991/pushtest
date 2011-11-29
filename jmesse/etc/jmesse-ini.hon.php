@@ -16,9 +16,11 @@ $config = array(
 //	'base_pub_en' => 'http://produce.jetro.go.jp/',
 
 	// path
-	'host_path' => 'https://www.jetro.go.jp',
-	'img_path'  => 'img/',
-	'flag_path' => 'img/flag/',
+	'host_path'      => 'https://www.jetro.go.jp',
+	'img_path'       => 'img/user/',
+	'img_tmp_path'   => 'img/user/tmp/',
+	'flag_path'      => 'img/flag/',
+	'photos_dir_max' => 10000,
 
 	//JSONファイル作成格納場所
 	'jsonfile_path' => '/home/jmesse1112/app/jmesse/www/jsonfile/',

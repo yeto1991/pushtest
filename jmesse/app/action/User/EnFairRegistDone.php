@@ -41,7 +41,6 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			$this->af->set('function', '');
 			return 'user_enLogin';
 		}
 
@@ -87,6 +86,11 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_WARNING, '二重POST');
 			header('Location: '.$url);
 			return null;
+		}
+
+		// 修正登録の場合、旧日本一番号を保持する。
+		if ('e' == $this->af->get('mode')) {
+			$mihon_no_old = $this->af->get('mihon_no');
 		}
 
 		// トランザクション開始
@@ -255,27 +259,51 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$jm_fair->get('mihon_no'));
 
 		// ディレクトリ作成
-		if (!is_dir($this->config->get('img_path').$jm_fair->get('mihon_no'))) {
-			mkdir($this->config->get('img_path').$jm_fair->get('mihon_no'));
+		$dir_name = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no');
+		if (!is_dir($dir_name)) {
+			$this->backend->getLogger()->log(LOG_DEBUG, '■mkdir : '.$dir_name);
+			mkdir($dir_name, 0777, true);
+				}
+
+			// 画像ファイルの保存
+		if ('e' == $this->af->get('mode')) {
+			// 修正登録の場合コピー
+			$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+			for ($i = 0; $i < count($ary_photos_name); $i++) {
+				$photos_name = $ary_photos_name[$i];
+				if ('' != $photos_name) {
+					// 修正登録の場合、前の画像をコピーする。
+					$filename_old = $this->config->get('img_path').$this->_getImageDir($mihon_no_old).'/'.$mihon_no_old.'/'.$photos_name;
+					$filename_new = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
+					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy 元 : '.$filename_old);
+					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy 先 : '.$filename_new);
+					copy($filename_old, $filename_new);
+				}
+			}
 		}
 
-		// 画像ファイルの保存
-		if ('c' == $this->af->get('mode')) {
+		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			// 削除
 			$ary_del_photos_name = $regist_param_2['del_photos_name'];
 			for ($i = 0; $i < count($ary_del_photos_name); $i++) {
 				if ('' != $ary_del_photos_name[$i]) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■rm '.$this->config->get('img_path').$ary_del_photos_name[$i]);
-					unlink($this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$ary_del_photos_name[$i]);
+					$filename_del = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$ary_del_photos_name[$i];
+					$this->backend->getLogger()->log(LOG_DEBUG, '■削除 : '.$filename_del);
+					unlink($filename_del);
 				}
 			}
 		}
+
 		// 保存
 		$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
 		for ($i = 0; $i < count($ary_photos_name); $i++) {
 			$photos_name = $ary_photos_name[$i];
 			if ('' != $photos_name) {
-				rename($this->session->get('img_tmp_path').'/'.$photos_name, $this->config->get('img_path').$jm_fair->get('mihon_no').'/'.$photos_name);
+				$filename_temp = $this->session->get('img_tmp_path').'/'.$photos_name;
+				$filename_save = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
+				$this->backend->getLogger()->log(LOG_DEBUG, '■一時 : '.$filename_temp);
+				$this->backend->getLogger()->log(LOG_DEBUG, '■保存 : '.$filename_save);
+				rename($filename_temp, $filename_save);
 			}
 		}
 
@@ -475,6 +503,18 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■sum_ticket : '.$ret);
 		return $ret;
+	}
+
+	/**
+	 * 見本市画像を保存するディレクトリ名を作成する。
+	 * 一つのフォルダに10000件保存する。
+	 * 0スタート。
+	 *
+	 * @param int $mihon_no 見本市番号
+	 * @return string
+	 */
+	function _getImageDir($mihon_no) {
+		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
 	}
 
 }
