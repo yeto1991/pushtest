@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>エラーページ（DEBUG用）</title>
+<title>error page</title>
 </head>
 <body>
 	<div align="center">
-		<font size=5><b>システムエラー</b></font>
+		<font size=5><b>System error</b></font>
 		<hr />
 	</div>
 	<ul>
@@ -18,4 +18,3 @@
 
 </body>
 </html>
-{debug}
