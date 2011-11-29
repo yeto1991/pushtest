@@ -46,19 +46,19 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2"><h2>Trade Fairs held in Japan and the World </h2></div>
+			<h3>Password Inquiries</h3>
 			<div class="in_main">
 				<div class="bgbox_set">
 					<div class="bgbox_base">
 						<div class="in_main">
-								<p>Your User ID and Password have been mailed to you.<br />receipt of this mail may take up to five minutes.<br />If you entered information incorrectly, this mail will not be sent. <br /></p>
+								<p>Your password has been sent to your registered e-mail address.</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<p class="totop">
-				<!-- <a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>  -->
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
-				</p>
+			</p>
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
