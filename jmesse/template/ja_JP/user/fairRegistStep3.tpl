@@ -70,7 +70,7 @@
 			<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
 			<li><a href="{$config.url}?action_user_fairRegistStep1=true">見本市登録(step1)</a></li>
-			<li><a href="{$config.url}?action_user_fairRegistStep2=true">見本市修正(step2)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep2=true">見本市登録(step2)</a></li>
 			<li>見本市登録(step3)</li>
 			{elseif ('c' == $form.mode)}
 			<li><a href="{$config.url}?action_user_fairRegistStep1=true">見本市修正(step1)</a></li>
