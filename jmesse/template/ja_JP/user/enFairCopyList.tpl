@@ -31,6 +31,7 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
+{*
 		<ul class="clearfix">
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">引き合い・展示会検索</a></li>
@@ -39,6 +40,7 @@
 			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
 			<li>My fairs list for copy registration</li>
 		</ul>
+*}
 	</div>
 	<!-- /bread -->
 
