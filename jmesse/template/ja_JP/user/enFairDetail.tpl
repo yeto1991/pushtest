@@ -75,14 +75,14 @@
 			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+			<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
-			<li><a href="/database/j-messe/tradefair/">Fair Registration(step1)</a></li>
-			<li><a href="/database/j-messe/tradefair/">Fair Registration(step2)</a></li>
+			<li><a href="{$config.url}?action_user_enFairRegistStep1=true">Fair Registration(step1)</a></li>
+			<li><a href="{$config.url}?action_user_enFairRegistStep2=true">Fair Registration(step2)</a></li>
 			<li>Fair Registration Confirm</li>
 			{elseif ('c' == $form.mode)}
-			<li><a href="/database/j-messe/tradefair/">Fair Editing(step1)</a></li>
-			<li><a href="/database/j-messe/tradefair/">Fair Editing(step2)</a></li>
+			<li><a href="{$config.url}?action_user_enFairRegistStep1=true">Fair Editing(step1)</a></li>
+			<li><a href="{$config.url}?action_user_enFairRegistStep2=true">Fair Editing(step2)</a></li>
 			<li>Fair Editing Confirm</li>
 			{else}
 			<li>Fair Detail</li>
