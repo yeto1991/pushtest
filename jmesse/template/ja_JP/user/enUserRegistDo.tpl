@@ -117,7 +117,7 @@
 						{/foreach}
 					</ul>
 					{/if}
-					<h4>Email and Password</h4>
+					<h4>E-mail Account and Password</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">email</th>
@@ -130,7 +130,7 @@
 							<td>{$form.password}</td>
 						</tr>
 					</table><br />
-					<h4>User's Information</h4>
+					<h4>Other User Information</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">Company name</th>
