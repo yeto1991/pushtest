@@ -35,6 +35,7 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
+{*
 		<ul class="clearfix">
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">Business Opportunities</a></li>
@@ -56,6 +57,7 @@
 			<li>Fair Deleting Complete</li>
 			{/if}
 		</ul>
+*}
 	</div>
 	<!-- /bread -->
 
