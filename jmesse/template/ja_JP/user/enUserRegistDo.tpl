@@ -65,20 +65,23 @@
 				{if ("regist" == $form.mode)}
 				<h2>User Registration</h2>
 				{elseif ("change" == $form.mode)}
-				<h2>User Editing</h2>
+				<h2>Edit User Information</h2>
 				{else}
-				<h2>User Deleting</h2>
+				<h2>Withdrawal of User Registration</h2>
 				{/if}
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認" /></h3>
 				{if ("delete" == $form.mode)}
-				<p><font color="red">If you press the "Complete" button, user's informations can't restore because it is deleted.<br />
-				So please note when you withdraw from membership.</font></p>
+				<p><font color="red">When you click “Finish,” all your registered information will be deleted.<br />
+				Please consider carefully as the operation is undoable. </font></p>
+				{elseif ("change" == $form.mode)}
+				<p><font color="red">Check that all of the following information is correct, and then click “Finish.”<br />
+				If you need to make a correction, click “Back.”</font></p>
 				{else}
 				<p>
-				Please confirm the your entered informations.If it's ok, please press the "Complete" button.<br />
-				If you want to back the last page, please press the "back" button.
+				Check that all data you entered is correct and click “Register.”<br />
+				If you need to make a correction, click “Back.”
 				</p>
 				{/if}
 				<form name="form_user_enUserRegistDo" id="form_user_enUserRegistDo" method="post" action="">
@@ -179,9 +182,9 @@
 						</tr>
 						{if ("1" == $form.delFlg)}
 						<tr>
-							<th class="item">Withdrawal from membership</th>
+							<th class="item">Withdrawal of Registration</th>
 							<th class="required"></th>
-							<td>Yes</td>
+							<td>I would like to withdraw my registration.</td>
 						</tr>
 						{/if}
 					</table>
@@ -205,12 +208,11 @@
 						<a href="http://www.digicert.com/ssl-certificate.htm">SSL Certificate</a><script language="javascript" type="text/javascript">coderz();</script></div>
 						<!-- /DigiCert Site Seal Code -->
 						</td>
-						<td>このページから送信される情報は、SSL暗号化通信により保護されています。</td>
+						<td>All your information submitted through this page is protected by SSL.</td>
 					</tr>
 				</table>
 			</div>
 			<p class="totop">
-				<!-- <a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>  -->
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
 			</p>
 		</div>

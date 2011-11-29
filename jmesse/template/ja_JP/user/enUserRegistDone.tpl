@@ -35,6 +35,7 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
+{*
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">Business Opportunities</a></li>
@@ -56,6 +57,7 @@
 				<li>User Deleting Complete</li>
 			{/if}
 		</ul>
+*}
 	</div>
 	<!-- /bread -->
 
@@ -69,38 +71,37 @@
 				<h2>User Registration</h2>
 				{/if}
 				{if ("change" == $form.mode)}
-				<h2>User Editing</h2>
+				<h2>Edit User Information</h2>
 				{/if}
 				{if ("delete" == $form.mode)}
-				<h2>User Deleting</h2>
+				<h2>Withdrawal of User Registration</h2>
 				{/if}
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了" /></h3>
 				{if ("regist" == $form.mode)}
-				<p>User Registration complete. Thank you very much.</p>
+				<p>Your user registration has been completed.</p>
 				{/if}
 				{if ("change" == $form.mode)}
-				<p>User Editing complete. Thank you very much.</p>
+				<p>Your user editing has been completed.</p>
 				{/if}
 				{if ("delete" == $form.mode)}
-				<p>User Deleting complete. Thank you very much.</p>
+				<p>Your registration has been withdrawn.</p>
 				{/if}
 				<div class="finish-navi">
 					{if ("delete" != $form.mode)}
 					<div class="btn">
-						<a href="{$config.url}?action_user_enFairRegistStep1=true" ><span class="title">New Fair Registration</span>
-						<span class="description">To new fair registration page</span></a>
+						<a href="{$config.url}?action_user_enFairRegistStep1=true" ><span class="title">Registration of New Trade Fair Info</span>
+						<span class="description">Click to go to the trade fair registration page.</span></a>
 					</div>
 					{/if}
 					<div class="btn">
-						<a href="/j-messe/" ><span class="title">To top page</span>
-						<span class="description">To jemmese top page</span></a>
+						<a href="/j-messe/" ><span class="title">Register</span>
+						<span class="description">Click to complete trade fair registration and return to the top page.</span></a>
 					</div>
 				</div>
 			</div>
 			<p class="totop">
-				<!-- <a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>  -->
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
 			</p>
 		</div>

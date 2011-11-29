@@ -50,9 +50,9 @@
 		<!-- main -->
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
-			<div class="h2"><h2>User Detail</h2></div>
+			<div class="h2"><h2>Detailed User Information</h2></div>
 			<div class="in_main">
-				<p>If you want edit or delete the your user's information, please press the "TO EDIT" button.<br /></p>
+				<p>If you need to change your registration information or to withdraw your registration, click “Return to Editing Page.”<br /></p>
 				<form name="form_user_enUserDetail" id="form_user_enUserDetail" method="post" action=""  enctype="multipart/form-data">
 					<input type="hidden" name="action_user_enUserChange" id="action_user_enUserChange" value="dummy" />
 					<!-- モード -->

@@ -57,11 +57,11 @@
 				{if ("regist" == $form.mode)}
 				<h2>User Registration</h2>
 				{else}
-				<h2>User Editing</h2>
+				<h2>Edit User Information</h2>
 				{/if}
 			</div>
 			<div class="in_main">
-				<h3 class="img t_center"><img src="/j-messe/images/db/user02.jpg" alt="ユーザー情報入力"></h3>
+				<h3 class="img t_center"><img src="/j-messe/images/db/user02.jpg" alt="ユーザー情報入力" /></h3>
 				<form name="form_user_enUserRegist" id="form_user_enUserRegist" method="post" action="">
 					{if ("regist" == $form.mode)}
 					<input type="hidden" name="action_user_enUserRegistDo" id="action_user_enUserRegistDo" value="dummy" />
@@ -76,9 +76,9 @@
 					{if count($errors)}
 					<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
 					{/if}
-					<h4>Email and Password</h4>
-					<p class="nomargin">Please enter your email and password for your login.<br />
-					(※ email is registered after changing into small letters.)</p>
+					<h4>E-mail Account and Password</h4>
+					<p class="nomargin">Please register your e-mail address and password to log into J-messe.<br />
+					(※ All letters entered for e-mail registration will be automatically converted to lowercase.)</p>
 					<table id="registration">
 						{if is_error('email')}
 						<tr class="errorcheck">
@@ -104,7 +104,7 @@
 							{if is_error('email2')}
 							<span class="error-message">{message name="email2"}</span><br />
 							{/if}
-							<strong>Please enter same email again.</strong></td>
+							<strong>Re-enter the e-mail address for confirmation.</strong></td>
 						</tr>
 						{if is_error('password')}
 						<tr class="errorcheck">
@@ -117,7 +117,7 @@
 							{if is_error('password')}
 							<span class="error-message">{message name="password"}</span><br />
 							{/if}
-							<strong>Enter between 4 and 8 characters in small letters only. </td>
+							<strong>Enter a login password with a combination of 4 to 8 single-byte letters and numbers.</strong></td>
 						</tr>
 						{if is_error('password2')}
 						<tr class="errorcheck">
@@ -130,10 +130,10 @@
 							{if is_error('password2')}
 							<span class="error-message">{message name="password2"}</span><br />
 							{/if}
-							<strong>Please enter same password again.</td>
+							<strong>Re-enter the password for confirmation.</strong></td>
 						</tr>
 					</table><br />
-					<h4>User's Information</h4>
+					<h4>Other User Information</h4>
 					<table id="registration">
 						{if is_error('companyNm')}
 						<tr class="errorcheck">
@@ -197,9 +197,10 @@
 							<th class="item">Post Code</th>
 							<th class="required"></th>
 							<td>
-							<input type="text" maxlength="20" value="{$form.postCode}" size="10" name="postCode" id="postCode" />（one-byte alphabet and numbers)<br />
+							<input type="text" maxlength="20" value="{$form.postCode}" size="10" name="postCode" id="postCode" />（single-byte letters and numbers)<br />
+							Insert a hyphen between each group of numbers.<br />(E.g. for an address in Japan: 123-4568)<br />
 							{if is_error('postCode')}
-							<span class="error-message">{message name="postCode"}</span><br />Example: For Tokyo, enter 123-4567
+							<span class="error-message">{message name="postCode"}</span>
 							{/if}
 							</td>
 						</tr>
@@ -224,11 +225,12 @@
 							<th class="item">TEL</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-							<input type="text" value="{$form.tel}" size="30" name="tel" id="tel" />（one-byte alphabet and numbers)<br />
+							<input type="text" value="{$form.tel}" size="30" name="tel" id="tel" />（single-byte letters and numbers)<br />
 							{if is_error('tel')}
 							<span class="error-message">{message name="tel"}</span><br />
 							{/if}
-							Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678
+							Enter the numbers starting with a plus mark “+” followed by the country code. <br />
+							Insert hyphens between each group of numbers. <br />(E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />
 							</td>
 						</tr>
 						{if is_error('fax')}
@@ -239,11 +241,10 @@
 							<th class="item">FAX</th>
 							<th class="required"></th>
 							<td>
-							<input type="text" value="{$form.fax}" size="30" name="fax" id="fax" />（one-byte alphabet and numbers)<br />
+							<input type="text" value="{$form.fax}" size="30" name="fax" id="fax" />（single-byte letters and numbers)<br />
 							{if is_error('fax')}
 							<span class="error-message">{message name="fax"}</span><br />
 							{/if}
-							Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678
 							</td>
 						</tr>
 						{if is_error('url')}
@@ -257,15 +258,15 @@
 							{if is_error('url')}
 							<span class="error-message">{message name="url"}</span><br />
 							{/if}
-							Enter URLs beginning with http(s)://.
+							Enter the URL beginning with “http(s)://”.
 							</td>
 						</tr>
 						{if ("regist" != $form.mode)}
 						<tr>
-							<th class="item">Withdrawal from membership</th>
+							<th class="item">Withdrawal of Registration</th>
 							<th class="required"></th>
-							<td><input type="checkbox" size="60" name="delFlg" id="delFlg" value="1" /> YES<br />
-							※If you want to withdraw from membership, please check the select box.<br />
+							<td><input type="checkbox" size="60" name="delFlg" id="delFlg" value="1" />I would like to withdraw my registration.<br />
+							※Check the box above if you wish to withdraw your registration.<br />
 							</td>
 						</tr>
 						{/if}
@@ -290,13 +291,12 @@
 							<a href="http://www.digicert.com/ssl-certificate.htm">SSL Certificate</a><script language="javascript" type="text/javascript">coderz();</script></div>
 							<!-- /DigiCert Site Seal Code -->
 						</td>
-						<td>このページから送信される情報は、SSL暗号化通信により保護されています。</td>
+						<td>All your information submitted through this page is protected by SSL.</td>
 					</tr>
 				</table>
 				<!-- /ssl area-->
 			</div>
 			<p class="totop">
-				<!-- <a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>  -->
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
 			</p>
 		</div>

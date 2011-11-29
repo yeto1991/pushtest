@@ -55,7 +55,7 @@
 {/literal}
 -->
 </script>
-<title>My Fairs List - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Trade Fair List - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>
 
 <body class="layout-LC highlight-database j-messe">
@@ -70,7 +70,7 @@
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
-			<li>My Fairs List</li>
+			<li>Trade Fair List</li>
 		</ul>
 	</div>
 	<!-- /bread -->
@@ -80,12 +80,12 @@
 		<!-- main -->
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
-			<div class="h2"><h2>My Fairs List</h2></div>
+			<div class="h2"><h2>Trade Fair List</h2></div>
 			<div class="in_main">
 				<p class="t_right">user：{$session.email}</p>
 				{if $app.my_fair_info_list_count != "0"}
-				<p>If you confirm the fair, please press the fair title's link.<br />
-				If you delete the fair, please check the select box and press "Delete" button.<br /></p>
+				<p>If you need to confirm/edit details of your registered fairs, click on the fair title.<br />
+				If you need to delete a registered fair, check the box in front of “Fair title”, then click “Delete” at the bottom of this page.<br /></p>
 				{/if}
 				<form name="form_user_enFairList" id="form_user_enFairList" method="post" action="">
 					<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
@@ -99,19 +99,19 @@
 					{section name=it loop=$app.my_fair_info_list}
 					<table id="registration">
 						<tr>
-							<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}" /><font size="2">&nbsp;&nbsp;Fair title </font></th>
+							<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}" /><font size="2">&nbsp;/&nbsp;Fair title (English)</font></th>
 							<td><a href="{$config.url}?action_user_enFairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_en}</font></a></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Dates</font></th>
+							<th class="item"><font size="2">Term</font></th>
 							<td><font size="2">{$app.my_fair_info_list[it].date_from_format} to {$app.my_fair_info_list[it].date_to_format}</font></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Location</font></th>
+							<th class="item"><font size="2">Location/Venue</font></th>
 							<td><font size="2">{if $app.my_fair_info_list[it].city_name_en == ""}Other({$app.my_fair_info_list[it].other_city_en}){else}{$app.my_fair_info_list[it].city_name_en}{/if} / {$app.my_fair_info_list[it].country_name_en} / {$app.my_fair_info_list[it].region_name_en}</font></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Main/Sub industry </font></th>
+							<th class="item"><font size="2">Main industries covered</font></th>
 							<td><font size="2">
 								{$app.my_fair_info_list[it].main_indust_name1_en}&nbsp;/&nbsp;{$app.my_fair_info_list[it].sub_indust_name1_en}
 								{if $app.my_fair_info_list[it].main_indust_name2_en != ""}
@@ -133,11 +133,11 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Exhibits</font></th>
+							<th class="item"><font size="2">Items covered</font></th>
 							<td><font size="2">{$app.my_fair_info_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}</font></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Confirm Status</font></th>
+							<th class="item"><font size="2">Approval status (by JETRO)</font></th>
 							<td>
 								<font size="2">
 								{if $app.my_fair_info_list[it].confirm_flag == "0"}unconfirmed{/if}
@@ -173,7 +173,7 @@
 			<p class="totop">
 				<a href="javascript:window.open('{$config.url}?action_user_enFairList=true&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
-				</p>
+			</p>
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
