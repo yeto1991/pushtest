@@ -48,6 +48,7 @@
 			<div class="in_main">
 				<h3>User Login</h3>
 				<div class="login">
+					<p>User Login: For hosts of trade fairs to register event information</p>
 					<form name="form_user_enLogin" id="form_user_enLogin" method="post" action="">
 						<input type="hidden" name="action_user_enLoginDo" id="action_user_enLoginDo" value="dummy" />
 						<input type="hidden" name="function" id="function" value="{$form.function}" />
@@ -89,15 +90,14 @@
 					</form>
 					<div class="line_dot"><hr /></div>
 					<p><strong>Forgot your password?</strong><br />
-					<a href="{$config.url}?action_user_enReissuePassword=true"  class="icon_arrow">Login Password Confirmation</a></p><br />
-					<p><strong>To the first visiting person</strong><br />Please regist your account<br />
+					<a href="{$config.url}?action_user_enReissuePassword=true"  class="icon_arrow">Password Inquiries</a></p><br />
+					<p><strong>For first time users</strong><br />Click “User Registration” and register your information<br />
 					<a href="{$config.url}?action_user_enUserRegist=true" class="icon_arrow">User Registration</a></p>
 				</div>
 			</div>
 			<p class="totop">
-				<!-- <a href="?print=1" target="print"><img src="/images/en/btn-print.gif" alt="Print" width="46" height="14" /></a>  -->
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
-				</p>
+			</p>
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
