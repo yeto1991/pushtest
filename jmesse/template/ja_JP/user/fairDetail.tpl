@@ -77,14 +77,14 @@
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
-			<li><a href="{$config.url}?action_user_fairRegistStep1=true">見本市登録(step1)</a></li>
-			<li><a href="{$config.url}?action_user_fairRegistStep2=true">見本市登録(step2)</a></li>
-			<li><a href="{$config.url}?action_user_fairRegistStep3=true">見本市登録(step3)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep1=true&back=1">見本市登録(step1)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep2=true&back=1">見本市登録(step2)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep3=true&back=1">見本市登録(step3)</a></li>
 			<li>見本市登録確認</li>
 			{elseif ('c' == $form.mode)}
-			<li><a href="{$config.url}?action_user_fairRegistStep1=true">見本市修正(step1)</a></li>
-			<li><a href="{$config.url}?action_user_fairRegistStep2=true">見本市修正(step2)</a></li>
-			<li><a href="{$config.url}?action_user_fairRegistStep3=true">見本市修正(step3)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep1=true&back=1">見本市修正(step1)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep2=true&back=1">見本市修正(step2)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep3=true&back=1">見本市修正(step3)</a></li>
 			<li>見本市修正確認</li>
 			{else}
 			<li>見本市詳細</li>
@@ -562,7 +562,7 @@ $form.mode
 					</div>
 				</div>
 				<p class="totop">
-				<!--
+{*
 					{if ('d' == $form.mode)}
 					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{elseif ('c' == $form.mode || 'e' == $form.mode)}
@@ -570,7 +570,7 @@ $form.mode
 					{else}
 					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{/if}
-				 -->
+*}
 				 	{if ('d' == $form.mode || 'p' == $form.mode)}
 				 	<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 				 	{/if}

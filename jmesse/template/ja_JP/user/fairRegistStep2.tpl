@@ -124,10 +124,10 @@
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
-			<li><a href="{$config.url}?action_user_fairRegistStep1=true">見本市登録(step1)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep1=true&back=1">見本市登録(step1)</a></li>
 			<li>見本市登録(step2)</li>
 			{elseif ('c' == $form.mode)}
-			<li><a href="{$config.url}?action_user_fairRegistStep1=true">見本市修正(step1)</a></li>
+			<li><a href="{$config.url}?action_user_fairRegistStep1=true&back=1">見本市修正(step1)</a></li>
 			<li>見本市修正(step2)</li>
 			{/if}
 		</ul>
@@ -514,7 +514,7 @@
 					</div>
 				</div>
 				<p class="totop">
-				<!--
+{*
 					{if ('c' == $form.mode || 'e' == $form.mode)}
 						{if ('1' == $form.back)}
 					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
@@ -528,7 +528,7 @@
 					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 						{/if}
 					{/if}
-				 -->
+*}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>
