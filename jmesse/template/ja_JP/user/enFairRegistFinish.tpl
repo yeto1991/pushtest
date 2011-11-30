@@ -67,7 +67,7 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ('r' == $form.msg)}
-				<h2>Fair Registration</h2>
+				<h2>New Fair Registration</h2>
 				{elseif ('c' == $form.msg)}
 				<h2>Fair Editing</h2>
 				{elseif ('d' == $form.msg)}
@@ -79,11 +79,11 @@
 					<img src="/j-messe/images/db/fair06.jpg" alt="見本市登録完了" />
 				</h3>
 				{if ('r' == $form.msg)}
-				<p>Fair Registration complete. Thank you very much.</p>
+				<p>Your registration has been completed.</p>
 				{elseif ('c' == $form.msg)}
-				<p>Fair Editing complete. Thank you very much.</p>
+				<p>Your editing has been completed.</p>
 				{elseif ('d' == $form.msg)}
-				<p>Fair Deleting complete. Thank you very much.</p>
+				<p>Your deleting has been completed.</p>
 				{/if}
 				<div class="finish-navi">
 					<div class="btn">

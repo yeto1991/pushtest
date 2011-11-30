@@ -143,7 +143,7 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ('' == $form.mode) || ('e' == $form.mode)}
-				<h2>Fair Registration</h2>
+				<h2>New Fair Registration</h2>
 				{elseif ('c' == $form.mode)}
 				<h2>Fair Editing</h2>
 				{/if}
@@ -186,7 +186,7 @@
 						</tr>
 					</table>
 
-					<h4>last fair information</h4>
+					<h4>Information from latest fair</h4>
 					<table id="registration">
 						{if is_error('year_of_the_trade_fair')}
 						<tr class="errorcheck">
@@ -216,7 +216,7 @@
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.total_number_of_visitor}" size="10" name="total_number_of_visitor" id="total_number_of_visitor" maxlength="10" /> <strong> (including </strong><input type="text" value="{$form.number_of_foreign_visitor}" size="10" name="number_of_foreign_visitor" id="number_of_foreign_visitor" maxlength="10" /> <strong>  foreign visitors) </strong><br />
-								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
+								Enter only single-byte numbers with no commas.  E.g. 100<br/>
 								{if is_error('total_number_of_visitor')}
 								<span class="error-message">{message name="total_number_of_visitor"}</span><br />
 								{/if}
@@ -234,7 +234,7 @@
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.total_number_of_exhibitors}" size="10" name="total_number_of_exhibitors" id="total_number_of_exhibitors" maxlength="10" /> <strong>(including </strong><input type="text" value="{$form.number_of_foreign_exhibitors}" size="10" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" maxlength="10" /> <strong>  foreign exhibitors) </strong><br />
-								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
+								Enter only single-byte numbers with no commas.  E.g. 100<br/>
 								{if is_error('total_number_of_exhibitors')}
 								<span class="error-message">{message name="total_number_of_exhibitors"}</span><br />
 								{/if}
@@ -253,7 +253,7 @@
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.net_square_meters}" size="50" name="net_square_meters" id="net_square_meters" maxlength="50" /> <strong>sqm (NET)</strong><br />
-								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
+								Enter only single-byte numbers with no commas.  E.g. 100<br/>
 								{if is_error('net_square_meters')}
 								<span class="error-message">{message name="net_square_meters"}</span><br />
 								{/if}
@@ -265,11 +265,11 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Data verified</th>
+							<th class="item">Data verified by</th>
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.spare_field1}" size="50" name="spare_field1" id="spare_field1" maxlength="255" /><br />
-								Example: FKM (Society for Voluntary Control of Trade Fair and Exhibition Statistics) <br />and UFI (Global Association of the Exhibition Industry) <br/>
+								Enter verifying authorities. E.g. FKM (the Society for Voluntary Control of Trade Fair and Exhibition Statistics) and UFI (the Global Association of the Exhibition Industry)<br/>
 								{if is_error('spare_field1')}
 								<span class="error-message">{message name="spare_field1"}</span><br />
 								{/if}
@@ -277,7 +277,7 @@
 						</tr>
 					</table>
 
-					<h4>PR・Catchphrase</h4>
+					<h4>Catchphrases</h4>
 					<table id="registration">
 						{if is_error('profile_en')}
 						<tr class="errorcheck">
@@ -288,7 +288,7 @@
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
-							 	Maximum of 500 characters<br/>
+							 	Approx. 120 words<br/>
 								{if is_error('profile_en')}
 								<span class="error-message">{message name="profile_en"}</span><br />
 								{/if}
@@ -304,7 +304,7 @@
 							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
-								Maximum of 1000 characters<br/>
+								Approx. 250 words <br/>
 								{if is_error('detailed_information_en')}
 								<span class="error-message">{message name="detailed_information_en"}</span><br />
 								{/if}
@@ -322,7 +322,7 @@
 								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="Regist" onclick="add_photos('photos_1')"/><br />
 								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="Regist" onclick="add_photos('photos_2')"/><br />
 								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="Regist" onclick="add_photos('photos_3')"/><br />
-								Register up to three images. (JPEG, GIF or TIFF format only and size is 600px×600px.) <br/>
+								Registration is available for up to three files. <br />(JPEG, GIF or TIFF formats only with size up to 600px×800px)<br/>
 								<select name="photos_list" id="photos_list" size="3" style="width:200px">
 									{if ('' != $form.photos_name_1) }
 									<option value="{$form.photos_name_1}">{$form.photos_name_1}</option>
@@ -342,7 +342,7 @@
 										{/if}
 									{/foreach}
 								{/if}
-								Did you virus check your selected photos?<br/>
+								Have you scanned the uploaded image files for viruses?<br/>
 								<input type="radio" name="virus_check" id="virus_check_y" value="1" />Yes
 								<input type="radio" name="virus_check" id="virus_check_n" value="0" checked />No<br/>
 								{if is_error('photos_1')}
@@ -402,9 +402,9 @@
 								<strong>Department: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />
 								<strong>Person: </strong><input type="text" value="{$form.organizer_pers}" size="30" name="organizer_pers" id="organizer_pers" maxlength="100" /><br />
 								<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
-								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
+								Enter the numbers starting with a plus mark “+” followed by the country code. Insert hyphens between each group of numbers. (E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />
 								<strong>FAX: </strong><input type="text" value="{$form.organizer_fax}" size="30" name="organizer_fax" id="organizer_fax" maxlength="100" /><br />
-								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
+								Enter the numbers starting with a plus mark “+” followed by the country code. Insert hyphens between each group of numbers. (E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />
 								<strong>Email: </strong><input type="text" value="{$form.organizer_email}" size="60" name="organizer_email" id="organizer_email" maxlength="255" /><br />
 								{if is_error('organizer_addr')}
 								<span class="error-message">{message name="organizer_addr"}</span><br />
@@ -435,18 +435,18 @@
 							<th class="item">Agency in Japan</th>
 							<th class="required"></th>
 							<td>
-								<strong>Use only if your trade fair is outside of Japan, <br />but you have an agent in Japan for inquiries.</strong><br />
-								<strong>Name: </strong><input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="100" /><br/>
+								<strong>Fill in information only if your exhibition will be held outside Japan and you have a representative office, agency or person in Japan for inquiries.</strong><br /><br />
+								<strong>Name of representative office or agency in Japan: </strong><input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="100" /><br/>
 								{if is_error('agency_in_japan_en')}
 								<span class="error-message">{message name="agency_in_japan_en"}</span><br />
 								{/if}
-								<strong>Address: </strong><input type="text" value="{$form.agency_in_japan_addr}" size="30" name="agency_in_japan_addr" id="agency_in_japan_addr" maxlength="255" /><br />
-								<strong>Department: </strong><input type="text" value="{$form.agency_in_japan_div}" size="30" name="agency_in_japan_div" id="agency_in_japan_div" maxlength="255" /><br />
-								<strong>Person: </strong><input type="text" value="{$form.agency_in_japan_pers}" size="30" name="agency_in_japan_pers" id="agency_in_japan_pers" maxlength="100" /><br />
+								<strong>Address of the office or agency: </strong><input type="text" value="{$form.agency_in_japan_addr}" size="30" name="agency_in_japan_addr" id="agency_in_japan_addr" maxlength="255" /><br />
+								<strong>Department in charge: </strong><input type="text" value="{$form.agency_in_japan_div}" size="30" name="agency_in_japan_div" id="agency_in_japan_div" maxlength="255" /><br />
+								<strong>Person in charge: </strong><input type="text" value="{$form.agency_in_japan_pers}" size="30" name="agency_in_japan_pers" id="agency_in_japan_pers" maxlength="100" /><br />
 								<strong>TEL: </strong><input type="text" value="{$form.agency_in_japan_tel}" size="30" name="agency_in_japan_tel" id="agency_in_japan_tel" maxlength="100" /><br />
-								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
+								Enter the numbers starting with a plus mark “+” followed by the country code. Insert hyphens between each group of numbers. (E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />
 								<strong>FAX: </strong><input type="text" value="{$form.agency_in_japan_fax}" size="30" name="agency_in_japan_fax" id="agency_in_japan_fax" maxlength="100" /><br />
-								Include your country code and a hyphen between each group of numbers.<br />Example: For Tokyo, enter +81-3-1234-5678<br />
+								Enter the numbers starting with a plus mark “+” followed by the country code. Insert hyphens between each group of numbers. (E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />
 								<strong>Email: </strong><input type="text" value="{$form.agency_in_japan_email}" size="60" name="agency_in_japan_email" id="agency_in_japan_email" maxlength="255" /><br />
 								{if is_error('agency_in_japan_en')}
 								<span class="error-message">{message name="agency_in_japan_en"}</span><br />

@@ -174,7 +174,7 @@
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
 				{if ('' == $form.mode) || ('e' == $form.mode)}
-				<h2>Fair Registration</h2>
+				<h2>New Fair Registration</h2>
 				{elseif ('c' == $form.mode)}
 				<h2>Fair Editing</h2>
 				{/if}
@@ -226,7 +226,7 @@
 					<input type="hidden" name="sub_industory_name_6" id="sub_industory_name_6" value="{$form.sub_industory_name_6}" />
 					<!-- /HIDDEN -->
 
-					<h4>basic information</h4>
+					<h4>Basic Information</h4>
 					<table id="registration">
 						{if is_error('fair_title_en')}
 						<tr class="errorcheck">
@@ -248,7 +248,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Abbreviated title</th>
+							<th class="item">Fair title (abbreviation)</th>
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.abbrev_title}" size="30"  name="abbrev_title" id="abbrev_title" maxlength="255" /><br />
@@ -419,7 +419,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Frequency</th>
+							<th class="item">How often is it held?</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.frequency_list}
@@ -433,7 +433,7 @@
 						</tr>
 					</table>
 
-					<h4>Industry and Exhibits</h4>
+					<h4>Industries/Products Covered</h4>
 					<table id="registration">
 						{if is_error('main_industory_1')}
 						<tr class="errorcheck">
@@ -443,7 +443,7 @@
 							<th class="item">Main/Sub Industry</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
-								<!-- 現在、以下の業種が選択されています。<br /> -->
+								Click “Select”, then choose industries. <br />
 								<div id="INDUSOTRY_LIST">
 								{if ('' != $form.sub_industory_name_1)}
 								・{$form.sub_industory_name_1}<br />
@@ -480,7 +480,7 @@
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="3" name="exhibits_en" id="exhibits_en">{$form.exhibits_en}</textarea><br />
-								Maximum of 300 characters<br/>
+								Enter details of products (Approx. 80 words)<br/>
 								{if is_error('exhibits_en')}
 								<span class="error-message">{message name="exhibits_en"}</span><br />
 								{/if}
@@ -488,7 +488,7 @@
 						</tr>
 					</table>
 
-					<h4>Location and Venue</h4>
+					<h4>Location/Venue</h4>
 					<table id="registration">
 						{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
 						<tr class="errorcheck">
@@ -593,7 +593,7 @@
 							<th class="required"></th>
 							<td>
 								<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
-								Please enter numbers only (one-byte size). <br/>Do not use commas, hyphen, or letters. e.g. 100<br/>
+								Enter only single-byte numbers with no commas. E.g. 1000<br/>
 								{if is_error('gross_floor_area')}
 								<span class="error-message">{message name="gross_floor_area"}</span><br />
 								{/if}

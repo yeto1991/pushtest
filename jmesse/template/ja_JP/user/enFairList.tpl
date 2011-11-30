@@ -55,7 +55,7 @@
 {/literal}
 -->
 </script>
-<title>Trade Fair List - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>My Trade Fair List - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>
 
 <body class="layout-LC highlight-database j-messe">
@@ -82,7 +82,7 @@
 		<!-- main -->
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
-			<div class="h2"><h2>Trade Fair List</h2></div>
+			<div class="h2"><h2>My Trade Fair List</h2></div>
 			<div class="in_main">
 				<p class="t_right">user：{$session.email}</p>
 				{if $app.my_fair_info_list_count != "0"}
@@ -135,21 +135,21 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Items covered</font></th>
+							<th class="item"><font size="2">Products covered</font></th>
 							<td><font size="2">{$app.my_fair_info_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}</font></td>
 						</tr>
 						<tr>
 							<th class="item"><font size="2">Approval status (by JETRO)</font></th>
 							<td>
 								<font size="2">
-								{if $app.my_fair_info_list[it].confirm_flag == "0"}unconfirmed{/if}
-								{if $app.my_fair_info_list[it].confirm_flag == "1"}confirmed{/if}
-								{if $app.my_fair_info_list[it].confirm_flag == "2"}denied{/if}
+								{if $app.my_fair_info_list[it].confirm_flag == "0"}Awaiting approval{/if}
+								{if $app.my_fair_info_list[it].confirm_flag == "1"}Approved{/if}
+								{if $app.my_fair_info_list[it].confirm_flag == "2"}Rejected{/if}
 								</font>
 							</td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">update date</font></th>
+							<th class="item"><font size="2">Date of last update</font></th>
 							<td>
 								{if $app.my_fair_info_list[it].update_date == ""}
 									<font size="2">{$app.my_fair_info_list[it].regist_date|date_format:"%e-%b-%Y"}</font>

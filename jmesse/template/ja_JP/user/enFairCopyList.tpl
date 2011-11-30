@@ -22,7 +22,7 @@
 <!--/-->
 <script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
 *}
-<title>My fairs list for copy registration - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Registration of New Trade Fair Info - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>
 
 <body class="layout-LC highlight-database j-messe">
@@ -50,15 +50,15 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
-				<h2>My fairs list for copy registration</h2>
+				<h2>Registration of New Trade Fair Info</h2>
 			</div>
 			<div class="in_main">
 				<p class="t_right">User：{$session.email}</p>
 				<p>
-					You can regist new fair by copying registed fair informations.<br />
-					<strong><span class="red">Please press fair title's link for copy registration.</span></strong>
+					You can register new trade fair information here by copying previously recorded information from My Trade Fair List.<br />
+					Click the fair title which you would like to copy.<br />
 				</p>
-				<h4>My fairs list</h4>
+				<h4>My Trade Fair List</h4>
 				<p>Result：{$app.cnt}</p>
 				{section name=it loop=$app.fair_list}
 				{if (0 == $smarty.section.it.index%2)}

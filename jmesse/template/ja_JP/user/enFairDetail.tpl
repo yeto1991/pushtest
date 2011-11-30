@@ -105,11 +105,11 @@ $form.mode
 'p' : 修正登録一覧         → 詳細表示 (→ 修正登録モードStep.1)
 *}
 				{if ('' == $form.mode) || ('e' == $form.mode)}
-				<h2>Fair Registration</h2>
+				<h2>New Fair Registration</h2>
 				{elseif ('c' == $form.mode)}
 				<h2>Fair Editing</h2>
 				{else}
-				<h2>Fair Detail</h2>
+				<h2>Details of Your Registered Fairs</h2>
 				{/if}
 			</div>
 			<form name="form_user_enFairDetail" id="form_user_enFairDetail" method="post" action="" >
@@ -138,19 +138,19 @@ $form.mode
 					<p class="t_right">user：{$session.email}</p>
 
 					{if ('' == $form.mode)}
-					<p><strong><span class="red">Do you regist this fair?</span></strong></p>
+					<p><strong><span class="red">Do you wish to register the trade fair information as follows?</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep2=true&back=1"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('e' == $form.mode)}
-					<p><strong><span class="red">Do you regist on a base the fair? </span></strong></p>
+					<p><strong><span class="red">Do you wish to register the trade fair information as follows?</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('c' == $form.mode)}
-					<p><strong><span class="red">Do you edit this fair?</span></strong></p>
+					<p><strong><span class="red">Do you wish to edit the trade fair information as follows?</span></strong></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
 						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
@@ -176,7 +176,7 @@ $form.mode
 					</div>
 				</div>
 				<div class="in_main">
-					<h4>basic information</h4>
+					<h4>Basic Information</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">Fair title</th>
@@ -184,7 +184,7 @@ $form.mode
 							<td>{$form.fair_title_en}</td>
 						</tr>
 						<tr>
-							<th class="item">Abbreviated title</th>
+							<th class="item">Fair title (abbreviation)</th>
 							<th class="required"></th>
 							<td>{$form.abbrev_title}</td>
 						</tr>
@@ -199,12 +199,12 @@ $form.mode
 							<td>{$form.date_from_yyyy}/{$form.date_from_mm}/{$form.date_from_dd}～{$form.date_to_yyyy}/{$form.date_to_mm}/{$form.date_to_dd}</td>
 						</tr>
 						<tr>
-							<th class="item">Frequency</th>
+							<th class="item">How often is it held?</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$app.frequency_name.discription_en}</td>
 						</tr>
 					</table>
-					<h4>Industry and Exhibits</h4>
+					<h4>Industries/Products Covered</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">Main/Sub Industry</th>
@@ -234,7 +234,7 @@ $form.mode
 							<td>{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 					</table>
-					<h4>Location and Venue</h4>
+					<h4>Location/Venue</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">Location</th>
@@ -265,7 +265,7 @@ $form.mode
 							</td>
 						</tr>
 						<tr>
-							<th class="item">Data verified</th>
+							<th class="item">Data verified by</th>
 							<th class="required"></th>
 							<td>
 							{if ('' != $form.spare_field1)}
@@ -316,7 +316,7 @@ $form.mode
 						</tr>
 *}
 					</table>
-					<h4>last fair information</h4>
+					<h4>Information from latest fair</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">year</th>
@@ -355,7 +355,7 @@ $form.mode
 							</td>
 						</tr>
 					</table>
-					<h4>PR・Catchphrase</h4>
+					<h4>Catchphrases</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">Catchphrase</th>
@@ -407,10 +407,10 @@ $form.mode
 							<th class="item">Agency in Japan</th>
 							<th class="required"></th>
 							<td>
-								<strong>Name: </strong>{$form.agency_in_japan_en}<br />
-								<strong>Address: </strong>{$form.agency_in_japan_addr}<br />
-								<strong>Department: </strong>{$form.agency_in_japan_div}<br />
-								<strong>Person: </strong>{$form.agency_in_japan_pers}<br />
+								<strong>Name of representative office or agency in Japan: </strong>{$form.agency_in_japan_en}<br />
+								<strong>Address of the office or agency: </strong>{$form.agency_in_japan_addr}<br />
+								<strong>Department in charge: </strong>{$form.agency_in_japan_div}<br />
+								<strong>Person in charge: </strong>{$form.agency_in_japan_pers}<br />
 								<strong>TEL: </strong>{$form.agency_in_japan_tel}<br />
 								<strong>FAX: </strong>{$form.agency_in_japan_fax}<br />
 								<strong>Email: </strong>{$form.agency_in_japan_email}<br />
