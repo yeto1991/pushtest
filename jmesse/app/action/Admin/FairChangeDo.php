@@ -199,6 +199,10 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			if ('' == $this->af->get('venue_jp')) {
 				$this->ae->add('error', '会場名(日)が入力されていません');
 			}
+			// 主催者・問合せ先名称（日）
+			if ('' == $this->af->get('organizer_jp')) {
+				$this->ae->add('error', '主催者・問合せ先名称(日)が入力されていません');
+			}
 		}
 		// 英語
 		if ('1' == $select_language_info || '2' == $select_language_info) {
