@@ -85,10 +85,10 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 
 		//ユーザ情報確認
 		if (null == $user || null == $user->get('user_id')) {
-			$this->ae->add('email', "The email doesn't exist.");
+			$this->ae->add('email', "Email is incorrect.");
 			return 'user_enReissuePassword';
 		} else if ($user->get('del_flg') == '1') {
-			$this->ae->add('email', "Already user's informations was being deleted.");
+			$this->ae->add('email', "Email is incorrect.");
 			return 'user_enReissuePassword';
 		}
 
