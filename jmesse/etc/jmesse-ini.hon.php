@@ -113,10 +113,10 @@ $config = array(
 	//'use_gettext' => false,
 
 	// mail
-	'mail_smtp_host' => '210.161.156.130',
+	'mail_smtp_host' => '10.1.100.23',
 	'mail_smtp_port' => '25',
-	'mail_smtp_user' => '',
-	'mail_smtp_pass' => '',
+	'mail_smtp_user' => 'j-messe@jetro.go.jp',
+	'mail_smtp_pass' => '121d0f3e',
 
 	'mail_from' => 'J-messe事務局 <j-messe@jetro.go.jp>',
 	'mail_bcc' => 'j-messe@totec-net.com',
@@ -132,10 +132,10 @@ $config = array(
 	'mail_title_fair_regist_en'  => 'J-messe見本市登録完了のお知らせ(英語)',
 	'mail_title_fair_change_en'  => 'J-messe見本市更新完了のお知らせ(英語)',
 
-	'mail_imap_host' => 'imap.gmail.com',
+	'mail_imap_host' => '10.1.100.23',
 	'mail_imap_port' => '993',
-	'mail_imap_user' => '',
-	'mail_imap_pass' => '',
+	'mail_imap_user' => 'j-messe@jetro.go.jp',
+	'mail_imap_pass' => '121d0f3e',
 
 
 	//'mail_func_workaround' => false,
