@@ -41,7 +41,7 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// ログインチェック
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		// 見本市番号
