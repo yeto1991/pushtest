@@ -53,11 +53,11 @@ class Jmesse_Action_UserReissuePasswordDo extends Jmesse_ActionClass
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
-					$this->ae->add('email', "Eメール 「@」の位置が不正です");
+					$this->ae->add('email', "Eメール 「@」の位置が不正です。");
 					return 'user_reissuePassword';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email', "Eメール 「@」の入力が重複しています。");
 					return 'user_reissuePassword';
 				}
 			}
@@ -85,10 +85,10 @@ class Jmesse_Action_UserReissuePasswordDo extends Jmesse_ActionClass
 
 		//ユーザ情報確認
 		if (null == $user || null == $user->get('user_id')) {
-			$this->ae->add('email', '入力されたEメールアドレスは正しくありません');
+			$this->ae->add('email', '入力されたeメールアドレスは正しくありません。');
 			return 'user_reissuePassword';
 		} else if ($user->get('del_flg') == '1') {
-			$this->ae->add('email', '入力されたEメールアドレスは正しくありません');
+			$this->ae->add('email', '入力されたeメールアドレスは正しくありません。');
 			return 'user_reissuePassword';
 		}
 

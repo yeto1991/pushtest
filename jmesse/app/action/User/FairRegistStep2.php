@@ -42,7 +42,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		// 戻った場合
@@ -53,7 +53,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', '見本市番号がありません');
+				$this->ae->add('error', 'システムエラーが発生しました。');
 				return 'error';
 			}
 		}
@@ -110,12 +110,12 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 
 		// 開催頻度
 		if ('' == $this->af->get('frequency')) {
-			$this->ae->add('frequency', '開催頻度が入力されていません');
+			$this->ae->add('frequency', '開催頻度が選択されていません');
 		}
 
 		// 業種
 		if ('' == $this->af->get('main_industory_1') || '' == $this->af->get('sub_industory_1')) {
-			$this->ae->add('main_industory_1', '業種が入力されていません');
+			$this->ae->add('main_industory_1', '業種が選択されていません');
 		} else {
 			$this->af->set('check_sub_industory', $this->_mekaCheckSubIndustory());
 		}
@@ -142,12 +142,12 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			$this->ae->add('other_city_jp', '開催地(都市(その他))が入力されていません');
 		}
 		if ('1' != $this->af->get('check_other_city') && '' != $this->af->get('other_city_jp')) {
-			$this->ae->add('other_city_jp', '開催地(都市(その他))がチェックされていません');
+			$this->ae->add('other_city_jp', '開催地(都市(その他))が選択されていません');
 		}
 
 		// 会場名
 		if ('' == $this->af->get('venue_jp')) {
-			$this->ae->add('venue_jp', '会場名が入力されていません');
+			$this->ae->add('venue_jp', '開催地（会場名）が入力されていません');
 		}
 
 		// 開催予定規模
@@ -173,7 +173,7 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_jp')) {
 			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が入力されていません');
 		} elseif ('1' != $this->af->get('admission_ticket_5') && '' != $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)がチェックされていません');
+			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が選択されていません');
 		}
 
 		// 出展申込締切日

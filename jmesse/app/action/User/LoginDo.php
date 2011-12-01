@@ -53,11 +53,11 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
-					$this->ae->add('email', "Eメール 「@」の位置が不正です");
+					$this->ae->add('email', "Eメール 「@」の位置が不正です。");
 					return 'user_login';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email', "Eメール 「@」の入力が重複しています。");
 					return 'user_login';
 				}
 			}
@@ -129,8 +129,8 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 				$db->rollback();
 				return 'error';
 			}
-			$this->ae->add('email', 'ログイン認証エラー');
-			$this->ae->add('password', 'ログイン認証エラー');
+			$this->ae->add('email', 'ログイン認証エラー 入力されたeメールアドレスは正しくありません。');
+			$this->ae->add('password', 'ログイン認証エラー 入力されたパスワードは正しくありません。');
 			return 'user_login';
 		}
 

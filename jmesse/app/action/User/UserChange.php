@@ -42,18 +42,18 @@ class Jmesse_Action_UserUserChange extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		// ユーザIDは必須
 		if (null == $this->af->get('user_id') || '' == $this->af->get('user_id')) {
-			$this->ae->addObject('error', Ethna::raiseError('ユーザIDが入力されていません', E_REQUIRED));
+			$this->ae->addObject('error', Ethna::raiseError('システムエラーが発生しました。', E_REQUIRED));
 			return 'error';
 		}
 
 		// 登録モードも必須
 		if (null == $this->af->get('mode') || '' == $this->af->get('mode')) {
-			$this->ae->addObject('error', Ethna::raiseError('登録モードが入力されていません', E_REQUIRED));
+			$this->ae->addObject('error', Ethna::raiseError('システムエラーが発生しました。', E_REQUIRED));
 			return 'error';
 		}
 

@@ -42,7 +42,7 @@ class Jmesse_Action_UserUserChangeDo extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_login';
 		}
 		if($this->af->get('delFlg') == '1'){
 			//ユーザ削除の場合
@@ -79,7 +79,7 @@ class Jmesse_Action_UserUserChangeDo extends Jmesse_ActionClass
 					return 'user_userRegist';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Eメール 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email', "Eメール 「@」の入力が重複しています。");
 					return 'user_userRegist';
 				}
 			}
@@ -91,7 +91,7 @@ class Jmesse_Action_UserUserChangeDo extends Jmesse_ActionClass
 					return 'user_userRegist';
 				}
 				if(substr_count($this->af->get('email2'),"@") != 1){
-					$this->ae->add('email2', "Eメール(確認) 「@」は必ず１文字のみ入力してください。");
+					$this->ae->add('email2', "Eメール(確認) 「@」の入力が重複しています。");
 					return 'user_userRegist';
 				}
 			}
@@ -120,7 +120,7 @@ class Jmesse_Action_UserUserChangeDo extends Jmesse_ActionClass
 				return 'error';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
-				$this->ae->add('email', "入力されたEメールは既に使用されています。");
+				$this->ae->add('email', "入力されたEメールは既に使用登録されています。他のアドレスを入力してください。");
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
 				return 'user_userRegist';
 			}

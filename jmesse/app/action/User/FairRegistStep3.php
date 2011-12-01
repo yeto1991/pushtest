@@ -42,12 +42,12 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		// SESSIONのチェック
 		if (null == $this->session->get('regist_param_1')) {
-			$this->ae->add('error', '最初からやり直して下さい');
+			$this->ae->add('error', '登録を最初からやり直して下さい');
 			return 'error';
 		}
 
@@ -59,7 +59,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', '見本市番号がありません');
+				$this->ae->add('error', 'システムエラーが発生しました。');
 				return 'error';
 			}
 		}
@@ -83,7 +83,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			&& '' != $this->af->get('number_of_foreign_visitor')
 			&& 0 < $this->af->get('number_of_foreign_visitor')) {
 			if ($this->af->get('total_number_of_visitor') < $this->af->get('number_of_foreign_visitor')) {
-				$this->ae->add('total_number_of_visitor', '総来場者数が正しくありません(全体<海外)');
+				$this->ae->add('total_number_of_visitor', '総来場者数が正しくありません(全体<海外) 正しい数を入れてください。');
 			}
 		}
 
@@ -93,7 +93,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			&& '' != $this->af->get('number_of_foreign_exhibitors')
 			&& 0 < $this->af->get('number_of_foreign_exhibitors')) {
 			if ($this->af->get('total_number_of_exhibitors') < $this->af->get('number_of_foreign_exhibitors')) {
-				$this->ae->add('total_number_of_exhibitors', '総出展社数が正しくありません(全体<海外)');
+				$this->ae->add('total_number_of_exhibitors', '総出展社数が正しくありません(全体<海外) 正しい数を入れてください。');
 			}
 		}
 
@@ -125,7 +125,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 				$photos = $ary_photos[$j];
 				if ('' != $photos_name && $photos['name'] == $photos_name) {
 					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type'] && 'image/pjpeg' != $photos['type']) {
-						$this->ae->add('photos_1', '見本市の紹介写真はgif、または、jpegのみにして下さい('.$photos['type'].')');
+						$this->ae->add('photos_1', '見本市の紹介写真はgif、jpeg、tiff形式のみにして下さい('.$photos['type'].')');
 						break;
 					}
 				}
