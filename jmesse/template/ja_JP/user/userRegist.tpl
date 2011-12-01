@@ -78,7 +78,7 @@
 									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 									{* エラー表示 *}
 									{if count($errors)}
-									<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+									<p class="error-message" id="error-pagetop">入力に誤りがあります。再度、入力ください。</p>
 									{/if}
 									<h4>Eメールとパスワード</h4>
 									<p class="nomargin">J-messe見本市登録をご利用いただくためのEメールとパスワードを設定してください。<br />

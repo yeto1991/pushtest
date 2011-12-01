@@ -58,7 +58,7 @@
 										<input type="hidden" name="action_user_reissuePasswordDo" id="action_user_reissuePasswordDo" value="dummy" />
 										{* エラー表示 *}
 										{if count($errors)}
-										<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+										<p class="error-message" id="error-pagetop">入力に誤りがあります。再度、入力ください。</p>
 										{/if}
 										<table id="registration">
 											<tbody>

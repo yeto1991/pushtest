@@ -115,7 +115,7 @@
 
 								{* エラー表示 *}
 								{if count($errors)}
-								<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+								<p class="error-message" id="error-pagetop">入力に誤りがあります。再度、入力ください。</p>
 								{/if}
 
 								<form name="form_fairRegistStep3" id="form_fairRegistStep3" method="post" action="">

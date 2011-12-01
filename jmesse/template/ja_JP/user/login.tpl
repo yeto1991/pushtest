@@ -60,7 +60,7 @@
 										<input type="hidden" name="function" id="function" value="{$form.function}" />
 										{* エラー表示 *}
 										{if count($errors)}
-										<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
+										<p class="error-message" id="error-pagetop">入力に誤りがあります。再度、入力ください。</p>
 										{/if}
 										<table id="registration">
 											<tbody>
