@@ -47,23 +47,23 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', '見本市番号がありません');
+				$this->ae->add('error', 'システムエラーが発生しました。');
 			}
 		}
 
 		// SESSIONのチェック
 		if (null == $this->session->get('regist_param_1')) {
-			$this->ae->add('error', '登録画面Step.1の情報がありません');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 		}
 		if (null == $this->session->get('regist_param_2')) {
-			$this->ae->add('error', '登録画面Step.2の情報がありません');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 		}
 		if (null == $this->session->get('regist_param_3')) {
-			$this->ae->add('error', '登録画面Step.3の情報がありません');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 		}
 
 		if (0 < $this->ae->count()) {
-			$this->backend->getLogger()->log(LOG_ERR, '不正にアクセスされた可能性があります');
+			$this->backend->getLogger()->log(LOG_ERR, 'システムエラーが発生しました。');
 			return 'error';
 		}
 

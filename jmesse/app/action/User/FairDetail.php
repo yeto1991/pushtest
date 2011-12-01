@@ -42,7 +42,7 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_login';
 		}
 		return null;
 	}
@@ -216,7 +216,7 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
 			if (null == $user_obj) {
 				$this->backend->getLogger()->log(LOG_ERR, '■ユーザ情報が存在しません。');
-				$this->ae->add('error', 'ユーザ情報が存在しません');
+				$this->ae->add('error', 'システムエラーが発生しました。');
 				return 'error';
 			}
 			$this->session->set('email', $user_obj->get('email'));

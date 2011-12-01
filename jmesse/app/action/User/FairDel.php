@@ -59,7 +59,7 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		// 入力チェック（必須）
@@ -88,12 +88,12 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 		$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 		if (null == $jm_fair_obj) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■見本市情報が存在しません。');
-			$this->ae->add('error', '見本市情報が存在しません');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 			return 'error';
 		}
 		if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■他人の見本市情報です。'.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
-			$this->ae->add('error', '他人の見本市情報なので編集できません');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 			return 'error';
 		}
 
@@ -107,7 +107,7 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_FAIRテーブルへの更新に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
+			$this->ae->add('error', 'システムエラーが発生しました。');
 			$db->rollback();
 			return 'error';
 		}
@@ -121,7 +121,7 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->add('error', $msg);
+			$this->ae->add('error', 'システムエラーが発生しました。');
 			$db->rollback();
 			return 'error';
 		}

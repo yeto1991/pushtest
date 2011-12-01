@@ -1383,7 +1383,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		// 戻った場合
@@ -1394,7 +1394,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', '見本市番号がありません');
+				$this->ae->add('error', 'システムエラーが発生しました。');
 			}
 		}
 
@@ -1430,17 +1430,17 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 				$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 				if (null == $jm_fair_obj) {
 					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報が存在しません。');
-					$this->ae->add('error', '見本市情報が存在しません');
+					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}
 				if ('1' == $jm_fair_obj->get('del_flg')) {
 					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報は削除されました。削除時刻('.$this->session->get('del_date').')');
-					$this->ae->add('error', '見本市情報は'.$this->session->get('del_date').'に削除されました');
+					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}
 				if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
 					$this->backend->getLogger()->log(LOG_ERR, '■他人の見本市情報です。('.$this->session->get('user_id').', '.$jm_fair_obj->get('user_id').')');
-					$this->ae->add('error', '他人の見本市情報なので編集できません');
+					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}
 
@@ -1460,7 +1460,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
 			if (null == $user_obj) {
 				$this->backend->getLogger()->log(LOG_DEBUG, '■ユーザ情報が存在しません。');
-				$this->ae->add('error', 'ユーザ情報が存在しません');
+				$this->ae->add('error', 'システムエラーが発生しました。');
 				return 'error';
 			}
 			$this->session->set('email', $user_obj->get('email'));
