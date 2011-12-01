@@ -42,7 +42,7 @@ class Jmesse_Action_UserFairListDel extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'user_Login';
+			return 'user_login';
 		}
 		return null;
 	}
