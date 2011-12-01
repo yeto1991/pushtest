@@ -92,7 +92,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 	<div id="bread">
 		<ul class="clearfix">
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
+			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ('1' != $form.all)}
 				{if ('i1' == $form.type)}
@@ -104,10 +104,10 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 			<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-			<li><a href="">開催地別に見る</a></li>
+			<li><a href="">View Reigion</a></li>
 			<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-			<li><a href="">開催地別に見る</a></li>
+			<li><a href="">View Reigion</a></li>
 					{if ('' == $form.v_4)}
 			<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 			<li>{$app.pan_2}</li>
