@@ -105,7 +105,7 @@
 							<td><a href="{$config.url}?action_user_enFairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_en}</font></a></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Term</font></th>
+							<th class="item"><font size="2">Period</font></th>
 							<td><font size="2">{$app.my_fair_info_list[it].date_from_format} to {$app.my_fair_info_list[it].date_to_format}</font></td>
 						</tr>
 						<tr>

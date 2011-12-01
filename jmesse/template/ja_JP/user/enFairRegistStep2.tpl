@@ -277,7 +277,7 @@
 						</tr>
 					</table>
 
-					<h4>Catchphrases</h4>
+					<h4>Catchphrase</h4>
 					<table id="registration">
 						{if is_error('profile_en')}
 						<tr class="errorcheck">
@@ -288,7 +288,7 @@
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
-							 	Approx. 120 words<br/>
+							 	Maximum of about 120 words<br/>
 								{if is_error('profile_en')}
 								<span class="error-message">{message name="profile_en"}</span><br />
 								{/if}
@@ -304,7 +304,7 @@
 							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
-								Approx. 250 words <br/>
+								Maximum of about 250 words<br/>
 								{if is_error('detailed_information_en')}
 								<span class="error-message">{message name="detailed_information_en"}</span><br />
 								{/if}

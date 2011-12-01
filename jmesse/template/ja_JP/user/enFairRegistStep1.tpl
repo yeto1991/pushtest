@@ -419,7 +419,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">How often is it held?</th>
+							<th class="item">Frequency of exhibition</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.frequency_list}
@@ -480,7 +480,7 @@
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="3" name="exhibits_en" id="exhibits_en">{$form.exhibits_en}</textarea><br />
-								Enter details of products (Approx. 80 words)<br/>
+								Enter details of products (Maximum of about 80 words) <br/>
 								{if is_error('exhibits_en')}
 								<span class="error-message">{message name="exhibits_en"}</span><br />
 								{/if}

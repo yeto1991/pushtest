@@ -199,7 +199,7 @@ $form.mode
 							<td>{$form.date_from_yyyy}/{$form.date_from_mm}/{$form.date_from_dd}～{$form.date_to_yyyy}/{$form.date_to_mm}/{$form.date_to_dd}</td>
 						</tr>
 						<tr>
-							<th class="item">How often is it held?</th>
+							<th class="item">Frequency of exhibition</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>{$app.frequency_name.discription_en}</td>
 						</tr>
@@ -355,7 +355,7 @@ $form.mode
 							</td>
 						</tr>
 					</table>
-					<h4>Catchphrases</h4>
+					<h4>Catchphrase</h4>
 					<table id="registration">
 						<tr>
 							<th class="item">Catchphrase</th>
