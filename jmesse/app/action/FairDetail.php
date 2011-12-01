@@ -92,7 +92,7 @@ class Jmesse_Action_FairDetail extends Jmesse_ActionClass
 		$lang = 'J';
 		$fair_detail = $jm_fair_obj->getFairDetail($this->af->get('mihon_no'), $lang);
 		if (null == $fair_detail) {
-			$this->ae->add('error', '見本市番号が間違っているか、情報が削除されたか、非表示指定になりました。');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 			return 'error';
 		}
 

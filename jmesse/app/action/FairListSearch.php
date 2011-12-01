@@ -47,23 +47,23 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 		// 会期
 		if ('e' == $this->af->get('year')) {
 			if ('' == $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')) {
-				$this->ae->add('date_from_yyyy', '会期(開始・年)が未入力です');
+				$this->ae->add('date_from_yyyy', '会期（開始）が正しくありません');
 			}
 			if ('' != $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')) {
-				$this->ae->add('date_from_mm', '会期(開始・月)が未入力です');
+				$this->ae->add('date_from_mm', '会期（開始）が正しくありません');
 			}
 			if ('' == $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')) {
-				$this->ae->add('date_to_yyyy', '会期(終了・年)が未入力です');
+				$this->ae->add('date_to_yyyy', '会期（終了）が正しくありません');
 			}
 			if ('' != $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')) {
-				$this->ae->add('date_to_mm', '会期(終了・月)が未入力です');
+				$this->ae->add('date_to_mm', '会期（終了）が正しくありません');
 			}
 			if ('' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')
 				&& '' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')
 				&& '' != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')
 				&& '' != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')) {
 				if ($this->af->get('date_from_yyyy').$this->af->get('date_from_mm') > $this->af->get('date_to_yyyy').$this->af->get('date_to_mm')) {
-					$this->ae->add('date_from_yyyy', '会期が正しくありません(開始>終了)');
+					$this->ae->add('date_from_yyyy', '会期（終了）は未来の日付を入力して下さい');
 				}
 			}
 			if ('' == $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')
