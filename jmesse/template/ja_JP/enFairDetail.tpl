@@ -127,9 +127,9 @@
 							<th>For Visitors</th>
 
 							<td>
-								Open to:{$app.fair_detail.open_to_name}<br />
+								Eligibility:{$app.fair_detail.open_to_name}<br />
 								{if ('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2 || '1' == $app.fair_detail.admission_ticket_3 || '1' == $app.fair_detail.admission_ticket_4 || '' != $app.fair_detail.other_admission_ticket_en)}
-								Admission/tickets:
+								Method of obtaining tickets:
 									{if ('1' == $app.fair_detail.admission_ticket_1)}
 									Free
 									{/if}
@@ -161,7 +161,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th>Show Management</th>
+							<th>Organizer</th>
 							<td>
 								{$app.fair_detail.organizer_en}<br />
 								Address : {$app.fair_detail.organizer_addr}<br/>
@@ -197,7 +197,7 @@
 							|| ('' != $app.fair_detail.agency_in_japan_email)
 						}
 						<tr>
-							<th>Agency in Japan</th>
+							<th>The representative office, person or agency in Japan</th>
 							<td>
 								{if ('' != $app.fair_detail.agency_in_japan_en)}
 								{$app.fair_detail.agency_in_japan_en}<br/>

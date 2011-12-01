@@ -614,7 +614,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Open to</th>
+							<th class="item">Eligibility</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.open_to_list}
@@ -631,7 +631,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Admission/tickets</th>
+							<th class="item">Method of obtaining tickets</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />Free

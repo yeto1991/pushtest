@@ -280,12 +280,12 @@ $form.mode
 						</tr>
 *}
 						<tr>
-							<th class="item">Open to</th>
+							<th class="item">Eligibility </th>
 							<th class="required"></th>
 							<td>{$app.open_to_name.discription_en}</td>
 						</tr>
 						<tr>
-							<th class="item">Admission/tickets</th>
+							<th class="item">Method of obtaining tickets</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{if ('1' == $form.admission_ticket_1)}
@@ -382,17 +382,17 @@ $form.mode
 							<td>{$form.keyword}</td>
 						</tr>
 					</table>
-					<h4>Show Management</h4>
+					<h4>Organizer</h4>
 					<table id="registration">
 						<tr>
-							<th class="item">Show Management Name</th>
+							<th class="item">Name of the organizer</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								{$form.organizer_en}
 							</td>
 						</tr>
 						<tr>
-							<th class="item">Show Management Information</th>
+							<th class="item">Information of the organizer</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<strong>Address: </strong>{$form.organizer_addr}<br />
@@ -404,7 +404,7 @@ $form.mode
 							</td>
 						</tr>
 						<tr>
-							<th class="item">Agency in Japan</th>
+							<th class="item">The representative office, person or agency in Japan</th>
 							<th class="required"></th>
 							<td>
 								<strong>Name of representative office or agency in Japan: </strong>{$form.agency_in_japan_en}<br />

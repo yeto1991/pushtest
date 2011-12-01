@@ -291,7 +291,7 @@
 											</tr>
 {*
 											<tr>
-												<th class="item">Show Management<br />主催者
+												<th class="item">Organizer<br />主催者
 												</th>
 												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>
@@ -299,7 +299,7 @@
 												</td>
 											</tr>
 											<tr>
-												<th class="item">Agency in Japan<br />日本国内の連絡先
+												<th class="item">The representative office, person or agency in Japan<br />日本国内の連絡先
 												</th>
 												<th class="required"></th>
 												<td>

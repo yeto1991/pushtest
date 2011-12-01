@@ -373,14 +373,14 @@
 						</tr>
 					</table>
 
-					<h4>Show Management</h4>
+					<h4>Organizer</h4>
 					<table id="registration">
 						{if is_error('organizer_en')}
 						<tr class="errorcheck">
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Show Management</th>
+							<th class="item">Name of the organizer</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								 Name: <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
@@ -395,7 +395,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Show Management Information</th>
+							<th class="item">Information of the organizer</th>
 							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 							<td>
 								<strong>Address: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
@@ -432,7 +432,7 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Agency in Japan</th>
+							<th class="item">The representative office, person or agency in Japan</th>
 							<th class="required"></th>
 							<td>
 								<strong>Fill in information only if your exhibition will be held outside Japan and you have a representative office, agency or person in Japan for inquiries.</strong><br /><br />

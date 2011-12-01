@@ -497,11 +497,11 @@ $form.mode
 											</tr>
 {*
 											<tr>
-												<th class="item">Show Management<br />主催者</th>
+												<th class="item">Organizer<br />主催者</th>
 												<td>{$form.organizer_en}</td>
 											</tr>
 											<tr>
-												<th class="item">Agency in Japan<br />日本国内の連絡先</th>
+												<th class="item">The representative office, person or agency in Japan<br />日本国内の連絡先</th>
 												<td>{$form.agency_in_japan_en}</td>
 											</tr>
 *}
