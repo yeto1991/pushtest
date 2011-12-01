@@ -42,7 +42,7 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_login';
 		}
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
