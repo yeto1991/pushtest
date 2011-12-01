@@ -143,7 +143,7 @@
 							<a href="http://www.digicert.com/ssl-certificate.htm">SSL Certificate</a><script language="javascript" type="text/javascript">coderz();</script></div>
 							<!-- /DigiCert Site Seal Code -->
 						</td>
-						<td>このページから送信される情報は、SSL暗号化通信により保護されています。</td>
+						<td>All your information submitted through this page is protected by SSL.</td>
 					</tr>
 				</table>
 			</div>

@@ -58,9 +58,9 @@
 {if ('' == $form.mode) || ('e' == $form.mode)}
 <title>Fair Registration - Online Trade Fair Database (J-messe) - JETRO</title>
 {elseif ('c' == $form.mode)}
-<title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Fair Editing - Online Trade Fair Database (J-messe) - JETRO</title>
 {else}
-<title>User Detail - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Fair Detail - Online Trade Fair Database (J-messe) - JETRO</title>
 {/if}
 </head>
 
