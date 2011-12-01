@@ -60,7 +60,7 @@ class Jmesse_Action_UserFairCopyList extends Jmesse_ActionClass
 		if (!$this->backend->getManager('userCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'user_Login';
+			return 'user_login';
 		}
 
 		return null;
