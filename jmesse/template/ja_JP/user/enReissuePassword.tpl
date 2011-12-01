@@ -54,7 +54,7 @@
 						<input type="hidden" name="action_user_enReissuePasswordDo" id="action_user_enReissuePasswordDo" value="dummy" />
 						{* エラー表示 *}
 						{if count($errors)}
-						<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
+						<p class="error-message" id="error-pagetop">The data you have entered is invalid. Please re-enter.</p>
 						{/if}
 						<table id="registration">
 							<tbody>

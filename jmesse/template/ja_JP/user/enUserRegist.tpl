@@ -73,7 +73,7 @@
 					<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
 					{* エラー表示 *}
 					{if count($errors)}
-					<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
+					<p class="error-message" id="error-pagetop">The data you have entered is invalid. Please re-enter.</p>
 					{/if}
 					<h4>E-mail Account and Password</h4>
 					<p class="nomargin">Please register your e-mail address and password to log into J-messe.<br />

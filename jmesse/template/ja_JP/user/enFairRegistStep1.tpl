@@ -189,7 +189,7 @@
 
 				{* エラー表示 *}
 				{if count($errors)}
-				<p class="error-message" id="error-pagetop">There are some incorrect input items. Please confirm them.</p>
+				<p class="error-message" id="error-pagetop">The data you have entered is invalid. Please re-enter.</p>
 				{/if}
 
 				<form name="form_enFairRegistStep1" id="form_enFairRegistStep1" method="post" action="">
