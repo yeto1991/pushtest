@@ -202,7 +202,7 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
 			if (null == $user_obj) {
 				$this->backend->getLogger()->log(LOG_ERR, '■ユーザ情報が存在しません。');
-				$this->ae->add('error', 'User error');
+				$this->ae->add('error', 'A system error has occurred.');
 				return 'error';
 			}
 			$this->session->set('email', $user_obj->get('email'));

@@ -47,7 +47,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 
 		// SESSIONのチェック
 		if (null == $this->session->get('regist_param_1')) {
-			$this->ae->add('error', 'Please retry.');
+			$this->ae->add('error', 'Please restart the registration process from the beginning.');
 			return 'error';
 		}
 
@@ -59,7 +59,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', 'mihon_no error');
+				$this->ae->add('error', 'A system error has occurred.');
 			}
 		}
 
@@ -71,7 +71,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 
 		// 見本市名
 		if ('' == $this->af->get('fair_title_en')) {
-			$this->ae->add('fair_title_en', 'Please enter the Fair title.');
+			$this->ae->add('fair_title_en', 'The fair title has not been entered.');
 		}
 
 		// 対象年
@@ -82,7 +82,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 			&& '' != $this->af->get('number_of_foreign_visitor')
 			&& 0 < $this->af->get('number_of_foreign_visitor')) {
 				if ($this->af->get('total_number_of_visitor') < $this->af->get('number_of_foreign_visitor')) {
-					$this->ae->add('total_number_of_visitor', 'Total number of visitors is incorrect(All<Foreign).');
+					$this->ae->add('total_number_of_visitor', 'The number you have entered for foreign visitors exceeds the total number. Please enter the correct numbers.');
 				}
 		}
 
@@ -92,14 +92,14 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 			&& '' != $this->af->get('number_of_foreign_exhibitors')
 			&& 0 < $this->af->get('number_of_foreign_exhibitors')) {
 				if ($this->af->get('total_number_of_exhibitors') < $this->af->get('number_of_foreign_exhibitors')) {
-					$this->ae->add('total_number_of_exhibitors', 'Total number of exhibitors is incorrect((All<Foreign).');
+					$this->ae->add('total_number_of_exhibitors', 'The number you have entered for foreign exhibitors exceeds the total number. Please enter the correct numbers.');
 				}
 		}
 		// 開催規模
 
 		// キャッチフレーズ
 		if ('' == $this->af->get('profile_en')) {
-			$this->ae->add('profile_en', 'Please enter Catchphrase.');
+			$this->ae->add('profile_en', 'The catchphrase has not been entered.');
 		}
 
 		// 見本市の紹介写真
@@ -113,7 +113,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 				$photos = $ary_photos[$j];
 				if ('' != $photos_name && $photos['name'] == $photos_name) {
 					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type'] && 'image/pjpeg' != $photos['type']) {
-						$this->ae->add('photos_1', 'Photo file is only GIF and JPEG file.('.$photos['type'].')');
+						$this->ae->add('photos_1', 'Photo files are limited to GIF, JPEG and TIFF formats only.('.$photos['type'].')');
 						break;
 					}
 				}
@@ -122,23 +122,23 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 
 		// 主催者
 		if ('' == $this->af->get('organizer_en')) {
-			$this->ae->add('organizer_en', 'Please enter Show Management Name.');
+			$this->ae->add('organizer_en', 'The name of the organizer has not been entered.');
 		}
 		// 主催者連絡先
 		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
-			$this->ae->add('organizer_addr', 'Please enter Show Management Information.');
+			$this->ae->add('organizer_addr', 'The contact of the organizer has not been entered.');
 		} else {
 			if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
-				$this->ae->add('organizer_tel', 'Please enter (Show Management) TEL,FAX,Email at least one the information.');
+				$this->ae->add('organizer_tel', 'Please enter at least one form of contact with the organizer: telephone number, fax number or e-mail.');
 			}
 		}
 		if ('' != $this->af->get('organizer_email')) {
 			if (!strpos($this->af->get('organizer_email'), '@')
 			|| 0 === strpos($this->af->get('organizer_email'), '@')
 			|| strlen($this->af->get('organizer_email')) - 1 === strpos($this->af->get('organizer_email'), '@')) {
-				$this->ae->add('organizer_email', 'Show Management Information Email is incorrect.');
+				$this->ae->add('organizer_email', 'The e-mail of the organizer you have entered is invalid.');
 			} elseif (1 != substr_count($this->af->get('organizer_email'), '@')) {
-				$this->ae->add('organizer_email', 'Show Management Information Email is incorrect.');
+				$this->ae->add('organizer_email', 'The e-mail of the organizer you have entered is invalid.');
 			}
 		}
 
@@ -147,10 +147,10 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 			if (!strpos($this->af->get('agency_in_japan_email'), '@')
 			|| 0 === strpos($this->af->get('agency_in_japan_email'), '@')
 			|| strlen($this->af->get('agency_in_japan_email')) - 1 === strpos($this->af->get('agency_in_japan_email'), '@')) {
-				$this->ae->add('agency_in_japan_email', 'Agency in Japan Email is incorrect.');
+				$this->ae->add('agency_in_japan_email', 'The e-mail of the representative office, person or agency in Japan you have entered is invalid.');
 			}
 			if (1 != substr_count($this->af->get('agency_in_japan_email'), '@')) {
-				$this->ae->add('agency_in_japan_email', 'Agency in Japan Email is incorrect.');
+				$this->ae->add('agency_in_japan_email', 'The e-mail of the representative office, person or agency in Japan you have entered is invalid.');
 			}
 		}
 

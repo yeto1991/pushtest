@@ -75,11 +75,11 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
-					$this->ae->add('email', "Email is incorrect.");
+					$this->ae->add('email', "The at mark “@” of your e-mail address is in the wrong location.");
 					return 'user_enUserRegist';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Email is incorrect.");
+					$this->ae->add('email', "Duplicate at marks “@” have been entered in your e-mail address.");
 					return 'user_enUserRegist';
 				}
 			}
@@ -87,29 +87,29 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			if($this->af->get('email2') != null && $this->af->get('email2') != ''){
 				//Eメール
 				if(substr($this->af->get('email2'), 0, 1) == "@" || substr($this->af->get('email2'), -1) == "@"){
-					$this->ae->add('email2', "Email(Confirm) is incorrect.");
+					$this->ae->add('email2', "The at mark “@” of your e-mail address for confirmation is in the wrong location.");
 					return 'user_enUserRegist';
 				}
 				if(substr_count($this->af->get('email2'),"@") != 1){
-					$this->ae->add('email2', "Email(Confirm) is incorrect.");
+					$this->ae->add('email2', "Duplicate at marks “@” have been entered in your e-mail address for confirmation.");
 					return 'user_enUserRegist';
 				}
 			}
 			//URL
 			if($this->af->get('url') != null && $this->af->get('url') != ''){
 				if (0 !== strpos($this->af->get('url'), 'http')) {
-					$this->ae->add('url', "URL is incorrect.");
+					$this->ae->add('url', "Please write the URL beginning with “http(s)://”");
 					return 'user_enUserRegist';
 				}
 			}
 			//Eメール2重登録チェック
 			if($this->af->get('email') != $this->af->get('email2')){
-				$this->ae->add('email2', "Email doesn't match.");
+				$this->ae->add('email2', "The e-mail address you have entered for confirmation does not match the original one.");
 				return 'user_enUserRegist';
 			}
 			//パスワード2重登録チェック
 			if($this->af->get('password') != $this->af->get('password2')){
-				$this->ae->add('password2', "Password doesn't match.");
+				$this->ae->add('password2', "The password you have entered for confirmation does not match the original one.");
 				return 'user_enUserRegist';
 			}
 			//重複チェック
@@ -120,7 +120,7 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 				return 'error';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
-				$this->ae->add('email', "Someone already is using the email.");
+				$this->ae->add('email', "The e-mail address you have entered has already been registered by someone. Please enter another e-mail address.");
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
 				return 'user_enUserRegist';
 			}

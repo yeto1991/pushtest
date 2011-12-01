@@ -98,7 +98,7 @@ class Jmesse_Action_UserEnUserRegistDo extends Jmesse_ActionClass
 				return 'error';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
-				$this->ae->add('email', "Someone already is using the email.");
+				$this->ae->add('email', "The e-mail address you have entered has already been registered by someone. Please enter another e-mail address.");
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複エラー');
 				return 'user_enUserRegist';
 			}

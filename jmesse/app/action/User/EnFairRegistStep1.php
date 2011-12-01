@@ -1875,7 +1875,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', 'mihon_no error');
+				$this->ae->add('error', 'A system error has occurred.');
 			}
 		}
 
@@ -1911,17 +1911,17 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 				$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 				if (null == $jm_fair_obj) {
 					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報が存在しません。');
-					$this->ae->add('error', 'Fair Information does not exist.');
+					$this->ae->add('error', 'A system error has occurred.');
 					return 'error';
 				}
 				if ('1' == $jm_fair_obj->get('del_flg')) {
 					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報は削除されました。削除時刻('.$this->session->get('del_date').')');
-					$this->ae->add('error', 'The Fair was deleted by '.$this->session->get('del_date').'.');
+					$this->ae->add('error', 'A system error has occurred.');
 					return 'error';
 				}
 				if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
 					$this->backend->getLogger()->log(LOG_ERR, '■他人の見本市情報です。('.$this->session->get('user_id').', '.$jm_fair_obj->get('user_id').')');
-					$this->ae->add('error', 'The Fair can not edit because it is not yours.');
+					$this->ae->add('error', 'A system error has occurred.');
 					return 'error';
 				}
 
@@ -1941,7 +1941,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
 			if (null == $user_obj) {
 				$this->backend->getLogger()->log(LOG_DEBUG, '■ユーザ情報が存在しません。');
-				$this->ae->add('error', 'User error');
+				$this->ae->add('error', 'A system error has occurred.');
 				return 'error';
 			}
 			$this->session->set('email', $user_obj->get('email'));

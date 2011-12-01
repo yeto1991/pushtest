@@ -47,16 +47,16 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', 'mihon_no error');
+				$this->ae->add('error', 'A system error has occurred.');
 			}
 		}
 
 		// SESSIONのチェック
 		if (null == $this->session->get('regist_param_1')) {
-			$this->ae->add('error', 'Step1 information does not exist.');
+			$this->ae->add('error', 'A system error has occurred.');
 		}
 		if (null == $this->session->get('regist_param_2')) {
-			$this->ae->add('error', 'Step2 information does not exist.');
+			$this->ae->add('error', 'A system error has occurred.');
 		}
 
 		if (0 < $this->ae->count()) {

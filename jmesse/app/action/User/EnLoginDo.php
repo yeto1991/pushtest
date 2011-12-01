@@ -53,11 +53,11 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			if($this->af->get('email') != null && $this->af->get('email') != ''){
 				//Eメール
 				if(substr($this->af->get('email'), 0, 1) == "@" || substr($this->af->get('email'), -1) == "@"){
-					$this->ae->add('email', "Email is incorrect.");
+					$this->ae->add('email', "The at mark “@” of your e-mail address is in the wrong location.");
 					return 'user_enLogin';
 				}
 				if(substr_count($this->af->get('email'),"@") != 1){
-					$this->ae->add('email', "Email is incorrect.");
+					$this->ae->add('email', "Duplicate at marks “@” have been entered in your e-mail address. ");
 					return 'user_enLogin';
 				}
 			}
@@ -124,8 +124,8 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 				$db->rollback();
 				return 'error';
 			}
-			$this->ae->add('email', 'login error');
-			$this->ae->add('password', 'login error');
+			$this->ae->add('email', "Login authentication has failed. The e-mail address you have entered is incorrect.");
+			$this->ae->add('password', "Login authentication has failed. The password you have entered is incorrect.");
 			return 'user_enLogin';
 		}
 

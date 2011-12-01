@@ -53,7 +53,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
-				$this->ae->add('error', 'mihon_no error');
+				$this->ae->add('error', 'A system error has occurred.');
 				return 'error';
 			}
 		}
@@ -67,7 +67,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		// 詳細チェック
 		// 見本市名
 		if ('' == $this->af->get('fair_title_en')) {
-			$this->ae->add('fair_title_en', 'Please enter the Fair title.');
+			$this->ae->add('fair_title_en', 'The fair title has not been entered.');
 		}
 
 		// 見本市略称
@@ -75,54 +75,54 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		// 見本市公式サイトURL
 		$this->backend->getLogger()->log(LOG_DEBUG, '■fair_url : '.$this->af->get('fair_url'));
 		if ('' == $this->af->get('fair_url') || 'http://' == $this->af->get('fair_url')) {
-			$this->ae->add('fair_url', 'Please enter the Fair URL.');
+			$this->ae->add('fair_url', 'The official fair URL has not been entered.');
 		} else {
 			if (0 !== strpos($this->af->get('fair_url'), 'http')) {
-				$this->ae->add('fair_url', 'URL is incorrect.');
+				$this->ae->add('fair_url', "Please write the official fair URL beginning with “http(s)://”");
 			}
 		}
 
 		// 会期
 		if ('' == $this->af->get('date_from_yyyy') || '' == $this->af->get('date_from_mm') || '' == $this->af->get('date_from_dd')) {
-			$this->ae->add('date_from_yyyy', 'Please enter Date(From).');
+			$this->ae->add('date_from_yyyy', 'The start of the period has not been entered.');
 		} else {
 			if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
-				$this->ae->add('date_from_yyyy', 'Date(From) is incorrect.');
+				$this->ae->add('date_from_yyyy', 'The start of the period you have entered is invalid.');
 			}
 		}
 		if ('' == $this->af->get('date_to_yyyy') || '' == $this->af->get('date_to_mm') || '' == $this->af->get('date_to_dd')) {
-			$this->ae->add('date_to_yyyy', 'Please enter Date(To).');
+			$this->ae->add('date_to_yyyy', 'The end of the period has not been entered.');
 		} else {
 			if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->add('date_to_yyyy', 'Date(To) is incorrect.');
+				$this->ae->add('date_to_yyyy', 'The end of the period you have entered is invalid.');
 			}
 		}
 		if ('' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_dd')
 			&& '' != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_dd')) {
 			if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
 				> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->add('date_from_yyyy', 'Date is incorrect(From>To).');
+				$this->ae->add('date_from_yyyy', 'The period you have entered is incorrect. The start date is past the end date.');
 			}
 			if (time() > mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->add('date_to_yyyy', 'Please enter future date to Date(To).');
+				$this->ae->add('date_to_yyyy', 'Please select the dates so that the end is at least one day after the start.');
 			}
 		}
 
 		// 開催頻度
 		if ('' == $this->af->get('frequency')) {
-			$this->ae->add('frequency', 'Please enter Frequency.');
+			$this->ae->add('frequency', 'The frequency of exhibition has not been selected.');
 		}
 
 		// 業種
 		if ('' == $this->af->get('main_industory_1') || '' == $this->af->get('sub_industory_1')) {
-			$this->ae->add('main_industory_1', 'Please select Industry.');
+			$this->ae->add('main_industory_1', 'The main industries have not been selected.');
 		} else {
 			$this->af->set('check_sub_industory', $this->_mekaCheckSubIndustory());
 		}
 
 		// 取扱品目
 		if ('' == $this->af->get('exhibits_en')) {
-			$this->ae->add('exhibits_en', 'Please enter Exhibits.');
+			$this->ae->add('exhibits_en', 'The products covered have not been entered.');
 		}
 // 		if (300 < mb_strlen($this->af->get('exhibits_en', 'UTF-8'))) {
 // 			$this->ae->add('exhibits_jp', '取扱品目は300文字以内にして下さい');
@@ -130,24 +130,24 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 
 		// 開催地
 		if ('' == $this->af->get('region')) {
-			$this->ae->add('region', 'Please select Region.');
+			$this->ae->add('region', 'The region of the venue has not been selected.');
 		}
 		if ('' == $this->af->get('country')) {
-			$this->ae->add('country', 'Please select Country/Area.');
+			$this->ae->add('country', 'The country/area of the venue has not been selected.');
 		}
 		if ('' == $this->af->get('city') && '1' != $this->af->get('check_other_city')) {
-			$this->ae->add('city', 'Please select City.');
+			$this->ae->add('city', 'The city of the venue has not been selected.');
 		}
 		if ('1' == $this->af->get('check_other_city') && '' == $this->af->get('other_city_en')) {
-			$this->ae->add('other_city_en', 'Please select City(Other).');
+			$this->ae->add('other_city_en', 'The city of the venue  has not been entered.');
 		}
 		if ('1' != $this->af->get('check_other_city') && '' != $this->af->get('other_city_en')) {
-			$this->ae->add('other_city_en', 'Please check City(Other).');
+			$this->ae->add('other_city_en', 'The city of the venue has not been selected.');
 		}
 
 		// 会場名
 		if ('' == $this->af->get('venue_en')) {
-			$this->ae->add('venue_en', 'Please enter Venue.');
+			$this->ae->add('venue_en', 'The venue (specific name of the site) has not been entered.');
 		}
 
 		// 開催予定規模
@@ -159,7 +159,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 
 		// 入場資格
 		if ('' == $this->af->get('open_to')) {
-			$this->ae->add('open_to', 'Please select Open to.');
+			$this->ae->add('open_to', 'The eligibility of entry has not been selected.');
 		}
 
 		// チケットの入手方法
@@ -169,11 +169,11 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 			&& '1' != $this->af->get('admission_ticket_4')
 			&& '1' != $this->af->get('admission_ticket_5')
 			&& '' == $this->af->get('other_admission_ticket_en')) {
-			$this->ae->add('admission_ticket_1', 'Please select Admission/tickets.');
+			$this->ae->add('admission_ticket_1', 'The method of obtaining tickets has not been selected.');
 		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_en')) {
-			$this->ae->add('other_admission_ticket_en', 'Please enter Admission/tickets(Other).');
+			$this->ae->add('other_admission_ticket_en', 'The method of obtaining tickets has not been entered.');
 		} elseif ('1' != $this->af->get('admission_ticket_5') && '' != $this->af->get('other_admission_ticket_en')) {
-			$this->ae->add('other_admission_ticket_en', 'Please check Admission/tickets(Other).');
+			$this->ae->add('other_admission_ticket_en', 'The method of obtaining tickets etc. has not been selected.');
 		}
 
 		if (0 < $this->ae->count()) {
