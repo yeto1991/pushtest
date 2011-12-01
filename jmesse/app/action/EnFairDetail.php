@@ -102,7 +102,7 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 		$lang = 'E';
 		$fair_detail = $jm_fair_obj->getFairDetail($this->af->get('mihon_no'), $lang);
 		if (null == $fair_detail) {
-			$this->ae->add('error', "The fair's data can not display because the data is wrong or the fair's data was deleted.");
+			$this->ae->add('error', "A system error has occurred.");
 			return 'error';
 		}
 
@@ -130,7 +130,7 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 
 		return 'enFairDetail';
 	}
-	
+
 	/**
 	 * 見本市画像を保存するディレクトリ名を作成する。
 	 * 一つのフォルダに10000件保存する。
@@ -142,7 +142,7 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 	function _getImageDir($mihon_no) {
 		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
 	}
-	
+
 }
 
 ?>

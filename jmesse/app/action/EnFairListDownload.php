@@ -91,7 +91,7 @@ class Jmesse_Action_EnFairListDownload extends Jmesse_ActionClass
 				echo "\n";
 			}
 		} else {
-			$this->ae->set('error', 'Search result is Zero.');
+			$this->ae->set('error', 'There are no search results.');
 			return 'enFairList';
 		}
 

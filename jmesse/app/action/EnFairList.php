@@ -930,7 +930,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// 業種選択
 			if ('' == $search_cond['i_2']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', 'Please select Main Industory.');
+				$this->ae->add('error', 'The main industry is not selected.');
 				return 'error';
 			}
 			// 業種（小分類）集計値
@@ -946,7 +946,7 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// 地域選択
 			if ('' == $search_cond['v_2']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', 'Please select the Region.');
+				$this->ae->add('error', 'The region is not selected.');
 				return 'error';
 			}
 			// 開催地（国・地域）集計値
@@ -958,13 +958,13 @@ class Jmesse_Action_EnFairList extends Jmesse_ActionClass
 			// 地域選択
 			if ('' == $search_cond['v_2']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', 'Please select the Region.');
+				$this->ae->add('error', 'The region is not selected.');
 				return 'error';
 			}
 			// 地域選択
 			if ('' == $search_cond['v_3']) {
 				$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-				$this->ae->add('error', 'Please select the Country.');
+				$this->ae->add('error', 'The country/area is not selected.');
 				return 'error';
 			}
 			// 開催地（都市）集計値

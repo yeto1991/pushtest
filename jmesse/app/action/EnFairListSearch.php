@@ -47,30 +47,30 @@ class Jmesse_Action_EnFairListSearch extends Jmesse_ActionClass
 		// 会期
 		if ('e' == $this->af->get('year')) {
 			if ('' == $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')) {
-				$this->ae->add('date_from_yyyy', 'Date(From) is incorrect.');
+				$this->ae->add('date_from_yyyy', 'The start of the period has not been entered.');
 			}
 			if ('' != $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')) {
-				$this->ae->add('date_from_mm', 'Date(From) is incorrect.');
+				$this->ae->add('date_from_mm', 'The start of the period has not been entered.');
 			}
 			if ('' == $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')) {
-				$this->ae->add('date_to_yyyy', 'Date(To) is incorrect.');
+				$this->ae->add('date_to_yyyy', 'The end of the period has not been entered.');
 			}
 			if ('' != $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')) {
-				$this->ae->add('date_to_mm', 'Date(To) is incorrect.');
+				$this->ae->add('date_to_mm', 'The end of the period has not been entered.');
 			}
 			if ('' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')
 				&& '' != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_mm')
 				&& '' != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')
 				&& '' != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_mm')) {
 				if ($this->af->get('date_from_yyyy').$this->af->get('date_from_mm') > $this->af->get('date_to_yyyy').$this->af->get('date_to_mm')) {
-					$this->ae->add('date_from_yyyy', 'Date is incorrect(From>To).');
+					$this->ae->add('date_from_yyyy', 'The period you have entered is incorrect. The start date is past the end date.');
 				}
 			}
 			if ('' == $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')
 				&& '' == $this->af->get('date_from_yyyy') && '' == $this->af->get('date_from_mm')
 				&& '' == $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')
 				&& '' == $this->af->get('date_to_yyyy') && '' == $this->af->get('date_to_mm')) {
-				$this->ae->add('date_to_mm', 'Please enter Date.');
+				$this->ae->add('date_to_mm', 'The period has not been entered.');
 			}
 		}
 
