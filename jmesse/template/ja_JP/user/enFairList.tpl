@@ -101,7 +101,7 @@
 					{section name=it loop=$app.my_fair_info_list}
 					<table id="registration">
 						<tr>
-							<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}" /><font size="2">&nbsp;/&nbsp;Fair title (English)</font></th>
+							<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}" /><font size="2">&nbsp;&nbsp;Fair title (English)</font></th>
 							<td><a href="{$config.url}?action_user_enFairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_en}</font></a></td>
 						</tr>
 						<tr>
