@@ -193,6 +193,13 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$jm_fair->set('spare_field1', $regist_param_3['spare_field1']);
 
+		// 申請年月日
+		$jm_fair->set('date_of_application', date('Y/m/d H:i:s'));
+		// 承認フラグ = 未承認
+		$jm_fair->set('confirm_flag', '0');
+		// 否認コメント初期化
+		$jm_fair->set('negate_comment', '');
+
 		// 登録種別
 		if ('e' == $this->af->get('mode')) {
 			// コピー
@@ -223,12 +230,8 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 			$jm_fair->set('mail_send_flag', '0');
 			// 削除フラグ(未削除)
 			$jm_fair->set('del_flg', '0');
-			// 申請年月日
-			$jm_fair->set('date_of_application', date('Y/m/d H:i:s'));
 			// 登録日（承認日）
 			$jm_fair->set('date_of_registration', date('Y/m/d H:i:s'));
-			// 承認フラグ = 未承認
-			$jm_fair->set('confirm_flag', '0');
 			// 登録者ID
 			$jm_fair->set('regist_user_id', $this->session->get('user_id'));
 			// 登録日
