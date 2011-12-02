@@ -89,14 +89,14 @@
 					<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
 					<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
 					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
-				</select> ��<br />
+				</select>～<br />
 				&nbsp;&nbsp;&nbsp;
 				<select name="date_to_yyyy" id="date_to_yyyy">
 					<option value=""></option>
 					{section name=it loop=$app.year_list}
 					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
 					{/section}
-				</select>
+				</select>/
 				<select name="date_to_mm" id="date_to_mm">
 					<option value=""></option>
 					<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
@@ -111,7 +111,7 @@
 					<option value="10" {if ('10' == $form.date_to_mm)}selected{/if}>10</option>
 					<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
 					<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
-				</select>/<br/>
+				</select><br/>
 				{if is_error('date_from_yyyy')}
 				<span class="error-message">{message name="date_from_yyyy"}</span><br />
 				{/if}
@@ -133,7 +133,7 @@
 	</table>
 	<a href="javascript:search('form_enFairMenuDetail');"><img width="93" height="34" alt="Refine" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
 
-	<!-- 讌ｭ遞ｮ驕ｸ謚�-->
+	<!-- 業種選択 -->
 	<script type="text/javascript">
 	{literal}
 	$(document).ready(function() {
@@ -155,13 +155,13 @@
 			}).get();
 			// close the overlay
 			triggers.overlay().close();
-			// 驕ｸ謚槫�縺ｮ豢励＞譖ｿ縺�
+			// 選択値の洗い替え
 			$("#industory_disp").empty();
 			var txt = "";
 			var n = 1;
 			for (i in input) {
 				arry_item = input[i].split("_");
-				txt += "繝ｻ" + arry_item[2] + "/" + arry_item[3] + "<br/>";
+				txt += "・" + arry_item[2] + "/" + arry_item[3] + "<br/>";
 			}
 			$("#industory_disp").html(txt);
 			$("#industory_selected").val("1");
@@ -388,9 +388,9 @@
 		</div>
 		<br />
 	</div>
-	<!-- /讌ｭ遞ｮ驕ｸ謚�-->
+	<!-- /業種選択 -->
 
-	<!-- 髢句ぎ蝨ｰ驕ｸ謚�-->
+	<!-- 開催地選択 -->
 	<script type="text/javascript">
 	{literal}
 	$(document).ready(function() {
@@ -415,13 +415,13 @@
 			var city_name = $("#select_city option:selected").text();
 			// close the overlay
 			triggers.overlay().close();
-			// 險ｭ螳�
+			// 設定
 			$("#region").val(region);
 			$("#country").val(country);
 			$("#city").val(city);
-			// 驕ｸ謚槫�縺ｮ豢励＞譖ｿ縺�
+			// 選択値の洗い替え
 			$("#venue_disp").empty();
-			var txt = "繝ｻ" + region_name;
+			var txt = "・" + region_name;
 			if ("" != country_name) {
 				txt += "/" + country_name;
 				if ("" != city_name) {
@@ -447,7 +447,11 @@
 
 	function set_country(url) {
 		var region = document.getElementById('select_region').options[document.getElementById('select_region').selectedIndex].value;
-		dynamicpulldownlist(url+'?action_json_getCountry=true&search=1&kbn_2='+region+'&use_language_flag=1', '', '#select_country', null);
+		if ('' == region) {
+			clear_country();
+		} else {
+			dynamicpulldownlist(url+'?action_json_getCountry=true&search=1&kbn_2='+region+'&use_language_flag=1', '', '#select_country', null);
+		}
 		clear_city();
 	}
 
@@ -457,6 +461,18 @@
 		dynamicpulldownlist(url+'?action_json_getCity=true&search=1&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=1', '', '#select_city', null);
 	}
 
+	function clear_country() {
+		var select_country = document.getElementById('select_country');
+		for (var i = select_country.length -1; i >= 0 ; i--) {
+			select_country.remove(i);
+		}
+		var op = document.createElement('option');
+		op.value = '';
+		op.innerHTML = 'ALL';
+		document.getElementById('select_country').appendChild(op);
+
+	}
+
 	function clear_city() {
 		var select_city = document.getElementById('select_city');
 		for (var i = select_city.length -1; i >= 0 ; i--) {
@@ -464,7 +480,7 @@
 		}
 		var op = document.createElement('option');
 		op.value = '';
-		op.innerHTML = 'All';
+		op.innerHTML = 'ALL';
 		document.getElementById('select_city').appendChild(op);
 
 	}
@@ -515,7 +531,7 @@
 		</div>
 		<br />
 	</div>
-	<!-- /髢句ぎ蝨ｰ驕ｸ謚�-->
+	<!-- /開催地選択 -->
 
 </div>
 </form>

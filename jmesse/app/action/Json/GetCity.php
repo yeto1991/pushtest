@@ -122,7 +122,11 @@ class Jmesse_Action_JsonGetCity extends Jmesse_ActionClass
 		if ('1' == $search) {
 			$jm_code_m_mgr = $this->backend->getManager('jmCodeM');
 			$list = $jm_code_m_mgr->getCityList($region, $country);
-			$json_list = array(array('text' => 'すべて', 'value' => ''));
+			if ('0' == $use_language_flag) {
+				$json_list = array(array('text' => 'すべて', 'value' => ''));
+			} elseif ('1' == $use_language_flag) {
+				$json_list = array(array('text' => 'ALL', 'value' => ''));
+			}
 			foreach ($list as $row) {
 				if ('0' == $use_language_flag) {
 					$json_row = array('text' => $row['discription_jp'], 'value' => $row['kbn_4']);

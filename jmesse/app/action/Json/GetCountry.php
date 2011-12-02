@@ -99,7 +99,11 @@ class Jmesse_Action_JsonGetCountry extends Jmesse_ActionClass
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
 			if ('1' == $this->af->get('search')) {
-				echo '[{"text":"すべて","value":""}]';
+				if ("0" == $use_language_flag) {
+					echo '[{"text":"すべて","value":""}]';
+				} elseif ('1' == $use_language_flag) {
+					echo '[{"text":"ALL","value":""}]';
+				}
 			} else {
 				echo '[{"text":"...","value":""}]';
 			}
@@ -122,7 +126,7 @@ class Jmesse_Action_JsonGetCountry extends Jmesse_ActionClass
 								$json .= ',{"text":"'.$list[$i]['discription_jp'].'","value":"'.$list[$i]['kbn_3'].'"}';
 							}
 						}
-					} else {
+					} elseif ('1' == $use_language_flag) {
 						for ($i = 0; $i < count($list); $i++) {
 							if ($i == 0) {
 								$json .= '{"text":"'.$list[$i]['discription_en'].'","value":"'.$list[$i]['kbn_3'].'"}';

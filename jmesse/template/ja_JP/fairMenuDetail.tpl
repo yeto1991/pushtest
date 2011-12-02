@@ -448,7 +448,11 @@
 
 	function set_country(url) {
 		var region = document.getElementById('select_region').options[document.getElementById('select_region').selectedIndex].value;
-		dynamicpulldownlist(url+'?action_json_getCountry=true&search=1&kbn_2='+region+'&use_language_flag=0', '', '#select_country', null);
+		if ('' != region) {
+			dynamicpulldownlist(url+'?action_json_getCountry=true&search=1&kbn_2='+region+'&use_language_flag=0', '', '#select_country', null);
+		} else {
+			clear_country();
+		}
 		clear_city();
 	}
 
@@ -456,6 +460,18 @@
 		var region = document.getElementById('select_region').options[document.getElementById('select_region').selectedIndex].value;
 		var country = document.getElementById('select_country').options[document.getElementById('select_country').selectedIndex].value;
 		dynamicpulldownlist(url+'?action_json_getCity=true&search=1&kbn_2='+region+'&kbn_3='+country+'&use_language_flag=0', '', '#select_city', null);
+	}
+
+	function clear_country() {
+		var select_country = document.getElementById('select_country');
+		for (var i = select_country.length -1; i >= 0 ; i--) {
+			select_country.remove(i);
+		}
+		var op = document.createElement('option');
+		op.value = '';
+		op.innerHTML = 'すべて';
+		document.getElementById('select_country').appendChild(op);
+
 	}
 
 	function clear_city() {
