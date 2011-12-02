@@ -19,7 +19,7 @@ $config = array(
 	'host_path'      => 'https://localhost',
 	'img_path'       => 'img/user/',
 	'img_tmp_path'   => 'img/user/tmp/',
-	'flag_path'      => 'img/flag/',
+	'flag_path'      => '/images/flag/',
 	'photos_dir_max' => 10000,
 
 	//JSONファイル作成格納場所

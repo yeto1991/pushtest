@@ -103,7 +103,10 @@
 											<th>開催地</th>
 											<td>
 												{if ('' != $app.fair_detail.flag_image)}
+												<img src="{$config.flag_path}{$app.fair_detail.flag_image}" class="flag">
+{*
 												<img src="{$config.url_pub}{$config.flag_path}{$app.fair_detail.flag_image}" style="vertical-align: middle;">
+*}
 												{/if}
 												{if ('' != $app.fair_detail.city_other_jp)}
 												{$app.fair_detail.city_other_jp} /
@@ -362,6 +365,13 @@
 									{/if}
 								</div>
 								{/if}
+								<br class="clr" />
+								<div class="frame_gray inside terms_use">
+								<p>
+								掲載の見本市情報は主催者により変更、延期、中止されることがあります。詳細については直接各主催者のサイト等を確認願います。<br />
+								詳しくは<a href="/j-messe/tradefair/terms.html">見本市・展示会情報のご利用について</a>を参照ください。
+								</p>
+								</div>
 							</div>
 						</div>
 					</div>
