@@ -19,8 +19,7 @@
 {/if}
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="{$config.url_pub}js/j-messe.js"></script>
-<script type="text/javascript" src="{$config.url_pub}js/j-messe_enInclude_pub.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe_en.js"></script>
 <script type="text/javascript">
 <!--
 {literal}

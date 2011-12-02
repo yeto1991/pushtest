@@ -66,7 +66,7 @@
 					{if (0 < $app.region_cnt[it].cnt)}
 					<p>
 						<img width="11" height="11" alt="open" src="/images/jp/btn-white-collapsed.gif">
-						<a href="#" onclick="return toggle_cy(this)" title="open">Others</a><br />
+						<a href="#" onclick="return toggle_cy_en(this)" title="open">Others</a><br />
 						<span class="close">
 						{section name=it2 loop=$app.country_close_cnt}
 						{if ($app.region_cnt[it].kbn_2 == $app.country_close_cnt[it2].kbn_2)}
