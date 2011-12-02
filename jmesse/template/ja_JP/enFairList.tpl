@@ -94,27 +94,28 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if ('1' != $form.all)}
 				{if ('i1' == $form.type)}
-			<li><a href="">Trade Fairs held in Japan and the World</a></li>
+					<li><a href="{$config.url_pub}?action_enTop=true">View Industry</a></li>
 					{if ('' == $form.i_3)}
-			<li>{$app.pan_1}</li>
+						<li>{$app.pan_1}</li>
 					{else}
-			<li><a href="{$config.url_pub}?action_enFairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
-			<li>{$app.pan_2}</li>
+						<li><a href="{$config.url_pub}?action_enFairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
+						<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-			<li><a href="">View Reigion</a></li>
-			<li>{$app.pan_1}</li>
+					<li><a href="{$config.url_pub}?action_top=true">View Reigion</a></li>
+					<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-			<li><a href="">View Reigion</a></li>
+					<li><a href="">View Reigion</a></li>
 					{if ('' == $form.v_4)}
-			<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
-			<li>{$app.pan_2}</li>
+						<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+						<li>{$app.pan_2}</li>
 					{else}
-			<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
-			<li><a href="{$config.url_pub}?action_enFairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
-			<li>{$app.pan_3}</li>
+						<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+						<li><a href="{$config.url_pub}?action_enFairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
+						<li>{$app.pan_3}</li>
 					{/if}
 				{/if}
 			{else}
@@ -134,10 +135,14 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 			<div class="in_main">
 				<div class="h3 clearfix">
 					{if ('1' == $form.detail)}
-					<h3>Trade Fairs held in Japan and the World</h3>
+						<h3>Trade Fairs held in Japan and the World</h3>
 					{else}
-					<h3>{$app.list_name}</h3>
-					<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+						<h3>{$app.list_name}</h3>
+						{if ('i1' == $form.type)}
+							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Industry</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+						{else}
+							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+						{/if}
 					{/if}
 				</div>
 				<div id="skip_menu"><a href="#right">Skip to search refinement</a></div>

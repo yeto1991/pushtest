@@ -85,30 +85,31 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul>
-			<li><a href="">HOME</a></li>
-			<li><a href="">引き合い・展示会検索</a></li>
-			<li><a href="{$config.url_pub}">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/indexj.html">HOME</a></li>
+			<li><a href="/database/">引き合い・展示会検索</a></li>
+			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			{if ('1' != $form.all)}
 				{if ('i1' == $form.type)}
-			<li><a href="">世界の見本市・展示会</a></li>
+					<li><a href="{$config.url_pub}?action_top=true">業種別に見る</a></li>
 					{if ('' == $form.i_3)}
-			<li>{$app.pan_1}</li>
+						<li>{$app.pan_1}</li>
 					{else}
-			<li><a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
-			<li>{$app.pan_2}</li>
+						<li><a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$form.i_2}">{$app.pan_1}</a></li>
+						<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-			<li><a href="">開催地別に見る</a></li>
-			<li>{$app.pan_1}</li>
+					<li><a href="{$config.url_pub}?action_top=true">開催地別に見る</a></li>
+					<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-			<li><a href="">開催地別に見る</a></li>
+					<li><a href="{$config.url_pub}?action_top=true">開催地別に見る</a></li>
 					{if ('' == $form.v_4)}
-			<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
-			<li>{$app.pan_2}</li>
+						<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+						<li>{$app.pan_2}</li>
 					{else}
-			<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
-			<li><a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
-			<li>{$app.pan_3}</li>
+						<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
+						<li><a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$form.v_2}&v_3={$form.v_3}">{$app.pan_2}</a></li>
+						<li>{$app.pan_3}</li>
 					{/if}
 				{/if}
 			{else}
@@ -147,12 +148,15 @@
 
 								<div class="h3">
 									{if ('1' == $form.detail)}
-									<h3>世界の見本市・展示会</h3>
+										<h3>世界の見本市・展示会</h3>
 									{else}
-									<h3>{$app.list_name}</h3>
-									<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の地域を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
+										<h3>{$app.list_name}</h3>
+										{if ('i1' == $form.type)}
+											<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の業種を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
+										{else}
+											<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の地域を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
+										{/if}
 									{/if}
-
 								</div>
 
 								<div id="skip_menu">
