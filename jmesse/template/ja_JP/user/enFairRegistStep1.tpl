@@ -181,7 +181,7 @@
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center">
-					<img src="/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1" />
+					<img src="/en/database/j-messe/images/db/fair02.jpg" alt="見本市登録　ステップ1" />
 				</h3>
 				<p class="t_right">
 					user：{$session.email}
@@ -234,7 +234,7 @@
 						<tr>
 						{/if}
 							<th class="item">Fair title</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<input type="text" value="{$form.fair_title_en}" size="60" name="fair_title_en" id="fair_title_en" maxlength="255" /><br />
 								{if is_error('fair_title_en')}
@@ -265,7 +265,7 @@
 						<tr>
 						{/if}
 							<th class="item">URL</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<input type="text" value="{if ('' == $form.fair_url)}http://{else}{$form.fair_url}{/if}" size="60" name="fair_url" id="fair_url" maxlength="255" /><br />
 								Enter URLs beginning with http(s)://. <br/>
@@ -281,7 +281,7 @@
 						<tr>
 						{/if}
 							<th class="item">Date</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<select name="date_from_yyyy" size="1" id="date_from_yyyy">
 									<option value=""></option>
@@ -420,7 +420,7 @@
 						<tr>
 						{/if}
 							<th class="item">Frequency of exhibition</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.frequency_list}
 								<input type="radio" value="{$app.frequency_list[it].kbn_2}" name="frequency" id="frequency" {if ($app.frequency_list[it].kbn_2 == $form.frequency)}checked{/if} />{$app.frequency_list[it].discription_en}&nbsp;
@@ -441,7 +441,7 @@
 						<tr>
 						{/if}
 							<th class="item">Main/Sub Industry</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								Click “Select”, then choose industries. <br />
 								<div id="INDUSOTRY_LIST">
@@ -477,7 +477,7 @@
 						<tr>
 						{/if}
 							<th class="item">Exhibits</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="3" name="exhibits_en" id="exhibits_en">{$form.exhibits_en}</textarea><br />
 								Enter details of products (Maximum of about 80 words) <br/>
@@ -496,7 +496,7 @@
 						<tr>
 						{/if}
 							<th class="item">Location</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<table style="border-style:none;border-collapse:collapse;">
 									{if is_error('region') || is_error('country') || is_error('city') || is_error('other_city_en')}
@@ -575,7 +575,7 @@
 						<tr>
 						{/if}
 							<th class="item">Venue</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<input type="text" value="{$form.venue_en}" size="50" name="venue_en" id="venue_en" maxlength="255" /><br/>
 								{if is_error('venue_en')}
@@ -602,7 +602,7 @@
 {*
 						<tr>
 							<th class="item">会場までの交通手段</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<input type="text" value="{$form.transportation_en}" size="60" name="transportation_en" id="transportation_en" maxlength="500"><br />
 								例：成田空港からA12バスで30分<br/>
@@ -615,7 +615,7 @@
 						<tr>
 						{/if}
 							<th class="item">Eligibility</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								{section name=it loop=$app.open_to_list}
 								<input name="open_to" id="open_to" value="{$app.open_to_list[it].kbn_2}" type="radio" {if ($app.open_to_list[it].kbn_2 == $form.open_to)}checked{/if} />{$app.open_to_list[it].discription_en}&nbsp;
@@ -632,7 +632,7 @@
 						<tr>
 						{/if}
 							<th class="item">Method of obtaining tickets</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />Free
 								<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />Apply/register online<br />

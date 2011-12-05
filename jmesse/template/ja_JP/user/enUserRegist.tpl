@@ -60,7 +60,7 @@
 				{/if}
 			</div>
 			<div class="in_main">
-				<h3 class="img t_center"><img src="/j-messe/images/db/user02.jpg" alt="ユーザー情報入力" /></h3>
+				<h3 class="img t_center"><img src="/en/database/j-messe/images/db/user02.jpg " alt="ユーザー情報入力" /></h3>
 				<form name="form_user_enUserRegist" id="form_user_enUserRegist" method="post" action="">
 					{if ("regist" == $form.mode)}
 					<input type="hidden" name="action_user_enUserRegistDo" id="action_user_enUserRegistDo" value="dummy" />
@@ -85,7 +85,7 @@
 						<tr>
 						{/if}
 							<th class="item">email</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="text" value="{$form.email}" size="50" name="email" id="email" /><br />
 							{if is_error('email')}
 							<span class="error-message">{message name="email"}</span><br />
@@ -98,7 +98,7 @@
 						<tr>
 						{/if}
 							<th class="item">email（Confirm）</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="text" value="{$form.email2}" size="50" name="email2" id="email2" /><br />
 							{if is_error('email2')}
 							<span class="error-message">{message name="email2"}</span><br />
@@ -111,7 +111,7 @@
 						<tr>
 						{/if}
 							<th class="item">password</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="password" value="{$form.password}" size="20" name="password" id="password" /><br />
 							{if is_error('password')}
 							<span class="error-message">{message name="password"}</span><br />
@@ -124,7 +124,7 @@
 						<tr>
 						{/if}
 							<th class="item">password（Confirm）</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2" /><br />
 							{if is_error('password2')}
 							<span class="error-message">{message name="password2"}</span><br />
@@ -140,7 +140,7 @@
 						<tr>
 						{/if}
 							<th class="item">Company name</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="text" value="{$form.companyNm}" size="60" name="companyNm" id="companyNm" /><br />
 							{if is_error('companyNm')}
 							<span class="error-message">{message name="companyNm"}</span><br />
@@ -166,7 +166,7 @@
 						<tr>
 						{/if}
 							<th class="item">Your name</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="text" value="{$form.userNm}" size="60" name="userNm" id="userNm" /><br />
 							{if is_error('userNm')}
 							<span class="error-message">{message name="userNm"}</span><br />
@@ -179,7 +179,7 @@
 						<tr>
 						{/if}
 							<th class="item">Gender</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 							<input type="radio" size="60" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0" } checked {/if} />Male
 							<input type="radio" size="60" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if} />Female<br />
@@ -209,7 +209,7 @@
 						<tr>
 						{/if}
 							<th class="item">Address</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td><input type="text" value="{$form.address}" size="80" name="address" id="address" /><br />
 							{if is_error('address')}
 							<span class="error-message">{message name="address"}</span><br />
@@ -222,7 +222,7 @@
 						<tr>
 						{/if}
 							<th class="item">TEL</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 							<input type="text" value="{$form.tel}" size="30" name="tel" id="tel" />（single-byte letters and numbers)<br />
 							{if is_error('tel')}

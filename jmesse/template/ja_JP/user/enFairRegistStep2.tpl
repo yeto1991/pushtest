@@ -150,7 +150,7 @@
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center">
-					<img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2" />
+					<img src="/en/database/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2" />
 				</h3>
 				<p class="t_right">user：{$session.email}</p>
 
@@ -176,7 +176,7 @@
 						<tr>
 						{/if}
 							<th class="item">Fair title</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<input type="text" value="{$form.fair_title_en}" size="60" name="fair_title_en" id="fair_title_en" maxlength="255" /><br/>
 								{if is_error('fair_title_en')}
@@ -285,7 +285,7 @@
 						<tr>
 						{/if}
 							<th class="item">Catchphrase</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
 							 	Maximum of about 120 words<br/>
@@ -381,7 +381,7 @@
 						<tr>
 						{/if}
 							<th class="item">Name of the organizer</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								 Name: <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
 								{if is_error('organizer_en')}
@@ -396,7 +396,7 @@
 						<tr>
 						{/if}
 							<th class="item">Information of the organizer</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<strong>Address: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
 								<strong>Department: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />

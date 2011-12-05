@@ -76,7 +76,7 @@
 			</div>
 			<div class="in_main">
 				<h3 class="img t_center">
-					<img src="/j-messe/images/db/fair06.jpg" alt="見本市登録完了" />
+					<img src="/en/database/j-messe/images/db/fair06.jpg" alt="見本市登録完了" />
 				</h3>
 				{if ('r' == $form.msg)}
 				<p>Your registration has been completed.</p>

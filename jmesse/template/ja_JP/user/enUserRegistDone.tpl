@@ -77,7 +77,7 @@
 				{/if}
 			</div>
 			<div class="in_main">
-				<h3 class="img t_center"><img src="/j-messe/images/db/user04.jpg" alt="ユーザー登録完了" /></h3>
+				<h3 class="img t_center"><img src="/en/database/j-messe/images/db/user04.jpg" alt="ユーザー登録完了" /></h3>
 				{if ("regist" == $form.mode)}
 				<p>Your user registration has been completed.</p>
 				{/if}

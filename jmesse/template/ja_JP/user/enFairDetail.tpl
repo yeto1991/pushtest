@@ -132,7 +132,7 @@ $form.mode
 				<div class="in_main">
 					{if ('d' != $form.mode && 'p' != $form.mode)}
 					<h3 class="img t_center">
-						<img src="/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4" />
+						<img src="/en/database/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4" />
 					</h3>
 					{/if}
 					<p class="t_right">user：{$session.email}</p>
@@ -180,7 +180,7 @@ $form.mode
 					<table id="registration">
 						<tr>
 							<th class="item">Fair title</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.fair_title_en}</td>
 						</tr>
 						<tr>
@@ -190,17 +190,17 @@ $form.mode
 						</tr>
 						<tr>
 							<th class="item">URL</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.fair_url}</td>
 						</tr>
 						<tr>
 							<th class="item">Date</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.date_from_yyyy}/{$form.date_from_mm}/{$form.date_from_dd}～{$form.date_to_yyyy}/{$form.date_to_mm}/{$form.date_to_dd}</td>
 						</tr>
 						<tr>
 							<th class="item">Frequency of exhibition</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$app.frequency_name.discription_en}</td>
 						</tr>
 					</table>
@@ -208,7 +208,7 @@ $form.mode
 					<table id="registration">
 						<tr>
 							<th class="item">Main/Sub Industry</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								{$form.main_industory_name_1}/{$form.sub_industory_name_1}<br />
 								{if ('' != $form.main_industory_name_2)}
@@ -230,7 +230,7 @@ $form.mode
 						</tr>
 						<tr>
 							<th class="item">Exhibits</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 					</table>
@@ -238,7 +238,7 @@ $form.mode
 					<table id="registration">
 						<tr>
 							<th class="item">Location</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								{$app.region_name.discription_en}
 								/ {$app.country_name.discription_en}
@@ -252,7 +252,7 @@ $form.mode
 						</tr>
 						<tr>
 							<th class="item">Venue</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.venue_en}</td>
 						</tr>
 						<tr>
@@ -286,7 +286,7 @@ $form.mode
 						</tr>
 						<tr>
 							<th class="item">Method of obtaining tickets</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								{if ('1' == $form.admission_ticket_1)}
 								Free<br />
@@ -359,7 +359,7 @@ $form.mode
 					<table id="registration">
 						<tr>
 							<th class="item">Catchphrase</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 						<tr>
@@ -386,14 +386,14 @@ $form.mode
 					<table id="registration">
 						<tr>
 							<th class="item">Name of the organizer</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								{$form.organizer_en}
 							</td>
 						</tr>
 						<tr>
 							<th class="item">Information of the organizer</th>
-							<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<strong>Address: </strong>{$form.organizer_addr}<br />
 								<strong>Department: </strong>{$form.organizer_div}<br />
