@@ -92,7 +92,10 @@
 							<th>City / Country</th>
 							<td>
 								{if ('' != $app.fair_detail.flag_image)}
+								<img src="{$config.flag_path}{$app.fair_detail.flag_image}" class="flag">
+{*
 								<img src="{$config.url_pub}{$config.flag_path}{$app.fair_detail.flag_image}" style="vertical-align: middle;">
+*}
 								{/if}
 								{if ('' != $app.fair_detail.city_other_en)}
 								{$app.fair_detail.city_other_en} /
@@ -302,9 +305,11 @@
 							<th>last update</th>
 							<td>
 								{if ('' != $app.fair_detail.update_date)}
-									{$app.fair_detail.update_date|date_format:"%e-%b-%Y"}
+									{$app.fair_detail.update_date}
+									{* $app.fair_detail.update_date|date_format:"%e-%b-%Y" *}
 								{else}
-									{$app.fair_detail.regist_date|date_format:"%e-%b-%Y"}
+									{$app.fair_detail.regist_date}
+									{* $app.fair_detail.regist_date|date_format:"%e-%b-%Y" *}
 								{/if}
 							</td>
 						</tr>
@@ -348,6 +353,12 @@
 					{/if}
 				</div>
 				{/if}
+{*
+				<br class="clr" />
+				<div class="frame_gray inside terms_use">
+				<p>掲載の見本市情報は主催者により変更、延期、中止されることがあります。詳細については直接各主催者のサイト等を確認願います。<br />詳しくは<a href="/j-messe/tradefair/terms.html">見本市・展示会情報のご利用について</a>を参照ください。</p>
+				</div>
+*}
 			</div>
 			<p class="totop">
 				<a href="javascript:window.open('{$config.url_pub}tradefair_en/{$app.fair_detail.mihon_no}/print/1/', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
