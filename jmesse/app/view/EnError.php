@@ -1,6 +1,6 @@
 <?php
 /**
- *  Error.php
+ *  EnError.php
  *
  *  @author     {$author}
  *  @package    Jmesse
@@ -8,13 +8,13 @@
  */
 
 /**
- *  error view implementation.
+ *  enError view implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_View_Error extends Jmesse_ViewClass
+class Jmesse_View_EnError extends Jmesse_ViewClass
 {
 	/**
 	 *  preprocess before forwarding.
@@ -24,7 +24,7 @@ class Jmesse_View_Error extends Jmesse_ViewClass
 	function preforward()
 	{
 		// 外部htmlの取得
-		$this->backend->getManager('Common')->setExtHtml();
+		$this->backend->getManager('Common')->setEnExtHtml();
 	}
 }
 
