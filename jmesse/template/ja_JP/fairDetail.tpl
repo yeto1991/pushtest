@@ -120,7 +120,12 @@
 										</tr>
 										<tr>
 											<th>会場</th>
-											<td>{$app.fair_detail.venue_jp}<br />
+											<td>
+											{if ('' != $app.fair_detail.venue_url)}
+												<a target="_blank" href="{$app.fair_detail.venue_url}">{$app.fair_detail.venue_jp}</a><br />
+											{else}
+												{$app.fair_detail.venue_jp}<br />
+											{/if}
 
 												<div style="padding-left: 15px;">
 													{if ('' != $app.fair_detail.gross_floor_area && 0 <$app.fair_detail.gross_floor_area)}

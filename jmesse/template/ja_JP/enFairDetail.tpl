@@ -109,7 +109,12 @@
 						</tr>
 						<tr>
 							<th>Venue</th>
-							<td>{$app.fair_detail.venue_en}<br />
+							<td>
+							{if ('' != $app.fair_detail.venue_url)}
+								<a target="_blank" href="{$app.fair_detail.venue_url}">{$app.fair_detail.venue_en}</a><br />
+							{else}
+								{$app.fair_detail.venue_en}<br />
+							{/if}
 								<div style="padding-left: 15px;">
 								{if ('' != $app.fair_detail.gross_floor_area && 0 <$app.fair_detail.gross_floor_area)}
 								Net square meters(net)：{$app.fair_detail.gross_floor_area|number_format} sqm<br />
