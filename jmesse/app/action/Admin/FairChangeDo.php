@@ -79,11 +79,11 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			if (null == $this->af->get('open_to_jp') || '' == $this->af->get('open_to_jp')) {
 				$this->ae->addObject('error', Ethna::raiseError('入場資格が入力されていません', E_REQUIRED));
 			}
-			// チケットの入手方法
-			if ('1' == $this->af->get('admission_ticket_5_jp')
-			&& (null == $this->af->get('other_admission_ticket_jp') || '' == $this->af->get('other_admission_ticket_jp'))) {
-				$this->ae->addObject('error', Ethna::raiseError('チケットの入手方法が入力されていません', E_REQUIRED));
-			}
+// 			// チケットの入手方法
+// 			if ('1' == $this->af->get('admission_ticket_5_jp')
+// 			&& (null == $this->af->get('other_admission_ticket_jp') || '' == $this->af->get('other_admission_ticket_jp'))) {
+// 				$this->ae->addObject('error', Ethna::raiseError('チケットの入手方法が入力されていません', E_REQUIRED));
+// 			}
 // 		} else {
 // 			// 開催頻度
 // 			if (null == $this->af->get('frequency_en') || '' == $this->af->get('frequency_en')) {
@@ -104,11 +104,11 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 // 			if (null == $this->af->get('open_to_en') || '' == $this->af->get('open_to_en')) {
 // 				$this->ae->addObject('error', Ethna::raiseError('入場資格が入力されていません', E_REQUIRED));
 // 			}
-			// チケットの入手方法
-			if ('1' == $this->af->get('admission_ticket_5_en')
-			&& (null == $this->af->get('other_admission_ticket_en') || '' == $this->af->get('other_admission_ticket_en'))) {
-				$this->ae->addObject('error', Ethna::raiseError('チケットの入手方法が入力されていません', E_REQUIRED));
-			}
+// 			// チケットの入手方法
+// 			if ('1' == $this->af->get('admission_ticket_5_en')
+// 			&& (null == $this->af->get('other_admission_ticket_en') || '' == $this->af->get('other_admission_ticket_en'))) {
+// 				$this->ae->addObject('error', Ethna::raiseError('チケットの入手方法が入力されていません', E_REQUIRED));
+// 			}
 // 		}
 		// Eメール
 		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
@@ -165,6 +165,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 				$this->ae->addObject('error', Ethna::raiseError('世界の展示会場／URLはhttp～として下さい', E_INPUT_TYPE));
 			}
 		}
+		// 会場URL
+		if (null != $this->af->get('venue_url') && '' != $this->af->get('venue_url')) {
+			if (0 !== strpos($this->af->get('venue_url'), 'http')) {
+				$this->ae->addObject('error', Ethna::raiseError('会場URLはhttp～として下さい', E_INPUT_TYPE));
+			}
+		}
 
 		// Eメールチェック
 		// 主催者・問合せ先 E-Mail
@@ -203,6 +209,10 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			if ('' == $this->af->get('organizer_jp')) {
 				$this->ae->add('error', '主催者・問合せ先名称(日)が入力されていません');
 			}
+			// キャッチフレーズ
+			if ('' == $this->af->get('profile_jp')) {
+				$this->ae->add('error', 'キャッチフレーズ(日)が入力されていません');
+			}
 		}
 		// 英語
 		if ('1' == $select_language_info || '2' == $select_language_info) {
@@ -218,6 +228,27 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			if ('' == $this->af->get('venue_en')) {
 				$this->ae->add('error', '会場名(英)が入力されていません');
 			}
+			// キャッチフレーズ
+			if ('' == $this->af->get('profile_en')) {
+				$this->ae->add('error', 'キャッチフレーズ(英)が入力されていません');
+			}
+		}
+
+		// チケット入手方法
+		if ('' == $this->af->get('admission_ticket_1_jp') && '' == $this->af->get('admission_ticket_2_jp') && '' == $this->af->get('admission_ticket_3_jp') && '' == $this->af->get('admission_ticket_4_jp') && '' == $this->af->get('admission_ticket_5_jp') && '' == $this->af->get('admission_ticket_5_en')) {
+			$this->ae->add('error', 'チケットの入手方法が入力されていません');
+		}
+		if ('' != $this->af->get('admission_ticket_5_jp') && '' == $this->af->get('other_admission_ticket_jp')) {
+			$this->ae->add('error', 'チケットの入手方法(その他)が入力されていません');
+		}
+		if ('' == $this->af->get('admission_ticket_5_jp') && '' != $this->af->get('other_admission_ticket_jp')) {
+			$this->ae->add('error', 'チケットの入手方法(その他)が入力されていません');
+		}
+		if ('' != $this->af->get('admission_ticket_5_en') && '' == $this->af->get('other_admission_ticket_en')) {
+			$this->ae->add('error', 'チケットの入手方法(Other)が入力されていません');
+		}
+		if ('' == $this->af->get('admission_ticket_5_en') && '' != $this->af->get('other_admission_ticket_en')) {
+			$this->ae->add('error', 'チケットの入手方法(Other)が入力されていません');
 		}
 
 		if (0 < $this->ae->count()) {
@@ -359,6 +390,9 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('venue_jp', $this->af->get('venue_jp'));
 		$jm_fair->set('venue_en', $this->af->get('venue_en'));
 
+		// 会場URL
+		$jm_fair->set('venue_url', $this->af->get('venue_url'));
+
 		// 開催予定規模
 		$jm_fair->set('gross_floor_area', $this->af->get('gross_floor_area'));
 
@@ -444,7 +478,6 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('update_date', date('Y/m/d H:i:s'));
 
 		// 入力項目なし
-		$jm_fair->set('venue_url', '');
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');
 		$jm_fair->set('regist_type', '');
@@ -533,6 +566,8 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// 会場名
 		$search_key .= $this->af->get('venue_jp').' ';
 		$search_key .= $this->af->get('venue_en').' ';
+		// 会場URL
+		$search_key .= $this->af->get('venue_url').' ';
 		// 開催予定規模
 		$search_key .= $this->af->get('gross_floor_area').' ';
 		// 入場資格

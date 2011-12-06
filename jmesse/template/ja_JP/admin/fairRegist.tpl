@@ -554,7 +554,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="2">キャッチフレーズ</td>
+							<td nowrap rowspan="2">キャッチフレーズ <font color="#CC3333">●</font></td>
 							<!-- キャッチフレーズ(日) -->
 							<!-- キャッチフレーズ(英) -->
 							<td nowrap>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="80" rows="7">{$form.profile_jp}</textarea><br />
@@ -912,6 +912,12 @@
 						</tr>
 
 						<tr>
+							<td nowrap>会場名URL</td>
+							<!-- 会場URL -->
+							<td nowrap><input type="text" name="venue_url" id="venue_url" value="{$form.venue_url}" maxlength="255" size="100" /></td>
+						</tr>
+
+						<tr>
 							<td nowrap>開催予定規模 <font color="#CC3333">○</font></td>
 							<!-- 開催予定規模 -->
 							<td nowrap><input type="text" name="gross_floor_area" id="gross_floor_area" value="{$form.gross_floor_area}" maxlength="10" size="10" /><br> <font size="-1">■半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
@@ -943,7 +949,7 @@
 *}
 
 						<tr>
-							<td nowrap rowspan="1">チケットの入手方法</td>
+							<td nowrap rowspan="1">チケットの入手方法 <font color="#CC3333">●</font></td>
 							<!-- チケットの入手方法(日) -->
 							<!-- チケットの入手方法(英) -->
 							<!-- その他のチケットの入手方法(日) -->

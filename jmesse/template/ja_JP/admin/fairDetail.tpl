@@ -342,6 +342,12 @@
 						</tr>
 
 						<tr>
+							<td nowrap>会場URL</td>
+							<!-- 会場名URL -->
+							<td nowrap>{$form.venue_url}</td>
+						</tr>
+
+						<tr>
 							<td nowrap>開催予定規模</td>
 							<!-- 開催予定規模 -->
 							<td nowrap>{$form.gross_floor_area}</td>

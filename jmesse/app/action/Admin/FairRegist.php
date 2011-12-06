@@ -993,6 +993,20 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
+		'venue_url' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => '会場名URL',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 255,             // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
 		'gross_floor_area' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type

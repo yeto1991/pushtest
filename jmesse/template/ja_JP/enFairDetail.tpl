@@ -306,10 +306,14 @@
 							<td>
 								{if ('' != $app.fair_detail.update_date)}
 									{$app.fair_detail.update_date}
-									{* $app.fair_detail.update_date|date_format:"%e-%b-%Y" *}
+{*
+									{$app.fair_detail.update_date|date_format:"%e-%b-%Y"}
+*}
 								{else}
 									{$app.fair_detail.regist_date}
-									{* $app.fair_detail.regist_date|date_format:"%e-%b-%Y" *}
+{*
+									{$app.fair_detail.regist_date|date_format:"%e-%b-%Y"}
+*}
 								{/if}
 							</td>
 						</tr>

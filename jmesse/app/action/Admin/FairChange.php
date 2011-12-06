@@ -202,6 +202,9 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('venue_jp', $jm_fair->get('venue_jp'));
 		$this->af->set('venue_en', $jm_fair->get('venue_en'));
 
+		// 会場URL
+		$this->af->set('venue_url', $jm_fair->get('venue_url'));
+
 		// 開催予定規模
 		$this->af->set('gross_floor_area', $jm_fair->get('gross_floor_area'));
 
