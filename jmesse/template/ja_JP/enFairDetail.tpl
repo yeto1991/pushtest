@@ -110,7 +110,7 @@
 						<tr>
 							<th>Venue</th>
 							<td>
-							{if ('' != $app.fair_detail.venue_url)}
+							{if ('' != $app.fair_detail.venue_url && '0' == $app.is_end)}
 								<a target="_blank" href="{$app.fair_detail.venue_url}">{$app.fair_detail.venue_en}</a><br />
 							{else}
 								{$app.fair_detail.venue_en}<br />

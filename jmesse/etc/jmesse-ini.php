@@ -115,6 +115,7 @@ $config = array(
 	// mail
 	'mail_smtp_host' => '210.161.156.130',
 	'mail_smtp_port' => '25',
+	'mail_smtp_auth' => false,
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
 	'mail_from' => 'J-messe事務局 <matsuura@ids.co.jp>',

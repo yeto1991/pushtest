@@ -28,10 +28,10 @@ $config = array(
 	// 共通部分URL
 	'header_url'       => 'http://www.jetro.go.jp/header.html',
  	'footer_url'       => 'http://www.jetro.go.jp/footer.html',
-	'left_menu_url'    => 'http://www.jetro.go.jp/j-messe/left_menu.html',
-	'header_url_en'    => 'http://www.jetro.go.jp/header.html',
- 	'footer_url_en'    => 'http://www.jetro.go.jp/footer.html',
-	'left_menu_url_en' => 'http://www.jetro.go.jp/j-messe/enLeft_menu.html',
+	'left_menu_url'    => 'http://www.jetro.go.jp/left_menu.html',
+	'header_url_en'    => 'http://www.jetro.go.jp/enHeader.html',
+ 	'footer_url_en'    => 'http://www.jetro.go.jp/enFooter.html',
+	'left_menu_url_en' => 'http://www.jetro.go.jp/enLeft_menu.html',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
@@ -115,6 +115,7 @@ $config = array(
 	// mail
 	'mail_smtp_host' => '10.1.100.23',
 	'mail_smtp_port' => '25',
+	'mail_smtp_auth' => true,
 	'mail_smtp_user' => 'j-messe@jetro.go.jp',
 	'mail_smtp_pass' => '121d0f3e',
 
@@ -133,7 +134,7 @@ $config = array(
 	'mail_title_fair_change_en'  => 'J-messe見本市更新完了のお知らせ(英語)',
 
 	'mail_imap_host' => '10.1.100.23',
-	'mail_imap_port' => '993',
+	'mail_imap_port' => '143',
 	'mail_imap_user' => 'j-messe@jetro.go.jp',
 	'mail_imap_pass' => '121d0f3e',
 

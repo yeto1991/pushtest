@@ -147,7 +147,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 		$params = array(
 			'host'       => $this->config->get('mail_smtp_host'),
 			'port'       => $this->config->get('mail_smtp_port'),
-			'auth'       => false,
+			'auth'       => $this->config->get('mail_smtp_auth'),
 			'username'   => base64_encode($this->config->get('mail_smtp_user')),
 			'password'   => base64_encode($this->config->get('mail_smtp_pass')),
 			'localhost'  => null,
