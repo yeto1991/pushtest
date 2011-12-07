@@ -5,6 +5,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.fair_detail.exhibits_jp|replace:'&lt;br/&gt;':''}, {$app.fair_detail.keyword}" />
+{include file="header.tpl}
+{*
 <base href="{$config.base}" />
 <link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -16,6 +18,7 @@
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
+*}
 <title>
 {if ('' != $app.fair_detail.abbrev_title)}
 {$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_jp} - 世界の見本市・展示会 - ジェトロ

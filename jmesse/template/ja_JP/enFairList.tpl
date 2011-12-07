@@ -5,8 +5,10 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.meta_keyword}" />
+{include file="enHeader.tpl}
+{*
 <!--テスト用-->
-<base href="http://produce.jetro.go.jp/" />
+<base href="{$config.base_en}" />
 <!--/テスト用-->
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -20,6 +22,7 @@
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="{$config.url_pub}js/j-messe_en.js"></script>
+*}
 <script type="text/javascript">
 <!--
 {literal}

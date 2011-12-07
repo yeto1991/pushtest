@@ -21,7 +21,7 @@
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
 *}
-<script type="text/javascript" src="{$config.url}/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="{$config.url}js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
