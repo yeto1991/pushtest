@@ -23,10 +23,10 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	 */
 	function isLoginUser() {
 
-		// "https"判定
-		if ('on' != $_SERVER['HTTPS']) {
-			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-		}
+// 		// "https"判定
+// 		if ('on' != $_SERVER['HTTPS']) {
+// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+// 		}
 
 		$ret = true;
 
@@ -51,10 +51,10 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	 */
 	function isLoginFair() {
 
-		// "https"判定
-		if ('on' != $_SERVER['HTTPS']) {
-			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-		}
+// 		// "https"判定
+// 		if ('on' != $_SERVER['HTTPS']) {
+// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+// 		}
 
 		$ret = true;
 
@@ -79,10 +79,10 @@ class Jmesse_AdminCommonManager extends Ethna_AppManager
 	*/
 	function isLoginError() {
 
-		// "https"判定
-		if ('on' != $_SERVER['HTTPS']) {
-			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-		}
+// 		// "https"判定
+// 		if ('on' != $_SERVER['HTTPS']) {
+// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+// 		}
 
 		$ret = true;
 

@@ -38,10 +38,10 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// "https"判定
-		if ('on' != $_SERVER['HTTPS']) {
-			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-		}
+// 		// "https"判定
+// 		if ('on' != $_SERVER['HTTPS']) {
+// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+// 		}
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {

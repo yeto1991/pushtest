@@ -39,10 +39,10 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-		// "https"判定
-		if ('on' != $_SERVER['HTTPS']) {
-			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-		}
+// 		// "https"判定
+// 		if ('on' != $_SERVER['HTTPS']) {
+// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+// 		}
 
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');

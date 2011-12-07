@@ -22,10 +22,10 @@ class Jmesse_UserCommonManager extends Ethna_AppManager
 	 * @return true：可、false：否。
 	 */
 	function isLoginUser() {
-		// "https"判定
-		if ('on' != $_SERVER['HTTPS']) {
-			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-		}
+// 		// "https"判定
+// 		if ('on' != $_SERVER['HTTPS']) {
+// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+// 		}
 
 		$ret = true;
 		if (!$this->session->isStart()) {
