@@ -212,7 +212,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 			$this->config->get('mail_imap_pass')
 		);
 		if (null == $mbox) {
-			$msg = 'Failed to open the mailbox.';
+			$msg = imap_last_error();
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->backend->getActionError()->add('error', $msg);
 			return null;

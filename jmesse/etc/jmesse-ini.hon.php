@@ -115,9 +115,9 @@ $config = array(
 	// mail
 	'mail_smtp_host' => '10.1.100.23',
 	'mail_smtp_port' => '25',
-	'mail_smtp_auth' => true,
-	'mail_smtp_user' => 'j-messe@jetro.go.jp',
-	'mail_smtp_pass' => '121d0f3e',
+	'mail_smtp_auth' => false,
+	'mail_smtp_user' => '',
+	'mail_smtp_pass' => '',
 
 	'mail_from' => 'J-messe事務局 <j-messe@jetro.go.jp>',
 	'mail_bcc' => 'j-messe@totec-net.com',
