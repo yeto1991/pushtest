@@ -31,12 +31,9 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
-				<h2>Trade Fairs held in Japan and the World</h2>
+				<h2>System error</h2>
 			</div>
 			<div class="in_main">
-
-				<h3>System error</h3>
-
 				<p>
 					<ul>
 					{if count($errors)}
@@ -46,7 +43,6 @@
 					{/if}
 					</ul>
 				</p>
-
 			</div>
 		</div>
 		<!-- /main -->

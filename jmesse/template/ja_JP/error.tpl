@@ -40,21 +40,13 @@
 				<div id="main">
 					<div class="bgbox_set">
 						<div class="bgbox_base">
-
 							<div class="h1">
 								<h1>見本市・展示会データベース</h1>
 							</div>
-
 							<div class="h2">
-								<h2>世界の見本市・展示会</h2>
+								<h2>システムエラー</h2>
 							</div>
-
 							<div class="in_main">
-
-								<div class="h3">
-								<h3>システムエラー</h3>
-								</div>
-
 								<p>
 									<ul>
 									{if count($errors)}
@@ -64,7 +56,6 @@
 									{/if}
 									</ul>
 								</p>
-
 							</div>
 						</div>
 					</div>
