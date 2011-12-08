@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.meta_keyword}" />
-{include file="enHeader.tpl}
+{include file="enHeader.tpl"}
 {*
 <!--テスト用-->
 <base href="{$config.base_en}" />

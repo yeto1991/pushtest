@@ -56,9 +56,10 @@ $config = array(
 	// log
 	'log' => array(
 		'file' => array(
-			'level' => 'debug',
+			'level'  => 'debug',
 			'option' => 'pid,function,pos',
-			'mode' => '666',
+			'mode'   => '666',
+//			'file'   => 'C:/opt/Apache2.2/htdocs/jmesse/log/jmesse_'.date('Ymd').'.log',
 		),
 	),
 	// sample-1: sigile facility

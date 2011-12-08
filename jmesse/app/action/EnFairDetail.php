@@ -81,7 +81,7 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$this->af->get('mihon_no'));
@@ -103,7 +103,7 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 		$fair_detail = $jm_fair_obj->getFairDetail($this->af->get('mihon_no'), $lang);
 		if (null == $fair_detail) {
 			$this->ae->add('error', "A system error has occurred.");
-			return 'error';
+			return 'enError';
 		}
 
 		$this->af->setApp('fair_detail', $fair_detail);
@@ -137,7 +137,7 @@ class Jmesse_Action_EnFairDetail extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'enFairDetail';

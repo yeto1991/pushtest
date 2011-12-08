@@ -207,7 +207,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 		mb_internal_encoding('UTF-8');
 
 		// メールボックスのオープン
-		$mbox = @imap_open('{'.$this->config->get('mail_imap_host').':'.$this->config->get('mail_imap_port').'/imap/ssl}INBOX',
+		$mbox = @imap_open('{'.$this->config->get('mail_imap_host').':'.$this->config->get('mail_imap_port').'/imap/notls}INBOX',
 			$this->config->get('mail_imap_user'),
 			$this->config->get('mail_imap_pass')
 		);

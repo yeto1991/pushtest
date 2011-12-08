@@ -41,7 +41,7 @@ class Jmesse_Action_EnFairListSearch extends Jmesse_ActionClass
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		// 会期
@@ -107,7 +107,7 @@ class Jmesse_Action_EnFairListSearch extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return $ret;
