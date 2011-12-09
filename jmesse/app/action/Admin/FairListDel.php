@@ -71,7 +71,7 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 				if (Ethna::isError($jm_fair)) {
 					$this->ae->addObject('error', $jm_fair);
 					$db->rollback();
-					return 'error';
+					return 'admin_error';
 				}
 				$jm_fair->set('del_flg', '1');
 				$jm_fair->set('del_date', date('Y/m/d H:i:s'));
@@ -81,7 +81,7 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 				if (Ethna::isError($ret)) {
 					$this->ae->addObject('error', $ret);
 					$db->rollback();
-					return 'error';
+					return 'admin_error';
 				}
 
 				// JM_FAIR_TEMPにコピー
@@ -94,7 +94,7 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 				if (Ethna::isError($ret)) {
 					$this->ae->addObject('error', $ret);
 					$db->rollback();
-					return 'error';
+					return 'admin_error';
 				}
 
 			}
@@ -105,7 +105,7 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		header('Location: '.$this->config->get('url').'?action_admin_fairList=true&type='.$this->af->get('type').'&page='.$this->af->get('page'));

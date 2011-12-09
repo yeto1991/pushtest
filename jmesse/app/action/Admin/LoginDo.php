@@ -77,7 +77,7 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 			$ret = $mgr->regLog($user->get('user_id'), '5', '3', 'Successful login.');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
-				return 'error';
+				return 'admin_error';
 			}
 
 			// SESSIONに設定
@@ -92,7 +92,7 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 			$ret = $mgr->regLog('0', '5', '3', 'Login failed.('.$this->af->get('email').':'.$_SERVER['REMOTE_ADDR'].')');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
-				return 'error';
+				return 'admin_error';
 			}
 			$this->ae->add('error', 'Eメールまたはパスワードが間違っています。');
 			return 'admin_login';
@@ -101,7 +101,7 @@ class Jmesse_Action_AdminLoginDo extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		// 転送

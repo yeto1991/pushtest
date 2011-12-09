@@ -58,22 +58,22 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 // 		if ('0' == $use_language_flag) {
 			// 開催頻度
 			if (null == $this->af->get('frequency_jp') || '' == $this->af->get('frequency_jp')) {
-				$this->ae->addObject('error', Ethna::raiseError('開催頻度が入力されていません', E_REQUIRED));
+				$this->ae->add('error', '開催頻度が入力されていません');
 			}
 			// 開催地
 			if (null == $this->af->get('region_jp') || '' == $this->af->get('region_jp')) {
-				$this->ae->addObject('error', Ethna::raiseError('開催地（地域）が入力されていません', E_REQUIRED));
+				$this->ae->add('error', '開催地（地域）が入力されていません');
 			}
 			if (null == $this->af->get('country_jp') || '' == $this->af->get('country_jp')) {
-				$this->ae->addObject('error', Ethna::raiseError('開催地（国・地域）が入力されていません', E_REQUIRED));
+				$this->ae->add('error', '開催地（国・地域）が入力されていません');
 			}
 			if ((null == $this->af->get('city_jp') || '' == $this->af->get('city_jp'))
 				&& (null == $this->af->get('othercity_jp') || '' == $this->af->get('othercity_jp'))) {
-				$this->ae->addObject('error', Ethna::raiseError('開催地（都市）が入力されていません', E_REQUIRED));
+				$this->ae->add('error', '開催地（都市）が入力されていません');
 			}
 			// 入場資格
 			if (null == $this->af->get('open_to_jp') || '' == $this->af->get('open_to_jp')) {
-				$this->ae->addObject('error', Ethna::raiseError('入場資格が入力されていません', E_REQUIRED));
+				$this->ae->add('error', '入場資格が入力されていません');
 			}
 // 			// チケットの入手方法
 // 			if ('1' == $this->af->get('admission_ticket_5_jp')
@@ -110,61 +110,61 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
 		if (Ethna::isError($user)) {
 			$this->ae->addObject('error', $user);
-			return 'error';
+			return 'admin_error';
 		}
 		if (null == $user || null == $user->get('user_id')) {
-			$this->ae->addObject('error', Ethna::raiseError('Eメールのユーザは未登録です', E_REQUIRED));
+			$this->ae->add('error', 'Eメールのユーザは未登録です');
 		}
 		// 主催者・問合せ先
 		if ((null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel'))
 			&& (null == $this->af->get('organizer_fax') || '' == $this->af->get('organizer_fax'))
 			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
-			$this->ae->addObject('error', Ethna::raiseError('主催者・問合せ先が入力されていません', E_REQUIRED));
+			$this->ae->add('error', '主催者・問合せ先が入力されていません');
 		}
 
 		// 日付
 		// 申請年月日
 		if (!checkdate($this->af->get('date_of_application_m'), $this->af->get('date_of_application_d'), $this->af->get('date_of_application_y'))) {
-			$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません', E_INPUT_TYPE));
+			$this->ae->add('error', '申請年月日が正しくありません');
 		}
 		// 登録日(承認日)
 		if (!checkdate($this->af->get('date_of_registration_m'), $this->af->get('date_of_registration_d'), $this->af->get('date_of_registration_y'))) {
-			$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません', E_INPUT_TYPE));
+			$this->ae->add('error', '登録日(承認日)が正しくありません');
 		}
 		// 会期
 		if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
-			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません', E_INPUT_TYPE));
+			$this->ae->add('error', '会期が正しくありません');
 		}
 		if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません', E_INPUT_TYPE));
+			$this->ae->add('error', '会期が正しくありません');
 		}
 		if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
 			> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+			$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
 		}
 		// URLチェック
 		// 見本市URL
 		if (null != $this->af->get('fair_url') && '' != $this->af->get('fair_url')) {
 			if (0 !== strpos($this->af->get('fair_url'), 'http')) {
-				$this->ae->addObject('error', Ethna::raiseError('見本市URLはhttp～として下さい', E_INPUT_TYPE));
+				$this->ae->add('error', '見本市URLはhttp～として下さい');
 			}
 		}
 		// 見本市レポート／URL
 		if (null != $this->af->get('report_link') && '' != $this->af->get('report_link')) {
 			if (0 !== strpos($this->af->get('report_link'), 'http')) {
-				$this->ae->addObject('error', Ethna::raiseError('見本市レポート／URLはhttp～として下さい', E_INPUT_TYPE));
+				$this->ae->add('error', '見本市レポート／URLはhttp～として下さい');
 			}
 		}
 		// 世界の展示会場／URL
 		if (null != $this->af->get('venue_link') && '' != $this->af->get('venue_link')) {
 			if (0 !== strpos($this->af->get('venue_link'), 'http')) {
-				$this->ae->addObject('error', Ethna::raiseError('世界の展示会場／URLはhttp～として下さい', E_INPUT_TYPE));
+				$this->ae->add('error', '世界の展示会場／URLはhttp～として下さい');
 			}
 		}
 		// 会場URL
 		if (null != $this->af->get('venue_url') && '' != $this->af->get('venue_url')) {
 			if (0 !== strpos($this->af->get('venue_url'), 'http')) {
-				$this->ae->addObject('error', Ethna::raiseError('会場URLはhttp～として下さい', E_INPUT_TYPE));
+				$this->ae->add('error', '会場URLはhttp～として下さい');
 			}
 		}
 
@@ -174,7 +174,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			if (!strpos($this->af->get('organizer_email'), '@')
 				|| 0 === strpos($this->af->get('organizer_email'), '@')
 				|| strlen($this->af->get('organizer_email')) - 1 === strpos($this->af->get('organizer_email'), '@')) {
-				$this->ae->addObject('error', Ethna::raiseError('主催者・問合せ先E-Mailが不正です', E_INPUT_TYPE));
+				$this->ae->add('error', '主催者・問合せ先E-Mailが不正です');
 			}
 		}
 		// 主催者・問合せ先 E-Mail
@@ -182,7 +182,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			if (!strpos($this->af->get('agency_in_japan_email'), '@')
 				|| 0 === strpos($this->af->get('agency_in_japan_email'), '@')
 				|| strlen($this->af->get('agency_in_japan_email')) - 1 === strpos($this->af->get('agency_in_japan_email'), '@')) {
-				$this->ae->addObject('error', Ethna::raiseError('日本国内の照会先E-Mailが不正です', E_INPUT_TYPE));
+				$this->ae->add('error', '日本国内の照会先E-Mailが不正です');
 			}
 		}
 
@@ -638,7 +638,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'admin_error';
 		}
 
 		// 画像ファイルの保存
@@ -702,7 +702,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'admin_error';
 		}
 
 		// コミット
@@ -711,7 +711,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		// 変更画面へ遷移

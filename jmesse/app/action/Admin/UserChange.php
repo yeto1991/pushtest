@@ -325,20 +325,20 @@ class Jmesse_Action_AdminUserChange extends Jmesse_ActionClass
 
 		// ユーザIDは必須
 		if (null == $this->af->get('user_id') || '' == $this->af->get('user_id')) {
-			$this->ae->addObject('error', Ethna::raiseError('ユーザIDが入力されていません', E_REQUIRED));
-			return 'error';
+			$this->ae->add('error', 'ユーザIDが入力されていません');
+			return 'admin_error';
 		}
 
 		// 登録モードも必須
 		if (null == $this->af->get('mode') || '' == $this->af->get('mode')) {
-			$this->ae->addObject('error', Ethna::raiseError('登録モードが入力されていません', E_REQUIRED));
-			return 'error';
+			$this->ae->add('error', '登録モードが入力されていません');
+			return 'admin_error';
 		}
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 		return null;
 	}
@@ -354,7 +354,7 @@ class Jmesse_Action_AdminUserChange extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'error';
+			return 'admin_error';
 		}
 		//Form値設定
 		$this->af->set('user_id', $jm_user->get('user_id'));

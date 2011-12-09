@@ -535,7 +535,7 @@ class Jmesse_Action_AdminUserSearch extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 		return null;
     }

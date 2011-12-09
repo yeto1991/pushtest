@@ -116,7 +116,7 @@ class Jmesse_Action_AdminErrMailDownload extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		// CSV出力

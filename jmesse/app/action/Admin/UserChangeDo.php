@@ -110,7 +110,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 			$emailCheck = $jmUserMgr->getEmailForDoubleCheck($this->af->get('email'));
 			if (Ethna::isError($emailCheck)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
-				return 'error';
+				return 'admin_error';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
 				$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
@@ -127,7 +127,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 		return null;
 	}
@@ -143,7 +143,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'error';
+			return 'admin_error';
 		}
 		if (Ethna_Util::isDuplicatePost()) {
 			// 二重POSTの場合
@@ -202,7 +202,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 			$this->ae->addObject('error', $ret);
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 更新エラー');
 			$db->rollback();
-			return 'error';
+			return 'admin_error';
 		}
 		$this->af->setApp('user_id', $jm_user->get('user_id'));
 
@@ -217,7 +217,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'admin_error';
 		}
 
 		// COMMIT
@@ -226,7 +226,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		// 更新画面へ遷移

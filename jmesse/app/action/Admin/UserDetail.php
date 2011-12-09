@@ -338,7 +338,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 		return null;
 	}
@@ -354,7 +354,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'error';
+			return 'admin_error';
 		}
 		//Form値設定
 		$this->af->set('mode', 'change'); //編集開始遷移用
@@ -391,7 +391,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'admin_error';
 		}
 
 		// COMMIT
@@ -400,7 +400,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		return 'admin_userDetail';

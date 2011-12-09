@@ -91,7 +91,7 @@ class Jmesse_Action_AdminSelectCity extends Jmesse_ActionClass
 
 		// バリデーション
 		if ($this->af->validate() > 0) {
-			return 'error';
+			return 'admin_error';
 		}
 
 		return null;

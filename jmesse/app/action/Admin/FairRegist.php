@@ -1692,7 +1692,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			// 改行はOK
 			$str = str_replace($br, '', $this->form_vars[$name]);
 			if (!preg_match("/^[ -~]+$/", $str)) {
-				$this->ae->add($name, "{form}は半角文字を入力して下さい", E_INPUT_TYPE);
+				$this->ae->add($name, "{form}は半角文字を入力して下さい");
 			}
 // 			if (preg_match("/`/", $str)) {
 // 				$this->ae->add($name, "{form}に「`:バッククォート」は使用できません", E_INPUT_TYPE);

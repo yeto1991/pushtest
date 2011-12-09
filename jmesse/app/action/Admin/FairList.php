@@ -57,14 +57,14 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			|| (null != $this->af->get('date_of_application_m_from') && '' != $this->af->get('date_of_application_m_from'))
 			|| (null != $this->af->get('date_of_application_d_from') && '' != $this->af->get('date_of_application_d_from'))) {
 			if (!checkdate($this->af->get('date_of_application_m_from'), $this->af->get('date_of_application_d_from'), $this->af->get('date_of_application_y_from'))) {
-				$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません（開始）', E_INPUT_TYPE));
+				$this->ae->add('error', '申請年月日が正しくありません（開始）');
 			}
 		}
 		if ((null != $this->af->get('date_of_application_y_to') && '' != $this->af->get('date_of_application_y_to')
 			|| (null != $this->af->get('date_of_application_m_to') && '' != $this->af->get('date_of_application_m_to'))
 			|| (null != $this->af->get('date_of_application_d_to') && '' != $this->af->get('date_of_application_d_to')))) {
 			if (!checkdate($this->af->get('date_of_application_m_to'), $this->af->get('date_of_application_d_to'), $this->af->get('date_of_application_y_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません（終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '申請年月日が正しくありません（終了）');
 			}
 		}
 		if (((null != $this->af->get('date_of_application_y_from') && '' != $this->af->get('date_of_application_y_from'))
@@ -75,7 +75,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			|| (null != $this->af->get('date_of_application_d_to') && '' != $this->af->get('date_of_application_d_to')))) {
 			if (mktime(0, 0, 0, $this->af->get('date_of_application_m_from'), $this->af->get('date_of_application_d_from'), $this->af->get('date_of_application_y_from'))
 				> mktime(0, 0, 0, $this->af->get('date_of_application_m_to'), $this->af->get('date_of_application_d_to'), $this->af->get('date_of_application_y_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('申請年月日が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '申請年月日が正しくありません（開始 > 終了）');
 			}
 		}
 		// 登録日(承認日)
@@ -83,14 +83,14 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			|| (null != $this->af->get('date_of_registration_m_from') && '' != $this->af->get('date_of_registration_m_from'))
 			|| (null != $this->af->get('date_of_registration_d_from') && '' != $this->af->get('date_of_registration_d_from'))) {
 			if (!checkdate($this->af->get('date_of_registration_m_from'), $this->af->get('date_of_registration_d_from'), $this->af->get('date_of_registration_y_from'))) {
-				$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません', E_INPUT_TYPE));
+				$this->ae->add('error', '登録日(承認日)が正しくありません');
 			}
 		}
 		if ((null != $this->af->get('date_of_registration_y_to') && '' != $this->af->get('date_of_registration_y_to'))
 			|| (null != $this->af->get('date_of_registration_m_to') && '' != $this->af->get('date_of_registration_m_to'))
 			|| (null != $this->af->get('date_of_registration_d_to') && '' != $this->af->get('date_of_registration_d_to'))) {
 			if (!checkdate($this->af->get('date_of_registration_m_to'), $this->af->get('date_of_registration_d_to'), $this->af->get('date_of_registration_y_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません', E_INPUT_TYPE));
+				$this->ae->add('error', '登録日(承認日)が正しくありません');
 			}
 		}
 		if (((null != $this->af->get('date_of_registration_y_from') && '' != $this->af->get('date_of_registration_y_from'))
@@ -101,7 +101,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			|| (null != $this->af->get('date_of_registration_d_to') && '' != $this->af->get('date_of_registration_d_to')))) {
 			if (mktime(0, 0, 0, $this->af->get('date_of_registration_m_from'), $this->af->get('date_of_registration_d_from'), $this->af->get('date_of_registration_y_from'))
 				> mktime(0, 0, 0, $this->af->get('date_of_registration_m_to'), $this->af->get('date_of_registration_d_to'), $this->af->get('date_of_registration_y_to'))) {
-				$this->ae->addObject('error', Ethna::raiseError('登録日(承認日)が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '登録日(承認日)が正しくありません（開始 > 終了）');
 			}
 		}
 		// 会期
@@ -109,14 +109,14 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
 			|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd'))) {
 			if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
-				$this->ae->addObject('error', Ethna::raiseError('会期（開始）が正しくありません', E_INPUT_TYPE));
+				$this->ae->add('error', '会期（開始）が正しくありません');
 			}
 		}
 		if ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
 			|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
 			|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd'))) {
 			if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->addObject('error', Ethna::raiseError('会期（終了）が正しくありません', E_INPUT_TYPE));
+				$this->ae->add('error', '会期（終了）が正しくありません');
 			}
 		}
 		if (((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
@@ -127,7 +127,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd')))) {
 			if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
 				> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->addObject('error', Ethna::raiseError('会期が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
 			}
 		}
 		// 数値の大小
@@ -135,7 +135,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		if (null != $this->af->get('mihon_no_from') && '' != $this->af->get('mihon_no_from')
 			&& null != $this->af->get('mihon_no_to') && '' != $this->af->get('mihon_no_to')) {
 			if ($this->af->get('mihon_no_from') > $this->af->get('mihon_no_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('見本市番号が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '見本市番号が正しくありません（開始 > 終了）');
 			}
 		}
 
@@ -143,7 +143,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		if (null != $this->af->get('gross_floor_area_from') && '' != $this->af->get('gross_floor_area_from')
 			&& null != $this->af->get('gross_floor_area_to') && '' != $this->af->get('gross_floor_area_to')) {
 			if ($this->af->get('gross_floor_area_from') > $this->af->get('gross_floor_area_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('開催予定規模が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '開催予定規模が正しくありません（開始 > 終了）');
 			}
 		}
 
@@ -151,7 +151,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		if (null != $this->af->get('total_number_of_visitor_from') && '' != $this->af->get('total_number_of_visitor_from')
 			&& null != $this->af->get('total_number_of_visitor_to') && '' != $this->af->get('total_number_of_visitor_to')) {
 			if ($this->af->get('total_number_of_visitor_from') > $this->af->get('total_number_of_visitor_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('過去の実績(入場者数)が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '過去の実績(入場者数)が正しくありません（開始 > 終了）');
 			}
 		}
 
@@ -159,7 +159,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		if (null != $this->af->get('number_of_foreign_visitor_from') && '' != $this->af->get('number_of_foreign_visitor_from')
 			&& null != $this->af->get('number_of_foreign_visitor_to') && '' != $this->af->get('number_of_foreign_visitor_to')) {
 			if ($this->af->get('number_of_foreign_visitor_from') > $this->af->get('number_of_foreign_visitor_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('過去の実績(入場者数(うち海外から))が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '過去の実績(入場者数(うち海外から))が正しくありません（開始 > 終了）');
 			}
 		}
 
@@ -167,7 +167,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		if (null != $this->af->get('total_number_of_exhibitors_from') && '' != $this->af->get('total_number_of_exhibitors_from')
 			&& null != $this->af->get('total_number_of_exhibitors_to') && '' != $this->af->get('total_number_of_exhibitors_to')) {
 			if ($this->af->get('total_number_of_exhibitors_from') > $this->af->get('total_number_of_exhibitors_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('過去の実績(出展社数)が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '過去の実績(出展社数)が正しくありません（開始 > 終了）');
 			}
 		}
 
@@ -175,7 +175,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		if (null != $this->af->get('number_of_foreign_exhibitors_from') && '' != $this->af->get('number_of_foreign_exhibitors_from')
 		&& null != $this->af->get('number_of_foreign_exhibitors_to') && '' != $this->af->get('number_of_foreign_exhibitors_to')) {
 			if ($this->af->get('number_of_foreign_exhibitors_from') > $this->af->get('number_of_foreign_exhibitors_to')) {
-				$this->ae->addObject('error', Ethna::raiseError('過去の実績(出展社数(うち海外から))が正しくありません（開始 > 終了）', E_INPUT_TYPE));
+				$this->ae->add('error', '過去の実績(出展社数(うち海外から))が正しくありません（開始 > 終了）');
 			}
 		}
 
@@ -435,7 +435,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			}
 		} else {
 			$this->ae->add('error', 'typeの指定が不正です。');
-			return 'error';
+			return 'admin_error';
 		}
 
 		// マネージャの取得
@@ -572,10 +572,10 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
-// 		return 'error';
+// 		return 'admin_error';
  		return 'admin_fairList';
 	}
 

@@ -106,7 +106,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		return null;
@@ -130,11 +130,11 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		}
 		if (Ethna::isError($jm_fair)) {
 			$this->ae->addObject('error', $jm_fair);
-			return 'error';
+			return 'admin_error';
 		}
 		if (null == $jm_fair || null == $jm_fair->get('mihon_no') || '' == $jm_fair->get('mihon_no')) {
-			$this->ae->addObject('error', Ethna::raiseError('指定された見本市番号は物理削除されました', E_FAIL_TO_GET_OBJECT_JM_FAIR));
-			return 'error';
+			$this->ae->add('error', '指定された見本市番号は物理削除されました');
+			return 'admin_error';
 		}
 
 		// TEXTAREAの改行コード
@@ -163,7 +163,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $jm_fair->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'error';
+			return 'admin_error';
 		}
 		$this->af->set('email', $jm_user->get('email'));
 
@@ -385,7 +385,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$city_name = $jm_code_m_mgr->getCityName($jm_fair->get('region'),$jm_fair->get('country'),$jm_fair->get('city'));
 		if (DB::isError($city_name)) {
 			$this->ae->addObject('error', $city_name);
-			return 'error';
+			return 'admin_error';
 		}
 		$this->af->set('city_name_jp', $city_name['discription_jp']);
 		$this->af->set('city_name_en', $city_name['discription_en']);
@@ -441,13 +441,13 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		$ret = $mgr->regLog($this->session->get('user_id'), '1', '2', $jm_fair->get('mihon_no'));
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
-			return 'error';
+			return 'admin_error';
 		}
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'admin_error';
 		}
 
 		return 'admin_fairDetail';
