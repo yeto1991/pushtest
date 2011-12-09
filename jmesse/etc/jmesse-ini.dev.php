@@ -26,12 +26,20 @@ $config = array(
 	'jsonfile_path' => '/home/j-messe/app/jmesse/www/jsonfile/',
 
 	// 共通部分URL
-	'header_url'       => 'http://192.168.0.229/header.html',
-	'footer_url'       => 'http://192.168.0.229/footer.html',
-	'left_menu_url'    => 'http://192.168.0.229/j-messe/left_menu.html',
-	'header_url_en'    => 'http://192.168.0.229/enHeader.html',
-	'footer_url_en'    => 'http://192.168.0.229/enFooter.html',
-	'left_menu_url_en' => 'http://192.168.0.229/j-messe/enLeft_menu.html',
+	'header_url'           => 'http://www.jetro.go.jp/parts/ja_header.html ',
+ 	'footer_url'           => 'http://www.jetro.go.jp/parts/ja_footer.html',
+ 	'footer_script_rul'    => 'http://www.jetro.go.jp/parts/ja_footer_script.html',
+	'left_menu_url'        => 'http://www.jetro.go.jp/parts/ja_left_menu.html',
+	'header_url_en'        => 'http://www.jetro.go.jp/en/parts/en_header.html',
+ 	'footer_url_en'        => 'http://www.jetro.go.jp/en/parts/en_footer.html',
+	'left_menu_url_en'     => 'http://www.jetro.go.jp/en/parts/en_left_menu.html',
+	'footer_script_rul_en' => 'http://www.jetro.go.jp/en/parts/ja_footer_script.html',
+// 	'header_url'       => 'http://192.168.0.229/header.html',
+// 	'footer_url'       => 'http://192.168.0.229/footer.html',
+// 	'left_menu_url'    => 'http://192.168.0.229/j-messe/left_menu.html',
+// 	'header_url_en'    => 'http://192.168.0.229/enHeader.html',
+// 	'footer_url_en'    => 'http://192.168.0.229/enFooter.html',
+// 	'left_menu_url_en' => 'http://192.168.0.229/j-messe/enLeft_menu.html',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
