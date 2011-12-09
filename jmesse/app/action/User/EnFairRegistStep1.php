@@ -1872,6 +1872,12 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 			return null;
 		}
 
+		// 入力チェック
+		if ($this->af->validate() > 0) {
+			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
+			return 'error';
+		}
+
 		// 見本市番号
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
