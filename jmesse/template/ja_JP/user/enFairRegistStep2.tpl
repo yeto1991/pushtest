@@ -121,8 +121,8 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">Business Opportunities</a></li>
+			<li><a href="/index.html">HOME</a></li>
+			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}

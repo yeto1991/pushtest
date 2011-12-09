@@ -41,8 +41,8 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
+			<li><a href="/index.html">HOME</a></li>
+			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if (''!= $app.fair_detail.abbrev_title)}
