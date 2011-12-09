@@ -1,4 +1,13 @@
 RewriteEngine On
+
+RewriteCond %{SERVER_PORT} !^443$
+RewriteCond %{QUERY_STRING} action_user_(.+)
+RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
+RewriteCond %{SERVER_PORT} !^443$
+RewriteCond %{QUERY_STRING} action_admin_(.+)
+RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
 RewriteBase /j-messe
 
 RewriteCond %{REQUEST_FILENAME} !-f
