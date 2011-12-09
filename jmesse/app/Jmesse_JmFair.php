@@ -53,7 +53,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -107,7 +107,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -295,9 +295,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// 結果の判定
 		if (null == $res) {
-			$msg = '検索結果が取得できません。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->backend->getActionError()->add('error', msg);
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
 			return null;
 		}
 		if (DB::isError($res)) {
@@ -621,7 +619,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -661,7 +659,6 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 結果の判定
 		if (null == $res) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
-			$this->backend->getActionError()->add('検索結果が取得できません。');
 			return null;
 		}
 		if (DB::isError($res)) {
@@ -1013,9 +1010,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// 結果の判定
 		if (null == $res) {
-			$msg = '検索結果が取得できません。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->backend->getActionError()->add('error', msg);
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
 			return null;
 		}
 		if (DB::isError($res)) {
@@ -1751,9 +1746,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		// 結果の判定
 		if (null == $res) {
-			$msg = '検索結果が取得できません。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->backend->getActionError()->add('error', $msg);
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
 			return null;
 		}
 		if (DB::isError($res)) {

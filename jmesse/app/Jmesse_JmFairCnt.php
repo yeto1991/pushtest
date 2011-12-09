@@ -53,7 +53,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -107,7 +107,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -160,7 +160,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -213,7 +213,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -253,7 +253,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -300,7 +300,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -339,7 +339,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -386,7 +386,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -434,7 +434,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -473,7 +473,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -512,7 +512,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
@@ -551,7 +551,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		if (DB::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
 			$this->backend->getActionError()->addObject('error', $res);
-			return $res;
+			return null;
 		}
 		if (0 == $res->numRows()) {
 			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
