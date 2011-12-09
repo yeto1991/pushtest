@@ -116,7 +116,7 @@ $config = array(
 	//'use_gettext' => false,
 
 	// mail
-	'mail_smtp_host' => '10.1.100.23',
+	'mail_smtp_host' => '10.1.100.18',
 	'mail_smtp_port' => '25',
 	'mail_smtp_auth' => false,
 	'mail_smtp_user' => '',
@@ -136,7 +136,7 @@ $config = array(
 	'mail_title_fair_regist_en'  => 'J-messe見本市登録完了のお知らせ(英語)',
 	'mail_title_fair_change_en'  => 'J-messe見本市更新完了のお知らせ(英語)',
 
-	'mail_imap_host' => '10.1.100.23',
+	'mail_imap_host' => '10.1.100.18',
 	'mail_imap_port' => '143',
 	'mail_imap_user' => 'j-messe@jetro.go.jp',
 	'mail_imap_pass' => '121d0f3e',
