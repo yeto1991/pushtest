@@ -31,19 +31,32 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2">
-				<h2>System error</h2>
+				<h2>Trade Fairs held in Japan and the World</h2>
 			</div>
 			<div class="in_main">
-				<p>
-					<ul>
-					{if count($errors)}
-					{foreach from=$errors item=error}
-						<li><font color="#ff0000">{$error}</font></li>
-					{/foreach}
-					{/if}
-					</ul>
-				</p>
+
+				<h3>
+					System error
+				</h3>
+				{if count($errors)}
+				<p>For the following reasons, can not display the page.</p>
+				<ul>
+				{foreach from=$errors item=error}
+					<li>{$error}</li>
+				{/foreach}
+				</ul>
+				{/if}
+
+				<p>Close this trade fairs and exhibitions from the world's top database, please locate your pages.</p>
+				<ul class="icon_arrow">
+					<li><a href="/en/j-messe/">Back to Top Database of World Trade Fair.</a></li>
+					<li><a href="/en/">English Back to top.</a></li>
+				</ul>
+
 			</div>
+			<p class="totop">
+				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /> </a>
+			</p>
 		</div>
 		<!-- /main -->
 
