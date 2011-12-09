@@ -49,7 +49,7 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 			if (Ethna::isError($jm_user)) {
 				$this->ae->addObject('error', $jm_user);
-				return 'error';
+				return 'enError';
 			}
 			//Form値設定
 			$this->af->set('email', $jm_user->get('email'));
@@ -117,7 +117,7 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			$emailCheck = $jmUserMgr->getEmailForDoubleCheckForFront($this->af->get('user_id'),$this->af->get('email'));
 			if (Ethna::isError($emailCheck)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 Eメール重複チェックエラー');
-				return 'error';
+				return 'enError';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
 				$this->ae->add('email', "The e-mail address you have entered has already been registered by someone. Please enter another e-mail address.");
@@ -130,7 +130,7 @@ class Jmesse_Action_UserEnUserChangeDo extends Jmesse_ActionClass
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
 				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-				return 'error';
+				return 'enError';
 			}
 			return null;
 		}

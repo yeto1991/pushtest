@@ -66,7 +66,7 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return null;
@@ -103,7 +103,7 @@ class Jmesse_Action_UserEnReissuePasswordDo extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'user_enReissuePasswordDo';

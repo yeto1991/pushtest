@@ -54,7 +54,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
 			if ('' == $this->af->get('mihon_no')) {
 				$this->ae->add('error', 'A system error has occurred.');
-				return 'error';
+				return 'enError';
 			}
 		}
 
@@ -237,7 +237,7 @@ class Jmesse_Action_UserEnFairRegistStep2 extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'user_enFairRegistStep2';

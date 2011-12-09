@@ -46,7 +46,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 		return null;
 	}
@@ -84,21 +84,21 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル物理削除エラー');
 				$this->ae->addObject('error', $userdel);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			//jm_fairテーブル
 			$deleteResults1 = $this->backend->getManager('jmFair')->deleteUserInfo($user_id_target);
 			if ($deleteResults1 == "NG") {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIRレコード削除エラー');
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			//jm_fair_tempテーブル
 			$deleteResults2 = $this->backend->getManager('jmFairTemp')->deleteUserInfo($user_id_target);
 			if ($deleteResults2 == "NG") {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIR_TEMPレコード削除エラー');
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 		}
 		$jm_user =& $this->backend->getObject('JmUser');
@@ -128,7 +128,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ新規登録エラー');
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 		// ログテーブルに登録
 		$mgr = $this->backend->getManager('userCommon');
@@ -138,7 +138,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 
 		// COMMIT
@@ -158,7 +158,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 		return 'user_enUserRegistDone';
 	}

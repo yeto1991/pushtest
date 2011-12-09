@@ -1875,7 +1875,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 		// 入力チェック
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		// 見本市番号
@@ -1887,7 +1887,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return null;
@@ -1918,17 +1918,17 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 				if (null == $jm_fair_obj) {
 					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報が存在しません。');
 					$this->ae->add('error', 'A system error has occurred.');
-					return 'error';
+					return 'enError';
 				}
 				if ('1' == $jm_fair_obj->get('del_flg')) {
 					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報は削除されました。削除時刻('.$this->session->get('del_date').')');
 					$this->ae->add('error', 'A system error has occurred.');
-					return 'error';
+					return 'enError';
 				}
 				if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
 					$this->backend->getLogger()->log(LOG_ERR, '■他人の見本市情報です。('.$this->session->get('user_id').', '.$jm_fair_obj->get('user_id').')');
 					$this->ae->add('error', 'A system error has occurred.');
-					return 'error';
+					return 'enError';
 				}
 
 				// オブジェクトの内容をSESSIONに設定する。
@@ -1948,7 +1948,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 			if (null == $user_obj) {
 				$this->backend->getLogger()->log(LOG_DEBUG, '■ユーザ情報が存在しません。');
 				$this->ae->add('error', 'A system error has occurred.');
-				return 'error';
+				return 'enError';
 			}
 			$this->session->set('email', $user_obj->get('email'));
 		}
@@ -1956,7 +1956,7 @@ class Jmesse_Action_UserEnFairRegistStep1 extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'user_enFairRegistStep1';

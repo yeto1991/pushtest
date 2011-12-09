@@ -59,7 +59,7 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 		if (Ethna::isError($jm_fair)) {
 			$this->ae->addObject('error', $jm_fair);
 			$this->backend->getLogger()->log(LOG_ERR, '展示会情報テーブル検索エラー');
-			return 'error';
+			return 'enError';
 		}
 
 		//Form値設定
@@ -203,7 +203,7 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 			if (null == $user_obj) {
 				$this->backend->getLogger()->log(LOG_ERR, '■ユーザ情報が存在しません。');
 				$this->ae->add('error', 'A system error has occurred.');
-				return 'error';
+				return 'enError';
 			}
 			$this->session->set('email', $user_obj->get('email'));
 		}
@@ -215,14 +215,14 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 		}
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'user_enFairDetail';

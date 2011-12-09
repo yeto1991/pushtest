@@ -48,7 +48,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 		// SESSIONのチェック
 		if (null == $this->session->get('regist_param_1')) {
 			$this->ae->add('error', 'Please restart the registration process from the beginning.');
-			return 'error';
+			return 'enError';
 		}
 
 		// 戻った場合
@@ -213,7 +213,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'user_enFairDetail';

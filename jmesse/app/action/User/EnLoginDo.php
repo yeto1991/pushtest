@@ -108,7 +108,7 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 
 			// SESSIONに設定
@@ -122,7 +122,7 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			$this->ae->add('email', "Login authentication has failed. The e-mail address you have entered is incorrect.");
 			$this->ae->add('password', "Login authentication has failed. The password you have entered is incorrect.");
@@ -135,7 +135,7 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		// 転送

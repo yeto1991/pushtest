@@ -234,7 +234,7 @@ class Jmesse_Action_UserEnUserDetail extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 		return null;
 	}
@@ -251,7 +251,7 @@ class Jmesse_Action_UserEnUserDetail extends Jmesse_ActionClass
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル検索エラー');
-			return 'error';
+			return 'enError';
 		}
 		//Form値設定
 		$this->af->set('mode', 'change'); //編集開始遷移用
@@ -279,7 +279,7 @@ class Jmesse_Action_UserEnUserDetail extends Jmesse_ActionClass
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 
 		// COMMIT
@@ -288,7 +288,7 @@ class Jmesse_Action_UserEnUserDetail extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return 'user_enUserDetail';

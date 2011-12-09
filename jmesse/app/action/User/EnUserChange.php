@@ -47,20 +47,20 @@ class Jmesse_Action_UserEnUserChange extends Jmesse_ActionClass
 
 		// ユーザIDは必須
 		if (null == $this->af->get('user_id') || '' == $this->af->get('user_id')) {
-			$this->ae->addObject('error', Ethna::raiseError('A system error has occurred.', E_REQUIRED));
-			return 'error';
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
 		}
 
 		// 登録モードも必須
 		if (null == $this->af->get('mode') || '' == $this->af->get('mode')) {
-			$this->ae->addObject('error', Ethna::raiseError('A system error has occurred.', E_REQUIRED));
-			return 'error';
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
 		}
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 		return null;
 	}
@@ -76,7 +76,7 @@ class Jmesse_Action_UserEnUserChange extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'error';
+			return 'enError';
 		}
 		//Form値設定
 		$this->af->set('mode', 'change');

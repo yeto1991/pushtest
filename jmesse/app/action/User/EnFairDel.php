@@ -70,7 +70,7 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 		// 入力チェック（必須）
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		return null;
@@ -94,12 +94,12 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 		if (null == $jm_fair_obj) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■見本市情報が存在しません。');
 			$this->ae->add('error', 'A system error has occurred.');
-			return 'error';
+			return 'enError';
 		}
 		if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
 			$this->backend->getLogger()->log(LOG_DEBUG, '■他人の見本市情報です。'.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
 			$this->ae->add('error', 'A system error has occurred.');
-			return 'error';
+			return 'enError';
 		}
 
 		$jm_fair_obj->set('del_flg', '1');
@@ -114,7 +114,7 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->ae->add('error', 'A system error has occurred.');
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 		// JM_FAIR_TEMPにコピー
 		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
@@ -128,7 +128,7 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->ae->add('error', 'A system error has occurred.');
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 
 		// COMMIT
@@ -137,7 +137,7 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		// 画面遷移

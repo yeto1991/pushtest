@@ -61,6 +61,12 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, '展示会情報テーブル検索エラー');
 			return 'error';
 		}
+		if (null == $jm_fair || $this->af->get('mihon_no') != $jm_fair->get('mihon_no')) {
+			$msg = '展示会情報テーブル検索エラー';
+			$this->ae->add('error', $msg);
+			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			return 'error';
+		}
 
 		//Form値設定
 		$this->af->set('user_id', $this->session->get('user_id'));

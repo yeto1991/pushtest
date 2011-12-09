@@ -47,7 +47,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 		return null;
 	}
@@ -75,7 +75,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'error';
+			return 'enError';
 		}
 		//退会希望の場合
 		if($this->af->get('delFlg') == '1'){
@@ -89,7 +89,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$this->ae->addObject('error', $ret);
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 更新エラー');
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			// ログテーブル登録
 			$mgr = $this->backend->getManager('userCommon');
@@ -97,7 +97,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			// SESSIONの破棄。
 			$this->session->set('user_id', '');
@@ -110,7 +110,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
 				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-				return 'error';
+				return 'enError';
 			}
 
 			//退会モードで完了画面へ
@@ -129,7 +129,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル物理削除エラー');
 				$this->ae->addObject('error', $userdel);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			//jm_fairテーブル
 			$jmFairMgr = $this->backend->getManager('jmFair');
@@ -137,7 +137,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			if (Ethna::isError($deleteResults)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIRレコード削除エラー');
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			//jm_fair_tempテーブル
 			$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
@@ -145,7 +145,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			if (Ethna::isError($deleteResults)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIR_TEMPレコード削除エラー');
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			//新規登録
 			$jm_user =& $this->backend->getObject('JmUser');
@@ -175,7 +175,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ新規登録エラー');
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			// ログテーブルに登録
 			$mgr = $this->backend->getManager('userCommon');
@@ -185,7 +185,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			//Sessionデータ再設定（ユーザIDのみ）
 			$this->session->set('user_id', $user->get('user_id'));
@@ -203,7 +203,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
 				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-				return 'error';
+				return 'enError';
 			}
 			return 'user_enUserRegistDone';
 		}else{
@@ -211,7 +211,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 			if (Ethna::isError($jm_user)) {
 				$this->ae->addObject('error', $jm_user);
-				return 'error';
+				return 'enError';
 			}
 			//更新項目 設定
 			$jm_user->set('email', strtolower($this->af->get('email'))); //メールアドレスを小文字変換
@@ -235,7 +235,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$this->ae->addObject('error', $ret);
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ登録 更新エラー');
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 			$this->af->setApp('user_id', $jm_user->get('user_id'));
 			// ログテーブル登録
@@ -244,7 +244,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
 				$db->rollback();
-				return 'error';
+				return 'enError';
 			}
 
 			// COMMIT
@@ -261,7 +261,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
 				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-				return 'error';
+				return 'enError';
 			}
 			return 'user_enUserRegistDone';
 		}

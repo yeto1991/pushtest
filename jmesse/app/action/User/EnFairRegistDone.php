@@ -61,7 +61,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'It could have been illegal access.');
-			return 'error';
+			return 'enError';
 		}
 
 		return null;
@@ -256,7 +256,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$jm_fair->get('mihon_no'));
 
@@ -320,7 +320,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->ae->addObject('error', $ret);
 			$db->rollback();
-			return 'error';
+			return 'enError';
 		}
 
 		// COMMIT
@@ -347,7 +347,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		// 画面遷移

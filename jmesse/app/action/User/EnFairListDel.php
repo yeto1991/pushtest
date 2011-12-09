@@ -69,7 +69,7 @@ class Jmesse_Action_UserEnFairListDel extends Jmesse_ActionClass
 				if (Ethna::isError($jm_fair)) {
 					$this->ae->addObject('error', $jm_fair);
 					$db->rollback();
-					return 'error';
+					return 'enError';
 				}
 				//項目設定
 				$jm_fair->set('del_flg', '1');
@@ -82,7 +82,7 @@ class Jmesse_Action_UserEnFairListDel extends Jmesse_ActionClass
 				if (Ethna::isError($ret)) {
 					$this->ae->addObject('error', $ret);
 					$db->rollback();
-					return 'error';
+					return 'enError';
 				}
 
 				// JM_FAIR_TEMPにコピー
@@ -95,7 +95,7 @@ class Jmesse_Action_UserEnFairListDel extends Jmesse_ActionClass
 				if (Ethna::isError($ret)) {
 					$this->ae->addObject('error', $ret);
 					$db->rollback();
-					return 'error';
+					return 'enError';
 				}
 			}
 		}
@@ -105,7 +105,7 @@ class Jmesse_Action_UserEnFairListDel extends Jmesse_ActionClass
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'error';
+			return 'enError';
 		}
 
 		header('Location: '.$this->config->get('url').'?action_user_enFairList=true');
