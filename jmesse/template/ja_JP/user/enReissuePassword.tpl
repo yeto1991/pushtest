@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-{include file="user/enHeader.tpl}
+{include file="user/enHeader.tpl"}
 {*
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />

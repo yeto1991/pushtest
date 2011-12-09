@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-{include file="user/enHeader.tpl}
+{include file="user/enHeader.tpl"}
 {*
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -19,9 +19,9 @@
 <link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 <!--/-->
 <script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
-*}
 <script type="text/javascript" src="{$config.url}/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
+*}
 <script type="text/javascript">
 <!--
 {literal}
@@ -71,7 +71,7 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/index.html">HOME</a></li>
+			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>

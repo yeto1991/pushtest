@@ -6,9 +6,6 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
 {include file="user/header.tpl"}
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselectforjson.js"></script>
-<script type="text/javascript" src="{$config.url}js/jquery.dynamicselect.js"></script>
-<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
 <script type="text/javascript">
 <!--
 {literal}

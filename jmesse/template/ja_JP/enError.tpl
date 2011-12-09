@@ -17,7 +17,7 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/index.html">HOME</a></li>
+			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
@@ -50,7 +50,7 @@
 				<p>Close this trade fairs and exhibitions from the world's top database, please locate your pages.</p>
 				<ul class="icon_arrow">
 					<li><a href="/en/j-messe/">Back to Top Database of World Trade Fair.</a></li>
-					<li><a href="/index.html">English Back to top.</a></li>
+					<li><a href="/">English Back to top.</a></li>
 				</ul>
 
 			</div>

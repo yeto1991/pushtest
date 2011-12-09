@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-{include file="user/enHeader.tpl}
+{include file="user/enHeader.tpl"}
 {*
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -34,8 +34,8 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul>
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">Business Opportunities</a></li>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ("regist" == $form.mode)}
 				<li>User Registration</li>

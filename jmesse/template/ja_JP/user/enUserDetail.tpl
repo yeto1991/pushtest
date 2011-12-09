@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
-{include file="user/enHeader.tpl}
+{include file="user/enHeader.tpl"}
 {*
 <!--テスト用-->
 <base href="http://produce.jetro.go.jp" />
@@ -34,11 +34,11 @@
 	<div id="bread">
 {*
 		<ul>
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/en/database/">引き合い・展示会検索</a></li>
+			<li><a href="/en/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/en/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
+			<li><a href="/en/database/j-messe/tradefair/">個人メニュー</a></li>
 			<li>ユーザー詳細</li>
 		</ul>
 *}
