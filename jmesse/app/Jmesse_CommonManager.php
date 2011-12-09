@@ -34,7 +34,7 @@ class Jmesse_CommonManager extends Ethna_AppManager
 // 		$this->af->setAppNe('header', $this->_curl_get_contents($this->config->get('header_url')));
 // 		$this->af->setAppNe('header', $this->_file_get_contents('localhost/jmesse/www/header.html'));
 		$this->af->setAppNe('header', @file_get_contents($this->config->get('header_url')));
-		$this->af->setAppNe('footer', @file_get_contents($this->config->get('footer_url')));
+		$this->af->setAppNe('footer', @file_get_contents($this->config->get('footer_url')).@file_get_contents($this->config->get('footer_script_rul')));
 		$this->af->setAppNe('left_menu', @file_get_contents($this->config->get('left_menu_url')));
 	}
 
@@ -44,7 +44,7 @@ class Jmesse_CommonManager extends Ethna_AppManager
 	 */
 	function setEnExtHtml() {
 		$this->af->setAppNe('header', @file_get_contents($this->config->get('header_url_en')));
-		$this->af->setAppNe('footer', @file_get_contents($this->config->get('footer_url_en')));
+		$this->af->setAppNe('footer', @file_get_contents($this->config->get('footer_url_en')).@file_get_contents($this->config->get('footer_script_rul_en')));
 		$this->af->setAppNe('left_menu', @file_get_contents($this->config->get('left_menu_url_en')));
 	}
 
