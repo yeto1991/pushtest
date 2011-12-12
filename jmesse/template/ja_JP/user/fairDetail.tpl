@@ -36,7 +36,11 @@
 			var msg = '';
 {/literal}
 			{section name=it loop=$app.duplication_list}
+			{if '' != $app.duplication_list[it].fair_title_jp}
 			msg += "　・{$app.duplication_list[it].fair_title_jp}\n";
+			{else}
+			msg += "　・{$app.duplication_list[it].fair_title_en}\n";
+			{/if}
 			{/section}
 {literal}
 			if ('' != msg) {
