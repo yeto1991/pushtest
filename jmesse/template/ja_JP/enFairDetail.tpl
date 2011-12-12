@@ -43,7 +43,7 @@
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/">Business Opportunities</a></li>
-			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if (''!= $app.fair_detail.abbrev_title)}
 			<li>{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_en})</li>

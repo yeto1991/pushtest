@@ -13,6 +13,6 @@
 <script type="text/javascript" src="/j-messe/js/j-messe.js"    charset="utf-8"></script>
 <script type="text/javascript" src="/js/jquery.prettyPhoto.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe/jquery.dynamicselectforjson.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript" src="{$config.url_pub}js/j-messe/jquery.dynamicselect.js"></script>
 
