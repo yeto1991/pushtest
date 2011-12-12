@@ -33,7 +33,7 @@ $config = array(
 	'header_url_en'        => 'http://www.jetro.go.jp/en/parts/en_header.html',
  	'footer_url_en'        => 'http://www.jetro.go.jp/en/parts/en_footer.html',
 	'left_menu_url_en'     => 'http://www.jetro.go.jp/en/parts/en_left_menu.html',
-	'footer_script_rul_en' => 'http://www.jetro.go.jp/en/parts/ja_footer_script.html',
+	'footer_script_rul_en' => 'http://www.jetro.go.jp/en/parts/en_footer_script.html ',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
