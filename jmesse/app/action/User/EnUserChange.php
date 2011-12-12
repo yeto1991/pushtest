@@ -47,12 +47,14 @@ class Jmesse_Action_UserEnUserChange extends Jmesse_ActionClass
 
 		// ユーザIDは必須
 		if (null == $this->af->get('user_id') || '' == $this->af->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザIDなし');
 			$this->ae->add('error', 'A system error has occurred.');
 			return 'enError';
 		}
 
 		// 登録モードも必須
 		if (null == $this->af->get('mode') || '' == $this->af->get('mode')) {
+			$this->backend->getLogger()->log(LOG_ERR, '登録モードなし');
 			$this->ae->add('error', 'A system error has occurred.');
 			return 'enError';
 		}
@@ -75,9 +77,16 @@ class Jmesse_Action_UserEnUserChange extends Jmesse_ActionClass
 	{
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報検索エラー');
 			$this->ae->addObject('error', $jm_user);
 			return 'enError';
 		}
+		if (null == $jm_user || $this->af->get('user_id') != $jm_user->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報検索エラー');
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
+		}
+
 		//Form値設定
 		$this->af->set('mode', 'change');
 		$this->af->set('user_id', $jm_user->get('user_id'));

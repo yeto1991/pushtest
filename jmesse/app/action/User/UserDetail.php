@@ -249,8 +249,13 @@ class Jmesse_Action_UserUserDetail extends Jmesse_ActionClass
 	{
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
 		if (Ethna::isError($jm_user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
 			$this->ae->addObject('error', $jm_user);
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル検索エラー');
+			return 'error';
+		}
+		if (null == $jm_user || $this->session->get('user_id') != $jm_user->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->add('error', 'システムエラーが発生しました。');
 			return 'error';
 		}
 		//Form値設定

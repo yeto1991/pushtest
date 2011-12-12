@@ -101,6 +101,24 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		// オブジェクトの取得
 		if ('c' == $this->af->get('mode')) {
 			$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
+			if (Ethna::isError($jm_fair)) {
+				$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
+				$this->ae->adObject('error', $jm_fair);
+				$db->rollback();
+				return 'enError';
+			}
+			if (null == $jm_fair || $this->af->get('mihon_no') != $jm_fair->get('mihon_no')) {
+				$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
+				$this->ae->add('error', 'A system error has occurred.');
+				$db->rollback();
+				return 'enError';
+			}
+			if ($this->session->get('user_id') != $jm_fair->get('user_id')) {
+				$this->backend->getLogger()->log(LOG_ERR, '他人の見本市 '.$this->session->get('user_id').' '.$jm_fair->get('user_id'));
+				$this->ae->add('error', 'A system error has occurred.');
+				$db->rollback();
+				return 'enError';
+			}
 		} else {
 			$jm_fair =& $this->backend->getObject('JmFair');
 		}
@@ -328,6 +346,17 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 
 		// メール送信
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+		if (Ethna::isError($jm_user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->addObject('error', $jm_user);
+			return 'enError';
+		}
+		if (null == $jm_user || $this->session->get('user_id') != $jm_user->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
+		}
+
 		$ary_value = array('user_nm' => $jm_user->get('user_nm'), 'fair_title_en' => $jm_fair->get('fair_title_en'));
 		$mail_mgr =& $this->backend->getManager('mail');
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');

@@ -76,7 +76,7 @@ class Jmesse_Action_UserEnLoginDo extends Jmesse_ActionClass
 		$login_ok = true;
 
 		// ユーザ情報取得
-		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 
 		// ユーザ認証
 		if (null == $user || null == $user->get('user_id')) {

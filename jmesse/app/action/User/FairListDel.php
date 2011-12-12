@@ -67,10 +67,24 @@ class Jmesse_Action_UserFairListDel extends Jmesse_ActionClass
 				// JM_FAIRオブジェクトの取得
 				$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $mihon_no);
 				if (Ethna::isError($jm_fair)) {
+					$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
 					$this->ae->addObject('error', $jm_fair);
 					$db->rollback();
 					return 'error';
 				}
+				if (null == $jm_fair || $mihon_no != $jm_fair->get('mihon_no')) {
+					$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
+					$this->ae->add('error', 'システムエラーが発生しました。');
+					$db->rollback();
+					return 'error';
+				}
+				if ($this->session->get('user_id') != $jm_fair->get('user_id')) {
+					$this->backend->getLogger()->log(LOG_ERR, '他人の見本市 '.$this->session->get('user_id').' '.$jm_fair->get('user_id'));
+					$this->ae->add('error', 'システムエラーが発生しました。');
+					$db->rollback();
+					return 'error';
+				}
+
 				//項目設定
 				$jm_fair->set('del_flg', '1');
 				$jm_fair->set('del_date', date('Y/m/d H:i:s'));
@@ -85,9 +99,9 @@ class Jmesse_Action_UserFairListDel extends Jmesse_ActionClass
 					return 'error';
 				}
 
-				// JM_FAIR_TEMPにコピー
-				$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
-				$jmFairTempMgr->copyFair($jm_fair->get('mihon_no'));
+// 				// JM_FAIR_TEMPにコピー
+// 				$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+// 				$jmFairTempMgr->copyFair($jm_fair->get('mihon_no'));
 
 				// ログに登録
 				$mgr = $this->backend->getManager('userCommon');

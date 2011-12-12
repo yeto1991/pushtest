@@ -81,7 +81,7 @@ class Jmesse_Action_UserReissuePasswordDo extends Jmesse_ActionClass
 	function perform()
 	{
 		// ユーザ情報取得
-		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 
 		//ユーザ情報確認
 		if (null == $user || null == $user->get('user_id')) {

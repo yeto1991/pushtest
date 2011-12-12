@@ -74,7 +74,13 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 		if (Ethna::isError($jm_user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
 			$this->ae->addObject('error', $jm_user);
+			return 'enError';
+		}
+		if (null == $jm_user || $this->af->get('user_id') != $jm_user->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->add('error', 'A system error has occurred.');
 			return 'enError';
 		}
 		//退会希望の場合
@@ -119,11 +125,31 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 		//新規登録の場合（Eメール重複チェック対象Eメールが削除済みである場合物理レコード削除）
 		if($this->af->get('emailCheckFlg') == "DOUBLE_CHECK_DEL_FLG1"){
 			// 削除対象ユーザ情報取得
-			$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+			$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+			if (Ethna::isError($user)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $user);
+				return 'enError';
+			}
+			if (null == $user || strtolower($this->af->get('email')) != $user->get('email')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addt('error', 'A system error has occurred.');
+				return 'enError';
+			}
 			$user_id_target = $user->get('user_id');
 
 			//jm_userテーブル
 			$jm_user_del = $this->backend->getObject('JmUser','email',strtolower($this->af->get('email')));
+			if (Ethna::isError($jm_user_del)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $jm_user_del);
+				return 'enError';
+			}
+			if (null == $jm_user_del || strtolower($this->af->get('email')) != $jm_user_del->get('email')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->add('error', 'A system error has occurred.');
+				return 'enError';
+			}
 			$userdel = $jm_user_del->remove();
 			if (Ethna::isError($userdel)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル物理削除エラー');
@@ -180,7 +206,17 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			// ログテーブルに登録
 			$mgr = $this->backend->getManager('userCommon');
 			// 登録したユーザ情報取得
-			$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+			$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+			if (Ethna::isError($user)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $user);
+				return 'enError';
+			}
+			if (null == $user || strtolower($this->af->get('email')) != $user->get('email')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->add('error', 'A system error has occurred.');
+				return 'enError';
+			}
 			$ret = $mgr->regLog($user->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
 			if (Ethna::isError($ret)) {
 				$this->ae->addObject('error', $ret);
@@ -210,7 +246,13 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 			//通常更新の場合
 			$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
 			if (Ethna::isError($jm_user)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
 				$this->ae->addObject('error', $jm_user);
+				return 'enError';
+			}
+			if (null == $jm_user || $this->af->get('user_id') != $jm_user->get('user_id')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->add('error', 'A system error has occurred.');
 				return 'enError';
 			}
 			//更新項目 設定

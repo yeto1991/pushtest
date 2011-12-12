@@ -86,13 +86,18 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 
 		// オブジェクトの取得
 		$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
-		if (null == $jm_fair_obj) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '■見本市情報が存在しません。');
+		if (Ethna::isError($jm_fair_obj)) {
+			$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
+			$this->ae->add('error', 'システムエラーが発生しました。');
+			return 'enError';
+		}
+		if (null == $jm_fair_obj || $this->af->get('mihon_no') != $jm_fair_obj->get('mihon_no')) {
+			$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
 			$this->ae->add('error', 'システムエラーが発生しました。');
 			return 'error';
 		}
 		if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '■他人の見本市情報です。'.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
+			$this->backend->getLogger()->log(LOG_ERR, '他人の見本市 '.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
 			$this->ae->add('error', 'システムエラーが発生しました。');
 			return 'error';
 		}
@@ -105,22 +110,21 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 		// UPDATE
 		$ret = $jm_fair_obj->update();
 		if (Ethna::isError($ret)) {
-			$msg = 'JM_FAIRテーブルへの更新に失敗しました。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->backend->getLogger()->log(LOG_ERR, 'JM_FAIR更新失敗');
 			$this->ae->add('error', 'システムエラーが発生しました。');
 			$db->rollback();
 			return 'error';
 		}
-		// JM_FAIR_TEMPにコピー
-		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
-		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
+
+// 		// JM_FAIR_TEMPにコピー
+// 		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+// 		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('userCommon');
 		$ret = $mgr->regLog($this->session->get('user_id'), '4', '2', $this->af->get('mihon_no'));
 		if (Ethna::isError($ret)) {
-			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->backend->getLogger()->log(LOG_ERR, 'JM_LOG登録失敗');
 			$this->ae->add('error', 'システムエラーが発生しました。');
 			$db->rollback();
 			return 'error';

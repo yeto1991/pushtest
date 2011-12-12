@@ -44,6 +44,21 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'user_enLogin';
 		}
+
+		// 登録モード
+		if ('d' != $this->af->get('mode') && 'p' != $this->af->get('mode')) {
+			$this->backend->getLogger()->log(LOG_ERR, '登録モードなし');
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
+		}
+
+		// 見本市番号
+		if ('' == $this->af->get('mihon_no')) {
+			$this->backend->getLogger()->log(LOG_ERR, '見本市番号なし');
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
+		}
+
 		return null;
 	}
 
@@ -57,8 +72,18 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 	{
 		$jm_fair =& $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
 		if (Ethna::isError($jm_fair)) {
+			$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
 			$this->ae->addObject('error', $jm_fair);
-			$this->backend->getLogger()->log(LOG_ERR, '展示会情報テーブル検索エラー');
+			return 'enError';
+		}
+		if (null == $jm_fair || $this->af->get('mihon_no') != $jm_fair->get('mihon_no')) {
+			$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
+			$this->ae->add('error', 'A system error has occurred.');
+			return 'enError';
+		}
+		if ($this->session->get('user_id') != $jm_fair->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, '他人の見本市 '.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
+			$this->ae->add('error', 'A system error has occurred.');
 			return 'enError';
 		}
 
@@ -200,8 +225,13 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 		// 表示用Eメールの取得
 		if (null == $this->session->get('email') || '' == $this->session->get('email')) {
 			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
-			if (null == $user_obj) {
-				$this->backend->getLogger()->log(LOG_ERR, '■ユーザ情報が存在しません。');
+			if (Ethna::isError($user_obj)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $user_obj);
+				return 'enError';
+			}
+			if (null == $user_obj || $this->session->get('user_id') != $user_obj->get('user_id')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
 				$this->ae->add('error', 'A system error has occurred.');
 				return 'enError';
 			}

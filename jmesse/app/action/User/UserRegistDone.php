@@ -74,11 +74,35 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		if($this->af->get('emailCheckFlg') == "DOUBLE_CHECK_DEL_FLG1"){
 			//Eメール重複チェック対象Eメールが削除済みである場合物理レコード削除
 			// 削除対象ユーザ情報取得
-			$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+			$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+			if (Ethna::isError($user)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $user);
+				$db->rollback();
+				return 'error';
+			}
+			if (null == $user || strtolower($this->af->get('email')) != $user->get('email')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->add('error', 'システムエラーが発生しました。');
+				$db->rollback();
+				return 'error';
+			}
 			$user_id_target = $user->get('user_id');
 
 			//jm_userテーブル
 			$jm_user_del = $this->backend->getObject('JmUser','email',strtolower($this->af->get('email')));
+			if (Ethna::isError($jm_user_del)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $jm_user_del);
+				$db->rollback();
+				return 'error';
+			}
+			if (null == $jm_user_del || strtolower($this->af->get('email')) != $jm_user_del->get('email')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->add('error', 'システムエラーが発生しました。');
+				$db->rollback();
+				return 'error';
+			}
 			$userdel = $jm_user_del->remove();
 			if (Ethna::isError($userdel)) {
 				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報テーブル物理削除エラー');
@@ -133,7 +157,19 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		// ログテーブルに登録
 		$mgr = $this->backend->getManager('userCommon');
 		// 登録したユーザ情報取得
-		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+		if (Ethna::isError($user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->addObject('error', $user);
+			$db->rollback();
+			return 'error';
+		}
+		if (null == $user || strtolower($this->af->get('email')) != $user->get('email')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->add('error', 'システムエラーが発生しました。');
+			$db->rollback();
+			return 'error';
+		}
 		$ret = $mgr->regLog($user->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);

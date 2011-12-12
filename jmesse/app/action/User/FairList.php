@@ -100,11 +100,13 @@ class Jmesse_Action_UserFairList extends Jmesse_ActionClass
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
 			return 'user_login';
 		}
+
 		// バリデーション
 		if ($this->af->validate() > 0) {
 			$this->backend->getLogger()->log(LOG_ERR, 'バリデーションエラー');
-			return null;
+			return 'error';
 		}
+
 		return null;
 	}
 
@@ -118,6 +120,16 @@ class Jmesse_Action_UserFairList extends Jmesse_ActionClass
 	{
 		// ユーザ情報
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+		if (Ethna::isError($jm_user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->addObject('error', $jm_user);
+			return 'error';
+		}
+		if (null == $jm_user || $this->session->get('user_id') != $jm_user->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->add('error', 'システムエラーが発生しました。');
+			return 'error';
+		}
 		$this->session->set('email', $jm_user->get('email'));
 
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');

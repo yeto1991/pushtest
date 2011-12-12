@@ -78,6 +78,16 @@ class Jmesse_Action_UserFairCopyList extends Jmesse_ActionClass
 
 		// ユーザ情報
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
+		if (Ethna::isError($jm_user)) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->addObject('error', $jm_user);
+			return 'error';
+		}
+		if (null == $jm_user || $this->session->get('user_id') != $jm_user->get('user_id')) {
+			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+			$this->ae->add('error', 'システムエラーが発生しました。');
+			return 'error';
+		}
 		$this->session->set('email', $jm_user->get('email'));
 
 		// My展示会総件数の取得

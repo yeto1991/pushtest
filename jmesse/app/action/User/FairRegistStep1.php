@@ -1434,18 +1434,23 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 
 				// オブジェクトの取得
 				$jm_fair_obj = $this->backend->getObject('JmFair', 'mihon_no', $this->af->get('mihon_no'));
-				if (null == $jm_fair_obj) {
-					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報が存在しません。');
+				if (Ethna::isError($jm_fair_obj)) {
+					$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
+					$this->ae->addObject('error', $jm_fair_obj);
+					return 'error';
+				}
+				if (null == $jm_fair_obj || $this->af->get('mihon_no') != $jm_fair_obj->get('mihon_no')) {
+					$this->backend->getLogger()->log(LOG_ERR, '見本市検索エラー');
 					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}
 				if ('1' == $jm_fair_obj->get('del_flg')) {
-					$this->backend->getLogger()->log(LOG_ERR, '■見本市情報は削除されました。削除時刻('.$this->session->get('del_date').')');
+					$this->backend->getLogger()->log(LOG_ERR, '見本市削除済 削除時刻 '.$this->session->get('del_date'));
 					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}
 				if ($this->session->get('user_id') != $jm_fair_obj->get('user_id')) {
-					$this->backend->getLogger()->log(LOG_ERR, '■他人の見本市情報です。('.$this->session->get('user_id').', '.$jm_fair_obj->get('user_id').')');
+					$this->backend->getLogger()->log(LOG_ERR, '他人の見本市 '.$this->session->get('user_id').' '.$jm_fair_obj->get('user_id'));
 					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}
@@ -1464,8 +1469,13 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 
 			// 表示用Eメールの取得
 			$user_obj = $this->backend->getObject('JmUser', 'user_id', $this->session->get('user_id'));
-			if (null == $user_obj) {
-				$this->backend->getLogger()->log(LOG_DEBUG, '■ユーザ情報が存在しません。');
+			if (Ethna::isError($user_obj)) {
+				$this->backend->getLogger()->log(LOG_DEBUG, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $user_obj);
+				return 'error';
+			}
+			if (null == $user_obj || $this->session->get('user_id') != $user_obj->get('user_id')) {
+				$this->backend->getLogger()->log(LOG_DEBUG, 'ユーザ検索エラー');
 				$this->ae->add('error', 'システムエラーが発生しました。');
 				return 'error';
 			}
