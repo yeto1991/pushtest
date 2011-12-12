@@ -113,7 +113,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 				return 'admin_error';
 			}
 			if($emailCheck == "DOUBLE_CHECK_NG"){
-				$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+				$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 				if($user->get('user_id') == $this->af->get('user_id')){
 					//Eメール重複するユーザIDと更新対象のユーザIDが同ユーザIDの場合
 					return null;

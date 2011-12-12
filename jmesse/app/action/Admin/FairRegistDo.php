@@ -107,7 +107,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 // 			}
 // 		}
 		// Eメール
-		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 		if (Ethna::isError($user)) {
 			$this->ae->addObject('error', $user);
 			return 'admin_error';
@@ -300,7 +300,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$use_language_flag = $this->af->get('use_language_flag');
 
 		// ユーザID
-		$user =& $this->backend->getObject('JmUser', 'email', $this->af->get('email'));
+		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 		$user_id = $user->get('user_id');
 		$jm_fair->set('user_id', $user_id);
 

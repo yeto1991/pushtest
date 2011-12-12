@@ -354,6 +354,10 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 			$this->ae->addObject('error', $city_name);
 			return 'admin_error';
 		}
+		if (null == $city_name) {
+			$this->ae->add('error', '都市名が取得できません。');
+			return 'admin_error';
+		}
 // 		if ('0' == $use_language_flag) {
 			$this->af->set('city_name_jp', $city_name['discription_jp']);
 // 		} else {
