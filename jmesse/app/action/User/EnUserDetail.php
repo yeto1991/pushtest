@@ -253,7 +253,7 @@ class Jmesse_Action_UserEnUserDetail extends Jmesse_ActionClass
 			$this->ae->addObject('error', $jm_user);
 			return 'enError';
 		}
-		if (null == $jm_user || $this->af->get('user_id') != $jm_user->get('user_id')) {
+		if (null == $jm_user || $this->session->get('user_id') != $jm_user->get('user_id')) {
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
 			$this->ae->add('error', 'A system error has occurred.');
 			return 'enError';

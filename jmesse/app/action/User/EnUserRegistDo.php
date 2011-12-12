@@ -122,9 +122,34 @@ class Jmesse_Action_UserEnUserRegistDo extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
+		// 入力項目をsessionに設定。
+		$this->_setSession();
+
 		// 確認画面へ遷移
 		return 'user_enUserRegistDo';
 	}
+
+	/**
+	 * 入力項目をセッションに設定。
+	 *
+	 */
+	function _setSession() {
+		$user_regist = array();
+		$user_regist['email'] = $this->af->get('email');
+		$user_regist['password'] = $this->af->get('password');
+		$user_regist['companyNm'] = $this->af->get('companyNm');
+		$user_regist['divisionDeptNm'] = $this->af->get('divisionDeptNm');
+		$user_regist['userNm'] = $this->af->get('userNm');
+		$user_regist['genderCd'] = $this->af->get('genderCd');
+		$user_regist['postCode'] = $this->af->get('postCode');
+		$user_regist['address'] = $this->af->get('address');
+		$user_regist['tel'] = $this->af->get('tel');
+		$user_regist['fax'] = $this->af->get('fax');
+		$user_regist['url'] = $this->af->get('url');
+		$user_regist['delFlg'] = $this->af->get('delFlg');
+		$this->session->set('user_regist', $user_regist);
+	}
+
 }
 
 ?>

@@ -75,34 +75,64 @@ class Jmesse_Action_UserEnUserChange extends Jmesse_ActionClass
 	*/
 	function perform()
 	{
-		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
-		if (Ethna::isError($jm_user)) {
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報検索エラー');
-			$this->ae->addObject('error', $jm_user);
-			return 'enError';
-		}
-		if (null == $jm_user || $this->af->get('user_id') != $jm_user->get('user_id')) {
-			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ情報検索エラー');
-			$this->ae->add('error', 'A system error has occurred.');
-			return 'enError';
-		}
+		// 戻った場合
+		if ('1' == $this->af->get('back')) {
+			// sessionからformへ設定
+			$this->_setSessionToForm();
+		} else {
+			$jm_user =& $this->backend->getObject('JmUser', 'user_id', $this->af->get('user_id'));
+			if (Ethna::isError($jm_user)) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->addObject('error', $jm_user);
+				return 'enError';
+			}
+			if (null == $jm_user || $this->af->get('user_id') != $jm_user->get('user_id')) {
+				$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
+				$this->ae->add('error', 'A system error has occurred.');
+				return 'enError';
+			}
 
-		//Form値設定
+			//Form値設定
+			$this->af->set('user_id', $jm_user->get('user_id'));
+			$this->af->set('email', $jm_user->get('email'));
+			$this->af->set('password', $jm_user->get('password'));
+			$this->af->set('companyNm', $jm_user->get('company_nm'));
+			$this->af->set('divisionDeptNm', $jm_user->get('division_dept_nm'));
+			$this->af->set('userNm', $jm_user->get('user_nm'));
+			$this->af->set('genderCd', $jm_user->get('gender_cd'));
+			$this->af->set('postCode', $jm_user->get('post_code'));
+			$this->af->set('address', $jm_user->get('address'));
+			$this->af->set('tel', $jm_user->get('tel'));
+			$this->af->set('fax', $jm_user->get('fax'));
+			$this->af->set('url', $jm_user->get('url'));
+		}
+		// modeを設定
 		$this->af->set('mode', 'change');
-		$this->af->set('user_id', $jm_user->get('user_id'));
-		$this->af->set('email', $jm_user->get('email'));
-		$this->af->set('password', $jm_user->get('password'));
-		$this->af->set('companyNm', $jm_user->get('company_nm'));
-		$this->af->set('divisionDeptNm', $jm_user->get('division_dept_nm'));
-		$this->af->set('userNm', $jm_user->get('user_nm'));
-		$this->af->set('genderCd', $jm_user->get('gender_cd'));
-		$this->af->set('postCode', $jm_user->get('post_code'));
-		$this->af->set('address', $jm_user->get('address'));
-		$this->af->set('tel', $jm_user->get('tel'));
-		$this->af->set('fax', $jm_user->get('fax'));
-		$this->af->set('url', $jm_user->get('url'));
 		return 'user_enUserRegist';
 	}
+
+	/**
+	 * 前回入力項目をsessionからformへ設定。
+	 *
+	 */
+	function _setSessionToForm() {
+		$user_regist = $this->session->get('user_regist');
+		if (null != $user_regist) {
+			$this->af->set('email', $user_regist['email']);
+			$this->af->set('password', $user_regist['password']);
+			$this->af->set('companyNm', $user_regist['companyNm']);
+			$this->af->set('divisionDeptNm', $user_regist['divisionDeptNm']);
+			$this->af->set('userNm', $user_regist['userNm']);
+			$this->af->set('genderCd', $user_regist['genderCd']);
+			$this->af->set('postCode', $user_regist['postCode']);
+			$this->af->set('address', $user_regist['address']);
+			$this->af->set('tel', $user_regist['tel']);
+			$this->af->set('fax', $user_regist['fax']);
+			$this->af->set('url', $user_regist['url']);
+			$this->af->set('delFlg', $user_regist['delFlg']);
+		}
+	}
+
 }
 
 ?>

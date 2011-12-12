@@ -1445,7 +1445,7 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 					return 'error';
 				}
 				if ('1' == $jm_fair_obj->get('del_flg')) {
-					$this->backend->getLogger()->log(LOG_ERR, '見本市削除済 削除時刻 '.$this->session->get('del_date'));
+					$this->backend->getLogger()->log(LOG_ERR, '見本市削除済 削除時刻 '.$jm_fair_obj->get('del_date'));
 					$this->ae->add('error', 'システムエラーが発生しました。');
 					return 'error';
 				}

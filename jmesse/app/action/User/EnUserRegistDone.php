@@ -183,6 +183,9 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		$mail_mgr =& $this->backend->getManager('mail');
 		$mail_mgr->sendmailEnUserReigst(strtolower($this->af->get('email')), $ary_value);
 
+		// sessionのクリア
+		$this->session->set('user_regist', null);
+
 		// 完了画面へ遷移
 		// SESSIONに設定
 		$this->session->start();

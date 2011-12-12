@@ -112,6 +112,9 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			// COMMIT
 			$db->commit();
 
+			// sessionのクリア
+			$this->session->set('user_regist', null);
+
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
 				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
@@ -242,6 +245,9 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			$mail_mgr =& $this->backend->getManager('mail');
 			$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
 
+			// sessionのクリア
+			$this->session->set('user_regist', null);
+
 			// 最終エラー確認
 			if (0 < $this->ae->count()) {
 				$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
@@ -302,6 +308,9 @@ class Jmesse_Action_UserUserChangeDone extends Jmesse_ActionClass
 			$ary_value = array('mail_send_user_name' => $this->af->get('userNm'));
 			$mail_mgr =& $this->backend->getManager('mail');
 			$mail_mgr->sendmailUserChange(strtolower($this->af->get('email')), $ary_value);
+
+			// sessionのクリア
+			$this->session->set('user_regist', null);
 
 			//更新モードで完了画面へ
 			$this->af->set('mode', 'change');

@@ -40,15 +40,15 @@
 			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ("regist" == $form.mode)}
-				<li><a href="{$config.url}?action_user_enUserRegist=true">User Registration</a></li>
+				<li><a href="{$config.url}?action_user_enUserRegist=true&back=1">User Registration</a></li>
 				<li>User Registration Confirm</li>
 			{elseif ("change" == $form.mode)}
 				<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
-				<li><a href="{$config.url}?action_user_enUserChange=true&user_id={$form.user_id}&mode={$form.mode}">User Editing</a></li>
+				<li><a href="{$config.url}?action_user_enUserChange=true&user_id={$form.user_id}&mode={$form.mode}&back=1">User Editing</a></li>
 				<li>User Editing Confirm</li>
 			{else}
 				<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
-				<li><a href="{$config.url}?action_user_enUserChange=true&user_id={$form.user_id}&mode={$form.mode}">User Editing</a></li>
+				<li><a href="{$config.url}?action_user_enUserChange=true&user_id={$form.user_id}&mode={$form.mode}&back=1">User Editing</a></li>
 				<li>User Deleting Confirm</li>
 			{/if}
 		</ul>
