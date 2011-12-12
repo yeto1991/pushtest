@@ -58,7 +58,9 @@
 					</div>
 				</div>
 				<p class="totop">
-					<!-- <a href="javascript:window.open('{$config.url}?action_user_reissuePasswordDo=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a> -->
+{*
+					<a href="javascript:window.open('{$config.url}?action_user_reissuePasswordDo=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+*}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>
