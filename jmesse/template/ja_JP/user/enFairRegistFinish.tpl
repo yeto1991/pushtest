@@ -39,7 +39,7 @@
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/">Business Opportunities</a></li>
-			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
 			{if ('r' == $form.msg)}
 			<li><a href="/database/j-messe/tradefair/">Fair Registration(step1)</a></li>

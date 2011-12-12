@@ -39,7 +39,7 @@
 		<ul>
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/">Business Opportunities</a></li>
-			<li><a href="/en/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ("regist" == $form.mode)}
 				<li><a href="/database/j-messe/tradefair/">User Registration</a></li>
 				<li><a href="/database/j-messe/tradefair/">User Registration Confirm</a></li>
@@ -95,7 +95,7 @@
 					</div>
 					{/if}
 					<div class="btn">
-						<a href="/j-messe/" ><span class="title">Register</span>
+						<a href="/en/database/j-messe/" ><span class="title">Register</span>
 						<span class="description">Click to complete trade fair registration and return to the top page.</span></a>
 					</div>
 				</div>

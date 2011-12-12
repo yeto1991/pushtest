@@ -99,7 +99,7 @@
 									</div>
 									{/if}
 									<div class="btn">
-										<a href="/j-messe/" ><span class="title">登録を終了する</span>
+										<a href="/database/j-messe/" ><span class="title">登録を終了する</span>
 										<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
 									</div>
 								</div>
@@ -108,13 +108,13 @@
 					</div>
 				</div>
 				<p class="totop">
-				<!--
+{*
 					{if ("regist" == $form.mode)}
 					<a href="javascript:window.open('{$config.url}?action_user_userRegistDone=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{else}
 					<a href="javascript:window.open('{$config.url}?action_user_userChangeDone=true&user_id={$form.user_id}&mode={$form.mode}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 					{/if}
-				 -->
+*}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>
