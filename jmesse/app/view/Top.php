@@ -28,6 +28,14 @@ class Jmesse_View_Top extends Jmesse_ViewClass
 
 		// 開催地（地域）集計値
 		$this->af->setApp('region_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListRegion());
+
+		// 10年前から10年後までの西暦リスト
+		$now = (int) date('Y');
+		$year_list = array();
+		for ($i = 0; $i < 20; $i++) {
+			$year_list[$i] = $now + $i -10;
+		}
+		$this->af->setApp('year_list', $year_list);
 	}
 }
 
