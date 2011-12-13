@@ -5,6 +5,7 @@
 </head>
 <body>
 	<div align="center">
+		<h1>This page is dummy.</h1>
 		<table>
 			<tr>
 				<td>Menu<br/><br/><br/></td>

@@ -6,6 +6,7 @@
 <body>
 	<div align="center">
 		<table>
+			<h1>このページはダミーです。</h1>
 			<tr>
 				<td>主催者管理メニュー<br/><br/><br/></td>
 			</tr>
