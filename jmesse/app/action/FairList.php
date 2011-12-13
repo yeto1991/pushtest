@@ -535,7 +535,8 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$this->af->setApp('meta_keyword', '');
 			$this->af->setApp('title', '');
 			// リスト部タイトル
-			$this->af->setApp('list_name', 'すべての見本市');
+			$this->af->setApp('list_name', $this->_getListName());
+//			$this->af->setApp('list_name', 'すべての見本市');
 			// 表示件数
 			$this->af->setApp('total', $total);
 			$this->af->setApp('start', $offset + 1);

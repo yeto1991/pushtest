@@ -11,18 +11,26 @@
 		<p>
 			{section name=it loop=$app.sub_industory_cnt}
 			<input type="checkbox" name="check_sub_industory[]" id="check_sub_industory_{$app.sub_industory_cnt[it].kbn_3}" value="{$app.sub_industory_cnt[it].kbn_3}"
-				{section name=it2 loop=$form.check_sub_industory}
-					{if ($form.check_sub_industory[it2] == $app.sub_industory_cnt[it].kbn_3)}
-						checked
-					{/if}
-				{/section}
-			/>
-				{if ($form.i_3 == $app.sub_industory_cnt[it].kbn_3)}
-			<b>{$app.sub_industory_cnt[it].discription_en} ({$app.sub_industory_cnt[it].fair_cnt})</b>
+				{if (0 == $app.sub_industory_cnt[it].fair_cnt)}
+			disabled
 				{else}
+					{section name=it2 loop=$form.check_sub_industory}
+						{if ($form.check_sub_industory[it2] == $app.sub_industory_cnt[it].kbn_3)}
+			checked
+						{/if}
+					{/section}
+				{/if}
+			/>
+				{if (0 == $app.sub_industory_cnt[it].fair_cnt)}
+			{$app.sub_industory_cnt[it].discription_en} ({$app.sub_industory_cnt[it].fair_cnt})
+				{else}
+					{if ($form.i_3 == $app.sub_industory_cnt[it].kbn_3)}
+			<b>{$app.sub_industory_cnt[it].discription_en} ({$app.sub_industory_cnt[it].fair_cnt})</b>
+					{else}
 			<a href="{$config.url_pub}?action_enFairList=true&type=i1&i_2={$form.i_2}&i_3={$app.sub_industory_cnt[it].kbn_3}">
 			{$app.sub_industory_cnt[it].discription_en} ({$app.sub_industory_cnt[it].fair_cnt})
 			</a>
+					{/if}
 				{/if}
 			<br/>
 			{/section}

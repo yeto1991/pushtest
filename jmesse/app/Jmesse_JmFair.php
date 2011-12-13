@@ -753,7 +753,12 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		} else {
 			$sql = $this->sql_get_fair_list_en;
 		}
-		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
+
+		// WHERE句追加
+		$data = array();
+		$sql_ext = $this->_makeWhereAll($data);
+		$sql .= ' and ('.$sql_ext.') ';
+// 		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
 
 		// SORT条件
 		if ('1' == $sort) {
@@ -773,12 +778,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$stmt =& $db->db->prepare($sql);
 
 		// 検索条件をArray化
-		$param = array((int)$offset, (int)$limit);
+		array_push($data, (int)$offset, (int)$limit);
+// 		$param = array((int)$offset, (int)$limit);
 
 		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
-		$res = $db->db->execute($stmt, $param);
+		$res = $db->db->execute($stmt, $data);
+// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {
@@ -820,13 +827,20 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}else{
 			$sql = $this->sql_get_fair_list_en;
 		}
-		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
+
+		// WHERE句追加
+		$data = array();
+		$sql_ext = $this->_makeWhereAll($data);
+		$sql .= ' and ('.$sql_ext.') ';
+// 		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
 		$sql = 'select count(*) cnt from ('.$sql.') t';
 
 		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
-		$res = $db->db->query($sql);
+		$stmt =& $db->db->prepare($sql);
+		$res = $db->db->execute($stmt, $data);
+//		$res = $db->db->query($sql);
 
 		// 結果の判定
 		if (null == $res) {
@@ -1291,6 +1305,87 @@ class Jmesse_JmFairManager extends Ethna_AppManager
  		$sql_ext = $this->_addWhereRelation($ary_sql, 'a');
 
 		return $sql_ext;
+	}
+
+	/**
+	 * 見本市情報一覧「すべて」検索条件WHERE句作成。(フロント）
+	 *
+	 * @param array $data
+	 * @return string WHERE句
+	 */
+	function _makeWhereAll(&$data) {
+		$sql_ext = '';
+		$search_cond = $this->session->get('search_cond');
+
+		// 各リンク
+		$sql_tmp_l = '';
+		if ('i1' == $search_cond['type']) {
+			// 業種（大分類）
+			$sql_tmp_lmi = '';
+			if ('' != $search_cond['i_2']) {
+				$sql_tmp_lmi .= ' main_industory_1 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_2 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_3 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_4 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_5 = ? or ';
+				$sql_tmp_lmi .= ' main_industory_6 = ? ';
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+				array_push($data, $search_cond['i_2']);
+			}
+
+			// 業種（小分類）
+			$sql_tmp_lsi = '';
+			if ('' != $search_cond['i_3']) {
+				$sql_tmp_lsi .= ' concat(main_industory_1, sub_industory_1) = ? or ';
+				$sql_tmp_lsi .= ' concat(main_industory_2, sub_industory_2) = ? or ';
+				$sql_tmp_lsi .= ' concat(main_industory_3, sub_industory_3) = ? or ';
+				$sql_tmp_lsi .= ' concat(main_industory_4, sub_industory_4) = ? or ';
+				$sql_tmp_lsi .= ' concat(main_industory_5, sub_industory_5) = ? or ';
+				$sql_tmp_lsi .= ' concat(main_industory_6, sub_industory_6) = ? ';
+				array_push($data, $search_cond['i_2'].$search_cond['i_3']);
+				array_push($data, $search_cond['i_2'].$search_cond['i_3']);
+				array_push($data, $search_cond['i_2'].$search_cond['i_3']);
+				array_push($data, $search_cond['i_2'].$search_cond['i_3']);
+				array_push($data, $search_cond['i_2'].$search_cond['i_3']);
+				array_push($data, $search_cond['i_2'].$search_cond['i_3']);
+			}
+
+			// ANDで連結
+			$ary_sql = array($sql_tmp_lmi, $sql_tmp_lsi);
+			$sql_tmp_l = $this->_addWhereRelation($ary_sql, 'a');
+
+		} elseif ('v1' == $search_cond['type'] || 'v2' == $search_cond['type']) {
+			// 地域
+			$sql_tmp_lr = '';
+			if ('' != $search_cond['v_2']) {
+				$sql_tmp_lr .= ' region = ? ';
+				array_push($data, $search_cond['v_2']);
+			}
+
+			// 国・地域
+			$sql_tmp_lc = '';
+			if ('' != $search_cond['v_3']) {
+				$sql_tmp_lc .= ' country = ? ';
+				array_push($data, $search_cond['v_3']);
+			}
+
+			// 都市
+			$sql_tmp_lt = '';
+			if ('' != $search_cond['v_4']) {
+				$sql_tmp_lt .= ' city = ? ';
+				array_push($data, $search_cond['v_4']);
+			}
+
+			// ANDで連結
+			$ary_sql = array($sql_tmp_lr, $sql_tmp_lc, $sql_tmp_lt);
+			$sql_tmp_l = $this->_addWhereRelation($ary_sql, 'a');
+		}
+
+			return $sql_tmp_l;
 	}
 
 	/**

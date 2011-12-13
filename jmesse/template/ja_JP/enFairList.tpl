@@ -151,16 +151,20 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 				<!-- list of tradefairs -->
 				<div class="left" id="list">
 					<div class="h4 clearfix">
-						{if ('1' == $form.detail)}
-						<h4>Refine results fair list</h4>
+						{if ('1' == $form.all)}
+						<h4>Including Past Trade Fairs View All</h4>
 						{else}
-							{if ('a' != $form.year)}
-							<h4>List of Upcoming Trade Fairs and Exhibitions</h4>
+							{if ('1' == $form.detail)}
+						<h4>Refine results fair list</h4>
 							{else}
-							<h4>Including Past Trade Fairs View All</h4>
+								{if ('a' != $form.year)}
+						<h4>List of Upcoming Trade Fairs and Exhibitions</h4>
+								{else}
+						<h4>Including Past Trade Fairs View All</h4>
+								{/if}
 							{/if}
 						{/if}
-						{if ('1' != $form.detail)}
+						{if ('1' != $form.detail && '1' != $form.all)}
 						<span class="right"><a href="{$config.url_pub}?action_enFairList=true&all=1&page=1" class="icon_arrow">View All</a></span>
 						{/if}
 					</div>

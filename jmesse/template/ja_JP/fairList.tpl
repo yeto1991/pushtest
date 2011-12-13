@@ -170,16 +170,20 @@
 								<div class="left" id="list">
 
 									<div class="h4 clearfix">
-										{if ('1' == $form.detail)}
-										<h4>見本市・展示会 絞込み検索結果一覧</h4>
-										{else}
-											{if ('a' != $form.year)}
-										<h4>これから開催される見本市・展示会一覧</h4>
-											{else}
+										{if ('1' == $form.all)}
 										<h4>過去のものを含む見本市・展示会一覧</h4>
+										{else}
+											{if ('1' == $form.detail)}
+										<h4>見本市・展示会 絞込み検索結果一覧</h4>
+											{else}
+												{if ('a' != $form.year)}
+										<h4>これから開催される見本市・展示会一覧</h4>
+												{else}
+										<h4>過去のものを含む見本市・展示会一覧</h4>
+												{/if}
 											{/if}
 										{/if}
-										{if ('1' != $form.detail)}
+										{if ('1' != $form.detail && '1' != $form.all)}
 										<span class="right"><a href="{$config.url_pub}?action_fairList=true&all=1&page=1" class="icon_arrow">すべての見本市・展示会</a></span>
 										{/if}
 									</div>
