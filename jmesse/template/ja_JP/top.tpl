@@ -123,11 +123,11 @@
 </form>
 <br/>
 <b>■登録ページ■</b><br/>
-・<a href="{$^config.url_pub}?action_user_login=true">ログインページ</a><br/>
+・<a href="{$config.url}?action_user_login=true">ログインページ</a><br/>
 <br/>
 <b>■英語ページ■</b><br/>
-・<a href="{$^config.url_pub}?action_enTop=true">TOPページ</a><br/>
-・<a href="{$^config.url_pub}?action_user_enLogin=true">ログインページ</a><br/>
+・<a href="{$config.url_pub}?action_enTop=true">TOPページ</a><br/>
+・<a href="{$config.url}?action_user_enLogin=true">ログインページ</a><br/>
 
 </body>
 </html>

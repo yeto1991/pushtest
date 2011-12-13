@@ -124,11 +124,11 @@
 </form>
 <br/>
 <b>■Registration Page■</b><br/>
-・<a href="{$^config.url_pub}?action_user_enLogin=true">Login page</a><br/>
+・<a href="{$config.url}?action_user_enLogin=true">Login page</a><br/>
 <br/>
 <b>■Japanese page■</b><br/>
-・<a href="{$^config.url_pub}?action_top=true">Top page</a><br/>
-・<a href="{$^config.url_pub}?action_user_login=true">Login page</a><br/>
+・<a href="{$config.url_pub}?action_top=true">Top page</a><br/>
+・<a href="{$config.url}?action_user_login=true">Login page</a><br/>
 
 </body>
 </html>
