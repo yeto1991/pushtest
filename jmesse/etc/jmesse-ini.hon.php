@@ -29,11 +29,13 @@ $config = array(
 	'header_url'           => 'http://www.jetro.go.jp/parts/ja_header.html ',
  	'footer_url'           => 'http://www.jetro.go.jp/parts/ja_footer.html',
  	'footer_script_rul'    => 'http://www.jetro.go.jp/parts/ja_footer_script.html',
-	'left_menu_url'        => 'http://www.jetro.go.jp/parts/ja_left_menu.html',
+	'left_menu_url'        => '/home/jmesse1112/app/jmesse/www/ja_left_menu.html',
+// 	'left_menu_url'        => 'http://www.jetro.go.jp/parts/ja_left_menu.html',
 	'header_url_en'        => 'http://www.jetro.go.jp/en/parts/en_header.html',
  	'footer_url_en'        => 'http://www.jetro.go.jp/en/parts/en_footer.html',
-	'left_menu_url_en'     => 'http://www.jetro.go.jp/en/parts/en_left_menu.html',
 	'footer_script_rul_en' => 'http://www.jetro.go.jp/en/parts/en_footer_script.html',
+	'left_menu_url_en'     => '/home/jmesse1112/app/jmesse/www/en_left_menu.html',
+// 	'left_menu_url_en'     => 'http://www.jetro.go.jp/en/parts/en_left_menu.html',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)

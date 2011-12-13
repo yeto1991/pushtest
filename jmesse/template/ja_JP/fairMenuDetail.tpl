@@ -1,8 +1,9 @@
 <!-- menu -->
+{*
 <script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.url_pub}js/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
-
+*}
 <form name="form_fairMenuDetail" id="form_fairMenuDetail" method="post" action="">
 <input type="hidden" name="action_fairListSearch" id="action_fairListSearch" value="dummy" />
 <input type="hidden" name="type" id="type" value="{$form.type}" />
