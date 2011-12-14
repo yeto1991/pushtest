@@ -5,21 +5,6 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 {include file="user/header.tpl"}
-{*
-<!--テスト用-->
-<base href="http://dev.jetro.go.jp/" />
-<!--/テスト用-->
-
-<link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
-
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
-*}
 <title>見本市修正登録選択一覧 - 世界の見本市・展示会 - ジェトロ</title>
 </head>
 

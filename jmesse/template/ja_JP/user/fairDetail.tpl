@@ -6,22 +6,6 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
 {include file="user/header.tpl"}
-{*
-<!--テスト用-->
-<base href="http://dev.jetro.go.jp" />
-<!--/テスト用-->
-<link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
-
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
-<script type="text/javascript" src="/js/jquery/jquery.tools.min.js"></script>
-<script type="text/javascript" src="/j-messe/js/j-messe-form.js" charset="utf-8"></script>
-*}
 <script type="text/javascript">
 <!--
 {literal}

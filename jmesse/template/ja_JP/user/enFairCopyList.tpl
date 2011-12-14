@@ -5,23 +5,6 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 {include file="user/enHeader.tpl"}
-{*
-<!--テスト用-->
-<base href="http://produce.jetro.go.jp" />
-<!--/テスト用-->
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-<link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
-<!--以下のCSSは最終的に削除します-->
-<link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
-<!--/-->
-<script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
-*}
 <title>Registration of New Trade Fair Info - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>
 

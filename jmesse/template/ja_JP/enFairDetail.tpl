@@ -6,25 +6,6 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="見本市、展示会、商談会、{$app.fair_detail.exhibits_en|replace:'&lt;br/&gt;':''}, {$app.fair_detail.keyword}" />
 {include file="enHeader.tpl"}
-{*
-<!--テスト用-->
-<base href="{$config.base_en}" />
-<!--/テスト用-->
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-<link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-<!--以下のCSSは最終的に削除します-->
-<link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
-<!--/-->
-{if ('1' == $form.print)}
-<link href="/css/jp/print.css" rel="stylesheet" type="text/css" media="all" />
-{/if}
-<link rel="stylesheet" href="/css/js/prettyphoto/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
-<script src="/j-messe/js/j-messe.js" type="text/javascript" charset="utf-8"></script>
-*}
 <title>
 {if ('' != $app.fair_detail.abbrev_title)}
 {$app.fair_detail.abbrev_title} - {$app.fair_detail.fair_title_en} - Online Trade Fair Database (J-messe) - JETRO

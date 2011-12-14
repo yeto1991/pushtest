@@ -6,20 +6,6 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
 {include file="user/enHeader.tpl"}
-{*
-<!--テスト用-->
-<base href="http://produce.jetro.go.jp" />
-<!--/テスト用-->
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-<link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-<!--以下のCSSは最終的に削除します-->
-<link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
-<!--/-->
-<script type="text/javascript" src="{$config.url}js/j-messe_enInclude.js"></script>
-*}
 <title>Password Confirmation - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>
 

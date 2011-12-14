@@ -6,17 +6,6 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="Keywords" content="" />
 {include file="user/header.tpl"}
-{*
-<!--テスト用-->
-<base href="http://dev.jetro.go.jp" />
-<!--/テスト用-->
-<link href="/css/jp/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/css/jp/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="{$config.url}js/j-messe_include.js"></script>
-*}
 {if ('r' == $form.msg)}
 <title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
 {elseif ('c' == $form.msg)}
