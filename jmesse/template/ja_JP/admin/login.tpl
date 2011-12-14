@@ -38,7 +38,7 @@
 				<tr>
 					<td align="left">パスワード</td>
 					<td>:</td>
-					<td align="left"><input type="password" name="password" id="password" value="" maxlength="8" style="width:200px;" /></td>
+					<td align="left"><input type="password" name="password" id="password" value="" maxlength="8" style="width:200px;" autocomplete="off" /></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center"><input type="submit" value=" 実  行 " /></td>

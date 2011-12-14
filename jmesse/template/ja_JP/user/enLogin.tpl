@@ -64,7 +64,7 @@
 								{/if}
 									<th class="item">Password<br /></th>
 									<td>
-										<input type="password" name="password" id="password" size="60" value="{$form.password}" /><br />
+										<input type="password" name="password" id="password" size="60" value="" autocomplete="off" /><br />
 										{if is_error('password')}
 										<span class="error-message">{message name="password"}</span><br />
 										{/if}
