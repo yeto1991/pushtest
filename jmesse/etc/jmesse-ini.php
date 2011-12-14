@@ -15,6 +15,10 @@ $config = array(
 	'base_pub'    => 'http://dev.jetro.go.jp/',
 	'base_pub_en' => 'http://produce.jetro.go.jp/',
 
+	// css,js,base
+	'css_js_base'     => 'https://localhost/',
+	'css_js_base_pub' => 'http://localhost/',
+
 	// path
 	'host_path'      => 'https://localhost',
 	'img_path'       => 'img/user/',
