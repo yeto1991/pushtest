@@ -176,9 +176,12 @@ class Jmesse_MailManager extends Ethna_AppManager
 		$body = mb_convert_encoding($body_tmp, "ISO-2022-JP", "UTF-8");
 		$this->backend->getLogger()->log(LOG_DEBUG, '■本文(JIS) : '.$body);
 
+		// 送信者
+		$recipients = $mail_to.','.$this->config->get('mail_bcc');
+
 		// 送信
 		$mail_obj =& Mail::factory('smtp', $params);
-		$result = $mail_obj->send($mail_to, $headers, $body);
+		$result = $mail_obj->send($recipients, $headers, $body);
 		if (PEAR::isError($result)) {
 			$msg = 'メールの送信に失敗しました';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
