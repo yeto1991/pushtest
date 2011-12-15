@@ -135,9 +135,15 @@
 							<th class="item"><font size="2">Date of last update</font></th>
 							<td>
 								{if $app.my_fair_info_list[it].update_date == ""}
+									<font size="2">{$app.my_fair_info_list[it].regist_date}</font>
+{*
 									<font size="2">{$app.my_fair_info_list[it].regist_date|date_format:"%e-%b-%Y"}</font>
+*}
 								{else}
+									<font size="2">{$app.my_fair_info_list[it].update_date}</font>
+{*
 									<font size="2">{$app.my_fair_info_list[it].update_date|date_format:"%e-%b-%Y"}</font>
+*}
 								{/if}
 							</td>
 						</tr>
