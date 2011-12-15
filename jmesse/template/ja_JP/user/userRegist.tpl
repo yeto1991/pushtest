@@ -107,7 +107,7 @@
 										{/if}
 											<th class="item">パスワード</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td><input type="password" value="{$form.password}" size="20" name="password" id="password" /><br />
+											<td><input type="password" value="{$form.password}" size="20" name="password" id="password" autocomplete="off" /><br />
 											{if is_error('password')}
 											<span class="error-message">{message name="password"}</span><br />
 											{/if}
@@ -120,7 +120,7 @@
 										{/if}
 											<th class="item">パスワード（確認）</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2"><br />
+											<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2" autocomplete="off" /><br />
 											{if is_error('password2')}
 											<span class="error-message">{message name="password2"}</span><br />
 											{/if}
