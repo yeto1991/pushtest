@@ -128,8 +128,9 @@ $config = array(
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
 
-	'mail_from' => 'J-messe事務局 <j-messe@jetro.go.jp>',
-	'mail_bcc' => 'j-messe@totec-net.com',
+	'mail_from'        => 'J-messe事務局 <j-messe@jetro.go.jp>',
+	'mail_bcc'         => 'j-messe@totec-net.com',
+	'mail_return-path' => 'j-messe@jetro.go.jp',
 
 	'mail_title_user_regist'  => 'J-messe見本市ユーザ登録完了のお知らせ',
 	'mail_title_user_change'  => 'J-messe見本市ユーザ更新完了のお知らせ',

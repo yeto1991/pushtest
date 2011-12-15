@@ -90,10 +90,10 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 						<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-					<li><a href="{$config.url_pub}?action_top=true">View Reigion</a></li>
+					<li><a href="{$config.url_pub}?action_enTop=true">View Reigion</a></li>
 					<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-					<li><a href="">View Reigion</a></li>
+					<li><a href="{$config.url_pub}?action_enTop=true">View Reigion</a></li>
 					{if ('' == $form.v_4)}
 						<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 						<li>{$app.pan_2}</li>

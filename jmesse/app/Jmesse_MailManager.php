@@ -159,10 +159,11 @@ class Jmesse_MailManager extends Ethna_AppManager
 
 		// メールヘッダ情報を配列に設定
 		$headers = array (
-			'To'      => mb_encode_mimeheader(mb_convert_encoding($mail_to, "ISO-2022-JP", "UTF-8")),
-			'Bcc'     => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_bcc'), "ISO-2022-JP", "UTF-8")),
-			'From'    => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8")),
-			'Subject' => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
+			'To'          => mb_encode_mimeheader($mail_to),
+			'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc')),
+			'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8")),
+			'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path')),
+			'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
 		);
 
 		// メール本文
@@ -224,17 +225,24 @@ class Jmesse_MailManager extends Ethna_AppManager
 		// メールの取り込み
 		$err_mail_list = array();
 		for ($i = 1; $i <= imap_num_msg($mbox); $i++) {
-			if (false !== stripos(imap_qprint(imap_body($mbox, $i)), 'User unknown')) {
+			$header = imap_header($mbox, $i);
+			$body = imap_body($mbox, $i);
+			if (false !== stripos($header->subject, 'The email account that you tried to reach does not exist. Please try')) {
 				// アドレス不正
-				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => imap_headerinfo($mbox, $i)->to[0]->mailbox.'@'.imap_headerinfo($mbox, $i)->to[0]->host, 'err_kind' => '0', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
+				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => $this->_getMailAddr($body), 'err_kind' => '0', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
 				array_push($err_mail_list, $err_mail);
-			} elseif (false !== stripos(imap_qprint(imap_body($mbox, $i)), 'Host not found')) {
+			} elseif (false !== stripos($header->subject, 'Host unknown')) {
 				// メールサーバ不正
-				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => imap_headerinfo($mbox, $i)->to[0]->mailbox.'@'.imap_headerinfo($mbox, $i)->to[0]->host, 'err_kind' => '1', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
+				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => $this->_getMailAddr($body), 'err_kind' => '1', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
 				array_push($err_mail_list, $err_mail);
 			} else {
 				// その他
-				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => imap_headerinfo($mbox, $i)->to[0]->mailbox.'@'.imap_headerinfo($mbox, $i)->to[0]->host, 'err_kind' => '2', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
+				if ('' != $header->toaddress) {
+					$email = $header->to[0]->mailbox.'@'.$header->to[0]->host;
+				} else {
+					$email = "no to address\n";
+				}
+				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => $email, 'err_kind' => '2', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
 				array_push($err_mail_list, $err_mail);
  			}
 		}
@@ -247,5 +255,24 @@ class Jmesse_MailManager extends Ethna_AppManager
 
 		return $err_mail_list;
 	}
+
+	/**
+	 * エラーメールの宛先を取得する。
+ 	 *
+ 	 * @param unknown_type $msg エラーメールのbody
+ 	 */
+ 	function _getMailAddr($msg) {
+		$email = '';
+		$text_array = explode("\n", $msg);
+		foreach ($text_array as $line) {
+			if (false !== stripos($line, 'Final-Recipient')) {
+				$col_array = explode(' ', str_replace("\r", "", $line));
+				$email = $col_array[2];
+				break;
+			}
+		}
+		return $email;
+	}
+
 }
 ?>

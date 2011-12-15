@@ -166,7 +166,7 @@ class Jmesse_JmErrMail extends Ethna_AppObject
 	*/
 	var $table_def = array(
 		'jm_err_mail' => array(
-			'primary' => true,
+			'primary' => false,
 		),
 	);
 

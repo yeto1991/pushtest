@@ -76,7 +76,7 @@
 						<a href="{$config.url}?action_user_enFairRegistStep1=true"><span class="title">New Fair Registration</span> <span class="description">To new fair registration page</span></a>
 					</div>
 					<div class="btn">
-						<a href="/j-messe/"><span class="title">To top page</span> <span class="description">To jemmese top page</span></a>
+						<a href="/en/database/j-messe/"><span class="title">To top page</span> <span class="description">To jemmese top page</span></a>
 					</div>
 				</div>
 			</div>
