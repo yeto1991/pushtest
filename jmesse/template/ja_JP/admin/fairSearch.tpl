@@ -2,8 +2,8 @@
 <html>
 <head>
 <script type="text/javascript" src="{$config.css_js_base}js/jquery.js"></script>
-<script type="text/javascript" src="{$config.css_js_base}j-messe/js/j-messe/jquery.dynamicselect.js"></script>
-<script type="text/javascript" src="{$config.css_js_base}j-messe/js/j-messe/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript" src="{$config.css_js_base}j-messe/js2/j-messe/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.css_js_base}j-messe/js2/j-messe/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript">
 {literal}
 <!--

@@ -144,32 +144,32 @@ $form.mode
 										{if ('' == $form.mode)}
 										<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
 										<p>
-											<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 											<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 										</p>
 										{elseif ('e' == $form.mode)}
 										<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
 										<p>
-											<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 											<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 										</p>
 										{elseif ('c' == $form.mode)}
 										<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
 										<p>
-											<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 											<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 										</p>
 										{elseif ('d' == $form.mode)}
 										<p></p>
 										<p>
-											<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 											修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 										</p>
 										{elseif ('p' == $form.mode)}
 										<p></p>
 										<p>
-											<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+											<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 											修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 										</p>
@@ -508,32 +508,32 @@ $form.mode
 									{if ('' == $form.mode)}
 									<p><strong><span class="red">見本市新規登録を行いますか？</span></strong></p>
 									<p>
-										<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&back=1"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 									</p>
 									{elseif ('e' == $form.mode)}
 									<p><strong><span class="red">以下の見本市データをもとに、見本市新規登録を行いますか？</span></strong></p>
 									<p>
-										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 									</p>
 									{elseif ('c' == $form.mode)}
 									<p><strong><span class="red">以下の見本市データをもとに、見本市の修正を行いますか？</span></strong></p>
 									<p>
-										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<a href="{$config.url}?action_user_fairRegistStep3=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 										<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
 									</p>
 									{elseif ('d' == $form.mode)}
 									<p></p>
 									<p>
-										<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 									</p>
 									{elseif ('p' == $form.mode)}
 									<p></p>
 									<p>
-										<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="http://dev.jetro.go.jp/j-messe/images/db/btn-back.gif" /></a>
+										<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
 										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 										修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 									</p>

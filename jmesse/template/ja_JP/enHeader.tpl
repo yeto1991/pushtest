@@ -14,9 +14,9 @@
 
 <script type="text/javascript" src="{$config.css_js_base_pub}js/jquery.js"></script>
 <script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js/j-messe.js" charset="utf-8"></script>
-<script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js/j-messe/j-messe_en.js"></script>
+<script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js2/j-messe/j-messe_en.js"></script>
 <script type="text/javascript" src="{$config.css_js_base_pub}js/jquery/jquery.prettyPhoto.js" charset="utf-8"></script>
 <script type="text/javascript" src="{$config.css_js_base_pub}js/jquery/jquery.tools.min.js"></script>
-<script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js/j-messe/jquery.dynamicselect.js"></script>
-<script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js/j-messe/jquery.dynamicselectforjson.js"></script>
+<script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js2/j-messe/jquery.dynamicselect.js"></script>
+<script type="text/javascript" src="{$config.css_js_base_pub}j-messe/js2/j-messe/jquery.dynamicselectforjson.js"></script>
 <script type="text/javascript" src="{$config.css_js_base_pub}js/common.js"></script>
