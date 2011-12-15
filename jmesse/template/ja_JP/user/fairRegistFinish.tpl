@@ -7,11 +7,11 @@
 <meta name="Keywords" content="" />
 {include file="user/header.tpl"}
 {if ('r' == $form.msg)}
-<title>見本市登録 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+<title>見本市登録 - 世界の見本市・展示会(J-messe) - ジェトロ</title>
 {elseif ('c' == $form.msg)}
-<title>見本市修正 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+<title>見本市修正 - 世界の見本市・展示会(J-messe) - ジェトロ</title>
 {elseif ('d' == $form.msg)}
-<title>見本市削除 - 世界の見本市・展示会(J-messe) -ジェトロ</title>
+<title>見本市削除 - 世界の見本市・展示会(J-messe) - ジェトロ</title>
 {/if}
 </head>
 
@@ -116,3 +116,4 @@
 
 </body>
 </html>
+
