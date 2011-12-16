@@ -209,7 +209,7 @@ class Jmesse_Action_UserEnUserRegistDone extends Jmesse_ActionClass
 		$mask = substr($pass, 0, 2);
 		$cnt = strlen($pass) - 2;
 		for ($i=0; $i<$cnt; $i++) {
-			$mask .= '*';
+			$mask .= '●';
 		}
 		return $mask;
 	}
