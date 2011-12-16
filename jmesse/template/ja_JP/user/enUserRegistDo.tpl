@@ -112,7 +112,7 @@
 						<tr>
 							<th class="item">password</th>
 							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
-							<td>{$form.password}</td>
+							<td>●●●●●●●●</td>
 						</tr>
 					</table><br />
 					<h4>Other User Information</h4>

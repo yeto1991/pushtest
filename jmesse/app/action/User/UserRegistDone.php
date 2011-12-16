@@ -181,7 +181,7 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		$db->commit();
 
 		//メール送信処理
-		$ary_value = array('mail_send_user_name' => $this->af->get('userNm'), 'mail_send_user_email' => strtolower($this->af->get('email')), 'mail_send_user_password' => $this->af->get('password'));
+		$ary_value = array('mail_send_user_name' => $this->af->get('userNm'), 'mail_send_user_email' => strtolower($this->af->get('email')), 'mail_send_user_password' => $this->_passwordMasking($this->af->get('password')));
 		$mail_mgr =& $this->backend->getManager('mail');
 		$mail_mgr->sendmailUserReigst(strtolower($this->af->get('email')), $ary_value);
 
@@ -201,6 +201,21 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		}
 		return 'user_userRegistDone';
 	}
+
+	/**
+	 * パスワードをマスクする。
+	 *
+	 * @param unknown_type $pass パスワード
+	 */
+	function _passwordMasking($pass) {
+		$mask = substr($pass, 0, 2);
+		$cnt = strlen($pass) - 2;
+		for ($i=0; $i<$cnt; $i++) {
+			$mask .= '*';
+		}
+		return $mask;
+	}
+
 }
 
 ?>

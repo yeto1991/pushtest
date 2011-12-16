@@ -116,7 +116,7 @@
 										<tr>
 											<th class="item">パスワード</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td>{$form.password}</td>
+											<td>●●●●●●●●</td>
 										</tr>
 									</table><br />
 									<h4>お客様情報入力</h4>
