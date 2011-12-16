@@ -58,10 +58,14 @@ class Jmesse_Action_FairListDownload extends Jmesse_ActionClass
 
 		// 検索実行
 		$lang = 'J';
-		if ('1' == $this->af->get('detail')) {
-			$jm_fair_list = $jm_fair_mgr->getFairListSearchDetailCsv($sort, $lang);
+		if ('1' == $this->af->get('all')) {
+			$jm_fair_list = $jm_fair_mgr->getFairListAllCsv($sort, $lang);
 		} else {
-			$jm_fair_list = $jm_fair_mgr->getFairListCsv($sort, $lang);
+			if ('1' == $this->af->get('detail')) {
+				$jm_fair_list = $jm_fair_mgr->getFairListSearchDetailCsv($sort, $lang);
+			} else {
+				$jm_fair_list = $jm_fair_mgr->getFairListCsv($sort, $lang);
+			}
 		}
 
 		// エラー判定

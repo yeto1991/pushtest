@@ -254,12 +254,17 @@
 
 				</div>
 				<p class="totop">
-					{if ('1' == $form.detail)}
+					{if ('1' == $form.all)}
+					<a href="{$config.url_pub}?action_fairListDownload=true&all=1"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
+					<a href="javascript:window.open('{$config.url_pub}?action_fairList=true&all=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+					{else}
+						{if ('1' == $form.detail)}
 					<a href="{$config.url_pub}?action_fairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
 					<a href="javascript:window.open('{$config.url_pub}?action_fairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-					{else}
+						{else}
 					<a href="{$config.url_pub}?action_fairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVダウンロード" height="23" width="71" /></a>
 					<a href="javascript:window.open('{$config.url_pub}?action_fairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
+						{/if}
 					{/if}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
