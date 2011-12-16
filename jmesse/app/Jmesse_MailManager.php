@@ -240,7 +240,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 				if ('' != $header->toaddress) {
 					$email = $header->to[0]->mailbox.'@'.$header->to[0]->host;
 				} else {
-					$email = "no to address\n";
+					$email = "";
 				}
 				$err_mail = array('yyyymmdd' => date('Ymd', strtotime(imap_headerinfo($mbox, $i)->date)), 'email' => $email, 'err_kind' => '2', 'mail_contents' => mb_convert_encoding(imap_body($mbox, $i), 'UTF-8', 'ISO-2022-JP'));
 				array_push($err_mail_list, $err_mail);
