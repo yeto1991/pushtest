@@ -27,7 +27,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm_1.discription_jp industory, jf.fair_cnt count from (select kbn_2, sum(fair_cnt) fair_cnt from jm_fair_cnt where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' group by kbn_2) jf left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
+		$sql = "select jcm_1.kbn_2 id, jcm_1.discription_jp industory, jf.fair_cnt count from (select kbn_2, sum(fair_cnt) fair_cnt from jm_fair_cnt where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' group by kbn_2) jf left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
 
 		// SQLを実行
 		$res = $db->db->query($sql);
@@ -81,7 +81,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm_1.discription_en industory, jf.fair_cnt count from (select kbn_2, sum(fair_cnt) fair_cnt from jm_fair_cnt where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' group by kbn_2) jf left outer join (select kbn_2, discription_en, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
+		$sql = "select jcm_1.kbn_2 id, jcm_1.discription_en industory, jf.fair_cnt count from (select kbn_2, sum(fair_cnt) fair_cnt from jm_fair_cnt where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' group by kbn_2) jf left outer join (select kbn_2, discription_en, disp_num from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
 
 		// SQLを実行
 		$res = $db->db->query($sql);
@@ -134,7 +134,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm_1.discription_jp region, jf.fair_cnt count from (select kbn_2, fair_cnt from jm_fair_cnt where kbn_1 = '003' and kbn_2 <> '001' and kbn_3 = '000' and kbn_4 = '000') jf left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num asc";
+		$sql = "select jcm_1.kbn_2 id, jcm_1.discription_jp region, jf.fair_cnt count from (select kbn_2, fair_cnt from jm_fair_cnt where kbn_1 = '003' and kbn_2 <> '001' and kbn_3 = '000' and kbn_4 = '000') jf left outer join (select kbn_2, discription_jp, disp_num from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num asc";
 
 		// SQLを実行
 		$res = $db->db->query($sql);
@@ -187,7 +187,7 @@ class Jmesse_JmFairCntManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jcm_1.discription_en region, jf.fair_cnt count from (select kbn_2, fair_cnt from jm_fair_cnt where kbn_1 = '003' and kbn_2 <> '001' and kbn_3 = '000' and kbn_4 = '000') jf left outer join (select kbn_2, discription_en, disp_num from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
+		$sql = "select jcm_1.kbn_2 id, jcm_1.discription_en region, jf.fair_cnt count from (select kbn_2, fair_cnt from jm_fair_cnt where kbn_1 = '003' and kbn_2 <> '001' and kbn_3 = '000' and kbn_4 = '000') jf left outer join (select kbn_2, discription_en, disp_num from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.kbn_2 = jcm_1.kbn_2 order by jcm_1.disp_num";
 
 		// SQLを実行
 		$res = $db->db->query($sql);

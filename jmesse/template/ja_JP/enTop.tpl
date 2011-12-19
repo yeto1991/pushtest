@@ -129,6 +129,170 @@
 <b>■Japanese page■</b><br/>
 ・<a href="{$config.url_pub}?action_top=true">Top page</a><br/>
 ・<a href="{$config.url}?action_user_login=true">Login page</a><br/>
+<br/>
+
+<b>■Json■</b><br/><br/>
+
+<b>Venue</b><br/>
+<ul class="icon_arrow" id="venue">
+</ul>
+<br/>
+
+<b>Industory</b><br/>
+<ul class="icon_arrow" id="industory">
+</ul>
+<br/>
+
+<b>Recently Added</b><br/>
+<ul class="icon_arrow" id="new_entry">
+</ul>
+<br/>
+
+<b>Monthly Ranking</b><br/>
+<b>November 2011 (Japan)</b><br/>
+<ul class="icon_arrow" id="ranking1">
+</ul>
+<br/>
+
+<b>October 2011 (Javapn)</b><br/>
+<ul class="icon_arrow" id="ranking2">
+</ul>
+<br/>
+
+<b>September 2011 (Japan)</b><br/>
+<ul class="icon_arrow" id="ranking3">
+</ul>
+<br/>
+
+<b>Novemver 2011 (World)</b><br/>
+<ul class="icon_arrow" id="ranking4">
+</ul>
+<br/>
+
+<b>October 2011 (World)</b><br/>
+<ul class="icon_arrow" id="ranking5">
+</ul>
+<br/>
+
+<b>September 2011 (World)</b><br/>
+<ul class="icon_arrow" id="ranking6">
+</ul>
+<br/>
 
 </body>
+
+<script type="text/javascript" src="{$config.css_js_base_pub}js/jquery.js"></script>
+<script type="text/javascript">
+{literal}
+$(function(){
+	/**
+	 * JSONデータをサーバーから取得し、指定したDOMにHTML加工してから挿入する関数
+	 *
+	 * @parameter url: jsonリソースを得られるURL
+	 * @parameter jQueryTargetObj:HTMLにしたJSONをinnerHTMLに入れられるDOM
+	 * @parameter convertFunc:JSONのデータ構造に対して、HTML変換を実装する関数
+	 * @return : void
+	 */
+	function insertHTMLContentFromUserJSON(url, jQueryTargetObj, convertFunc){
+		//ajax
+		$.ajax({
+			"url":url,
+			"dataType":"json",
+			"success":function(data){
+				var content_data = convertFunc(data);
+				jQueryTargetObj.html(content_data);
+			}
+		});
+	}
+
+	/**
+	 * 開催地表示。
+	 *
+	 * @parameter data: JSONデータ
+	 * @return : JSONデータを加工したHTML文字列
+	 */
+	var region_ConvertJSONtoHTML = function(data){
+		//variables
+		var content_data ='';
+		var content_length = data.length;
+		var temp_loop_ref = null;
+		//core logic
+		for(var i=0; i<content_length; ++i){
+			temp_loop_ref = data[i];
+			content_data += '<li><a href="?action_fairList=true&type=v1&v_2=' + temp_loop_ref["id"] + '">' + temp_loop_ref["region"] + '（' + temp_loop_ref["count"] + '）</a></li>';
+		}
+		return content_data;
+	};
+
+	/**
+	 * 業種（大分類）表示。
+	 *
+	 * @parameter data: JSONデータ
+	 * @return : JSONデータを加工したHTML文字列
+	 */
+	var industory_ConvertJSONtoHTML = function(data){
+		//variables
+		var content_data ='';
+		var content_length = data.length;
+		var temp_loop_ref = null;
+		//core logic
+		for(var i=0; i<content_length; ++i){
+			temp_loop_ref = data[i];
+			content_data += '<li><a href="?action_fairList=true&type=i1&i_2=' + temp_loop_ref["id"] + '">' + temp_loop_ref["industory"] + '（' + temp_loop_ref["count"] + '）</a></li>';
+		}
+		return content_data;
+	};
+
+	/**
+	 * 新着表示。
+	 *
+	 * @parameter data: JSONデータ
+	 * @return : JSONデータを加工したHTML文字列
+	 */
+	var new_entry_ConvertJSONtoHTML = function(data){
+		//variables
+		var content_data ='';
+		var content_length = data.length;
+		var temp_loop_ref = null;
+		//core logic
+		for(var i=0; i<content_length; ++i){
+			temp_loop_ref = data[i];
+			content_data += '<li><a href="tradefair_en/' + temp_loop_ref["id"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
+		}
+		return content_data;
+	};
+
+	/**
+	 * ランキング表示。
+	 *
+	 * @parameter data: JSONデータ
+	 * @return : JSONデータを加工したHTML文字列
+	 */
+	var ranking_ConvertJSONtoHTML = function(data){
+		//variables
+		var content_data ='';
+		var content_length = data.length;
+		var temp_loop_ref = null;
+		//core logic
+		for(var i=0; i<content_length; ++i){
+			temp_loop_ref = data[i];
+			content_data += '<li><a href="tradefair_en/' + temp_loop_ref["id"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
+		}
+		return content_data;
+	};
+
+	insertHTMLContentFromUserJSON( "jsonfile/region_en.json", $('#venue'), region_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/industory_en.json", $('#industory'), industory_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/new-mihonichi_en.json", $('#new_entry'), new_entry_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking1_en.json", $('#ranking1'), ranking_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking2_en.json", $('#ranking2'), ranking_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking3_en.json", $('#ranking3'), ranking_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking4_en.json", $('#ranking4'), ranking_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking5_en.json", $('#ranking5'), ranking_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking6_en.json", $('#ranking6'), ranking_ConvertJSONtoHTML);
+
+});
+{/literal}
+</script>
+
 </html>
