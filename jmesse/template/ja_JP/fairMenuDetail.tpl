@@ -142,6 +142,7 @@
 				opacity : 0.9
 			},
 			top : 20,
+			fixed : false,
 			close : null,
 			closeOnClick : true
 		});
