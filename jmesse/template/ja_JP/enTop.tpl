@@ -17,26 +17,19 @@
 
 <h1>This page is dummy.</h1>
 
-<b>■Industry■</b><br/>
-{section name=it loop=$app.main_industory_cnt}
-	{if (0 == $app.main_industory_cnt[it].fair_cnt)}
-・{$app.main_industory_cnt[it].discription_en} (0)
-	{else}
-・<a href="{$config.url_pub}?action_enFairList=true&type=i1&i_2={$app.main_industory_cnt[it].kbn_2}">{$app.main_industory_cnt[it].discription_en} ({$app.main_industory_cnt[it].fair_cnt})</a>
-	{/if}
-{/section}
-<br/>
-<br/>
+<table>
+<tr valign="top">
+<td>
 <b>■Area■</b><br/>
-{section name=it loop=$app.region_cnt}
-	{if (0 == $app.region_cnt[it].fair_cnt)}
-・{$app.region_cnt[it].discription_en} (0)
-	{else}
-・<a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$app.region_cnt[it].kbn_2}">{$app.region_cnt[it].discription_en} ({$app.region_cnt[it].fair_cnt})</a>
-	{/if}
-{/section}
-<br/>
-<br/>
+<ul class="icon_arrow" id="venue">
+</ul>
+</td>
+<td>
+<b>■Industry■</b><br/>
+<ul class="icon_arrow" id="industory">
+</ul>
+</td>
+<td>
 <b>■Search condition■</b><br/>
 <form name="form_en_dummy_top" id="form_en_dummy_top" method="post" action="">
 <input type="hidden" name="action_enFairListSearch" id="action_enFairListSearch" value="dummy" />
@@ -122,6 +115,10 @@
 </table>
 <input type="submit" value="Search" />
 </form>
+</td>
+</tr>
+</table>
+
 <br/>
 <b>■Registration Page■</b><br/>
 ・<a href="{$config.url}?action_user_enLogin=true">Login page</a><br/>
@@ -131,53 +128,51 @@
 ・<a href="{$config.url}?action_user_login=true">Login page</a><br/>
 <br/>
 
-<b>■Json■</b><br/><br/>
 
-<b>Venue</b><br/>
-<ul class="icon_arrow" id="venue">
-</ul>
-<br/>
-
-<b>Industory</b><br/>
-<ul class="icon_arrow" id="industory">
-</ul>
-<br/>
-
-<b>Recently Added</b><br/>
+<b>■Recently Added■</b><br/>
 <ul class="icon_arrow" id="new_entry">
 </ul>
 <br/>
 
-<b>Monthly Ranking</b><br/>
+<b>■Monthly Ranking■</b><br/>
+<table>
+<tr valign="top">
+<td>
 <b>November 2011 (Japan)</b><br/>
 <ul class="icon_arrow" id="ranking1">
 </ul>
-<br/>
-
-<b>October 2011 (Javapn)</b><br/>
-<ul class="icon_arrow" id="ranking2">
-</ul>
-<br/>
-
-<b>September 2011 (Japan)</b><br/>
-<ul class="icon_arrow" id="ranking3">
-</ul>
-<br/>
-
+</td>
+<td>
 <b>Novemver 2011 (World)</b><br/>
 <ul class="icon_arrow" id="ranking4">
 </ul>
-<br/>
-
+</td>
+</tr>
+<tr valign="top">
+<td>
+<b>October 2011 (Javapn)</b><br/>
+<ul class="icon_arrow" id="ranking2">
+</ul>
+</td>
+<td>
 <b>October 2011 (World)</b><br/>
 <ul class="icon_arrow" id="ranking5">
 </ul>
-<br/>
-
+</td>
+</tr>
+<tr valign="top">
+<td>
+<b>September 2011 (Japan)</b><br/>
+<ul class="icon_arrow" id="ranking3">
+</ul>
+</td>
+<td>
 <b>September 2011 (World)</b><br/>
 <ul class="icon_arrow" id="ranking6">
 </ul>
-<br/>
+</td>
+</tr>
+</table>
 
 </body>
 

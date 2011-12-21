@@ -17,27 +17,20 @@
 
 <h1>このページはダミーです。</h1>
 
+<table>
+<tr valign="top">
+<td>
+<b>■開催地■</b><br/>
+<ul class="icon_arrow" id="venue">
+</ul>
+</td>
+<td>
 <b>■業種■</b><br/>
-{section name=it loop=$app.main_industory_cnt}
-	{if (0 == $app.main_industory_cnt[it].fair_cnt)}
-・{$app.main_industory_cnt[it].discription_jp} (0)
-	{else}
-・<a href="{$config.url_pub}?action_fairList=true&type=i1&i_2={$app.main_industory_cnt[it].kbn_2}">{$app.main_industory_cnt[it].discription_jp} ({$app.main_industory_cnt[it].fair_cnt})</a>
-	{/if}
-{/section}
-<br/>
-<br/>
-<b>■地域■</b><br/>
-{section name=it loop=$app.region_cnt}
-	{if (0 == $app.region_cnt[it].fair_cnt)}
-・{$app.region_cnt[it].discription_jp} (0)
-	{else}
-・<a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$app.region_cnt[it].kbn_2}">{$app.region_cnt[it].discription_jp} ({$app.region_cnt[it].fair_cnt})</a>
-	{/if}
-{/section}
-<br/>
-<br/>
-<b>■検索条件■</b><br/>
+<ul class="icon_arrow" id="industory">
+</ul>
+</td>
+<td>
+<b>■検索条件■</b><br/><br/>
 <form name="form_dummy_top" id="form_dummy_top" method="post" action="">
 <input type="hidden" name="action_fairListSearch" id="action_fairListSearch" value="dummy" />
 <input type="hidden" name="type" id="type" value="" />
@@ -121,6 +114,10 @@
 </table>
 <input type="submit" value="検索" />
 </form>
+</td>
+</tr>
+</table>
+
 <br/>
 <b>■登録ページ■</b><br/>
 ・<a href="{$config.url}?action_user_login=true">ログインページ</a><br/>
@@ -130,53 +127,50 @@
 ・<a href="{$config.url}?action_user_enLogin=true">ログインページ</a><br/>
 <br/>
 
-<b>■Json取り込み表示■</b><br/><br/>
-
-<b>開催地</b><br/>
-<ul class="icon_arrow" id="venue">
-</ul>
-<br/>
-
-<b>業種</b><br/>
-<ul class="icon_arrow" id="industory">
-</ul>
-<br/>
-
-<b>新着</b><br/>
+<b>■新着■</b><br/>
 <ul class="icon_arrow" id="new_entry">
 </ul>
 <br/>
 
-<b>ランキング</b><br/>
+<b>■ランキング■</b><br/>
+<table>
+<tr valign="top">
+<td>
 <b>先月（国内）</b><br/>
 <ul class="icon_arrow" id="ranking1">
 </ul>
-<br/>
-
-<b>２ヶ月前（国内）</b><br/>
-<ul class="icon_arrow" id="ranking2">
-</ul>
-<br/>
-
-<b>３ヶ月前（国内）</b><br/>
-<ul class="icon_arrow" id="ranking3">
-</ul>
-<br/>
-
+</td>
+<td>
 <b>先月（海外）</b><br/>
 <ul class="icon_arrow" id="ranking4">
 </ul>
-<br/>
-
+</td>
+</tr>
+<tr valign="top">
+<td>
+<b>２ヶ月前（国内）</b><br/>
+<ul class="icon_arrow" id="ranking2">
+</ul>
+</td>
+<td>
 <b>２ヶ月前（海外）</b><br/>
 <ul class="icon_arrow" id="ranking5">
 </ul>
-<br/>
-
+</td>
+</tr>
+<tr valign="top">
+<td>
+<b>３ヶ月前（国内）</b><br/>
+<ul class="icon_arrow" id="ranking3">
+</ul>
+</td>
+<td>
 <b>３ヶ月前（海外）</b><br/>
 <ul class="icon_arrow" id="ranking6">
 </ul>
-<br/>
+</td>
+</tr>
+</table>
 
 </body>
 
