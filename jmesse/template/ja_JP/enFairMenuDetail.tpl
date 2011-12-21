@@ -487,7 +487,7 @@
 	<div class="modal" id="prompt_venue">
 		<a class="close" id="btn_close"></a>
 		<h2>
-			Select location<span>Please select(region竍団ountry/Area竍団ity)</span>
+			Select location<span>Please select(「Region」→「Country/Area」→「City」)</span>
 		</h2>
 		<div class="venue clearfix">
 
