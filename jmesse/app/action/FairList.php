@@ -787,13 +787,13 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 				return 'error';
 			}
 			// 業種（小分類）集計値
-			$this->af->setApp('sub_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListSubIndustory($search_cond['i_2']));
+			$this->af->setApp('sub_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListSubIndustory($search_cond['i_2'], '0'));
 
 			// 開催地（地域）集計値
-			$this->af->setApp('region_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListRegionIndustory());
+			$this->af->setApp('region_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListRegionIndustory('0'));
 			// 開催地（国・地域）集計値
-			$this->af->setApp('country_disp_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountryDisp());
-			$this->af->setApp('country_close_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountryClose());
+			$this->af->setApp('country_disp_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountryDisp('0'));
+			$this->af->setApp('country_close_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountryClose('0'));
 
 		} elseif ('v1' == $search_cond['type']) {
 			// 地域選択
@@ -803,10 +803,10 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 				return 'error';
 			}
 			// 開催地（国・地域）集計値
-			$this->af->setApp('country_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountry($search_cond['v_2']));
+			$this->af->setApp('country_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountry($search_cond['v_2'], '0'));
 
 			// 業種（大分類）集計値
-			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory());
+			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory('0'));
 		} elseif ('v2' == $search_cond['type']) {
 			// 地域選択
 			if ('' == $search_cond['v_2']) {
@@ -821,10 +821,10 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 				return 'error';
 			}
 			// 開催地（都市）集計値
-			$this->af->setApp('city_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCity($search_cond['v_2'], $search_cond['v_3']));
+			$this->af->setApp('city_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCity($search_cond['v_2'], $search_cond['v_3'], '0'));
 
 			// 業種（大分類）集計値
-			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory());
+			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory('0'));
 		}
 
 	}

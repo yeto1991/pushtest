@@ -29,6 +29,26 @@ $config = array(
 	//JSONファイル作成格納場所
 	'jsonfile_path' => '/home/j-messe/app/jmesse/www/jsonfile/',
 
+	// JSONファイル名
+	'r_jp'  => 'region_jp.json',
+	'r_en'  => 'region_en.json',
+	'i_jp'  => 'industry_jp.json',
+	'i_en'  => 'industry_en.json',
+	'n_jp'  => 'new-mihonichi_jp.json',
+	'n_en'  => 'new-mihonichi_en.json',
+	'r1_jp' => 'ranking1_jp.json',
+	'r2_jp' => 'ranking2_jp.json',
+	'r3_jp' => 'ranking3_jp.json',
+	'r4_jp' => 'ranking4_jp.json',
+	'r5_jp' => 'ranking5_jp.json',
+	'r6_jp' => 'ranking6_jp.json',
+	'r1_en' => 'ranking1_en.json',
+	'r2_en' => 'ranking2_en.json',
+	'r3_en' => 'ranking3_en.json',
+	'r4_en' => 'ranking4_en.json',
+	'r5_en' => 'ranking5_en.json',
+	'r6_en' => 'ranking6_en.json',
+
 	// 共通部分URL
 	'header_url'           => 'http://192.168.0.229/j-messe/ja_header.html ',
  	'footer_url'           => 'http://192.168.0.229/j-messe/ja_footer.html',

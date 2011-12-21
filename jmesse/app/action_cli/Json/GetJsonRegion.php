@@ -59,17 +59,19 @@ class Jmesse_Cli_Action_JsonGetJsonRegion extends Jmesse_ActionClass
 			// JSON化
 			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list);
 			// FILE出力
-			$filename = $this->config->get('jsonfile_path').'region_jp.json';
+			$filename = $this->config->get('jsonfile_path').$this->config->get('r_jp');
 			file_put_contents($filename, $jm_fair_cnt_region_json);
- 		}
+			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
+		}
  		//英語用
  		$jm_fair_cnt_region_list = $jm_fair_cnt_mgr->getJsonRegionEN();
  		if (null != $jm_fair_cnt_region_list) {
  			// JSON化
  			$jm_fair_cnt_region_json = json_encode($jm_fair_cnt_region_list);
  			// FILE出力
- 			$filename = $this->config->get('jsonfile_path').'region_en.json';
+ 			$filename = $this->config->get('jsonfile_path').$this->config->get('r_en');
  			file_put_contents($filename, $jm_fair_cnt_region_json);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
  		}
 		return null;
 	}

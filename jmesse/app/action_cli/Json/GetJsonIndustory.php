@@ -60,8 +60,9 @@ class Jmesse_Cli_Action_JsonGetJsonIndustory extends Jmesse_ActionClass
 			// JSON化
 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
 			// FILE出力
-			$filename = $this->config->get('jsonfile_path').'industory_jp.json';
+			$filename = $this->config->get('jsonfile_path').$this->config->get('i_jp');
 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
 		}
 
 		//英語用
@@ -70,8 +71,9 @@ class Jmesse_Cli_Action_JsonGetJsonIndustory extends Jmesse_ActionClass
 			// JSON化
 			$jm_fair_cnt_indutory_json = json_encode($jm_fair_cnt_indutory_list);
 			// FILE出力
-			$filename = $this->config->get('jsonfile_path').'industory_en.json';
+			$filename = $this->config->get('jsonfile_path').$this->config->get('i_en');
 			file_put_contents($filename, $jm_fair_cnt_indutory_json);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
 		}
 
 // 		//日本語（国内）用

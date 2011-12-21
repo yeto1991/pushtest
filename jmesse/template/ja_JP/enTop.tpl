@@ -219,7 +219,7 @@ $(function(){
 		//core logic
 		for(var i=0; i<content_length; ++i){
 			temp_loop_ref = data[i];
-			content_data += '<li><a href="?action_fairList=true&type=v1&v_2=' + temp_loop_ref["id"] + '">' + temp_loop_ref["region"] + '（' + temp_loop_ref["count"] + '）</a></li>';
+			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["region"] + '（' + temp_loop_ref["count"] + '）</a></li>';
 		}
 		return content_data;
 	};
@@ -238,7 +238,7 @@ $(function(){
 		//core logic
 		for(var i=0; i<content_length; ++i){
 			temp_loop_ref = data[i];
-			content_data += '<li><a href="?action_fairList=true&type=i1&i_2=' + temp_loop_ref["id"] + '">' + temp_loop_ref["industory"] + '（' + temp_loop_ref["count"] + '）</a></li>';
+			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["industory"] + '（' + temp_loop_ref["count"] + '）</a></li>';
 		}
 		return content_data;
 	};
@@ -257,7 +257,7 @@ $(function(){
 		//core logic
 		for(var i=0; i<content_length; ++i){
 			temp_loop_ref = data[i];
-			content_data += '<li><a href="tradefair_en/' + temp_loop_ref["id"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
+			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
 		}
 		return content_data;
 	};
@@ -276,13 +276,13 @@ $(function(){
 		//core logic
 		for(var i=0; i<content_length; ++i){
 			temp_loop_ref = data[i];
-			content_data += '<li><a href="tradefair_en/' + temp_loop_ref["id"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
+			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["venue"] + '</li>';
 		}
 		return content_data;
 	};
 
 	insertHTMLContentFromUserJSON( "jsonfile/region_en.json", $('#venue'), region_ConvertJSONtoHTML);
-	insertHTMLContentFromUserJSON( "jsonfile/industory_en.json", $('#industory'), industory_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/industry_en.json", $('#industory'), industory_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/new-mihonichi_en.json", $('#new_entry'), new_entry_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking1_en.json", $('#ranking1'), ranking_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking2_en.json", $('#ranking2'), ranking_ConvertJSONtoHTML);
