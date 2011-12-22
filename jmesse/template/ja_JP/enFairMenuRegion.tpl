@@ -41,7 +41,11 @@
 				{/if}
 			{/section}
 			{/if} />
-			{$app.main_industory_cnt[it].discription_en} ({$app.main_industory_cnt[it].fair_cnt})<br />
+			{$app.main_industory_cnt[it].discription_en}
+{*
+			({$app.main_industory_cnt[it].fair_cnt})
+*}
+			<br />
 		{/section}
 	</p>
 

@@ -54,7 +54,10 @@
 						checked
 						{/if}
 					{/section}
-					/>{$app.region_cnt[it].discription_en} ({$app.region_cnt[it].fair_cnt})
+					/>{$app.region_cnt[it].discription_en}
+{*
+					({$app.region_cnt[it].fair_cnt})
+*}
 				</p>
 				<div>
 					<p>
