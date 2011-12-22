@@ -356,12 +356,12 @@ $form.mode
 									<table id="registration">
 										<tr>
 											<th class="item">キャッチフレーズ</th>
-											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<th class="required"></th>
 											<td>{$form.profile_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
 											<th class="item">PR・紹介文</th>
-											<th class="required"></th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
@@ -449,12 +449,12 @@ $form.mode
 											</tr>
 											<tr>
 												<th class="item">Teaser Copy<br />キャッチフレーズ</th>
-												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+												<th class="required"></th>
 												<td>{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
-												<th class="required"></th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>

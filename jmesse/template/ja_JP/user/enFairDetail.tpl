@@ -347,12 +347,12 @@ $form.mode
 					<table id="registration">
 						<tr>
 							<th class="item">Catchphrase</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"></th>
 							<td>{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 						<tr>
 							<th class="item">PR</th>
-							<th class="required"></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 						<tr>

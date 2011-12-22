@@ -99,15 +99,18 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 
 		// 開催規模
 
-		// キャッチフレーズ
-		if ('' == $this->af->get('profile_jp')) {
-			$this->ae->add('profile_jp', 'キャッチフレーズが入力されていません');
-		}
+// 		// キャッチフレーズ
+// 		if ('' == $this->af->get('profile_jp')) {
+// 			$this->ae->add('profile_jp', 'キャッチフレーズが入力されていません');
+// 		}
 // 		if (500 < mb_strlen($this->af->get('profile_jp'))) {
 // 			$this->ae->add('error', 'キャッチフレーズは500文字以内にして下さい');
 // 		}
 
 		// PR・紹介文
+		if ('' == $this->af->get('detailed_information_jp')) {
+			$this->ae->add('detailed_information_jp', 'PR・紹介文が入力されていません');
+		}
 // 		if ('' != $this->af->get('detailed_information_jp')) {
 // 			if (1000 < mb_strlen($this->af->get('detailed_information_jp'))) {
 // 				$this->ae->add('error', 'PR・紹介文は1000文字以内にして下さい');

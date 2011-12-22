@@ -269,7 +269,7 @@
 						<tr>
 						{/if}
 							<th class="item">Catchphrase</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
 							 	Maximum of about 120 words<br/>
@@ -285,7 +285,7 @@
 						<tr>
 						{/if}
 							<th class="item">Organizer's statement, special features. etc. </th>
-							<th class="required"></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
 								Maximum of about 250 words<br/>

@@ -98,8 +98,13 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 		// 開催規模
 
 		// キャッチフレーズ
-		if ('' == $this->af->get('profile_en')) {
-			$this->ae->add('profile_en', 'The catchphrase has not been entered.');
+// 		if ('' == $this->af->get('profile_en')) {
+// 			$this->ae->add('profile_en', 'The catchphrase has not been entered.');
+// 		}
+
+		// PR・紹介文
+		if ('' == $this->af->get('detailed_information_en')) {
+			$this->ae->add('detailed_information_en', "The organizer's statement, special features. etc. has not been entered.");
 		}
 
 		// 見本市の紹介写真

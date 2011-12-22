@@ -171,7 +171,7 @@
 											{/if}
 												<th class="item">Teaser Copy<br />キャッチフレーズ
 												</th>
-												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+												<th class="required"></th>
 												<td>
 													<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
 													500文字以内で簡潔に。<br/>
@@ -188,7 +188,7 @@
 											{/if}
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文
 												</th>
-												<th class="required"></th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>
 													<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
 													1000文字以内で。<br/>

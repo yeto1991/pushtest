@@ -210,8 +210,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 				$this->ae->add('error', '主催者・問合せ先名称(日)が入力されていません');
 			}
 			// キャッチフレーズ
-			if ('' == $this->af->get('profile_jp')) {
-				$this->ae->add('error', 'キャッチフレーズ(日)が入力されていません');
+// 			if ('' == $this->af->get('profile_jp')) {
+// 				$this->ae->add('error', 'キャッチフレーズ(日)が入力されていません');
+// 			}
+			// ＰＲ・紹介文
+			if ('' == $this->af->get('detailed_information_jp')) {
+				$this->ae->add('error', 'ＰＲ・紹介文(日)が入力されていません');
 			}
 		}
 		// 英語
@@ -229,8 +233,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 				$this->ae->add('error', '会場名(英)が入力されていません');
 			}
 			// キャッチフレーズ
-			if ('' == $this->af->get('profile_en')) {
-				$this->ae->add('error', 'キャッチフレーズ(英)が入力されていません');
+// 			if ('' == $this->af->get('profile_en')) {
+// 				$this->ae->add('error', 'キャッチフレーズ(英)が入力されていません');
+// 			}
+			// ＰＲ・紹介文
+			if ('' == $this->af->get('detailed_information_en')) {
+				$this->ae->add('error', 'ＰＲ・紹介文(英)が入力されていません');
 			}
 		}
 

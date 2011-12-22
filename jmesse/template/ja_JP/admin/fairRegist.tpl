@@ -554,7 +554,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="2">キャッチフレーズ <font color="#CC3333">●</font></td>
+							<td nowrap rowspan="2">キャッチフレーズ</font></td>
 							<!-- キャッチフレーズ(日) -->
 							<!-- キャッチフレーズ(英) -->
 							<td nowrap>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="80" rows="7">{$form.profile_jp}</textarea><br />
@@ -566,13 +566,13 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="2">ＰＲ・紹介文</td>
+							<td nowrap rowspan="2">ＰＲ・紹介文 <font color="#CC3333">●</font></td>
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
 							<td nowrap>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="80" rows="7">{$form.detailed_information_jp}</textarea></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<br> <textarea name="detailed_information_en" id="detailed_information_en" cols="80" rows="7">{$form.detailed_information_en}</textarea></td>
+							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="detailed_information_en" id="detailed_information_en" cols="80" rows="7">{$form.detailed_information_en}</textarea></td>
 						</tr>
 
 						<tr>

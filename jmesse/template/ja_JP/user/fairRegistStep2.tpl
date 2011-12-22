@@ -271,7 +271,7 @@
 										<tr>
 										{/if}
 											<th class="item">キャッチフレーズ</th>
-											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<th class="required"></th>
 											<td>
 												<textarea cols="60" rows="2" name="profile_jp" id="profile_jp">{$form.profile_jp}</textarea><br/>
 											 	500文字以内で簡潔に。例：20年の歴史をもつ○○で最大の環境機器の展示会。<br/>
@@ -287,7 +287,7 @@
 										<tr>
 										{/if}
 											<th class="item">PR・紹介文</th>
-											<th class="required"></th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<textarea cols="60" rows="6" name="detailed_information_jp" id="detailed_information_jp">{$form.detailed_information_jp}</textarea><br/>
 												1000文字以内で。<br/>
