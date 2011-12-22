@@ -157,9 +157,9 @@ $config = array(
 	'mail_title_user_confirm' => 'J-messe見本市ユーザのお知らせ',
 	'mail_title_fair_regist'  => 'J-messe見本市登録完了のお知らせ',
 	'mail_title_fair_change'  => 'J-messe見本市更新完了のお知らせ',
-	'mail_title_user_regist_en'  => 'J-messe見本市ユーザ登録完了のお知らせ(英語)',
-	'mail_title_user_change_en'  => 'J-messe見本市ユーザ更新完了のお知らせ(英語)',
-	'mail_title_user_confirm_en' => 'J-messe見本市ユーザのお知らせ(英語)',
+	'mail_title_user_regist_en'  => 'Notice of completion of your registration in J-messe',
+	'mail_title_user_change_en'  => 'Notice of completion of updating your information in J-messe',
+	'mail_title_user_confirm_en' => 'Notice of reissuance of your information in J-messe',
 	'mail_title_fair_regist_en'  => 'J-messe見本市登録完了のお知らせ(英語)',
 	'mail_title_fair_change_en'  => 'J-messe見本市更新完了のお知らせ(英語)',
 
