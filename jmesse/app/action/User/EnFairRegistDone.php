@@ -254,7 +254,7 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 			// ユーザ使用言語(英語)
 			$jm_fair->set('use_language_flag', '1');
 			// Webページの表示/非表示(表示)
-			$jm_fair->set('web_display_type', '0');
+			$jm_fair->set('web_display_type', '1');
 			// メール送信フラグ(送信する)
 			$jm_fair->set('mail_send_flag', '0');
 			// 削除フラグ(未削除)
