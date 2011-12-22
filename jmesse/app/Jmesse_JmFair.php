@@ -28,7 +28,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// SQL作成
 		$sql = "select jf.mihon_no mihon_no, jf.abbrev_title abbrev_title, jf.fair_title_en fair_title_en, jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日') end, jcm_2.discription_jp country, case when jf.city = '' then concat('その他(', jf.other_city_jp, ')') else jcm_3.discription_jp end city, jf.fair_url url from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') order by jf.date_of_registration desc, jf.mihon_no desc limit 0, 10";
 //		$sql = "select jf.mihon_no id, jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日') end, jcm_2.discription_jp country, case when jf.city = '' then concat('その他(', jf.other_city_jp, ')') else jcm_3.discription_jp end city, jf.fair_url url from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') order by jf.date_of_registration desc, jf.mihon_no desc limit 0, 10";
-	
+
 		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
@@ -3163,6 +3163,49 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		while ($row =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 			$list[$i] = $row;
 			$i++;
+		}
+
+		return $list;
+	}
+
+	// for initialize
+	/**
+	 * すべての見本市番号を取得する。
+	 *
+	 * @return array 見本市番号のリスト
+	 */
+	function getMihonNoList() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL
+		$sql = "select mihon_no from jm_fair order by mihon_no";
+		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
+
+		// SQLを実行
+		$res = $db->db->query($sql);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		$list = array();
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
 		}
 
 		return $list;
