@@ -521,7 +521,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// 会期
 		$sql_tmp_y = '';
 		if ('u' == $search_cond['year']) {
-			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
+			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd) >= curdate() ";
 		} elseif ('e' == $search_cond['year']) {
 			$date_from = $search_cond['date_from_yyyy'].$search_cond['date_from_mm'];
 			$date_to = $search_cond['date_to_yyyy'].$search_cond['date_to_mm'];
@@ -1368,7 +1368,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 // 		// これから or 含む過去
 		$sql_tmp_y = '';
 // 		if ('u' == $search_cond['year']) {
-			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 00:00:00') > now() ";
+			$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd) >= curdate() ";
 // 		}
 
 // 		// リンク、チェックボックス、キーワード、これから？をAND
