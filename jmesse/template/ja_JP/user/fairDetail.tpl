@@ -278,7 +278,7 @@ $form.mode
 *}
 										<tr>
 											<th class="item">入場資格</th>
-											<th class="required"></th>
+											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>{$app.open_to_name.discription_jp}</td>
 										</tr>
 										<tr>

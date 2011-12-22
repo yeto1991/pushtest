@@ -269,7 +269,7 @@ $form.mode
 *}
 						<tr>
 							<th class="item">Eligibility </th>
-							<th class="required"></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
 							<td>{$app.open_to_name.discription_en}</td>
 						</tr>
 						<tr>
