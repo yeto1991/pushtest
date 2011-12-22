@@ -12,7 +12,7 @@ echo ▼▼▼ [`date`]【開始】バッチ
 
 # 見本市件数テーブルデータ集計バッチ
 echo ▼▼▼ [`date`]【開始】見本市件数テーブルデータ集計バッチ
-$MYSQL_HOME/bin/mysql -ujmesse -pidsjmesse -h$DB_SERVER jmesse < $JMESSE_HOME/bin/summaryCountForFairCntTable.sql
+$MYSQL_HOME/bin/mysql -f -ujmesse -pidsjmesse -h$DB_SERVER jmesse < $JMESSE_HOME/bin/summaryCountForFairCntTable.sql
 echo $?
 echo ▲▲▲ [`date`]【終了】見本市件数テーブルデータ集計バッチ
 
@@ -60,7 +60,6 @@ echo ▲▲▲ [`date`]【終了】最古ダンプ削除
 # ローテーション
 echo ▼▼▼ [`date`]【開始】ローテーション
 cd $DB_BACKUP_PATH
-echo $?
 mv jmesse_backup_007.dmp.gz jmesse_backup_008.dmp.gz
 echo $?
 mv jmesse_backup_006.dmp.gz jmesse_backup_007.dmp.gz
