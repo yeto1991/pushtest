@@ -7,7 +7,7 @@ Dear Mr./Ms. {$mail_send_user_name} ,
 	Please visit the front page of our website, of which the URL is shown below, and enter your ID and password to log in to J-messe. There, you can add and revise information of your trade fairs.
 
 *** Click on the URL to add and revise information of your trade fairs ****
-https://www.jetro.go.jp/j-messe/?action_user_enLogin=true
+http://www.jetro.go.jp/en/database/j-messe/
 
      It is important to keep the information you registered in J-messe updated all the time.  Providing your customers with the newest information on your trade fairs shall also be self-rewarding for you as organizers. Kindly please be aware of following points:
 ★Your registered information of a trade fair shall be updated on J-messe Database upon approval from Secretariat.
