@@ -137,7 +137,10 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 		$this->af->set('admission_ticket_2', $jm_fair->get('admission_ticket_2'));
 		$this->af->set('admission_ticket_3', $jm_fair->get('admission_ticket_3'));
 		$this->af->set('admission_ticket_4', $jm_fair->get('admission_ticket_4'));
-		$this->af->set('admission_ticket_5', $jm_fair->get('admission_ticket_5'));
+		if ('' != $jm_fair->get('other_admission_ticket_jp')) {
+			$this->af->set('admission_ticket_5', '1');
+		}
+// 		$this->af->set('admission_ticket_5', $jm_fair->get('admission_ticket_5'));
 		$this->af->set('other_admission_ticket_jp', $jm_fair->get('other_admission_ticket_jp'));
 		$this->af->set('app_dead_yyyy', $jm_fair->get('app_dead_yyyy'));
 		$this->af->set('app_dead_mm', $jm_fair->get('app_dead_mm'));
