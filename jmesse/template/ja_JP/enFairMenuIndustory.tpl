@@ -108,7 +108,7 @@
 	</p>
 
 	<p class="narrow_btn">
-		<a href="javascript:search('form_enFairMenuIndusory');"><img width="93" height="34" alt="Refine" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
+		<a href="javascript:search('form_enFairMenuIndusory');"><img width="93" height="34" alt="Refine" src="/en/database/j-messe/images/db/btn-narrow.gif" class="over"></a>
 		<a href="javascript:resetAll();" class="icon_arrow reset">All Clear</a>
 	</p>
 </div>

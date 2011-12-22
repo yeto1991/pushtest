@@ -128,34 +128,34 @@ $form.mode
 					{if ('' == $form.mode)}
 					<p><strong><span class="red">Do you wish to register the trade fair information as follows?</span></strong></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairRegistStep2=true&back=1"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
+						<a href="{$config.url}?action_user_enFairRegistStep2=true&back=1"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						<input type="image" width="110" height="37" class="over" alt="Yes" src="/en/database/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('e' == $form.mode)}
 					<p><strong><span class="red">Do you wish to register the trade fair information as follows?</span></strong></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
+						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						<input type="image" width="110" height="37" class="over" alt="Yes" src="/en/database/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('c' == $form.mode)}
 					<p><strong><span class="red">Do you wish to edit the trade fair information as follows?</span></strong></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/en/database/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('d' == $form.mode)}
 					<p></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairList=true"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
-						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						<a href="{$config.url}?action_user_enFairList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{elseif ('p' == $form.mode)}
 					<p></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
-						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{else}
 					{/if}
@@ -413,34 +413,34 @@ $form.mode
 					{if ('' == $form.mode)}
 					<p><strong><span class="red">Do you regist this fair?</span></strong></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairRegistStep2=true&back=1"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
+						<a href="{$config.url}?action_user_enFairRegistStep2=true&back=1"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						<input type="image" width="110" height="37" class="over" alt="Yes" src="/en/database/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('e' == $form.mode)}
 					<p><strong><span class="red">Do you regist on a base the fair? </span></strong></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="Yes" src="/j-messe/images/db/btn-yes.gif" />
+						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=e&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						<input type="image" width="110" height="37" class="over" alt="Yes" src="/en/database/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('c' == $form.mode)}
 					<p><strong><span class="red">Do you edit this fair?</span></strong></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						<input type="image" width="110" height="37" class="over" alt="はい" src="/j-messe/images/db/btn-yes.gif" />
+						<a href="{$config.url}?action_user_enFairRegistStep2=true&mode=c&mihon_no={$form.mihon_no}&back=1"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						<input type="image" width="110" height="37" class="over" alt="はい" src="/en/database/j-messe/images/db/btn-yes.gif" />
 					</p>
 					{elseif ('d' == $form.mode)}
 					<p></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairList=true"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
-						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						<a href="{$config.url}?action_user_enFairList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{elseif ('p' == $form.mode)}
 					<p></p>
 					<p>
-						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
-						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{else}
 					{/if}

@@ -462,11 +462,11 @@
 					<table width="100%">
 						<tr>
 							{if ('c' == $form.mode || 'e' == $form.mode)}
-							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
+							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1"><img src="/en/database/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{else}
-							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
+							<td width="250px"><a href="{$config.url}?action_user_enFairRegistStep1=true&back=1"><img src="/en/database/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" /></a></td>
 							{/if}
-							<td align="right"><a href="javascript:next();"><img src="/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></a></td>
+							<td align="right"><a href="javascript:next();"><img src="/en/database/j-messe/images/db/btn-confirm.gif" alt="Confirm" width="180" height="37" class="over" /></a></td>
 						</tr>
 					</table>
 				</form>

@@ -127,7 +127,7 @@
 			<td><input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="30" /></td>
 		</tr>
 	</table>
-	<a href="javascript:search('form_enFairMenuDetail');"><img width="93" height="34" alt="Refine" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
+	<a href="javascript:search('form_enFairMenuDetail');"><img width="93" height="34" alt="Refine" src="/en/database/j-messe/images/db/btn-narrow.gif" class="over"></a>
 
 	<!-- 業種選択 -->
 	<script type="text/javascript">

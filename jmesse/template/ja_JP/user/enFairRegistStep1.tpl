@@ -696,8 +696,8 @@
 					<div class="line_dot"><hr /></div>
 					<table width="100%">
 						<tr>
-							<td width="250px"><img src="/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
-							<td align="right"><input type="image" src="/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
+							<td width="250px"><img src="/en/database/j-messe/images/db/btn-back.gif" alt="戻る" width="110" height="37" class="over" onclick="history.back()"/></td>
+							<td align="right"><input type="image" src="/en/database/j-messe/images/db/btn-next.gif" alt="次へ" width="180" height="37" class="over" /></td>
 						</tr>
 					</table>
 				</form>

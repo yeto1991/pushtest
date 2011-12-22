@@ -176,8 +176,8 @@
 					<!-- navi area-->
 					<table width="100%">
 						<tr>
-							<td><img src="/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" onclick="history.back()"/></td>
-							<td align="right"><input type="image" src="/j-messe/images/db/btn-finish.gif" alt="complete" class="over" /></td>
+							<td><img src="/en/database/j-messe/images/db/btn-back.gif" alt="back" width="110" height="37" class="over" onclick="history.back()"/></td>
+							<td align="right"><input type="image" src="/en/database/j-messe/images/db/btn-finish.gif" alt="complete" class="over" /></td>
 						</tr>
 					</table>
 				</form>
