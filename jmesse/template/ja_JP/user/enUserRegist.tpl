@@ -19,7 +19,7 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
-		<ul>
+		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
@@ -71,7 +71,7 @@
 						<tr>
 						{/if}
 							<th class="item">email</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="text" value="{$form.email}" size="50" name="email" id="email" /><br />
 							{if is_error('email')}
 							<span class="error-message">{message name="email"}</span><br />
@@ -84,7 +84,7 @@
 						<tr>
 						{/if}
 							<th class="item">email（Confirm）</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="text" value="{$form.email2}" size="50" name="email2" id="email2" /><br />
 							{if is_error('email2')}
 							<span class="error-message">{message name="email2"}</span><br />
@@ -97,7 +97,7 @@
 						<tr>
 						{/if}
 							<th class="item">password</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="password" value="{$form.password}" size="20" name="password" id="password" autocomplete="off" /><br />
 							{if is_error('password')}
 							<span class="error-message">{message name="password"}</span><br />
@@ -110,7 +110,7 @@
 						<tr>
 						{/if}
 							<th class="item">password（Confirm）</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="password" value="{$form.password2}" size="20" name="password2" id="password2" autocomplete="off" /><br />
 							{if is_error('password2')}
 							<span class="error-message">{message name="password2"}</span><br />
@@ -126,7 +126,7 @@
 						<tr>
 						{/if}
 							<th class="item">Company name</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="text" value="{$form.companyNm}" size="60" name="companyNm" id="companyNm" /><br />
 							{if is_error('companyNm')}
 							<span class="error-message">{message name="companyNm"}</span><br />
@@ -152,7 +152,7 @@
 						<tr>
 						{/if}
 							<th class="item">Your name</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="text" value="{$form.userNm}" size="60" name="userNm" id="userNm" /><br />
 							{if is_error('userNm')}
 							<span class="error-message">{message name="userNm"}</span><br />
@@ -165,7 +165,7 @@
 						<tr>
 						{/if}
 							<th class="item">Gender</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 							<input type="radio" size="60" name="genderCd" id="genderCd" value="0" {if $form.genderCd == "0" } checked {/if} />Male
 							<input type="radio" size="60" name="genderCd" id="genderCd" value="1" {if $form.genderCd == "1"} checked {/if} />Female<br />
@@ -195,7 +195,7 @@
 						<tr>
 						{/if}
 							<th class="item">Address</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td><input type="text" value="{$form.address}" size="80" name="address" id="address" /><br />
 							{if is_error('address')}
 							<span class="error-message">{message name="address"}</span><br />
@@ -208,7 +208,7 @@
 						<tr>
 						{/if}
 							<th class="item">TEL</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 							<input type="text" value="{$form.tel}" size="30" name="tel" id="tel" />（single-byte letters and numbers)<br />
 							{if is_error('tel')}

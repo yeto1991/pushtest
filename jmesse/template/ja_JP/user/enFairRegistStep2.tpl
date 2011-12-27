@@ -160,7 +160,7 @@
 						<tr>
 						{/if}
 							<th class="item">Fair title</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								<input type="text" value="{$form.fair_title_en}" size="60" name="fair_title_en" id="fair_title_en" maxlength="255" /><br/>
 								{if is_error('fair_title_en')}
@@ -285,7 +285,7 @@
 						<tr>
 						{/if}
 							<th class="item">Organizer's statement, special features. etc. </th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
 								Maximum of about 250 words<br/>
@@ -365,7 +365,7 @@
 						<tr>
 						{/if}
 							<th class="item">Name of the organizer</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								 Name: <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
 								{if is_error('organizer_en')}
@@ -380,7 +380,7 @@
 						<tr>
 						{/if}
 							<th class="item">Information of the organizer</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								<strong>Address: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
 								<strong>Department: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />

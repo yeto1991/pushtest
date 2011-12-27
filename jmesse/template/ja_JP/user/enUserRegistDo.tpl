@@ -106,12 +106,12 @@
 					<table id="registration">
 						<tr>
 							<th class="item">email</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>{$form.email}</td>
 						</tr>
 						<tr>
 							<th class="item">password</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>●●●●●●●●</td>
 						</tr>
 					</table><br />
@@ -119,7 +119,7 @@
 					<table id="registration">
 						<tr>
 							<th class="item">Company name</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>{$form.companyNm}</td>
 						</tr>
 						<tr>
@@ -129,12 +129,12 @@
 						</tr>
 						<tr>
 							<th class="item">Your name</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>{$form.userNm}</td>
 						</tr>
 						<tr>
 							<th class="item">Gender</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 							{if $form.genderCd == "0"}Male{/if}
 							{if $form.genderCd == "1"}Female{/if}
@@ -147,12 +147,12 @@
 						</tr>
 						<tr>
 							<th class="item">Address</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>{$form.address}</td>
 						</tr>
 						<tr>
 							<th class="item">TEL</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="30" /></th>
+							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>{$form.tel}</td>
 						</tr>
 						<tr>

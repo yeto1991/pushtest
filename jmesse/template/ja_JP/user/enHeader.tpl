@@ -4,7 +4,6 @@
 <link href="/css/en/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/en/database/j-messe/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/en/printmedia.css" rel="stylesheet" type="text/css" media="print" />
-<link href="/css/en/parts/newmodule.css" rel="stylesheet" type="text/css" media="all" />
 {if ('1' == $form.print)}
 <link href="/css/en/print.css" rel="stylesheet" type="text/css" media="all" />
 {/if}
