@@ -136,13 +136,8 @@
 								<h2>世界の見本市・展示会</h2>
 							</div>
 							<div class="in_main">
-
-
 								<div class="h3">
-									{if ('1' == $form.detail)}
-										<h3>世界の見本市・展示会</h3>
-									{else}
-										<h3>{$app.list_name}</h3>
+									{if ('1' != $form.detail)}
 										{if ('i1' == $form.type)}
 											<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の業種を見る</a> <a href="" class="icon_arrow">詳細検索</a></span>
 										{else}
@@ -150,7 +145,6 @@
 										{/if}
 									{/if}
 								</div>
-
 								<div id="skip_menu">
 									<a href="">絞り込み条件にスキップ</a>
 								</div>
@@ -163,7 +157,7 @@
 										<h4>過去のものを含む見本市・展示会一覧</h4>
 										{else}
 											{if ('1' == $form.detail)}
-										<h4>見本市・展示会 絞込み検索結果一覧</h4>
+										<h4>検索結果一覧</h4>
 											{else}
 												{if ('a' != $form.year)}
 										<h4>これから開催される見本市・展示会一覧</h4>

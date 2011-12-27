@@ -43,6 +43,9 @@
 					{section name=it loop=$app.industory_list}
 						{$app.industory_list[it]}<br/>
 					{/section}
+					{if ('' != $app.industory_list)}
+						No selected
+					{/if}
 				</div>
 				<button class="modalInputIndustory" rel="#prompt_industory">Change Industory</button>
 			</td>
@@ -54,6 +57,9 @@
 					{section name=it loop=$app.vanue_list}
 						{$app.vanue_list[it]}<br/>
 					{/section}
+					{if ('' != $app.vanue_list)}
+						No selected
+					{/if}
 				</div>
 				<button class="modalInputVenue" rel="#prompt_venue">Select Location</button>
 			</td>
