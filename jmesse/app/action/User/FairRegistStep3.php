@@ -144,13 +144,27 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		}
 
 		// 主催者連絡先
-		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
-			$this->ae->add('organizer_addr', '主催者連絡先が入力されていません');
-		} else {
-			if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
-				$this->ae->add('organizer_tel', 'TEL、FAX、Emailを最低一つ入力して下さい');
-			}
+// 		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
+// 			$this->ae->add('organizer_addr', '主催者連絡先が入力されていません');
+// 		} else {
+// 			if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
+// 				$this->ae->add('organizer_tel', 'TEL、FAX、Emailを最低一つ入力して下さい');
+// 			}
+// 		}
+
+		// 主催者問合せ住所
+		if ('' == $this->af->get('organizer_addr')) {
+			$this->ae->add('organizer_addr', '主催者連絡先住所が入力されていません');
 		}
+		// 主催者問合せTEL
+		if ('' == $this->af->get('organizer_tel')) {
+			$this->ae->add('organizer_tel', '主催者連絡先TELが入力されていません');
+		}
+		// 主催者問合せEMAIL
+		if ('' == $this->af->get('organizer_email')) {
+			$this->ae->add('organizer_email', '主催者連絡先Emailが入力されていません');
+		}
+
 		if ('' != $this->af->get('organizer_email')) {
 			if (!strpos($this->af->get('organizer_email'), '@')
 			|| 0 === strpos($this->af->get('organizer_email'), '@')

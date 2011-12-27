@@ -115,11 +115,23 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if (null == $user || null == $user->get('user_id')) {
 			$this->ae->add('error', 'Eメールのユーザは未登録です');
 		}
-		// 主催者・問合せ先
-		if ((null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel'))
-			&& (null == $this->af->get('organizer_fax') || '' == $this->af->get('organizer_fax'))
-			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
-			$this->ae->add('error', '主催者・問合せ先が入力されていません');
+// 		// 主催者・問合せ先
+// 		if ((null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel'))
+// 			&& (null == $this->af->get('organizer_fax') || '' == $this->af->get('organizer_fax'))
+// 			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
+// 			$this->ae->add('error', '主催者・問合せ先が入力されていません');
+// 		}
+		// 主催者・問合せ先住所
+		if (null == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_addr')) {
+			$this->ae->add('error', '主催者・問合せ先住所が入力されていません');
+		}
+		// 主催者・問合せ先TEL
+		if (null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel')) {
+			$this->ae->add('error', '主催者・問合せ先TELが入力されていません');
+		}
+		// 主催者・問合せ先E-Mail
+		if (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email')) {
+			$this->ae->add('error', '主催者・問合せ先E-Mailが入力されていません');
 		}
 
 		// 日付

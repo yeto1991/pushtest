@@ -1339,7 +1339,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先担当部課', // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1352,7 +1352,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先担当者', // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1365,7 +1365,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先TEL', // Display name
-			'required'    => false,           // Required Option(true/false)
+			'required'    => true,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1391,7 +1391,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先E-Mail', // Display name
-			'required'    => false,           // Required Option(true/false)
+			'required'    => true,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp

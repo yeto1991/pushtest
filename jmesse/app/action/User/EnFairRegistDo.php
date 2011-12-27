@@ -129,14 +129,28 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 		if ('' == $this->af->get('organizer_en')) {
 			$this->ae->add('organizer_en', 'The name of the organizer has not been entered.');
 		}
-		// 主催者連絡先
-		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
-			$this->ae->add('organizer_addr', 'The contact of the organizer has not been entered.');
-		} else {
-			if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
-				$this->ae->add('organizer_tel', 'Please enter at least one form of contact with the organizer: telephone number, fax number or e-mail.');
-			}
+// 		// 主催者連絡先
+// 		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
+// 			$this->ae->add('organizer_addr', 'The contact of the organizer has not been entered.');
+// 		} else {
+// 			if ('' == $this->af->get('organizer_tel') && '' == $this->af->get('organizer_fax') && '' == $this->af->get('organizer_email')) {
+// 				$this->ae->add('organizer_tel', 'Please enter at least one form of contact with the organizer: telephone number, fax number or e-mail.');
+// 			}
+// 		}
+
+		// 主催者問合せ住所
+		if ('' == $this->af->get('organizer_addr')) {
+			$this->ae->add('organizer_addr', 'The address of the organizer has not been entered.');
 		}
+		// 主催者問合せTEL
+		if ('' == $this->af->get('organizer_tel')) {
+			$this->ae->add('organizer_tel', 'The tel of the organizer has not been entered.');
+		}
+		// 主催者問合せEMAIL
+		if ('' == $this->af->get('organizer_email')) {
+			$this->ae->add('organizer_email', 'The email of the organizer has not been entered.');
+		}
+
 		if ('' != $this->af->get('organizer_email')) {
 			if (!strpos($this->af->get('organizer_email'), '@')
 			|| 0 === strpos($this->af->get('organizer_email'), '@')
