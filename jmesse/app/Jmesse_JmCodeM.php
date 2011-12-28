@@ -18,6 +18,216 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 {
 
 	/**
+	 * 都市のコード値を取得。
+	 *
+	 * @param string $kbn_2 地域コード値
+	 * @param string $kbn_3 国・地域コード値
+	 * @param string $discription_jp 都市名
+	 * @return string 都市のコード値
+	 */
+	function getCityCode($kbn_2, $kbn_3, $discription_jp) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select kbn_4 from jm_code_m where kbn_1 = '003' and kbn_2 = ? and kbn_3 = ? and discription_jp = ?";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array($kbn_2, $kbn_3, $discription_jp);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['kbn_4'];
+	}
+
+	/**
+	 * 国・地域のコード値を取得。
+	 *
+	 * @param string $kbn_2 地域コード値
+	 * @param string $discription_jp 国・地域名
+	 * @return string 国・地域のコード値
+	 */
+	function getCountryCode($kbn_2, $discription_jp) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select kbn_3 from jm_code_m where kbn_1 = '003' and kbn_2 = ? and kbn_4 = '000' and discription_jp = ?";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array($kbn_2, $discription_jp);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['kbn_3'];
+	}
+
+	/**
+	 * 地域のコード値を取得。
+	 *
+	 * @param string $discription_jp 地域名
+	 * @return string 地域のコード値
+	 */
+	function getRegionCode($discription_jp) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select kbn_2 from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000' and discription_jp = ?";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array($discription_jp);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['kbn_2'];
+	}
+
+	/**
+	 * 業種（小分類）のコード値を取得。
+	 *
+	 * @param string $kbn_2 業種（大分類）コード値
+	 * @param string $discription_jp 業種（小分類）名
+	 * @return string 業種（小分類）のコード値
+	 */
+	function getSubIndustoryCode($kbn_2, $discription_jp) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select kbn_3 from jm_code_m where kbn_1 = '002' and kbn_2 = ? and kbn_4 = '000' and discription_jp = ?";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array($kbn_2, $discription_jp);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['kbn_3'];
+	}
+
+
+	/**
+	 * 業種（大分類）のコード値を取得。
+	 *
+	 * @param string $discription_jp 業種（大分類）名
+	 * @return string 業種（大分類）のコード値
+	 */
+	function getMainIndustoryCode($discription_jp) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select kbn_2 from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' and discription_jp = ?";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		$param = array($discription_jp);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['kbn_2'];
+	}
+
+	/**
 	 * コードを取得する。
 	 *
 	 * @param unknown_type $kbn_1
