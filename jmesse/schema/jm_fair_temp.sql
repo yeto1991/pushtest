@@ -89,6 +89,7 @@ create table jmesse.jm_fair_temp(
   , use_language_flag char (1)
   , web_display_type char (1)
   , regist_type char (1)
+  , regist_category char (1)
   , note_for_system_manager varchar (255)
   , note_for_data_manager varchar (255)
   , confirm_flag char (1)
