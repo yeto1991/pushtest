@@ -488,7 +488,7 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		// 入力項目なし
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');
-		$jm_fair->set('regist_type', '');
+// 		$jm_fair->set('regist_type', '');
 //		$jm_fair->set('mihon_no', $this->af->get('mihon_no'));
 //		$jm_fair->set('regist_user_id', $this->session->get('user_id'));
 //		$jm_fair->set('regist_date', date('Y/m/d H:i:s'));
