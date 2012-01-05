@@ -275,7 +275,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
-			'regexp'      => '/^[a-zA-Z1-9 ]+$/',            // String by Regexp
+			'regexp'      => '/^[ -~]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
