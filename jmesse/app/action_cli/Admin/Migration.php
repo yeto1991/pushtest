@@ -59,6 +59,10 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$this->_begin();
 		$ary_user = @file("MQData_User.txt");
 		foreach ($ary_user as $row) {
+			// 改行コードの削除
+			$row = str_replace("\r", "", $row);
+			$row = str_replace("\n", "", $row);
+
 			// jm_userへinsert
 			$jm_user =& $this->_setJmUser($row);
 
@@ -77,6 +81,10 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$this->_begin();
 		$ary_fair = @file("MQData_Fair.txt");
 		foreach ($ary_fair as $row) {
+			// 改行コードの削除
+			$row = str_replace("\r", "", $row);
+			$row = str_replace("\n", "", $row);
+
 			// jm_fairへinsert
 			$jm_fair =& $this->_setJmFair($row);
 
@@ -93,10 +101,12 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		echo "[FINISH] JM_FAIR <<<<<\n";
 
 		// エラー出力
+		echo "[START] System Error >>>>>\n";
 		foreach ($this->ae->getErrorList() as $key => $value) {
 			echo $value['object']->getMessage()."\n";
 // 			echo mb_convert_encoding($value['object']->getMessage(), 'SJIS', 'UTF-8')."\n";
 		}
+		echo "[FINISH] System Error <<<<<\n";
 
 		return null;
 	}
@@ -204,7 +214,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		if (Ethna::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'jm_userの登録に失敗しました。['.$row.']');
 			$this->ae->addObject('insert error.', $res);
-			echo "fail to insert.[".$row."]\n";
+			echo "fail to insert into jm_user [".$row."]\n";
 			return null;
 		}
 
@@ -258,16 +268,35 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 
 		// 必須チェック
 		// ユーザID
-		$user_id = $this->_getUserId($ary_col[13]);
-		if ('' == $user_id) {
+		if ('' == $ary_col[13]) {
 			echo "not set user_id [".$row."]\n";
 			return null;
 		}
+		$user =& $this->_getUserId($ary_col[13]);
+		if (null == $user) {
+			echo "not found user_id [".$row."]\n";
+			return null;
+		}
 
+		$jm_fair->set('user_id', $user->get('user_id'));
 
-		$jm_fair->set('user_id', $user_id);
-		$jm_fair->set('date_of_application', $ary_col[14]);
-		$jm_fair->set('date_of_registration', $ary_col[15]);
+		// 申請年月日 > 更新日 > 登録日
+		if ('' != $ary_col[14]) {
+			$jm_fair->set('date_of_application', $ary_col[14]);
+		} else {
+			if ('' != $ary_col[2]) {
+				$jm_fair->set('date_of_application', $ary_col[2]);
+			} else {
+				$jm_fair->set('date_of_application', $ary_col[1]);
+			}
+		}
+		// 登録日（承認日） > 登録日
+		if ('' != $ary_col[15]) {
+			$jm_fair->set('date_of_registration', $ary_col[15]);
+		} else {
+			$jm_fair->set('date_of_registration', $ary_col[1]);
+		}
+
 		$jm_fair->set('fair_title_jp', $ary_col[11]);
 		$jm_fair->set('fair_title_en', str_replace('、', ',', $ary_col[17]));
 		$jm_fair->set('abbrev_title', $ary_col[18]);
@@ -386,8 +415,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_fair->set('photos_2', $ary_col[4]);
 		$jm_fair->set('photos_3', $ary_col[5]);
 
-		// TODO言語選択情報
-		$jm_fair->set('select_language_info', $ary_col[16]);
+		$jm_fair->set('select_language_info', '2');
 
 		$jm_fair->set('report_link', $ary_col[99]);
 		$jm_fair->set('venue_link', $ary_col[100]);
@@ -397,19 +425,19 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');
 
-		$jm_fair->set('use_language_flag', '0');
+		$jm_fair->set('use_language_flag', $user->get('use_language_cd'));
 
 		$jm_fair->set('web_display_type', '1');
 		$jm_fair->set('regist_type', '0');
 
+		$jm_fair->set('regist_category', $this->_getRegistCategory($ary_col[12]));
+
 		$jm_fair->set('note_for_system_manager', $ary_col[102]);
 		$jm_fair->set('note_for_data_manager', $ary_col[103]);
 
-		// TODO承認フラグ
 		$jm_fair->set('confirm_flag', $this->_getConfirmFlag($ary_col[104]));
 		$jm_fair->set('negate_comment', $ary_col[107]);
 
-		// TODOメール送信フラグ
 		$jm_fair->set('mail_send_flag', '0');
 
 		$jm_fair->set('del_flg', '0');
@@ -417,10 +445,10 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 
 // 		$jm_fair->set('search_key', $ary_col[]);
 
-		$jm_fair->set('regist_user_id', $user_id);
+		$jm_fair->set('regist_user_id', $user->get('user_id'));
 		$jm_fair->set('regist_date', $ary_col[1]);
 		if ('' != $ary_col[2]) {
-			$jm_fair->set('update_user_id', $user_id);
+			$jm_fair->set('update_user_id', $user->get('user_id'));
 			$jm_fair->set('update_date', $ary_col[2]);
 		}
 
@@ -428,10 +456,30 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		if (Ethna::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'jm_fairの登録に失敗しました。['.$row.']');
 			$this->ae->addObject('insert error.', $res);
-			echo "fail to insert.[".$row."]\n";
+			echo "fail to insert into jm_fair [".$row."]\n";
 		}
 
 		return $jm_fair;
+	}
+
+	/**
+	 * 登録カテゴリを取得する。
+	 *
+	 * @param int $mihon_no 旧見本市番号
+	 * @return string 登録カテゴリ
+	 */
+	function _getRegistCategory($mihon_no) {
+		$ret = '';
+		if (50000 <= $mihon_no && 59999 >= $mihon_no) {
+			$ret = '0';
+		} elseif ((20000 <= $mihon_no && 29999 >= $mihon_no) || (40000 <= $mihon_no && 49999 >= $mihon_no) || (60000 <= $mihon_no && 69999 >= $mihon_no)) {
+			$ret = '1';
+		} elseif (70000 <= $mihon_no && 79999 >= $mihon_no) {
+			$ret = '2';
+		} else {
+			$ret = '9';
+		}
+		return $ret;
 	}
 
 	/**
@@ -692,16 +740,16 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	/**
 	 * 新ユーザIDをTMP_USER_IDから取得する。
 	 *
-	 * @param string $old_user_id 旧ユーザID
+	 * @param string $old_user_id TMP_USER_IDオブジェクト
 	 */
 	function _getUserId($old_user_id) {
 		$tmp_user_id =& $this->backend->getObject('TmpUserId', 'old_user_id', $old_user_id);
-		if (null == $tmp_user_id || $old_user_id != $tmp_user_id->get('old_user_id')) {
+		if (null == $tmp_user_id || null == $tmp_user_id->get('user_id') || $old_user_id != $tmp_user_id->get('old_user_id')) {
 			echo "not found user : ".$old_user_id."\n";
-			return '';
+			return null;
 		}
 
-		return $tmp_user_id->get('user_id');
+		return $tmp_user_id;
 	}
 
 	/**
@@ -719,7 +767,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 
 		$tmp_user_id =& $this->backend->getObject('TmpUserId');
 
-		$tmp_user_id->set('old_user_id', $user_id);
+		$tmp_user_id->set('old_user_id', $old_user_id);
 		$tmp_user_id->set('user_id', $user_id);
 		$tmp_user_id->set('use_language_cd', $use_language_cd);
 
@@ -727,7 +775,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		if (Ethna::isError($res)) {
 			$this->backend->getLogger()->log(LOG_ERR, 'tmp_user_idの登録に失敗しました。['.$row.']');
 			$this->ae->addObject('insert error.', $res);
-			echo "fail to insert.[".$row."]\n";
+			echo "fail to insert into tmp_user_id [".$row."]\n";
 			return null;
 		}
 	}
