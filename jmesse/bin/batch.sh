@@ -28,12 +28,6 @@ $PHP_HOME/bin/php -f $JMESSE_HOME/bin/getJsonIndustory.php
 echo $?
 echo ▲▲▲ [`date`]【終了】業種毎件数生成バッチ
 
-# 月間アクセスランキング情報生成バッチ
-echo ▼▼▼ [`date`]【開始】月間アクセスランキング情報生成バッチ
-$PHP_HOME/bin/php -f $JMESSE_HOME/bin/getJsonMonthlyRanking.php
-echo $?
-echo ▲▲▲ [`date`]【終了】月間アクセスランキング情報生成バッチ
-
 # 新着見本市情報生成バッチ
 echo ▼▼▼ [`date`]【開始】新着見本市情報生成バッチ
 $PHP_HOME/bin/php -f $JMESSE_HOME/bin/getJsonNewMihonichi.php
