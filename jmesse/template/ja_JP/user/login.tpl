@@ -78,7 +78,7 @@
 														<th class="item">ユーザー名<br />（メールアドレス）
 														</th>
 														<td>
-															<input type="text" name="email" id="email" size="26" value="{$form.email}" />
+															<input type="text" name="email" id="email" size="26" value="{$form.email}" /><br/>
 															{if is_error('email')}
 															<span class="error-message">{message name="email"}</span><br />
 															{/if}
@@ -92,7 +92,7 @@
 														<th class="item">パスワード<br />
 														</th>
 														<td>
-															<input type="password" name="password" id="password" size="26" value="" autocomplete="off" />
+															<input type="password" name="password" id="password" size="26" value="" autocomplete="off" /><br/>
 															{if is_error('password')}
 															<span class="error-message">{message name="password"}</span><br />
 															{/if}
