@@ -118,7 +118,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 */
 	function _setPhotos($jm_fair) {
 		$mihon_no = $jm_fair->get('mihon_no');
-		$tmp_dir = $this->config->get('img_path');
+		$tmp_dir = '../www/'.$this->config->get('img_path').'work/';
 
 		// ディレクトリ作成
 		$dir_name = '../www/'.$this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no');
@@ -129,13 +129,28 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$photos_3 = $jm_fair->get('photos_3');
 
 		if ('' != $photos_1) {
-			rename($tmp_dir.$photos_1, $dir_name.'/'.$photos_1);
+			if (file_exists($tmp_dir.$photos_1)) {
+				rename($tmp_dir.$photos_1, $dir_name.'/'.$photos_1);
+			} else {
+				echo "image file not exist [".$photos_1."]\n";
+				$jm_fair->set('photos_1', '');
+			}
 		}
 		if ('' != $photos_2) {
-			rename($tmp_dir.$photos_2, $dir_name.'/'.$photos_2);
+			if (file_exists($tmp_dir.$photos_2)) {
+				rename($tmp_dir.$photos_2, $dir_name.'/'.$photos_2);
+			} else {
+				echo "image file not exist [".$photos_2."]\n";
+				$jm_fair->set('photos_2', '');
+			}
 		}
-		if ('' != $photos_1) {
-			rename($tmp_dir.$photos_3, $dir_name.'/'.$photos_3);
+		if ('' != $photos_3) {
+			if (file_exists($tmp_dir.$photos_3)) {
+				rename($tmp_dir.$photos_3, $dir_name.'/'.$photos_3);
+			} else {
+				echo "image file not exist [".$photos_3."]\n";
+				$jm_fair->set('photos_3', '');
+			}
 		}
 	}
 
@@ -176,8 +191,13 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 			return null;
 		}
 		// メールアドレスチェック
-		if ($this->_checkEmai($ary_col[10])) {
-			echo "not set email [".$row."]\n";
+		if (!$this->_checkEmai($ary_col[10])) {
+			echo "incorrect email [".$row."]\n";
+			return null;
+		}
+		// 削除フラグ
+		if ('2' == $ary_col[16] || '3' == $ary_col[16]) {
+			echo "user deleted [".$row."]\n";
 			return null;
 		}
 
@@ -251,7 +271,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		if('@' == substr($email, 0, 1) || '@' == substr($email, -1)){
 			$ret = false;
 		}
-		if(1 != substr_count($this->af->get('email'), '@')) {
+		if(1 != substr_count($email, '@')) {
 			$ret = false;
 		}
 		return $ret;

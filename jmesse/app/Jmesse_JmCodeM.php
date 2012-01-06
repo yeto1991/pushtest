@@ -30,7 +30,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select kbn_4 from jm_code_m where kbn_1 = '003' and kbn_2 = ? and kbn_3 = ? and discription_jp = ?";
+		$sql = "select kbn_4 from jm_code_m where kbn_1 = '003' and kbn_2 = ? and kbn_3 = ? and kbn_4 <> '000' and discription_jp = ?";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -72,7 +72,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select kbn_3 from jm_code_m where kbn_1 = '003' and kbn_2 = ? and kbn_4 = '000' and discription_jp = ?";
+		$sql = "select kbn_3 from jm_code_m where kbn_1 = '003' and kbn_2 = ? and kbn_3 <> '000' and kbn_4 = '000' and discription_jp = ?";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -113,7 +113,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select kbn_2 from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000' and discription_jp = ?";
+		$sql = "select kbn_2 from jm_code_m where kbn_1 = '003' and kbn_2 <> '000' and kbn_3 = '000' and kbn_4 = '000' and discription_jp = ?";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -155,7 +155,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select kbn_3 from jm_code_m where kbn_1 = '002' and kbn_2 = ? and kbn_4 = '000' and discription_jp = ?";
+		$sql = "select kbn_3 from jm_code_m where kbn_1 = '002' and kbn_2 = ? and kbn_3 <> '000' and kbn_4 = '000' and discription_jp = ?";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
@@ -197,7 +197,7 @@ class Jmesse_JmCodeMManager extends Ethna_AppManager
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select kbn_2 from jm_code_m where kbn_1 = '002' and kbn_3 = '000' and kbn_4 = '000' and discription_jp = ?";
+		$sql = "select kbn_2 from jm_code_m where kbn_1 = '002' and kbn_2 <> '000' and kbn_3 = '000' and kbn_4 = '000' and discription_jp = ?";
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare($sql);
