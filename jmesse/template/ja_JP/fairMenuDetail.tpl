@@ -42,10 +42,9 @@
 				<div id="industory_disp">
 					{section name=it loop=$app.industory_list}
 						・{$app.industory_list[it]}<br/>
+					{sectionelse}
+						選択されていません<br/>
 					{/section}
-					{if ('' != $app.industory_list)}
-						選択されていません
-					{/if}
 				</div>
 				<button class="modalInputIndustory" rel="#prompt_industory">業種を変更する</button>
 			</td>
@@ -56,10 +55,9 @@
 				<div id="venue_disp">
 					{section name=it loop=$app.vanue_list}
 						・{$app.vanue_list[it]}<br/>
+					{sectionelse}
+						選択されていません<br/>
 					{/section}
-					{if ('' != $app.vanue_list)}
-						選択されていません
-					{/if}
 				</div>
 				<button class="modalInputVenue" rel="#prompt_venue">開催地選択</button>
 			</td>
