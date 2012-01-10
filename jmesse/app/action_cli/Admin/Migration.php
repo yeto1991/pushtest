@@ -182,8 +182,10 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		}
 		// パスワード
 		if ('' == $ary_col[5]) {
-			echo "not set password [".$row."]\n";
-			return null;
+			// パスワード無しは一時的に下記を設定。
+			$ary_col[5] = 'temp0000';
+// 			echo "not set password [".$row."]\n";
+// 			return null;
 		}
 		// メール
 		if ('' == $ary_col[10]) {
@@ -209,7 +211,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_user->set('division_dept_nm', $ary_col[7]);
 		$jm_user->set('user_nm', $ary_col[8]);
 		$jm_user->set('gender_cd', $this->_getGenderCd($ary_col[9]));
-		$jm_user->set('email', $ary_col[10]);
+		$jm_user->set('email', strtolower($ary_col[10]));
 		$jm_user->set('post_code', $ary_col[11]);
 		$jm_user->set('address', $ary_col[12]);
 		$jm_user->set('tel', $ary_col[13]);
@@ -289,13 +291,20 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		// 必須チェック
 		// ユーザID
 		if ('' == $ary_col[13]) {
-			echo "not set user_id [".$row."]\n";
-			return null;
-		}
-		$user =& $this->_getUserId($ary_col[13]);
-		if (null == $user) {
-			echo "not found user_id [".$row."]\n";
-			return null;
+			$user =& $this->backend->getObject('TmpUserId');
+			$user->set('user_id', 0);
+			$user->set('use_language_cd', '0');
+// 			echo "not set user_id [".$row."]\n";
+// 			return null;
+		} else {
+			$user =& $this->_getUserId($ary_col[13]);
+			if (null == $user) {
+				$user =& $this->backend->getObject('TmpUserId');
+				$user->set('user_id', 0);
+				$user->set('use_language_cd', '0');
+// 				echo "not found user_id [".$row."]\n";
+// 				return null;
+			}
 		}
 
 		$jm_fair->set('user_id', $user->get('user_id'));
