@@ -1,35 +1,27 @@
-Dear Mr./Ms. {$mail_send_user_name} ,
+Notice of completion of your user registration for J-messe
 
-    Thank you for registering in J-messe, an online database on trade fairs and exhibitions around the world.
-     Below are your user ID and password for J-messe:
-	ID :{$mail_send_user_email}
-	Password :{$mail_send_user_password}
-	Please visit the front page of our website, of which the URL is shown below, and enter your ID and password to log in to J-messe. There, you can add and revise information of your trade fairs.
+Dear Mr. /Ms. {$mail_send_user_name},
 
-*** Click on the URL to add and revise information of your trade fairs ****
-http://www.jetro.go.jp/en/database/j-messe/
+Thank you for your user registration for J-messe.
+This email informs you of your user ID and password for J-messe as follows:
+	Your ID: {$mail_send_user_email}
+	Your password: {$mail_send_user_password}
 
-     It is important to keep the information you registered in J-messe updated all the time.  Providing your customers with the newest information on your trade fairs shall also be self-rewarding for you as organizers. Kindly please be aware of following points:
-★Your registered information of a trade fair shall be updated on J-messe Database upon approval from Secretariat.
-★Please revise your registered information as soon as there occur cancellations of your trade fairs or changes on the data, such as the period or venue of the fairs.
-★Please add reports of fairs, such as the number of visitors, after the closure of your trade fair.  Registered information of a trade fair shall be locked 6 months after the fair is finished.
+To register/ revise information of your trade fairs, please click the following URL and login J-messe:
+https://www.jetro.go.jp/j-messe/?action_user_enLogin=true
 
+Please be aware of the following points to utilize J-messe effectively:
+★Your registered/updated information will be on J-messe upon approval from J-messe Secretariat.
+★In case of any change/cancelation of your registered trade fair, including changing period and venue, please revise your registered information on J-messe as soon as possible.
+★After the completion of trade fairs you registered, please add records of the fairs, such as the number of visitors. Please note that all registered information of the trade fairs will be automatically locked six months after the date of completion.
+
+ Kindly regards,
 ■□■-------------------J-messe Secretariat---------------
 TOTEC Co., Ltd.*
-Address: Kamiyacho KT Bldg. 6F, 5-11-5 Toranomon,
-Minato-ku, Tokyo 105-0001, Japan
+Address: 6F, Kamiyacho KT Bldg., 5-11-5 Toranomon,
+Minato-ku, Tokyo, 105-0001, Japan
 Tel: +81-3-6450-1827 Fax: +81-3-6450-1828
 E-mail: j-messe@totec-net.com
-*JETRO outsources part of J-messe's maintenance / operation to TOTEC Co., Ltd.
+*JETRO outsources a part of maintenance and operation of J-messe to TOTEC Co., Ltd.
 ---------------------------------------------------------------■□■
-
-
-
-
-
-
-
-
-
-
 

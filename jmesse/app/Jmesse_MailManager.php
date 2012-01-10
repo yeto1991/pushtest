@@ -26,7 +26,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 * @param array $ary_param 置き換え文字列
 	 */
 	function sendmailUserReigst($mail_to, $ary_param) {
-		$this->_sendmail('userRegist.tpl', $this->config->get('mail_title_user_regist'), $mail_to, $ary_param);
+		$this->_sendmail('userRegist.tpl', $this->config->get('mail_title_user_regist'), $mail_to, $ary_param, 'J');
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	* @param array $ary_param 置き換え文字列
 	*/
 	function sendmailEnUserReigst($mail_to, $ary_param) {
-		$this->_sendmail('enUserRegist.tpl', $this->config->get('mail_title_user_regist_en'), $mail_to, $ary_param);
+		$this->_sendmail('enUserRegist.tpl', $this->config->get('mail_title_user_regist_en'), $mail_to, $ary_param, 'E');
 	}
 
 	/**
@@ -48,7 +48,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 * @param array $ary_param 置き換え文字列
 	 */
 	function sendmailUserChange($mail_to, $ary_param) {
-		$this->_sendmail('userChange.tpl', $this->config->get('mail_title_user_change'), $mail_to, $ary_param);
+		$this->_sendmail('userChange.tpl', $this->config->get('mail_title_user_change'), $mail_to, $ary_param, 'J');
 	}
 
 	/**
@@ -59,7 +59,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	* @param array $ary_param 置き換え文字列
 	*/
 	function sendmailEnUserChange($mail_to, $ary_param) {
-		$this->_sendmail('enUserChange.tpl', $this->config->get('mail_title_user_change_en'), $mail_to, $ary_param);
+		$this->_sendmail('enUserChange.tpl', $this->config->get('mail_title_user_change_en'), $mail_to, $ary_param, 'E');
 	}
 
 	/**
@@ -70,7 +70,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 * @param array $ary_param 置き換え文字列
 	 */
 	function sendmailUserConfirm($mail_to, $ary_param) {
-		$this->_sendmail('userConfirm.tpl', $this->config->get('mail_title_user_confirm'), $mail_to, $ary_param);
+		$this->_sendmail('userConfirm.tpl', $this->config->get('mail_title_user_confirm'), $mail_to, $ary_param, 'J');
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	* @param array $ary_param 置き換え文字列
 	*/
 	function sendmailEnUserConfirm($mail_to, $ary_param) {
-		$this->_sendmail('enUserConfirm.tpl', $this->config->get('mail_title_user_confirm_en'), $mail_to, $ary_param);
+		$this->_sendmail('enUserConfirm.tpl', $this->config->get('mail_title_user_confirm_en'), $mail_to, $ary_param, 'E');
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 * @param array $ary_param 置き換え文字列
 	 */
 	function sendmailFairReigst($mail_to, $ary_param) {
-		$this->_sendmail('fairRegist.tpl', $this->config->get('mail_title_fair_regist'), $mail_to, $ary_param);
+		$this->_sendmail('fairRegist.tpl', $this->config->get('mail_title_fair_regist'), $mail_to, $ary_param, 'J');
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	* @param array $ary_param 置き換え文字列
 	*/
 	function sendmailEnFairReigst($mail_to, $ary_param) {
-		$this->_sendmail('enFairRegist.tpl', $this->config->get('mail_title_fair_regist_en'), $mail_to, $ary_param);
+		$this->_sendmail('enFairRegist.tpl', $this->config->get('mail_title_fair_regist_en'), $mail_to, $ary_param, 'E');
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 * @param array $ary_param 置き換え文字列
 	 */
 	function sendmailFairChange($mail_to, $ary_param) {
-		$this->_sendmail('fairChange.tpl', $this->config->get('mail_title_fair_change'), $mail_to, $ary_param);
+		$this->_sendmail('fairChange.tpl', $this->config->get('mail_title_fair_change'), $mail_to, $ary_param, 'J');
 	}
 
 	/**
@@ -125,7 +125,7 @@ class Jmesse_MailManager extends Ethna_AppManager
 	* @param array $ary_param 置き換え文字列
 	*/
 	function sendmailEnFairChange($mail_to, $ary_param) {
-		$this->_sendmail('enFairChange.tpl', $this->config->get('mail_title_fair_change_en'), $mail_to, $ary_param);
+		$this->_sendmail('enFairChange.tpl', $this->config->get('mail_title_fair_change_en'), $mail_to, $ary_param, 'E');
 	}
 
 	/**
@@ -136,8 +136,9 @@ class Jmesse_MailManager extends Ethna_AppManager
 	 * @param string $title メールのサブジェクト
 	 * @param string $mail_to メール送信先
 	 * @param array $ary_value 置き換え文字列
+	 * @param string $mail_language メール言語判定値(J:日本語メール、E:英語メール)
 	 */
-	function _sendmail($template, $title, $mail_to, $ary_value) {
+	function _sendmail($template, $title, $mail_to, $ary_value, $mail_language) {
 
 		// 日本語メールを送る際の設定
 		mb_language("Japanese");
@@ -158,13 +159,24 @@ class Jmesse_MailManager extends Ethna_AppManager
 		);
 
 		// メールヘッダ情報を配列に設定
-		$headers = array (
-			'To'          => mb_encode_mimeheader($mail_to),
-			'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc')),
-			'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8")),
-			'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path')),
-			'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
-		);
+		// 日本語メールの場合
+		if($mail_language == 'J'){
+			$headers = array (
+						'To'          => mb_encode_mimeheader($mail_to),
+						'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc')),
+						'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8")),
+						'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path')),
+						'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
+			);
+		}else{
+			$headers = array (
+						'To'          => mb_encode_mimeheader($mail_to),
+						'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc')),
+						'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from_en'), "ISO-2022-JP", "UTF-8")),
+						'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path')),
+						'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
+			);
+		}
 
 		// メール本文
 		$ethna_mail =& new Ethna_MailSender($this->backend);
