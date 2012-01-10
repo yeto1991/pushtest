@@ -118,15 +118,17 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 				<h2>Trade Fairs held in Japan and the World </h2>
 			</div>
 			<div class="in_main">
+				{*
 				<div class="h3 clearfix">
 					{if ('1' != $form.detail)}
 						{if ('i1' == $form.type)}
-							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Industry</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Industry</a> <a href="/en/j-messe/tradefair/" class="icon_arrow">Advanced Search</a></span>
 						{else}
-							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="" class="icon_arrow">Advanced Search</a></span>
+							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="/en/j-messe/tradefair/" class="icon_arrow">Advanced Search</a></span>
 						{/if}
 					{/if}
 				</div>
+				*}
 				<div id="skip_menu"><a href="#right">Skip to search refinement</a></div>
 				<!-- list of tradefairs -->
 				<div class="left" id="list">
