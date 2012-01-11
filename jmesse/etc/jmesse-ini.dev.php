@@ -152,7 +152,8 @@ $config = array(
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
 
-	'mail_from'        => 'J-messe事務局 <matsuura@ids.co.jp>',
+	'mail_from'        => mb_encode_mimeheader(mb_convert_encoding("J-messe事務局", "ISO-2022-JP", "UTF-8"), "ISO-2022-JP").' <matsuura@ids.co.jp>',
+// 	'mail_from'        => 'J-messe事務局 <matsuura@ids.co.jp>',
 	'mail_from_en'     => 'J-messe Administrator <matsuura@ids.co.jp>',
 	'mail_bcc'         => 'matsuura@ids.co.jp',
 	'mail_return-path' => 'matsuura@ids.co.jp',

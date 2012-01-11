@@ -162,19 +162,20 @@ class Jmesse_MailManager extends Ethna_AppManager
 		// 日本語メールの場合
 		if($mail_language == 'J'){
 			$headers = array (
-						'To'          => mb_encode_mimeheader($mail_to),
-						'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc')),
-						'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8")),
-						'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path')),
-						'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
+						'To'          => mb_encode_mimeheader($mail_to, "ISO-2022-JP"),
+						'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc'), "ISO-2022-JP"),
+						'From'        => $this->config->get('mail_from'),
+// 						'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from'), "ISO-2022-JP", "UTF-8"), "ISO-2022-JP"),
+						'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path'), "ISO-2022-JP"),
+						'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"), "ISO-2022-JP")
 			);
 		}else{
 			$headers = array (
-						'To'          => mb_encode_mimeheader($mail_to),
-						'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc')),
-						'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from_en'), "ISO-2022-JP", "UTF-8")),
-						'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path')),
-						'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"))
+						'To'          => mb_encode_mimeheader($mail_to, "ISO-2022-JP"),
+						'Bcc'         => mb_encode_mimeheader($this->config->get('mail_bcc'), "ISO-2022-JP"),
+						'From'        => mb_encode_mimeheader(mb_convert_encoding($this->config->get('mail_from_en'), "ISO-2022-JP", "UTF-8"), "ISO-2022-JP"),
+						'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path'), "ISO-2022-JP"),
+						'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"), "ISO-2022-JP")
 			);
 		}
 

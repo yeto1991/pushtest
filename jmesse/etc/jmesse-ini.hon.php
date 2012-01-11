@@ -148,7 +148,8 @@ $config = array(
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
 
-	'mail_from'        => 'J-messe事務局 <j-messe@jetro.go.jp>',
+	'mail_from'        => mb_encode_mimeheader(mb_convert_encoding("J-messe事務局", "ISO-2022-JP", "UTF-8"), "ISO-2022-JP").' <j-messe@jetro.go.jp>',
+// 	'mail_from'        => 'J-messe事務局 <j-messe@jetro.go.jp>',
 	'mail_from_en'     => 'J-messe Administrator <j-messe@jetro.go.jp>',
 	'mail_bcc'         => 'j-messe@totec-net.com',
 	'mail_return-path' => 'j-messe@jetro.go.jp',
