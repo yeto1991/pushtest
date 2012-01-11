@@ -207,10 +207,10 @@
 									<div class="list1">
 									{/if}
 										<dl>
-											<dt>
+											<dt style="word-break: break-all;">
 												<a href="{$config.url_pub}tradefair/{$app.fair_list[it].detail_url}">{$app.fair_list[it].fair_title_jp}</a>
 											</dt>
-											<dd>
+											<dd style="word-break: break-all;">
 												{$app.fair_list[it].date_from_yyyy}年{$app.fair_list[it].date_from_mm}月{$app.fair_list[it].date_from_dd}日～{$app.fair_list[it].date_to_yyyy}年{$app.fair_list[it].date_to_mm}月{$app.fair_list[it].date_to_dd}日<br />
 												{$app.fair_list[it].city_name} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
 												{$app.fair_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}

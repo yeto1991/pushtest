@@ -60,7 +60,7 @@
 								<h2>世界の見本市・展示会</h2>
 							</div>
 
-							<div class="in_main">
+							<div class="in_main" style="word-break: break-all;">
 
 								{if ('' != $app.fair_detail.abbrev_title)}
 								<div class="h3">
@@ -71,7 +71,7 @@
 								<h3>{$app.fair_detail.fair_title_jp}</h3>
 								{/if}
 
-								<p>{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
+								<p style="word-break: break-all;">{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
 								{if ('' != $app.fair_detail.fair_url)}
 								<p class="t_right">
 									<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">公式ウェブサイト</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
@@ -83,7 +83,7 @@
 								{else}
 								<div class="left" id="detail-noimg">
 								{/if}
-									<table class="detail">
+									<table class="detail" style="word-break: break-all;">
 										<tr>
 											<th>会期</th>
 											<td>{$app.fair_detail.date_from_yyyy}年{$app.fair_detail.date_from_mm}月{$app.fair_detail.date_from_dd}日 ～ {$app.fair_detail.date_to_yyyy}年{$app.fair_detail.date_to_mm}月{$app.fair_detail.date_to_dd}日</td>

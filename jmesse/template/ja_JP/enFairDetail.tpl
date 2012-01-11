@@ -43,7 +43,7 @@
 			<div class="h2">
 				<h2>Trade Fairs held in Japan and the World</h2>
 			</div>
-			<div class="in_main">
+			<div class="in_main" style="word-break: break-all;">
 				{if ('' != $app.fair_detail.abbrev_title)}
 				<h3>{$app.fair_detail.abbrev_title}<br/>
 				<span>{$app.fair_detail.fair_title_en}</span></h3>
@@ -51,7 +51,7 @@
 				<h3>{$app.fair_detail.fair_title_en}</h3>
 				{/if}
 
-				<p>{$app.fair_detail.profile_en|replace:"&lt;br/&gt;":"<br/>"}</p>
+				<p style="word-break: break-all;">{$app.fair_detail.profile_en|replace:"&lt;br/&gt;":"<br/>"}</p>
 				{if ('' != $app.fair_detail.fair_url)}
 				<p class="t_right">
 					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">officail site</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
@@ -65,7 +65,7 @@
 				{else}
 				<div class="left" id="detail-noimg">
 				{/if}
-					<table class="detail">
+					<table class="detail" style="word-break: break-all;">
 						<tr>
 							<th>Date</th>
 							<td>{$app.fair_detail.date_from_format} to {$app.fair_detail.date_to_format}</td>
