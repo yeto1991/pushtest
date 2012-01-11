@@ -71,7 +71,7 @@
 								</tr>
 								<!-- 検索結果分 繰り返し処理 -->
 								{section name=it loop=$app.user_search_info_list}
-								<tr>
+								<tr style="word-break: break-all;">
 									<td><font size=2><a href="{$config.url}?action_admin_userDetail=true&user_id={$app.user_search_info_list[it].user_id}">{$app.user_search_info_list[it].email}</a></font></td>
 									<td><font size=2>
 										{if ($app.user_search_info_list[it].auth_gen == '1')}

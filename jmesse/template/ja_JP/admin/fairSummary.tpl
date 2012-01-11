@@ -54,7 +54,7 @@
 					{/if}
 					<hr />
 					{$app.total} 件中、{$app.begin} から {$app.limit} 件を表示
-					<table border="1" width="100%">
+					<table border="1" width="100%" style="word-break: break-all;">
 						<tr>
 							{section name=it loop=$app.jm_fair_summary_column}
 							<th nowrap>{$app.jm_fair_summary_column[it]}</th>

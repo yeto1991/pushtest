@@ -118,7 +118,7 @@
 						</tr>
 
 						{section name=it loop=$app.jm_fair_list}
-						<tr>
+						<tr style="word-break: break-all;">
 							<td align="center"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.jm_fair_list[it].mihon_no}"></td>
 {*							<td></td> *}
 							<td align="right">{$app.jm_fair_list[it].mihon_no}</td>

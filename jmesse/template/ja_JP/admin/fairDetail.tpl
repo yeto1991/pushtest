@@ -34,7 +34,7 @@
 		{uniqid}
 		<!-- 見本市番号 -->
 		<input type="hidden" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
-		<table width="100%">
+		<table width="100%" style="word-break: break-all;">
 			<tr>
 				<td valign="top" width="200">{include file="admin/menu.tpl"}</td>
 				<td valign="top" >
@@ -69,23 +69,23 @@
 					</table>
 					<hr/>
 					{/if}
-					<table border="1">
+					<table border="1" style="word-break: break-all;">
 						<tr>
 							<td nowrap>見本市番号</td>
 							<!-- 見本市番号 -->
-							<td nowrap>{$form.mihon_no}</td>
+							<td>{$form.mihon_no}</td>
 						</tr>
 						{if (null != $form.seq_num && '' != $form.seq_num)}
 						<tr>
 							<td nowrap>見本市番号枝番</td>
 							<!-- 見本市番号 -->
-							<td nowrap>{$form.seq_num}</td>
+							<td>{$form.seq_num}</td>
 						</tr>
 						{/if}
 						<tr>
 							<td nowrap>Webページの表示／非表示</td>
 							<!-- Ｗｅｂページの表示／非表示 -->
-							<td nowrap>
+							<td>
 								{if ("1" == $form.web_display_type)}
 								表示する
 								{elseif ("0" == $form.web_display_type)}
@@ -98,7 +98,7 @@
 							<td nowrap>承認フラグ</td>
 							<!-- 承認フラグ -->
 							<!-- 否認コメント -->
-							<td nowrap>
+							<td>
 								{if ("1" == $form.confirm_flag)}
 								承認
 								{elseif ("0" == $form.confirm_flag)}
@@ -113,7 +113,7 @@
 						<tr>
 							<td nowrap>メール送信フラグ</td>
 							<!-- メール送信フラグ -->
-							<td nowrap>
+							<td>
 								{if ("1" == $form.mail_send_flag)}
 								送信しない
 								{elseif ("0" == $form.mail_send_flag)}
@@ -125,7 +125,7 @@
 						<tr>
 							<td nowrap>ユーザ使用言語フラグ</td>
 							<!-- ユーザ使用言語フラグ -->
-							<td nowrap>
+							<td>
 								{if ("0" == $form.use_language_flag)}
 								日本語
 								{elseif ("1" == $form.use_language_flag)}
@@ -137,13 +137,13 @@
 						<tr>
 							<td nowrap>Eメール</td>
 							<!-- Eメール -->
-							<td nowrap>{$form.email}</td>
+							<td>{$form.email}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>申請年月日</td>
 							<!-- 申請年月日 -->
-							<td nowrap>
+							<td>
 								{$form.date_of_application_y}年
 								{$form.date_of_application_m}月
 								{$form.date_of_application_d}日
@@ -153,7 +153,7 @@
 						<tr>
 							<td nowrap>登録日(承認日)</td>
 							<!-- 登録日(承認日) -->
-							<td nowrap>
+							<td>
 								{$form.date_of_registration_y}年
 								{$form.date_of_registration_m}月
 								{$form.date_of_registration_d}日
@@ -163,7 +163,7 @@
 						<tr>
 							<td nowrap>言語選択情報</td>
 							<!-- 言語選択情報 -->
-							<td nowrap>
+							<td>
 								{if ("0" == $form.select_language_info)}
 								日本語
 								{elseif ("2" == $form.select_language_info)}
@@ -178,42 +178,42 @@
 							<td nowrap rowspan="2">見本市名</td>
 							<!-- 見本市名(日) -->
 							<!-- 見本市名(英) -->
-							<td nowrap>{$form.fair_title_jp}</td>
+							<td>{$form.fair_title_jp}</td>
 						</tr>
 						<tr>
-							<td nowrap>{$form.fair_title_en}</td>
+							<td>{$form.fair_title_en}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>見本市略称</td>
 							<!-- 見本市略称(英) -->
-							<td nowrap>英：{$form.abbrev_title}</td>
+							<td>英：{$form.abbrev_title}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>見本市URL</td>
 							<!-- 見本市ＵＲＬ -->
-							<td nowrap>{$form.fair_url}</td>
+							<td>{$form.fair_url}</td>
 						</tr>
 
 						<tr>
 							<td nowrap rowspan="2">キャッチフレーズ</td>
 							<!-- キャッチフレーズ(日) -->
 							<!-- キャッチフレーズ(英) -->
-							<td nowrap>{$form.profile_jp|nl2br}</td>
+							<td>{$form.profile_jp|nl2br}</td>
 						</tr>
 						<tr>
-							<td nowrap>{$form.profile_en|nl2br}</td>
+							<td>{$form.profile_en|nl2br}</td>
 						</tr>
 
 						<tr>
 							<td nowrap rowspan="2">ＰＲ・紹介文</td>
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
-							<td nowrap>{$form.detailed_information_jp|nl2br}</td>
+							<td>{$form.detailed_information_jp|nl2br}</td>
 						</tr>
 						<tr>
-							<td nowrap>{$form.detailed_information_en|nl2br}</td>
+							<td>{$form.detailed_information_en|nl2br}</td>
 						</tr>
 
 						<tr>
@@ -242,7 +242,7 @@
 							<td nowrap>開催頻度</td>
 							<!-- 開催頻度(日) -->
 							<!-- 開催頻度(英) -->
-							<td nowrap>
+							<td>
 								{section name=it loop=$app.frequency}
 								{if ($form.frequency_jp == $app.frequency[it].kbn_2)}
 									{$app.frequency[it].discription_jp}
@@ -254,7 +254,7 @@
 						<tr>
 							<td nowrap>業種</td>
 							<!-- 業種大分類(日) -->
-							<td nowrap>
+							<td>
 								<table>
 									{if (null != $form.main_industory_1 && 0 < count($form.main_industory_1))}
 									<tr>
@@ -294,10 +294,10 @@
 							<td nowrap rowspan="2">出品物</td>
 							<!-- 出品物(日) -->
 							<!-- 出品物(英) -->
-							<td nowrap>{$form.exhibits_jp|nl2br}</td>
+							<td>{$form.exhibits_jp|nl2br}</td>
 						</tr>
 						<tr>
-							<td nowrap>{$form.exhibits_en|nl2br}</td>
+							<td>{$form.exhibits_en|nl2br}</td>
 						</tr>
 
 						<tr>
@@ -310,7 +310,7 @@
 							<!-- 開催都市(英) -->
 							<!-- その他の都市(日) -->
 							<!-- その他の都市(英) -->
-							<td nowrap>
+							<td>
 								{section name=it loop=$app.region}
 									{if ($form.region_jp == $app.region[it].kbn_2)}
 										{$app.region[it].discription_jp}
@@ -335,29 +335,29 @@
 							<td nowrap rowspan="2">会場名</td>
 							<!-- 会場名(日) -->
 							<!-- 会場名(英) -->
-							<td nowrap>{$form.venue_jp}</td>
+							<td>{$form.venue_jp}</td>
 						</tr>
 						<tr>
-							<td nowrap>{$form.venue_en}</td>
+							<td>{$form.venue_en}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>会場URL</td>
 							<!-- 会場名URL -->
-							<td nowrap>{$form.venue_url}</td>
+							<td>{$form.venue_url}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>開催予定規模</td>
 							<!-- 開催予定規模 -->
-							<td nowrap>{$form.gross_floor_area}</td>
+							<td>{$form.gross_floor_area}</td>
 						</tr>
 
 						<tr>
 							<td nowrap rowspan="1">入場資格</td>
 							<!-- 入場資格(日) -->
 							<!-- 入場資格(英) -->
-							<td nowrap>
+							<td>
 							{section name=it loop=$app.open_to}
 								{if ($app.open_to[it].kbn_2 == $form.open_to_jp)}
 									{$app.open_to[it].discription_jp}
@@ -372,7 +372,7 @@
 							<!-- チケットの入手方法(英) -->
 							<!-- その他のチケットの入手方法(日) -->
 							<!-- その他のチケットの入手方法(英) -->
-							<td nowrap>
+							<td>
 							{if ("1" == $form.admission_ticket_1_jp)}
 								登録の必要なし
 							{/if}
@@ -407,7 +407,7 @@
 							<!-- 海外からの出典者数(社) -->
 							<!-- 開催規模(㎡) -->
 							<!-- 予備域１ -->
-							<td nowrap>
+							<td>
 								<table border="0">
 									<tr>
 										<td>&nbsp;</td>
@@ -451,11 +451,11 @@
 								<table border="0">
 									<tr>
 										<td nowrap>名称（日）</td>
-										<td nowrap>{$form.organizer_jp}</td>
+										<td>{$form.organizer_jp}</td>
 									</tr>
 									<tr>
 										<td nowrap>名称（英）</td>
-										<td nowrap>{$form.organizer_en}</td>
+										<td>{$form.organizer_en}</td>
 									</tr>
 									<tr>
 										<td nowrap>住所</td>
@@ -479,7 +479,7 @@
 									</tr>
 									<tr>
 										<td nowrap>Ｅ－Ｍａｉｌ</td>
-										<td nowrap>{$form.organizer_email}</td>
+										<td>{$form.organizer_email}</td>
 									</tr>
 								</table>
 							</td>
@@ -496,11 +496,11 @@
 								<table border="0">
 									<tr>
 										<td nowrap>名称（日）</td>
-										<td nowrap>{$form.agency_in_japan_jp}</td>
+										<td>{$form.agency_in_japan_jp}</td>
 									</tr>
 									<tr>
 										<td nowrap>名称（英）</td>
-										<td nowrap>{$form.agency_in_japan_en}</td>
+										<td>{$form.agency_in_japan_en}</td>
 									</tr>
 									<tr>
 										<td nowrap>住所</td>
@@ -524,7 +524,7 @@
 									</tr>
 									<tr>
 										<td nowrap>Ｅ－Ｍａｉｌ</td>
-										<td nowrap>{$form.agency_in_japan_email}</td>
+										<td>{$form.agency_in_japan_email}</td>
 									</tr>
 								</table>
 							</td>
@@ -533,31 +533,31 @@
 						<tr>
 							<td nowrap>見本市レポート／URL</td>
 							<!-- 駐在員レポート／リンク -->
-							<td nowrap>{$form.report_link}</td>
+							<td>{$form.report_link}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>世界の展示会場／URL</td>
 							<!-- 展示会場／リンク -->
-							<td nowrap>{$form.venue_link}</td>
+							<td>{$form.venue_link}</td>
 						</tr>
 
 
 						<tr>
 							<td nowrap>システム管理者備考欄</td>
 							<!-- システム管理者備考欄 -->
-							<td nowrap>{$form.note_for_system_manager}</td>
+							<td>{$form.note_for_system_manager}</td>
 						</tr>
 
 						<tr>
 							<td nowrap>データ管理者備考欄</td>
 							<!-- データ管理者備考欄 -->
-							<td nowrap>{$form.note_for_data_manager}</td>
+							<td>{$form.note_for_data_manager}</td>
 						</tr>
 						<tr>
 							<td nowrap>削除</td>
 							<!-- 削除フラグ -->
-							<td nowrap>{if ("1" ==$form.del_flg)}削除済{else}未削除{/if}</td>
+							<td>{if ("1" ==$form.del_flg)}削除済{else}未削除{/if}</td>
 						</tr>
 					</table>
 					<hr/>

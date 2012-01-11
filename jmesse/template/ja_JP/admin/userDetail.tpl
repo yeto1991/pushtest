@@ -29,7 +29,7 @@
 								</div>
 							</td>
 						</tr>
-						<tr>
+						<tr style="word-break: break-all;">
 							<td>
 								<table border=1 style="width:100%; font-size:15px;table-layout:fixed">
 									<tr>
