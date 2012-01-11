@@ -72,12 +72,31 @@
 				<p>Your deleting has been completed.</p>
 				{/if}
 				<div class="finish-navi">
-					<div class="btn">
-						<a href="{$config.url}?action_user_enFairRegistStep1=true"><span class="title">New Fair Registration</span> <span class="description">To new fair registration page</span></a>
-					</div>
-					<div class="btn">
-						<a href="/en/database/j-messe/"><span class="title">To top page</span> <span class="description">To jemmese top page</span></a>
-					</div>
+					{if ('r' == $form.msg)}
+						<div class="btn">
+							<a href="{$config.url}?action_user_enFairRegistStep1=true"><span class="title">New Fair Registration</span> <span class="description">To new fair registration page</span></a>
+						</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enFairCopyList=true"><span class="title">修正登録</span> <span class="description">見本市修正登録対象一覧ページを開きます。</span></a>
+						</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enTop=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+						</div>
+					{elseif ('c' == $form.msg)}
+						<div class="btn">
+							<a href="{$config.url}?action_user_enFairList=true"><span class="title">続けて修正登録</span> <span class="description">見本市一覧ページを開きます。</span></a>
+						</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enTop=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+						</div>
+					{elseif ('d' == $form.msg)}
+						<div class="btn">
+							<a href="{$config.url}?action_user_enFairList=true"><span class="title">登録済み見本市一覧に戻る</span> <span class="description">見本市一覧ページを開きます。</span></a>
+						</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enTop=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+						</div>
+					{/if}
 				</div>
 			</div>
 			<p class="totop">

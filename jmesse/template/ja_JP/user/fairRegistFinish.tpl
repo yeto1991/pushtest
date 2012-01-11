@@ -86,12 +86,31 @@
 								<p>見本市の削除が完了しました。ありがとうございました。</p>
 								{/if}
 								<div class="finish-navi">
-									<div class="btn">
-										<a href="{$config.url}?action_user_fairRegistStep1=true"><span class="title">続いて見本市を登録する</span> <span class="description">見本市新規登録ページを開きます。</span></a>
-									</div>
-									<div class="btn">
-										<a href="/j-messe/"><span class="title">登録を終了する</span> <span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
-									</div>
+									{if ('r' == $form.msg)}
+										<div class="btn">
+											<a href="{$config.url}?action_user_fairRegistStep1=true"><span class="title">続けて新規登録</span> <span class="description">見本市新規登録ページを開きます。</span></a>
+										</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_fairCopyList=true"><span class="title">修正登録</span> <span class="description">見本市修正登録対象一覧ページを開きます。</span></a>
+										</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+										</div>
+									{elseif ('c' == $form.msg)}
+										<div class="btn">
+											<a href="{$config.url}?action_user_fairList=true"><span class="title">続けて修正登録</span> <span class="description">見本市一覧ページを開きます。</span></a>
+										</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+										</div>
+									{elseif ('d' == $form.msg)}
+										<div class="btn">
+											<a href="{$config.url}?action_user_fairList=true"><span class="title">登録済み見本市一覧に戻る</span> <span class="description">見本市一覧ページを開きます。</span></a>
+										</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+										</div>
+									{/if}
 								</div>
 							</div>
 						</div>
