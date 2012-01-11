@@ -78,7 +78,7 @@
 					<p><strong>Forgot your password?</strong><br />
 					<a href="{$config.url}?action_user_enReissuePassword=true"  class="icon_arrow">Password Inquiries</a></p><br />
 					<p><strong>For first time users</strong><br />Click “User Registration” and register your information<br />
-					<a href="{$config.url}?action_user_enUserRegist=true" class="icon_arrow">User Registration</a></p>
+					<a href="{$config.url}?action_user_enUserTerms=true">User Registration</a></p>
 				</div>
 			</div>
 			<p class="totop">
