@@ -219,15 +219,15 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 			</div>
 			<p class="totop">
 				{if ('1' == $form.all)}
-				<a href="{$config.url_pub}?action_enFairListDownload=true&all=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
-				<a href="javascript:window.open('{$config.url_pub}?action_enFairList=true&all=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+		{*			<a href="{$config.url_pub}?action_enFairListDownload=true&all=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a> *}
+					<a href="javascript:window.open('{$config.url_pub}?action_enFairList=true&all=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
 				{else}
 					{if ('1' == $form.detail)}
-				<a href="{$config.url_pub}?action_enFairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
-				<a href="javascript:window.open('{$config.url_pub}?action_enFairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+		{*				<a href="{$config.url_pub}?action_enFairListDownload=true&detail=1"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a> *}
+						<a href="javascript:window.open('{$config.url_pub}?action_enFairListSearch=true&detail=1&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
 					{else}
-				<a href="{$config.url_pub}?action_enFairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a>
-				<a href="javascript:window.open('{$config.url_pub}?action_enFairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
+		{*				<a href="{$config.url_pub}?action_enFairListDownload=true&page={$app.page}"><img src="/images/jp/btn-print.gif" alt="CSVdownload" height="23" width="71" /></a> *}
+						<a href="javascript:window.open('{$config.url_pub}?action_enFairList=true&page={$app.page}&print=1', 'print')" target="print"><img src="/images/en/btn-print.gif" alt="Print" height="14" width="46" /></a>
 					{/if}
 				{/if}
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
