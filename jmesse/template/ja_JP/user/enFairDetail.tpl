@@ -163,7 +163,7 @@ $form.mode
 						<hr />
 					</div>
 				</div>
-				<div class="in_main">
+				<div class="in_main"  style="word-break: break-all;">
 					<h4>Basic Information</h4>
 					<table id="registration">
 						<tr>
@@ -219,7 +219,7 @@ $form.mode
 						<tr>
 							<th class="item">Exhibits</th>
 							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
-							<td>{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+							<td style="word-break: break-all;">{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 					</table>
 					<h4>Location/Venue</h4>
@@ -348,12 +348,12 @@ $form.mode
 						<tr>
 							<th class="item">Catchphrase</th>
 							<th class="required"></th>
-							<td>{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+							<td style="word-break: break-all;">{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 						<tr>
 							<th class="item">PR</th>
 							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
-							<td>{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+							<td style="word-break: break-all;">{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 						<tr>
 							<th class="item">Photos</th>

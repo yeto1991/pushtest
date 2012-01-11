@@ -55,7 +55,7 @@
 				<h2>Withdrawal of User Registration</h2>
 				{/if}
 			</div>
-			<div class="in_main">
+			<div class="in_main" style="word-break: break-all;">
 				<h3 class="img t_center"><img src="/en/database/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認" /></h3>
 				{if ("delete" == $form.mode)}
 				<p><font color="red">When you click “Finish,” all your registered information will be deleted.<br />

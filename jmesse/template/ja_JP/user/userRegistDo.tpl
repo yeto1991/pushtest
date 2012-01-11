@@ -64,7 +64,7 @@
 								<h2>ユーザー削除</h2>
 								{/if}
 							</div>
-							<div class="in_main">
+							<div class="in_main" style="word-break: break-all;">
 								<h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認" /></h3>
 								{if ("delete" == $form.mode)}
 								<p><font color="red">「完了」ボタンをクリックすると、ユーザ情報が削除されます。<br />

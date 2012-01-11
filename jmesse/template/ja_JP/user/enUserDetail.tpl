@@ -34,7 +34,7 @@
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
 			<div class="h2"><h2>Detailed User Information</h2></div>
-			<div class="in_main">
+			<div class="in_main" style="word-break: break-all;">
 				<p>If you need to change your registration information or to withdraw your registration, click “Return to Editing Page.”<br /></p>
 				<form name="form_user_enUserDetail" id="form_user_enUserDetail" method="post" action=""  enctype="multipart/form-data">
 					<input type="hidden" name="action_user_enUserChange" id="action_user_enUserChange" value="dummy" />

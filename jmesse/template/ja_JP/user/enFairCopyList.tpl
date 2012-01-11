@@ -50,7 +50,7 @@
 				<div class="list1">
 				{/if}
 					<dl>
-						<dt>
+						<dt style="word-break: break-all;">
 							<a href="{$config.url}?action_user_enFairDetail=true&mode=p&mihon_no={$app.fair_list[it].mihon_no}">
 							{if ('' != $app.fair_list[it].abbrev_title)}
 							{$app.fair_list[it].abbrev_title} -
@@ -58,7 +58,7 @@
 							{$app.fair_list[it].fair_title_en}
 							</a>
 						</dt>
-						<dd>
+						<dd style="word-break: break-all;">
 							{$app.fair_list[it].date_from_format} to {$app.fair_list[it].date_to_format}<br />
 							{if $app.fair_list[it].city_name_en == ""}Other({$app.fair_list[it].other_city_en}){else}{$app.fair_list[it].city_name_en}{/if} / {$app.fair_list[it].country_name_en} / {$app.fair_list[it].region_name_en}<br />
 							{$app.fair_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}

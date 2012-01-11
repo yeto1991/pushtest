@@ -63,7 +63,7 @@
 								<div class="list1">
 								{/if}
 									<dl>
-										<dt>
+										<dt style="word-break: break-all;">
 											<a href="{$config.url}?action_user_fairDetail=true&mode=p&mihon_no={$app.fair_list[it].mihon_no}">
 											{if ('' != $app.fair_list[it].abbrev_title)}
 											{$app.fair_list[it].abbrev_title} -
@@ -71,7 +71,7 @@
 											{$app.fair_list[it].fair_title_jp}
 											</a>
 										</dt>
-										<dd>
+										<dd style="word-break: break-all;">
 											{$app.fair_list[it].date_from_yyyy}年{$app.fair_list[it].date_from_mm}月{$app.fair_list[it].date_from_dd}日～{$app.fair_list[it].date_to_yyyy}年{$app.fair_list[it].date_to_mm}月{$app.fair_list[it].date_to_dd}日<br />
 											{if $app.fair_list[it].city_name == ""}Other({$app.fair_list[it].other_city_jp}){else}{$app.fair_list[it].city_name}{/if} / {$app.fair_list[it].country_name} / {$app.fair_list[it].region_name}<br />
 											{$app.fair_list[it].exhibits_jp|replace:'&lt;br/&gt;':'<br/>'}

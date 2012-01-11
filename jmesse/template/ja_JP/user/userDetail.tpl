@@ -43,7 +43,7 @@
 						<div class="bgbox_base">
 							<div class="h1"><h1>見本市・展示会データベース</h1></div>
 							<div class="h2"><h2>ユーザー詳細</h2></div>
-							<div class="in_main">
+							<div class="in_main" style="word-break: break-all;">
 								<!-- <h3 class="img t_center"><img src="/j-messe/images/db/user03.jpg" alt="ユーザー登録情報確認"></h3> -->
 								<p>登録情報を変更したい場合、または退会をご希望の方は「編集画面へ」ボタンをクリックしてください。<br /></p>
 								<form name="form_user_userDetail" id="form_user_userDetail" method="post" action=""  enctype="multipart/form-data">

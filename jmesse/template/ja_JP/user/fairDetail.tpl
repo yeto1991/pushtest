@@ -181,7 +181,7 @@ $form.mode
 										</div>
 								</div>
 
-								<div class="in_main">
+								<div class="in_main" style="word-break: break-all;">
 									<h4>基本情報</h4>
 									<table id="registration">
 										<tr>
@@ -237,7 +237,7 @@ $form.mode
 										<tr>
 											<th class="item">取扱品目</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td>{$form.exhibits_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+											<td style="word-break: break-all;">{$form.exhibits_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 									</table>
 									<h4>開催地・会場</h4>
@@ -357,12 +357,12 @@ $form.mode
 										<tr>
 											<th class="item">キャッチフレーズ</th>
 											<th class="required"></th>
-											<td>{$form.profile_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+											<td style="word-break: break-all;">{$form.profile_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
 											<th class="item">PR・紹介文</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td>{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+											<td style="word-break: break-all;">{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
 											<th class="item">見本市の紹介写真</th>
@@ -450,17 +450,17 @@ $form.mode
 											<tr>
 												<th class="item">Teaser Copy<br />キャッチフレーズ</th>
 												<th class="required"></th>
-												<td>{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+												<td style="word-break: break-all;">{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
 												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-												<td>{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+												<td style="word-break: break-all;">{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">Exhibits<br />出品物</th>
 												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-												<td>{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
+												<td style="word-break: break-all;">{$form.exhibits_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
 												<th class="item">City (other)<br />開催都市（その他）</th>
