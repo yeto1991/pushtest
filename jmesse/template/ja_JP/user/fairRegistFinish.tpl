@@ -98,7 +98,7 @@
 										</div>
 									{elseif ('c' == $form.msg)}
 										<div class="btn">
-											<a href="{$config.url}?action_user_fairList=true"><span class="title">続けて修正登録</span> <span class="description">見本市一覧ページを開きます。</span></a>
+											<a href="{$config.url}?action_user_fairList=true"><span class="title">登録済み見本市一覧に戻る</span> <span class="description">見本市一覧ページを開きます。</span></a>
 										</div>
 										<div class="btn">
 											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
