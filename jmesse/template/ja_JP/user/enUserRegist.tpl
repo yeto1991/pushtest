@@ -246,6 +246,7 @@
 							Enter the URL beginning with “http(s)://”.
 							</td>
 						</tr>
+						{*
 						{if ("regist" != $form.mode)}
 						<tr>
 							<th class="item">Withdrawal of Registration</th>
@@ -255,6 +256,7 @@
 							</td>
 						</tr>
 						{/if}
+						*}
 					</table>
 					<!-- navi area-->
 					<table width="100%">

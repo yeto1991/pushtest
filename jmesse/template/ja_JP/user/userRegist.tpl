@@ -256,6 +256,7 @@
 											URLはhttp(s):// から入力して下さい。
 											</td>
 										</tr>
+										{*
 										{if ("regist" != $form.mode)}
 										<tr>
 											<th class="item">退会希望</th>
@@ -265,6 +266,7 @@
 											</td>
 										</tr>
 										{/if}
+										*}
 									</table>
 									<!-- navi area-->
 									<table width="100%">
