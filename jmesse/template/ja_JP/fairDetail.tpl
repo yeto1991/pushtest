@@ -29,9 +29,9 @@
 			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			{if (''!= $app.fair_detail.abbrev_title)}
-			<li>{$app.fair_detail.abbrev_title} ({$app.fair_detail.fair_title_jp})</li>
+			<li>{$app.fair_detail.abbrev_title|truncate:15:'...'} ({$app.fair_detail.fair_title_jp|truncate:15:'...'})</li>
 			{else}
-			<li>{$app.fair_detail.fair_title_jp}</li>
+			<li>{$app.fair_detail.fair_title_jp|truncate:15:'...'}</li>
 			{/if}
 		</ul>
 	</div>
