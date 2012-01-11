@@ -89,7 +89,7 @@
 									{/if}
 									<!-- 検索結果分 繰り返し処理 -->
 									{section name=it loop=$app.my_fair_info_list}
-									<table id="registration">
+									<table id="registration" style="word-break: break-all;">
 										<tr>
 											<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}"><font size="2">&nbsp;&nbsp;見本市名(日)</font></th>
 											<td><a href="{$config.url}?action_user_fairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_jp}</font></a></td>
