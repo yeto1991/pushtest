@@ -24,6 +24,11 @@
 {/if}
 
 <h1>このページはダミーです。</h1>
+<br />
+
+<a href="{$config.url_pub}?action_fairListDetailSearch=true">詳細検索</a>
+
+<br />
 
 <table>
 <tr valign="top">
