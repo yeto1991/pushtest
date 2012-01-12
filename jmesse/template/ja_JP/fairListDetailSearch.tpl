@@ -95,7 +95,9 @@
 									<tr>
 										<th>会期</th>
 										<td>
-											<input type="radio" name="year" id="year" value="e" {if ('e' == $form.year)}checked{/if} />期間を選択する<br/>
+											<input type="radio" name="year" id="year" value="u" />これから開催のもの<br />
+											<input type="radio" name="year" id="year" value="a" />過去のものを含む<br/>
+											<input type="radio" name="year" id="year" value="e" />期間を選択する<br/>
 											<select name="date_from_yyyy" id="date_from_yyyy">
 												<option value=""></option>
 												{section name=it loop=$app.year_list}
