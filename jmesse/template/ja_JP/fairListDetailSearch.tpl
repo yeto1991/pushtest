@@ -89,7 +89,7 @@
 													選択されていません<br/>
 												{/section}
 											</div>
-											<button class="modalInputIndustory" rel="#prompt_industory">業種を変更する</button>
+											<button class="modalInputIndustory" rel="#prompt_industory">業種を選択する</button>
 										</td>
 									</tr>
 									<tr>
