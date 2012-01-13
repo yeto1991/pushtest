@@ -103,7 +103,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 				{/if}
 			{else}
 				<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-				<li>View All</li>
+				<li>Search Results</li>
 			{/if}
 		</ul>
 	</div>

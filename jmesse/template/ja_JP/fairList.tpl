@@ -104,7 +104,7 @@
 				{/if}
 			{else}
 				<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
-				<li>すべての見本市</li>
+				<li>検索結果</li>
 			{/if}
 		</ul>
 	</div>
