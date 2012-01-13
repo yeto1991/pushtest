@@ -21,6 +21,24 @@ class Jmesse_Form_UserEnFairDel extends Jmesse_ActionForm
 	 *  @var    array   form definition.
 	 */
 	var $form = array(
+		'mode' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_HIDDEN, // Form type
+			'name'        => 'mode',    // Display name
+			'required'    => true,            // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
+		),
 		'mihon_no' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
@@ -145,7 +163,11 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 		}
 
 		// 画面遷移
-		$url = $this->config->get('url').'?action_user_enFairRegistFinish=true&msg=d';
+		if ('d' == $this->af->get('mode')) {
+			$url = $this->config->get('url').'?action_user_enFairRegistFinish=true&msg=ed';
+		}else{
+			$url = $this->config->get('url').'?action_user_enFairRegistFinish=true&msg=cd';
+		}
 		header('Location: '.$url);
 		return null;
 	}
