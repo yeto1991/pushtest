@@ -10,7 +10,7 @@
 <title>見本市登録 - 世界の見本市・展示会(J-messe) - ジェトロ</title>
 {elseif ('c' == $form.msg)}
 <title>見本市修正 - 世界の見本市・展示会(J-messe) - ジェトロ</title>
-{elseif ('d' == $form.msg)}
+{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 <title>見本市削除 - 世界の見本市・展示会(J-messe) - ジェトロ</title>
 {/if}
 </head>
@@ -40,7 +40,7 @@
 			<li><a href="/database/j-messe/tradefair/">見本市修正(step3)</a></li>
 			<li><a href="/database/j-messe/tradefair/">見本市修正確認</a></li>
 			<li>見本市修正完了</li>
-			{elseif ('d' == $form.msg)}
+			{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 			<li><a href="/database/j-messe/tradefair/">見本市詳細(削除確認)</a></li>
 			<li>見本市削除完了</li>
 			{/if}
@@ -70,7 +70,7 @@
 								<h2>見本市登録</h2>
 								{elseif ('c' == $form.msg)}
 								<h2>見本市修正</h2>
-								{elseif ('d' == $form.msg)}
+								{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 								<h2>見本市削除</h2>
 								{/if}
 							</div>
@@ -82,7 +82,7 @@
 								<p>見本市の登録が完了しました。ありがとうございました。</p>
 								{elseif ('c' == $form.msg)}
 								<p>見本市の修正が完了しました。ありがとうございました。</p>
-								{elseif ('d' == $form.msg)}
+								{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 								<p>見本市の削除が完了しました。ありがとうございました。</p>
 								{/if}
 								<div class="finish-navi">
@@ -103,9 +103,16 @@
 										<div class="btn">
 											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
 										</div>
-									{elseif ('d' == $form.msg)}
+									{elseif ('ed' == $form.msg)}
 										<div class="btn">
 											<a href="{$config.url}?action_user_fairList=true"><span class="title">登録済み見本市一覧に戻る</span> <span class="description">見本市一覧ページを開きます。</span></a>
+										</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>
+										</div>
+									{elseif ('cd' == $form.msg)}
+										<div class="btn">
+											<a href="{$config.url}?action_user_fairCopyList=true"><span class="title">登録済み見本市一覧に戻る</span> <span class="description">見本市一覧ページを開きます。</span></a>
 										</div>
 										<div class="btn">
 											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>

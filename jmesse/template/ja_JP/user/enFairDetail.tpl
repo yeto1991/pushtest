@@ -34,9 +34,9 @@
 		}
 	}
 
-	function fair_delete(url, mihon_no) {
+	function fair_delete(url, mihon_no, mode) {
 		if (window.confirm('Do you delete the fair?')) {
-			document.location.href = url + '?action_user_enFairDel=true&mihon_no=' + mihon_no;
+			document.location.href = url + '?action_user_enFairDel=true&mihon_no=' + mihon_no + '&mode=' + mode;
 		}
 	}
 
@@ -147,14 +147,14 @@ $form.mode
 					<p></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
 						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{elseif ('p' == $form.mode)}
 					<p></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
 						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{else}
@@ -432,14 +432,14 @@ $form.mode
 					<p></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
 						Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{elseif ('p' == $form.mode)}
 					<p></p>
 					<p>
 						<a href="{$config.url}?action_user_enFairCopyList=true"><img width="110" height="37" class="over" alt="back" src="/en/database/j-messe/images/db/btn-back.gif" /></a>
-						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
+						Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
 						EditRegist<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
 					</p>
 					{else}

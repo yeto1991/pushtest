@@ -10,7 +10,7 @@
 <title>Fair Registration - Online Trade Fair Database (J-messe) - JETRO</title>
 {elseif ('c' == $form.msg)}
 <title>User Editing - Online Trade Fair Database (J-messe) - JETRO</title>
-{elseif ('d' == $form.msg)}
+{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 <title>User Deleting - Online Trade Fair Database (J-messe) - JETRO</title>
 {/if}
 </head>
@@ -37,7 +37,7 @@
 			<li><a href="/database/j-messe/tradefair/">Fair Editing(step2)</a></li>
 			<li><a href="/database/j-messe/tradefair/">Fair Editing Confirm</a></li>
 			<li>Fair Editing Complete</li>
-			{elseif ('d' == $form.msg)}
+			{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 			<li><a href="/database/j-messe/tradefair/">Fair Detail(Fair Deleting Confirm)</a></li>
 			<li>Fair Deleting Complete</li>
 			{/if}
@@ -56,7 +56,7 @@
 				<h2>New Fair Registration</h2>
 				{elseif ('c' == $form.msg)}
 				<h2>Fair Editing</h2>
-				{elseif ('d' == $form.msg)}
+				{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 				<h2>Fair Deleting</h2>
 				{/if}
 			</div>
@@ -68,7 +68,7 @@
 				<p>Your registration has been completed.</p>
 				{elseif ('c' == $form.msg)}
 				<p>Your editing has been completed.</p>
-				{elseif ('d' == $form.msg)}
+				{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 				<p>Your deleting has been completed.</p>
 				{/if}
 				<div class="finish-navi">
@@ -89,9 +89,16 @@
 						<div class="btn">
 							<a href="{$config.url}?action_user_enTop=true"><span class="title">Administration Menus for Organizers</span> <span class="description">To the user menu page</span></a>
 						</div>
-					{elseif ('d' == $form.msg)}
+					{elseif ('ed' == $form.msg)}
 						<div class="btn">
 							<a href="{$config.url}?action_user_enFairList=true"><span class="title">Edit/delete</span> <span class="description">To fair list page</span></a>
+						</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enTop=true"><span class="title">Administration Menus for Organizers</span> <span class="description">To the user menu page</span></a>
+						</div>
+					{elseif ('cd' == $form.msg)}
+						<div class="btn">
+							<a href="{$config.url}?action_user_enFairCopyList=true"><span class="title">Edit/delete</span> <span class="description">To fair list page</span></a>
 						</div>
 						<div class="btn">
 							<a href="{$config.url}?action_user_enTop=true"><span class="title">Administration Menus for Organizers</span> <span class="description">To the user menu page</span></a>
