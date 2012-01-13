@@ -83,7 +83,7 @@
 			<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			{if ('1' != $form.all)}
 				{if ('i1' == $form.type)}
-					<li><a href="{$config.url_pub}?action_top=true">業種別に見る</a></li>
+					<li><a href="/j-messe/industry/">業種別に見る</a></li>
 					{if ('' == $form.i_3)}
 						<li>{$app.pan_1}</li>
 					{else}
@@ -91,10 +91,10 @@
 						<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-					<li><a href="{$config.url_pub}?action_top=true">開催地別に見る</a></li>
+					<li><a href="/j-messe/country/">開催地別に見る</a></li>
 					<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-					<li><a href="{$config.url_pub}?action_top=true">開催地別に見る</a></li>
+					<li><a href="/j-messe/country/">開催地別に見る</a></li>
 					{if ('' == $form.v_4)}
 						<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 						<li>{$app.pan_2}</li>
