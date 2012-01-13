@@ -78,9 +78,7 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			{if ('1' != $form.all)}
 				{if ('i1' == $form.type)}
 					<li><a href="/j-messe/industry/">業種別に見る</a></li>
@@ -105,7 +103,8 @@
 					{/if}
 				{/if}
 			{else}
-			<li>すべての見本市</li>
+				<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
+				<li>すべての見本市</li>
 			{/if}
 		</ul>
 	</div>
