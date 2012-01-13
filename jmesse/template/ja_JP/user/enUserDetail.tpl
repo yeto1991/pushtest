@@ -18,7 +18,6 @@
 {*
 		<ul>
 			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/">引き合い・展示会検索</a></li>
 			<li><a href="/en/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/en/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			<li><a href="/en/database/j-messe/tradefair/">個人メニュー</a></li>

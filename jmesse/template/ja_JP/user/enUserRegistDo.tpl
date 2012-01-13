@@ -23,7 +23,6 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/">Business Opportunities</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ("regist" == $form.mode)}
 				<li><a href="{$config.url}?action_user_enUserRegist=true&back=1">User Registration</a></li>

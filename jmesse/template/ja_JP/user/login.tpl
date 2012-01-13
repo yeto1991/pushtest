@@ -18,9 +18,7 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			<li>主催者様向け見本市登録</li>
 		</ul>

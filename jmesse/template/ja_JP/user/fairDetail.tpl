@@ -61,7 +61,6 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/">引き合い・展示会検索</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
