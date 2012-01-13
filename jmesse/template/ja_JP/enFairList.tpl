@@ -119,21 +119,21 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 			</div>
 			<div class="in_main">
 				{if ('1' == $form.all)}
-					<div class="h3 clearfix">View All</div>
+					<h3>View All</h3>
 				{elseif ('1' != $form.detail)}
 					{if ('i1' == $form.type)}
 						{if ('' == $form.i_3)}
-							<div class="h3 clearfix">{$app.pan_1}</div>
+							<h3>{$app.pan_1}</h3>
 						{else}
-							<div class="h3 clearfix">{$app.pan_2}</div>
+							<h3>{$app.pan_2}</h3>
 						{/if}
 					{elseif ('v1' == $form.type)}
-						<div class="h3 clearfix">{$app.pan_1}</div>
+						<h3>{$app.pan_1}</h3>
 					{elseif ('v2' == $form.type)}
 						{if ('' == $form.v_4)}
-							<div class="h3 clearfix">{$app.pan_2}</div>
+							<h3>{$app.pan_2}</h3>
 						{else}
-							<div class="h3 clearfix">{$app.pan_3}</div>
+							<h3>{$app.pan_3}</h3>
 						{/if}
 					{/if}
 				{/if}
