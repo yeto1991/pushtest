@@ -136,17 +136,25 @@
 								<h2>世界の見本市・展示会</h2>
 							</div>
 							<div class="in_main">
-						{*
-								<div class="h3">
-									{if ('1' != $form.detail)}
-										{if ('i1' == $form.type)}
-											<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の業種を見る</a> <a href="/j-messe/tradefair/" class="icon_arrow">詳細検索</a></span>
+								{if ('1' == $form.all)}
+									<div class="h3">すべての見本市</div>
+								{elseif ('1' != $form.detail)}
+									{if ('i1' == $form.type)}
+										{if ('' == $form.i_3)}
+											<div class="h3">{$app.pan_1}</div>
 										{else}
-											<span class="right"><a href="{$config.url_pub}?action_top=true" class="icon_arrow">他の地域を見る</a> <a href="/j-messe/tradefair/" class="icon_arrow">詳細検索</a></span>
+											<div class="h3">{$app.pan_2}</div>
+										{/if}
+									{elseif ('v1' == $form.type)}
+										<div class="h3">{$app.pan_1}</div>
+									{elseif ('v2' == $form.type)}
+										{if ('' == $form.v_4)}
+											<div class="h3">{$app.pan_2}</div>
+										{else}
+											<div class="h3">{$app.pan_3}</div>
 										{/if}
 									{/if}
-								</div>
-						*}
+								{/if}
 								<div id="skip_menu">
 									<a href="">絞り込み条件にスキップ</a>
 								</div>

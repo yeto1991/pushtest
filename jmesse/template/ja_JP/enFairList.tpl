@@ -118,17 +118,25 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 				<h2>Trade Fairs held in Japan and the World </h2>
 			</div>
 			<div class="in_main">
-				{*
-				<div class="h3 clearfix">
-					{if ('1' != $form.detail)}
-						{if ('i1' == $form.type)}
-							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Industry</a> <a href="/en/j-messe/tradefair/" class="icon_arrow">Advanced Search</a></span>
+				{if ('1' == $form.all)}
+					<div class="h3 clearfix">View All</div>
+				{elseif ('1' != $form.detail)}
+					{if ('i1' == $form.type)}
+						{if ('' == $form.i_3)}
+							<div class="h3 clearfix">{$app.pan_1}</div>
 						{else}
-							<span class="right"><a href="{$config.url_pub}?action_enTop=true" class="icon_arrow">View Other Region/Country</a> <a href="/en/j-messe/tradefair/" class="icon_arrow">Advanced Search</a></span>
+							<div class="h3 clearfix">{$app.pan_2}</div>
+						{/if}
+					{elseif ('v1' == $form.type)}
+						<div class="h3 clearfix">{$app.pan_1}</div>
+					{elseif ('v2' == $form.type)}
+						{if ('' == $form.v_4)}
+							<div class="h3 clearfix">{$app.pan_2}</div>
+						{else}
+							<div class="h3 clearfix">{$app.pan_3}</div>
 						{/if}
 					{/if}
-				</div>
-				*}
+				{/if}
 				<div id="skip_menu"><a href="#right">Skip to search refinement</a></div>
 				<!-- list of tradefairs -->
 				<div class="left" id="list">
