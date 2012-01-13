@@ -27,9 +27,9 @@
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if (''!= $app.fair_detail.abbrev_title)}
-			<li>{$app.fair_detail.abbrev_title|truncate:15:'...'} ({$app.fair_detail.fair_title_en|truncate:15:'...'})</li>
+			<li>{$app.fair_detail.abbrev_title|mb_truncate:15:'...'} ({$app.fair_detail.fair_title_en|mb_truncate:15:'...'})</li>
 			{else}
-			<li>{$app.fair_detail.fair_title_en|truncate:15:'...'}</li>
+			<li>{$app.fair_detail.fair_title_en|mb_truncate:15:'...'}</li>
 			{/if}
 		</ul>
 	</div>
