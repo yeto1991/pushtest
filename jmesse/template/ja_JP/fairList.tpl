@@ -119,7 +119,53 @@
 		<div class="area">
 
 			<!-- left -->
-			{$app_ne.left_menu}
+			<div id="left">
+				<div class="bgbox_set">
+					<p id="title">
+						<a href="/j-messe/">見本市・展示会データベース</a>
+					</p>
+					<div class="bgbox_base">
+						<div class="bgbox_in">
+							<div class="submenu no_border">
+								<ul class="navi">
+									<li class="lv01_title"><a href="/j-messe/industry/">業種別に見る</a></li>
+									<li class="lv01_title"><a href="/j-messe/country/">開催地別に見る</a></li>
+									<li class="lv01_title"><a href="/j-messe/tradefair/">詳細検索</a></li>
+									<li class="lv01_title"><a href="/j-messe/new_fair/">新着見本市</a></li>
+									<li class="lv01_title"><a href="/j-messe/ranking/">月間ランキング</a></li>
+								</ul>
+								<ul class="navi">
+									<li class="lv01_label">出展お役立ち情報</li>
+									<li class="lv02_title"><a href="/j-messe/w-info/">見本市レポート</a></li>
+									<li class="lv02_title"><a href="/services/tradefair/">出展支援</a></li>
+									<li class="lv02_title"><a href="/j-messe/center/">世界の展示会場</a></li>
+									<li class="lv02_title"><a href="/j-messe/business/">世界の見本市ビジネス動向</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="j-messe_left">
+					<div class="wrap">
+						<dl>
+							<dt><img src="/j-messe/images/title-left-organizer.gif" alt="主催者様へ" width="150" height="32" /></dt>
+							<dd>J-messeの「見本市・展示会データベース」に見本市の情報を登録できます。<br />
+								<strong class="orange">登録は無料！</strong><br />
+								ぜひご登録いただき、PRにご活用ください。<br />
+								<a href="https://www.jetro.go.jp/j-messe/?action_user_login=true"><img src="/j-messe/images/btn_regist.gif" alt="見本市を登録する" width="140" height="63" class="padding_l05 margin_t10" /></a></dd>
+						</dl>
+					</div>
+					<div class="wrap">
+						<dl>
+							<dt><img src="/j-messe/images/title-left-inquiry.gif" alt="お問い合わせ" width="150" height="26" /></dt>
+							<dd>本コーナーに関するお問い合わせ・ご意見・ご感想はこちらまで<br />
+								<a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form/fm/faa/inquiry_j');"><img src="/j-messe/images/btn_inquiry.gif" alt="お問い合わせフォーム" width="140" height="25" class="over padding_l05 margin_tb10" /></a><br />
+								ジェトロ展示事業課<br />
+								（TEL：03-3582-5541）</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
 			<!-- /left -->
 
 			<!-- center -->

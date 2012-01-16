@@ -353,7 +353,40 @@
 		</div>
 		<!-- /main -->
 		<!-- submenu -->
-		{$app_ne.left_menu}
+		<div id="submenu">
+			<div class="submenu_box">
+				<div class="submenu_box_inside">
+					<p class="menu_title"><a href="/en/database/j-messe/">Online Trade Fair Database</a></p>
+					<div class="menu_content">
+						<ul>
+							<li><a href="/en/database/j-messe/industry/">By Industry</a></li>
+							<li><a href="/en/database/j-messe/country/">By Country</a></li>
+							<li><a href="/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
+							<li><a href="/en/database/j-messe/recent/">Recently Added</a></li>
+							<li><a href="/en/database/j-messe/ranking/">Monthly Ranking</a></li>
+							<li><a href="/en/database/j-messe/center/">Major Exhibition Sites</a></li>
+							<li><a href="/en/database/j-messe/links/">Related Links</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="direct_inquiries">
+				<div id="direct_inquiries_inside">
+					<p><strong>For Organaizers</strong><br />
+						Register Your Trade Show <strong class="red">For Free</strong>!</p>
+					<p><a href="https://www.jetro.go.jp/j-messe/?action_user_enLogin=true"><img src="/en/database/j-messe/images/btn_registration.gif" width="138" height="63" /></a></p>
+				</div>
+			</div>
+			<div id="direct_inquiries">
+				<div id="direct_inquiries_inside">
+					<p>Please direct inquiries or comments to</p>
+					<p>Trade Fair Planning Division</p>
+					<ul>
+						<li><a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form/fm/faa/inquiry_en');" class="icon_arrow">Inquiry form</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<!-- /submenu -->
 	</div>
 	<!-- /contents -->
