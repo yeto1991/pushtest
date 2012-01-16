@@ -15,7 +15,9 @@
 
 	function dosort(url) {
 		var sort = document.getElementById('sort').options[document.getElementById('sort').selectedIndex].value;
-		document.location.href = url + "&sort=" + sort;
+		if ('' != sort) {
+			document.location.href = url + "&sort=" + sort;
+		}
 	}
 
 	function resetAll() {
@@ -243,7 +245,6 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 			</p>
 		</div>
 		<!-- /main -->
-
 		<!-- submenu -->
 		<div id="submenu">
 			<div class="submenu_box">

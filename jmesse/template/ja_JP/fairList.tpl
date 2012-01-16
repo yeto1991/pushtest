@@ -15,7 +15,9 @@
 
 	function dosort(url) {
 		var sort = document.getElementById('sort').options[document.getElementById('sort').selectedIndex].value;
-		document.location.href = url + "&sort=" + sort;
+		if ('' != sort) {
+			document.location.href = url + "&sort=" + sort;
+		}
 	}
 
 	function resetAll() {
