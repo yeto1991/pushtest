@@ -80,7 +80,10 @@
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			{if ('1' != $form.all)}
-				{if ('i1' == $form.type)}
+				{if ('1' == $form.detail)}
+					<li><a href="/j-messe/tradefair/">詳細検索</a></li>
+					<li>検索結果一覧</li>
+				{elseif ('i1' == $form.type)}
 					<li><a href="/j-messe/industry/">業種別に見る</a></li>
 					{if ('' == $form.i_3)}
 						<li>{$app.pan_1}</li>
@@ -103,8 +106,7 @@
 					{/if}
 				{/if}
 			{else}
-				<li><a href="/j-messe/tradefair/">世界の見本市・展示会</a></li>
-				<li>検索結果</li>
+				<li>検索結果一覧</li>
 			{/if}
 		</ul>
 	</div>
