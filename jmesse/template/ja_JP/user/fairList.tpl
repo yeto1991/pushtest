@@ -69,7 +69,7 @@
 					<div class="bgbox_set">
 						<div class="bgbox_base">
 							<div class="h1"><h1>見本市・展示会データベース</h1></div>
-							<div class="h2"><h2>登録済み見本市一覧一覧</h2></div>
+							<div class="h2"><h2>登録済み見本市一覧</h2></div>
 							<div class="in_main">
 								<p class="t_right">ユーザー：{$session.email}</p>
 								{if $app.my_fair_info_list_count != "0"}
