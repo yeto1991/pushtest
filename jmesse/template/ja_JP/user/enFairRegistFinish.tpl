@@ -97,7 +97,7 @@
 						</div>
 					{elseif ('cd' == $form.msg)}
 						<div class="btn">
-							<a href="{$config.url}?action_user_enFairCopyList=true"><span class="title">Edit/delete</span> <span class="description">To fair list page</span></a>
+							<a href="{$config.url}?action_user_enFairCopyList=true"><span class="title">Coping registered information</span> <span class="description">To fair list page for coping</span></a>
 						</div>
 						<div class="btn">
 							<a href="{$config.url}?action_user_enTop=true"><span class="title">Administration Menus for Organizers</span> <span class="description">To the user menu page</span></a>

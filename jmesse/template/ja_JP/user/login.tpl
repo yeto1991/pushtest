@@ -19,17 +19,14 @@
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li>主催者様向け見本市登録</li>
+			<li>ユーザログイン</li>
 		</ul>
 	</div>
 	<!-- /bread -->
 
 	<!-- contents -->
 	<div id="contents">
-
-
-
+	
 		<div class="area">
 			<!-- left -->
 			{$app_ne.left_menu}

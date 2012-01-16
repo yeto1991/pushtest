@@ -74,15 +74,20 @@
 				{/if}
 				<div class="finish-navi">
 					{if ("delete" != $form.mode)}
-					<div class="btn">
-						<a href="{$config.url}?action_user_enFairRegistStep1=true" ><span class="title">Registration of New Trade Fair Info</span>
-						<span class="description">Click to go to the trade fair registration page.</span></a>
-					</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enFairRegistStep1=true" ><span class="title">Registration of New Trade Fair Info</span>
+							<span class="description">Click to go to the trade fair registration page.</span></a>
+						</div>
+						<div class="btn">
+							<a href="{$config.url}?action_user_enTop=true"><span class="title">Administration Menus for Organizers</span>
+							<span class="description">To the user menu page</span></a>
+						</div>
+					{else}
+						<div class="btn">
+							<a href="/en/database/j-messe/" ><span class="title">Top page</span>
+							<span class="description">To the top page.</span></a>
+						</div>
 					{/if}
-					<div class="btn">
-						<a href="/en/database/j-messe/" ><span class="title">Register</span>
-						<span class="description">Click to complete trade fair registration and return to the top page.</span></a>
-					</div>
 				</div>
 			</div>
 			<p class="totop">

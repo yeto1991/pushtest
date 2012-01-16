@@ -17,7 +17,7 @@
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li>Administration Menus for Organizers</li>
+			<li>Administration Menus</li>
 		</ul>
 	</div>
 	<!-- /bread -->

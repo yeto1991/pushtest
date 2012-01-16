@@ -25,7 +25,7 @@
 			{if ("regist" == $form.mode)}
 				<li>User Registration</li>
 				{else}
-				<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
+				<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
 				<li>User Editing</li>
 			{/if}
 		</ul>

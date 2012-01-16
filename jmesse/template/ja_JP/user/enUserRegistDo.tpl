@@ -28,12 +28,11 @@
 				<li><a href="{$config.url}?action_user_enUserRegist=true&back=1">User Registration</a></li>
 				<li>User Registration Confirm</li>
 			{elseif ("change" == $form.mode)}
-				<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
+				<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
 				<li><a href="{$config.url}?action_user_enUserChange=true&user_id={$form.user_id}&mode={$form.mode}&back=1">User Editing</a></li>
 				<li>User Editing Confirm</li>
 			{else}
-				<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
-				<li><a href="{$config.url}?action_user_enUserChange=true&user_id={$form.user_id}&mode={$form.mode}&back=1">User Editing</a></li>
+				<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
 				<li>User Deleting Confirm</li>
 			{/if}
 		</ul>
@@ -168,7 +167,7 @@
 						<tr>
 							<th class="item">Withdrawal of Registration</th>
 							<th class="required"></th>
-							<td>I would like to withdraw my registration.</td>
+							<td>I withdraw my registration.</td>
 						</tr>
 						{/if}
 					</table>

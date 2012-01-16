@@ -38,7 +38,7 @@
 {/literal}
 -->
 </script>
-<title>My展示会一覧 - 世界の見本市・展示会 -ジェトロ</title>
+<title>登録済み見本市一覧 - 世界の見本市・展示会 -ジェトロ</title>
 </head>
 
 <body class="layout-LC highlight-match j-messe">
@@ -48,15 +48,12 @@
 
 	<!-- bread -->
 	<div id="bread">
-{*
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
-			<li>My展示会一覧</li>
+			<li><a href="{$config.url}?action_user_top=true">管理者メニュー</a></li>
+			<li>登録済み見本市一覧</li>
 		</ul>
-*}
 	</div>
 	<!-- /bread -->
 
@@ -72,7 +69,7 @@
 					<div class="bgbox_set">
 						<div class="bgbox_base">
 							<div class="h1"><h1>見本市・展示会データベース</h1></div>
-							<div class="h2"><h2>My展示会一覧</h2></div>
+							<div class="h2"><h2>登録済み見本市一覧一覧</h2></div>
 							<div class="in_main">
 								<p class="t_right">ユーザー：{$session.email}</p>
 								{if $app.my_fair_info_list_count != "0"}

@@ -14,15 +14,12 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
-{*
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
-			<li>My fairs list for copy registration</li>
+			<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
+			<li>Coping registered information</li>
 		</ul>
-*}
 	</div>
 	<!-- /bread -->
 

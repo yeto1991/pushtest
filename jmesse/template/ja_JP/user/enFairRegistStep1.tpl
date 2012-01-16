@@ -137,7 +137,7 @@
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="{$config.url}?action_user_enTop=true">My Menu</a></li>
+			<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
 			{if ('' == $form.mode) || ('e' == $form.mode)}
 			<li>Fair Registration(step1)</li>
 			{elseif ('c' == $form.mode)}

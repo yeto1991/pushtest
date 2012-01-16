@@ -82,15 +82,20 @@
 								{/if}
 								<div class="finish-navi">
 									{if ("delete" != $form.mode)}
-									<div class="btn">
-										<a href="{$config.url}?action_user_fairRegistStep1=true" ><span class="title">続いて見本市を登録する</span>
-										<span class="description">見本市新規登録ページを開きます。</span></a>
-									</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_fairRegistStep1=true" ><span class="title">続いて見本市を登録する</span>
+											<span class="description">見本市新規登録ページを開きます。</span></a>
+										</div>
+										<div class="btn">
+											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span>
+											<span class="description">管理者メニューページを開きます。</span></a>
+										</div>
+									{else}
+										<div class="btn">
+											<a href="/database/j-messe/" ><span class="title">登録を終了する</span>
+											<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
+										</div>
 									{/if}
-									<div class="btn">
-										<a href="/database/j-messe/" ><span class="title">登録を終了する</span>
-										<span class="description">「見本市・展示会データベース」のトップページに戻ります。</span></a>
-									</div>
 								</div>
 							</div>
 						</div>

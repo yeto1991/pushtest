@@ -111,7 +111,7 @@
 										</div>
 									{elseif ('cd' == $form.msg)}
 										<div class="btn">
-											<a href="{$config.url}?action_user_fairCopyList=true"><span class="title">登録済み見本市一覧に戻る</span> <span class="description">見本市一覧ページを開きます。</span></a>
+											<a href="{$config.url}?action_user_fairCopyList=true"><span class="title">登録済み見本市修正登録一覧に戻る</span> <span class="description">見本市修正登録一覧ページを開きます。</span></a>
 										</div>
 										<div class="btn">
 											<a href="{$config.url}?action_user_top=true"><span class="title">管理者メニューに戻る</span> <span class="description">管理者メニューページを開きます。</span></a>

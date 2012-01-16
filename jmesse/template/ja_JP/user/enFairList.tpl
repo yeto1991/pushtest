@@ -38,7 +38,7 @@
 {/literal}
 -->
 </script>
-<title>My Trade Fair List - Online Trade Fair Database (J-messe) - JETRO</title>
+<title>Trade Fair List - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>
 
 <body class="layout-LC highlight-database j-messe">
@@ -47,15 +47,12 @@
 	<!-- /header -->
 	<!-- bread -->
 	<div id="bread">
-{*
 		<ul class="clearfix">
 			<li><a href="/">HOME</a></li>
 			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
-			<li><a href="/database/j-messe/tradefair/">My Menu</a></li>
+			<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
 			<li>Trade Fair List</li>
 		</ul>
-*}
 	</div>
 	<!-- /bread -->
 
@@ -64,7 +61,7 @@
 		<!-- main -->
 		<div id="main">
 			<h1>Online Trade Fair Database (J-messe)</h1>
-			<div class="h2"><h2>My Trade Fair List</h2></div>
+			<div class="h2"><h2>Trade Fair List</h2></div>
 			<div class="in_main">
 				<p class="t_right">user：{$session.email}</p>
 				{if $app.my_fair_info_list_count != "0"}

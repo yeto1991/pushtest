@@ -18,7 +18,6 @@
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
 			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			<li>ユーザー登録</li>
 		</ul>
 	</div>

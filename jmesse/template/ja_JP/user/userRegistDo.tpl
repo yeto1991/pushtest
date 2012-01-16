@@ -30,12 +30,11 @@
 				<li><a href="{$config.url}?action_user_userRegist=true&back=1">ユーザー登録</a></li>
 				<li>ユーザー登録確認</li>
 			{elseif ("change" == $form.mode)}
-				<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
+				<li><a href="{$config.url}?action_user_top=true">管理者メニュー</a></li>
 				<li><a href="{$config.url}?action_user_userChange=true&user_id={$form.user_id}&mode={$form.mode}&back=1">ユーザー修正</a></li>
 				<li>ユーザー修正確認</li>
 			{else}
-				<li><a href="{$config.url}?action_user_top=true">個人メニュー</a></li>
-				<li><a href="{$config.url}?action_user_userChange=true&user_id={$form.user_id}&mode={$form.mode}&back=1">ユーザー修正</a></li>
+				<li><a href="{$config.url}?action_user_top=true">管理者メニュー</a></li>
 				<li>ユーザー削除確認</li>
 			{/if}
 		</ul>
@@ -170,9 +169,9 @@
 										</tr>
 										{if ("1" == $form.delFlg)}
 										<tr>
-											<th class="item">退会希望</th>
+											<th class="item">削除確認</th>
 											<th class="required"></th>
-											<td>退会を希望します。</td>
+											<td>削除します。</td>
 										</tr>
 										{/if}
 									</table>
