@@ -16,7 +16,7 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul>
-			<li><a href="/indexj.html">HOME</a></li>
+			<li><a href="http://www.jetro.go.jp/indexj.html">HOME</a></li>
 			<li>見本市・展示会データベース（J-messe）</li>
 		</ul>
 	</div>

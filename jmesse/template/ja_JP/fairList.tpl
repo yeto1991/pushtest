@@ -79,14 +79,14 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul>
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="http://www.jetro.go.jp/indexj.html">HOME</a></li>
+			<li><a href="{$config.url_pub}">見本市・展示会データベース（J-messe）</a></li>
 			{if ('1' != $form.all)}
 				{if ('1' == $form.detail)}
-					<li><a href="/j-messe/tradefair/">詳細検索</a></li>
+					<li><a href="{$config.url_pub}tradefair/">詳細検索</a></li>
 					<li>検索結果一覧</li>
 				{elseif ('i1' == $form.type)}
-					<li><a href="/j-messe/industry/">業種別に見る</a></li>
+					<li><a href="{$config.url_pub}industry/">業種別に見る</a></li>
 					{if ('' == $form.i_3)}
 						<li>{$app.pan_1}</li>
 					{else}
@@ -94,10 +94,10 @@
 						<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-					<li><a href="/j-messe/country/">開催地別に見る</a></li>
+					<li><a href="{$config.url_pub}country/">開催地別に見る</a></li>
 					<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-					<li><a href="/j-messe/country/">開催地別に見る</a></li>
+					<li><a href="{$config.url_pub}country/">開催地別に見る</a></li>
 					{if ('' == $form.v_4)}
 						<li><a href="{$config.url_pub}?action_fairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 						<li>{$app.pan_2}</li>

@@ -22,9 +22,9 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
+			<li><a href="http://www.jetro.go.jp/">HOME</a></li>
+			<li><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="http://www.jetro.go.jp/en/database/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
 			{if (''!= $app.fair_detail.abbrev_title)}
 			<li>{$app.fair_detail.abbrev_title|mb_truncate:15:'...'} ({$app.fair_detail.fair_title_en|mb_truncate:15:'...'})</li>
 			{else}

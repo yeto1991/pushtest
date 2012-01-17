@@ -78,14 +78,14 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="http://www.jetro.go.jp/">HOME</a></li>
+			<li><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ('1' != $form.all)}
 				{if ('1' == $form.detail)}
-					<li><a href="/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
+					<li><a href="http://www.jetro.go.jp/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
 					<li>Search Results</li>
 				{elseif ('i1' == $form.type)}
-					<li><a href="/en/database/j-messe/industry/">By Industry</a></li>
+					<li><a href="http://www.jetro.go.jp/en/database/j-messe/industry/">By Industry</a></li>
 					{if ('' == $form.i_3)}
 						<li>{$app.pan_1}</li>
 					{else}
@@ -93,10 +93,10 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 						<li>{$app.pan_2}</li>
 					{/if}
 				{elseif ('v1' == $form.type)}
-					<li><a href="/en/database/j-messe/country/">By Country</a></li>
+					<li><a href="http://www.jetro.go.jp/en/database/j-messe/country/">By Country</a></li>
 					<li>{$app.pan_1}</li>
 				{elseif ('v2' == $form.type)}
-					<li><a href="/en/database/j-messe/country/">By Country</a></li>
+					<li><a href="http://www.jetro.go.jp/en/database/j-messe/country/">By Country</a></li>
 					{if ('' == $form.v_4)}
 						<li><a href="{$config.url_pub}?action_enFairList=true&type=v1&v_2={$form.v_2}">{$app.pan_1}</a></li>
 						<li>{$app.pan_2}</li>
