@@ -249,16 +249,16 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 		<div id="submenu">
 			<div class="submenu_box">
 				<div class="submenu_box_inside">
-					<p class="menu_title"><a href="/en/database/j-messe/">Online Trade Fair Database</a></p>
+					<p class="menu_title"><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database</a></p>
 					<div class="menu_content">
 						<ul>
-							<li><a href="/en/database/j-messe/industry/">By Industry</a></li>
-							<li><a href="/en/database/j-messe/country/">By Country</a></li>
-							<li><a href="/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
-							<li><a href="/en/database/j-messe/recent/">Recently Added</a></li>
-							<li><a href="/en/database/j-messe/ranking/">Monthly Ranking</a></li>
-							<li><a href="/en/database/j-messe/center/">Major Exhibition Sites</a></li>
-							<li><a href="/en/database/j-messe/links/">Related Links</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/industry/">By Industry</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/country/">By Country</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/recent/">Recently Added</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/ranking/">Monthly Ranking</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/center/">Major Exhibition Sites</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/links/">Related Links</a></li>
 						</ul>
 					</div>
 				</div>
