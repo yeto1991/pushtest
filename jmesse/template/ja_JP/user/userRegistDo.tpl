@@ -25,7 +25,7 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			{if ("regist" == $form.mode)}
 				<li><a href="{$config.url}?action_user_userRegist=true&back=1">ユーザー登録</a></li>
 				<li>ユーザー登録確認</li>

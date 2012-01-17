@@ -50,7 +50,7 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="{$config.url}?action_user_top=true">管理者メニュー</a></li>
 			<li>登録済み見本市一覧</li>
 		</ul>

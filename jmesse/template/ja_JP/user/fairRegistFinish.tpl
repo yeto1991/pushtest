@@ -25,7 +25,7 @@
 {*
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">個人メニュー</a></li>
 			{if ('r' == $form.msg)}
 			<li><a href="/database/j-messe/tradefair/">見本市登録(step1)</a></li>

@@ -17,7 +17,7 @@
 	<div id="bread">
 		<ul>
 			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
 			<li>管理者メニュー</li>
 		</ul>
 	</div>
