@@ -20,8 +20,8 @@
 	<!-- bread -->
 	<div id="bread">
 		<ul class="clearfix">
-			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="http://www.jetro.go.jp/">HOME</a></li>
+			<li><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			{if ("regist" == $form.mode)}
 				<li>User Registration</li>
 				{else}

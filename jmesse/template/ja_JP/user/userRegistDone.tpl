@@ -24,8 +24,8 @@
 	<div id="bread">
 {*
 		<ul>
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="http://www.jetro.go.jp/indexj.html">HOME</a></li>
+			<li><a href="{$config.url_pub}">見本市・展示会データベース（J-messe）</a></li>
 			{if ("regist" == $form.mode)}
 				<li><a href="{$config.url}?action_user_userRegist=true">ユーザー登録</a></li>
 				<li><a href="{$config.url}?action_user_userRegistDo=true">ユーザー登録確認</a></li>

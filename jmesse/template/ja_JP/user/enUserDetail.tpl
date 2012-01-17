@@ -17,11 +17,10 @@
 	<div id="bread">
 {*
 		<ul>
-			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/j-messe/">見本市・展示会データベース（J-messe）</a></li>
-			<li><a href="/en/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
-			<li><a href="/en/database/j-messe/tradefair/">個人メニュー</a></li>
-			<li>ユーザー詳細</li>
+			<li><a href="http://www.jetro.go.jp/">HOME</a></li>
+			<li><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
+			<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
+			<li>User Detail</li>
 		</ul>
 *}
 	</div>

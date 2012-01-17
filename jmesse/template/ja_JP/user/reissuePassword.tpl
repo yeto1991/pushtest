@@ -18,8 +18,8 @@
 {*
 	<div id="bread">
 		<ul>
-			<li><a href="/indexj.html">HOME</a></li>
-			<li><a href="/j-messe/">見本市・展示会データベース（J-messe）</a></li>
+			<li><a href="http://www.jetro.go.jp/indexj.html">HOME</a></li>
+			<li><a href="{$config.url_pub}">見本市・展示会データベース（J-messe）</a></li>
 			<li><a href="/database/j-messe/tradefair/">世界の見本市・展示会</a></li>
 			<li>パスワードお問い合わせ</li>
 		</ul>

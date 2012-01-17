@@ -17,9 +17,8 @@
 	<div id="bread">
 {*
 		<ul class="clearfix">
-			<li><a href="/">HOME</a></li>
-			<li><a href="/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
-			<li><a href="/en/j-messe/tradefair/">Trade Fairs held in Japan and the World</a></li>
+			<li><a href="http://www.jetro.go.jp/">HOME</a></li>
+			<li><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li>Password Confirmation</li>
 		</ul>
 *}
