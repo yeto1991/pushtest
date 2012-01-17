@@ -491,11 +491,11 @@
 	<div class="modal" id="prompt_venue">
 		<a class="close" id="btn_close"></a>
 		<h2>
-			Select location<span>Please select(「Region」→「Country/Area」→「City」)</span>
+			Select location<span>&nbsp;Please select it in order of the Region. the Country / Area, and the City.</span>
 		</h2>
 		<div class="venue clearfix">
 
-		<table>
+		<table style="font-size:1.2em;">
 			<tr>
 				<th>Region</th>
 				<td>
