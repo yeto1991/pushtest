@@ -700,16 +700,16 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$sub_industory_5 = $this->_getSubIndustoryCode($main_industory_5, $ary_col[46], $row);
 		$sub_industory_6 = $this->_getSubIndustoryCode($main_industory_6, $ary_col[47], $row);
 
-		// 前回バグ
-		if (
-			('' != $main_industory_2 && $main_industory_1 != $main_industory_2) ||
-			('' != $main_industory_3 && $main_industory_1 != $main_industory_3) ||
-			('' != $main_industory_4 && $main_industory_1 != $main_industory_4) ||
-			('' != $main_industory_5 && $main_industory_1 != $main_industory_5) ||
-			('' != $main_industory_6 && $main_industory_1 != $main_industory_6))
-		{
-			echo "industry bug [".$row."]\n";
-		}
+// 		// 前回バグ
+// 		if (
+// 			('' != $main_industory_2 && $main_industory_1 != $main_industory_2) ||
+// 			('' != $main_industory_3 && $main_industory_1 != $main_industory_3) ||
+// 			('' != $main_industory_4 && $main_industory_1 != $main_industory_4) ||
+// 			('' != $main_industory_5 && $main_industory_1 != $main_industory_5) ||
+// 			('' != $main_industory_6 && $main_industory_1 != $main_industory_6))
+// 		{
+// 			echo "industry bug [".$row."]\n";
+// 		}
 
 		// 大小連結し配列に
 		$ary_industory_tmp = array();
@@ -753,7 +753,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_3 = $jm_code_m->getSubIndustoryCode($main_industory, $sub_industory_name);
 		if (null == $kbn_3) {
-			echo "sub industry code is not found [".$sub_industory_name."][".$row."]\n";
+			echo "sub industry code is not found [".$main_industory.$sub_industory_name."][".$row."]\n";
 			return '';
 		}
 		return $kbn_3;

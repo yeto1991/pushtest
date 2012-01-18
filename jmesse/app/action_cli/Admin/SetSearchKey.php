@@ -90,6 +90,11 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 				$db->rollback();
 				return null;
 			}
+			if (0 == ++$i%1000) {
+				$db->commit();
+				$db->db->autocommit(false);
+				$db->begin();
+			}
 		}
 
 		// COMMIT
@@ -112,9 +117,11 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		$search_key = '';
 
 		// 申請年月日
-		$search_key .= date('Y年m月d日').' ';
+		$search_key .= date('Y年m月d日', strtotime($jm_fair->get('date_of_application'))).' ';
+// 		$search_key .= date('Y年m月d日').' ';
 		// 登録日(承認日)
-		$search_key .= date('Y年m月d日').' ';
+		$search_key .= date('Y年m月d日', strtotime($jm_fair->get('date_of_registration'))).' ';
+// 		$search_key .= date('Y年m月d日').' ';
 		// 見本市番号
 		$search_key .= $jm_fair->get('mihon_no').' ';
 		// 見本市名
@@ -243,9 +250,11 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		$search_key = '';
 
 		// 申請年月日
-		$search_key .= date('Y/m/d').' ';
+		$search_key .= date('Y/m/d', strtotime($jm_fair->get('date_of_application'))).' ';
+// 		$search_key .= date('Y/m/d').' ';
 		// 登録日(承認日)
-		$search_key .= date('Y/m/d').' ';
+		$search_key .= date('Y/m/d', strtotime($jm_fair->get('date_of_registration'))).' ';
+// 		$search_key .= date('Y/m/d').' ';
 		// 見本市番号
 		$search_key .= $jm_fair->get('mihon_no').' ';
 		// 見本市名
@@ -360,6 +369,9 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		return $search_key;
 	}
 
+	function _dateformat($str) {
+
+	}
 }
 
 ?>
