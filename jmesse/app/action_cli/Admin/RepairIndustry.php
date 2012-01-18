@@ -100,7 +100,7 @@ class Jmesse_Cli_Action_AdminRepairIndustry extends Jmesse_ActionClass
 			}
 
 			// 既に更新していたら修正しない
-			if ($jm_fair->get('update_date') > '2012-01-17 00:00:00') {
+			if ('' != $jm_fair->get('update_date') && $jm_fair->get('update_date') > '2012-01-17 00:00:00') {
 				echo "already updated [".$row."]\n";
 				continue;
 			}
