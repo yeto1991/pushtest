@@ -53,27 +53,28 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
-		// ユーザ情報の移行
-		echo "[START]  JM_USER >>>>>\n";
-		// トランザクションの開始
-		$this->_begin();
-		$ary_user = @file("MQData_User.txt");
-		foreach ($ary_user as $row) {
-			// 改行コードの削除
-			$row = str_replace("\r", "", $row);
-			$row = str_replace("\n", "", $row);
+		// ユーザは一時的にコメントアウト
+// 		// ユーザ情報の移行
+// 		echo "[START]  JM_USER >>>>>\n";
+// 		// トランザクションの開始
+// 		$this->_begin();
+// 		$ary_user = @file("MQData_User.txt");
+// 		foreach ($ary_user as $row) {
+// 			// 改行コードの削除
+// 			$row = str_replace("\r", "", $row);
+// 			$row = str_replace("\n", "", $row);
 
-			// jm_userへinsert
-			$jm_user =& $this->_setJmUser($row);
+// 			// jm_userへinsert
+// 			$jm_user =& $this->_setJmUser($row);
 
-			if (null != $jm_user) {
-				// tmp_user_idへinsert
-				$this->_setUserId($row, $jm_user);
-			}
-		}
-		// トランザクション終了
-		$this->_end();
-		echo "[FINISH] JM_USER <<<<<\n";
+// 			if (null != $jm_user) {
+// 				// tmp_user_idへinsert
+// 				$this->_setUserId($row, $jm_user);
+// 			}
+// 		}
+// 		// トランザクション終了
+// 		$this->_end();
+// 		echo "[FINISH] JM_USER <<<<<\n";
 
 		// 見本市情報の移行
 		echo "[START]  JM_FAIR >>>>>\n";
@@ -88,13 +89,14 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 			// jm_fairへinsert
 			$jm_fair =& $this->_setJmFair($row);
 
-			if (null != $jm_fair) {
-				// 画像ファイルの移動
-				$this->_setPhotos($jm_fair);
+			// 画像は一時的にコメント
+// 			if (null != $jm_fair) {
+// 				// 画像ファイルの移動
+// 				$this->_setPhotos($jm_fair);
 
-				// 「キーワード検索対象」設定
-				// 別のバッチで行う。
-			}
+// 				// 「キーワード検索対象」設定
+// 				// 別のバッチで行う。
+// 			}
 		}
 		// トランザクション終了
 		$this->_end();
@@ -355,7 +357,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		}
 		$jm_fair->set('frequency', $this->_getFrequencyCode($ary_col[28], $ary_col[29]));
 
-		$ary_industory = $this->_getIndustory($ary_col);
+		$ary_industory = $this->_getIndustory($ary_col, $row);
 		$n = 1;
 		foreach ($ary_industory as $industory_list) {
 			if (6 == strlen($industory_list)) {
@@ -380,12 +382,17 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_fair->set('exhibits_jp', str_replace('<br>', '<br/>', $ary_col[54]));
 		$jm_fair->set('exhibits_en', str_replace('、', ',', str_replace('<br>', '<br/>', $ary_col[55])));
 
-		$region = $this->_getRegionCode($ary_col[56]);
+		$region = $this->_getRegionCode($ary_col[56], $row);
 		$jm_fair->set('region', $region);
-		$country = $this->_getCountryCode($region, $ary_col[58]);
+		$country = $this->_getCountryCode($region, $ary_col[58], $row);
 		$jm_fair->set('country', $country);
-		$city = $this->_getCityCode($region, $country, $ary_col[60]);
+		$city = $this->_getCityCode($region, $country, $ary_col[60], $row);
 		$jm_fair->set('city', $city);
+
+		// 都市、その他都市のチェック
+		if ('' == $ary_col[60] && $ary_col[62] && $ary_col[63]) {
+			echo "city is blank [".$row."]\n";
+		}
 
 		$jm_fair->set('other_city_jp', $ary_col[62]);
 		$jm_fair->set('other_city_en', $ary_col[63]);
@@ -480,6 +487,9 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 			$jm_fair->set('update_user_id', $user->get('user_id'));
 			$jm_fair->set('update_date', $ary_col[2]);
 		}
+
+		// 「文書番号」追加
+		$jm_fair->set('doc_no', $ary_col[0]);
 
 		$res = $jm_fair->add();
 		if (Ethna::isError($res)) {
@@ -589,15 +599,17 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 * @param string $kbn_2 地域コード
 	 * @param string $kbn_3 国・地域コード
 	 * @param string $city 都市名
+	 * @param string $row 入力文字列
 	 * @return string 都市コード
 	 */
-	function _getCityCode($kbn_2, $kbn_3, $city) {
+	function _getCityCode($kbn_2, $kbn_3, $city, $row) {
 		if ('' == $kbn_2 || '' == $kbn_3 || '' == $city) {
 			return '';
 		}
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_4 = $jm_code_m->getCityCode($kbn_2, $kbn_3, $city);
 		if (null == $kbn_4) {
+			echo "city code is not found [".$row."]\n";
 			return '';
 		}
 		return $kbn_4;
@@ -609,16 +621,19 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 *
 	 * @param string $kbn_2 地域コード
 	 * @param string $country 国・地域名
+	 * @param string $row 入力文字列
 	 * @return string 国・地域コード
 	 */
-	function _getCountryCode($kbn_2, $country) {
+	function _getCountryCode($kbn_2, $country, $row) {
 		if ('' == $kbn_2 || '' == $country) {
+			echo "country is blank [".$row."]\n";
 			return '';
 		}
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_3 = $jm_code_m->getCountryCode($kbn_2, $country);
 		if (null == $kbn_3) {
-				return '';
+			echo "country code is not found [".$row."]\n";
+			return '';
 		}
 		return $kbn_3;
 	}
@@ -627,15 +642,18 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 * 地域コードを取得。
 	 *
 	 * @param string $region 地域名
+	 * @param string $row 入力文字列
 	 * @return string 地域のコード値
 	 */
-	function _getRegionCode($region) {
+	function _getRegionCode($region, $row) {
 		if ('' == $region) {
+			echo "reagion is blank [".$row."]\n";
 			return '';
 		}
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_2 = $jm_code_m->getRegionCode($region);
 		if (null == $kbn_2) {
+			echo "region code is not found [".$row."]\n";
 			return '';
 		}
 		return $kbn_2;
@@ -645,22 +663,53 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 * 業種のコード値を取得。
 	 *
 	 * @param array $ary_col 見本市配列
+	 * @param string $row 入力文字列
 	 * @return array 業種配列<大分類.小分類>
 	 */
-	function _getIndustory($ary_col) {
+	function _getIndustory($ary_col, $row) {
+		// 全て空文字の場合エラー
+		if (
+			'' == $ary_col[30] &&
+			'' == $ary_col[31] &&
+			'' == $ary_col[32] &&
+			'' == $ary_col[33] &&
+			'' == $ary_col[34] &&
+			'' == $ary_col[35] &&
+
+			'' == $ary_col[42] &&
+			'' == $ary_col[43] &&
+			'' == $ary_col[44] &&
+			'' == $ary_col[45] &&
+			'' == $ary_col[46] &&
+			'' == $ary_col[47]
+		) {
+			echo "industry all blank [".$row."]\n";
+		}
+
 		// コードに変換
-		$main_industory_1 = $this->_getMainIndustoryCode($ary_col[30]);
-		$main_industory_2 = $this->_getMainIndustoryCode($ary_col[31]);
-		$main_industory_3 = $this->_getMainIndustoryCode($ary_col[32]);
-		$main_industory_4 = $this->_getMainIndustoryCode($ary_col[33]);
-		$main_industory_5 = $this->_getMainIndustoryCode($ary_col[34]);
-		$main_industory_6 = $this->_getMainIndustoryCode($ary_col[35]);
-		$sub_industory_1 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[42]);
-		$sub_industory_2 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[43]);
-		$sub_industory_3 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[44]);
-		$sub_industory_4 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[45]);
-		$sub_industory_5 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[46]);
-		$sub_industory_6 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[47]);
+		$main_industory_1 = $this->_getMainIndustoryCode($ary_col[30], $row);
+		$main_industory_2 = $this->_getMainIndustoryCode($ary_col[31], $row);
+		$main_industory_3 = $this->_getMainIndustoryCode($ary_col[32], $row);
+		$main_industory_4 = $this->_getMainIndustoryCode($ary_col[33], $row);
+		$main_industory_5 = $this->_getMainIndustoryCode($ary_col[34], $row);
+		$main_industory_6 = $this->_getMainIndustoryCode($ary_col[35], $row);
+		$sub_industory_1 = $this->_getSubIndustoryCode($main_industory_1, $ary_col[42], $row);
+		$sub_industory_2 = $this->_getSubIndustoryCode($main_industory_2, $ary_col[43], $row);
+		$sub_industory_3 = $this->_getSubIndustoryCode($main_industory_3, $ary_col[44], $row);
+		$sub_industory_4 = $this->_getSubIndustoryCode($main_industory_4, $ary_col[45], $row);
+		$sub_industory_5 = $this->_getSubIndustoryCode($main_industory_5, $ary_col[46], $row);
+		$sub_industory_6 = $this->_getSubIndustoryCode($main_industory_6, $ary_col[47], $row);
+
+		// 前回バグ
+		if (
+			('' != $main_industory_2 && $main_industory_1 != $main_industory_2) ||
+			('' != $main_industory_3 && $main_industory_1 != $main_industory_3) ||
+			('' != $main_industory_4 && $main_industory_1 != $main_industory_4) ||
+			('' != $main_industory_5 && $main_industory_1 != $main_industory_5) ||
+			('' != $main_industory_6 && $main_industory_1 != $main_industory_6))
+		{
+			echo "industry bug [".$row."]\n";
+		}
 
 		// 大小連結し配列に
 		$ary_industory_tmp = array();
@@ -694,15 +743,17 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 *
 	 * @param string $main_industory 業種（大分類）のコード値
 	 * @param string $sub_industory_name 業種（小分類）名
+	 * @param string $row 入力文字列
 	 * @return string|unknown 業種（小分類）のコード値
 	 */
-	function _getSubIndustoryCode($main_industory, $sub_industory_name) {
+	function _getSubIndustoryCode($main_industory, $sub_industory_name, $row) {
 		if ('' == $main_industory || '' == $sub_industory_name) {
 			return '';
 		}
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_3 = $jm_code_m->getSubIndustoryCode($main_industory, $sub_industory_name);
 		if (null == $kbn_3) {
+			echo "sub industry code is not found [".$sub_industory_name."][".$row."]\n";
 			return '';
 		}
 		return $kbn_3;
@@ -712,15 +763,17 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 	 * 業種（大分類）のコード値を取得する。
 	 *
 	 * @param string $main_industory_name 業種（大分類）名
+	 * @param string $row 入力文字列
 	 * @return string 業種（大分類）のコード値
 	 */
-	function _getMainIndustoryCode($main_industory_name) {
+	function _getMainIndustoryCode($main_industory_name, $row) {
 		if ('' == $main_industory_name) {
 			return '';
 		}
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_2 = $jm_code_m->getMainIndustoryCode($main_industory_name);
 		if (null == $kbn_2) {
+			echo "main industry code is not found [".$main_industory_name."][".$row."]\n";
 			return '';
 		}
 		return $kbn_2;
