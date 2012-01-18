@@ -390,7 +390,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_fair->set('city', $city);
 
 		// 都市、その他都市のチェック
-		if ('' == $ary_col[60] && $ary_col[62] && $ary_col[63]) {
+		if ('' == $ary_col[60] && '' == $ary_col[62] && '' == $ary_col[63]) {
 			echo "city is blank [".$row."]\n";
 		}
 
@@ -609,7 +609,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_4 = $jm_code_m->getCityCode($kbn_2, $kbn_3, $city);
 		if (null == $kbn_4) {
-			echo "city code is not found [".$row."]\n";
+			echo "city code is not found [".$kbn_2.$kbn_3.$city."][".$row."]\n";
 			return '';
 		}
 		return $kbn_4;
@@ -632,7 +632,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_3 = $jm_code_m->getCountryCode($kbn_2, $country);
 		if (null == $kbn_3) {
-			echo "country code is not found [".$row."]\n";
+			echo "country code is not found [".$kbn_2.$country."][".$row."]\n";
 			return '';
 		}
 		return $kbn_3;
@@ -653,7 +653,7 @@ class Jmesse_Cli_Action_AdminMigration extends Jmesse_ActionClass
 		$jm_code_m =& $this->backend->getManager('JmCodeM');
 		$kbn_2 = $jm_code_m->getRegionCode($region);
 		if (null == $kbn_2) {
-			echo "region code is not found [".$row."]\n";
+			echo "region code is not found [".$region."][".$row."]\n";
 			return '';
 		}
 		return $kbn_2;
