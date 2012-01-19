@@ -548,7 +548,10 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			for ($i = 0; $i < count($ary_keyword); $i++) {
 				if ('' != $ary_keyword[$i]) {
 					if ('' != $sql_tmp_kw) {
-						$sql_tmp_kw .= ' or ';
+						// MOD-S 2012.01.19 and 検索
+						$sql_tmp_kw .= ' and ';
+// 						$sql_tmp_kw .= ' or ';
+						// MOD-E 2012.01.19 and 検索
 					}
 					$sql_tmp_kw .= ' search_key like ? ';
 					array_push($data, '%'.$ary_keyword[$i].'%');
