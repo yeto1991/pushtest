@@ -65,52 +65,68 @@
 		<tr>
 			<th>Date</th>
 			<td>
-				<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if} />Upcoming Trade Fairs View All<br />
-				<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if} />Including Past Trade Fairs View All<br/>
-				<input type="radio" name="year" id="year_e" value="e" {if ('e' == $form.year)}checked{/if} />Select Date<br/>
+				<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if} onclick="fSelectDisabled('u')"/>Upcoming Trade Fairs View All<br />
+				<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if} onclick="fSelectDisabled('a')"/>Including Past Trade Fairs View All<br/>
+				<input type="radio" name="year" id="year_e" value="e" {if ('e' == $form.year)}checked{/if} onclick="fSelectDisabled('e')"/>Select Date<br/>
 				&nbsp;&nbsp;&nbsp;
+				{if ('e' != $form.year)}
+				<select name="date_from_yyyy" id="date_from_yyyy" disabled="disabled">
+				{else}
 				<select name="date_from_yyyy" id="date_from_yyyy">
+				{/if}
 					<option value=""></option>
 					{section name=it loop=$app.year_list}
 					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_from_yyyy)}selected{/if}>{$app.year_list[it]}</option>
 					{/section}
 				</select>/
+				{if ('e' != $form.year)}
+				<select name="date_from_mm" id="date_from_mm" disabled="disabled">
+				{else}
 				<select name="date_from_mm" id="date_from_mm">
+				{/if}
 					<option value=""></option>
-					<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>1</option>
-					<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>2</option>
-					<option value="03" {if ('03' == $form.date_from_mm)}selected{/if}>3</option>
-					<option value="04" {if ('04' == $form.date_from_mm)}selected{/if}>4</option>
-					<option value="05" {if ('05' == $form.date_from_mm)}selected{/if}>5</option>
-					<option value="06" {if ('06' == $form.date_from_mm)}selected{/if}>6</option>
-					<option value="07" {if ('07' == $form.date_from_mm)}selected{/if}>7</option>
-					<option value="08" {if ('08' == $form.date_from_mm)}selected{/if}>8</option>
-					<option value="09" {if ('09' == $form.date_from_mm)}selected{/if}>9</option>
-					<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
-					<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
-					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
+					<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>Jan</option>
+					<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>Feb</option>
+					<option value="03" {if ('03' == $form.date_from_mm)}selected{/if}>Mar</option>
+					<option value="04" {if ('04' == $form.date_from_mm)}selected{/if}>Apr</option>
+					<option value="05" {if ('05' == $form.date_from_mm)}selected{/if}>May</option>
+					<option value="06" {if ('06' == $form.date_from_mm)}selected{/if}>Jun</option>
+					<option value="07" {if ('07' == $form.date_from_mm)}selected{/if}>Jul</option>
+					<option value="08" {if ('08' == $form.date_from_mm)}selected{/if}>Aug</option>
+					<option value="09" {if ('09' == $form.date_from_mm)}selected{/if}>Sep</option>
+					<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>Oct</option>
+					<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>Nov</option>
+					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>Dec</option>
 				</select>～<br />
 				&nbsp;&nbsp;&nbsp;
+				{if ('e' != $form.year)}
+				<select name="date_to_yyyy" id="date_to_yyyy" disabled="disabled">
+				{else}
 				<select name="date_to_yyyy" id="date_to_yyyy">
+				{/if}
 					<option value=""></option>
 					{section name=it loop=$app.year_list}
 					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
 					{/section}
 				</select>/
+				{if ('e' != $form.year)}
+				<select name="date_to_mm" id="date_to_mm" disabled="disabled">
+				{else}
 				<select name="date_to_mm" id="date_to_mm">
+				{/if}
 					<option value=""></option>
-					<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
-					<option value="02" {if ('02' == $form.date_to_mm)}selected{/if}>2</option>
-					<option value="03" {if ('03' == $form.date_to_mm)}selected{/if}>3</option>
-					<option value="04" {if ('04' == $form.date_to_mm)}selected{/if}>4</option>
-					<option value="05" {if ('05' == $form.date_to_mm)}selected{/if}>5</option>
-					<option value="06" {if ('06' == $form.date_to_mm)}selected{/if}>6</option>
-					<option value="07" {if ('07' == $form.date_to_mm)}selected{/if}>7</option>
-					<option value="08" {if ('08' == $form.date_to_mm)}selected{/if}>8</option>
-					<option value="09" {if ('09' == $form.date_to_mm)}selected{/if}>9</option>
-					<option value="10" {if ('10' == $form.date_to_mm)}selected{/if}>10</option>
-					<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
-					<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
+					<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>Jan</option>
+					<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>Feb</option>
+					<option value="03" {if ('03' == $form.date_from_mm)}selected{/if}>Mar</option>
+					<option value="04" {if ('04' == $form.date_from_mm)}selected{/if}>Apr</option>
+					<option value="05" {if ('05' == $form.date_from_mm)}selected{/if}>May</option>
+					<option value="06" {if ('06' == $form.date_from_mm)}selected{/if}>Jun</option>
+					<option value="07" {if ('07' == $form.date_from_mm)}selected{/if}>Jul</option>
+					<option value="08" {if ('08' == $form.date_from_mm)}selected{/if}>Aug</option>
+					<option value="09" {if ('09' == $form.date_from_mm)}selected{/if}>Sep</option>
+					<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>Oct</option>
+					<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>Nov</option>
+					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>Dec</option>
 				</select><br/>
 				{if is_error('date_from_yyyy')}
 				<span class="error-message">{message name="date_from_yyyy"}</span><br />
@@ -484,6 +500,20 @@
 		op.innerHTML = 'ALL';
 		document.getElementById('select_city').appendChild(op);
 
+	}
+
+	function fSelectDisabled(year){
+		if(year == 'e'){
+			document.forms["form_enFairMenuDetail"].elements["date_from_yyyy"].disabled=false;
+			document.forms["form_enFairMenuDetail"].elements["date_from_mm"].disabled=false;
+			document.forms["form_enFairMenuDetail"].elements["date_to_yyyy"].disabled=false;
+			document.forms["form_enFairMenuDetail"].elements["date_to_mm"].disabled=false;
+		}else{
+			document.forms["form_enFairMenuDetail"].elements["date_from_yyyy"].disabled=true;
+			document.forms["form_enFairMenuDetail"].elements["date_from_mm"].disabled=true;
+			document.forms["form_enFairMenuDetail"].elements["date_to_yyyy"].disabled=true;
+			document.forms["form_enFairMenuDetail"].elements["date_to_mm"].disabled=true;
+		}
 	}
 
 	{/literal}

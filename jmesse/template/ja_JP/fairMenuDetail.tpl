@@ -65,17 +65,25 @@
 		<tr>
 			<th>会期</th>
 			<td>
-				<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if} />これから開催のもの<br />
-				<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if} />過去のものを含む<br/>
-				<input type="radio" name="year" id="year_e" value="e" {if ('e' == $form.year)}checked{/if} />期間を選択する<br/>
+				<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if} onclick="fSelectDisabled('u')"/>これから開催のもの<br />
+				<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if} onclick="fSelectDisabled('a')"/>過去のものを含む<br/>
+				<input type="radio" name="year" id="year_e" value="e" {if ('e' == $form.year)}checked{/if} onclick="fSelectDisabled('e')"/>期間を選択する<br/>
 				&nbsp;&nbsp;&nbsp;
+				{if ('e' != $form.year)}
+				<select name="date_from_yyyy" id="date_from_yyyy" disabled="disabled">
+				{else}
 				<select name="date_from_yyyy" id="date_from_yyyy">
+				{/if}
 					<option value=""></option>
 					{section name=it loop=$app.year_list}
 					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_from_yyyy)}selected{/if}>{$app.year_list[it]}</option>
 					{/section}
 				</select>年
+				{if ('e' != $form.year)}
+				<select name="date_from_mm" id="date_from_mm" disabled="disabled">
+				{else}
 				<select name="date_from_mm" id="date_from_mm">
+				{/if}
 					<option value=""></option>
 					<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>1</option>
 					<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>2</option>
@@ -91,13 +99,21 @@
 					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
 				</select>月～<br/>
 				&nbsp;&nbsp;&nbsp;
+				{if ('e' != $form.year)}
+				<select name="date_to_yyyy" id="date_to_yyyy" disabled="disabled">
+				{else}
 				<select name="date_to_yyyy" id="date_to_yyyy">
+				{/if}
 					<option value=""></option>
 					{section name=it loop=$app.year_list}
 					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
 					{/section}
 				</select>年
+				{if ('e' != $form.year)}
+				<select name="date_to_mm" id="date_to_mm" disabled="disabled">
+				{else}
 				<select name="date_to_mm" id="date_to_mm">
+				{/if}
 					<option value=""></option>
 					<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
 					<option value="02" {if ('02' == $form.date_to_mm)}selected{/if}>2</option>
@@ -485,6 +501,20 @@
 		op.innerHTML = 'すべて';
 		document.getElementById('select_city').appendChild(op);
 
+	}
+
+	function fSelectDisabled(year){
+		if(year == 'e'){
+			document.forms["form_fairMenuDetail"].elements["date_from_yyyy"].disabled=false;
+			document.forms["form_fairMenuDetail"].elements["date_from_mm"].disabled=false;
+			document.forms["form_fairMenuDetail"].elements["date_to_yyyy"].disabled=false;
+			document.forms["form_fairMenuDetail"].elements["date_to_mm"].disabled=false;
+		}else{
+			document.forms["form_fairMenuDetail"].elements["date_from_yyyy"].disabled=true;
+			document.forms["form_fairMenuDetail"].elements["date_from_mm"].disabled=true;
+			document.forms["form_fairMenuDetail"].elements["date_to_yyyy"].disabled=true;
+			document.forms["form_fairMenuDetail"].elements["date_to_mm"].disabled=true;
+		}
 	}
 
 	{/literal}
