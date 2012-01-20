@@ -179,7 +179,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 							onchange="dosort('{$config.url_pub}?action_enFairList=ture&page=1')"
 							{/if}
 							>
-							<option value="0" {if ('0' == $form.sort || '' == $form.sort)}selected{/if}>Date</option>
+							<option value="0" {if ('0' == $form.sort || '' == $form.sort)}selected{/if}>Term</option>
 							<option value="1" {if ('1' == $form.sort)}selected{/if}>Newest</option>
 							<option value="2" {if ('2' == $form.sort)}selected{/if}>Name</option>
 						</select>
