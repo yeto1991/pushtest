@@ -71,10 +71,23 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			if (null == $this->af->get('country_jp') || '' == $this->af->get('country_jp')) {
 				$this->ae->add('error', '開催地（国・地域）が入力されていません');
 			}
+			// MOD-S 2012.01.20
 			if ((null == $this->af->get('city_jp') || '' == $this->af->get('city_jp'))
-			&& (null == $this->af->get('othercity_jp') || '' == $this->af->get('othercity_jp'))) {
+				&& (null == $this->af->get('othercity_jp') || '' == $this->af->get('othercity_jp'))
+				&& (null == $this->af->get('othercity_en') || '' == $this->af->get('othercity_en'))
+				&& (null == $this->af->get('other_city_jp') || '' == $this->af->get('other_city_jp'))
+				&& (null == $this->af->get('other_city_en') || '' == $this->af->get('other_city_en'))) {
 				$this->ae->add('error', '開催地（都市）が入力されていません');
 			}
+			if (('' != $this->af->get('othercity_jp') && '' == $this->af->get('other_city_jp'))
+				|| ('' != $this->af->get('othercity_en') && '' == $this->af->get('other_city_en'))){
+				$this->ae->add('error', '開催地（都市）その他が入力されていません');
+			}
+			if (('' == $this->af->get('othercity_jp') && '' != $this->af->get('other_city_jp'))
+				|| ('' == $this->af->get('othercity_en') && '' != $this->af->get('other_city_en'))){
+				$this->ae->add('error', '開催地（都市）その他がチェックされていません');
+			}
+			// MOD-E 2012.01.20
 			// 入場資格
 			if (null == $this->af->get('open_to_jp') || '' == $this->af->get('open_to_jp')) {
 				$this->ae->add('error', '入場資格が入力されていません');

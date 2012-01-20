@@ -108,11 +108,11 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$jm_user =& $this->backend->getObject('JmUser', 'user_id', $jm_fair->get('user_id'));
 		if (Ethna::isError($jm_user)) {
 			$this->ae->addObject('error', $jm_user);
-			return 'admin_error';
+// 			return 'admin_error';
 		}
 		if (null == $jm_user || $jm_fair->get('user_id') != $jm_user->get('user_id')) {
 			$this->ae->add('error', 'ユーザが未登録です。');
-			return 'admin_error';
+// 			return 'admin_error';
 		}
 		$this->af->set('email', $jm_user->get('email'));
 
@@ -350,19 +350,25 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 
 		// 都市名
 		$city_name = $jm_code_m_mgr->getCityName($jm_fair->get('region'),$jm_fair->get('country'),$jm_fair->get('city'));
+		// MOD-S 2012.01.20
 		if (DB::isError($city_name)) {
 			$this->ae->addObject('error', $city_name);
-			return 'admin_error';
+// 			return 'admin_error';
 		}
 		if (null == $city_name) {
-			$this->ae->add('error', '都市名が取得できません。');
-			return 'admin_error';
-		}
-// 		if ('0' == $use_language_flag) {
+			$this->af->set('city_name_jp', '');
+		} else {
 			$this->af->set('city_name_jp', $city_name['discription_jp']);
+		}
+// 			$this->ae->add('error', '都市名が取得できません。');
+// 			return 'admin_error';
+// 		}
+// 		if ('0' == $use_language_flag) {
+// 			$this->af->set('city_name_jp', $city_name['discription_jp']);
 // 		} else {
 //			$this->af->set('city_name_en', $city_name['discription_en']);
 // 		}
+		// MOD-E 2012.01.20
 
 		// 成功？
 		$this->af->setApp('success', $this->af->get('success'));
@@ -372,13 +378,13 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$ret = $mgr->regLog($this->session->get('user_id'), '1', '2', $jm_fair->get('mihon_no'));
 		if (Ethna::isError($ret)) {
 			$this->ae->addObject('error', $ret);
-			return 'admin_error';
+// 			return 'admin_error';
 		}
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
-			return 'admin_error';
+// 			return 'admin_error';
 		}
 
 		return 'admin_fairRegist';
