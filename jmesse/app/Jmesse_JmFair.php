@@ -155,15 +155,31 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_makeWhereSearchDetail($data);
 
 		// SORT条件
-		if ('1' == $sort) {
+		// MOD-S 2012.01.20 会期順追加
+		if ('2' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
+			if($language == 'J'){
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
+			}else{
+				$sql_sort = ' order by trim(fair_title_en) asc ';
+			}
+		} elseif ('1' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			if($language == 'J'){
-				$sql_sort = ' order by fair_title_jp asc ';
-			} else {
-				$sql_sort = ' order by fair_title_en asc ';
-			}
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
 		}
+// 		if ('1' == $sort) {
+// 			$sql_sort = ' order by date_of_registration desc ';
+// 		} else {
+// 			if($language == 'J'){
+// 				$sql_sort = ' order by fair_title_jp asc ';
+// 			}else{
+// 				$sql_sort = ' order by fair_title_en asc ';
+// 			}
+// 		}
+		// MOD-E 2012.01.20 会期順追加
 
 		// OFFSET、LIMIT
 		$sql_limit = ' limit ?, ? ';
@@ -280,15 +296,31 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_makeWhereSearchDetail($data);
 
 		// SORT条件
-		if ('1' == $sort) {
+		// MOD-S 2012.01.20 会期順追加
+		if ('2' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
+			if($language == 'J'){
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
+			}else{
+				$sql_sort = ' order by trim(fair_title_en) asc ';
+			}
+		} elseif ('1' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			if($language == 'J'){
-				$sql_sort = ' order by fair_title_jp asc ';
-			}else{
-				$sql_sort = ' order by fair_title_en asc ';
-			}
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
 		}
+// 		if ('1' == $sort) {
+// 			$sql_sort = ' order by date_of_registration desc ';
+// 		} else {
+// 			if($language == 'J'){
+// 				$sql_sort = ' order by fair_title_jp asc ';
+// 			}else{
+// 				$sql_sort = ' order by fair_title_en asc ';
+// 			}
+// 		}
+		// MOD-E 2012.01.20 会期順追加
 
 		// Prepare Statement化
 		$sql .= ' and ('.$sql_ext.')'.$sql_sort;
@@ -771,15 +803,32 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 // 		$sql .= " and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd, ' 00:00:00') > now() ";
 
 		// SORT条件
-		if ('1' == $sort) {
-			$sql .= ' order by date_of_registration desc ';
-		} elseif ('2' == $sort) {
+		// MOD-S 2012.01.20 会期順追加
+		if ('2' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
 			if($language == 'J'){
-				$sql .= ' order by fair_title_jp asc ';
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
 			}else{
-				$sql .= ' order by fair_title_en asc ';
+				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		} elseif ('1' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
+			$sql_sort = ' order by date_of_registration desc ';
+		} else {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
 		}
+		$sql .= $sql_sort;
+// 		if ('1' == $sort) {
+// 			$sql_sort = ' order by date_of_registration desc ';
+// 		} else {
+// 			if($language == 'J'){
+// 				$sql_sort = ' order by fair_title_jp asc ';
+// 			}else{
+// 				$sql_sort = ' order by fair_title_en asc ';
+// 			}
+// 		}
+		// MOD-E 2012.01.20 会期順追加
 
 		// OFFSET、LIMIT
 		$sql .= ' limit ?, ? ';
@@ -896,15 +945,31 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_makeWhere($data);
 
 		// SORT条件
-		if ('1' == $sort) {
+		// MOD-S 2012.01.20 会期順追加
+		if ('2' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
+			if($language == 'J'){
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
+			}else{
+				$sql_sort = ' order by trim(fair_title_en) asc ';
+			}
+		} elseif ('1' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			if($language == 'J'){
-				$sql_sort = ' order by fair_title_jp asc ';
-			}else{
-				$sql_sort = ' order by fair_title_en asc ';
-			}
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
 		}
+// 		if ('1' == $sort) {
+// 			$sql_sort = ' order by date_of_registration desc ';
+// 		} else {
+// 			if($language == 'J'){
+// 				$sql_sort = ' order by fair_title_jp asc ';
+// 			}else{
+// 				$sql_sort = ' order by fair_title_en asc ';
+// 			}
+// 		}
+		// MOD-E 2012.01.20 会期順追加
 
 		// OFFSET、LIMIT
 		$sql_limit = ' limit ?, ? ';
@@ -1013,15 +1078,31 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_makeWhere($data);
 
 		// SORT条件
-		if ('1' == $sort) {
-			$sql_sort = ' order by jf.date_of_registration desc ';
-		} else {
+		// MOD-S 2012.01.20 会期順追加
+		if ('2' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
 			if($language == 'J'){
-				$sql_sort =  ' order by fair_title_jp asc ';
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
 			}else{
-				$sql_sort =  ' order by fair_title_en asc ';
+				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		} elseif ('1' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
+			$sql_sort = ' order by date_of_registration desc ';
+		} else {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
 		}
+// 		if ('1' == $sort) {
+// 			$sql_sort = ' order by date_of_registration desc ';
+// 		} else {
+// 			if($language == 'J'){
+// 				$sql_sort = ' order by fair_title_jp asc ';
+// 			}else{
+// 				$sql_sort = ' order by fair_title_en asc ';
+// 			}
+// 		}
+		// MOD-E 2012.01.20 会期順追加
 
 		// Prepare Statement化
 		$sql .= ' and ('.$sql_ext.')'.$sql_sort;
@@ -1078,15 +1159,31 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_makeWhereAll($data);
 
 		// SORT条件
-		if ('1' == $sort) {
-			$sql_sort = ' order by jf.date_of_registration desc ';
-		} else {
+		// MOD-S 2012.01.20 会期順追加
+		if ('2' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
 			if($language == 'J'){
-				$sql_sort =  ' order by fair_title_jp asc ';
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
 			}else{
-				$sql_sort =  ' order by fair_title_en asc ';
+				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		} elseif ('1' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
+			$sql_sort = ' order by date_of_registration desc ';
+		} else {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
 		}
+// 		if ('1' == $sort) {
+// 			$sql_sort = ' order by date_of_registration desc ';
+// 		} else {
+// 			if($language == 'J'){
+// 				$sql_sort = ' order by fair_title_jp asc ';
+// 			}else{
+// 				$sql_sort = ' order by fair_title_en asc ';
+// 			}
+// 		}
+		// MOD-E 2012.01.20 会期順追加
 
 		// Prepare Statement化
 		$sql .= ' and ('.$sql_ext.')'.$sql_sort;

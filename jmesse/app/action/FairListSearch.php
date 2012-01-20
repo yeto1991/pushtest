@@ -477,12 +477,16 @@ class Jmesse_Action_FairListSearch extends Jmesse_ActionClass
 	 */
 	function _setSort() {
 		$search_cond = $this->session->get('search_cond');
-		if (null != $this->af->get('sort') && '' != $this->af->get('sort') && 0 != $this->af->get('sort')) {
+		// MOD-S 2012.01.20 会期順追加
+		if (null != $this->af->get('sort') && '' != $this->af->get('sort')) {
+// 		if (null != $this->af->get('sort') && '' != $this->af->get('sort') && 0 != $this->af->get('sort')) {
 			$search_cond['sort'] =  $this->af->get('sort');
 		}
-		if (null == $search_cond['sort'] || '' == $search_cond['sort'] || 0 == $search_cond['sort']) {
+		if (null == $search_cond['sort'] || '' == $search_cond['sort']) {
+// 		if (null == $search_cond['sort'] || '' == $search_cond['sort'] || 0 == $search_cond['sort']) {
 			$search_cond['sort'] =  0;
 		}
+		// MOD-E 2012.01.20 会期順追加
 		$this->session->set('search_cond', $search_cond);
 		return $search_cond['sort'];
 	}

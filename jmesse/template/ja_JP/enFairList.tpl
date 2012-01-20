@@ -169,6 +169,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 						{else}
 						Items per page：<a href="{$config.url_pub}?action_enFairList=true&page=1&limit=20">20</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairList=true&page=1&limit=50">50</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_enFairList=true&page=1&limit=100">100</a> &nbsp;&nbsp;&nbsp;
 						{/if}
+						Sort by:
 						<select name="sort" id="sort"
 							{if ('1' == $form.all)}
 							onchange="dosort('{$config.url_pub}?action_enFairList=ture&page=1&all=1')"
@@ -178,7 +179,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 							onchange="dosort('{$config.url_pub}?action_enFairList=ture&page=1')"
 							{/if}
 							>
-							<option value="">Sort by</option>
+							<option value="0" {if ('0' == $form.sort || '' == $form.sort)}selected{/if}>Date</option>
 							<option value="1" {if ('1' == $form.sort)}selected{/if}>Newest</option>
 							<option value="2" {if ('2' == $form.sort)}selected{/if}>Name</option>
 						</select>

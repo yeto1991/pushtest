@@ -238,6 +238,7 @@
 										{else}
 										表示件数：<a href="{$config.url_pub}?action_fairList=true&page=1&limit=20">20件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairList=true&page=1&limit=50">50件</a>&nbsp;&nbsp;<a href="{$config.url_pub}?action_fairList=true&page=1&limit=100">100件</a> &nbsp;&nbsp;&nbsp;
 										{/if}
+										並び順:
 										<select name="sort" id="sort"
 											{if ('1' == $form.all)}
 											onchange="dosort('{$config.url_pub}?action_fairList=ture&page=1&all=1')"
@@ -247,7 +248,7 @@
 											onchange="dosort('{$config.url_pub}?action_fairList=ture&page=1')"
 											{/if}
 											>
-											<option value="">並び替え</option>
+											<option value="0" {if ('0' == $form.sort || '' == $form.sort)}selected{/if}>会期順</option>
 											<option value="1" {if ('1' == $form.sort)}selected{/if}>新着順</option>
 											<option value="2" {if ('2' == $form.sort)}selected{/if}>名称順</option>
 										</select>
@@ -334,4 +335,3 @@
 
 </body>
 </html>
-
