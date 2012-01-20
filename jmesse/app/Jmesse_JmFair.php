@@ -167,8 +167,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
-			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
 		}
 // 		if ('1' == $sort) {
 // 			$sql_sort = ' order by date_of_registration desc ';
@@ -308,8 +308,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
-			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
 		}
 // 		if ('1' == $sort) {
 // 			$sql_sort = ' order by date_of_registration desc ';
@@ -815,8 +815,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
-			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
 		}
 		$sql .= $sql_sort;
 // 		if ('1' == $sort) {
@@ -957,8 +957,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
-			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
 		}
 // 		if ('1' == $sort) {
 // 			$sql_sort = ' order by date_of_registration desc ';
@@ -1090,8 +1090,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
-			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
 		}
 // 		if ('1' == $sort) {
 // 			$sql_sort = ' order by date_of_registration desc ';
@@ -1171,8 +1171,8 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
 		} else {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼開始日");
-			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) desc ';
+			$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
 		}
 // 		if ('1' == $sort) {
 // 			$sql_sort = ' order by date_of_registration desc ';
