@@ -100,7 +100,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'admin_Login';
+			return 'admin_login';
 		}
 
 		// 入力チェック（必須）
@@ -166,7 +166,10 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 			return 'admin_error';
 		}
 		$this->af->set('email', $jm_user->get('email'));
-
+		// MOD-S 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
+		//$this->af->setApp('user_id', $jm_fair->get('user_id'));
+		//$this->af->setApp('display_mode', 'fairdetail');
+		// MOD-E 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
 		// 申請年月日
 		$this->af->set('date_of_application_y', substr($jm_fair->get('date_of_application'), 0, 4));
 		$this->af->set('date_of_application_m', substr($jm_fair->get('date_of_application'), 5, 2));

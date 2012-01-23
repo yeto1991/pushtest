@@ -332,7 +332,7 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'admin_Login';
+			return 'admin_login';
 		}
 
 		// 最終エラー確認
@@ -356,6 +356,12 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 			$this->ae->addObject('error', $jm_user);
 			return 'admin_error';
 		}
+		// MOD-S 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
+		//展示会詳細画面からの遷移の場合 ボタン表示制御用
+		//if($this->af->get('mode') == 'fairdetail'){
+			//$this->af->setApp('from_page_flg', '1');
+		//}
+		// MOD-E 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
 		//Form値設定
 		$this->af->set('mode', 'change'); //編集開始遷移用
 		$this->af->set('user_id', $jm_user->get('user_id'));

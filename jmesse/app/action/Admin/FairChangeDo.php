@@ -42,7 +42,7 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'admin_Login';
+			return 'admin_login';
 		}
 
 		// 入力チェック（必須）
@@ -133,11 +133,13 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 			$this->ae->add('error', 'Eメールのユーザは未登録です');
 		}
 		// 主催者・問合せ先
-		if ((null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel'))
-			&& (null == $this->af->get('organizer_fax') || '' == $this->af->get('organizer_fax'))
-			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
-			$this->ae->add('error', '主催者・問合せ先が入力されていません');
-		}
+		// MOD-S 2012.01.23 必須チェック削除 TELのみ必須 バリデーションチェックのみのため
+// 		if ((null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel'))
+// 			&& (null == $this->af->get('organizer_fax') || '' == $this->af->get('organizer_fax'))
+// 			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
+// 			$this->ae->add('error', '主催者・問合せ先が入力されていません');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 TELのみ必須 バリデーションチェックのみのため
 
 		// 日付チェック
 		// 申請年月日
@@ -226,10 +228,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 // 			if ('' == $this->af->get('profile_jp')) {
 // 				$this->ae->add('error', 'キャッチフレーズ(日)が入力されていません');
 // 			}
+			// MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
 			// ＰＲ・紹介文
-			if ('' == $this->af->get('detailed_information_jp')) {
-				$this->ae->add('error', 'ＰＲ・紹介文(日)が入力されていません');
-			}
+// 			if ('' == $this->af->get('detailed_information_jp')) {
+// 				$this->ae->add('error', 'ＰＲ・紹介文(日)が入力されていません');
+// 			}
+			// MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
 		}
 		// 英語
 		if ('1' == $select_language_info || '2' == $select_language_info) {
@@ -249,10 +253,12 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 // 			if ('' == $this->af->get('profile_en')) {
 // 				$this->ae->add('error', 'キャッチフレーズ(英)が入力されていません');
 // 			}
+			// MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
 			// ＰＲ・紹介文
-			if ('' == $this->af->get('detailed_information_en')) {
-				$this->ae->add('error', 'ＰＲ・紹介文(英)が入力されていません');
-			}
+// 			if ('' == $this->af->get('detailed_information_en')) {
+// 				$this->ae->add('error', 'ＰＲ・紹介文(英)が入力されていません');
+// 			}
+			// MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
 		}
 
 		// チケット入手方法

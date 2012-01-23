@@ -44,7 +44,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', '');
-			return 'admin_Login';
+			return 'admin_login';
 		}
 
 		// 入力チェック（必須）
@@ -134,18 +134,25 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 // 			&& (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email'))) {
 // 			$this->ae->add('error', '主催者・問合せ先が入力されていません');
 // 		}
+
+		// MOD-S 2012.01.23 必須チェック削除 主催者・問合せ先住所
 		// 主催者・問合せ先住所
-		if (null == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_addr')) {
-			$this->ae->add('error', '主催者・問合せ先住所が入力されていません');
-		}
+// 		if (null == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_addr')) {
+// 			$this->ae->add('error', '主催者・問合せ先住所が入力されていません');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 主催者・問合せ先住所
+
 		// 主催者・問合せ先TEL
 		if (null == $this->af->get('organizer_tel') || '' == $this->af->get('organizer_tel')) {
 			$this->ae->add('error', '主催者・問合せ先TELが入力されていません');
 		}
+
+		// MOD-S 2012.01.23 必須チェック削除 主催者・問合せ先E-Mail
 		// 主催者・問合せ先E-Mail
-		if (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email')) {
-			$this->ae->add('error', '主催者・問合せ先E-Mailが入力されていません');
-		}
+// 		if (null == $this->af->get('organizer_email') || '' == $this->af->get('organizer_email')) {
+// 			$this->ae->add('error', '主催者・問合せ先E-Mailが入力されていません');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 主催者・問合せ先E-Mail
 
 		// 日付
 		// 申請年月日
@@ -234,10 +241,12 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 // 			if ('' == $this->af->get('profile_jp')) {
 // 				$this->ae->add('error', 'キャッチフレーズ(日)が入力されていません');
 // 			}
+			// MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
 			// ＰＲ・紹介文
-			if ('' == $this->af->get('detailed_information_jp')) {
-				$this->ae->add('error', 'ＰＲ・紹介文(日)が入力されていません');
-			}
+// 			if ('' == $this->af->get('detailed_information_jp')) {
+// 				$this->ae->add('error', 'ＰＲ・紹介文(日)が入力されていません');
+// 			}
+			// MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
 		}
 		// 英語
 		if ('1' == $select_language_info || '2' == $select_language_info) {
@@ -257,10 +266,12 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 // 			if ('' == $this->af->get('profile_en')) {
 // 				$this->ae->add('error', 'キャッチフレーズ(英)が入力されていません');
 // 			}
+			// MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
 			// ＰＲ・紹介文
-			if ('' == $this->af->get('detailed_information_en')) {
-				$this->ae->add('error', 'ＰＲ・紹介文(英)が入力されていません');
-			}
+// 			if ('' == $this->af->get('detailed_information_en')) {
+// 				$this->ae->add('error', 'ＰＲ・紹介文(英)が入力されていません');
+// 			}
+			// MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
 		}
 
 		// チケット入手方法

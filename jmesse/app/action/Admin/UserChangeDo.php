@@ -42,7 +42,7 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginUser()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'admin_Login';
+			return 'admin_login';
 		}
 		//入力値チェック
 		if ($this->af->validate() > 0) {

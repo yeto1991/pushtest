@@ -1326,7 +1326,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先住所', // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1391,7 +1391,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先E-Mail', // Display name
-			'required'    => true,           // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
@@ -1726,7 +1726,7 @@ class Jmesse_Action_AdminFairRegist extends Jmesse_ActionClass
 		if (!$this->backend->getManager('adminCommon')->isLoginFair()) {
 			$this->backend->getLogger()->log(LOG_ERR, '未ログイン');
 			$this->af->set('function', $this->config->get('host_path').$_SERVER[REQUEST_URI]);
-			return 'admin_Login';
+			return 'admin_login';
 		}
 
 		return null;
