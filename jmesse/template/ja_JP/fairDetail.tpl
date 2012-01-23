@@ -219,7 +219,9 @@
 											<th>主催者</th>
 											<td>
 												{$app.fair_detail.organizer_jp}<br />
+												{if ('' != $app.fair_detail.organizer_addr)}
 												住所 : {$app.fair_detail.organizer_addr}<br/>
+												{/if}
 												{if ('' != $app.fair_detail.organizer_div)}
 												担当部課 : {$app.fair_detail.organizer_div}<br/>
 												{/if}
@@ -230,7 +232,9 @@
 												{if ('' != $app.fair_detail.organizer_fax)}
 												FAX : {$app.fair_detail.organizer_fax}<br />
 												{/if}
+												{if ('' != $app.fair_detail.organizer_email)}
 												E-mail : <a href="mailto:{$app.fair_detail.organizer_email}">{$app.fair_detail.organizer_email}</a><br />
+												{/if}
 												TEL・FAXは国際電話用の国番号から表示されています。<br />
 												例 : 東京の場合 +81-3-1234-5678<br />
 											</td>

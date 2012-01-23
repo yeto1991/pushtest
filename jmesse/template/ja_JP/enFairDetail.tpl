@@ -153,7 +153,9 @@
 							<th>Organizer</th>
 							<td>
 								{$app.fair_detail.organizer_en}<br />
+								{if ('' != $app.fair_detail.organizer_addr)}
 								Address : {$app.fair_detail.organizer_addr}<br/>
+								{/if}
 								{if ('' != $app.fair_detail.organizer_div)}
 								Department : {$app.fair_detail.organizer_div}<br/>
 								{/if}
@@ -164,7 +166,9 @@
 								{if ('' != $app.fair_detail.organizer_fax)}
 								FAX : {$app.fair_detail.organizer_fax}<br />
 								{/if}
+								{if ('' != $app.fair_detail.organizer_email)}
 								E-mail : <a href="mailto:{$app.fair_detail.organizer_email}">{$app.fair_detail.organizer_email}</a><br />
+								{/if}
 							</td>
 						</tr>
 						{if ('' != $app.fair_detail.detailed_information_en|replace)}
