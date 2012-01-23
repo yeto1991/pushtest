@@ -10,10 +10,10 @@ $config = array(
 	'url_pub'     => 'http://192.168.0.229/j-messe/',
 
 	// base
-	'base'        => 'http://dev.jetro.go.jp/',
-	'base_en'     => 'http://produce.jetro.go.jp/',
-	'base_pub'    => 'http://dev.jetro.go.jp/',
-	'base_pub_en' => 'http://produce.jetro.go.jp/',
+	'base'        => 'https://www.jetro.go.jp/',
+	'base_en'     => 'https://www.jetro.go.jp/',
+	'base_pub'    => 'http://www.jetro.go.jp/',
+	'base_pub_en' => 'http://www.jetro.go.jp/',
 
 	// css,js,base
 	'css_js_base'     => 'https://www.jetro.go.jp/',
