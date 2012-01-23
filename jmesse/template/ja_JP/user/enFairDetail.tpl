@@ -351,7 +351,7 @@ $form.mode
 						</tr>
 						<tr>
 							<th class="item">PR</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
+							<th class="required"></th>
 							<td style="word-break: break-all;">{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 						</tr>
 						<tr>
@@ -385,7 +385,7 @@ $form.mode
 								<strong>Address: </strong>{$form.organizer_addr}<br />
 								<strong>Department: </strong>{$form.organizer_div}<br />
 								<strong>Person: </strong>{$form.organizer_pers}<br />
-								<strong>TEL: </strong>{$form.organizer_tel}<br />
+								<img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /><strong>TEL: </strong>{$form.organizer_tel}<br />
 								<strong>FAX: </strong>{$form.organizer_fax}<br />
 								<strong>Email: </strong>{$form.organizer_email}<br />
 							</td>

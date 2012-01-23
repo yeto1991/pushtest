@@ -284,7 +284,7 @@
 						<tr>
 						{/if}
 							<th class="item">Organizer's statement, special features. etc. </th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
+							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
 								Maximum of about 250 words<br/>
@@ -384,7 +384,7 @@
 								<strong>Address: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
 								<strong>Department: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />
 								<strong>Person: </strong><input type="text" value="{$form.organizer_pers}" size="30" name="organizer_pers" id="organizer_pers" maxlength="100" /><br />
-								<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
+								<img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" />&nbsp;<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
 								Enter the numbers starting with a plus mark “+” followed by the country code. Insert hyphens between each group of numbers. (E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />
 								<strong>FAX: </strong><input type="text" value="{$form.organizer_fax}" size="30" name="organizer_fax" id="organizer_fax" maxlength="100" /><br />
 								Enter the numbers starting with a plus mark “+” followed by the country code. Insert hyphens between each group of numbers. (E.g. for a phone number in Tokyo: +81-3-1234-5678)<br />

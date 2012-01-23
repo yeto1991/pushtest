@@ -286,7 +286,7 @@
 										<tr>
 										{/if}
 											<th class="item">PR・紹介文</th>
-											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<th class="required"></th>
 											<td>
 												<textarea cols="60" rows="6" name="detailed_information_jp" id="detailed_information_jp">{$form.detailed_information_jp}</textarea><br/>
 												1000文字以内で。<br/>
@@ -390,7 +390,7 @@
 												<strong>住所: </strong><input type="text" value="{$form.organizer_addr}" size="30" name="organizer_addr" id="organizer_addr" maxlength="255" /><br />
 												<strong>担当部課: </strong><input type="text" value="{$form.organizer_div}" size="30" name="organizer_div" id="organizer_div" maxlength="255" /><br />
 												<strong>担当者: </strong><input type="text" value="{$form.organizer_pers}" size="30" name="organizer_pers" id="organizer_pers" maxlength="100" /><br />
-												<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
+												<img src="/j-messe/images/db/required.gif" height="18" width="30" />&nbsp;<strong>TEL: </strong><input type="text" value="{$form.organizer_tel}" size="30" name="organizer_tel" id="organizer_tel" maxlength="100" /><br />
 												<strong>FAX: </strong><input type="text" value="{$form.organizer_fax}" size="30" name="organizer_fax" id="organizer_fax" maxlength="100" /><br />
 												電話番号はハイフン区切りで国番号から入力してください。（半角数字）<br />
 												例：東京の場合 +81-3-1234-5678<br />

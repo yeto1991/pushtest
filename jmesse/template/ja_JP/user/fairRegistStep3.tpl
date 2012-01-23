@@ -187,7 +187,7 @@
 											{/if}
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文
 												</th>
-												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+												<th class="required"></th>
 												<td>
 													<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
 													1000文字以内で。<br/>

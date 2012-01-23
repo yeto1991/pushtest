@@ -360,7 +360,7 @@ $form.mode
 										</tr>
 										<tr>
 											<th class="item">PR・紹介文</th>
-											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+											<th class="required"></th>
 											<td style="word-break: break-all;">{$form.detailed_information_jp|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 										</tr>
 										<tr>
@@ -395,7 +395,7 @@ $form.mode
 												<strong>住所: </strong>{$form.organizer_addr}<br />
 												<strong>担当部課: </strong>{$form.organizer_div}<br />
 												<strong>担当者: </strong>{$form.organizer_pers}<br />
-												<strong>TEL: </strong>{$form.organizer_tel}<br />
+												<img src="/j-messe/images/db/required.gif" height="18" width="30" /><strong>TEL: </strong>{$form.organizer_tel}<br />
 												<strong>FAX: </strong>{$form.organizer_fax}<br />
 												<strong>Email: </strong>{$form.organizer_email}<br />
 											</td>
@@ -453,7 +453,7 @@ $form.mode
 											</tr>
 											<tr>
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
-												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+												<th class="required"></th>
 												<td style="word-break: break-all;">{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
