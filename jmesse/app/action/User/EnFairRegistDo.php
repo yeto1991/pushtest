@@ -102,10 +102,12 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 // 			$this->ae->add('profile_en', 'The catchphrase has not been entered.');
 // 		}
 
+		// MOD-S 2012.01.23 必須チェック削除 PR・紹介文
 		// PR・紹介文
-		if ('' == $this->af->get('detailed_information_en')) {
-			$this->ae->add('detailed_information_en', "The organizer's statement, special features. etc. has not been entered.");
-		}
+// 		if ('' == $this->af->get('detailed_information_en')) {
+// 			$this->ae->add('detailed_information_en', "The organizer's statement, special features. etc. has not been entered.");
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 PR・紹介文
 
 		// 見本市の紹介写真
 		// gifとjpgのみ
@@ -138,18 +140,24 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 // 			}
 // 		}
 
+		// MOD-S 2012.01.23 必須チェック削除 主催者問合せ住所
 		// 主催者問合せ住所
-		if ('' == $this->af->get('organizer_addr')) {
-			$this->ae->add('organizer_addr', 'The address of the organizer has not been entered.');
-		}
+// 		if ('' == $this->af->get('organizer_addr')) {
+// 			$this->ae->add('organizer_addr', 'The address of the organizer has not been entered.');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 主催者問合せ住所
+
 		// 主催者問合せTEL
 		if ('' == $this->af->get('organizer_tel')) {
 			$this->ae->add('organizer_tel', 'The tel of the organizer has not been entered.');
 		}
+
+		// MOD-S 2012.01.23 必須チェック削除 主催者問合せEMAIL
 		// 主催者問合せEMAIL
-		if ('' == $this->af->get('organizer_email')) {
-			$this->ae->add('organizer_email', 'The email of the organizer has not been entered.');
-		}
+// 		if ('' == $this->af->get('organizer_email')) {
+// 			$this->ae->add('organizer_email', 'The email of the organizer has not been entered.');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 主催者問合せEMAIL
 
 		if ('' != $this->af->get('organizer_email')) {
 			if (!strpos($this->af->get('organizer_email'), '@')

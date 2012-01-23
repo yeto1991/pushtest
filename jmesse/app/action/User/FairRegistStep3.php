@@ -107,10 +107,13 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 // 			$this->ae->add('error', 'キャッチフレーズは500文字以内にして下さい');
 // 		}
 
+		// MOD-S 2012.01.23 必須チェック削除 PR・紹介文
 		// PR・紹介文
-		if ('' == $this->af->get('detailed_information_jp')) {
-			$this->ae->add('detailed_information_jp', 'PR・紹介文が入力されていません');
-		}
+// 		if ('' == $this->af->get('detailed_information_jp')) {
+// 			$this->ae->add('detailed_information_jp', 'PR・紹介文が入力されていません');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 PR・紹介文
+
 // 		if ('' != $this->af->get('detailed_information_jp')) {
 // 			if (1000 < mb_strlen($this->af->get('detailed_information_jp'))) {
 // 				$this->ae->add('error', 'PR・紹介文は1000文字以内にして下さい');
@@ -152,18 +155,24 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 // 			}
 // 		}
 
-		// 主催者問合せ住所
-		if ('' == $this->af->get('organizer_addr')) {
-			$this->ae->add('organizer_addr', '主催者連絡先住所が入力されていません');
-		}
+		// MOD-S 2012.01.23 必須チェック削除 主催者問合せ住所
+// 		// 主催者問合せ住所
+// 		if ('' == $this->af->get('organizer_addr')) {
+// 			$this->ae->add('organizer_addr', '主催者連絡先住所が入力されていません');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 主催者問合せ住所
+
 		// 主催者問合せTEL
 		if ('' == $this->af->get('organizer_tel')) {
 			$this->ae->add('organizer_tel', '主催者連絡先TELが入力されていません');
 		}
+
+		// MOD-S 2012.01.23 必須チェック削除 主催者問合せEMAIL
 		// 主催者問合せEMAIL
-		if ('' == $this->af->get('organizer_email')) {
-			$this->ae->add('organizer_email', '主催者連絡先Emailが入力されていません');
-		}
+// 		if ('' == $this->af->get('organizer_email')) {
+// 			$this->ae->add('organizer_email', '主催者連絡先Emailが入力されていません');
+// 		}
+		// MOD-E 2012.01.23 必須チェック削除 主催者問合せEMAIL
 
 		if ('' != $this->af->get('organizer_email')) {
 			if (!strpos($this->af->get('organizer_email'), '@')

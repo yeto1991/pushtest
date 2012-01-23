@@ -95,11 +95,12 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 // 			if (500 < mb_strlen($this->af->get('profile_en'))) {
 // 				$this->ae->add('error', 'Teaser Copy は500文字以内にして下さい');
 // 			}
-
+			// MOD-S 2012.01.23 必須チェック削除 PR・紹介文
 			// Organizer's statement,special features. etc.
-			if ('' == $this->af->get('detailed_information_en')) {
-				$this->ae->add('detailed_information_en', "Organizer's statement,special features. etc. が入力されていません");
-			}
+// 			if ('' == $this->af->get('detailed_information_en')) {
+// 				$this->ae->add('detailed_information_en', "Organizer's statement,special features. etc. が入力されていません");
+// 			}
+			// MOD-E 2012.01.23 必須チェック削除 PR・紹介文
 // 			if ('' != $this->af->get('detailed_information_en')) {
 // 				if (1000 < mb_strlen($this->af->get('detailed_information_en'))) {
 // 					$this->ae->add('error', "Organizer's statement,special features. etc. は1000文字以内にして下さい");
