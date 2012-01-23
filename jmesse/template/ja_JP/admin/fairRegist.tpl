@@ -566,7 +566,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="2">ＰＲ・紹介文 <font color="#CC3333">●</font></td>
+							<td nowrap rowspan="2">ＰＲ・紹介文</td>
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
 							<td nowrap>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="80" rows="7">{$form.detailed_information_jp}</textarea></td>
@@ -1058,7 +1058,7 @@
 										<td nowrap><input type="text" name="organizer_en" id="organizer_en" value="{$form.organizer_en}" maxlength="500" size="100" /><font color="#CC3333">（翻訳）</font></td>
 									</tr>
 									<tr>
-										<td nowrap>住所 <font color="#CC3333">●</font></td>
+										<td nowrap>住所</td>
 										<td><input type="text" name="organizer_addr" id="organizer_addr" value="{$form.organizer_addr}" maxlength="225" size="100" /></td>
 									</tr>
 									<tr>
@@ -1078,10 +1078,10 @@
 										<td><input type="text" name="organizer_fax" id="organizer_fax" value="{$form.organizer_fax}" maxlength="100" size="100" /> （半角数字）</td>
 									</tr>
 									<tr>
-										<td nowrap>Ｅ－Ｍａｉｌ <font color="#CC3333">●</font></td>
+										<td nowrap>Ｅ－Ｍａｉｌ</td>
 										<td nowrap><input type="text" name="organizer_email" id="organizer_email" value="{$form.organizer_email}" maxlength="255" size="100" /> （半角英数）</td>
 									</tr>
-								</table> <font size="-1"> ■TEL・FAX はハイフン区切り、国番号から入力してください。 <br> 例：東京の場合 +81-3-1234-5678 <br> ■問合せ先については、住所、TEL、E-mailが必須項目です。
+								</table> <font size="-1"> ■TEL・FAX はハイフン区切り、国番号から入力してください。 <br> 例：東京の場合 +81-3-1234-5678 <br>
 							</font>
 							</td>
 						</tr>
