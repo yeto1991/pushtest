@@ -16,6 +16,11 @@
 	<li><a href="{config.url_pub}?action_json_viewJson=true&f=i_jp">日本語</a></li>
 	<li><a href="{config.url_pub}?action_json_viewJson=true&f=i_en">英語</a></li>
 	</ul>
+<li>業種（大分類）毎件数情報(2列)</li>
+	<ul>
+	<li><a href="{config.url_pub}?action_json_viewJson=true&f=i2_jp">日本語</a></li>
+	<li><a href="{config.url_pub}?action_json_viewJson=true&f=i2_en">英語</a></li>
+	</ul>
 <li>新着見本市情報</li>
 	<ul>
 	<li><a href="{config.url_pub}?action_json_viewJson=true&f=n_jp">日本語</a></li>

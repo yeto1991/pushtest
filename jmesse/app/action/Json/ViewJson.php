@@ -72,20 +72,34 @@ class Jmesse_Action_JsonViewJson extends Jmesse_ActionClass
 		if (null != $f && '' != $f) {
 			$filename = $this->config->get($f);
 			if (null != $filename && '' != $filename) {
-				$full_path = $this->config->get('url_pub').'jsonfile/'.$filename;
+				$full_path = $this->config->get('jsonfile_path').$filename;
 				$this->backend->getLogger()->log(LOG_DEBUG, '■full_path : '.$full_path);
 				$json = @file_get_contents($full_path);
-
 				$list = array();
-				foreach (json_decode($json, true) as $json_row) {
-					$row = array();
-					foreach($json_row as $json_col => $json_value) {
-						$col = array();
-						$col['col'] = $json_col;
-						$col['value'] = $json_value;
-						array_push($row, $col);
+				if ('i2_jp' == $f || 'i2_en' == $f) {
+					foreach (json_decode($json, true) as $json_row_1) {
+						foreach($json_row_1 as $json_row) {
+							$row = array();
+							foreach($json_row as $json_col => $json_value) {
+								$col = array();
+								$col['col'] = $json_col;
+								$col['value'] = $json_value;
+								array_push($row, $col);
+							}
+							array_push($list, $row);
+						}
 					}
-					array_push($list, $row);
+				} else {
+					foreach (json_decode($json, true) as $json_row) {
+						$row = array();
+						foreach($json_row as $json_col => $json_value) {
+							$col = array();
+							$col['col'] = $json_col;
+							$col['value'] = $json_value;
+							array_push($row, $col);
+						}
+						array_push($list, $row);
+					}
 				}
 				$this->af->setApp('list', $list);
 				$this->af->setApp('mode', 'list');
