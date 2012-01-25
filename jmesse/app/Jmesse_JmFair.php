@@ -2386,18 +2386,34 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 会期
+		// MOD-S 2012.01.25
+		// '0'埋め
 		if ('' != $search_cond['date_from_yyyy']) {
-			$date_from = $search_cond['date_from_yyyy'].'/'.$search_cond['date_from_mm'].'/'.$search_cond['date_from_dd'].' 00:00:00';
+			$date_from = $search_cond['date_from_yyyy'].'/'.$this->_zeroFill($search_cond['date_from_mm'], 2).'/'.$this->_zeroFill($search_cond['date_from_dd'], 2);
 		} else {
 			$date_from = '';
 		}
 		if ('' != $search_cond['date_to_yyyy']) {
-			$date_to = $search_cond['date_to_yyyy'].'/'.$search_cond['date_to_mm'].'/'.$search_cond['date_to_dd'].' 23:59:59';
+			$date_to = $search_cond['date_to_yyyy'].'/'.$this->_zeroFill($search_cond['date_to_mm'], 2).'/'.$this->_zeroFill($search_cond['date_to_dd'], 2);
 		} else {
 			$date_to = '';
 		}
-		$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd, ' 00:00:00')";
-		$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 23:59:59')";
+		$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd)";
+		$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd)";
+
+// 		if ('' != $search_cond['date_from_yyyy']) {
+// 			$date_from = $search_cond['date_from_yyyy'].'/'.$search_cond['date_from_mm'].'/'.$search_cond['date_from_dd'].' 00:00:00';
+// 		} else {
+// 			$date_from = '';
+// 		}
+// 		if ('' != $search_cond['date_to_yyyy']) {
+// 			$date_to = $search_cond['date_to_yyyy'].'/'.$search_cond['date_to_mm'].'/'.$search_cond['date_to_dd'].' 23:59:59';
+// 		} else {
+// 			$date_to = '';
+// 		}
+// 		$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd, ' 00:00:00')";
+// 		$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 23:59:59')";
+		// MOD-E 2012.01.25
 		$sql_tmp = $this->_mkSqlDate2($column_from, $column_to, $date_from, $date_to, $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
@@ -2549,6 +2565,23 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		return $sql_ext;
 	}
+
+	// ADD-S 2012.01.25
+	/**
+	 * '0'埋め。
+	 *
+	 * @param string $str 対象文字列
+	 * @param int $col 全体カラムすう
+	 * @return string '0'埋めされた文字列
+	 */
+	function _zeroFill($str, $col) {
+		$ret = $str;
+		while ($col > strlen($ret)) {
+			$ret = '0'.$ret;
+		}
+		return $ret;
+	}
+	// ADD-E 2012.01.25
 
 	/**
 	 * キーワード。

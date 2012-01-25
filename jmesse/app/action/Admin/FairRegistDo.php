@@ -384,12 +384,21 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('keyword', $this->af->get('keyword'));
 
 		// 会期
+		// MOD-S 2012.01.25 '0'埋め
 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
-		$jm_fair->set('date_from_mm', $this->af->get('date_from_mm'));
-		$jm_fair->set('date_from_dd', $this->af->get('date_from_dd'));
+		$jm_fair->set('date_from_mm', $this->_zeroFill($this->af->get('date_from_mm'), 2));
+		$jm_fair->set('date_from_dd', $this->_zeroFill($this->af->get('date_from_dd'), 2));
 		$jm_fair->set('date_to_yyyy', $this->af->get('date_to_yyyy'));
-		$jm_fair->set('date_to_mm', $this->af->get('date_to_mm'));
-		$jm_fair->set('date_to_dd', $this->af->get('date_to_dd'));
+		$jm_fair->set('date_to_mm', $this->_zeroFill($this->af->get('date_to_mm'), 2));
+		$jm_fair->set('date_to_dd', $this->_zeroFill($this->af->get('date_to_dd'), 2));
+
+// 		$jm_fair->set('date_from_yyyy', $this->af->get('date_from_yyyy'));
+// 		$jm_fair->set('date_from_mm', $this->af->get('date_from_mm'));
+// 		$jm_fair->set('date_from_dd', $this->af->get('date_from_dd'));
+// 		$jm_fair->set('date_to_yyyy', $this->af->get('date_to_yyyy'));
+// 		$jm_fair->set('date_to_mm', $this->af->get('date_to_mm'));
+// 		$jm_fair->set('date_to_dd', $this->af->get('date_to_dd'));
+		// MOD-E 2012.01.25 '0'埋め
 
 		// 開催頻度
 // 		if ('0' == $use_language_flag) {
@@ -838,6 +847,24 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 	function _getImageDir($mihon_no) {
 		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
 	}
+
+	// ADD-S 2012.01.25
+	/**
+	 * '0'埋め。
+	 *
+	 * @param string $str 対象文字列
+	 * @param int $col 全体カラムすう
+	 * @return string '0'埋めされた文字列
+	 */
+	function _zeroFill($str, $col) {
+		$ret = $str;
+		while ($col > strlen($ret)) {
+			$ret = '0'.$ret;
+		}
+		return $ret;
+	}
+	// ADD-E 2012.01.25
+
 }
 
 ?>
