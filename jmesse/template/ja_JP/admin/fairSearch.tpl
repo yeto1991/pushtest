@@ -443,7 +443,8 @@
 								<input type="text" name="date_from_dd" id="date_from_dd" value="{$form.date_from_dd}" maxlength="2" size="2" />日から&nbsp;
 								<input type="text" name="date_to_yyyy" id="date_to_yyyy" value="{$form.date_to_yyyy}" maxlength="4" size="4" />年
 								<input type="text" name="date_to_mm" id="date_to_mm" value="{$form.date_to_mm}" maxlength="2" size="2" />月
-								<input type="text" name="date_to_dd" id="date_to_dd" value="{$form.date_to_dd}" maxlength="2" size="2" />日まで
+								<input type="text" name="date_to_dd" id="date_to_dd" value="{$form.date_to_dd}" maxlength="2" size="2" />日まで<br/>
+								<font size="-1">■例：2002年8月1日の場合には半角数字で、2002 08 01 と入力してください。</font>
 							</td>
 						</tr>
 
