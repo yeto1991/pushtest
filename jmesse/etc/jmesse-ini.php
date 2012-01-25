@@ -10,14 +10,14 @@ $config = array(
 	'url_pub'     => 'http://localhost/jmesse/www/',
 
 	// base
-	'base'        => 'http://dev.jetro.go.jp/',
-	'base_en'     => 'http://produce.jetro.go.jp/',
-	'base_pub'    => 'http://dev.jetro.go.jp/',
-	'base_pub_en' => 'http://produce.jetro.go.jp/',
+	'base'        => 'https://www.jetro.go.jp/',
+	'base_en'     => 'https://www.jetro.go.jp/',
+	'base_pub'    => 'http://www.jetro.go.jp/',
+	'base_pub_en' => 'http://www.jetro.go.jp/',
 
 	// css,js,base
-	'css_js_base'     => 'https://localhost/',
-	'css_js_base_pub' => 'http://localhost/',
+	'css_js_base'     => 'https://www.jetro.go.jp/',
+	'css_js_base_pub' => 'http://www.jetro.go.jp/',
 
 	// path
 	'host_path'      => 'https://localhost',
@@ -34,6 +34,8 @@ $config = array(
 	'r_en'  => 'region_en.json',
 	'i_jp'  => 'industry_jp.json',
 	'i_en'  => 'industry_en.json',
+	'i2_jp'  => 'industry2_jp.json',
+	'i2_en'  => 'industry2_en.json',
 	'n_jp'  => 'new-mihonichi_jp.json',
 	'n_en'  => 'new-mihonichi_en.json',
 	'r1_jp' => 'ranking1_jp.json',
@@ -71,7 +73,7 @@ $config = array(
 
 	// db
 // 	'dsn' => 'mysql://jmesse:idsjmesse@localhost/jmesse',
-	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
+ 	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
 	// sample-1: single db
 	// 'dsn' => 'mysql://user:password@server/database',
 	//
