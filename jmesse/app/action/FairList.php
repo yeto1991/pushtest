@@ -790,7 +790,10 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$this->af->setApp('sub_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListSubIndustory($search_cond['i_2'], '0'));
 
 			// 開催地（地域）集計値
-			$this->af->setApp('region_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListRegionIndustory('0'));
+			$main_industory = $search_cond['i_2'];
+			$sub_industory = '' == $search_cond['i_3'] ? '000' : $search_cond['i_3'];
+			$this->af->setApp('region_cnt', $this->backend->getManager('JmFairDetailCnt')->getFairCntListRegionIndustory('0', $main_industory, $sub_industory));
+// 			$this->af->setApp('region_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListRegionIndustory('0'));
 			// 開催地（国・地域）集計値
 			$this->af->setApp('country_disp_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountryDisp('0'));
 			$this->af->setApp('country_close_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountryClose('0'));
@@ -806,7 +809,9 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$this->af->setApp('country_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCountry($search_cond['v_2'], '0'));
 
 			// 業種（大分類）集計値
-			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory('0'));
+			$region = $search_cond['v_2'];
+			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairDetailCnt')->getFairCntListMainIndustory('0', $region, '000', '000'));
+// 			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory('0'));
 		} elseif ('v2' == $search_cond['type']) {
 			// 地域選択
 			if ('' == $search_cond['v_2']) {
@@ -824,7 +829,11 @@ class Jmesse_Action_FairList extends Jmesse_ActionClass
 			$this->af->setApp('city_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListCity($search_cond['v_2'], $search_cond['v_3'], '0'));
 
 			// 業種（大分類）集計値
-			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory('0'));
+			$region = $search_cond['v_2'];
+			$country = $search_cond['v_3'];
+			$city = '' == $search_cond['v_4'] ? '000' : $search_cond['v_4'];
+			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairDetailCnt')->getFairCntListMainIndustory('0', $region, $country, $city));
+// 			$this->af->setApp('main_industory_cnt', $this->backend->getManager('JmFairCnt')->getFairCntListMainIndustory('0'));
 		}
 
 	}

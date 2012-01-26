@@ -55,9 +55,7 @@
 						{/if}
 					{/section}
 					/>{$app.region_cnt[it].discription_jp}
-{*
 					({$app.region_cnt[it].fair_cnt})
-*}
 				</p>
 				<div>
 					<p>
