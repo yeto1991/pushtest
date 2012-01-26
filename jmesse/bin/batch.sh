@@ -14,6 +14,8 @@ echo ▼▼▼ [`date`]【開始】バッチ
 echo ▼▼▼ [`date`]【開始】見本市件数テーブルデータ集計バッチ
 $MYSQL_HOME/bin/mysql -ujmesse -pidsjmesse -h$DB_SERVER jmesse < $JMESSE_HOME/bin/summaryCountForFairCntTable.sql
 echo $?
+$MYSQL_HOME/bin/mysql -ujmesse -pidsjmesse -h$DB_SERVER jmesse < $JMESSE_HOME/bin/summaryCountForFairDetailCntTable.sql
+echo $?
 echo ▲▲▲ [`date`]【終了】見本市件数テーブルデータ集計バッチ
 
 # 地域毎件数生成バッチ
