@@ -90,6 +90,7 @@
 						/>{$app.country_close_cnt[it2].discription_jp}
 						{/if}
 						{/section}
+						</span>
 					</p>
 					{/if}
 				</div>
