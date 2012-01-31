@@ -163,6 +163,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if (!checkdate($this->af->get('date_of_registration_m'), $this->af->get('date_of_registration_d'), $this->af->get('date_of_registration_y'))) {
 			$this->ae->add('error', '登録日(承認日)が正しくありません');
 		}
+		// ADD-S 2012.01.31 未来日付はエラー
+		if (strtotime(date('Y-m-d')) < strtotime($this->af->get('date_of_registration_y').'-'.$this->af->get('date_of_registration_m').'-'.$this->af->get('date_of_registration_d'))) {
+			$this->ae->add('error', '登録日(承認日)が未来です');
+		}
+		// ADD-E 2012.01.31 未来日付はエラー
 		// 会期
 		if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
 			$this->ae->add('error', '会期が正しくありません');
