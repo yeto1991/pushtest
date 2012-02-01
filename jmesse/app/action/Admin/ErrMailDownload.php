@@ -119,37 +119,36 @@ class Jmesse_Action_AdminErrMailDownload extends Jmesse_ActionClass
 			return 'admin_error';
 		}
 
+		// MOD-S 2012.01.31 ダウンロード項目、コード値変換対応
 		// CSV出力
-		if (null == $list || 0 == count($list)) {
-			$this->ae->add('error', '検索結果が0件です');
-			return 'admin_errMail';
-		} else {
-			// ファイル名
-			$file = 'list.csv';
+		// ファイル名
+		$file = 'list.csv';
 
-			// CSV出力
-			header ("Content-Disposition: attachment; filename=$file");
-			header ("Content-type: application/x-csv");
+		// CSV出力
+		header ("Content-Disposition: attachment; filename=$file");
+		header ("Content-type: application/x-csv");
 
-			for ($i = 0; $i < count($list); $i++) {
-				$row = $list[$i];
-				$j = 0;
-				foreach ($row as $key => $value) {
-					if (0 < $j) {
-						echo ',';
-					}
-					if ('err_kind' == $key) {
-						echo '"'.mb_convert_encoding($this->err_kind[$value], 'CP932', 'UTF-8').'"';
-					} else {
-						echo '"'.mb_convert_encoding($value, 'CP932', 'UTF-8').'"';
-					}
-					$j++;
+		$csvtitle = '"年月日","Eメール","エラー種別"';
+		echo mb_convert_encoding($csvtitle, 'CP932', 'UTF-8');
+		echo "\n";
+		for ($i = 0; $i < count($list); $i++) {
+			$row = $list[$i];
+			$j = 0;
+			foreach ($row as $key => $value) {
+				if (0 < $j) {
+					echo ',';
 				}
-				echo "\n";
+				if ('err_kind' == $key) {
+					echo '"'.mb_convert_encoding($this->err_kind[$value], 'CP932', 'UTF-8').'"';
+				} else {
+					echo '"'.mb_convert_encoding($value, 'CP932', 'UTF-8').'"';
+				}
+				$j++;
 			}
+			echo "\n";
 		}
-
 		return null;
+		// MOD-E 2012.01.31 ダウンロード項目、コード値変換対応
 	}
 
 	var $err_kind = array('0' => 'アドレス不正', '1' => 'メールサーバ不正', '2' => 'その他');

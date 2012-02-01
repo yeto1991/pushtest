@@ -74,31 +74,30 @@ class Jmesse_Action_FairListDownload extends Jmesse_ActionClass
 			return 'error';
 		}
 
+		// MOD-S 2012.01.31 ダウンロード項目、コード値変換対応
 		// CSV出力
-		if (null != $jm_fair_list) {
-			// ファイル名
-			$file = 'list.csv';
+		// ファイル名
+		$file = 'list.csv';
 
-			// header出力
-			header ("Content-Disposition: attachment; filename=$file");
-			header ("Content-type: application/x-csv");
+		// header出力
+		header ("Content-Disposition: attachment; filename=$file");
+		header ("Content-type: application/x-csv");
 
-			foreach ($jm_fair_list as $row) {
-				$j = 0;
-				foreach ($row as $value) {
-					if (0 < $j) {
-						echo ',';
-					}
-					echo '"'.mb_convert_encoding(str_replace('<br/>', '', $value), 'CP932', 'UTF-8').'"';
-					$j++;
+		$csvtitle = '"申請年月日","登録日（承認日）","見本市名（日）","見本市名（英）","見本市略称","見本市URL","見本市番号","キャッチフレーズ（日）","キャッチフレーズ（英）","PR・紹介文(日)","PR・紹介文(英)","会期開始年","会期開始月","会期開始日","会期終了年","会期終了月","会期終了日","開催頻度","業種大分類(1)","業種小分類(1)","業種大分類(2)","業種小分類(2)","業種大分類(3)","業種小分類(3)","業種大分類(4)","業種小分類(4)","業種大分類(5)","業種小分類(5)","業種大分類(6)","業種小分類(6)","出品物(日)","出品物(英)","開催地地域","開催地国地域","開催地都市","開催地その他（日）","開催地その他（英）","会場名(日)","会場名(英)","会場URL","展示会で使用する面積（Net）","入場資格","チケットの入手方法(1)","チケットの入手方法(2)","チケットの入手方法(3)","チケットの入手方法(4)","その他のチケットの入手方法(日)","その他のチケットの入手方法(英)","過去の実績年","過去の実績来場者数","過去の実績海外来場者数","過去の実績出展社数","過去の実績海外出展社数","過去の実績展示面積(㎡)","過去の実績認証機関","主催者・問合せ先名称（日）","主催者・問合せ先名称（英）","主催者・問合せ先TEL","主催者・問合せ先FAX","主催者・問合せ先E-Mail","主催者・問合せ先住所","主催者・問合せ先担当部課","主催者・問合せ先担当者","日本国内の照会先名称（日）","日本国内の照会先名称（英）","日本国内の照会先TEL","日本国内の照会先FAX","日本国内の照会先E-Mail","日本国内の照会先住所","日本国内の照会先担当部課","日本国内の照会先先担当者","展示会に係わる画像（1）","展示会に係わる画像（2）","展示会に係わる画像（3）","検索キーワード","登録日","更新日"';
+		echo mb_convert_encoding($csvtitle, 'CP932', 'UTF-8');
+		echo "\n";
+		foreach ($jm_fair_list as $row) {
+			$j = 0;
+			foreach ($row as $value) {
+				if (0 < $j) {
+					echo ',';
 				}
-				echo "\n";
+				echo '"'.mb_convert_encoding(str_replace('<br/>', '', $value), 'CP932', 'UTF-8').'"';
+				$j++;
 			}
-		} else {
-			$this->ae->set('error', '検索件数が0件です。');
-			return 'fairList';
+			echo "\n";
 		}
-
+		// MOD-E 2012.01.31 ダウンロード項目、コード値変換対応
 		return null;
 	}
 

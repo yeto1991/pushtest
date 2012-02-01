@@ -70,6 +70,12 @@ class Jmesse_Action_AdminUserCsvDownload extends Jmesse_ActionClass
 		header ("Content-Disposition: attachment; filename=$file");
 		header ("Content-type: application/x-csv");
 
+		// MOD-S 2012.01.31 ダウンロード項目、コード値変換対応
+		$csvtitle = '"Eメール"';
+		echo mb_convert_encoding($csvtitle, 'CP932', 'UTF-8');
+		echo "\n";
+		// MOD-E 2012.01.31 ダウンロード項目、コード値変換対応
+
 		for ($i = 0; $i < count($jm_user_csv_list); $i++) {
 			$row = $jm_user_csv_list[$i];
 			$j = 0;
