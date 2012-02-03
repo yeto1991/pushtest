@@ -559,6 +559,21 @@
 							<!-- 削除フラグ -->
 							<td>{if ("1" ==$form.del_flg)}削除済{else}未削除{/if}</td>
 						</tr>
+						<tr>
+							<td nowrap>登録カテゴリ</td>
+							<!-- 登録カテゴリ -->
+							<td>
+								{if ("0" == $form.regist_category)}
+								ユーザによる登録（新規/コピー登録）
+								{elseif ("1" == $form.regist_category)}
+								運営委託先/管理者による登録
+								{elseif ("2" == $form.regist_category)}
+								新規発掘登録
+								{elseif ("9" == $form.regist_category)}
+								その他
+								{/if}
+							</td>
+						</tr>
 					</table>
 					<hr/>
 

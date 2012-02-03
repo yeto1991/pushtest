@@ -1058,6 +1058,32 @@
 								</select>
 							</td>
 						</tr>
+						<tr>
+							<td nowrap>登録カテゴリ</td>
+							<!-- 登録カテゴリ -->
+							<td nowrap>
+								<input type="checkbox" name="regist_category[]" id="regist_category[]" value="0"
+								{section name=it loop=$form.regist_category}
+								{if ('0' == $form.regist_category[it])}checked{/if}
+								{/section}
+								/>ユーザによる登録（新規/コピー登録）
+								<input type="checkbox" name="regist_category[]" id="regist_category[]" value="1"
+								{section name=it loop=$form.regist_category}
+								{if ('1' == $form.regist_category[it])}checked{/if}
+								{/section}
+								/>運営委託先/管理者による登録<br />
+								<input type="checkbox" name="regist_category[]" id="regist_category[]" value="2"
+								{section name=it loop=$form.regist_category}
+								{if ('2' == $form.regist_category[it])}checked{/if}
+								{/section}
+								/>新規発掘登録
+								<input type="checkbox" name="regist_category[]" id="regist_category[]" value="9"
+								{section name=it loop=$form.regist_category}
+								{if ('9' == $form.regist_category[it])}checked{/if}
+								{/section}
+								/>その他
+							</td>
+						</tr>
 					</table>
 					<hr />
 					集計条件設定<br>

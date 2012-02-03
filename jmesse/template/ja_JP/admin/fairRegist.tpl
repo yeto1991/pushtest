@@ -1183,6 +1183,16 @@
 								<input type="radio" name="del_flg" id="del_flg" value="1" {if ("1" == $form.del_flg)}checked{/if} />削除済
 							</td>
 						</tr>
+						<tr>
+							<td nowrap>登録カテゴリ</td>
+							<!-- 登録カテゴリ -->
+							<td nowrap>
+								<input type="radio" name="regist_category" id="regist_category" value="0" {if ("0" == $form.regist_category)}checked{/if} />ユーザによる登録（新規/コピー登録）
+								<input type="radio" name="regist_category" id="regist_category" value="1" {if ("1" == $form.regist_category)}checked{/if} />運営委託先/管理者による登録
+								<input type="radio" name="regist_category" id="regist_category" value="2" {if ("2" == $form.regist_category)}checked{/if} />新規発掘登録
+								<input type="radio" name="regist_category" id="regist_category" value="9" {if ("9" == $form.regist_category)}checked{/if} />その他<br />
+							</td>
+						</tr>
 					</table>
 					<hr>
 					<input type="button" value="登録" onclick="registFair()" />
