@@ -51,6 +51,13 @@ $config = array(
 	'r5_en' => 'ranking5_en.json',
 	'r6_en' => 'ranking6_en.json',
 
+	// MOD-S 2012.01.23 top3用ファイル作成
+	'n_jp_top3'  => 'new-mihonichi_jp_top3.json',
+	'n_en_top3'  => 'new-mihonichi_en_top3.json',
+	'r1_jp_top3' => 'ranking1_jp_top3.json',
+	'r4_en_top3' => 'ranking4_en_top3.json',
+	// MOD-E 2012.01.23 top3用ファイル作成
+
 	// 共通部分URL
 	'header_url'           => 'http://www.jetro.go.jp/parts/ja_header.html ',
  	'footer_url'           => 'http://www.jetro.go.jp/parts/ja_footer.html',
