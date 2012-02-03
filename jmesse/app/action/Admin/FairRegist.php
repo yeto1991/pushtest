@@ -1666,6 +1666,20 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 
+		'regist_category' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_RADIO, // Form type
+			'name'        => '登録カテゴリ',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
 		'br' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type

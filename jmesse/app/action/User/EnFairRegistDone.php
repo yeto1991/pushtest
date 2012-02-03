@@ -238,6 +238,11 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 			$jm_fair->set('regist_type', '0');
 		}
 
+		// MOD-S 2012.02.03 登録カテゴリ追加対応
+		//登録カテゴリ ([0：ユーザによる登録])
+		$jm_fair->set('regist_category', '0');
+		// MOD-E 2012.02.03 登録カテゴリ追加対応
+
 		// フリーワード検索用カラム作成
 		$jm_fair->set('search_key', $this->_makeSearchKey($jm_fair));
 

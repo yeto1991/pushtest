@@ -166,7 +166,7 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 			return 'admin_error';
 		}
 		$this->af->set('email', $jm_user->get('email'));
-		// MOD-S 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
+		// TODO MOD-S 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
 		//$this->af->setApp('user_id', $jm_fair->get('user_id'));
 		//$this->af->setApp('display_mode', 'fairdetail');
 		// MOD-E 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
@@ -333,6 +333,9 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 		// 削除
 		$this->af->set('del_flg', $jm_fair->get('del_flg'));
 
+		// MOD-S 2012.02.03 登録カテゴリ追加対応
+		$this->af->set('regist_category', $jm_fair->get('regist_category'));
+		// MOD-E 2012.02.03 登録カテゴリ追加対応
 		// 表示項目なし
 // 		$this->af->set('venue_url', $jm_fair->get('venue_url'));
 // 		$this->af->set('keyword', $jm_fair->get('keyword'));

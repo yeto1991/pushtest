@@ -540,6 +540,9 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		}else{
 			$jm_fair->set('regist_type', '0');
 		}
+		// MOD-S 2012.02.03 登録カテゴリ追加対応
+		$jm_fair->set('regist_category', $this->af->get('regist_category'));
+		// MOD-E 2012.02.03 登録カテゴリ追加対応
 // 		$jm_fair->set('update_user_id', '');
 // 		$jm_fair->set('update_date', '');
 

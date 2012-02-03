@@ -518,6 +518,10 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		$jm_fair->set('update_user_id', $this->session->get('user_id'));
 		$jm_fair->set('update_date', date('Y/m/d H:i:s'));
 
+		// MOD-S 2012.02.03 登録カテゴリ追加対応
+		//登録カテゴリ
+		$jm_fair->set('regist_category', $this->af->get('regist_category'));
+		// MOD-E 2012.02.03 登録カテゴリ追加対応
 		// 入力項目なし
 		$jm_fair->set('jetro_suport', '');
 		$jm_fair->set('jetro_suport_url', '');

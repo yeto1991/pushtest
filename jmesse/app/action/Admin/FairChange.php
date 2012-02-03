@@ -297,6 +297,9 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 
 		// 削除
 		$this->af->set('del_flg', $jm_fair->get('del_flg'));
+		// MOD-S 2012.02.03 登録カテゴリ追加対応
+		$this->af->set('regist_category', $jm_fair->get('regist_category'));
+		// MOD-E 2012.02.03 登録カテゴリ追加対応
 
 		// 表示項目なし
 // 		$this->af->set('venue_url', $jm_fair->get('venue_url'));

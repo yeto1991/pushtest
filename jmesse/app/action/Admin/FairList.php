@@ -399,6 +399,9 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['note_for_system_manager_cond'] = $this->af->get('note_for_system_manager_cond');
 				$search_cond['note_for_data_manager'] = $this->af->get('note_for_data_manager');
 				$search_cond['note_for_data_manager_cond'] = $this->af->get('note_for_data_manager_cond');
+				// MOD-S 2012.02.03 登録カテゴリ追加対応
+				$search_cond['regist_category'] = $this->af->get('regist_category');
+				// MOD-E 2012.02.03 登録カテゴリ追加対応
 				$this->session->set('search_cond', $search_cond);
 			}
 		} elseif ('s' == $this->af->get('type')) {
