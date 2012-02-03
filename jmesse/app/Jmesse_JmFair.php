@@ -17,36 +17,20 @@
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
 	/**
-	* JSONファイル(new-mihonichi_jp.json)作成用
-	*
+	* 新着見本市 日本語JSONファイル作成用
+	* @param int $limitmax 取得件数
 	* @return array 取得データ
 	*/
-	function getJsonNewMihonichiJP() {
+	function getJsonNewMihonichiJP($limitmax) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jf.mihon_no mihon_no, jf.abbrev_title abbrev_title, jf.fair_title_en fair_title_en, jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日') end, jcm_2.discription_jp country, case when jf.city = '' then concat('その他(', jf.other_city_jp, ')') else jcm_3.discription_jp end city, jf.fair_url url from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') order by jf.date_of_registration desc, jf.mihon_no desc limit 0, 10";
-//		$sql = "select jf.mihon_no id, jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日') end, jcm_2.discription_jp country, case when jf.city = '' then concat('その他(', jf.other_city_jp, ')') else jcm_3.discription_jp end city, jf.fair_url url from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') order by jf.date_of_registration desc, jf.mihon_no desc limit 0, 10";
-
+		$sql = "select jf.mihon_no mihon_no, jf.abbrev_title abbrev_title, jf.fair_title_en fair_title_en, jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日') end, jcm_2.discription_jp country, case when jf.city = '' then concat('その他(', jf.other_city_jp, ')') else jcm_3.discription_jp end city, jf.fair_url url from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('0', '2') and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd) >= curdate()order by jf.date_of_registration desc, concat(jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd) asc limit 0, " . $limitmax;
 		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
 		$res = $db->db->query($sql);
-
-// 		$sql  = " select ";
-// 		$sql .= " jf.fair_title_jp name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy,'年', jf.date_to_mm, '月', jf.date_to_dd,'日') end, jcm_2.discription_jp country, CASE WHEN jf.city = '' THEN concat('その他(', jf.other_city_jp, ')') ELSE jcm_3.discription_jp END city, jf.fair_url url ";
-// 		$sql .= " from jm_fair jf  ";
-// 		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3  ";
-// 		$sql .= " left outer join ( select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = ? ) jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 ";
-// 		$sql .= " where jf.confirm_flag = ? and jf.del_flg = ? and jf.web_display_type = ? and jf.select_language_info = ? order by jf.date_of_registration desc limit ?, ? ";
-
-// 		// Prepare Statement化
-// 		$stmt =& $db->db->prepare($sql);
-// 		// 検索条件をArray化
-// 		$param = array('003', '000', '003', '1', '0', '1', '0', 0, 10);
-// 		// SQLを実行
-// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {
@@ -74,36 +58,20 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
-	* JSONファイル(new-mihonichi_en.json)作成用
-	*
+	* 新着見本市 英語ファイル作成用
+	* @param int $limitmax 取得件数
 	* @return array 取得データ
 	*/
-	function getJsonNewMihonichiEN() {
+	function getJsonNewMihonichiEN($limitmax) {
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
 		// SQL作成
-		$sql = "select jf.mihon_no mihon_no, jf.abbrev_title abbrev_title, jf.fair_title_en name, date_format(concat(jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd), '%b. %e, %Y') start, date_format(concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd), '%b. %e, %Y') end, jcm_2.discription_en country, case when jf.city = '' then concat('その他(', jf.other_city_en, ')') else jcm_3.discription_en end city from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('1', '2') order by jf.date_of_registration desc, jf.mihon_no desc limit 0, 10";
-//		$sql = "select jf.mihon_no id, jf.fair_title_en name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy, '年', jf.date_to_mm, '月', jf.date_to_dd, '日') end, jcm_2.discription_en country, case when jf.city = '' then concat('その他(', jf.other_city_en, ')') else jcm_3.discription_en end city, jf.fair_url url from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('1', '2') order by jf.date_of_registration desc, jf.mihon_no desc limit 0, 10";
-
+		$sql = "select jf.mihon_no mihon_no, jf.abbrev_title abbrev_title, jf.fair_title_en name, date_format(concat(jf.date_from_yyyy, '/', jf.date_from_mm, '/', jf.date_from_dd), '%b. %e, %Y') start, date_format(concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd), '%b. %e, %Y') end, jcm_2.discription_en country, case when jf.city = '' then concat('Others(', jf.other_city_en, ')') else jcm_3.discription_en end city from jm_fair jf left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 where jf.confirm_flag = '1' and jf.del_flg = '0' and jf.web_display_type = '1' and jf.select_language_info in ('1', '2') and concat(jf.date_to_yyyy, '/', jf.date_to_mm, '/', jf.date_to_dd) >= curdate() order by jf.date_of_registration desc, concat(jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd) asc limit 0, " . $limitmax;
 		$this->backend->getLogger()->log(LOG_DEBUG, '■SQL : '.$sql);
 
 		// SQLを実行
 		$res = $db->db->query($sql);
-
-// 		$sql  = " select ";
-// 		$sql .= " jf.fair_title_en name, concat(jf.date_from_yyyy, '年', jf.date_from_mm, '月', jf.date_from_dd, '日') start, concat(jf.date_to_yyyy,'年', jf.date_to_mm, '月', jf.date_to_dd,'日') end, jcm_2.discription_en country, CASE WHEN jf.city = '' THEN concat('その他(', jf.other_city_en, ')') ELSE jcm_3.discription_en END city, jf.fair_url url ";
-// 		$sql .= " from jm_fair jf  ";
-// 		$sql .= " left outer join ( select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = ? and kbn_4 = ? ) jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3  ";
-// 		$sql .= " left outer join ( select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = ? ) jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4 ";
-// 		$sql .= " where jf.confirm_flag = ? and jf.del_flg = ? and jf.web_display_type = ? and jf.select_language_info = ? order by jf.date_of_registration desc limit ?, ? ";
-
-// 		// Prepare Statement化
-// 		$stmt =& $db->db->prepare($sql);
-// 		// 検索条件をArray化
-// 		$param = array('003','000','003','1','0','1','1',0,10);
-// 		// SQLを実行
-// 		$res = $db->db->execute($stmt, $param);
 
 		// 結果の判定
 		if (null == $res) {
@@ -2571,6 +2539,12 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_tmp = $this->_mkSqlText('note_for_data_manager', $search_cond['note_for_data_manager'], $search_cond['note_for_data_manager_cond'], $search_cond['relation'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
+		//TODO 本番未反映
+		// MOD-S 2012.02.03 登録カテゴリ追加対応
+		// 登録カテゴリ
+		//$sql_tmp = $this->_mkSqlCheckBox1('regist_category', $search_cond['regist_category'], $data);
+		//$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+		// MOD-E 2012.02.03 登録カテゴリ追加対応
 		return $sql_ext;
 	}
 
@@ -2722,6 +2696,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	 * Web表示言語
 	 * 開催頻度
 	 * 入場資格
+	 * 登録カテゴリ
 	 *
 	 * @param string $column カラム名
 	 * @param array $ary_text 入力値配列
