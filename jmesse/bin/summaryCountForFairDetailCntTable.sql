@@ -1,16 +1,14 @@
 truncate table jm_fair_detail_cnt; 
+
 insert 
 into jm_fair_detail_cnt( 
   select
-    '002' i_kbn_1
-    , main_industory i_kbn_2
+    main_industory i_kbn_2
     , '000' i_kbn_3
     , '000' i_kbn_4
-    , '003' v_kbn_1
     , region v_kbn_2
     , '000' v_kbn_3
     , '000' v_kbn_4
-    , null venue_kbn
     , site_kbn
     , count(*) fair_cnt 
   from
@@ -275,15 +273,12 @@ into jm_fair_detail_cnt(
 ) 
 union ( 
   select
-    '002' i_kbn_1
-    , main_industory i_kbn_2
+    main_industory i_kbn_2
     , '000' i_kbn_3
     , '000' i_kbn_4
-    , '003' v_kbn_1
     , region v_kbn_2
     , country v_kbn_3
     , '000' v_kbn_4
-    , null venue_kbn
     , site_kbn
     , count(*) fair_cnt 
   from
@@ -549,15 +544,12 @@ union (
 ) 
 union ( 
   select
-    '002' i_kbn_1
-    , main_industory i_kbn_2
+    main_industory i_kbn_2
     , '000' i_kbn_3
     , '000' i_kbn_4
-    , '003' v_kbn_1
     , region v_kbn_2
     , country v_kbn_3
     , city v_kbn_4
-    , null venue_kbn
     , site_kbn
     , count(*) fair_cnt 
   from
@@ -824,15 +816,12 @@ union (
 ) 
 union ( 
   select
-    '002' i_kbn_1
-    , main_industory i_kbn_2
+    main_industory i_kbn_2
     , sub_industory i_kbn_3
     , '000' i_kbn_4
-    , '003' v_kbn_1
     , region v_kbn_2
     , '000' v_kbn_3
     , '000' v_kbn_4
-    , null venue_kbn
     , site_kbn
     , count(*) fair_cnt 
   from
