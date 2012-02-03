@@ -157,8 +157,17 @@
 <b>■Japanese page■</b><br/>
 ・<a href="{$config.url_pub}?action_top=true">Top page</a><br/>
 ・<a href="{$config.url}?action_user_login=true">Login page</a><br/>
+<br/><br/>
+
+<b>■Recently Added TOP3■</b><br/>
+<ul class="icon_arrow" id="new_entry_top3">
+</ul>
 <br/>
 
+<b>■Monthly Ranking TOP3■</b><br/>
+<ul class="icon_arrow" id="ranking4_top3">
+</ul>
+<br/><br/>
 
 <b>■Recently Added■</b><br/>
 <ul class="icon_arrow" id="new_entry">
@@ -685,7 +694,7 @@ $(function(){
 		//core logic
 		for(var i=0; i<content_length; ++i){
 			temp_loop_ref = data[i];
-			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
+			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + ' ' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
 		}
 		return content_data;
 	};
@@ -704,7 +713,7 @@ $(function(){
 		//core logic
 		for(var i=0; i<content_length; ++i){
 			temp_loop_ref = data[i];
-			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["venue"] + '</li>';
+			content_data += '<li id=rank' + i+1 + '><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + '<br/>' + temp_loop_ref["venue"] + '</li>';
 		}
 		return content_data;
 	};
@@ -712,6 +721,8 @@ $(function(){
 	insertHTMLContentFromUserJSON( "jsonfile/region_en.json", $('#venue'), region_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/industry_en.json", $('#industory'), industory_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/new-mihonichi_en.json", $('#new_entry'), new_entry_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/new-mihonichi_en_top3.json", $('#new_entry_top3'), new_entry_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/ranking4_en_top3.json", $('#ranking4_top3'), ranking_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking1_en.json", $('#ranking1'), ranking_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking2_en.json", $('#ranking2'), ranking_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking3_en.json", $('#ranking3'), ranking_ConvertJSONtoHTML);

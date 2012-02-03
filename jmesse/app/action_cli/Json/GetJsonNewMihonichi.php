@@ -50,8 +50,8 @@ class Jmesse_Cli_Action_JsonGetJsonNewMihonichi extends Jmesse_ActionClass
 		// DB検索
 		$jm_fair_mgr = $this->backend->getManager('JmFair');
 
-		//日本語用
-		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiJP();
+		//日本語用(TOP10)
+		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiJP(10);
 		if (null != $jm_fair_new_mihonichi_list) {
 			// 移し替え
 			$list_out = array();
@@ -72,8 +72,30 @@ class Jmesse_Cli_Action_JsonGetJsonNewMihonichi extends Jmesse_ActionClass
 			file_put_contents($filename, $jm_fair_new_mihonchi_json);
 			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
 		}
-		//英語用
-		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiEN();
+		//日本語用(TOP3)
+		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiJP(3);
+		if (null != $jm_fair_new_mihonichi_list) {
+			// 移し替え
+			$list_out = array();
+			foreach ($jm_fair_new_mihonichi_list as $row) {
+				$row_out = array();
+				$row_out['name'] = $row['name'];
+				$row_out['start'] = $row['start'];
+				$row_out['end'] = $row['end'];
+				$row_out['country'] = $row['country'];
+				$row_out['city'] = $row['city'];
+				$row_out['url'] = 'tradefair/'.$this->_makeDetailUrl($row['abbrev_title'], $row['fair_title_en'], $row['mihon_no']);
+				array_push($list_out, $row_out);
+			}
+			// JSON化
+			$jm_fair_new_mihonchi_json = json_encode($list_out);
+			// FILE出力
+			$filename = $this->config->get('jsonfile_path').$this->config->get('n_jp_top3');
+			file_put_contents($filename, $jm_fair_new_mihonchi_json);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
+		}
+		//英語用(TOP10)
+		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiEN(10);
 		if (null != $jm_fair_new_mihonichi_list) {
 			// 移し替え
 			$list_out = array();
@@ -91,6 +113,28 @@ class Jmesse_Cli_Action_JsonGetJsonNewMihonichi extends Jmesse_ActionClass
 			$jm_fair_new_mihonchi_json = json_encode($list_out);
 			// FILE出力
 			$filename = $this->config->get('jsonfile_path').$this->config->get('n_en');
+			file_put_contents($filename, $jm_fair_new_mihonchi_json);
+			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
+		}
+		//英語用(TOP3)
+		$jm_fair_new_mihonichi_list = $jm_fair_mgr->getJsonNewMihonichiEN(3);
+		if (null != $jm_fair_new_mihonichi_list) {
+			// 移し替え
+			$list_out = array();
+			foreach ($jm_fair_new_mihonichi_list as $row) {
+				$row_out = array();
+				$row_out['name'] = $row['name'];
+				$row_out['start'] = $row['start'];
+				$row_out['end'] = $row['end'];
+				$row_out['country'] = $row['country'];
+				$row_out['city'] = $row['city'];
+				$row_out['url'] = 'tradefair_en/'.$this->_makeDetailUrl($row['abbrev_title'], $row['name'], $row['mihon_no']);
+				array_push($list_out, $row_out);
+			}
+			// JSON化
+			$jm_fair_new_mihonchi_json = json_encode($list_out);
+			// FILE出力
+			$filename = $this->config->get('jsonfile_path').$this->config->get('n_en_top3');
 			file_put_contents($filename, $jm_fair_new_mihonchi_json);
 			$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
 		}
