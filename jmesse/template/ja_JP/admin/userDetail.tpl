@@ -25,7 +25,11 @@
 						<tr>
 							<td>
 								<div align="left">
-									<input type="button" value="ユーザ一覧に戻る" onclick="history.back()"><br>
+									{if $app.from_page_flg == '1'}
+										<input type="button" value="展示会詳細に戻る" onclick="history.back()"><br>
+									{else}
+										<input type="button" value="ユーザ一覧に戻る" onclick="history.back()"><br>
+									{/if}
 								</div>
 							</td>
 						</tr>

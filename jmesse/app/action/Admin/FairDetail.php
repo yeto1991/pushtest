@@ -166,10 +166,10 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 			return 'admin_error';
 		}
 		$this->af->set('email', $jm_user->get('email'));
-		// TODO MOD-S 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
-		//$this->af->setApp('user_id', $jm_fair->get('user_id'));
-		//$this->af->setApp('display_mode', 'fairdetail');
-		// MOD-E 2012.01.23 展示会詳細画面からのユーザ詳細画面への遷移対応
+		// MOD-S 2012.02.06 展示会詳細画面からのユーザ詳細画面への遷移対応
+		$this->af->setApp('user_id', $jm_fair->get('user_id'));
+		$this->af->setApp('display_mode', 'fairdetail');
+		// MOD-E 2012.02.06 展示会詳細画面からのユーザ詳細画面への遷移対応
 		// 申請年月日
 		$this->af->set('date_of_application_y', substr($jm_fair->get('date_of_application'), 0, 4));
 		$this->af->set('date_of_application_m', substr($jm_fair->get('date_of_application'), 5, 2));

@@ -137,7 +137,7 @@
 						<tr>
 							<td nowrap>Eメール</td>
 							<!-- Eメール -->
-							<td>{$form.email}</td>
+							<td><a href="{$config.url}?action_admin_userDetail=true&user_id={$app.user_id}&mode={$app.display_mode}">{$form.email}</a></td>
 						</tr>
 
 						<tr>
