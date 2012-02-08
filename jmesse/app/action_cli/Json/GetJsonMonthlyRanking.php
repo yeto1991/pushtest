@@ -59,7 +59,9 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 			$this->config->get('r3_en'),
 			$this->config->get('r4_en'),
 			$this->config->get('r5_en'),
-			$this->config->get('r6_en')
+			$this->config->get('r6_en'),
+			$this->config->get('r1_jp_top3'),
+			$this->config->get('r4_en_top3')
 		);
 
 		$jm_ranking = $this->backend->getManager('JmRanking');
@@ -76,7 +78,7 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 					if ('0' == $row['venue_kbn']) {
 						$row_out['venue'] = $row['site'];
 					} else {
-						$row_out['venue'] = $row['country'].'/'.$row['city'];
+						$row_out['venue'] = $row['city'].'/'.$row['country'].'/'.$row['area'];
 					}
 					if ('0' == $row['site_kbn']) {
 						$row_out['url'] = 'tradefair/'.$this->_makeDetailUrl($row['abbrev_title'], $row['fair_title_en'], $row['mihon_no']);
@@ -88,10 +90,6 @@ class Jmesse_Cli_Action_JsonGetJsonMonthlyRanking extends Jmesse_ActionClass
 				$filename = $this->config->get('jsonfile_path').$file_name_list[$i];
 				file_put_contents($filename, json_encode($list_out));
 				$this->backend->getLogger()->log(LOG_DEBUG, '■JSON出力 : '.$filename);
-
-//			} else {
-//				file_put_contents($this->config->get('jsonfile_path').$file_name_list[$i], '');
-
 			}
 		}
 
