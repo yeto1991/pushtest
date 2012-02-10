@@ -2544,6 +2544,12 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_tmp = $this->_mkSqlCheckBox1('regist_category', $search_cond['regist_category'], $data);
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		// MOD-E 2012.02.03 登録カテゴリ追加対応
+
+		// ADD-S 2012.02.08 削除フラグ対応
+		$sql_tmp = $this->_mkSqlCheckBox1('jf.del_flg', $search_cond['del_flg'], $data);
+		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+		// ADD-E 2012.02.08 削除フラグ対応
+
 		return $sql_ext;
 	}
 

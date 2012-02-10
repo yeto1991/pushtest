@@ -250,10 +250,29 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			// 展示会未承認一覧表示
 			// それまでの検索条件を削除
 			$this->session->set('search_cond', null);
-			$this->session->set('sort_cond', null);
+ 			$this->session->set('sort_cond', null);
 			$search_cond = array();
 			$search_cond['confirm_flag'] = '0';;
+			// ADD-S 2012.02.08 削除済は非表示
+			$search_cond['del_flg'] = array('0');
+			$search_cond['connection'] = 'a';;
+			// ADD-E 2012.02.08 削除済は非表示
 			$this->session->set('search_cond', $search_cond);
+			// ADD-S 2012.02.08 デフォルトソート条件追加
+			// 会期(昇順) > 見本市番号(昇順) > 登録日(承認日)(昇順) > 開催地(昇順)
+			if ('1' != $this->af->get('sort')) {
+				$sort_cond = array();
+				$sort_cond['sort_1'] = '3';
+				$sort_cond['sort_2'] = '0';
+				$sort_cond['sort_3'] = '7';
+				$sort_cond['sort_4'] = '4';
+				$sort_cond['sort_cond_1'] = '0';
+				$sort_cond['sort_cond_2'] = '0';
+				$sort_cond['sort_cond_3'] = '0';
+				$sort_cond['sort_cond_4'] = '0';
+				$this->session->set('sort_cond', $sort_cond);
+			}
+			// ADD-E 2012.02.08 デフォルトソート条件追加
 		} elseif ('d' == $this->af->get('type')) {
 			// 展示会否認一覧表示
 			// それまでの検索条件を削除
@@ -261,6 +280,10 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			$this->session->set('sort_cond', null);
 			$search_cond = array();
 			$search_cond['confirm_flag'] = '2';;
+			// ADD-S 2012.02.08 削除済は非表示
+			$search_cond['del_flg'] = array('0');
+			$search_cond['connection'] = 'a';;
+			// ADD-E 2012.02.08 削除済は非表示
 			$this->session->set('search_cond', $search_cond);
 		} elseif ('a' == $this->af->get('type')) {
 			if (null == $this->session->get('search_cond')) {
@@ -402,6 +425,9 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				// MOD-S 2012.02.03 登録カテゴリ追加対応
 				$search_cond['regist_category'] = $this->af->get('regist_category');
 				// MOD-E 2012.02.03 登録カテゴリ追加対応
+				// ADD-S 2012.02.08 登録カテゴリ追加対応
+				$search_cond['del_flg'] = $this->af->get('del_flg');
+				// ADD-E 2012.02.08 登録カテゴリ追加対応
 				$this->session->set('search_cond', $search_cond);
 			}
 		} elseif ('s' == $this->af->get('type')) {

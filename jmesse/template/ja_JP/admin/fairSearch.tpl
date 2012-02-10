@@ -1084,6 +1084,22 @@
 								/>その他
 							</td>
 						</tr>
+						<tr>
+							<td nowrap>削除フラグ</td>
+							<!-- 削除フラグ -->
+							<td nowrap>
+								<input type="checkbox" name="del_flg[]" id="del_flg_0" value="0"
+								{section name=it loop=$form.del_flg}
+								{if ('0' == $form.del_flg[it])}checked{/if}
+								{/section}
+								/>未削除
+								<input type="checkbox" name="del_flg[]" id="del_flg_1" value="1"
+								{section name=it loop=$form.del_flg}
+								{if ('1' == $form.del_flg[it])}checked{/if}
+								{/section}
+								/>削除済
+							</td>
+						</tr>
 					</table>
 					<hr />
 					集計条件設定<br>

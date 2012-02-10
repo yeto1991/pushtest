@@ -1864,6 +1864,20 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 			'custom'      => null,            // Optional method name which
 		),
 
+		'del_flg' => array(
+			'type'        => array(VAR_TYPE_STRING), // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
+			'name'        => '削除フラグ',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+
 		'sort_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
@@ -2287,6 +2301,9 @@ class Jmesse_Action_AdminFairSearch extends Jmesse_ActionClass
 		$this->session->set('data_sum', null);
 		$this->session->set('code_list', null);
 		$this->session->set('index', null);
+		// ADD-S 2012.02.10
+		$this->session->set('sort_cond', null);
+		// ADD-E 2012.02.10
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
