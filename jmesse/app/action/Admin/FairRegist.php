@@ -1313,7 +1313,7 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '主催者・問合せ先名称（英）', // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
 			'regexp'      => null,            // String by Regexp

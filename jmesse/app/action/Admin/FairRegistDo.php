@@ -223,9 +223,10 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			}
 		}
 
+		// MOD-S 2012.02.07 主催者(英)Step3へ移動対応
 		$select_language_info = $this->af->get('select_language_info');
 		// 日本語
-		if ('0' == $select_language_info || '2' == $select_language_info) {
+		if ('0' == $select_language_info) {
 			// 見本市名
 			if ('' == $this->af->get('fair_title_jp')) {
 				$this->ae->add('error', '見本市名(日)が入力されていません');
@@ -242,19 +243,19 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			if ('' == $this->af->get('organizer_jp')) {
 				$this->ae->add('error', '主催者・問合せ先名称(日)が入力されていません');
 			}
-			// キャッチフレーズ
+// 			キャッチフレーズ
 // 			if ('' == $this->af->get('profile_jp')) {
 // 				$this->ae->add('error', 'キャッチフレーズ(日)が入力されていません');
 // 			}
-			// MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
-			// ＰＲ・紹介文
+// 			MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
+// 			ＰＲ・紹介文
 // 			if ('' == $this->af->get('detailed_information_jp')) {
 // 				$this->ae->add('error', 'ＰＲ・紹介文(日)が入力されていません');
 // 			}
-			// MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
+// 			MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
 		}
 		// 英語
-		if ('1' == $select_language_info || '2' == $select_language_info) {
+		if ('1' == $select_language_info) {
 			// 見本市名
 			if ('' == $this->af->get('fair_title_en')) {
 				$this->ae->add('error', '見本市名(英)が入力されていません');
@@ -267,17 +268,57 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			if ('' == $this->af->get('venue_en')) {
 				$this->ae->add('error', '会場名(英)が入力されていません');
 			}
-			// キャッチフレーズ
+			// 主催者・問合せ先名称（英）
+			if ('' == $this->af->get('organizer_en')) {
+				$this->ae->add('error', '主催者・問合せ先名称(英)が入力されていません');
+			}
+// 			キャッチフレーズ
 // 			if ('' == $this->af->get('profile_en')) {
 // 				$this->ae->add('error', 'キャッチフレーズ(英)が入力されていません');
 // 			}
-			// MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
-			// ＰＲ・紹介文
+// 			MOD-S 2012.01.23 必須チェック削除 ＰＲ・紹介文
+// 			ＰＲ・紹介文
 // 			if ('' == $this->af->get('detailed_information_en')) {
 // 				$this->ae->add('error', 'ＰＲ・紹介文(英)が入力されていません');
 // 			}
-			// MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
+// 			MOD-E 2012.01.23 必須チェック削除 ＰＲ・紹介文
 		}
+		// 日英両方
+		if ('2' == $select_language_info) {
+			// 見本市名
+			if ('' == $this->af->get('fair_title_jp')) {
+				$this->ae->add('error', '見本市名(日)が入力されていません');
+			}
+			// 出品物
+			if ('' == $this->af->get('exhibits_jp')) {
+				$this->ae->add('error', '出品物(日)が入力されていません');
+			}
+			// 会場名
+			if ('' == $this->af->get('venue_jp')) {
+				$this->ae->add('error', '会場名(日)が入力されていません');
+			}
+			// 主催者・問合せ先名称（日）
+			if ('' == $this->af->get('organizer_jp')) {
+				$this->ae->add('error', '主催者・問合せ先名称(日)が入力されていません');
+			}
+			// 見本市名
+			if ('' == $this->af->get('fair_title_en')) {
+				$this->ae->add('error', '見本市名(英)が入力されていません');
+			}
+			// 出品物
+			if ('' == $this->af->get('exhibits_en')) {
+				$this->ae->add('error', '出品物(英)が入力されていません');
+			}
+			// 会場名
+			if ('' == $this->af->get('venue_en')) {
+				$this->ae->add('error', '会場名(英)が入力されていません');
+			}
+			// 主催者・問合せ先名称（英）
+			if ('' == $this->af->get('organizer_en')) {
+				$this->ae->add('error', '主催者・問合せ先名称(英)が入力されていません');
+			}
+		}
+		// MOD-E 2012.02.07 主催者(英)Step3へ移動対応
 
 		// チケット入手方法
 		if ('' == $this->af->get('admission_ticket_1_jp') && '' == $this->af->get('admission_ticket_2_jp') && '' == $this->af->get('admission_ticket_3_jp') && '' == $this->af->get('admission_ticket_4_jp') && '' == $this->af->get('admission_ticket_5_jp') && '' == $this->af->get('admission_ticket_5_en')) {
