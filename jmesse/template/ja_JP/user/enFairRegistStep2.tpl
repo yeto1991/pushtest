@@ -305,7 +305,8 @@
 								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="Regist" onclick="add_photos('photos_1')"/><br />
 								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="Regist" onclick="add_photos('photos_2')"/><br />
 								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="Regist" onclick="add_photos('photos_3')"/><br />
-								Registration is available for up to three files. <br />(JPEG, GIF or TIFF formats only with size up to 600px×800px)<br/>
+								Registration is available for up to three files. <br />(JPEG or GIF formats only with size up to 600px×800px)<br/><br/>
+								Please note that image files larger than 2MB can't be registered.<br />And each image file size limit is up to 2MB bytes.<br />
 								<select name="photos_list" id="photos_list" size="3" style="width:200px">
 									{if ('' != $form.photos_name_1) }
 									<option value="{$form.photos_name_1}">{$form.photos_name_1}</option>
