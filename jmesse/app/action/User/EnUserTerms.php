@@ -34,6 +34,11 @@ class Jmesse_Form_UserEnUserTerms extends Jmesse_ActionForm
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
+			'required_error' => '{form} is incorrect.',
+			'type_error'     => '{form} is incorrect.',
+			'min_error'      => '{form} is incorrect.',
+			'max_error'      => '{form} is incorrect.',
+			'regexp_error'   => '{form} is incorrect.',
 		),
 	);
 }
@@ -67,6 +72,12 @@ class Jmesse_Action_UserEnUserTerms extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
+		$checkflg = 'front_page_userEnTerm';
+		// MOD-S 2012.02.13 利用規約画面遷移チェック対応
+		// SESSIONに設定
+		$this->session->start();
+		$this->session->set('term_flg', $checkflg);
+		// MOD-E 2012.02.13 利用規約画面遷移チェック対応
 		return 'user_enUserTerms';
 	}
 }

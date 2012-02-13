@@ -42,7 +42,7 @@ class Jmesse_Form_UserEnUserRegist extends Jmesse_ActionForm
 		'back' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_HIDDEN, // Form type
-			'name'        => '戻り',          // Display name
+			'name'        => 'back',          // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 1,               // Maximum value
@@ -366,11 +366,13 @@ class Jmesse_Action_UserEnUserRegist extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-// 		// "https"判定
-// 		if ('on' != $_SERVER['HTTPS']) {
-// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-// 		}
-
+		// MOD-S 2012.02.13 利用規約画面遷移チェック対応
+		if ($this->session->get('term_flg') != 'front_page_userEnTerm') {
+			//セッションの破棄
+			$this->session->destroy();
+			return 'user_enLogin';
+		}
+		// MOD-E 2012.02.13 利用規約画面遷移チェック対応
 		return null;
 	}
 

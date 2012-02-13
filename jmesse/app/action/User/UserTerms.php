@@ -67,6 +67,12 @@ class Jmesse_Action_UserUserTerms extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
+		$checkflg = 'front_page_userTerm';
+		// MOD-S 2012.02.13 利用規約画面遷移チェック対応
+		// SESSIONに設定
+		$this->session->start();
+		$this->session->set('term_flg', $checkflg);
+		// MOD-E 2012.02.13 利用規約画面遷移チェック対応
 		return 'user_userTerms';
 	}
 }

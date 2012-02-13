@@ -276,53 +276,55 @@ class Jmesse_Action_UserUserRegist extends Jmesse_ActionClass
 	 */
 	function prepare()
 	{
-// 		// "https"判定
-// 		if ('on' != $_SERVER['HTTPS']) {
-// 			header('Location: https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-// 		}
-
-			return null;
+		// MOD-S 2012.02.13 利用規約画面遷移チェック対応
+		if ($this->session->get('term_flg') != 'front_page_userTerm') {
+			//セッションの破棄
+			$this->session->destroy();
+			return 'user_login';
 		}
-
-		/**
-		 *  user_userRegist action implementation.
-		 *
-		 *  @access public
-		 *  @return string  forward name.
-		 */
-		function perform()
-		{
-			// 戻った場合
-			if ('1' == $this->af->get('back')) {
-				// sessionからformへ設定
-				$this->_setSessionToForm();
-			}
-
-			$this->af->set('mode', 'regist');
-			return 'user_userRegist';
-		}
-
-		/**
-		 * 前回入力項目をsessionからformへ設定。
-		 *
-		 */
-		function _setSessionToForm() {
-			$user_regist = $this->session->get('user_regist');
-			if (null != $user_regist) {
-				$this->af->set('email', $user_regist['email']);
-				$this->af->set('password', $user_regist['password']);
-				$this->af->set('companyNm', $user_regist['companyNm']);
-				$this->af->set('divisionDeptNm', $user_regist['divisionDeptNm']);
-				$this->af->set('userNm', $user_regist['userNm']);
-				$this->af->set('genderCd', $user_regist['genderCd']);
-				$this->af->set('postCode', $user_regist['postCode']);
-				$this->af->set('address', $user_regist['address']);
-				$this->af->set('tel', $user_regist['tel']);
-				$this->af->set('fax', $user_regist['fax']);
-				$this->af->set('url', $user_regist['url']);
-				$this->af->set('delFlg', $user_regist['delFlg']);
-			}
-		}
+		// MOD-E 2012.02.13 利用規約画面遷移チェック対応
+		return null;
 	}
 
-	?>
+	/**
+	 *  user_userRegist action implementation.
+	 *
+	 *  @access public
+	 *  @return string  forward name.
+	 */
+	function perform()
+	{
+		// 戻った場合
+		if ('1' == $this->af->get('back')) {
+			// sessionからformへ設定
+			$this->_setSessionToForm();
+		}
+
+		$this->af->set('mode', 'regist');
+		return 'user_userRegist';
+	}
+
+	/**
+	 * 前回入力項目をsessionからformへ設定。
+	 *
+	 */
+	function _setSessionToForm() {
+		$user_regist = $this->session->get('user_regist');
+		if (null != $user_regist) {
+			$this->af->set('email', $user_regist['email']);
+			$this->af->set('password', $user_regist['password']);
+			$this->af->set('companyNm', $user_regist['companyNm']);
+			$this->af->set('divisionDeptNm', $user_regist['divisionDeptNm']);
+			$this->af->set('userNm', $user_regist['userNm']);
+			$this->af->set('genderCd', $user_regist['genderCd']);
+			$this->af->set('postCode', $user_regist['postCode']);
+			$this->af->set('address', $user_regist['address']);
+			$this->af->set('tel', $user_regist['tel']);
+			$this->af->set('fax', $user_regist['fax']);
+			$this->af->set('url', $user_regist['url']);
+			$this->af->set('delFlg', $user_regist['delFlg']);
+		}
+	}
+}
+
+?>
