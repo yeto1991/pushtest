@@ -110,6 +110,46 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 		// MOD-E 2012.01.23 必須チェック削除 PR・紹介文
 
 		// 見本市の紹介写真
+		// MOD-S 2012.02.07 ファイルアップロードサイズエラー対応
+		//upload処理判定フラグ
+		$upload_check_flg = '0';
+		if($_FILES["photos_1"]["name"] != '' && $_FILES["photos_1"]["size"] == 0 && $_FILES["photos_1"]["error"] == 1){
+			$this->ae->add('photos_1', $_FILES["photos_1"]["name"].' is file size error.');
+			$upload_check_flg = '1';
+		}
+		if($_FILES["photos_2"]["name"] != '' && $_FILES["photos_2"]["size"] == 0 && $_FILES["photos_2"]["error"] == 1){
+			$this->ae->add('photos_2', $_FILES["photos_2"]["name"].' is file size error.');
+			$upload_check_flg = '1';
+		}
+		if($_FILES["photos_3"]["name"] != '' && $_FILES["photos_3"]["size"] == 0 && $_FILES["photos_3"]["error"] == 1){
+			$this->ae->add('photos_3', $_FILES["photos_3"]["name"].' is file size error.');
+			$upload_check_flg = '1';
+		}
+		if($upload_check_flg != '0'){
+			if ($_FILES["photos_1"]["name"] == $this->af->get('photos_name_1')) {
+				$this->af->set('photos_name_1','');
+			} elseif ($_FILES["photos_1"]["name"] == $this->af->get('photos_name_2')) {
+				$this->af->set('photos_name_2','');
+			} elseif ($_FILES["photos_1"]["name"] == $this->af->get('photos_name_3')) {
+				$this->af->set('photos_name_3','');
+			}
+			if ($_FILES["photos_2"]["name"] == $this->af->get('photos_name_1')) {
+				$this->af->set('photos_name_1','');
+			} elseif ($_FILES["photos_2"]["name"] == $this->af->get('photos_name_2')) {
+				$this->af->set('photos_name_2','');
+			} elseif ($_FILES["photos_2"]["name"] == $this->af->get('photos_name_3')) {
+				$this->af->set('photos_name_3','');
+			}
+			if ($_FILES["photos_3"]["name"] == $this->af->get('photos_name_1')) {
+				$this->af->set('photos_name_1','');
+			} elseif ($_FILES["photos_3"]["name"] == $this->af->get('photos_name_2')) {
+				$this->af->set('photos_name_2','');
+			} elseif ($_FILES["photos_3"]["name"] == $this->af->get('photos_name_3')) {
+				$this->af->set('photos_name_3','');
+			}
+		}
+		// MOD-E 2012.02.07 ファイルアップロードサイズエラー対応
+
 		// gifとjpgのみ
 		$ary_photos = array($this->af->get('photos_1'), $this->af->get('photos_2'), $this->af->get('photos_3'));
 		$ary_photos_name = array($this->af->get('photos_name_1'), $this->af->get('photos_name_2'), $this->af->get('photos_name_3'));
@@ -120,7 +160,7 @@ class Jmesse_Action_UserEnFairRegistDo extends Jmesse_ActionClass
 				$photos = $ary_photos[$j];
 				if ('' != $photos_name && $photos['name'] == $photos_name) {
 					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type'] && 'image/pjpeg' != $photos['type']) {
-						$this->ae->add('photos_1', 'Photo files are limited to GIF, JPEG and TIFF formats only.('.$photos['type'].')');
+						$this->ae->add('photos_1', 'Photo files are limited to GIF and JPEG formats only.('.$photos['type'].')');
 						break;
 					}
 				}
