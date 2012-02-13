@@ -263,13 +263,11 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			if ('1' != $this->af->get('sort')) {
 				$sort_cond = array();
 				$sort_cond['sort_1'] = '3';
-				$sort_cond['sort_2'] = '0';
-				$sort_cond['sort_3'] = '7';
-				$sort_cond['sort_4'] = '4';
+				$sort_cond['sort_2'] = '7';
+				$sort_cond['sort_3'] = '4';
 				$sort_cond['sort_cond_1'] = '0';
 				$sort_cond['sort_cond_2'] = '0';
 				$sort_cond['sort_cond_3'] = '0';
-				$sort_cond['sort_cond_4'] = '0';
 				$this->session->set('sort_cond', $sort_cond);
 			}
 			// ADD-E 2012.02.08 デフォルトソート条件追加
