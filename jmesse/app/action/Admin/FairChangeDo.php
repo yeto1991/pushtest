@@ -282,7 +282,88 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		if ('' == $this->af->get('admission_ticket_5_en') && '' != $this->af->get('other_admission_ticket_en')) {
 			$this->ae->add('error', 'チケットの入手方法(Other)が入力されていません');
 		}
-
+		// 見本市の紹介写真
+		// MOD-S 2012.02.07 ファイルアップロードサイズエラー対応
+		//upload処理判定フラグ
+		$upload_check_flg = '0';
+		if($_FILES["photos_1"]["name"] != '' && $_FILES["photos_1"]["size"] == 0 && $_FILES["photos_1"]["error"] == 1){
+			$this->ae->add('photos_1', $_FILES["photos_1"]["name"].' ファイルサイズエラーです。');
+			$upload_check_flg = '1';
+		}
+		if($_FILES["photos_2"]["name"] != '' && $_FILES["photos_2"]["size"] == 0 && $_FILES["photos_2"]["error"] == 1){
+			$this->ae->add('photos_2', $_FILES["photos_2"]["name"].' ファイルサイズエラーです。');
+			$upload_check_flg = '1';
+		}
+		if($_FILES["photos_3"]["name"] != '' && $_FILES["photos_3"]["size"] == 0 && $_FILES["photos_3"]["error"] == 1){
+			$this->ae->add('photos_3', $_FILES["photos_3"]["name"].' ファイルサイズエラーです。');
+			$upload_check_flg = '1';
+		}
+		if($upload_check_flg != '0'){
+			if ($_FILES["photos_1"]["name"] == $this->af->get('photos_name_1')) {
+				$this->af->set('photos_name_1','');
+			} elseif ($_FILES["photos_1"]["name"] == $this->af->get('photos_name_2')) {
+				$this->af->set('photos_name_2','');
+			} elseif ($_FILES["photos_1"]["name"] == $this->af->get('photos_name_3')) {
+				$this->af->set('photos_name_3','');
+			}
+			if ($_FILES["photos_2"]["name"] == $this->af->get('photos_name_1')) {
+				$this->af->set('photos_name_1','');
+			} elseif ($_FILES["photos_2"]["name"] == $this->af->get('photos_name_2')) {
+				$this->af->set('photos_name_2','');
+			} elseif ($_FILES["photos_2"]["name"] == $this->af->get('photos_name_3')) {
+				$this->af->set('photos_name_3','');
+			}
+			if ($_FILES["photos_3"]["name"] == $this->af->get('photos_name_1')) {
+				$this->af->set('photos_name_1','');
+			} elseif ($_FILES["photos_3"]["name"] == $this->af->get('photos_name_2')) {
+				$this->af->set('photos_name_2','');
+			} elseif ($_FILES["photos_3"]["name"] == $this->af->get('photos_name_3')) {
+				$this->af->set('photos_name_3','');
+			}
+			if($this->af->get('photos_name_1') != ''){
+				$photos_name_list = array($this->af->get('photos_name_1'));
+				if($this->af->get('photos_name_2') != ''){
+					array_push($photos_name_list, $this->af->get('photos_name_2'));
+					if($this->af->get('photos_name_3') != ''){
+						array_push($photos_name_list, $this->af->get('photos_name_3'));
+					}
+				} else {
+					if($this->af->get('photos_name_3') != ''){
+						array_push($photos_name_list, $this->af->get('photos_name_3'));
+					}
+				}
+			} else {
+				if($this->af->get('photos_name_2') != ''){
+					$photos_name_list = array($this->af->get('photos_name_2'));
+					if($this->af->get('photos_name_3') != ''){
+						array_push($photos_name_list, $this->af->get('photos_name_3'));
+					}
+				} else {
+					if($this->af->get('photos_name_3') != ''){
+						$photos_name_list = array($this->af->get('photos_name_3'));
+					}
+				}
+			}
+			//画像リストを表示用に値設定
+			$this->af->setApp('photos', $photos_name_list);
+		}
+		// gifとjpgのみ
+		$ary_photos = array($this->af->get('photos_1'), $this->af->get('photos_2'), $this->af->get('photos_3'));
+		$ary_photos_name = array($this->af->get('photos_name_1'), $this->af->get('photos_name_2'), $this->af->get('photos_name_3'));
+		for ($i = 0; $i < count($ary_photos_name); $i++) {
+			$photos_name = $ary_photos_name[$i];
+			$this->backend->getLogger()->log(LOG_DEBUG, '■$photos_name : '.$photos_name);
+			for ($j = 0; $j < count($ary_photos); $j++) {
+				$photos = $ary_photos[$j];
+				if ('' != $photos_name && $photos['name'] == $photos_name) {
+					if ('image/jpeg' != $photos['type'] && 'image/gif' != $photos['type'] && 'image/pjpeg' != $photos['type']) {
+						$this->ae->add('photos_name_1', '見本市の紹介写真はgif、jpeg形式のみにして下さい('.$photos['type'].')');
+						break;
+					}
+				}
+			}
+		}
+		// MOD-E 2012.02.07 ファイルアップロードサイズエラー対応
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
 			return 'admin_fairRegist';
