@@ -269,12 +269,6 @@ $form.mode
 											{/if}
 											</td>
 										</tr>
-{*
-										<tr>
-											<th class="item">会場までの交通手段</th>
-											<td>{$form.transportation_jp}</td>
-										</tr>
-*}
 										<tr>
 											<th class="item">入場資格</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
@@ -301,16 +295,6 @@ $form.mode
 												{/if}
 											</td>
 										</tr>
-{*
-										<tr>
-											<th class="item">出展申込締切日</th>
-											<td>
-												{if ('' != $form.app_dead_yyyy)}
-												{$form.app_dead_yyyy}年{$form.app_dead_mm}月{$form.app_dead_dd}日
-												{/if}
-											</td>
-										</tr>
-*}
 									</table>
 									<h4>過去の実績</h4>
 									<table id="registration">
@@ -384,8 +368,7 @@ $form.mode
 											<th class="item">主催者</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
-												{$form.organizer_jp}<br/>
-												{$form.organizer_en}
+												<strong>名称: </strong>{$form.organizer_jp}<br />
 											</td>
 										</tr>
 										<tr>
@@ -405,17 +388,7 @@ $form.mode
 											<th class="required"></th>
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
-												<table style="border-style:none;border-collapse:collapse;">
-													<tr>
-														<td rowspan="2" style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															<strong>団体名等： </strong>
-														</td>
-														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">{$form.agency_in_japan_jp}</td>
-													</tr>
-													<tr>
-														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">{$form.agency_in_japan_en}</td>
-													</tr>
-												</table>
+												<strong>名称： </strong>{$form.agency_in_japan_jp}<br />
 												<strong>住所: </strong>{$form.agency_in_japan_addr}<br />
 												<strong>担当部課: </strong>{$form.agency_in_japan_div}<br />
 												<strong>担当者: </strong>{$form.agency_in_japan_pers}<br />
@@ -452,6 +425,16 @@ $form.mode
 												<td style="word-break: break-all;">{$form.profile_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
 											</tr>
 											<tr>
+												<th class="item">Name of the organizer<br />主催者 名称</th>
+												<th class="required"></th>
+												<td>{$form.organizer_en}</td>
+											</tr>
+											<tr>
+												<th class="item">The representative office, person or agency in Japan<br />日本国内の連絡先 名称</th>
+												<th class="required"></th>
+												<td>{$form.agency_in_japan_en}</td>
+											</tr>
+											<tr>
 												<th class="item">Organizer's statement,special features. etc.<br />PR・紹介文</th>
 												<th class="required"></th>
 												<td style="word-break: break-all;">{$form.detailed_information_en|nl2br|replace:"&lt;br/&gt;":"<br/>"}</td>
@@ -471,27 +454,11 @@ $form.mode
 												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 												<td>{$form.venue_en}</td>
 											</tr>
-{*
-											<tr>
-												<th class="item">Transportation<br />交通手段</th>
-												<td>{$form.transportation_en}</td>
-											</tr>
-*}
 											<tr>
 												<th class="item">Admission ticket(other)<br />チケット入手法（その他)</th>
 												<th class="required"></th>
 												<td>{$form.other_admission_ticket_en}</td>
 											</tr>
-{*
-											<tr>
-												<th class="item">Organizer<br />主催者</th>
-												<td>{$form.organizer_en}</td>
-											</tr>
-											<tr>
-												<th class="item">The representative office, person or agency in Japan<br />日本国内の連絡先</th>
-												<td>{$form.agency_in_japan_en}</td>
-											</tr>
-*}
 											<tr>
 												<th class="item">Details of last fair audited by<br />承認機関</th>
 												<th class="required"></th>
@@ -549,15 +516,6 @@ $form.mode
 					</div>
 				</div>
 				<p class="totop">
-{*
-					{if ('d' == $form.mode)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-					{elseif ('c' == $form.mode || 'e' == $form.mode)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-					{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-					{/if}
-*}
 				 	{if ('d' == $form.mode || 'p' == $form.mode)}
 				 	<a href="javascript:window.open('{$config.url}?action_user_fairDetail=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
 				 	{/if}

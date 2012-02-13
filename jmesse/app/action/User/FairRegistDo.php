@@ -142,14 +142,12 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 				$this->ae->add('other_admission_ticket_en', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされています');
 			}
 
+			// MOD-S 2012.02.07 主催者(英)Step3へ移動対応
 			// Show Management
-// 			if ('' == $this->af->get('organizer_en')) {
-// 				$this->ae->add('error', 'Show Management が入力されていません');
-// 			}
-
-			// Agency in Japan
-
-			// Details of last fair audited by
+			if ('' == $this->af->get('organizer_en')) {
+				$this->ae->add('organizer_en', 'Name of the organizer/主催者名称 が入力されていません');
+			}
+			// MOD-E 2012.02.07 主催者(英)Step3へ移動対応
 		}
 
 		if (0 < $this->ae->count()) {
@@ -206,8 +204,10 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$regist_param_3['venue_en'] = $this->af->get('venue_en');
 // 		$regist_param_3['transportation_en'] = $this->af->get('transportation_en');
 		$regist_param_3['other_admission_ticket_en'] = $this->af->get('other_admission_ticket_en');
-// 		$regist_param_3['organizer_en'] = $this->af->get('organizer_en');
-// 		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
+		// MOD-S 2012.02.07 主催者(英)Step3へ移動対応
+		$regist_param_3['organizer_en'] = $this->af->get('organizer_en');
+		$regist_param_3['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
+		// MOD-E 2012.02.07 主催者(英)Step3へ移動対応
 		$regist_param_3['spare_field1'] = $this->af->get('spare_field1');
 		$this->session->set('regist_param_3', $regist_param_3);
 
@@ -290,7 +290,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
 		$this->af->set('keyword', $regist_param_2['keyword']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
-		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
+// 		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
 		$this->af->set('organizer_addr', $regist_param_2['organizer_addr']);
 		$this->af->set('organizer_div', $regist_param_2['organizer_div']);
 		$this->af->set('organizer_pers', $regist_param_2['organizer_pers']);
@@ -298,7 +298,7 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
 		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
-		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
+// 		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$this->af->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
 		$this->af->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
 		$this->af->set('agency_in_japan_pers', $regist_param_2['agency_in_japan_pers']);
@@ -317,6 +317,8 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 //		$this->af->set('transportation_en', $regist_param_3['transportation_en']);
 		$this->af->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$this->af->set('spare_field1', $regist_param_3['spare_field1']);
+		$this->af->set('organizer_en', $regist_param_3['organizer_en']);
+		$this->af->set('agency_in_japan_en', $regist_param_3['agency_in_japan_en']);
 
 		// コード名
 		$jm_code_m_mgr =& $this->backend->getManager('JmCodeM');

@@ -361,7 +361,7 @@
 
 									<h4>主催者</h4>
 									<table id="registration">
-										{if is_error('organizer_jp') || is_error('organizer_en')}
+										{if is_error('organizer_jp')}
 										<tr class="errorcheck">
 										{else}
 										<tr>
@@ -369,17 +369,12 @@
 											<th class="item">主催者</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
-												日 <input type="text" value="{$form.organizer_jp}" size="60" name="organizer_jp" id="organizer_jp" maxlength="500" /><br/>
-												英 <input type="text" value="{$form.organizer_en}" size="60" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
+												<strong>名称: </strong><input type="text" value="{$form.organizer_jp}" size="60" name="organizer_jp" id="organizer_jp" maxlength="500" /><br/>
 												{if is_error('organizer_jp')}
 												<span class="error-message">{message name="organizer_jp"}</span><br />
 												{/if}
-												{if is_error('organizer_en')}
-												<span class="error-message">{message name="organizer_en"}</span><br />
-												{/if}
 											</td>
 										</tr>
-
 										{if is_error('organizer_addr') || is_error('organizer_div') || is_error('organizer_pers') || is_error('organizer_tel') || is_error('organizer_fax') || is_error('organizer_email')}
 										<tr class="errorcheck">
 										{else}
@@ -425,29 +420,7 @@
 											<th class="required"></th>
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
-												<table style="border-style:none;border-collapse:collapse;">
-													{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
-													<tr class="errorcheck">
-													{else}
-													<tr>
-													{/if}
-														<td rowspan="2" style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															<strong>名称： </strong>
-														</td>
-														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															日 <input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" maxlength="255" /><br />
-														</td>
-													</tr>
-													{if is_error('agency_in_japan_jp') || is_error('agency_in_japan_en') || is_error('agency_in_japan_addr') || is_error('agency_in_japan_div') || is_error('agency_in_japan_pers') || is_error('agency_in_japan_tel') || is_error('agency_in_japan_fax') || is_error('agency_in_japan_email')}
-													<tr class="errorcheck">
-													{else}
-													<tr>
-													{/if}
-														<td style="border-style:none;padding:0px;font-size:1em;border-collapse:collapse;">
-															英 <input type="text" value="{$form.agency_in_japan_en}" size="60" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="255" /><br />
-														</td>
-													</tr>
-												</table>
+												<strong>名称: </strong><input type="text" value="{$form.agency_in_japan_jp}" size="60" name="agency_in_japan_jp" id="agency_in_japan_jp" maxlength="255" /><br />
 												<strong>住所: </strong><input type="text" value="{$form.agency_in_japan_addr}" size="30" name="agency_in_japan_addr" id="agency_in_japan_addr" maxlength="255" /><br />
 												<strong>担当部課: </strong><input type="text" value="{$form.agency_in_japan_div}" size="30" name="agency_in_japan_div" id="agency_in_japan_div" maxlength="255" /><br />
 												<strong>担当者: </strong><input type="text" value="{$form.agency_in_japan_pers}" size="30" name="agency_in_japan_pers" id="agency_in_japan_pers" maxlength="100" /><br />
@@ -458,9 +431,6 @@
 												<strong>Email: </strong><input type="text" value="{$form.agency_in_japan_email}" size="60" name="agency_in_japan_email" id="agency_in_japan_email" maxlength="255" /><br />
 												{if is_error('agency_in_japan_jp')}
 												<span class="error-message">{message name="agency_in_japan_jp"}</span><br />
-												{/if}
-												{if is_error('agency_in_japan_en')}
-												<span class="error-message">{message name="agency_in_japan_en"}</span><br />
 												{/if}
 												{if is_error('agency_in_japan_addr')}
 												<span class="error-message">{message name="agency_in_japan_addr"}</span><br />
@@ -502,21 +472,6 @@
 					</div>
 				</div>
 				<p class="totop">
-{*
-					{if ('c' == $form.mode || 'e' == $form.mode)}
-						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode={$form.mode}&mihon_no={$form.mihon_no}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&mode={$form.mode}&mihon_no={$form.mihon_no}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{/if}
-					{else}
-						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep2=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{/if}
-					{/if}
-*}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

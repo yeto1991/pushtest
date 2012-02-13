@@ -182,9 +182,11 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		if ('' == $this->af->get('organizer_jp')) {
 			$this->ae->add('organizer_jp', '主催者(日)が入力されていません');
 		}
-		if ('' == $this->af->get('organizer_en')) {
-			$this->ae->add('organizer_en', '主催者(英)が入力されていません');
-		}
+		// MOD-S 2012.02.07 主催者(英)Step3へ移動対応
+// 		if ('' == $this->af->get('organizer_en')) {
+// 			$this->ae->add('organizer_en', '主催者(英)が入力されていません');
+// 		}
+		// MOD-E 2012.02.07 主催者(英)Step3へ移動対応
 
 		// 主催者連絡先
 // 		if ('' == $this->af->get('organizer_addr') || '' == $this->af->get('organizer_div') || '' == $this->af->get('organizer_pers')) {
@@ -314,7 +316,6 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		$regist_param_2['del_photos_name'] = $this->af->get('del_photos_name');
 		$regist_param_2['keyword'] = $this->af->get('keyword');
 		$regist_param_2['organizer_jp'] = $this->af->get('organizer_jp');
-		$regist_param_2['organizer_en'] = $this->af->get('organizer_en');
 		$regist_param_2['organizer_addr'] = $this->af->get('organizer_addr');
 		$regist_param_2['organizer_div'] = $this->af->get('organizer_div');
 		$regist_param_2['organizer_pers'] = $this->af->get('organizer_pers');
@@ -322,7 +323,6 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 		$regist_param_2['organizer_fax'] = $this->af->get('organizer_fax');
 		$regist_param_2['organizer_email'] = $this->af->get('organizer_email');
 		$regist_param_2['agency_in_japan_jp'] = $this->af->get('agency_in_japan_jp');
-		$regist_param_2['agency_in_japan_en'] = $this->af->get('agency_in_japan_en');
 		$regist_param_2['agency_in_japan_addr'] = $this->af->get('agency_in_japan_addr');
 		$regist_param_2['agency_in_japan_div'] = $this->af->get('agency_in_japan_div');
 		$regist_param_2['agency_in_japan_pers'] = $this->af->get('agency_in_japan_pers');
@@ -354,6 +354,8 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 // 		$this->af->set('transportation_en', $regist_param_3['transportation_en']);
 		$this->af->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$this->af->set('spare_field1', $regist_param_3['spare_field1']);
+		$this->af->set('organizer_en', $regist_param_3['organizer_en']);
+		$this->af->set('agency_in_japan_en', $regist_param_3['agency_in_japan_en']);
 
 		$regist_param_1 = $this->session->get('regist_param_1');
 		if (null == $regist_param_1) {

@@ -1031,19 +1031,6 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-		'organizer_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '主催者(英)',    // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 500,             // Maximum value
-			'regexp'      => '/^[ -~]+$/',    // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
 		'organizer_addr' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
@@ -1130,19 +1117,6 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
 			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => null,            // Optional method name which
-		),
-		'agency_in_japan_en' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(名称(英))', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => '/^[ -~]+$/',    // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
@@ -1349,6 +1323,32 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => 'Details of last fair audited by', // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 255,             // Maximum value
+			'regexp'      => '/^[ -~]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'organizer_en' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'Name of the organizer',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 500,             // Maximum value
+			'regexp'      => '/^[ -~]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'agency_in_japan_en' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'Name of representative office or agency in Japan', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1657,7 +1657,6 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_2['photos_name_3'] = $obj->get('photos_3');
 		$regist_param_2['keyword'] = $obj->get('keyword');
 		$regist_param_2['organizer_jp'] = $obj->get('organizer_jp');
-		$regist_param_2['organizer_en'] = $obj->get('organizer_en');
 		$regist_param_2['organizer_addr'] = $obj->get('organizer_addr');
 		$regist_param_2['organizer_div'] = $obj->get('organizer_div');
 		$regist_param_2['organizer_pers'] = $obj->get('organizer_pers');
@@ -1665,7 +1664,6 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 		$regist_param_2['organizer_fax'] = $obj->get('organizer_fax');
 		$regist_param_2['organizer_email'] = $obj->get('organizer_email');
 		$regist_param_2['agency_in_japan_jp'] = $obj->get('agency_in_japan_jp');
-		$regist_param_2['agency_in_japan_en'] = $obj->get('agency_in_japan_en');
 		$regist_param_2['agency_in_japan_addr'] = $obj->get('agency_in_japan_addr');
 		$regist_param_2['agency_in_japan_div'] = $obj->get('agency_in_japan_div');
 		$regist_param_2['agency_in_japan_pers'] = $obj->get('agency_in_japan_pers');
@@ -1685,6 +1683,8 @@ class Jmesse_Action_UserFairRegistStep1 extends Jmesse_ActionClass
 // 		$regist_param_3['transportation_en'] = $obj->get('transportation_en');
 		$regist_param_3['other_admission_ticket_en'] = $obj->get('other_admission_ticket_en');
 		$regist_param_3['spare_field1'] = $obj->get('spare_field1');
+		$regist_param_3['organizer_en'] = $obj->get('organizer_en');
+		$regist_param_3['agency_in_japan_en'] = $obj->get('agency_in_japan_en');
 		$this->session->set('regist_param_3', $regist_param_3);
 	}
 

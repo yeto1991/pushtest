@@ -340,7 +340,6 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('photos_name_3', $regist_param_2['photos_name_3']);
 		$this->af->set('keyword', $regist_param_2['keyword']);
 		$this->af->set('organizer_jp', $regist_param_2['organizer_jp']);
-		$this->af->set('organizer_en', $regist_param_2['organizer_en']);
 		$this->af->set('organizer_addr', $regist_param_2['organizer_addr']);
 		$this->af->set('organizer_div', $regist_param_2['organizer_div']);
 		$this->af->set('organizer_pers', $regist_param_2['organizer_pers']);
@@ -348,7 +347,6 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 		$this->af->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$this->af->set('organizer_email', $regist_param_2['organizer_email']);
 		$this->af->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
-		$this->af->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$this->af->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
 		$this->af->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
 		$this->af->set('agency_in_japan_pers', $regist_param_2['agency_in_japan_pers']);

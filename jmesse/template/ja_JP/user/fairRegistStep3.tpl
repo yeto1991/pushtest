@@ -16,23 +16,6 @@
 		}
 	}
 
-	function next() {
-		if (document.getElementById('select_language_info_0').checked) {
-			document.getElementById('fair_title_en').value = '';
-			document.getElementById('profile_en').value = '';
-			document.getElementById('detailed_information_en').value = '';
-			document.getElementById('exhibits_en').value = '';
-			document.getElementById('other_city_en').value = '';
-			document.getElementById('venue_en').value = '';
-			document.getElementById('transportation_en').value = '';
-			document.getElementById('other_admission_ticket_en').value = '';
-			document.getElementById('organizer_en').value = '';
-			document.getElementById('agency_in_japan_en').value = '';
-			document.getElementById('spare_field1').value = '';
-		}
-		document.getElementById('form_fairRegistStep3').submit();
-	}
-
 {/literal}
 // -->
 </script>
@@ -95,9 +78,7 @@
 								<h3 class="img t_center">
 									<img src="/j-messe/images/db/fair04.jpg" alt="見本市登録　ステップ3" />
 								</h3>
-								<p class="t_right">
-									ユーザー：{$session.email}</a>
-								</p>
+								<p class="t_right">ユーザー：{$session.email}</p>
 
 								{* エラー表示 *}
 								{if count($errors)}
@@ -180,6 +161,39 @@
 												</td>
 											</tr>
 
+											{if is_error('organizer_en')}
+											<tr class="errorcheck">
+											{else}
+											<tr>
+											{/if}
+												<th class="item">Name of the organizer<br />主催者 名称
+												</th>
+												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
+												<td>
+													<input type="text" value="{$form.organizer_en}" size="50" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
+													{if is_error('organizer_en')}
+													<span class="error-message">{message name="organizer_en"}</span><br />
+													{/if}
+												</td>
+											</tr>
+
+											{if is_error('agency_in_japan_en')}
+											<tr class="errorcheck">
+											{else}
+											<tr>
+											{/if}
+												<th class="item">The representative office, person or agency in Japan<br />日本国内の連絡先 名称
+												</th>
+												<th class="required"></th>
+												<td>
+													<input type="text" value="{$form.agency_in_japan_en}" size="50" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="255" /><br />
+													海外で開催される見本市で、日本国内に問合せ先がある場合のみ入力ください。<br/>
+													{if is_error('agency_in_japan_en')}
+													<span class="error-message">{message name="agency_in_japan_en"}</span><br />
+													{/if}
+												</td>
+											</tr>
+
 											{if is_error('detailed_information_en')}
 											<tr class="errorcheck">
 											{else}
@@ -247,18 +261,6 @@
 												</td>
 											</tr>
 
-{*
-											<tr>
-												<th class="item">Transportation<br />交通手段
-												</th>
-												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-												<td>
-													<input type="text" value="{$form.transportation_en}" size="50" name="transportation_en" id="transportation_en" /> <br />
-													例：30 minutes by bus from xxx airport.<br/>
-												</td>
-											</tr>
-*}
-
 											{if is_error('other_admission_ticket_en')}
 											<tr class="errorcheck">
 											{else}
@@ -275,25 +277,6 @@
 													{/if}
 												</td>
 											</tr>
-{*
-											<tr>
-												<th class="item">Organizer<br />主催者
-												</th>
-												<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-												<td>
-													<input type="text" value="{$form.organizer_en}" size="50" name="organizer_en" id="organizer_en" maxlength="500" /><br/>
-												</td>
-											</tr>
-											<tr>
-												<th class="item">The representative office, person or agency in Japan<br />日本国内の連絡先
-												</th>
-												<th class="required"></th>
-												<td>
-													<input type="text" value="{$form.agency_in_japan_en}" size="50" name="agency_in_japan_en" id="agency_in_japan_en" maxlength="255" /><br />
-													海外で開催される見本市で、日本国内に問合せ先がある場合のみ入力ください。<br/>
-												</td>
-											</tr>
-*}
 
 											{if is_error('spare_field1')}
 											<tr class="errorcheck">
@@ -333,21 +316,6 @@
 					</div>
 				</div>
 				<p class="totop">
-{*
-					{if ('c' == $form.mode || 'e' == $form.mode)}
-						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&mode={$form.mode}&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&mode={$form.mode}&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{/if}
-					{else}
-						{if ('1' == $form.back)}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&back=1&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{else}
-					<a href="javascript:window.open('{$config.url}?action_user_fairRegistStep3=true&print=1', 'print')" target="print"><img src="/images/jp/btn-print.gif" alt="印刷" height="23" width="71" /></a>
-						{/if}
-					{/if}
-*}
 					<a href="javascript:window.scrollTo(0, 0);"><img src="/images/jp/btn-totop.gif" alt="このページの上へ" height="23" width="110" /></a>
 				</p>
 			</div>

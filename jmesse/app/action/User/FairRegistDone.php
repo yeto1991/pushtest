@@ -185,7 +185,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('photos_3', $regist_param_2['photos_name_3']);
 		$jm_fair->set('keyword', $regist_param_2['keyword']);
 		$jm_fair->set('organizer_jp', $regist_param_2['organizer_jp']);
-		$jm_fair->set('organizer_en', $regist_param_2['organizer_en']);
 		$jm_fair->set('organizer_addr', $regist_param_2['organizer_addr']);
 		$jm_fair->set('organizer_div', $regist_param_2['organizer_div']);
 		$jm_fair->set('organizer_pers', $regist_param_2['organizer_pers']);
@@ -193,7 +192,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 		$jm_fair->set('organizer_fax', $regist_param_2['organizer_fax']);
 		$jm_fair->set('organizer_email', $regist_param_2['organizer_email']);
 		$jm_fair->set('agency_in_japan_jp', $regist_param_2['agency_in_japan_jp']);
-		$jm_fair->set('agency_in_japan_en', $regist_param_2['agency_in_japan_en']);
 		$jm_fair->set('agency_in_japan_addr', $regist_param_2['agency_in_japan_addr']);
 		$jm_fair->set('agency_in_japan_div', $regist_param_2['agency_in_japan_div']);
 		$jm_fair->set('agency_in_japan_pers', $regist_param_2['agency_in_japan_pers']);
@@ -210,6 +208,8 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 // 		$jm_fair->set('transportation_en', $regist_param_3['transportation_en']);
 		$jm_fair->set('other_admission_ticket_en', $regist_param_3['other_admission_ticket_en']);
 		$jm_fair->set('spare_field1', $regist_param_3['spare_field1']);
+		$jm_fair->set('organizer_en', $regist_param_3['organizer_en']);
+		$jm_fair->set('agency_in_japan_en', $regist_param_3['agency_in_japan_en']);
 
 		// 申請年月日
 		$jm_fair->set('date_of_application', date('Y/m/d H:i:s'));
