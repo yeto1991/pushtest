@@ -1147,20 +1147,22 @@
 						<tr>
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
-							<td><font size="-1">1.「参照」ボタンをクリックして登録する画像ファイルを選択してください。最大3つまで登録できます。（JPEG, GIF, TIFF 形式のみ）</font><br/><br/>
-							<input type="file" name="photos_1" id="photos_1" size="50" onBlur="add_photos('photos_1')" /><br/>
-							<input type="file" name="photos_2" id="photos_2" size="50" onBlur="add_photos('photos_2')" /><br/>
-							<input type="file" name="photos_3" id="photos_3" size="50" onBlur="add_photos('photos_3')" /><br/>
-							<font size="-1">2. 登録された画像ファイル名が以下に表示されます。表示されない時は画面上をクリックしてください。</font><br/>
-							<input type="button" value="上へ" onClick="up_photos_list();">&nbsp;<input type="button" value="下へ" onClick="down_photos_list()">&nbsp;<input type="button" value="削除" onClick="delete_photos_list()"><br>
-							<select name="photos_list" id="photos_list" size="5" style="width:200px">
-								{section name=it loop=$app.photos}
-								<option value="{$app.photos[it]}">{$app.photos[it]}</option>
-								{/section}
-							</select>
-							<input type="hidden" name="values2" value=""> <br/>
-							<font size="-1">登録されているイメージの順番は上から1番目です。<br>
-							詳細表示するときには左から1番目を表示します。</font>
+							<td>
+								<font size="-1">1.「参照」ボタンをクリックして登録する画像ファイルを選択してください。最大3つまで登録できます。（JPEG, GIF形式のみ）</font><br/>
+								<font size="-1">2.１画像ファイルサイズの上限は2MB以内までです。</font><br/>
+								<input type="file" name="photos_1" id="photos_1" size="50" onBlur="add_photos('photos_1')" /><br/>
+								<input type="file" name="photos_2" id="photos_2" size="50" onBlur="add_photos('photos_2')" /><br/>
+								<input type="file" name="photos_3" id="photos_3" size="50" onBlur="add_photos('photos_3')" /><br/>
+								<font size="-1">2. 登録された画像ファイル名が以下に表示されます。表示されない時は画面上をクリックしてください。</font><br/>
+								<input type="button" value="上へ" onClick="up_photos_list();">&nbsp;<input type="button" value="下へ" onClick="down_photos_list()">&nbsp;<input type="button" value="削除" onClick="delete_photos_list()"><br>
+								<select name="photos_list" id="photos_list" size="5" style="width:200px">
+									{section name=it loop=$app.photos}
+									<option value="{$app.photos[it]}">{$app.photos[it]}</option>
+									{/section}
+								</select>
+								<input type="hidden" name="values2" value=""> <br/>
+								<font size="-1">登録されているイメージの順番は上から1番目です。<br>
+								詳細表示するときには左から1番目を表示します。</font>
 							</td>
 						</tr>
 
