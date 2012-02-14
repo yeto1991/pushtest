@@ -572,23 +572,13 @@
 							<th class="item">Net square meters</th>
 							<th class="required"></th>
 							<td>
-								<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
+								<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sq.m.(NET)</strong><br />
 								Enter only single-byte numbers with no commas. E.g. 1000<br/>
 								{if is_error('gross_floor_area')}
 								<span class="error-message">{message name="gross_floor_area"}</span><br />
 								{/if}
 							</td>
 						</tr>
-{*
-						<tr>
-							<th class="item">会場までの交通手段</th>
-							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
-							<td>
-								<input type="text" value="{$form.transportation_en}" size="60" name="transportation_en" id="transportation_en" maxlength="500"><br />
-								例：成田空港からA12バスで30分<br/>
-							</td>
-						</tr>
-*}
 						{if is_error('open_to')}
 						<tr class="errorcheck">
 						{else}
@@ -628,69 +618,6 @@
 								{/if}
 							</td>
 						</tr>
-{*
-						<tr>
-							<th class="item">出展申込締切日</th>
-							<th class="required"></th>
-							<td>
-								<select name="app_dead_yyyy" size="1" id="app_dead_yyyy">
-									<option value=""></option>
-									{section name=it loop=$app.year_list}
-									<option value="{$app.year_list[it]}" {if ($app.year_list[it]==$form.app_dead_yyyy)}selected{/if}>{$app.year_list[it]}</option>
-									{/section}
-								</select> 年
-								<select name="app_dead_mm" size="1" id="app_dead_mm">
-									<option value=""></option>
-									<option value="01" {if ('01' == $form.app_dead_mm)}selected{/if}>1</option>
-									<option value="02" {if ('02' == $form.app_dead_mm)}selected{/if}>2</option>
-									<option value="03" {if ('03' == $form.app_dead_mm)}selected{/if}>3</option>
-									<option value="04" {if ('04' == $form.app_dead_mm)}selected{/if}>4</option>
-									<option value="05" {if ('05' == $form.app_dead_mm)}selected{/if}>5</option>
-									<option value="06" {if ('06' == $form.app_dead_mm)}selected{/if}>6</option>
-									<option value="07" {if ('07' == $form.app_dead_mm)}selected{/if}>7</option>
-									<option value="08" {if ('08' == $form.app_dead_mm)}selected{/if}>8</option>
-									<option value="09" {if ('09' == $form.app_dead_mm)}selected{/if}>9</option>
-									<option value="10" {if ('10' == $form.app_dead_mm)}selected{/if}>10</option>
-									<option value="11" {if ('11' == $form.app_dead_mm)}selected{/if}>11</option>
-									<option value="12" {if ('12' == $form.app_dead_mm)}selected{/if}>12</option>
-								</select> 月
-								<select name="app_dead_dd" size="1" id="app_dead_dd">
-									<option value=""></option>
-									<option value="01" {if ('01' == $form.app_dead_dd)}selected{/if}>1</option>
-									<option value="02" {if ('02' == $form.app_dead_dd)}selected{/if}>2</option>
-									<option value="03" {if ('03' == $form.app_dead_dd)}selected{/if}>3</option>
-									<option value="04" {if ('04' == $form.app_dead_dd)}selected{/if}>4</option>
-									<option value="05" {if ('05' == $form.app_dead_dd)}selected{/if}>5</option>
-									<option value="06" {if ('06' == $form.app_dead_dd)}selected{/if}>6</option>
-									<option value="07" {if ('07' == $form.app_dead_dd)}selected{/if}>7</option>
-									<option value="08" {if ('08' == $form.app_dead_dd)}selected{/if}>8</option>
-									<option value="09" {if ('09' == $form.app_dead_dd)}selected{/if}>9</option>
-									<option value="10" {if ('10' == $form.app_dead_dd)}selected{/if}>10</option>
-									<option value="11" {if ('11' == $form.app_dead_dd)}selected{/if}>11</option>
-									<option value="12" {if ('12' == $form.app_dead_dd)}selected{/if}>12</option>
-									<option value="13" {if ('13' == $form.app_dead_dd)}selected{/if}>13</option>
-									<option value="14" {if ('14' == $form.app_dead_dd)}selected{/if}>14</option>
-									<option value="15" {if ('15' == $form.app_dead_dd)}selected{/if}>15</option>
-									<option value="16" {if ('16' == $form.app_dead_dd)}selected{/if}>16</option>
-									<option value="17" {if ('17' == $form.app_dead_dd)}selected{/if}>17</option>
-									<option value="18" {if ('18' == $form.app_dead_dd)}selected{/if}>18</option>
-									<option value="19" {if ('19' == $form.app_dead_dd)}selected{/if}>19</option>
-									<option value="20" {if ('20' == $form.app_dead_dd)}selected{/if}>20</option>
-									<option value="21" {if ('21' == $form.app_dead_dd)}selected{/if}>21</option>
-									<option value="22" {if ('22' == $form.app_dead_dd)}selected{/if}>22</option>
-									<option value="23" {if ('23' == $form.app_dead_dd)}selected{/if}>23</option>
-									<option value="24" {if ('24' == $form.app_dead_dd)}selected{/if}>24</option>
-									<option value="25" {if ('25' == $form.app_dead_dd)}selected{/if}>25</option>
-									<option value="26" {if ('26' == $form.app_dead_dd)}selected{/if}>26</option>
-									<option value="27" {if ('27' == $form.app_dead_dd)}selected{/if}>27</option>
-									<option value="28" {if ('28' == $form.app_dead_dd)}selected{/if}>28</option>
-									<option value="29" {if ('29' == $form.app_dead_dd)}selected{/if}>29</option>
-									<option value="30" {if ('30' == $form.app_dead_dd)}selected{/if}>30</option>
-									<option value="21" {if ('31' == $form.app_dead_dd)}selected{/if}>31</option>
-								</select> 日<br/>
-							</td>
-						</tr>
-*}
 					</table>
 					<div class="line_dot"><hr /></div>
 					<table width="100%">

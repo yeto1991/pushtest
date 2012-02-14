@@ -584,24 +584,13 @@
 											<th class="item">開催予定規模</th>
 											<th class="required"></th>
 											<td>
-												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sqm（NET）</strong><br />
-												半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
+												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sq.m.(NET)</strong><br />
+												半角数字のみ入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
 												{if is_error('gross_floor_area')}
 												<span class="error-message">{message name="gross_floor_area"}</span><br />
 												{/if}
 											</td>
 										</tr>
-{*
-										<tr>
-											<th class="item">会場までの交通手段</th>
-											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
-											<td>
-												<input type="text" value="{$form.transportation_jp}" size="60" name="transportation_jp" id="transportation_jp" maxlength="500"><br />
-												例：成田空港からA12バスで30分<br/>
-											</td>
-										</tr>
-*}
-
 										{if is_error('open_to')}
 										<tr class="errorcheck">
 										{else}
