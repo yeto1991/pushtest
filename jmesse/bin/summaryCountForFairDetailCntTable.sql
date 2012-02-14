@@ -865,6 +865,8 @@ union (
           del_flg = '0' 
           and main_industory_2 is not null 
           and main_industory_2 <> '' 
+          and sub_industory_2 is not null 
+          and sub_industory_2 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -887,6 +889,8 @@ union (
           del_flg = '0' 
           and main_industory_3 is not null 
           and main_industory_3 <> '' 
+          and sub_industory_3 is not null 
+          and sub_industory_3 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -909,6 +913,8 @@ union (
           del_flg = '0' 
           and main_industory_4 is not null 
           and main_industory_4 <> '' 
+          and sub_industory_4 is not null 
+          and sub_industory_4 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -931,6 +937,8 @@ union (
           del_flg = '0' 
           and main_industory_5 is not null 
           and main_industory_5 <> '' 
+          and sub_industory_5 is not null 
+          and sub_industory_5 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -953,6 +961,8 @@ union (
           del_flg = '0' 
           and main_industory_6 is not null 
           and main_industory_6 <> '' 
+          and sub_industory_6 is not null 
+          and sub_industory_6 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -975,6 +985,8 @@ union (
           del_flg = '0' 
           and main_industory_1 is not null 
           and main_industory_1 <> '' 
+          and sub_industory_1 is not null 
+          and sub_industory_1 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -997,6 +1009,8 @@ union (
           del_flg = '0' 
           and main_industory_2 is not null 
           and main_industory_2 <> '' 
+          and sub_industory_2 is not null 
+          and sub_industory_2 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -1019,6 +1033,8 @@ union (
           del_flg = '0' 
           and main_industory_3 is not null 
           and main_industory_3 <> '' 
+          and sub_industory_3 is not null 
+          and sub_industory_3 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -1041,6 +1057,8 @@ union (
           del_flg = '0' 
           and main_industory_4 is not null 
           and main_industory_4 <> '' 
+          and sub_industory_4 is not null 
+          and sub_industory_4 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -1063,6 +1081,8 @@ union (
           del_flg = '0' 
           and main_industory_5 is not null 
           and main_industory_5 <> '' 
+          and sub_industory_5 is not null 
+          and sub_industory_5 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
@@ -1085,6 +1105,8 @@ union (
           del_flg = '0' 
           and main_industory_6 is not null 
           and main_industory_6 <> '' 
+          and sub_industory_6 is not null 
+          and sub_industory_6 <> '' 
           and region is not null 
           and region <> '' 
           and confirm_flag = '1' 
