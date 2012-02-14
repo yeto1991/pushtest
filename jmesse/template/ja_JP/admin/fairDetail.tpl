@@ -350,7 +350,7 @@
 						<tr>
 							<td nowrap>開催予定規模</td>
 							<!-- 開催予定規模 -->
-							<td>{$form.gross_floor_area}</td>
+							<td>{$form.gross_floor_area}sq.m. (NET)</td>
 						</tr>
 
 						<tr>
@@ -430,7 +430,7 @@
 									</tr>
 									<tr>
 										<td>開催規模</td>
-										<td colspan="4">{$form.net_square_meters} ㎡</td>
+										<td colspan="4">{$form.net_square_meters} sq.m. (㎡) (NET)</td>
 									</tr>
 									<tr>
 										<td>承認機関</td>

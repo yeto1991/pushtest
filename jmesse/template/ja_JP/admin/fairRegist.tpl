@@ -920,7 +920,7 @@
 						<tr>
 							<td nowrap>開催予定規模 <font color="#CC3333">○</font></td>
 							<!-- 開催予定規模 -->
-							<td nowrap><input type="text" name="gross_floor_area" id="gross_floor_area" value="{$form.gross_floor_area}" maxlength="10" size="10" /><br> <font size="-1">■半角数字で入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
+							<td nowrap><input type="text" name="gross_floor_area" id="gross_floor_area" value="{$form.gross_floor_area}" maxlength="10" size="10" />sq.m. (NET)<br> <font size="-1">■半角数字のみ入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
 						</tr>
 
 						<tr>
@@ -1005,7 +1005,7 @@
 							<!-- 海外からの入場者数(人) -->
 							<!-- 総出典者数(社) -->
 							<!-- 海外からの出典者数(社) -->
-							<!-- 開催規模(㎡) -->
+							<!-- 開催規模 -->
 							<!-- 予備域１ -->
 							<td nowrap>
 								<table border="0">
@@ -1030,7 +1030,7 @@
 									</tr>
 									<tr>
 										<td>開催規模</td>
-										<td colspan="4"><input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" maxlength="50" size="50">㎡</td>
+										<td colspan="4"><input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" maxlength="50" size="50">sq.m. (㎡) (NET)<br> <font size="-1">■半角数字のみ入力して下さい。","(カンマ)は使用しないで下さい。例：1000</font></td>
 									</tr>
 									<tr>
 										<td>承認機関</td>
