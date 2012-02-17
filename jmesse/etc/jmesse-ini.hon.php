@@ -177,7 +177,7 @@ $config = array(
 	'mail_imap_host' => '10.1.100.18',
 	'mail_imap_port' => '143',
 	'mail_imap_user' => 'j-messe@jetro.go.jp',
-	'mail_imap_pass' => '121d0f3e',
+	'mail_imap_pass' => 'e65e0925',
 
 
 	//'mail_func_workaround' => false,
