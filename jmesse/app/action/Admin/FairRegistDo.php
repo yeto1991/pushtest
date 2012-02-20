@@ -169,16 +169,35 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		}
 		// ADD-E 2012.01.31 未来日付はエラー
 		// 会期
+		// MOD-S 2012.02.15 会期未定登録対応
+		$this->af->set('success', '1');
 		if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
-			$this->ae->add('error', '会期が正しくありません');
+			//年月日チェック後、日付が「00」であればエラーを返さない。
+			if($this->af->get('date_from_dd') == '00'){
+				//会期未定値が含まれる場合
+				$this->af->set('success', '2');
+			}else{
+				$this->ae->add('error', '会期が正しくありません');
+			}
 		}
 		if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->add('error', '会期が正しくありません');
+			//年月日チェック後、日付が「00」であればエラーを返さない。
+			if($this->af->get('date_to_dd') == '00'){
+				//会期未定値が含まれる場合
+				$this->af->set('success', '2');
+			}else{
+				$this->ae->add('error', '会期が正しくありません');
+			}
 		}
-		if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
+		if($this->af->get('success') != '2'){
+			if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
 			> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-			$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
+				$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
+			}
+
 		}
+		// MOD-E 2012.02.15 会期未定登録対応
+
 		// URLチェック
 		// 見本市URL
 		if (null != $this->af->get('fair_url') && '' != $this->af->get('fair_url')) {
@@ -898,7 +917,9 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		}
 
 		// 変更画面へ遷移
-		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$jm_fair->get('mihon_no').'&mode=change&success=1');
+		// MOD-S 2012.02.15 会期未定登録対応
+		header('Location: '.$this->config->get('url').'?action_admin_fairChange=true&mihon_no='.$jm_fair->get('mihon_no').'&mode=change&success='.$this->af->get('success'));
+		// MOD-E 2012.02.15 会期未定登録対応
 		return null;
 	}
 

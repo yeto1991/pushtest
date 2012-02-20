@@ -754,7 +754,19 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
+		'kaiki_mitei' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
+			'name'        => '会期未定',  // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,               // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'frequency' => array(
 			'type'        => array(VAR_TYPE_STRING), // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type

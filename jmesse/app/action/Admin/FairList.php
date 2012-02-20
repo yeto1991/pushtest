@@ -105,31 +105,36 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			}
 		}
 		// 会期
-		if ((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
-			|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
-			|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd'))) {
-			if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
-				$this->ae->add('error', '会期（開始）が正しくありません');
+		// MOD-S 2012.02.15 会期未定登録対応
+		if(!($this->af->get('kaiki_mitei' == '1'))){
+			//会期未定以外の場合
+			if ((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
+				|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
+				|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd'))) {
+				if (!checkdate($this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))) {
+					$this->ae->add('error', '会期（開始）が正しくありません');
+				}
+			}
+			if ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
+				|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
+				|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd'))) {
+				if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+					$this->ae->add('error', '会期（終了）が正しくありません');
+				}
+			}
+			if (((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
+				|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
+				|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd')))
+				&& ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
+				|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
+				|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd')))) {
+				if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
+					> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
+					$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
+				}
 			}
 		}
-		if ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
-			|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
-			|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd'))) {
-			if (!checkdate($this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->add('error', '会期（終了）が正しくありません');
-			}
-		}
-		if (((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
-			|| (null != $this->af->get('date_from_mm') && '' != $this->af->get('date_from_mm'))
-			|| (null != $this->af->get('date_from_dd') && '' != $this->af->get('date_from_dd')))
-			&& ((null != $this->af->get('date_to_yyyy') && '' != $this->af->get('date_to_yyyy'))
-			|| (null != $this->af->get('date_to_mm') && '' != $this->af->get('date_to_mm'))
-			|| (null != $this->af->get('date_to_dd') && '' != $this->af->get('date_to_dd')))) {
-			if (mktime(0, 0, 0, $this->af->get('date_from_mm'), $this->af->get('date_from_dd'), $this->af->get('date_from_yyyy'))
-				> mktime(0, 0, 0, $this->af->get('date_to_mm'), $this->af->get('date_to_dd'), $this->af->get('date_to_yyyy'))) {
-				$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
-			}
-		}
+		// MOD-E 2012.02.15 会期未定登録対応
 		// 数値の大小
 		// 見本市番号
 		if (null != $this->af->get('mihon_no_from') && '' != $this->af->get('mihon_no_from')
@@ -338,6 +343,9 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['date_to_yyyy'] = $this->af->get('date_to_yyyy');
 				$search_cond['date_to_mm'] = $this->af->get('date_to_mm');
 				$search_cond['date_to_dd'] = $this->af->get('date_to_dd');
+				// MOD-S 2012.02.15 会期未定登録対応
+				$search_cond['kaiki_mitei'] = $this->af->get('kaiki_mitei');
+				// MOD-E 2012.02.15 会期未定登録対応
 				$search_cond['frequency'] = $this->af->get('frequency');
 				$search_cond['main_industory'] = $this->af->get('main_industory');
 				$search_cond['sub_industory'] = $this->af->get('sub_industory');

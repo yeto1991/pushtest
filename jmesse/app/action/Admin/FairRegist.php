@@ -27,8 +27,8 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'name'        => '成功',          // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
-			'max'         => 1,               // Maximum value
-			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
 			'mbregexp'    => null,            // Multibype string by Regexp
 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
 			'filter'      => null,            // Optional Input filter to convert input
