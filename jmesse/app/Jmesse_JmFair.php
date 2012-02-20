@@ -131,6 +131,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}else{
 				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		// MOD-E 2012.02.17 規模順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -274,6 +279,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}else{
 				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		// MOD-E 2012.02.17 規模順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -781,6 +791,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}else{
 				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		// MOD-E 2012.02.17 規模順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -923,6 +938,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}else{
 				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		// MOD-E 2012.02.17 規模順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -1058,6 +1078,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}else{
 				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		// MOD-E 2012.02.17 規模順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -1141,6 +1166,11 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}else{
 				$sql_sort = ' order by trim(fair_title_en) asc ';
 			}
+		// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		// MOD-E 2012.02.17 規模順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -2362,36 +2392,43 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 
 		// 会期
-		// MOD-S 2012.01.25
-		// '0'埋め
-		if ('' != $search_cond['date_from_yyyy']) {
-			$date_from = $search_cond['date_from_yyyy'].'/'.$this->_zeroFill($search_cond['date_from_mm'], 2).'/'.$this->_zeroFill($search_cond['date_from_dd'], 2);
+		// MOD-S 2012.02.15 会期未定登録対応
+		if($search_cond['kaiki_mitei'] == '1'){
+			$sql_tmp = "(date_from_dd = '00' OR date_to_dd = '00')";
+			$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
 		} else {
-			$date_from = '';
-		}
-		if ('' != $search_cond['date_to_yyyy']) {
-			$date_to = $search_cond['date_to_yyyy'].'/'.$this->_zeroFill($search_cond['date_to_mm'], 2).'/'.$this->_zeroFill($search_cond['date_to_dd'], 2);
-		} else {
-			$date_to = '';
-		}
-		$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd)";
-		$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd)";
+			// MOD-S 2012.01.25
+			// '0'埋め
+			if ('' != $search_cond['date_from_yyyy']) {
+				$date_from = $search_cond['date_from_yyyy'].'/'.$this->_zeroFill($search_cond['date_from_mm'], 2).'/'.$this->_zeroFill($search_cond['date_from_dd'], 2);
+			} else {
+				$date_from = '';
+			}
+			if ('' != $search_cond['date_to_yyyy']) {
+				$date_to = $search_cond['date_to_yyyy'].'/'.$this->_zeroFill($search_cond['date_to_mm'], 2).'/'.$this->_zeroFill($search_cond['date_to_dd'], 2);
+			} else {
+				$date_to = '';
+			}
+			$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd)";
+			$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd)";
 
-// 		if ('' != $search_cond['date_from_yyyy']) {
-// 			$date_from = $search_cond['date_from_yyyy'].'/'.$search_cond['date_from_mm'].'/'.$search_cond['date_from_dd'].' 00:00:00';
-// 		} else {
-// 			$date_from = '';
-// 		}
-// 		if ('' != $search_cond['date_to_yyyy']) {
-// 			$date_to = $search_cond['date_to_yyyy'].'/'.$search_cond['date_to_mm'].'/'.$search_cond['date_to_dd'].' 23:59:59';
-// 		} else {
-// 			$date_to = '';
-// 		}
-// 		$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd, ' 00:00:00')";
-// 		$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 23:59:59')";
-		// MOD-E 2012.01.25
-		$sql_tmp = $this->_mkSqlDate2($column_from, $column_to, $date_from, $date_to, $data);
-		$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+// 			if ('' != $search_cond['date_from_yyyy']) {
+// 				$date_from = $search_cond['date_from_yyyy'].'/'.$search_cond['date_from_mm'].'/'.$search_cond['date_from_dd'].' 00:00:00';
+// 			} else {
+// 				$date_from = '';
+// 			}
+// 			if ('' != $search_cond['date_to_yyyy']) {
+// 				$date_to = $search_cond['date_to_yyyy'].'/'.$search_cond['date_to_mm'].'/'.$search_cond['date_to_dd'].' 23:59:59';
+// 			} else {
+// 				$date_to = '';
+// 			}
+// 			$column_from = "concat(date_from_yyyy, '/', date_from_mm, '/', date_from_dd, ' 00:00:00')";
+// 			$column_to = "concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd, ' 23:59:59')";
+			// MOD-E 2012.01.25
+			$sql_tmp = $this->_mkSqlDate2($column_from, $column_to, $date_from, $date_to, $data);
+			$sql_ext = $this->_addWhere($sql_ext, $sql_tmp, $search_cond['connection']);
+		}
+		// MOD-E 2012.02.15 会期未定登録対応
 
 		// 開催頻度
 		$sql_tmp = $this->_mkSqlCheckBox1('frequency', $search_cond['frequency'], $data);
