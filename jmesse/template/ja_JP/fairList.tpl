@@ -251,6 +251,7 @@
 											<option value="0" {if ('0' == $form.sort || '' == $form.sort)}selected{/if}>会期順</option>
 											<option value="1" {if ('1' == $form.sort)}selected{/if}>新着順</option>
 											<option value="2" {if ('2' == $form.sort)}selected{/if}>名称順</option>
+											<option value="3" {if ('3' == $form.sort)}selected{/if}>規模順</option>
 										</select>
 									</p>
 
