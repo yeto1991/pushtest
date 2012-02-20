@@ -441,6 +441,10 @@
 					{if ("1" == $app.success)}
 					<center><b><font color="#0000ff"><br/>登録しました。<br/><br/></font></b></center>
 					{/if}
+					{if ("2" == $app.success)}
+					{* 成功(会期未定の場合) *}
+					<center><b><font color="#0000ff"><br/>登録しました。※開催日未定での登録となっています。<br/><br/></font></b></center>
+					{/if}
 
 
 					<font color="#CC3333">●</font>印は入力必須項目、<font color="#CC3333">○</font>は入力推奨項目です。<br> 言語選択で「日本語のみ」をつけた時は、原則 翻訳入力は必要ありません<br> （英語インターフェースでの検索対象となりません）
@@ -593,7 +597,8 @@
 								<input type="text" name="date_to_yyyy" id="date_to_yyyy" value="{$form.date_to_yyyy}" maxlength="4" size="4" />年
 								<input type="text" name="date_to_mm" id="date_to_mm" value="{$form.date_to_mm}" maxlength="2" size="2" />月
 								<input type="text" name="date_to_dd" id="date_to_dd" value="{$form.date_to_dd}" maxlength="2" size="2" />日まで<br>
-								<font size="-1">■例：2002年8月1日の場合には半角数字で、2002 08 01 と入力してください。</font>
+								<font size="-1">■例：2002年8月1日の場合には半角数字で、2002 08 01 と入力してください。</font><br>
+								<font size="-1">■会期の日付（会期開始日または会期終了日）が未定の場合には半角数字で、00 と入力してください。</font>
 							</td>
 						</tr>
 
