@@ -1,25 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="{$config.css_js_base}js/jquery.js"></script>
 <script type="text/javascript" src="{$config.css_js_base}j-messe/js2/j-messe/jquery.dynamicselect.js"></script>
 <script type="text/javascript" src="{$config.css_js_base}j-messe/js2/j-messe/jquery.dynamicselectforjson.js"></script>
+<title>業種設定画面</title>
 </head>
 <body>
-
-{* エラー表示 *}
-{if count($errors)}
-<ul>
-	{foreach from=$errors item=error}
-	<li><font color="#ff0000">{$error}</font></li>
-	{/foreach}
-</ul>
-{/if}
-
-<span style="color:#ff0000;">※jQueryの.change()を使用しています。IEではそのバージョンに関係なく正常動作しません。</span>
-<br/>
-<br/>
+<h1>業種設定画面</h1>
+<hr/>
 
 <form name="form_search" id="form_search" method="post" action="">
 <input type="hidden" name="action_admin_setIndustry" id="action_admin_setIndustry" value="dummy" />
@@ -29,8 +19,17 @@
 <input type="button" name="btn_search" id="btn_search" value="検索" />
 </form>
 
+{* エラー表示 *}
+{if count($errors)}
+<ul>
+	{foreach from=$errors item=error}
+	<li><font color="#ff0000">{$error}</font></li>
+	{/foreach}
+</ul>
+{/if}
 <hr/>
 
+{if ('' != $form.mihon_no && !count($errors))}
 <form name="form_regist" id="form_regist" method="post" action="">
 <input type="hidden" name="action_admin_setIndustry" id="action_admin_setIndustry" value="dummy" />
 <input type="hidden" name="regist" id="regist" value="1" />
@@ -63,7 +62,7 @@
 			<option value="{$app.main_industory[it].kbn_2}" {if ($form.main_industory_1 == $app.main_industory[it].kbn_2)}selected{/if}>{$app.main_industory[it].discription_jp}</option>
 			{/section}
 		</select>
-		(<spam id="mi_1">{$form.main_industory_1}</spam>)
+		(<span id="mi_1">{$form.main_industory_1}</span>)
 	</td>
 	<td>
 		<select name="sub_industory_1" id="sub_industory_1" style="width:250px;">
@@ -81,7 +80,7 @@
 			<option value="{$app.main_industory[it].kbn_2}" {if ($form.main_industory_2 == $app.main_industory[it].kbn_2)}selected{/if}>{$app.main_industory[it].discription_jp}</option>
 			{/section}
 		</select>
-		(<spam id="mi_2">{$form.main_industory_2}</spam>)
+		(<span id="mi_2">{$form.main_industory_2}</span>)
 	</td>
 	<td>
 		<select name="sub_industory_2" id="sub_industory_2" style="width:250px;">
@@ -99,7 +98,7 @@
 			<option value="{$app.main_industory[it].kbn_2}" {if ($form.main_industory_3 == $app.main_industory[it].kbn_2)}selected{/if}>{$app.main_industory[it].discription_jp}</option>
 			{/section}
 		</select>
-		(<spam id="mi_3">{$form.main_industory_3}</spam>)
+		(<span id="mi_3">{$form.main_industory_3}</span>)
 	</td>
 	<td>
 		<select name="sub_industory_3" id="sub_industory_3" style="width:250px;">
@@ -117,7 +116,7 @@
 			<option value="{$app.main_industory[it].kbn_2}" {if ($form.main_industory_4 == $app.main_industory[it].kbn_2)}selected{/if}>{$app.main_industory[it].discription_jp}</option>
 			{/section}
 		</select>
-		(<spam id="mi_4">{$form.main_industory_4}</spam>)
+		(<span id="mi_4">{$form.main_industory_4}</span>)
 	</td>
 	<td>
 		<select name="sub_industory_4" id="sub_industory_4" style="width:250px;">
@@ -135,7 +134,7 @@
 			<option value="{$app.main_industory[it].kbn_2}" {if ($form.main_industory_5 == $app.main_industory[it].kbn_2)}selected{/if}>{$app.main_industory[it].discription_jp}</option>
 			{/section}
 		</select>
-		(<spam id="mi_5">{$form.main_industory_5}</spam>)
+		(<span id="mi_5">{$form.main_industory_5}</span>)
 	</td>
 	<td>
 		<select name="sub_industory_5" id="sub_industory_5" style="width:250px;">
@@ -153,7 +152,7 @@
 			<option value="{$app.main_industory[it].kbn_2}" {if ($form.main_industory_6 == $app.main_industory[it].kbn_2)}selected{/if}>{$app.main_industory[it].discription_jp}</option>
 			{/section}
 		</select>
-		(<spam id="mi_6">{$form.main_industory_6}</spam>)
+		(<span id="mi_6">{$form.main_industory_6}</span>)
 	</td>
 	<td>
 		<select name="sub_industory_6" id="sub_industory_6" style="width:250px;">
@@ -166,9 +165,11 @@
 ※重複チェックは行いません。<br/>
 ※業種(1)は必須です。<br/>
 ※そのまま登録されるので、途中の空欄は無い方が安全です。<br/>
-<input type="button" name="btn_regist" id="btn_regist" value="登録" />
+※「更新」後は元に戻せません。<br/>
+<input type="button" name="btn_regist" id="btn_regist" value="更新" />
 <input type="button" name="btn_reset" id="btn_reset" value="元に戻す" />
 </form>
+{/if}
 
 <script type="text/javascript">
 {literal}
@@ -210,20 +211,20 @@ $(function(){
 });
 $(function(){
 	$("#main_industory_1").change(function(){
-		$("#mi_1").html($("#main_industory_1 option:selected").val());
 		var main_industory_1 = $("#main_industory_1 option:selected").val();
+		$("#mi_1").html(main_industory_1);
 		if ('' != main_industory_1) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory_1+'&use_language_flag=0', '', '#sub_industory_1', '');
 		} else {
 			$("#sub_industory_1").html('');
 		}
-		$("#si_1").html('');
+		$("#si_1").empty();
 	});
 });
 $(function(){
 	$("#main_industory_2").change(function(){
-		$("#mi_2").html($("#main_industory_2 option:selected").val());
 		var main_industory_2 = $("#main_industory_2 option:selected").val();
+		$("#mi_2").html(main_industory_2);
 		if ('' != main_industory_2) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory_2+'&use_language_flag=0', '', '#sub_industory_2', '');
 		} else {
@@ -234,8 +235,8 @@ $(function(){
 });
 $(function(){
 	$("#main_industory_3").change(function(){
-		$("#mi_3").html($("#main_industory_3 option:selected").val());
 		var main_industory_3 = $("#main_industory_3 option:selected").val();
+		$("#mi_3").html(main_industory_3);
 		if ('' != main_industory_3) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory_3+'&use_language_flag=0', '', '#sub_industory_3', '');
 		} else {
@@ -246,8 +247,8 @@ $(function(){
 });
 $(function(){
 	$("#main_industory_4").change(function(){
-		$("#mi_4").html($("#main_industory_4 option:selected").val());
 		var main_industory_4 = $("#main_industory_4 option:selected").val();
+		$("#mi_4").html(main_industory_4);
 		if ('' != main_industory_4) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory_4+'&use_language_flag=0', '', '#sub_industory_4', '');
 		} else {
@@ -258,8 +259,8 @@ $(function(){
 });
 $(function(){
 	$("#main_industory_5").change(function(){
-		$("#mi_5").html($("#main_industory_5 option:selected").val());
 		var main_industory_5 = $("#main_industory_5 option:selected").val();
+		$("#mi_5").html(main_industory_5);
 		if ('' != main_industory_5) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory_5+'&use_language_flag=0', '', '#sub_industory_5', '');
 		} else {
@@ -270,8 +271,8 @@ $(function(){
 });
 $(function(){
 	$("#main_industory_6").change(function(){
-		$("#mi_6").html($("#main_industory_6 option:selected").val());
 		var main_industory_6 = $("#main_industory_6 option:selected").val();
+		$("#mi_6").html(main_industory_6);
 		if ('' != main_industory_6) {
 			dynamicpulldownlist('?action_json_getSubIndustory=true&kbn_2='+main_industory_6+'&use_language_flag=0', '', '#sub_industory_6', '');
 		} else {
