@@ -51,7 +51,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '区分１',        // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
@@ -64,7 +64,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '区分２',        // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
@@ -77,7 +77,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '区分３',        // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
@@ -90,7 +90,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
 			'name'        => '区分４',        // Display name
-			'required'    => true,            // Required Option(true/false)
+			'required'    => false,            // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 3,               // Maximum value
 			'regexp'      => '/^[0-9]+$/',    // String by Regexp
@@ -102,7 +102,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'discription_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '内容(日本語)',  // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -115,7 +115,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'discription_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '内容(英語)',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -128,7 +128,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'disp_cd' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '表示コード',    // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 10,              // Maximum value
@@ -141,7 +141,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'disp_num' => array(
 			'type'        => VAR_TYPE_INT,    // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '表示順',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => 0,               // Minimum value
 			'max'         => null,            // Maximum value
@@ -154,7 +154,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'reserve_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '予備1',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 10,              // Maximum value
@@ -167,7 +167,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'reserve_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '予備2',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 10,              // Maximum value
@@ -180,7 +180,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'reserve_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '予備3',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 10,              // Maximum value
@@ -193,7 +193,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'reserve_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '予備4',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -206,7 +206,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'reserve_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '予備5',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -219,7 +219,7 @@ class Jmesse_Form_AdminMasterMaintenance extends Jmesse_ActionForm
 		'reserve_6' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '',              // Display name
+			'name'        => '予備6',         // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -279,6 +279,10 @@ class Jmesse_Action_AdminMasterMaintenance extends Jmesse_ActionClass
 	function perform()
 	{
 
+		// '0':検索
+		// '1':更新
+		// '2':登録
+		// '3':一覧
 		$mode = $this->af->get('mode');
 
 		$kbn_1 = $this->af->get('kbn_1');
@@ -313,6 +317,13 @@ class Jmesse_Action_AdminMasterMaintenance extends Jmesse_ActionClass
 				// 新規登録モード
 				$this->af->setApp('mode', '2');
 			}
+		} elseif ('3' == $mode) {
+			// 一覧取得
+			$jm_code_m =& $this->backend->getObject('JmCodeM');
+			$res = $jm_code_m->searchProp(array('kbn_1', 'kbn_2', 'kbn_3', 'kbn_4', 'discription_jp', 'discription_en'), array(), array('kbn_1'=>'asc', 'kbn_2'=>'asc', 'kbn_3'=>'asc', 'kbn_4'=>'asc'));
+			$this->af->setApp('total', $res[0]);
+			$this->af->setApp('list', $res[1]);
+			$this->af->setApp('mode', '3');
 		} else {
 			// 入力値
 			$discription_jp = $this->af->get('discription_jp');
@@ -349,8 +360,8 @@ class Jmesse_Action_AdminMasterMaintenance extends Jmesse_ActionClass
 					$jm_code_m->set('reserve_5', $this->_changeNull($reserve_5));
 					$jm_code_m->set('reserve_6', $this->_changeNull($reserve_6));
 					$jm_code_m->update();
+					$this->af->setApp('mode', '1');
 				}
-
 			} elseif ('2' == $mode) {
 				// 登録モード
 				$jm_code_m =& $this->backend->getObject('JmCodeM');
@@ -370,6 +381,7 @@ class Jmesse_Action_AdminMasterMaintenance extends Jmesse_ActionClass
 				$jm_code_m->set('reserve_6', $this->_changeNull($reserve_6));
 				$jm_code_m->add();
 
+				$this->af->setApp('mode', '1');
 			}
 		}
 

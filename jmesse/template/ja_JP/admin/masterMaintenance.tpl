@@ -16,6 +16,7 @@
 区分３：<input type="text" name="kbn_3" id="kbn_3" value="{$form.kbn_3}" size="3" maxlength="3" />
 区分４：<input type="text" name="kbn_4" id="kbn_4" value="{$form.kbn_4}" size="3" maxlength="3" />
 <input type="button" name="btn_search" id="btn_search" value="検索" />
+<input type="button" name="btn_list" id="btn_list" value="一覧表示" />
 </form>
 ※区分１は「001:開催頻度」、「002:業種分類」、「003:開催地」、「004:入場資格」です。<br/>
 ※レコードが存在しない場合、新規登録モードとなります。
@@ -25,6 +26,8 @@
 <b>更新モード</b><br/><br/>
 {elseif '2'==$app.mode}
 <b>新規登録モード</b><br/><br/>
+{elseif '3'==$app.mode}
+<b>一覧</b>(全{$app.total}件)<br/><br/>
 {/if}
 
 <form name="form_regist" id="form_regist" method="post" action="">
@@ -35,8 +38,46 @@
 <input type="hidden" name="kbn_3" id="kbn_3_save" value="{$form.kbn_3}" />
 <input type="hidden" name="kbn_4" id="kbn_4_save" value="{$form.kbn_4}" />
 
+{if '3'==$app.mode}
+<table border="1">
+<tr>
+	<th>区分１</th>
+	<th>区分２</th>
+	<th>区分３</th>
+	<th>区分４</th>
+	<th>内容(日本語)</th>
+	<th>内容(英語)</th>
+	<th>編集</th>
+</tr>
+{section name=it loop=$app.list}
+<tr>
+	<td>{$app.list[it].kbn_1}</td>
+	<td>{$app.list[it].kbn_2}</td>
+	<td>{$app.list[it].kbn_3}</td>
+	<td>{$app.list[it].kbn_4}</td>
+	<td>{$app.list[it].discription_jp}</td>
+	<td>{$app.list[it].discription_en}</td>
+	<td><input type="button" name="btn_edit" id="btn_}edit" value="編集" onclick="javascript:do_edit('{$app.list[it].kbn_1}', '{$app.list[it].kbn_2}', '{$app.list[it].kbn_3}', '{$app.list[it].kbn_4}');"</td>
+</tr>
+{/section}
+</table>
+{elseif '0'!=$app.mode  && ''!=$app.mode}
+<table border="1">
+<tr>
+	<th>区分１</th>
+	<th>区分２</th>
+	<th>区分３</th>
+	<th>区分４</th>
+</tr>
+<tr>
+	<td>{$form.kbn_1}</td>
+	<td>{$form.kbn_2}</td>
+	<td>{$form.kbn_3}</td>
+	<td>{$form.kbn_4}</td>
+</tr>
+</table>
+<br/>
 
-{if '0'!=$app.mode  && ''!=$app.mode}
 <table border="1">
 <tr>
 	<th>項目名</th>
@@ -46,7 +87,7 @@
 </tr>
 <tr>
 	<td>内容(日本語)</td>
-	<td>255バイトまで</td>
+	<td>255文字まで</td>
 	<td>
 		<input type="text" name="discription_jp" id="discription_jp" value="{$form.discription_jp}" size="30" maxlength="255" />
 		<input type="button" name="clr_discription_jp" id="clr_discription_jp" value="クリア" />
@@ -56,7 +97,7 @@
 </tr>
 <tr>
 	<td>内容(英語)</td>
-	<td>255バイトまで</td>
+	<td>255文字まで</td>
 	<td>
 		<input type="text" name="discription_en" id="discription_en" value="{$form.discription_en}"  size="30" maxlength="255" />
 		<input type="button" name="clr_discription_en" id="clr_discription_en" value="クリア" />
@@ -65,7 +106,7 @@
 </tr>
 <tr>
 	<td>表示コード</td>
-	<td>10バイトまで</td>
+	<td>10文字まで</td>
 	<td>
 		<input type="text" name="disp_cd" id="disp_cd" value="{$form.disp_cd}" size="30" maxlength="10" />
 		<input type="button" name="clr_disp_cd" id="clr_disp_cd" value="クリア" />
@@ -76,14 +117,14 @@
 	<td>表示順</td>
 	<td>INT型</td>
 	<td>
-		<input type="text" name="disp_num" id="disp_num" value="{$form.disp_num}" size="30" maxlength="5" />
+		<input type="text" name="disp_num" id="disp_num" value="{$form.disp_num}" size="30" maxlength="11" />
 		<input type="button" name="clr_disp_num" id="clr_disp_num" value="クリア" />
 	</td>
 	<td></td>
 </tr>
 <tr>
 	<td>予備1</td>
-	<td>10バイトまで</td>
+	<td>10文字まで</td>
 	<td>
 		<input type="text" name="reserve_1" id="reserve_1" value="{$form.reserve_1}" size="30" maxlength="10" />
 		<input type="button" name="clr_reserve_1" id="clr_reserve_1" value="クリア" />
@@ -92,7 +133,7 @@
 </tr>
 <tr>
 	<td>予備2</td>
-	<td>10バイトまで</td>
+	<td>10文字まで</td>
 	<td>
 		<input type="text" name="reserve_2" id="reserve_2" value="{$form.reserve_2}" size="30" maxlength="10" />
 		<input type="button" name="clr_reserve_2" id="clr_reserve_2" value="クリア" />
@@ -101,7 +142,7 @@
 </tr>
 <tr>
 	<td>予備3</td>
-	<td>10バイトまで</td>
+	<td>10文字まで</td>
 	<td>
 		<input type="text" name="reserve_3" id="reserve_3" value="{$form.reserve_3}" size="30" maxlength="10" />
 		<input type="button" name="clr_reserve_3" id="clr_reserve_3" value="クリア" />
@@ -110,7 +151,7 @@
 </tr>
 <tr>
 	<td>予備4</td>
-	<td>255バイトまで</td>
+	<td>255文字まで</td>
 	<td>
 		<input type="text" name="reserve_4" id="reserve_4" value="{$form.reserve_4}" size="30" maxlength="255" />
 		<input type="button" name="clr_reserve_4" id="clr_reserve_4" value="クリア" />
@@ -119,7 +160,7 @@
 </tr>
 <tr>
 	<td>予備5</td>
-	<td>255バイトまで</td>
+	<td>255文字まで</td>
 	<td>
 		<input type="text" name="reserve_5" id="reserve_5" value="{$form.reserve_5}" size="30" maxlength="255" />
 		<input type="button" name="clr_reserve_5" id="clr_reserve_5" value="クリア" />
@@ -128,7 +169,7 @@
 </tr>
 <tr>
 	<td>予備6</td>
-	<td>255バイトまで</td>
+	<td>255文字まで</td>
 	<td>
 		<input type="text" name="reserve_6" id="reserve_6" value="{$form.reserve_6}" size="30" maxlength="255" />
 		<input type="button" name="clr_reserve_6" id="clr_reserve_6" value="クリア" />
@@ -246,12 +287,40 @@ $(function(){
 			window.alert("内容(英語)は必須です。");
 			return false;
 		}
-		if (!window.confirm('登録します。よろしいですか？')) {
-			return false;
+		if ('2' == $("#mode_save").val()) {
+			if (!window.confirm('登録します。よろしいですか？')) {
+				return false;
+			}
+		} else if ('1' == $("#del").attr('checked')) {
+			if (!window.confirm('削除します。よろしいですか？')) {
+				return false;
+			}
+		} else {
+			if (!window.confirm('更新します。よろしいですか？')) {
+				return false;
+			}
 		}
 		$("#form_regist").submit();
 	});
 });
+$(function(){
+	$("#btn_list").click(function(){
+		$("#kbn_1").val('');
+		$("#kbn_2").val('');
+		$("#kbn_3").val('');
+		$("#kbn_4").val('');
+		$("#mode").val('3');
+		$("#form_search").submit();
+	});
+});
+function do_edit(kbn_1, kbn_2, kbn_3, kbn_4) {
+	$("#mode").val('0');
+	$("#kbn_1").val(kbn_1);
+	$("#kbn_2").val(kbn_2);
+	$("#kbn_3").val(kbn_3);
+	$("#kbn_4").val(kbn_4);
+	$("#form_search").submit();
+}
 {/literal}
 </script>
 </body>
