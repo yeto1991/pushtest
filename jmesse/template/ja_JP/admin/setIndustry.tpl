@@ -14,7 +14,7 @@
 <form name="form_search" id="form_search" method="post" action="">
 <input type="hidden" name="action_admin_setIndustry" id="action_admin_setIndustry" value="dummy" />
 <input type="hidden" name="regist" id="regist" value="" />
-見本値番号
+見本市番号
 <input type="text" name="mihon_no" id="mihon_no" value="{$form.mihon_no}" />
 <input type="button" name="btn_search" id="btn_search" value="検索" />
 </form>
