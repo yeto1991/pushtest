@@ -350,7 +350,7 @@ $(function(){
 			window.alert("業種(6)の小分類を選択して下さい。");
 			return false;
 		}
-		if (!window.confirm('登録します。よろしいですか？')) {
+		if (!window.confirm('更新します。よろしいですか？')) {
 			return false;
 		}
 		$("#form_regist").submit();

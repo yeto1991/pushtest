@@ -18,7 +18,8 @@
 	<input type="button" name="btn_search" id="btn_search" value="検索" />
 </form>
 
-{* エラー表示 *} {if count($errors)}
+{* エラー表示 *}
+{if count($errors)}
 <ul>
 	{foreach from=$errors item=error}
 	<li><font color="#ff0000">{$error}</font></li> {/foreach}
@@ -40,7 +41,9 @@
 <br/>
 
 <form name="form_regist" id="form_regist" method="post" action="">
-	<input type="hidden" name="action_admin_setKaisaichi" id="action_admin_setKaisaichi" value="dummy" /> <input type="hidden" name="regist" id="regist" value="1" /> <input type="hidden" name="mihon_no" id="mihon_no_save" value="{$form.mihon_no}" />
+	<input type="hidden" name="action_admin_setKaisaichi" id="action_admin_setKaisaichi" value="dummy" />
+	<input type="hidden" name="regist" id="regist" value="1" />
+	<input type="hidden" name="mihon_no" id="mihon_no_save" value="{$form.mihon_no}" />
 	<table border="1" style="width:550px">
 		<tr>
 			<td style="width:115px">地域</td>
@@ -175,7 +178,7 @@ $(function(){
 			window.alert("都市を選択するか、その他都市に入力して下さい。");
 			return false;
 		}
-		if (!window.confirm('登録します。よろしいですか？')) {
+		if (!window.confirm('更新します。よろしいですか？')) {
 			return false;
 		}
 		$("#form_regist").submit();
