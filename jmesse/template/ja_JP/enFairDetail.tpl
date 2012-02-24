@@ -98,7 +98,7 @@
 							{/if}
 								<div style="padding-left: 15px;">
 								{if ('' != $app.fair_detail.gross_floor_area && 0 <$app.fair_detail.gross_floor_area)}
-								Net square meters(net)：{$app.fair_detail.gross_floor_area|number_format} sqm<br />
+								Net square meters：{$app.fair_detail.gross_floor_area|number_format} sq.m.<br />
 								{/if}
 {*
 									{if ('' != $app.fair_detail.transportation_jp)}
@@ -273,7 +273,7 @@
 								{/if}
 								<br/>
 								{if ('' != $app.fair_detail.net_square_meters && 0 < $app.fair_detail.net_square_meters)}
-								Net square meters(net) : {$app.fair_detail.net_square_meters} ㎡<br/>
+								Net square meters : {$app.fair_detail.net_square_meters} sq.m.<br/>
 								{/if}
 								{if ('' != $app.fair_detail.spare_field1)}
 								Data verified : {$app.fair_detail.spare_field1}<br/>
