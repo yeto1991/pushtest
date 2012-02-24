@@ -627,7 +627,7 @@
 							<td nowrap>開催予定規模</td>
 							<!-- 開催予定規模 -->
 							<td nowrap>
-								<input type="text" name="gross_floor_area_from" id="gross_floor_area_from" value="{$form.gross_floor_area_from}" size=20>～<input type="text" name="gross_floor_area_to" id="gross_floor_area_to" value="{$form.gross_floor_area_to}" size=20>sq.m. (NET)
+								<input type="text" name="gross_floor_area_from" id="gross_floor_area_from" value="{$form.gross_floor_area_from}" size=20>～<input type="text" name="gross_floor_area_to" id="gross_floor_area_to" value="{$form.gross_floor_area_to}" size=20>sq.m.
 								<select name="gross_floor_area_cond" id ="gross_floor_area_cond">
 									<option value="10" {if ('10' == $form.gross_floor_area_cond || '' == $form.gross_floor_area_cond)}selected{/if}>範囲</option>
 									<option value="11" {if ('11' == $form.gross_floor_area_cond)}selected{/if}>範囲外</option>
@@ -777,7 +777,7 @@
 									<tr>
 										<td>開催規模</td>
 										<td>
-											<input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" size="50" />sq.m. (㎡) (NET)
+											<input type="text" name="net_square_meters" id="net_square_meters" value="{$form.net_square_meters}" size="50" />sq.m.
 											<select name="net_square_meters_cond" id="net_square_meters_cond">
 												<option value="1" {if ('1' == $form.net_square_meters_cond)}selected{/if}>一致</option>
 												<option value="2" {if ('2' == $form.net_square_meters_cond)}selected{/if}>不一致</option>
