@@ -179,6 +179,14 @@ $config = array(
 	'mail_imap_user' => 'j-messe@jetro.go.jp',
 	'mail_imap_pass' => 'e65e0925',
 
+	// ADD-S 2012.02.24 バッチログメール追加
+	// バッチログ配信情報
+	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
+	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_mon.log('.date('Ymd').')',
+	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp,m.sasaki@ids.co.jp',
+	'batch_log'                    => '/home/jmesse1112/app/jmesse/log/batch.log',
+	'batch_mon_log'                => '/home/jmesse1112/app/jmesse/log/batch_mon.log',
+	// ADD-E 2012.02.24 バッチログメール追加
 
 	//'mail_func_workaround' => false,
 

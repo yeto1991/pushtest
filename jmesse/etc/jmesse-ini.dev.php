@@ -50,7 +50,7 @@ $config = array(
 	'r4_en' => 'ranking4_en.json',
 	'r5_en' => 'ranking5_en.json',
 	'r6_en' => 'ranking6_en.json',
-	
+
 	// MOD-S 2012.01.23 top3用ファイル作成
 	'n_jp_top3'  => 'new-mihonichi_jp_top3.json',
 	'n_en_top3'  => 'new-mihonichi_en_top3.json',
@@ -187,6 +187,14 @@ $config = array(
 	'mail_imap_user' => '',
 	'mail_imap_pass' => '',
 
+	// ADD-S 2012.02.24 バッチログメール追加
+	// バッチログ配信情報
+	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
+	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_man.log('.date('Ymd').')',
+	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp,m.sasaki@ids.co.jp',
+	'batch_log'                    => '/home/j-messe/app/jmesse/log/batch.log',
+	'batch_mon_log'                => '/home/j-messe/app/jmesse/log/batch_mon.log',
+	// ADD-E 2012.02.24 バッチログメール追加
 
 	//'mail_func_workaround' => false,
 

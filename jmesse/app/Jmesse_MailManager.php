@@ -287,5 +287,67 @@ class Jmesse_MailManager extends Ethna_AppManager
 		return $email;
 	}
 
+	// ADD-S 2012.02.24 バッチログメール追加
+	/**
+	 * 保守担当者にメールする。（日本語メール）
+	 *
+	 * @param string $title メールタイトル
+	 * @param string $to メール送信先
+	 * @param string $template テンプレート
+	 * @param array $ary_value 置き換え文字列
+	 */
+	function sendMaintenanceMail($title, $mail_to, $template, $ary_value) {
+		// 日本語メールを送る際の設定
+		mb_language("Japanese");
+		mb_internal_encoding("UTF-8");
+
+		// SMTPサーバーの情報を配列に設定
+		$params = array(
+			'host'       => $this->config->get('mail_smtp_host'),
+			'port'       => $this->config->get('mail_smtp_port'),
+			'auth'       => $this->config->get('mail_smtp_auth'),
+			'username'   => base64_encode($this->config->get('mail_smtp_user')),
+			'password'   => base64_encode($this->config->get('mail_smtp_pass')),
+			'localhost'  => null,
+			'timeout'    => null,
+			'debug'      => false,
+			'persist'    => null,
+			'pipelining' => null
+		);
+
+		// メールヘッダ情報を配列に設定
+		// 日本語メールの場合
+		$headers = array (
+			'To'          => mb_encode_mimeheader($mail_to, "ISO-2022-JP"),
+			'From'        => $this->config->get('mail_from'),
+			'Return-Path' => mb_encode_mimeheader($this->config->get('mail_return-path'), "ISO-2022-JP"),
+			'Subject'     => mb_encode_mimeheader(mb_convert_encoding($title, "ISO-2022-JP", "UTF-8"), "ISO-2022-JP")
+		);
+
+		// メール本文
+		$ethna_mail =& new Ethna_MailSender($this->backend);
+		$body_tmp = $ethna_mail->send(
+			null,
+			$template,
+			$ary_value
+		);
+		$this->backend->getLogger()->log(LOG_DEBUG, '■本文(UTF-8) : '.$body_tmp);
+		$body = mb_convert_encoding($body_tmp, "ISO-2022-JP", "UTF-8");
+
+		// 送信者
+		$recipients = $mail_to;
+
+		// 送信
+		$mail_obj =& Mail::factory('smtp', $params);
+		$result = $mail_obj->send($recipients, $headers, $body);
+		if (PEAR::isError($result)) {
+			$msg = 'メールの送信に失敗しました';
+			$this->backend->getLogger()->log(LOG_ERR, $msg);
+			$this->backend->getActionError()->add('error', $msg);
+		}
+
+		return;
+	}
+	// ADD-E 2012.02.24 バッチログメール追加
 }
 ?>
