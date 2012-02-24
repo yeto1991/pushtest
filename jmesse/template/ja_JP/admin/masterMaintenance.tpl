@@ -57,7 +57,7 @@
 	<td>{$app.list[it].kbn_4}</td>
 	<td>{$app.list[it].discription_jp}</td>
 	<td>{$app.list[it].discription_en}</td>
-	<td><input type="button" name="btn_edit" id="btn_}edit" value="編集" onclick="javascript:do_edit('{$app.list[it].kbn_1}', '{$app.list[it].kbn_2}', '{$app.list[it].kbn_3}', '{$app.list[it].kbn_4}');"</td>
+	<td><input type="button" name="btn_edit" id="btn_}edit" value="編集" onclick="javascript:do_edit('{$app.list[it].kbn_1}', '{$app.list[it].kbn_2}', '{$app.list[it].kbn_3}', '{$app.list[it].kbn_4}');" /></td>
 </tr>
 {/section}
 </table>
