@@ -133,7 +133,7 @@
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/industry/">業種別に見る</a></li>
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/country/">開催地別に見る</a></li>
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/tradefair/">詳細検索</a></li>
-									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/new_fair/">新着見本市</a></li>
+									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/new-additions/">新着見本市</a></li>
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/ranking/">月間ランキング</a></li>
 								</ul>
 								<ul class="navi">
