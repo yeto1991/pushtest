@@ -584,7 +584,7 @@
 											<th class="item">開催予定規模</th>
 											<th class="required"></th>
 											<td>
-												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sq.m.(NET)</strong><br />
+												<input type="text" value="{$form.gross_floor_area}" size="5" name="gross_floor_area" id="gross_floor_area" maxlength="10" /> <strong>sq.m.</strong><br />
 												半角数字のみ入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
 												{if is_error('gross_floor_area')}
 												<span class="error-message">{message name="gross_floor_area"}</span><br />

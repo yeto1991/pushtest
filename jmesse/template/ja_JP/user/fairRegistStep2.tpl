@@ -253,7 +253,7 @@
 											<th class="item">開催規模</th>
 											<th class="required"></th>
 											<td>
-												<input type="text" value="{$form.net_square_meters}" size="50" name="net_square_meters" id="net_square_meters" maxlength="50" /> <strong>sq.m. (㎡) (NET)</strong><br />
+												<input type="text" value="{$form.net_square_meters}" size="50" name="net_square_meters" id="net_square_meters" maxlength="50" /> <strong>sq.m.</strong><br />
 												半角数字のみ入力して下さい。","(カンマ)は使用しないで下さい。例：1000<br/>
 												{if is_error('net_square_meters')}
 												<span class="error-message">{message name="net_square_meters"}</span><br />

@@ -247,7 +247,7 @@ $form.mode
 							<th class="required"></th>
 							<td>
 							{if ('' != $form.gross_floor_area)}
-								{$form.gross_floor_area} sq.m. (NET)
+								{$form.gross_floor_area} sq.m.
 							{/if}
 							</td>
 						</tr>
@@ -337,7 +337,7 @@ $form.mode
 							<th class="required"></th>
 							<td>
 								{if ('' != $form.net_square_meters)}
-								{$form.net_square_meters} sq.m. (㎡) (NET)
+								{$form.net_square_meters} sq.m.
 								{/if}
 							</td>
 						</tr>

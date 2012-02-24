@@ -235,7 +235,7 @@
 							<th class="item">Net square meters</th>
 							<th class="required"></th>
 							<td>
-								<input type="text" value="{$form.net_square_meters}" size="50" name="net_square_meters" id="net_square_meters" maxlength="50" /> <strong>sq.m. (㎡) (NET)</strong><br />
+								<input type="text" value="{$form.net_square_meters}" size="50" name="net_square_meters" id="net_square_meters" maxlength="50" /> <strong>sq.m.</strong><br />
 								Enter only single-byte numbers with no commas.  E.g. 100<br/>
 								{if is_error('net_square_meters')}
 								<span class="error-message">{message name="net_square_meters"}</span><br />
