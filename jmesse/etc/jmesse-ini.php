@@ -59,14 +59,14 @@ $config = array(
 	// MOD-E 2012.01.23 top3用ファイル作成
 
 	// 共通部分URL
-	'header_url'           => 'http://www.jetro.go.jp/parts/ja_header.html ',
- 	'footer_url'           => 'http://www.jetro.go.jp/parts/ja_footer.html',
- 	'footer_script_rul'    => 'http://www.jetro.go.jp/parts/ja_footer_script.html',
-	'left_menu_url'        => 'http://localhost/jmesse/www/ja_left_menu.html',
-	'header_url_en'        => 'http://www.jetro.go.jp/en/parts/en_header.html',
- 	'footer_url_en'        => 'http://www.jetro.go.jp/en/parts/en_footer.html',
-	'footer_script_rul_en' => 'http://www.jetro.go.jp/en/parts/en_footer_script.html',
-	'left_menu_url_en'     => 'http://localhost/jmesse/www/en_left_menu.html',
+	'header_url'           => 'ja_header.html ',
+ 	'footer_url'           => 'ja_footer.html',
+ 	'footer_script_rul'    => 'ja_footer_script.html',
+	'left_menu_url'        => 'ja_left_menu.html',
+	'header_url_en'        => 'en_header.html',
+ 	'footer_url_en'        => 'en_footer.html',
+	'footer_script_rul_en' => 'en_footer_script.html',
+	'left_menu_url_en'     => 'en_left_menu.html',
 // 	'header_url'       => 'http://localhost/jmesse/www/header.html',
 // 	'footer_url'       => 'http://localhost/jmesse/www/footer.html',
 // 	'left_menu_url'    => 'http://localhost/jmesse/www/left_menu.html',
@@ -80,7 +80,7 @@ $config = array(
 
 	// db
 // 	'dsn' => 'mysql://jmesse:idsjmesse@localhost/jmesse',
- 	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
+	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
 	// sample-1: single db
 	// 'dsn' => 'mysql://user:password@server/database',
 	//
@@ -163,7 +163,6 @@ $config = array(
 	'mail_smtp_pass' => '',
 
 	'mail_from'        => mb_encode_mimeheader(mb_convert_encoding("J-messe 事務局", "ISO-2022-JP", "UTF-8"), "ISO-2022-JP").' <matsuura@ids.co.jp>',
-// 	'mail_from'        => 'J-messe事務局 <matsuura@ids.co.jp>',
 	'mail_from_en'     => 'J-messe Administrator <matsuura@ids.co.jp>',
 	'mail_bcc'         => 'matsuura@ids.co.jp',
 	'mail_return-path' => 'matsuura@ids.co.jp',
@@ -188,6 +187,14 @@ $config = array(
 	'mail_imap_user' => '',
 	'mail_imap_pass' => '',
 
+	// ADD-S 2012.02.24 バッチログメール追加
+	// バッチログ配信情報
+	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
+	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_mon.log('.date('Ymd').')',
+	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp,m.sasaki@ids.co.jp',
+	'batch_log'                    => 'C:\opt\Apache2.2\htdocs\jmesse\log\batch.log',
+	'batch_mon_log'                => 'C:\opt\Apache2.2\htdocs\jmesse\log\batch_mon.log',
+	// ADD-E 2012.02.24 バッチログメール追加
 
 	//'mail_func_workaround' => false,
 
