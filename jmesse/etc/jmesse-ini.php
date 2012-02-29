@@ -182,7 +182,7 @@ $config = array(
 	'mail_title_fair_regist_en'  => 'Notice of completion of your trade fair registration for J-messe',
 	'mail_title_fair_change_en'  => 'Notice of completion of updating your registered trade fair for J-messe',
 
-	'mail_imap_host' => 'imap.gmail.com',
+	'mail_imap_host' => '192.168.0.229',
 	'mail_imap_port' => '993',
 	'mail_imap_user' => '',
 	'mail_imap_pass' => '',
@@ -191,7 +191,7 @@ $config = array(
 	// バッチログ配信情報
 	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
 	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_mon.log('.date('Ymd').')',
-	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp,m.sasaki@ids.co.jp',
+	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp',
 	'batch_log'                    => 'C:\opt\Apache2.2\htdocs\jmesse\log\batch.log',
 	'batch_mon_log'                => 'C:\opt\Apache2.2\htdocs\jmesse\log\batch_mon.log',
 	// ADD-E 2012.02.24 バッチログメール追加

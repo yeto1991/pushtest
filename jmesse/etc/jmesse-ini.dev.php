@@ -97,7 +97,7 @@ $config = array(
 	// log
 	'log' => array(
 		'file' => array(
-			'level'  => 'debug',
+			'level'  => 'err',
 			'option' => 'pid,function,pos',
 			'mode'   => '666',
 			'file'   => '/home/j-messe/app/jmesse/log/jmesse_'.date('Ymd').'.log',
@@ -191,7 +191,7 @@ $config = array(
 	// バッチログ配信情報
 	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
 	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_man.log('.date('Ymd').')',
-	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp,m.sasaki@ids.co.jp',
+	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp',
 	'batch_log'                    => '/home/j-messe/app/jmesse/log/batch.log',
 	'batch_mon_log'                => '/home/j-messe/app/jmesse/log/batch_mon.log',
 	// ADD-E 2012.02.24 バッチログメール追加
