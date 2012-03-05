@@ -910,6 +910,87 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// コミット
 		$db->commit();
 
+		// MOD-S 2012.03.02 メール送信機能追加
+		if ('copy' == $this->af->get('mode')) {
+			//編集登録の場合 メール送信処理
+			if($this->af->get('mail_send_flag') == '0'){
+				//メール送信フラグメール「0:送信する」の場合
+				//削除フラグ「0:未削除」の場合
+				if($this->af->get('del_flg') == '0'){
+					if($this->af->get('confirm_flag') == '0'){
+						//承認フラグ「0:承認待ち」
+						//登録完了メール送信
+						if($use_language_flag == '0'){
+							//ユーザ使用言語「0：日本語」
+							$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+							if (Ethna::isError($user)) {
+								$this->ae->addObject('error', $user);
+								return 'admin_error';
+							}
+							if (null == $user || null == $user->get('user_id')) {
+								$this->ae->add('error', 'Eメールのユーザは未登録です');
+							}
+							$ary_value = array('user_nm' => $user->get('user_nm'), 'fair_title_jp' => $jm_fair->get('fair_title_jp'));
+							$mail_mgr =& $this->backend->getManager('mail');
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
+							$mail_mgr->sendmailFairReigst(strtolower($this->af->get('email')), $ary_value);
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
+						} else {
+							//ユーザ使用言語「1：英語」
+							$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+							if (Ethna::isError($user)) {
+								$this->ae->addObject('error', $user);
+								return 'admin_error';
+							}
+							if (null == $user || null == $user->get('user_id')) {
+								$this->ae->add('error', 'Eメールのユーザは未登録です');
+							}
+							$ary_value = array('user_nm' => $user->get('user_nm'), 'fair_title_en' => $jm_fair->get('fair_title_en'));
+							$mail_mgr =& $this->backend->getManager('mail');
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
+							$mail_mgr->sendmailEnFairReigst(strtolower($this->af->get('email')), $ary_value);
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
+						}
+					} elseif ($this->af->get('confirm_flag') == '2'){
+						//承認フラグ「2:否認」
+						//否認メール送信
+						if($use_language_flag == '0'){
+							//ユーザ使用言語「0：日本語」
+							$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+							if (Ethna::isError($user)) {
+								$this->ae->addObject('error', $user);
+								return 'admin_error';
+							}
+							if (null == $user || null == $user->get('user_id')) {
+								$this->ae->add('error', 'Eメールのユーザは未登録です');
+							}
+							$ary_value = array('user_nm' => $user->get('user_nm'), 'fair_title_jp' => $jm_fair->get('fair_title_jp'), 'rejection_comment' => $jm_fair->get('negate_comment'));
+							$mail_mgr =& $this->backend->getManager('mail');
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
+							$mail_mgr->sendmailFairRejection(strtolower($this->af->get('email')), $ary_value);
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
+						} else {
+							//ユーザ使用言語「1：英語」
+							$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
+							if (Ethna::isError($user)) {
+								$this->ae->addObject('error', $user);
+								return 'admin_error';
+							}
+							if (null == $user || null == $user->get('user_id')) {
+								$this->ae->add('error', 'Eメールのユーザは未登録です');
+							}
+							$ary_value = array('user_nm' => $user->get('user_nm'), 'fair_title_en' => $jm_fair->get('fair_title_en'), 'rejection_comment' => $jm_fair->get('negate_comment'));
+							$mail_mgr =& $this->backend->getManager('mail');
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信開始');
+							$mail_mgr->sendmailEnFairRejection(strtolower($this->af->get('email')), $ary_value);
+							$this->backend->getLogger()->log(LOG_DEBUG, '■mail送信終了');
+						}
+					}
+				}
+			}
+		}
+		// MOD-E 2012.03.02 メール送信機能追加
+
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
