@@ -168,11 +168,13 @@ $config = array(
 	'mail_title_user_confirm' => 'J-messe パスワード再発行のお知らせ',
 	'mail_title_fair_regist'  => 'J-messe 見本市登録完了のお知らせ',
 	'mail_title_fair_change'  => 'J-messe 見本市更新完了のお知らせ',
+	'mail_title_fair_rejection'  => 'J-messeより見本市登録否認のお知らせ',
 	'mail_title_user_regist_en'  => 'Notice of completion of your user registration for J-messe',
 	'mail_title_user_change_en'  => 'Notice of completion of updating your user information for J-messe',
 	'mail_title_user_confirm_en' => 'Notice of reissue of your password for J-messe',
 	'mail_title_fair_regist_en'  => 'Notice of completion of your trade fair registration for J-messe',
 	'mail_title_fair_change_en'  => 'Notice of completion of updating your registered trade fair for J-messe',
+	'mail_title_fair_rejection_en'  => 'Notice of rejection of trade fair registration to J-messe',
 
 	'mail_imap_host' => '10.1.100.18',
 	'mail_imap_port' => '143',
