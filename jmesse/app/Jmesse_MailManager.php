@@ -128,6 +128,30 @@ class Jmesse_MailManager extends Ethna_AppManager
 		$this->_sendmail('enFairChange.tpl', $this->config->get('mail_title_fair_change_en'), $mail_to, $ary_param, 'E');
 	}
 
+	// MOD-S 2012.03.02 メール送信機能追加
+	/**
+	* 見本市登録否認メール送信。（日本語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailFairRejection($mail_to, $ary_param) {
+		$this->_sendmail('fairRejection.tpl', $this->config->get('mail_title_fair_rejection'), $mail_to, $ary_param, 'J');
+	}
+
+	/**
+	 * 見本市登録否認メール送信。（英語メール）
+	 *
+	 * @access public
+	 * @param string $mail_to 送信先Eメール
+	 * @param array $ary_param 置き換え文字列
+	 */
+	function sendmailEnFairRejection($mail_to, $ary_param) {
+		$this->_sendmail('enFairRejection.tpl', $this->config->get('mail_title_fair_rejection_en'), $mail_to, $ary_param, 'E');
+	}
+	// MOD-E 2012.03.02 メール送信機能追加
+
 	/**
 	 * メール送信。
 	 *
