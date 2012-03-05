@@ -472,10 +472,17 @@
 							<!-- 承認フラグ -->
 							<!-- 否認コメント -->
 							<td nowrap>
-								<input type="radio" name="confirm_flag" id="confirm_flag" value="1" {if ("1" == $form.confirm_flag)}checked{/if} />承認
-								<input type="radio" name="confirm_flag" id="confirm_flag" value="0" {if ("0" == $form.confirm_flag || ("1" != $form.confirm_flag && "2" != $form.confirm_flag))}checked{/if} />承認待ち
-								<input type="radio" name="confirm_flag" id="confirm_flag" value="2" {if ("2" == $form.confirm_flag)}checked{/if} />否認<br />
-								否認コメント： <input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" maxlength="255" size="100" />
+								{if ("copy" == $form.mode)}
+									<input type="radio" name="confirm_flag" id="confirm_flag" value="1"  />承認
+									<input type="radio" name="confirm_flag" id="confirm_flag" value="0" checked />承認待ち
+									<input type="radio" name="confirm_flag" id="confirm_flag" value="2"  />否認<br />
+									否認コメント： <input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" maxlength="255" size="100" />
+								{else}
+									<input type="radio" name="confirm_flag" id="confirm_flag" value="1" {if ("1" == $form.confirm_flag)}checked{/if} />承認
+									<input type="radio" name="confirm_flag" id="confirm_flag" value="0" {if ("0" == $form.confirm_flag || ("1" != $form.confirm_flag && "2" != $form.confirm_flag))}checked{/if} />承認待ち
+									<input type="radio" name="confirm_flag" id="confirm_flag" value="2" {if ("2" == $form.confirm_flag)}checked{/if} />否認<br />
+									否認コメント： <input type="text" name="negate_comment" id="negate_comment" value="{$form.negate_comment}" maxlength="255" size="100" />
+								{/if}
 							</td>
 						</tr>
 
@@ -483,8 +490,13 @@
 							<td nowrap>メール送信フラグ <font color="#CC3333">●</font></td>
 							<!-- メール送信フラグ -->
 							<td nowrap>
-								<input type="radio" name="mail_send_flag" id="mail_send_flag" value="1" {if ("1" == $form.mail_send_flag)}checked{/if} />送信しない
-								<input type="radio" name="mail_send_flag" id="mail_send_flag" value="0" {if ("0" == $form.mail_send_flag || "1" != $form.mail_send_flag)}checked{/if} />送信する
+								{if ("copy" == $form.mode)}
+									<input type="radio" name="mail_send_flag" id="mail_send_flag" value="1" checked />送信しない
+									<input type="radio" name="mail_send_flag" id="mail_send_flag" value="0" />送信する
+								{else}
+									<input type="radio" name="mail_send_flag" id="mail_send_flag" value="1" {if ("1" == $form.mail_send_flag || "0" != $form.mail_send_flag)}checked{/if} />送信しない
+									<input type="radio" name="mail_send_flag" id="mail_send_flag" value="0" {if ("0" == $form.mail_send_flag)}checked{/if} />送信する
+								{/if}
 							</td>
 						</tr>
 
@@ -1186,8 +1198,13 @@
 							<td nowrap>削除</td>
 							<!-- 削除フラグ -->
 							<td nowrap>
-								<input type="radio" name="del_flg" id="del_flg" value="0" {if ("0" == $form.del_flg || "1" != $form.del_flg)}checked{/if} />未削除
-								<input type="radio" name="del_flg" id="del_flg" value="1" {if ("1" == $form.del_flg)}checked{/if} />削除済
+								{if ("copy" == $form.mode)}
+									<input type="radio" name="del_flg" id="del_flg" value="0" checked />未削除
+									<input type="radio" name="del_flg" id="del_flg" value="1"  />削除済
+								{else}
+									<input type="radio" name="del_flg" id="del_flg" value="0" {if ("0" == $form.del_flg || "1" != $form.del_flg)}checked{/if} />未削除
+									<input type="radio" name="del_flg" id="del_flg" value="1" {if ("1" == $form.del_flg)}checked{/if} />削除済
+								{/if}
 							</td>
 						</tr>
 						<tr>
