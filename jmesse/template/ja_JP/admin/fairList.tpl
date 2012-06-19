@@ -5,8 +5,8 @@
 <script type="text/javascript">{literal}
 	function init() {
 	}
-	function goto_page(url, type, page, index) {
-		document.location.href = url + '?action_admin_fairList=true&type=' + type + '&page=' + page + '&index=' + index;
+	function goto_page(url, type, page, index, sort, s1, s2, s3, s4, s5, sc1, sc2, sc3, sc4, sc5) {
+		document.location.href = url + '?action_admin_fairList=true&type=' + type + '&page=' + page + '&index=' + index + '&sort=' + sort + '&sort_1=' + s1 + '&sort_2=' + s2 + '&sort_3=' + s3 + '&sort_4=' + s4 + '&sort_5=' + s5 + '&sort_cond_1=' + sc1 + '&sort_cond_2=' + sc2 + '&sort_cond_3=' + sc3 + '&sort_cond_4=' + sc4 + '&sort_cond_5=' + sc5;
 	}
 	function download() {
 		action = document.createElement('input');
@@ -88,12 +88,12 @@
 
 					<div align="center">一覧画面</div>
 					{if ('1' != $app.first_page)}
-					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}', '{$form.index}')" />
+					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}', '{$form.index}', '{$form.sort}', '{$form.sort_1}', '{$form.sort_2}', '{$form.sort_3}', '{$form.sort_4}', '{$form.sort_5}', '{$form.sort_cond_1}', '{$form.sort_cond_2}', '{$form.sort_cond_3}', '{$form.sort_cond_4}', '{$form.sort_cond_5}')" />
 					{else}
 					<input type="button" value="前の一覧" onclick="" disabled />
 					{/if}
 					{if ('1' != $app.last_page)}
-					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}', '{$form.index}')" />
+					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}', '{$form.index}', '{$form.sort}', '{$form.sort_1}', '{$form.sort_2}', '{$form.sort_3}', '{$form.sort_4}', '{$form.sort_5}', '{$form.sort_cond_1}', '{$form.sort_cond_2}', '{$form.sort_cond_3}', '{$form.sort_cond_4}', '{$form.sort_cond_5}')" />
 					{else}
 					<input type="button" value="次の一覧" onclick="" disabled />
 					{/if}
@@ -105,7 +105,6 @@
 					<table border="1">
 						<tr>
 							<th nowrap>選択</th>
-{*							<th nowrap>状態</th> *}
 							<th nowrap>見本市番号</th>
 							<th nowrap>見本市名</th>
 							<th nowrap>見本市略称</th>
@@ -120,7 +119,6 @@
 						{section name=it loop=$app.jm_fair_list}
 						<tr style="word-break: break-all;">
 							<td align="center"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.jm_fair_list[it].mihon_no}"></td>
-{*							<td></td> *}
 							<td align="right">{$app.jm_fair_list[it].mihon_no}</td>
 							{if ('' != $app.jm_fair_list[it].fair_title_jp)}
 							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].fair_title_jp}</a></td>
@@ -229,12 +227,12 @@
 					<hr />
 					<input type="button" name="$DeleteDoc" value="削除" onClick="del()"> <small> 選択した文書に対して処理を実行します。</small><br />
 					{if ('1' != $app.first_page)}
-					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}', '{$form.index}')" />
+					<input type="button" value="前の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_prev}', '{$form.index}', '{$form.sort}', '{$form.sort_1}', '{$form.sort_2}', '{$form.sort_3}', '{$form.sort_4}', '{$form.sort_5}', '{$form.sort_cond_1}', '{$form.sort_cond_2}', '{$form.sort_cond_3}', '{$form.sort_cond_4}', '{$form.sort_cond_5}')" />
 					{else}
 					<input type="button" value="前の一覧" onclick="" disabled />
 					{/if}
 					{if ('1' != $app.last_page)}
-					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}', '{$form.index}')" />
+					<input type="button" value="次の一覧" onclick="goto_page('{$config.url}','{$app.type}','{$app.page_next}', '{$form.index}', '{$form.sort}', '{$form.sort_1}', '{$form.sort_2}', '{$form.sort_3}', '{$form.sort_4}', '{$form.sort_5}', '{$form.sort_cond_1}', '{$form.sort_cond_2}', '{$form.sort_cond_3}', '{$form.sort_cond_4}', '{$form.sort_cond_5}')" />
 					{else}
 					<input type="button" value="次の一覧" onclick="" disabled />
 					{/if}
