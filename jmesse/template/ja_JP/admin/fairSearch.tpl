@@ -1090,16 +1090,26 @@
 							<td nowrap>削除フラグ</td>
 							<!-- 削除フラグ -->
 							<td nowrap>
-								<input type="checkbox" name="del_flg[]" id="del_flg_0" value="0"
-								{section name=it loop=$form.del_flg}
-								{if ('0' == $form.del_flg[it])}checked{/if}
-								{/section}
-								/>未削除
-								<input type="checkbox" name="del_flg[]" id="del_flg_1" value="1"
-								{section name=it loop=$form.del_flg}
-								{if ('1' == $form.del_flg[it])}checked{/if}
-								{/section}
-								/>削除済
+								{if ('' == $form.del_flg)}
+									{if count($errors)}
+										<input type="checkbox" name="del_flg[]" id="del_flg[]" value="0" />未削除
+										<input type="checkbox" name="del_flg[]" id="del_flg[]" value="1" />削除済
+									{else}
+										<input type="checkbox" name="del_flg[]" id="del_flg[]" value="0" checked />未削除
+										<input type="checkbox" name="del_flg[]" id="del_flg[]" value="1" />削除済
+									{/if}
+								{else}
+									<input type="checkbox" name="del_flg[]" id="del_flg[]" value="0"
+										{section name=it loop=$form.del_flg}
+										{if ('0' == $form.del_flg[it] && '' != $form.del_flg[it])}checked{/if}
+										{/section}
+									/>未削除
+									<input type="checkbox" name="del_flg[]" id="del_flg[]" value="1"
+										{section name=it loop=$form.del_flg}
+										{if ('1' == $form.del_flg[it] && '' != $form.del_flg[it])}checked{/if}
+										{/section}
+									/>削除済
+								{/if}
 							</td>
 						</tr>
 					</table>
@@ -1183,9 +1193,10 @@
 									<option value="69" {if ('69' == form.summary_key1)}selected{/if}>展示会に係わる画像名称3</option>
 									<option value="70" {if ('70' == form.summary_key1)}selected{/if}>システム管理者備考欄</option>
 									<option value="71" {if ('71' == form.summary_key1)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>削除フラグ</option>
-									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>登録者ID</option>
-									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>更新者ID</option>
+									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
+									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
+									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
+									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1269,9 +1280,10 @@
 									<option value="69" {if ('69' == form.summary_key2)}selected{/if}>展示会に係わる画像名称3</option>
 									<option value="70" {if ('70' == form.summary_key2)}selected{/if}>システム管理者備考欄</option>
 									<option value="71" {if ('71' == form.summary_key2)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key2)}selected{/if}>削除フラグ</option>
-									<option value="73" {if ('73' == form.summary_key2)}selected{/if}>登録者ID</option>
-									<option value="74" {if ('74' == form.summary_key2)}selected{/if}>更新者ID</option>
+									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
+									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
+									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
+									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1355,9 +1367,10 @@
 									<option value="69" {if ('69' == form.summary_key3)}selected{/if}>展示会に係わる画像名称3</option>
 									<option value="70" {if ('70' == form.summary_key3)}selected{/if}>システム管理者備考欄</option>
 									<option value="71" {if ('71' == form.summary_key3)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key3)}selected{/if}>削除フラグ</option>
-									<option value="73" {if ('73' == form.summary_key3)}selected{/if}>登録者ID</option>
-									<option value="74" {if ('74' == form.summary_key3)}selected{/if}>更新者ID</option>
+									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
+									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
+									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
+									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1441,9 +1454,10 @@
 									<option value="69" {if ('69' == form.summary_key4)}selected{/if}>展示会に係わる画像名称3</option>
 									<option value="70" {if ('70' == form.summary_key4)}selected{/if}>システム管理者備考欄</option>
 									<option value="71" {if ('71' == form.summary_key4)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key4)}selected{/if}>削除フラグ</option>
-									<option value="73" {if ('73' == form.summary_key4)}selected{/if}>登録者ID</option>
-									<option value="74" {if ('74' == form.summary_key4)}selected{/if}>更新者ID</option>
+									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
+									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
+									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
+									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1527,9 +1541,10 @@
 									<option value="69" {if ('69' == form.summary_key5)}selected{/if}>展示会に係わる画像名称3</option>
 									<option value="70" {if ('70' == form.summary_key5)}selected{/if}>システム管理者備考欄</option>
 									<option value="71" {if ('71' == form.summary_key5)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key5)}selected{/if}>削除フラグ</option>
-									<option value="73" {if ('73' == form.summary_key5)}selected{/if}>登録者ID</option>
-									<option value="74" {if ('74' == form.summary_key5)}selected{/if}>更新者ID</option>
+									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
+									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
+									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
+									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>

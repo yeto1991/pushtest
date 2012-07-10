@@ -330,12 +330,13 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 	 * '69':展示会に係わる画像名称3
 	 * '70':システム管理者備考欄
 	 * '71':データ管理者備考欄
-	 * '72':削除フラグ
-	 * '73':登録者ID
-	 * '74':更新者ID
-	 * '75':削除日時
-	 * '76':登録日
-	 * '77':更新日
+	 * '72':登録カテゴリ
+	 * '73':削除フラグ
+	 * '74':登録者ID
+	 * '75':更新者ID
+	 * '76':削除日時
+	 * '77':登録日
+	 * '78':更新日
 	 *
 	 */
 	var $sort_column_name = array(
@@ -411,6 +412,7 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'展示会に係わる画像名称3',
 		'システム管理者備考欄',
 		'データ管理者備考欄',
+		'登録カテゴリ',
 		'削除フラグ',
 		'登録者ID',
 		'更新者ID',
@@ -492,6 +494,7 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'jf.photos_3',
 		'jf.note_for_system_manager',
 		'jf.note_for_data_manager',
+		'jf.regist_category',
 		'jf.del_flg',
 		'jf.regist_user_id',
 		'jf.update_user_id',
@@ -548,6 +551,12 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'3' => '主催者・日本の登録先へ問合せ',
 		'4' => '当日会場で入手',
 		'5' => 'その他'
+	);
+	var $regist_category_name = array(
+		'0' => 'ユーザによる登録（新規/コピー登録）',
+		'1' => '運営委託先/管理者による登録',
+		'2' => '新規発掘登録',
+		'9' => 'その他'
 	);
 	var $del_flg_name = array(
 		'0' => '未削除',
@@ -660,6 +669,8 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 						$disp_list[$idx][$i++] = $this->select_language_info_name[$value];
 					} elseif ('sum_ticket' == $key) {
 						$disp_list[$idx][$i++] = $this->sum_ticket_name[$value];
+					} elseif ('regist_category' == $key) {
+						$disp_list[$idx][$i++] = $this->regist_category_name[$value];
 					} elseif ('del_flg' == $key) {
 						$disp_list[$idx][$i++] = $this->del_flg_name[$value];
 					} else {
@@ -889,6 +900,8 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		$search_cond['note_for_system_manager_cond'] = $this->af->get('note_for_system_manager_cond');
 		$search_cond['note_for_data_manager'] = $this->af->get('note_for_data_manager');
 		$search_cond['note_for_data_manager_cond'] = $this->af->get('note_for_data_manager_cond');
+		$search_cond['regist_category'] = $this->af->get('regist_category');
+		$search_cond['del_flg'] = $this->af->get('del_flg');
 		$search_cond['summary_key1'] = $this->af->get('summary_key1');
 		$search_cond['summary_key1_sort_cond'] = $this->af->get('summary_key1_sort_cond');
 		$search_cond['summary_key2'] = $this->af->get('summary_key2');
