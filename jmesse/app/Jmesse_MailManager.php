@@ -128,6 +128,30 @@ class Jmesse_MailManager extends Ethna_AppManager
 		$this->_sendmail('enFairChange.tpl', $this->config->get('mail_title_fair_change_en'), $mail_to, $ary_param, 'E');
 	}
 
+	// MOD-S 2012.06.15 【問合せ管理票20120612-001】メール送信機能改修
+	/**
+	* 見本市 承認メール送信。（日本語メール）
+	*
+	* @access public
+	* @param string $mail_to 送信先Eメール
+	* @param array $ary_param 置き換え文字列
+	*/
+	function sendmailFairApproved($mail_to, $ary_param) {
+		$this->_sendmail('fairApproved.tpl', $this->config->get('mail_title_fair_approved'), $mail_to, $ary_param, 'J');
+	}
+
+	/**
+	 * 見本市 承認メール送信。（英語メール）
+	 *
+	 * @access public
+	 * @param string $mail_to 送信先Eメール
+	 * @param array $ary_param 置き換え文字列
+	 */
+	function sendmailEnFairApproved($mail_to, $ary_param) {
+		$this->_sendmail('enFairApproved.tpl', $this->config->get('mail_title_fair_approved_en'), $mail_to, $ary_param, 'E');
+	}
+	// MOD-E 2012.06.15 【問合せ管理票20120612-001】メール送信機能改修
+
 	// MOD-S 2012.03.02 メール送信機能追加
 	/**
 	* 見本市登録否認メール送信。（日本語メール）
