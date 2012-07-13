@@ -53,7 +53,7 @@
 				<p style="word-break: break-all;">{$app.fair_detail.profile_en|replace:"&lt;br/&gt;":"<br/>"}</p>
 				{if ('' != $app.fair_detail.fair_url)}
 				<p class="t_right">
-					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">officail site</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
+					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">official site</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
 				</p>
 				{/if}
 				<!-- left -->
