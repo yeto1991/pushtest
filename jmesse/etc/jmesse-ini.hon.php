@@ -168,8 +168,8 @@ $config = array(
 	'mail_bcc'         => 'j-messe@totec-net.com',
 	'mail_return-path' => 'j-messe@jetro.go.jp',
 
-	'mail_title_user_regist'  => 'J-messe 見本市ユーザ登録完了のお知らせ',
-	'mail_title_user_change'  => 'J-messe 見本市ユーザ更新完了のお知らせ',
+	'mail_title_user_regist'  => 'J-messe 見本市ユーザー登録完了のお知らせ',
+	'mail_title_user_change'  => 'J-messe 見本市ユーザー更新完了のお知らせ',
 	'mail_title_user_confirm' => 'J-messe パスワード再発行のお知らせ',
 	'mail_title_fair_regist'  => 'J-messe 見本市登録申請受付のお知らせ',
 	'mail_title_fair_change'  => 'J-messe 見本市更新受付のお知らせ',
