@@ -12,9 +12,9 @@ This email informs you that your trade fair has been opened to the public on J-m
 
 Please be aware of the following points to utilize J-messe effectively:
 
-★In case of any change/cancelation of your registered trade fair, including changing period and venue, please revise your registered information on J-messe as soon as possible.
+*In case of any change/cancelation of your registered trade fair, including changing period and venue, please revise your registered information on J-messe as soon as possible.
 
-★After the completion of trade fairs you registered, please add records of the fairs, such as the number of visitors. Please note that all registered information of the trade fairs will be automatically locked six months after the date of completion.
+*After the completion of trade fairs you registered, please add records of the fairs, such as the number of visitors. Please note that all registered information of the trade fairs will be automatically locked six months after the date of completion.
 
  Kindly regards,
 
