@@ -827,11 +827,18 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		}
 		$this->af->setApp('mihon_no', $jm_fair->get('mihon_no'));
 
+		//MOD-S 2012.08.13 保守：画像処理エラー対応
 		// ディレクトリ作成
 		$dir_name = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no');
-		if (!is_dir($dir_name)) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '■mkdir : '.$dir_name);
-			mkdir($dir_name, 0777, true);
+		if (!is_dir($dir_name)){
+			$mkdirResult = mkdir($dir_name, 0777, true);
+			if(!$mkdirResult){
+				$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:新見本市番号ディレクトリ作成失敗');
+				$this->backend->getLogger()->log(LOG_ERR, '[対象ディレクトリ]:'.$dir_name);
+				$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+				$db->rollback();
+				return 'admin_error';
+			}
 		}
 
 		// 画像ファイルの削除
@@ -839,8 +846,25 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 		for ($i = 0; $i < count($del_photos_name); $i++) {
 			if (null != $del_photos_name[$i] && '' != $del_photos_name[$i]) {
 				$filename_del = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$del_photos_name[$i];
-				$this->backend->getLogger()->log(LOG_DEBUG, '■削除 : '.$filename_del);
-				unlink($filename_del);
+				//削除対象ファイルの存在確認
+				if(file_exists($filename_del)){
+					$deleteResult = unlink($filename_del);
+					if(!$deleteResult){
+						$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:削除対象ファイルの削除処理失敗');
+						$this->backend->getLogger()->log(LOG_ERR, '[削除対象ファイル]:'.$filename_del);
+						$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+						$db->rollback();
+						return 'admin_error';
+					}
+// 				}else{
+// 					$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:新規アップロードファイルの存在確認失敗');
+// 					$this->backend->getLogger()->log(LOG_ERR, '[存在未確認ファイル]:'.$filename_from_temp);
+// 					$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+// 					//tmpディレクトリ強制削除
+// 					system("rm -rf ".$this->session->get('img_tmp_path'));
+// 					$db->rollback();
+// 					return 'admin_error';
+				}
 			}
 		}
 
@@ -854,12 +878,23 @@ class Jmesse_Action_AdminFairChangeDo extends Jmesse_ActionClass
 				if (null != $file && '' !=  $name_list && $name_list == $file['name']) {
 					$filename_save = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$file['name'];
 					$this->backend->getLogger()->log(LOG_DEBUG, '■保存 : '.$filename_save);
-					rename($file['tmp_name'], $filename_save);
+					$copyResult = copy($file['tmp_name'], $filename_save);
+					if(!$copyResult){
+						//新規ファイルコピー失敗
+						$this->backend->getLogger()->log(LOG_ERR, '[見本市新規登録またはコピー登録 システムエラー]:ファイルのコピー処理失敗');
+						$this->backend->getLogger()->log(LOG_ERR, '[コピー元ファイル]:'.$file['tmp_name']);
+						$this->backend->getLogger()->log(LOG_ERR, '[コピー先ファイル]:'.$filename_save);
+						$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+						$db->rollback();
+						return 'admin_error';
+					}
 					$photos_list[$idx++] = $name_list;
 					break;
 				}
 			}
 		}
+		//MOD-E 2012.08.13 保守：画像処理エラー対応
+
 		$this->af->setApp('photos', $photos_list);
 
 		// JM_FAIR_TEMPにコピー

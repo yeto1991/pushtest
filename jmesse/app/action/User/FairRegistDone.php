@@ -268,62 +268,180 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 			$msg = 'JM_FAIRテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->ae->addObject('error', $ret);
+			//tmpディレクトリ強制削除
+			system("rm -rf ".$this->session->get('img_tmp_path'));
 			$db->rollback();
 			return 'error';
 		}
 		$this->backend->getLogger()->log(LOG_DEBUG, '■mihon_no : '.$jm_fair->get('mihon_no'));
 
+		//MOD-S 2012.08.13 保守：画像処理エラー対応
+		//画像ファイル操作処理（各モードによって処理が異なる。モード(e:見本市コピー登録,c:見本市修正、新規登録はモード無し）
+		//各処理でエラーの場合は、
+		//①「システムエラー」画面へ遷移
+		//②logにエラー情報を出力
+		//③DB登録はRollback（採番された見本市番号は欠番となる（MySqlのオートインクリメント仕様のため）
+		//④処理対象tmpフォルダの強制削除
+		//[補足]copy関数は、コピー先に同名ファイルが存在する場合、上書き。
+
 		// ディレクトリ作成
 		$dir_name = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no');
 		if (!is_dir($dir_name)) {
-			$this->backend->getLogger()->log(LOG_DEBUG, '■mkdir : '.$dir_name);
-			mkdir($dir_name, 0777, true);
-		}
-
-		// 画像ファイルの保存
-		if ('e' == $this->af->get('mode')) {
-			// 修正登録の場合コピー
-			$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
-			for ($i = 0; $i < count($ary_photos_name); $i++) {
-				$photos_name = $ary_photos_name[$i];
-				if ('' != $photos_name) {
-					// 修正登録の場合、前の画像をコピーする。
-					$filename_old = $this->config->get('img_path').$this->_getImageDir($mihon_no_old).'/'.$mihon_no_old.'/'.$photos_name;
-					$filename_new = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
-					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy 元 : '.$filename_old);
-					$this->backend->getLogger()->log(LOG_DEBUG, '■Copy 先 : '.$filename_new);
-					copy($filename_old, $filename_new);
-				}
+			$mkdirResult = mkdir($dir_name, 0777, true);
+			if(!$mkdirResult){
+				$this->backend->getLogger()->log(LOG_ERR, '[見本市新規登録またはコピー登録 システムエラー]:新見本市番号ディレクトリ作成失敗');
+				$this->backend->getLogger()->log(LOG_ERR, '[対象ディレクトリ]:'.$dir_name);
+				$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+				//tmpディレクトリ強制削除
+				system("rm -rf ".$this->session->get('img_tmp_path'));
+				$db->rollback();
+				return 'error';
 			}
 		}
 
-		if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
-			// 削除
+		//[見本市修正の場合]
+		if ('c' == $this->af->get('mode')){
+			//[処理①]対象フォルダ内の削除対象ファイルを削除
 			$ary_del_photos_name = $regist_param_2['del_photos_name'];
 			for ($i = 0; $i < count($ary_del_photos_name); $i++) {
 				if ('' != $ary_del_photos_name[$i]) {
 					$filename_del = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$ary_del_photos_name[$i];
-					$this->backend->getLogger()->log(LOG_DEBUG, '■削除 : '.$filename_del);
-					unlink($filename_del);
+					//削除対象ファイルの存在確認
+					if(file_exists($filename_del)){
+						//ファイル削除
+						$deleteResult_as_editMode = unlink($filename_del);
+						if(!$deleteResult_as_editMode){
+							$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:削除対象ファイルの削除処理失敗');
+							$this->backend->getLogger()->log(LOG_ERR, '[削除対象ファイル]:'.$filename_del);
+							$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+							//tmpディレクトリ強制削除
+							system("rm -rf ".$this->session->get('img_tmp_path'));
+							$db->rollback();
+							return 'error';
+						}
+// 					}else{
+// 						$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:削除対象ファイルの存在確認失敗');
+// 						$this->backend->getLogger()->log(LOG_ERR, '[存在未確認ファイル]:'.$filename_del);
+// 						$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+// 						//tmpディレクトリ強制削除
+// 						system("rm -rf ".$this->session->get('img_tmp_path'));
+// 						$db->rollback();
+// 						return 'error';
+					}
+				}
+			}
+
+			//[処理②]tmpディレクトリ内の新規アップロードファイル→修正対象見本市番号のディレクトリへコピー
+			$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+			for ($i = 0; $i < count($ary_photos_name); $i++) {
+				$photos_name = $ary_photos_name[$i];
+				if ('' != $photos_name) {
+					$filename_from_temp = $this->session->get('img_tmp_path').'/'.$photos_name;
+					//コピー元ファイルの存在確認
+					if(file_exists($filename_from_temp)){
+						$filename_to_save = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
+						$copyResult_as_editMode = copy($filename_from_temp, $filename_to_save);
+						if(!$copyResult_as_editMode){
+							//コピー失敗
+							$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:新規アップロードファイルのコピー処理失敗');
+							$this->backend->getLogger()->log(LOG_ERR, '[新規アップロードファイル]:'.$filename_from_temp);
+							$this->backend->getLogger()->log(LOG_ERR, '[コピー先ファイル]:'.$filename_to_save);
+							$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+							//tmpディレクトリ強制削除
+							system("rm -rf ".$this->session->get('img_tmp_path'));
+							$db->rollback();
+							return 'error';
+						}
+// 					}else{
+// 						$this->backend->getLogger()->log(LOG_ERR, '[見本市修正 システムエラー]:新規アップロードファイルの存在確認失敗');
+// 						$this->backend->getLogger()->log(LOG_ERR, '[存在未確認ファイル]:'.$filename_from_temp);
+// 						$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+// 						//tmpディレクトリ強制削除
+// 						system("rm -rf ".$this->session->get('img_tmp_path'));
+// 						$db->rollback();
+// 						return 'error';
+					}
 				}
 			}
 		}
 
-		// 保存
-		$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
-		for ($i = 0; $i < count($ary_photos_name); $i++) {
-			$photos_name = $ary_photos_name[$i];
-			if ('' != $photos_name) {
-				$filename_temp = $this->session->get('img_tmp_path').'/'.$photos_name;
-				$filename_save = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
-				$this->backend->getLogger()->log(LOG_DEBUG, '■一時 : '.$filename_temp);
-				$this->backend->getLogger()->log(LOG_DEBUG, '■保存 : '.$filename_save);
-				rename($filename_temp, $filename_save);
+		//[見本市コピー登録の場合]
+		if ('e' == $this->af->get('mode')){
+			//[処理①]コピー元ディレクトリ内に新規アップロードファイルと同名ファイルがあればコピー
+			$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+			for ($i = 0; $i < count($ary_photos_name); $i++) {
+				$photos_name = $ary_photos_name[$i];
+				if ('' != $photos_name) {
+					$filename_from_temp = $this->config->get('img_path').$this->_getImageDir($mihon_no_old).'/'.$mihon_no_old.'/'.$photos_name;
+					//コピー元ファイルの存在確認
+					if(file_exists($filename_from_temp)){
+						$filename_to_copy = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
+						$copyResult_as_copyMode = copy($filename_from_temp, $filename_to_copy);
+						if(!$copyResult_as_copyMode){
+							//コピー元ファイルのコピー失敗
+							$this->backend->getLogger()->log(LOG_ERR, '[見本市コピー登録 システムエラー]:コピー元ファイルのコピー処理失敗');
+							$this->backend->getLogger()->log(LOG_ERR, '[コピー元ファイル]:'.$filename_from_temp);
+							$this->backend->getLogger()->log(LOG_ERR, '[コピー先ファイル]:'.$filename_to_copy);
+							$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+							//tmpディレクトリ強制削除
+							system("rm -rf ".$this->session->get('img_tmp_path'));
+							$db->rollback();
+							return 'error';
+						}
+// 					}else{
+// 						$this->backend->getLogger()->log(LOG_ERR, '[見本市コピー登録 システムエラー]:コピー元ファイルの存在確認失敗');
+// 						$this->backend->getLogger()->log(LOG_ERR, '[存在未確認ファイル]:'.$filename_from_temp);
+// 						$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+// 						//tmpディレクトリ強制削除
+// 						system("rm -rf ".$this->session->get('img_tmp_path'));
+// 						$db->rollback();
+// 						return 'error';
+					}
+				}
 			}
 		}
 
-		// 一時保存フォルダの削除
-		rmdir($this->session->get('img_tmp_path'));
+		//[見本市新規登録 処理①、見本市コピー登録 処理②]tmp→新見本市番号ディレクトリへ全新規アップロードファイルをコピー
+		//見本市新規登録、見本市コピー登録の場合（見本市修正以外の場合）
+		if ('c' != $this->af->get('mode')){
+			$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+			for ($i = 0; $i < count($ary_photos_name); $i++) {
+				$photos_name = $ary_photos_name[$i];
+				if ('' != $photos_name) {
+					$filename_from_temp = $this->session->get('img_tmp_path').'/'.$photos_name;
+					//コピー元ファイルの存在確認
+					if(file_exists($filename_from_temp)){
+						$filename_to_copy = $this->config->get('img_path').$this->_getImageDir($jm_fair->get('mihon_no')).'/'.$jm_fair->get('mihon_no').'/'.$photos_name;
+						$copyResult_as_registMode = copy($filename_from_temp, $filename_to_copy);
+						if(!$copyResult_as_registMode){
+							//tmpディレクトリ内のファイルコピー失敗
+							$this->backend->getLogger()->log(LOG_ERR, '[見本市新規登録またはコピー登録 システムエラー]:tmpディレクトリ内ファイルのコピー処理失敗');
+							$this->backend->getLogger()->log(LOG_ERR, '[コピー元ファイル]:'.$filename_from_temp);
+							$this->backend->getLogger()->log(LOG_ERR, '[コピー先ファイル]:'.$filename_to_copy);
+							$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+							//tmpディレクトリ強制削除
+							system("rm -rf ".$this->session->get('img_tmp_path'));
+							$db->rollback();
+							return 'error';
+						}
+// 					}else{
+// 						$this->backend->getLogger()->log(LOG_ERR, '[見本市新規登録またはコピー登録 システムエラー]:コピーする新規アップロードファイルの存在確認失敗');
+// 						$this->backend->getLogger()->log(LOG_ERR, '[存在未確認ファイル]:'.$filename_from_temp);
+// 						$this->backend->getLogger()->log(LOG_ERR, '[処理モード(e:コピー登録 その他は新規登録)]:'.$this->af->get('mode'));
+// 						$this->ae->add('error', 'システムエラーが発生しました。[ファイル操作に失敗]');
+// 						//tmpディレクトリ強制削除
+// 						system("rm -rf ".$this->session->get('img_tmp_path'));
+// 						$db->rollback();
+// 						return 'error';
+					}
+				}
+			}
+		}
+
+		//最終的tmpフォルダ削除（ディレクトリ内にファイルが存在しても削除実行）※各エラーじに実行している処理と同一
+		//tmpディレクトリ強制削除
+		system("rm -rf ".$this->session->get('img_tmp_path'));
+		// MOD-E 2012.08.13 保守：画像処理エラー対応
 
 		// LOGに記録
 		$mgr =& $this->backend->getManager('userCommon');
@@ -332,6 +450,8 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
 			$this->backend->getLogger()->log(LOG_ERR, $msg);
 			$this->ae->addObject('error', $ret);
+			//tmpディレクトリ強制削除
+			system($this->session->get('img_tmp_path'));
 			$db->rollback();
 			return 'error';
 		}
@@ -543,7 +663,6 @@ class Jmesse_Action_UserFairRegistDone extends Jmesse_ActionClass
 	function _getImageDir($mihon_no) {
 		return (string) ((int) ($mihon_no / $this->config->get('photos_dir_max')));
 	}
-
 }
 
 ?>
