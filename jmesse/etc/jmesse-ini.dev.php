@@ -6,8 +6,8 @@
 */
 $config = array(
 	// site
-	'url'         => 'https://192.168.0.229/j-messe/',
-	'url_pub'     => 'http://192.168.0.229/j-messe/',
+	'url'         => 'https://192.168.0.236/j-messe/',
+	'url_pub'     => 'http://192.168.0.236/j-messe/',
 
 	// base
 	'base'        => 'https://www.jetro.go.jp/',
@@ -20,7 +20,7 @@ $config = array(
 	'css_js_base_pub' => 'http://www.jetro.go.jp/',
 
 	// path
-	'host_path'      => 'https://192.168.0.229',
+	'host_path'      => 'https://192.168.0.236',
 	'img_path'       => 'img/user/',
 	'img_tmp_path'   => 'img/user/tmp/',
 	'flag_path'      => '/images/flag/',
@@ -59,27 +59,27 @@ $config = array(
 	// MOD-E 2012.01.23 top3用ファイル作成
 
 	// 共通部分URL
-	'header_url'           => 'http://192.168.0.229/j-messe/ja_header.html ',
- 	'footer_url'           => 'http://192.168.0.229/j-messe/ja_footer.html',
- 	'footer_script_rul'    => 'http://192.168.0.229/j-messe/ja_footer_script.html',
-	'left_menu_url'        => 'http://192.168.0.229/j-messe/ja_left_menu.html',
-	'header_url_en'        => 'http://192.168.0.229/j-messe/en_header.html',
- 	'footer_url_en'        => 'http://192.168.0.229/j-messe/en_footer.html',
-	'footer_script_rul_en' => 'http://192.168.0.229/j-messe/en_footer_script.html',
-	'left_menu_url_en'     => 'http://192.168.0.229/j-messe/en_left_menu.html',
-// 	'header_url'       => 'http://192.168.0.229/header.html',
-// 	'footer_url'       => 'http://192.168.0.229/footer.html',
-// 	'left_menu_url'    => 'http://192.168.0.229/j-messe/left_menu.html',
-// 	'header_url_en'    => 'http://192.168.0.229/enHeader.html',
-// 	'footer_url_en'    => 'http://192.168.0.229/enFooter.html',
-// 	'left_menu_url_en' => 'http://192.168.0.229/j-messe/enLeft_menu.html',
+	'header_url'           => 'http://192.168.0.236/j-messe/ja_header.html ',
+ 	'footer_url'           => 'http://192.168.0.236/j-messe/ja_footer.html',
+ 	'footer_script_rul'    => 'http://192.168.0.236/j-messe/ja_footer_script.html',
+	'left_menu_url'        => 'http://192.168.0.236/j-messe/ja_left_menu.html',
+	'header_url_en'        => 'http://192.168.0.236/j-messe/en_header.html',
+ 	'footer_url_en'        => 'http://192.168.0.236/j-messe/en_footer.html',
+	'footer_script_rul_en' => 'http://192.168.0.236/j-messe/en_footer_script.html',
+	'left_menu_url_en'     => 'http://192.168.0.236/j-messe/en_left_menu.html',
+// 	'header_url'       => 'http://192.168.0.236/header.html',
+// 	'footer_url'       => 'http://192.168.0.236/footer.html',
+// 	'left_menu_url'    => 'http://192.168.0.236/j-messe/left_menu.html',
+// 	'header_url_en'    => 'http://192.168.0.236/enHeader.html',
+// 	'footer_url_en'    => 'http://192.168.0.236/enFooter.html',
+// 	'left_menu_url_en' => 'http://192.168.0.236/j-messe/enLeft_menu.html',
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
 	'debug' => true,
 
 	// db
-	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
+	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.236/jmesse',
 	// sample-1: single db
 	// 'dsn' => 'mysql://user:password@server/database',
 	//

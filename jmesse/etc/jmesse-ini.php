@@ -80,7 +80,7 @@ $config = array(
 
 	// db
 // 	'dsn' => 'mysql://jmesse:idsjmesse@localhost/jmesse',
-	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.229/jmesse',
+	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.236/jmesse',
 	// sample-1: single db
 	// 'dsn' => 'mysql://user:password@server/database',
 	//
@@ -186,7 +186,7 @@ $config = array(
 	'mail_title_fair_rejection_en'  => 'Notice of rejection of trade fair registration to J-messe',
 	'mail_title_fair_approved_en'  => 'Notice of approval of your trade fair registration on J-messe',
 
-	'mail_imap_host' => '192.168.0.229',
+	'mail_imap_host' => '192.168.0.236',
 	'mail_imap_port' => '993',
 	'mail_imap_user' => '',
 	'mail_imap_pass' => '',
