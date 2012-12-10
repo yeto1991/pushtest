@@ -119,7 +119,7 @@ $form.mode
 				<div class="in_main">
 					{if ('d' != $form.mode && 'p' != $form.mode)}
 					<h3 class="img t_center">
-						<img src="/en/database/j-messe/images/db/fair05.jpg" alt="見本市登録　ステップ4" />
+						<img src="/en/database/j-messe/images/db/fair04.jpg" alt="見本市登録確認" />
 					</h3>
 					{/if}
 					<p class="t_right">user：{$session.email}</p>
