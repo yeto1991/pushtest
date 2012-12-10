@@ -2,9 +2,9 @@
 
 # SHELL変数
 PHP_HOME=/usr/local/php
-MYSQL_HOME=/home/jmesse1112/opt/mysql
+MYSQL_HOME=/usr
 JMESSE_HOME=/home/jmesse1112/app/jmesse
-DB_SERVER=10.11.100.103
+DB_SERVER=172.16.20.80
 DB_BACKUP_PATH=/home/jmesse1112/db_backup
 
 # Batch開始時刻

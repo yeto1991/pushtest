@@ -66,7 +66,6 @@ $config = array(
 	// MOD-E 2012.05.10 保守対応：ヘッダー、フッター参照先変更対応
 	'left_menu_url'        => '/home/jmesse1112/app/jmesse/www/ja_left_menu.html',
 // 	'left_menu_url'        => 'http://www.jetro.go.jp/parts/ja_left_menu.html',
-
 	// MOD-S 2012.05.10 保守対応：ヘッダー、フッター参照先変更対応
 	'header_url_en'        => 'http://www.jetro.go.jp/static/parts/en_header.html',
  	'footer_url_en'        => 'http://www.jetro.go.jp/static/parts/en_footer.html',
@@ -80,7 +79,8 @@ $config = array(
 	'debug' => false,
 
 	// db
-	'dsn' => 'mysql://jmesse:idsjmesse@10.11.100.103/jmesse',
+	// 新本番環境(80:本番 81:検証(ただし使用しない。)  共にJETRO本番環境)
+	'dsn' => 'mysql://jmesse:idsjmesse@172.16.20.80/jmesse',
 	// sample-1: single db
 	// 'dsn' => 'mysql://user:password@server/database',
 	//
@@ -156,14 +156,13 @@ $config = array(
 	//'use_gettext' => false,
 
 	// mail
-	'mail_smtp_host' => '10.1.100.18',
+	'mail_smtp_host' => '172.16.24.51',
 	'mail_smtp_port' => '25',
 	'mail_smtp_auth' => false,
 	'mail_smtp_user' => '',
 	'mail_smtp_pass' => '',
 
 	'mail_from'        => mb_encode_mimeheader(mb_convert_encoding("J-messe 事務局", "ISO-2022-JP", "UTF-8"), "ISO-2022-JP").' <j-messe@jetro.go.jp>',
-// 	'mail_from'        => 'J-messe事務局 <j-messe@jetro.go.jp>',
 	'mail_from_en'     => 'J-messe Administrator <j-messe@jetro.go.jp>',
 	'mail_bcc'         => 'j-messe@totec-net.com',
 	'mail_return-path' => 'j-messe@jetro.go.jp',
@@ -183,7 +182,7 @@ $config = array(
 	'mail_title_fair_rejection_en'  => 'Notice of rejection of trade fair registration to J-messe',
 	'mail_title_fair_approved_en'  => 'Notice of approval of your trade fair registration on J-messe',
 
-	'mail_imap_host' => '10.1.100.18',
+	'mail_imap_host' => '172.16.24.51',
 	'mail_imap_port' => '143',
 	'mail_imap_user' => 'j-messe@jetro.go.jp',
 	// MOD-S 2012.08.03 保守対応：新パスワード反映(有効期限は10月末2012/10/31まで) f76f1036→ g87g2147
