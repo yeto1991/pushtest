@@ -36,11 +36,12 @@ $PHP_HOME/bin/php -f $JMESSE_HOME/bin/getJsonNewMihonichi.php
 echo $?
 echo ▲▲▲ [`date`]【終了】新着見本市情報生成バッチ
 
+# 取得エラーのため一旦コメントアウト 2012-12-19
 # エラーメール情報取得バッチ
-echo ▼▼▼ [`date`]【開始】エラーメール情報取得バッチ
-$PHP_HOME/bin/php -f $JMESSE_HOME/bin/getErrMail.php
-echo $?
-echo ▲▲▲ [`date`]【終了】エラーメール情報取得バッチ
+#echo ▼▼▼ [`date`]【開始】エラーメール情報取得バッチ
+#$PHP_HOME/bin/php -f $JMESSE_HOME/bin/getErrMail.php
+#echo $?
+#echo ▲▲▲ [`date`]【終了】エラーメール情報取得バッチ
 
 # DBバックアップ
 ##################################################
