@@ -117,11 +117,15 @@
 								{/if}
 
 								<p style="word-break: break-all;">{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
-								{if ('' != $app.fair_detail.fair_url)}
+
 								<p class="t_right">
-									<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">公式ウェブサイト</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
-								</p>
+								{if ('1' == $app.fair_detail.jecc_flag)}
+									<a href="http://www.jetro.go.jp/j-messe/jecc/" /><img src="/j-messe/images/approved_exhibition.jpg" alt="JECC"></a>
 								{/if}
+								{if ('' != $app.fair_detail.fair_url)}
+									<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">公式ウェブサイト</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
+								{/if}
+								</p>
 								<!-- left -->
 								{if ('' != $app.fair_detail.photos_1 || '' != $app.fair_detail.photos_2 || '' != $app.fair_detail.photos_3)}
 								<div class="left" id="detail">
@@ -143,8 +147,8 @@
 												<img src="{$config.url_pub}{$config.flag_path}{$app.fair_detail.flag_image}" style="vertical-align: middle;">
 *}
 												{/if}
-												{if ('' != $app.fair_detail.city_other_jp)}
-												{$app.fair_detail.city_other_jp} /
+												{if ('' != $app.fair_detail.other_city_jp)}
+												{$app.fair_detail.other_city_jp} /
 												{/if}
 												{if ('' != $app.fair_detail.city_name)}
 												<a href="{$config.url_pub}?action_fairList=true&type=v2&v_2={$app.fair_detail.region}&v_3={$app.fair_detail.country}&v_4={$app.fair_detail.city}">{$app.fair_detail.city_name}</a> /
@@ -312,6 +316,14 @@
 											</td>
 										</tr>
 										{/if}
+										{if ('1' == $app.fair_detail.exhibit_support_flag)}
+										<tr>
+											<th>JETRO出展支援</th>
+											<td>
+												<a href="{$app.fair_detail.jetro_suport_url}">ジェトロが出展支援を予定している展示会</a>
+											</td>
+										</tr>
+										{/if}
 										{if ('' != $app.fair_detail.year_of_the_trade_fair
 											|| ('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor))
 											|| ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor)
@@ -349,12 +361,14 @@
 											</td>
 										</tr>
 										{/if}
+{*
 										{if ('' != $app.fair_detail.keyword)}
 										<tr>
 											<th>キーワード</th>
 											<td>{$app.fair_detail.keyword}</td>
 										</tr>
 										{/if}
+*}
 										<tr>
 											<th>最終更新日</th>
 											<td>

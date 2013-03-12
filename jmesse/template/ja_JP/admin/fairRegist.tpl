@@ -1154,13 +1154,13 @@
 							<!-- 駐在員レポート／リンク -->
 							<td nowrap><input type="text" name="report_link" id="report_link" value="{$form.report_link}" maxlength="255" size="100" /></td>
 						</tr>
-
+{*
 						<tr>
 							<td nowrap>世界の展示会場／URL</td>
 							<!-- 展示会場／リンク -->
 							<td nowrap><input type="text" name="venue_link" id="venue_link" value="{$form.venue_link}" maxlength="255" size="100" /></td>
 						</tr>
-
+*}
 						<tr>
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
@@ -1216,6 +1216,46 @@
 								<input type="radio" name="regist_category" id="regist_category" value="2" {if ("2" == $form.regist_category)}checked{/if} />新規発掘登録
 								<input type="radio" name="regist_category" id="regist_category" value="9" {if ("9" == $form.regist_category)}checked{/if} />その他<br />
 							</td>
+						</tr>
+						<tr>
+							<td nowrap>JECC認証</td>
+							<!-- JECC認証フラグ -->
+							<td nowrap>
+								{if ("copy" == $form.mode)}
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="0" checked />未認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="1"  />認証
+								{else}
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="0" {if ("0" == $form.jecc_flag || "1" != $form.jecc_flag)}checked{/if} />未認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="1" {if ("1" == $form.jecc_flag)}checked{/if} />認証
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<td nowrap>JECC認証年月日</td>
+							<!-- JECC認証年月日 -->
+							<td nowrap>
+								<input type="text" name="jecc_date_y" id="jecc_date_y" value="{$form.jecc_date_y}"  maxlength="4" size="4" />年
+								<input type="text" name="jecc_date_m" id="jecc_date_m" value="{$form.jecc_date_m}"  maxlength="2" size="2" />月
+								<input type="text" name="jecc_date_d" id="jecc_date_d" value="{$form.jecc_date_d}"  maxlength="2" size="2" />日
+							</td>
+						</tr>
+						<tr>
+							<td nowrap>JETRO出展支援</td>
+							<!-- JETRO出展支援フラグ -->
+							<td nowrap>
+								{if ("copy" == $form.mode)}
+									<input type="radio" name="exhibit_support_flag" id="exhibit_support_flag" value="0" checked />無
+									<input type="radio" name="exhibit_support_flag" id="exhibit_support_flag" value="1"  />有
+								{else}
+									<input type="radio" name="exhibit_support_flag" id="exhibit_support_flag" value="0" {if ("0" == $form.exhibit_support_flag || "1" != $form.exhibit_support_flag)}checked{/if} />無
+									<input type="radio" name="exhibit_support_flag" id="exhibit_support_flag" value="1" {if ("1" == $form.exhibit_support_flag)}checked{/if} />有
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<td nowrap>JETRO出展支援URL</td>
+							<!-- JETRO出展支援URL -->
+							<td nowrap><input type="text" name="jetro_suport_url" id="jetro_suport_url" value="{if ('' == $form.jetro_suport_url)}http://www.jetro.go.jp/services/tradefair/list/{else}{$form.jetro_suport_url}{/if}" maxlength="255" size="100" /></td>
 						</tr>
 					</table>
 					<hr>

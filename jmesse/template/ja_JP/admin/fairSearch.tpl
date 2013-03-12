@@ -986,6 +986,7 @@
 								</select>
 							</td>
 						</tr>
+{*
 						<tr>
 							<td nowrap>世界の展示会場／URL</td>
 							<!-- 展示会場／リンク -->
@@ -1001,7 +1002,7 @@
 								</select>
 							</td>
 						</tr>
-
+*}
 						<tr>
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
@@ -1112,6 +1113,77 @@
 								{/if}
 							</td>
 						</tr>
+						<tr>
+							<td nowrap>JECC認証フラグ</td>
+							<!-- JECC認証フラグ -->
+							<td nowrap>
+								{if ('' == $form.jecc_flag)}
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="0" />未認証
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="1" />認証
+								{else}
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="0"
+										{section name=it loop=$form.jecc_flag}
+										{if ('0' == $form.jecc_flag[it] && '' != $form.jecc_flag[it])}checked{/if}
+										{/section}
+									/>未認証
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="1"
+										{section name=it loop=$form.jecc_flag}
+										{if ('1' == $form.jecc_flag[it] && '' != $form.jecc_flag[it])}checked{/if}
+										{/section}
+									/>認証
+								{/if}
+							</td>
+						</tr>
+
+						<tr>
+							<td nowrap>JECC認証年月日</td>
+							<!-- JECC認証年月日 -->
+							<td nowrap>
+								<input type="text" name="jecc_date_y_from" id="jecc_date_y_from" value="{$form.jecc_date_y_from}" maxlength="4" size="4" />年
+								<input type="text" name="jecc_date_m_from" id="jecc_date_m_from" value="{$form.jecc_date_m_from}" maxlength="2" size="2" />月
+								<input type="text" name="jecc_date_d_from" id="jecc_date_d_from" value="{$form.jecc_date_d_from}" maxlength="2" size="2" />日から&nbsp;
+								<input type="text" name="jecc_date_y_to" id="jecc_date_y_to" value="{$form.jecc_date_y_to}" maxlength="4" size="4" />年
+								<input type="text" name="jecc_date_m_to" id="jecc_date_m_to" value="{$form.jecc_date_m_to}" maxlength="2" size="2" />月
+								<input type="text" name="jecc_date_d_to" id="jecc_date_d_to" value="{$form.jecc_date_d_to}" maxlength="2" size="2" />日まで
+							</td>
+						</tr>
+
+						<tr>
+							<td nowrap>JETRO出展支援フラグ</td>
+							<!-- JETRO出展支援フラグ -->
+							<td nowrap>
+								{if ('' == $form.exhibit_support_flag)}
+									<input type="checkbox" name="exhibit_support_flag[]" id="exhibit_support_flag[]" value="0" />無
+									<input type="checkbox" name="exhibit_support_flag[]" id="exhibit_support_flag[]" value="1" />有
+								{else}
+									<input type="checkbox" name="exhibit_support_flag[]" id="exhibit_support_flag[]" value="0"
+										{section name=it loop=$form.exhibit_support_flag}
+										{if ('0' == $form.exhibit_support_flag[it] && '' != $form.exhibit_support_flag[it])}checked{/if}
+										{/section}
+									/>無
+									<input type="checkbox" name="exhibit_support_flag[]" id="exhibit_support_flag[]" value="1"
+										{section name=it loop=$form.exhibit_support_flag}
+										{if ('1' == $form.exhibit_support_flag[it] && '' != $form.exhibit_support_flag[it])}checked{/if}
+										{/section}
+									/>有
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<td nowrap>JETRO出展支援URL</td>
+							<!-- JETRO出展支援URL -->
+							<td nowrap>
+								<input type="text" name="jetro_suport_url" id="jetro_suport_url" value="{$form.jetro_suport_url}" size="50" />
+								<select name="jetro_suport_url_cond" id="jetro_suport_url_cond">
+									<option value="1" {if ('1' == $form.jetro_suport_url_cond)}selected{/if}>一致</option>
+									<option value="2" {if ('2' == $form.jetro_suport_url_cond)}selected{/if}>不一致</option>
+									<option value="3" {if ('3' == $form.jetro_suport_url_cond)}selected{/if}>前一致</option>
+									<option value="4" {if ('4' == $form.jetro_suport_url_cond)}selected{/if}>前不一</option>
+									<option value="5" {if ('5' == $form.jetro_suport_url_cond || '' == $form.jetro_suport_url_cond)}selected{/if}>含む</option>
+									<option value="6" {if ('6' == $form.jetro_suport_url_cond)}selected{/if}>含まず</option>
+								</select>
+							</td>
+						</tr>
 					</table>
 					<hr />
 					集計条件設定<br>
@@ -1187,16 +1259,19 @@
 									<option value="63" {if ('63' == form.summary_key1)}selected{/if}>日本国内の照会先担当部課</option>
 									<option value="64" {if ('64' == form.summary_key1)}selected{/if}>日本国内の照会先担当者</option>
 									<option value="65" {if ('65' == form.summary_key1)}selected{/if}>見本市レポートURL</option>
-									<option value="66" {if ('66' == form.summary_key1)}selected{/if}>世界の展示会場URL</option>
-									<option value="67" {if ('67' == form.summary_key1)}selected{/if}>展示会に係わる画像名称1</option>
-									<option value="68" {if ('68' == form.summary_key1)}selected{/if}>展示会に係わる画像名称2</option>
-									<option value="69" {if ('69' == form.summary_key1)}selected{/if}>展示会に係わる画像名称3</option>
-									<option value="70" {if ('70' == form.summary_key1)}selected{/if}>システム管理者備考欄</option>
-									<option value="71" {if ('71' == form.summary_key1)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
-									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
-									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
-									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
+									<option value="66" {if ('66' == form.summary_key1)}selected{/if}>展示会に係わる画像名称1</option>
+									<option value="67" {if ('67' == form.summary_key1)}selected{/if}>展示会に係わる画像名称2</option>
+									<option value="68" {if ('68' == form.summary_key1)}selected{/if}>展示会に係わる画像名称3</option>
+									<option value="69" {if ('69' == form.summary_key1)}selected{/if}>システム管理者備考欄</option>
+									<option value="70" {if ('70' == form.summary_key1)}selected{/if}>データ管理者備考欄</option>
+									<option value="71" {if ('71' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
+									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>削除フラグ</option>
+									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>JECC認証フラグ</option>
+									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>JECC認証年月日</option>
+									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>JETRO出展支援URL</option>
+									<option value="76" {if ('76' == form.summary_key1)}selected{/if}>JETRO出展支援フラグ</option>
+									<option value="77" {if ('77' == form.summary_key1)}selected{/if}>登録者ID</option>
+									<option value="78" {if ('78' == form.summary_key1)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1274,16 +1349,19 @@
 									<option value="63" {if ('63' == form.summary_key2)}selected{/if}>日本国内の照会先担当部課</option>
 									<option value="64" {if ('64' == form.summary_key2)}selected{/if}>日本国内の照会先担当者</option>
 									<option value="65" {if ('65' == form.summary_key2)}selected{/if}>見本市レポートURL</option>
-									<option value="66" {if ('66' == form.summary_key2)}selected{/if}>世界の展示会場URL</option>
-									<option value="67" {if ('67' == form.summary_key2)}selected{/if}>展示会に係わる画像名称1</option>
-									<option value="68" {if ('68' == form.summary_key2)}selected{/if}>展示会に係わる画像名称2</option>
-									<option value="69" {if ('69' == form.summary_key2)}selected{/if}>展示会に係わる画像名称3</option>
-									<option value="70" {if ('70' == form.summary_key2)}selected{/if}>システム管理者備考欄</option>
-									<option value="71" {if ('71' == form.summary_key2)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
-									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
-									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
-									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
+									<option value="66" {if ('66' == form.summary_key2)}selected{/if}>展示会に係わる画像名称1</option>
+									<option value="67" {if ('67' == form.summary_key2)}selected{/if}>展示会に係わる画像名称2</option>
+									<option value="68" {if ('68' == form.summary_key2)}selected{/if}>展示会に係わる画像名称3</option>
+									<option value="69" {if ('69' == form.summary_key2)}selected{/if}>システム管理者備考欄</option>
+									<option value="70" {if ('70' == form.summary_key2)}selected{/if}>データ管理者備考欄</option>
+									<option value="71" {if ('71' == form.summary_key2)}selected{/if}>登録カテゴリ</option>
+									<option value="72" {if ('72' == form.summary_key2)}selected{/if}>削除フラグ</option>
+									<option value="73" {if ('73' == form.summary_key2)}selected{/if}>JECC認証フラグ</option>
+									<option value="74" {if ('74' == form.summary_key2)}selected{/if}>JECC認証年月日</option>
+									<option value="75" {if ('75' == form.summary_key2)}selected{/if}>JETRO出展支援URL</option>
+									<option value="76" {if ('76' == form.summary_key2)}selected{/if}>JETRO出展支援フラグ</option>
+									<option value="77" {if ('77' == form.summary_key2)}selected{/if}>登録者ID</option>
+									<option value="78" {if ('78' == form.summary_key2)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1361,16 +1439,19 @@
 									<option value="63" {if ('63' == form.summary_key3)}selected{/if}>日本国内の照会先担当部課</option>
 									<option value="64" {if ('64' == form.summary_key3)}selected{/if}>日本国内の照会先担当者</option>
 									<option value="65" {if ('65' == form.summary_key3)}selected{/if}>見本市レポートURL</option>
-									<option value="66" {if ('66' == form.summary_key3)}selected{/if}>世界の展示会場URL</option>
-									<option value="67" {if ('67' == form.summary_key3)}selected{/if}>展示会に係わる画像名称1</option>
-									<option value="68" {if ('68' == form.summary_key3)}selected{/if}>展示会に係わる画像名称2</option>
-									<option value="69" {if ('69' == form.summary_key3)}selected{/if}>展示会に係わる画像名称3</option>
-									<option value="70" {if ('70' == form.summary_key3)}selected{/if}>システム管理者備考欄</option>
-									<option value="71" {if ('71' == form.summary_key3)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
-									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
-									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
-									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
+									<option value="66" {if ('66' == form.summary_key3)}selected{/if}>展示会に係わる画像名称1</option>
+									<option value="67" {if ('67' == form.summary_key3)}selected{/if}>展示会に係わる画像名称2</option>
+									<option value="68" {if ('68' == form.summary_key3)}selected{/if}>展示会に係わる画像名称3</option>
+									<option value="69" {if ('69' == form.summary_key3)}selected{/if}>システム管理者備考欄</option>
+									<option value="70" {if ('70' == form.summary_key3)}selected{/if}>データ管理者備考欄</option>
+									<option value="71" {if ('71' == form.summary_key3)}selected{/if}>登録カテゴリ</option>
+									<option value="72" {if ('72' == form.summary_key3)}selected{/if}>削除フラグ</option>
+									<option value="73" {if ('73' == form.summary_key3)}selected{/if}>JECC認証フラグ</option>
+									<option value="74" {if ('74' == form.summary_key3)}selected{/if}>JECC認証年月日</option>
+									<option value="75" {if ('75' == form.summary_key3)}selected{/if}>JETRO出展支援URL</option>
+									<option value="76" {if ('76' == form.summary_key3)}selected{/if}>JETRO出展支援フラグ</option>
+									<option value="77" {if ('77' == form.summary_key3)}selected{/if}>登録者ID</option>
+									<option value="78" {if ('78' == form.summary_key3)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1448,16 +1529,19 @@
 									<option value="63" {if ('63' == form.summary_key4)}selected{/if}>日本国内の照会先担当部課</option>
 									<option value="64" {if ('64' == form.summary_key4)}selected{/if}>日本国内の照会先担当者</option>
 									<option value="65" {if ('65' == form.summary_key4)}selected{/if}>見本市レポートURL</option>
-									<option value="66" {if ('66' == form.summary_key4)}selected{/if}>世界の展示会場URL</option>
-									<option value="67" {if ('67' == form.summary_key4)}selected{/if}>展示会に係わる画像名称1</option>
-									<option value="68" {if ('68' == form.summary_key4)}selected{/if}>展示会に係わる画像名称2</option>
-									<option value="69" {if ('69' == form.summary_key4)}selected{/if}>展示会に係わる画像名称3</option>
-									<option value="70" {if ('70' == form.summary_key4)}selected{/if}>システム管理者備考欄</option>
-									<option value="71" {if ('71' == form.summary_key4)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
-									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
-									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
-									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
+									<option value="66" {if ('66' == form.summary_key4)}selected{/if}>展示会に係わる画像名称1</option>
+									<option value="67" {if ('67' == form.summary_key4)}selected{/if}>展示会に係わる画像名称2</option>
+									<option value="68" {if ('68' == form.summary_key4)}selected{/if}>展示会に係わる画像名称3</option>
+									<option value="69" {if ('69' == form.summary_key4)}selected{/if}>システム管理者備考欄</option>
+									<option value="70" {if ('70' == form.summary_key4)}selected{/if}>データ管理者備考欄</option>
+									<option value="71" {if ('71' == form.summary_key4)}selected{/if}>登録カテゴリ</option>
+									<option value="72" {if ('72' == form.summary_key4)}selected{/if}>削除フラグ</option>
+									<option value="73" {if ('73' == form.summary_key4)}selected{/if}>JECC認証フラグ</option>
+									<option value="74" {if ('74' == form.summary_key4)}selected{/if}>JECC認証年月日</option>
+									<option value="75" {if ('75' == form.summary_key4)}selected{/if}>JETRO出展支援URL</option>
+									<option value="76" {if ('76' == form.summary_key4)}selected{/if}>JETRO出展支援フラグ</option>
+									<option value="77" {if ('77' == form.summary_key4)}selected{/if}>登録者ID</option>
+									<option value="78" {if ('78' == form.summary_key4)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1535,16 +1619,19 @@
 									<option value="63" {if ('63' == form.summary_key5)}selected{/if}>日本国内の照会先担当部課</option>
 									<option value="64" {if ('64' == form.summary_key5)}selected{/if}>日本国内の照会先担当者</option>
 									<option value="65" {if ('65' == form.summary_key5)}selected{/if}>見本市レポートURL</option>
-									<option value="66" {if ('66' == form.summary_key5)}selected{/if}>世界の展示会場URL</option>
-									<option value="67" {if ('67' == form.summary_key5)}selected{/if}>展示会に係わる画像名称1</option>
-									<option value="68" {if ('68' == form.summary_key5)}selected{/if}>展示会に係わる画像名称2</option>
-									<option value="69" {if ('69' == form.summary_key5)}selected{/if}>展示会に係わる画像名称3</option>
-									<option value="70" {if ('70' == form.summary_key5)}selected{/if}>システム管理者備考欄</option>
-									<option value="71" {if ('71' == form.summary_key5)}selected{/if}>データ管理者備考欄</option>
-									<option value="72" {if ('72' == form.summary_key1)}selected{/if}>登録カテゴリ</option>
-									<option value="73" {if ('73' == form.summary_key1)}selected{/if}>削除フラグ</option>
-									<option value="74" {if ('74' == form.summary_key1)}selected{/if}>登録者ID</option>
-									<option value="75" {if ('75' == form.summary_key1)}selected{/if}>更新者ID</option>
+									<option value="66" {if ('66' == form.summary_key5)}selected{/if}>展示会に係わる画像名称1</option>
+									<option value="67" {if ('67' == form.summary_key5)}selected{/if}>展示会に係わる画像名称2</option>
+									<option value="68" {if ('68' == form.summary_key5)}selected{/if}>展示会に係わる画像名称3</option>
+									<option value="69" {if ('69' == form.summary_key5)}selected{/if}>システム管理者備考欄</option>
+									<option value="70" {if ('70' == form.summary_key5)}selected{/if}>データ管理者備考欄</option>
+									<option value="71" {if ('71' == form.summary_key5)}selected{/if}>登録カテゴリ</option>
+									<option value="72" {if ('72' == form.summary_key5)}selected{/if}>削除フラグ</option>
+									<option value="73" {if ('73' == form.summary_key5)}selected{/if}>JECC認証フラグ</option>
+									<option value="74" {if ('74' == form.summary_key5)}selected{/if}>JECC認証年月日</option>
+									<option value="75" {if ('75' == form.summary_key5)}selected{/if}>JETRO出展支援URL</option>
+									<option value="76" {if ('76' == form.summary_key5)}selected{/if}>JETRO出展支援フラグ</option>
+									<option value="77" {if ('77' == form.summary_key5)}selected{/if}>登録者ID</option>
+									<option value="78" {if ('78' == form.summary_key5)}selected{/if}>更新者ID</option>
 								</select>
 							</td>
 							<td>
@@ -1559,9 +1646,9 @@
 							<td>
 								<select name="summary_value" id="summary_value">
 									<option value="" {if ('' == $form.summary_value)}selected{/if}>ソートなし</option>
-									<option value="75" {if ('75' == $form.summary_value)}selected{/if}>削除日時</option>
-									<option value="76" {if ('76' == $form.summary_value)}selected{/if}>登録日</option>
-									<option value="77" {if ('77' == $form.summary_value)}selected{/if}>更新日</option>
+									<option value="79" {if ('79' == $form.summary_value)}selected{/if}>削除日時</option>
+									<option value="80" {if ('80' == $form.summary_value)}selected{/if}>登録日</option>
+									<option value="81" {if ('81' == $form.summary_value)}selected{/if}>更新日</option>
 								</select>
 							</td>
 							<td>

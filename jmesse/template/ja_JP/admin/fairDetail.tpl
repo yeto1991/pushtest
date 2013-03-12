@@ -535,13 +535,13 @@
 							<!-- 駐在員レポート／リンク -->
 							<td>{$form.report_link}</td>
 						</tr>
-
+{*
 						<tr>
 							<td nowrap>世界の展示会場／URL</td>
 							<!-- 展示会場／リンク -->
 							<td>{$form.venue_link}</td>
 						</tr>
-
+*}
 
 						<tr>
 							<td nowrap>システム管理者備考欄</td>
@@ -573,6 +573,30 @@
 								その他
 								{/if}
 							</td>
+						</tr>
+						<tr>
+							<td nowrap>JECC認証</td>
+							<!-- JECC認証フラグ -->
+							<td>{if ("1" ==$form.jecc_flag)}認証{else}未認証{/if}</td>
+						</tr>
+						<tr>
+							<td nowrap>JECC認証年月日</td>
+							<!-- JECC認証年月日 -->
+							<td>
+								{$form.jecc_date_y}年
+								{$form.jecc_date_m}月
+								{$form.jecc_date_d}日
+							</td>
+						</tr>
+						<tr>
+							<td nowrap>JETRO出展支援</td>
+							<!-- JETRO出展支援フラグ -->
+							<td>{if ("1" == $form.exhibit_support_flag)}有{else}無{/if}</td>
+						</tr>
+						<tr>
+							<td nowrap>JETRO出展支援URL</td>
+							<!-- JETRO出展支援URL -->
+							<td>{$form.jetro_suport_url}</td>
 						</tr>
 					</table>
 					<hr/>

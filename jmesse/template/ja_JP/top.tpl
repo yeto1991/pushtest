@@ -176,6 +176,11 @@
 </ul>
 <br/>
 
+<b>■JECC認証リスト■</b><br/>
+<ul class="icon_arrow" id="jecc_list">
+</ul>
+<br/>
+
 <b>■ランキング■</b><br/>
 <table>
 <tr valign="top">
@@ -700,6 +705,25 @@ $(function(){
 	};
 
 	/**
+	 * JECC認証リスト表示。
+	 *
+	 * @parameter data: JSONデータ
+	 * @return : JSONデータを加工したHTML文字列
+	 */
+	var jecc_list_ConvertJSONtoHTML = function(data){
+		//variables
+		var content_data ='';
+		var content_length = data.length;
+		var temp_loop_ref = null;
+		//core logic
+		for(var i=0; i<content_length; ++i){
+			temp_loop_ref = data[i];
+			content_data += '<li><a href="' + temp_loop_ref["url"] + '">' + temp_loop_ref["name"] + '</a><br/>' + temp_loop_ref["start"] + '～' + temp_loop_ref["end"] + ' ' + temp_loop_ref["country"] + '/' + temp_loop_ref["city"] + '</li>';
+		}
+		return content_data;
+	};
+
+	/**
 	 * ランキング表示。
 	 *
 	 * @parameter data: JSONデータ
@@ -721,6 +745,7 @@ $(function(){
 	insertHTMLContentFromUserJSON( "jsonfile/region_jp.json", $('#venue'), region_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/industry_jp.json", $('#industory'), industory_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/new-mihonichi_jp.json", $('#new_entry'), new_entry_ConvertJSONtoHTML);
+	insertHTMLContentFromUserJSON( "jsonfile/jecc-mihonichi_jp.json", $('#jecc_list'), jecc_list_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/new-mihonichi_jp_top3.json", $('#new_entry_top3'), new_entry_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking1_jp_top3.json", $('#ranking1_top3'), ranking_ConvertJSONtoHTML);
 	insertHTMLContentFromUserJSON( "jsonfile/ranking1_jp.json", $('#ranking1'), ranking_ConvertJSONtoHTML);
