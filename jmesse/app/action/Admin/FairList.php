@@ -104,6 +104,35 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '登録日(承認日)が正しくありません（開始 > 終了）');
 			}
 		}
+		// MOD-S 2013.01.16 JECC認証対応
+		// JECC認証年月日
+		if ((null != $this->af->get('jecc_date_y_from') && '' != $this->af->get('jecc_date_y_from'))
+		|| (null != $this->af->get('jecc_date_m_from') && '' != $this->af->get('jecc_date_m_from'))
+		|| (null != $this->af->get('jecc_date_d_from') && '' != $this->af->get('jecc_date_d_from'))) {
+			if (!checkdate($this->af->get('jecc_date_m_from'), $this->af->get('jecc_date_d_from'), $this->af->get('jecc_date_y_from'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません（開始）');
+			}
+		}
+		if ((null != $this->af->get('jecc_date_y_to') && '' != $this->af->get('jecc_date_y_to')
+		|| (null != $this->af->get('jecc_date_m_to') && '' != $this->af->get('jecc_date_m_to'))
+		|| (null != $this->af->get('jecc_date_d_to') && '' != $this->af->get('jecc_date_d_to')))) {
+			if (!checkdate($this->af->get('jecc_date_m_to'), $this->af->get('jecc_date_d_to'), $this->af->get('jecc_date_y_to'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません（終了）');
+			}
+		}
+		if (((null != $this->af->get('jecc_date_y_from') && '' != $this->af->get('jecc_date_y_from'))
+		|| (null != $this->af->get('jecc_date_m_from') && '' != $this->af->get('jecc_date_m_from'))
+		|| (null != $this->af->get('jecc_date_d_from') && '' != $this->af->get('jecc_date_d_from')))
+		&& ((null != $this->af->get('jecc_date_y_to') && '' != $this->af->get('jecc_date_y_to'))
+		|| (null != $this->af->get('jecc_date_m_to') && '' != $this->af->get('jecc_date_m_to'))
+		|| (null != $this->af->get('jecc_date_d_to') && '' != $this->af->get('jecc_date_d_to')))) {
+			if (mktime(0, 0, 0, $this->af->get('jecc_date_m_from'), $this->af->get('jecc_date_d_from'), $this->af->get('jecc_date_y_from'))
+			> mktime(0, 0, 0, $this->af->get('jecc_date_m_to'), $this->af->get('jecc_date_d_to'), $this->af->get('jecc_date_y_to'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません（開始 > 終了）');
+			}
+		}
+		// MOD-E 2013.01.16 JECC認証対応
+
 		// 会期
 		// MOD-S 2012.02.15 会期未定登録対応
 		if(!($this->af->get('kaiki_mitei' == '1'))){
@@ -437,8 +466,8 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['agency_in_japan_email_cond'] = $this->af->get('agency_in_japan_email_cond');
 				$search_cond['report_link'] = $this->af->get('report_link');
 				$search_cond['report_link_cond'] = $this->af->get('report_link_cond');
-				$search_cond['venue_link'] = $this->af->get('venue_link');
-				$search_cond['venue_link_cond'] = $this->af->get('venue_link_cond');
+// 				$search_cond['venue_link'] = $this->af->get('venue_link');
+// 				$search_cond['venue_link_cond'] = $this->af->get('venue_link_cond');
 //				$search_cond['photos'] = $this->af->get('photos');
 				$search_cond['photos_cond'] = $this->af->get('photos_cond');
 				$search_cond['note_for_system_manager'] = $this->af->get('note_for_system_manager');
@@ -448,9 +477,23 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				// MOD-S 2012.02.03 登録カテゴリ追加対応
 				$search_cond['regist_category'] = $this->af->get('regist_category');
 				// MOD-E 2012.02.03 登録カテゴリ追加対応
-				// ADD-S 2012.02.08 登録カテゴリ追加対応
+				// MOD-S 2012.02.08 削除フラグ追加対応
 				$search_cond['del_flg'] = $this->af->get('del_flg');
-				// ADD-E 2012.02.08 登録カテゴリ追加対応
+				// MOD-E 2012.02.08 削除フラグ追加対応
+				// MOD-S 2013.01.16 JECC認証対応
+				$search_cond['jecc_flag'] = $this->af->get('jecc_flag');
+				$search_cond['jecc_date_y_from'] = $this->af->get('jecc_date_y_from');
+				$search_cond['jecc_date_m_from'] = $this->af->get('jecc_date_m_from');
+				$search_cond['jecc_date_d_from'] = $this->af->get('jecc_date_d_from');
+				$search_cond['jecc_date_y_to'] = $this->af->get('jecc_date_y_to');
+				$search_cond['jecc_date_m_to'] = $this->af->get('jecc_date_m_to');
+				$search_cond['jecc_date_d_to'] = $this->af->get('jecc_date_d_to');
+				// MOD-E 2013.01.16 JECC認証対応
+				// MOD-S 2013.01.22 JETRO出展支援対応
+				$search_cond['jetro_suport_url'] = $this->af->get('jetro_suport_url');
+				$search_cond['jetro_suport_url_cond'] = $this->af->get('jetro_suport_url_cond');
+				$search_cond['exhibit_support_flag'] = $this->af->get('exhibit_support_flag');
+				// MOD-E 2013.01.22 JETRO出展支援対応
 				$this->session->set('search_cond', $search_cond);
 			}
 		} elseif ('s' == $this->af->get('type')) {

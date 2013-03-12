@@ -1519,19 +1519,19 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => 'checkHalfWidthChar', // Optional method name which
 		),
-		'venue_link' => array(
-			'type'        => VAR_TYPE_STRING, // Input type
-			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '世界の展示会場/URL', // Display name
-			'required'    => false,           // Required Option(true/false)
-			'min'         => null,            // Minimum value
-			'max'         => 255,             // Maximum value
-			'regexp'      => null,            // String by Regexp
-			'mbregexp'    => null,            // Multibype string by Regexp
-			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
-			'filter'      => null,            // Optional Input filter to convert input
-			'custom'      => 'checkHalfWidthChar', // Optional method name which
-		),
+// 		'venue_link' => array(
+// 			'type'        => VAR_TYPE_STRING, // Input type
+// 			'form_type'   => FORM_TYPE_TEXT,  // Form type
+// 			'name'        => '世界の展示会場/URL', // Display name
+// 			'required'    => false,           // Required Option(true/false)
+// 			'min'         => null,            // Minimum value
+// 			'max'         => 255,             // Maximum value
+// 			'regexp'      => null,            // String by Regexp
+// 			'mbregexp'    => null,            // Multibype string by Regexp
+// 			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+// 			'filter'      => null,            // Optional Input filter to convert input
+// 			'custom'      => 'checkHalfWidthChar', // Optional method name which
+// 		),
 
 		'photos_1' => array(
 			'type'        => VAR_TYPE_FILE,   // Input type
@@ -1679,7 +1679,84 @@ class Jmesse_Form_AdminFairRegist extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
-
+		'jecc_flag' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_RADIO, // Form type
+			'name'        => 'JECC認証フラグ',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'jecc_date_y' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'JECC認証年月日（年）', // Display name
+			'required'    => false,            // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 4,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'jecc_date_m' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'JECC認証年月日（月）', // Display name
+			'required'    => false,            // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 2,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'jecc_date_d' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'JECC認証年月日（日）', // Display name
+			'required'    => false,            // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 2,               // Maximum value
+			'regexp'      => '/^[0-9]+$/',    // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
+		'jetro_suport_url' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_TEXT,  // Form type
+			'name'        => 'JETRO出展支援URL',     // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => 255,             // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => 'checkHalfWidthChar', // Optional method name which
+		),
+		'exhibit_support_flag' => array(
+			'type'        => VAR_TYPE_STRING, // Input type
+			'form_type'   => FORM_TYPE_RADIO, // Form type
+			'name'        => 'JETRO出展支援フラグ',    // Display name
+			'required'    => false,           // Required Option(true/false)
+			'min'         => null,            // Minimum value
+			'max'         => null,            // Maximum value
+			'regexp'      => null,            // String by Regexp
+			'mbregexp'    => null,            // Multibype string by Regexp
+			'mbregexp_encoding' => 'UTF-8',   // Matching encoding when using mbregexp
+			'filter'      => null,            // Optional Input filter to convert input
+			'custom'      => null,            // Optional method name which
+		),
 		'br' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXTAREA, // Form type

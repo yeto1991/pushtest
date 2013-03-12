@@ -168,6 +168,14 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			$this->ae->add('error', '登録日(承認日)が未来です');
 		}
 		// ADD-E 2012.01.31 未来日付はエラー
+		// MOD-S 2013.01.22 JECC認証対応
+		// JECC認証年月日(認証時のみ)
+		if ('1' == $this->af->get('jecc_flag')) {
+			if (!checkdate($this->af->get('jecc_date_m'), $this->af->get('jecc_date_d'), $this->af->get('jecc_date_y'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません');
+			}
+		}
+		// MOD-E 2013.01.22 JECC認証対応
 		// 会期
 		// MOD-S 2012.02.15 会期未定登録対応
 		$this->af->set('success', '1');
@@ -211,12 +219,23 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 				$this->ae->add('error', '見本市レポート／URLはhttp～として下さい');
 			}
 		}
-		// 世界の展示会場／URL
-		if (null != $this->af->get('venue_link') && '' != $this->af->get('venue_link')) {
-			if (0 !== strpos($this->af->get('venue_link'), 'http')) {
-				$this->ae->add('error', '世界の展示会場／URLはhttp～として下さい');
+		// MOD-S 2013.01.22 JETRO出展支援対応
+		// JETRO出展支援URL(有の場合)
+		if ("1" == $this->af->get('exhibit_support_flag')) {
+			if (null != $this->af->get('jetro_suport_url') && '' != $this->af->get('jetro_suport_url')) {
+				if (0 !== strpos($this->af->get('jetro_suport_url'), 'http')) {
+					$this->ae->add('error', 'JETRO出展支援URLはhttp～として下さい');
+				}
 			}
 		}
+		// MOD-E 2013.01.22 JETRO出展支援対応
+
+		// 世界の展示会場／URL
+// 		if (null != $this->af->get('venue_link') && '' != $this->af->get('venue_link')) {
+// 			if (0 !== strpos($this->af->get('venue_link'), 'http')) {
+// 				$this->ae->add('error', '世界の展示会場／URLはhttp～として下さい');
+// 			}
+// 		}
 		// 会場URL
 		if (null != $this->af->get('venue_url') && '' != $this->af->get('venue_url')) {
 			if (0 !== strpos($this->af->get('venue_url'), 'http')) {
@@ -650,7 +669,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		$jm_fair->set('report_link', $this->af->get('report_link'));
 
 		// 世界の展示会場／URL
-		$jm_fair->set('venue_link', $this->af->get('venue_link'));
+// 		$jm_fair->set('venue_link', $this->af->get('venue_link'));
 
 		// 展示会に係わる画像(3点)
 		$jm_fair->set('photos_1', $this->af->get('photos_name_1'));
@@ -684,6 +703,27 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// MOD-S 2012.02.03 登録カテゴリ追加対応
 		$jm_fair->set('regist_category', $this->af->get('regist_category'));
 		// MOD-E 2012.02.03 登録カテゴリ追加対応
+
+		// MOD-S 2013.01.16 JECC認証対応
+		$jm_fair->set('jecc_flag', $this->af->get('jecc_flag'));
+		// JECC認証年月日
+		if ('1' == $this->af->get('jecc_flag')) {
+			$jecc_date = $this->af->get('jecc_date_y').'/'.$this->af->get('jecc_date_m').'/'.$this->af->get('jecc_date_d');
+			$jm_fair->set('jecc_date', $jecc_date);
+		}else{
+			$jm_fair->set('jecc_date', null);
+		}
+		// MOD-E 2013.01.16 JECC認証対応
+
+		// MOD-S 2013.01.22 JETRO出展支援対応
+		$jm_fair->set('exhibit_support_flag', $this->af->get('exhibit_support_flag'));
+		if ('1' == $this->af->get('exhibit_support_flag')) {
+			$jm_fair->set('jetro_suport_url', $this->af->get('jetro_suport_url'));
+		}else{
+			$jm_fair->set('jetro_suport_url', '');
+		}
+		// MOD-E 2013.01.22 JETRO出展支援対応
+
 // 		$jm_fair->set('update_user_id', '');
 // 		$jm_fair->set('update_date', '');
 
@@ -820,7 +860,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// 見本市レポート／URL
 		$search_key .= $this->af->get('report_link').' ';
 		// 世界の展示会場／URL
-		$search_key .= $this->af->get('venue_link').' ';
+// 		$search_key .= $this->af->get('venue_link').' ';
 		// 展示会に係わる画像(3点)
 		$search_key .= $this->af->get('photos_name_1').' ';
 		$search_key .= $this->af->get('photos_name_2').' ';
@@ -833,7 +873,30 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		if ('1' == $this->af->get('del_flg')) {
 			$search_key .= '削除 ';
 		}
+		// MOD-S 2013.01.16 JECC認証対応
+		if ('1' == $this->af->get('jecc_flag')) {
+			$search_key .= '認証 ';
+		}
+		if ('0' == $this->af->get('jecc_flag')) {
+			$search_key .= '未認証 ';
+		}
+		// JECC認証年月日
+		$search_key .= $this->af->get('jecc_date_y').'年'.$this->af->get('jecc_date_m').'月'.$this->af->get('jecc_date_d').'日 ';
+		// MOD-E 2013.01.16 JECC認証対応
+
+		// MOD-S 2013.01.22 JETRO出展支援対応
+		if ('1' == $this->af->get('exhibit_support_flag')) {
+		$search_key .= '有 ';
+				}
+		if ('0' == $this->af->get('exhibit_support_flag')) {
+		$search_key .= '無 ';
+		}
+		$search_key .= $this->af->get('jetro_suport_url').' ';
+		// MOD-E 2013.01.22 JETRO出展支援対応
+
 		$jm_fair->set('search_key', $search_key);
+
+
 
 		// INSERT
 		$ret = $jm_fair->add();

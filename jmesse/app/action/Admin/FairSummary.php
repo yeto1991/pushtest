@@ -130,6 +130,32 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 				$this->ae->add('error', '会期が正しくありません（開始 > 終了）');
 			}
 		}
+		// JECC認証年月日
+		if ((null != $this->af->get('jecc_date_y_from') && '' != $this->af->get('jecc_date_y_from'))
+		|| (null != $this->af->get('jecc_date_m_from') && '' != $this->af->get('jecc_date_m_from'))
+		|| (null != $this->af->get('jecc_date_d_from') && '' != $this->af->get('jecc_date_d_from'))) {
+			if (!checkdate($this->af->get('jecc_date_m_from'), $this->af->get('jecc_date_d_from'), $this->af->get('jecc_date_y_from'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません（開始）');
+			}
+		}
+		if ((null != $this->af->get('jecc_date_y_to') && '' != $this->af->get('jecc_date_y_to')
+		|| (null != $this->af->get('jecc_date_m_to') && '' != $this->af->get('jecc_date_m_to'))
+		|| (null != $this->af->get('jecc_date_d_to') && '' != $this->af->get('jecc_date_d_to')))) {
+			if (!checkdate($this->af->get('jecc_date_m_to'), $this->af->get('jecc_date_d_to'), $this->af->get('jecc_date_y_to'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません（終了）');
+			}
+		}
+		if (((null != $this->af->get('jecc_date_y_from') && '' != $this->af->get('jecc_date_y_from'))
+		|| (null != $this->af->get('jecc_date_m_from') && '' != $this->af->get('jecc_date_m_from'))
+		|| (null != $this->af->get('jecc_date_d_from') && '' != $this->af->get('jecc_date_d_from')))
+		&& ((null != $this->af->get('jecc_date_y_to') && '' != $this->af->get('jecc_date_y_to'))
+		|| (null != $this->af->get('jecc_date_m_to') && '' != $this->af->get('jecc_date_m_to'))
+		|| (null != $this->af->get('jecc_date_d_to') && '' != $this->af->get('jecc_date_d_to')))) {
+			if (mktime(0, 0, 0, $this->af->get('jecc_date_m_from'), $this->af->get('jecc_date_d_from'), $this->af->get('jecc_date_y_from'))
+			> mktime(0, 0, 0, $this->af->get('jecc_date_m_to'), $this->af->get('jecc_date_d_to'), $this->af->get('jecc_date_y_to'))) {
+				$this->ae->add('error', 'JECC認証年月日が正しくありません（開始 > 終了）');
+			}
+		}
 		// 数値の大小
 		// 見本市番号
 		if (null != $this->af->get('mihon_no_from') && '' != $this->af->get('mihon_no_from')
@@ -324,19 +350,22 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 	 * '63':日本国内の照会先担当部課
 	 * '64':日本国内の照会先担当者
 	 * '65':見本市レポートURL
-	 * '66':世界の展示会場URL
-	 * '67':展示会に係わる画像名称1
-	 * '68':展示会に係わる画像名称2
-	 * '69':展示会に係わる画像名称3
-	 * '70':システム管理者備考欄
-	 * '71':データ管理者備考欄
-	 * '72':登録カテゴリ
-	 * '73':削除フラグ
-	 * '74':登録者ID
-	 * '75':更新者ID
-	 * '76':削除日時
-	 * '77':登録日
-	 * '78':更新日
+	 * '66':展示会に係わる画像名称1
+	 * '67':展示会に係わる画像名称2
+	 * '68':展示会に係わる画像名称3
+	 * '69':システム管理者備考欄
+	 * '70':データ管理者備考欄
+	 * '71':登録カテゴリ
+	 * '72':削除フラグ
+	 * '73':JECC認証フラグ
+	 * '74':JECC認証年月日
+	 * '75':JETRO出展支援URL
+	 * '76':JETRO出展支援フラグ
+	 * '77':登録者ID
+	 * '78':更新者ID
+	 * '79':削除日時
+	 * '80':登録日
+	 * '81':更新日
 	 *
 	 */
 	var $sort_column_name = array(
@@ -406,7 +435,6 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'日本国内の照会先担当部課',
 		'日本国内の照会先担当者',
 		'見本市レポートURL',
-		'世界の展示会場URL',
 		'展示会に係わる画像名称1',
 		'展示会に係わる画像名称2',
 		'展示会に係わる画像名称3',
@@ -414,6 +442,10 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'データ管理者備考欄',
 		'登録カテゴリ',
 		'削除フラグ',
+		'JECC認証フラグ',
+		'JECC認証年月日',
+		'JETRO出展支援URL',
+		'JETRO出展支援フラグ',
 		'登録者ID',
 		'更新者ID',
 		'削除日時',
@@ -488,7 +520,6 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'jf.agency_in_japan_div',
 		'jf.agency_in_japan_pers',
 		'jf.report_link',
-		'jf.venue_link',
 		'jf.photos_1',
 		'jf.photos_2',
 		'jf.photos_3',
@@ -496,6 +527,10 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		'jf.note_for_data_manager',
 		'jf.regist_category',
 		'jf.del_flg',
+		'jf.jecc_flag',
+		'jf.jecc_date',
+		'jf.jetro_suport_url',
+		'jf.exhibit_support_flag',
 		'jf.regist_user_id',
 		'jf.update_user_id',
 		'jf.del_date',
@@ -561,6 +596,16 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 	var $del_flg_name = array(
 		'0' => '未削除',
 		'1' => '削除済'
+	);
+
+	var $jecc_flag_name = array(
+		'0' => '未認証',
+		'1' => '認証'
+	);
+
+	var $exhibit_support_flag_name = array(
+			'0' => '無',
+			'1' => '有'
 	);
 
 	/**
@@ -673,6 +718,10 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 						$disp_list[$idx][$i++] = $this->regist_category_name[$value];
 					} elseif ('del_flg' == $key) {
 						$disp_list[$idx][$i++] = $this->del_flg_name[$value];
+					} elseif ('jecc_flag' == $key) {
+						$disp_list[$idx][$i++] = $this->jecc_flag_name[$value];
+					} elseif ('exhibit_support_flag' == $key) {
+						$disp_list[$idx][$i++] = $this->exhibit_support_flag_name[$value];
 					} else {
 						$disp_list[$idx][$i++] = $value;
 					}
@@ -892,8 +941,8 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		$search_cond['agency_in_japan_email_cond'] = $this->af->get('agency_in_japan_email_cond');
 		$search_cond['report_link'] = $this->af->get('report_link');
 		$search_cond['report_link_cond'] = $this->af->get('report_link_cond');
-		$search_cond['venue_link'] = $this->af->get('venue_link');
-		$search_cond['venue_link_cond'] = $this->af->get('venue_link_cond');
+// 		$search_cond['venue_link'] = $this->af->get('venue_link');
+// 		$search_cond['venue_link_cond'] = $this->af->get('venue_link_cond');
 		$search_cond['photos'] = $this->af->get('photos');
 		$search_cond['photos_cond'] = $this->af->get('photos_cond');
 		$search_cond['note_for_system_manager'] = $this->af->get('note_for_system_manager');
@@ -902,6 +951,16 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 		$search_cond['note_for_data_manager_cond'] = $this->af->get('note_for_data_manager_cond');
 		$search_cond['regist_category'] = $this->af->get('regist_category');
 		$search_cond['del_flg'] = $this->af->get('del_flg');
+		$search_cond['jecc_flag'] = $this->af->get('jecc_flag');
+		$search_cond['jecc_date_y_from'] = $this->af->get('jecc_date_y_from');
+		$search_cond['jecc_date_m_from'] = $this->af->get('jecc_date_m_from');
+		$search_cond['jecc_date_d_from'] = $this->af->get('jecc_date_d_from');
+		$search_cond['jecc_date_y_to'] = $this->af->get('jecc_date_y_to');
+		$search_cond['jecc_date_m_to'] = $this->af->get('jecc_date_m_to');
+		$search_cond['jecc_date_d_to'] = $this->af->get('jecc_date_d_to');
+		$search_cond['jetro_suport_url'] = $this->af->get('jetro_suport_url');
+		$search_cond['jetro_suport_url_cond'] = $this->af->get('jetro_suport_url_cond');
+		$search_cond['exhibit_support_flag'] = $this->af->get('exhibit_support_flag');
 		$search_cond['summary_key1'] = $this->af->get('summary_key1');
 		$search_cond['summary_key1_sort_cond'] = $this->af->get('summary_key1_sort_cond');
 		$search_cond['summary_key2'] = $this->af->get('summary_key2');
