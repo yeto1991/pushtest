@@ -51,6 +51,11 @@ $config = array(
 	'r5_en' => 'ranking5_en.json',
 	'r6_en' => 'ranking6_en.json',
 
+	// MOD-S 2013.01.22 JECC認証用ファイル作成
+	'jecc_jp' => 'jecc-mihonichi_jp.json',
+	'jecc_en' => 'jecc-mihonichi_en.json',
+	// MOD-E 2013.01.22 JECC認証用ファイル作成
+
 	// MOD-S 2012.01.23 top3用ファイル作成
 	'n_jp_top3'  => 'new-mihonichi_jp_top3.json',
 	'n_en_top3'  => 'new-mihonichi_en_top3.json',
