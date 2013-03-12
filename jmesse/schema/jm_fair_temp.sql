@@ -98,6 +98,9 @@ create table jmesse.jm_fair_temp(
   , del_flg char (1)
   , del_date datetime
   , search_key longtext
+  , jecc_flag char (1)
+  , jecc_date datetime not null
+  , exhibit_support_flag char (1)
   , regist_user_id int not null
   , regist_date datetime not null
   , update_user_id int
