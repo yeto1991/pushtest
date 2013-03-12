@@ -4,4 +4,5 @@ mysql -ujmesse -pidsjmesse -h192.168.0.229 jmesse < summaryCountForFairDetailCnt
 php -f getJsonIndustory.php
 php -f getJsonMonthlyRanking.php
 php -f getJsonNewMihonichi.php
+php -f getJsonJeccMihonichi.php
 php -f getJsonRegion.php

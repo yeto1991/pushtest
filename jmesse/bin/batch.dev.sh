@@ -2,7 +2,7 @@
 
 # SHELL変数
 PHP_HOME=/usr/local/php
-MYSQL_HOME=/opt/mysql
+MYSQL_HOME=/home/j-messe/opt/mysql
 JMESSE_HOME=/home/j-messe/app/jmesse
 DB_SERVER=localhost
 DB_BACKUP_PATH=/home/j-messe/db_backup
@@ -36,11 +36,17 @@ $PHP_HOME/bin/php -f $JMESSE_HOME/bin/getJsonNewMihonichi.php
 echo $?
 echo ▲▲▲ [`date`]【終了】新着見本市情報生成バッチ
 
-# エラーメール情報取得バッチ
-echo ▼▼▼ [`date`]【開始】エラーメール情報取得バッチ
-$PHP_HOME/bin/php -f $JMESSE_HOME/bin/getErrMail.php
+# JECC認証見本市情報生成バッチ
+echo ▼▼▼ [`date`]【開始 JECC認証見本市情報生成バッチ
+$PHP_HOME/bin/php -f $JMESSE_HOME/bin/getJsonJeccMihonichi.php
 echo $?
-echo ▲▲▲ [`date`]【終了】エラーメール情報取得バッチ
+echo ▲▲▲ [`date`]【終了】JECC認証見本市情報生成バッチ
+
+# エラーメール情報取得バッチ 2012/12以降不要。
+#echo ▼▼▼ [`date`]【開始】エラーメール情報取得バッチ
+#$PHP_HOME/bin/php -f $JMESSE_HOME/bin/getErrMail.php
+#echo $?
+#echo ▲▲▲ [`date`]【終了】エラーメール情報取得バッチ
 
 # DBバックアップ
 ##################################################
