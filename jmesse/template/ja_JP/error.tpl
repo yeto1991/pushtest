@@ -67,7 +67,7 @@
 						<dl>
 							<dt><img src="/j-messe/images/title-left-inquiry.gif" alt="お問い合わせ" width="150" height="26" /></dt>
 							<dd>本コーナーに関するお問い合わせ・ご意見・ご感想はこちらまで<br />
-								<a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form/fm/faa/inquiry_j');"><img src="/j-messe/images/btn_inquiry.gif" alt="お問い合わせフォーム" width="140" height="25" class="over padding_l05 margin_tb10" /></a><br />
+								<a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form5/pub/faa/inquiry_j');"><img src="/j-messe/images/btn_inquiry.gif" alt="お問い合わせフォーム" width="140" height="25" class="over padding_l05 margin_tb10" /></a><br />
 								ジェトロ展示事業課<br />
 								（TEL：03-3582-5541）</dd>
 						</dl>
