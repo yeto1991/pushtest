@@ -340,6 +340,42 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 		// 入場資格
 		$this->af->setApp('open_to_name', $jm_code_m_mgr->getCode('004', $this->af->get('open_to'), '000', '000'));
 
+		//MOD-S 2013.04.25 登録（対象）画像の実画像表示
+		//画面表示対象ファイルパスを配列で保持
+		$ary_photos_name = array($regist_param_2['photos_name_1'], $regist_param_2['photos_name_2'], $regist_param_2['photos_name_3']);
+		$abc = 0;
+		for ($i = 0; $i < count($ary_photos_name); $i++) {
+			$photos_name = $ary_photos_name[$i];
+			if ('' != $photos_name) {
+				$filename_from_temp = $this->session->get('img_tmp_path').'/'.$photos_name;
+				//コピー元ファイルの存在確認
+				if(file_exists($filename_from_temp)){
+					$displayPhotosNo[$abc] = $abc+1;
+					$displayPhotosName[$abc] = $photos_name;
+					$displayPhotosPath[$abc] = $filename_from_temp;
+					$abc++;
+				}else{
+					if ('c' == $this->af->get('mode') || 'e' == $this->af->get('mode')) {
+						//元画像の場合
+						if(5 > mb_strlen($this->af->get('mihon_no'))){
+							//見本市番号が5桁以上ではない場合（1～9999）
+							$mihon_no_first_value = 0; //0フォルダ
+						}else{
+							$mihon_no_first_value = substr($this->af->get('mihon_no'),0,1); //見本市番号先頭桁数フォルダ
+						}
+					}
+					$displayPhotosNo[$abc] = $abc+1;
+					$displayPhotosName[$abc] = $photos_name;
+					$displayPhotosPath[$abc] = $this->config->get('img_path').$mihon_no_first_value.'/'.$this->af->get('mihon_no').'/'.$photos_name;
+					$abc++;
+				}
+			}
+		}
+		$this->session->set('display_photos_no', $displayPhotosNo);
+		$this->session->set('display_photos_name', $displayPhotosName);
+		$this->session->set('display_photos_path', $displayPhotosPath);
+		//MOD-E 2013.04.25 登録（対象）画像の実画像表示
+
 	}
 
 	function _duplicationCheck() {
