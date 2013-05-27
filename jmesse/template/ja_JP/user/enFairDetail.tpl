@@ -358,9 +358,14 @@ $form.mode
 							<th class="item">Photos</th>
 							<th class="required"></th>
 							<td>
-								Photo(1)：{$form.photos_name_1}<br />
-								Photo(2)：{$form.photos_name_2}<br />
-								Photo(3)：{$form.photos_name_3}<br />
+								{section name=it loop=$session.display_photos_path}
+									Photo({$session.display_photos_no[it]})：{$session.display_photos_name[it]}<br />
+									<img src="{$config.url}{$session.display_photos_path[it]}" alt="{$session.display_photos_name[it]}" width="150" /><br /><br />
+								{/section}
+								{if ('' == $form.mode) || ('c' == $form.mode) || ('e' == $form.mode)}
+									If the selected image file is not displayed correctly, it will not be registered correctly. <br />
+									In that case, return to the Step 2 for registration, see the instructions regarding image files, and select an image  again.<br />
+								{/if}
 							</td>
 						</tr>
 						<tr>

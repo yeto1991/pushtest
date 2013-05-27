@@ -460,7 +460,7 @@
 							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								<textarea cols="60" rows="3" name="exhibits_en" id="exhibits_en">{$form.exhibits_en}</textarea><br />
-								Enter details of products (Maximum of about 80 words) <br/>
+								Maximum of 300 letters (about 30 words) <br/>
 								{if is_error('exhibits_en')}
 								<span class="error-message">{message name="exhibits_en"}</span><br />
 								{/if}

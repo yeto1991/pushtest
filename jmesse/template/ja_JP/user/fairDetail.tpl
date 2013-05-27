@@ -351,9 +351,14 @@ $form.mode
 											<th class="item">見本市の紹介写真</th>
 											<th class="required"></th>
 											<td>
-												画像(1)：{$form.photos_name_1}<br />
-												画像(2)：{$form.photos_name_2}<br />
-												画像(3)：{$form.photos_name_3}<br />
+												{section name=it loop=$session.display_photos_path}
+													画像({$session.display_photos_no[it]})：{$session.display_photos_name[it]}<br />
+													<img src="{$config.url}{$session.display_photos_path[it]}" alt="{$session.display_photos_name[it]}" width="150" /><br /><br />
+												{/section}
+												{if ('' == $form.mode) || ('c' == $form.mode) || ('e' == $form.mode)}
+													選択した画像ファイルが正常に表示されていない場合は、正常に登録されません。<br />
+													正常に表示されていない場合は登録Step2画面に戻り、画像ファイルに関する注意点をご確認の上、画像を再選択してください。<br />
+												{/if}
 											</td>
 										</tr>
 										<tr>

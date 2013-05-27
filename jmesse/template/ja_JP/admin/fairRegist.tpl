@@ -1165,8 +1165,9 @@
 							<td nowrap>展示会に係わる画像(3点)</td>
 							<!-- 展示会に係わる画像(3点) -->
 							<td>
-								<font size="-1">1.「参照」ボタンをクリックして登録する画像ファイルを選択してください。最大3つまで登録できます。（JPEG, GIF形式のみ）</font><br/>
-								<font size="-1">2.１画像ファイルサイズの上限は2MB以内までです。</font><br/>
+								<font size="-1">1. 画像ファイルをアップロードする際は以下の点にご注意ください。条件を満たさない場合は、正常に登録されません。</font><br/>
+								<font size="-1">・画像1ファイル辺り2MB以下、縦600×横800ピクセル以内のgifまたはjpegにしてください。</font><br/>
+								<font size="-1">・またファイル名は、半角英数字(a～ｚ、0～9)のみご使用ください。</font><br/>
 								<input type="file" name="photos_1" id="photos_1" size="50" onBlur="add_photos('photos_1')" /><br/>
 								<input type="file" name="photos_2" id="photos_2" size="50" onBlur="add_photos('photos_2')" /><br/>
 								<input type="file" name="photos_3" id="photos_3" size="50" onBlur="add_photos('photos_3')" /><br/>

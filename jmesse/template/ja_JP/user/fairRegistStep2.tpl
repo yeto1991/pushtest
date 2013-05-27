@@ -307,8 +307,9 @@
 												<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="登録" onclick="add_photos('photos_1')"/><br />
 												<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="登録" onclick="add_photos('photos_2')"/><br />
 												<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="登録" onclick="add_photos('photos_3')"/><br />
-												画像ファイルはgif,jpegで縦・横600ピクセル以内。<br/><br />
-												１画像ファイルサイズの上限が2MBまでとなっております。<br />2MBを越えるファイルは登録ができませんのでご注意ください。<br />
+												※画像ファイルをアップロードする際は以下の点にご注意ください。条件を満たさない場合は、正常に登録されません。<br />
+												・画像1ファイル辺り2MB以下、縦600×横800ピクセル以内のgifまたはjpegにしてください。<br />
+												・またファイル名は、半角英数字(a～ｚ、0～9)のみご使用ください。<br />
 												<select name="photos_list" id="photos_list" size="3" style="width:200px">
 													{if ('' != $form.photos_name_1) }
 													<option value="{$form.photos_name_1}">{$form.photos_name_1}</option>

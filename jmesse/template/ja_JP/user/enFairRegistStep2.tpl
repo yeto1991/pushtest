@@ -271,7 +271,7 @@
 							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="2" name="profile_en" id="profile_en">{$form.profile_en}</textarea><br/>
-							 	Maximum of about 120 words<br/>
+							 	Maximum of 500 letters (about 70 words) <br/>
 								{if is_error('profile_en')}
 								<span class="error-message">{message name="profile_en"}</span><br />
 								{/if}
@@ -287,7 +287,7 @@
 							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
-								Maximum of about 250 words<br/>
+								Maximum of 1000 letters (about 140 words) <br/>
 								{if is_error('detailed_information_en')}
 								<span class="error-message">{message name="detailed_information_en"}</span><br />
 								{/if}
@@ -305,8 +305,9 @@
 								<input type="file" size="40" name="photos_1" id="photos_1" /> <input type="button" value="Regist" onclick="add_photos('photos_1')"/><br />
 								<input type="file" size="40" name="photos_2" id="photos_2" /> <input type="button" value="Regist" onclick="add_photos('photos_2')"/><br />
 								<input type="file" size="40" name="photos_3" id="photos_3" /> <input type="button" value="Regist" onclick="add_photos('photos_3')"/><br />
-								Registration is available for up to three files. <br />(JPEG or GIF formats only with size up to 600px×800px)<br/><br/>
-								Please note that image files larger than 2MB can't be registered.<br />And each image file size limit is up to 2MB bytes.<br />
+								* Follow the instructions shown below when uploading image files. Any image file not  meeting the requirements  will not  be registered correctly.<br/>
+								・The image should be in a gif or jpeg format file within 600 (H) x 800 (W) pixels with a volume of 2MB or less<br/>
+								・For file names, use alphanumeric characters (a-ｚ and 0-9) only.<br/>
 								<select name="photos_list" id="photos_list" size="3" style="width:200px">
 									{if ('' != $form.photos_name_1) }
 									<option value="{$form.photos_name_1}">{$form.photos_name_1}</option>
