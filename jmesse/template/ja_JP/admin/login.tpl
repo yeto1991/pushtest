@@ -28,7 +28,7 @@
 		<div align="center">
 			<table>
 				<tr>
-					<td colspan=3 align="left">Eメール2、パスワードを入力してください。</td>
+					<td colspan=3 align="left">Eメール、パスワードを入力してください。</td>
 				</tr>
 				<tr>
 					<td align="left">Eメール</td>
