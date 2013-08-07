@@ -56,8 +56,8 @@
 												{else}
 												<tr>
 												{/if}
-													<th class="item">ご登録メールアドレス</th>
-													<td><input name="email" id="email" size="60" type="text" value="{form.email}" /><br>
+													<th nowrap class="item">ご登録メールアドレス</th>
+													<td><input name="email" id="email" size="60" type="text" value="{form.email}" /><br />
 													{if is_error('email')}
 													<span class="error-message">{message name="email"}</span><br />
 													{/if}
