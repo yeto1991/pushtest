@@ -4,7 +4,7 @@ Dear Mr. /Ms. {$user_nm},
 
 Thank you for using J-messe.
 
-This email informs you that J-messe Secretariat is unable to approve your registration of “{$fair_title_en}” to J-messe for the reasons described below.
+This email informs you that J-messe Secretariat is unable to approve your registration of 窶悳$fair_title_en}窶�to J-messe for the reasons described below.
 
 Reason: {$rejection_comment}
 
@@ -16,7 +16,7 @@ Kindly regards,
 
 -------------------J-messe Secretariat-------------------------------------------------
 TOTEC Co., Ltd.*
-Address: 6F, Kamiyacho KT Bldg., 5-11-5 Toranomon,
+Address: 6F, Kamiyacho KT Bldg., 5-11-15 Toranomon,
 Minato-ku, Tokyo, 105-0001, Japan
 Tel: +81-3-6450-1827 Fax: +81-3-6450-1828
 E-mail: j-messe@totec-net.com
