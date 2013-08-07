@@ -15,10 +15,6 @@
 ・<a href="{$config.url}?action_admin_fairList=true&type=d">展示会否認一覧表示</a><br/>
 <br/>
 {/if}
-{if ("1" == $session.auth_user) || ("1" == $session.auth_fair) }
-<b>エラーメール情報</b><br/>
-・<a href="{$config.url}?action_admin_errMail=true">エラーメール一覧</a><br/>
-{/if}
 {* テキストエリアの改行コード *}
 <textarea name="br" id="br" style="display:none;">
 
