@@ -64,9 +64,9 @@
 					<img src="/en/database/j-messe/images/db/fair05.jpg" alt="見本市登録完了" />
 				</h3>
 				{if ('r' == $form.msg)}
-				<p>Your registration has been completed.</p>
+				<p>Your registration has been completed.<br />We have sent an automatic confirmation email to {$session.email2} .<br />If you don't receive the email within minutes, please check whether you have registered your email address correctly.</p>
 				{elseif ('c' == $form.msg)}
-				<p>Your editing has been completed.</p>
+				<p>Your information has been updated.<br />We have sent an automati  confirmation email to {$session.email2} .<br />If you don't receive the email within minutes, please check whether you have registered your email address correctly.</p>
 				{elseif ('ed' == $form.msg || 'cd' == $form.msg)}
 				<p>Your deleting has been completed.</p>
 				{/if}

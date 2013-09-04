@@ -36,7 +36,7 @@
 				<div class="bgbox_set">
 					<div class="bgbox_base">
 						<div class="in_main">
-								<p>Your password has been sent to your registered e-mail address.</p>
+							<p>Your password has been sent to {$form.email} .<br />If you don't receive the email within minutes, please check whether you have registered your email address correctly.</p>
 						</div>
 					</div>
 				</div>

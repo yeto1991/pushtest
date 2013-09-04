@@ -496,6 +496,8 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		$this->session->set('regist_param_1', null);
 		$this->session->set('regist_param_2', null);
 		$this->session->set('img_tmp_path', '');
+		//2013/08/25 保守課題No.013対応
+		$this->session->set('email2', $this->session->get('email'));
 		$this->session->set('email', '');
 
 		// エラー判定

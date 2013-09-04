@@ -64,10 +64,10 @@
 			<div class="in_main">
 				<h3 class="img t_center"><img src="/en/database/j-messe/images/db/user04.jpg" alt="ユーザー登録完了" /></h3>
 				{if ("regist" == $form.mode)}
-				<p>Your user registration has been completed.</p>
+				<p>Your user registration has been completed.<br />We have sent an automatic confirmation email to {$session.email2} .<br />If you don't receive the email within minutes, please check whether you have registered your email address correctly.</p>
 				{/if}
 				{if ("change" == $form.mode)}
-				<p>Your user editing has been completed.</p>
+				<p>Your user information has been updated. <br />We have sent an automatic confirmation email to {$session.email2} .<br />If you don't receive the email within minutes, please check whether you have registered your email address correctly.</p>
 				{/if}
 				{if ("delete" == $form.mode)}
 				<p>Your registration has been withdrawn.</p>
