@@ -57,7 +57,7 @@
 					<a href="http://www.jetro.go.jp/en/database/j-messe/jecc/" /><img src="/j-messe/images/approved_exhibition.jpg" alt="JECC"></a>
 				{/if}
 				{if ('' != $app.fair_detail.fair_url)}
-					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">official site</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
+					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">official site</font></b></a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
 				{/if}
 				</p>
 				<!-- left -->
@@ -403,7 +403,7 @@
 					<p>Please direct inquiries or comments to</p>
 					<p>Trade Fair Planning Division</p>
 					<ul>
-						<li><a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form/fm/faa/inquiry_en');" class="icon_arrow">Inquiry form</a></li>
+						<li><a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form5/pub/faa/inquiry_en');" class="icon_arrow">Inquiry form</a></li>
 					</ul>
 				</div>
 			</div>

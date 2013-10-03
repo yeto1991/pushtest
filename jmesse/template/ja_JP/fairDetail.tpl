@@ -123,7 +123,7 @@
 									<a href="http://www.jetro.go.jp/j-messe/jecc/" /><img src="/j-messe/images/approved_exhibition.jpg" alt="JECC"></a>
 								{/if}
 								{if ('' != $app.fair_detail.fair_url)}
-									<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}">公式ウェブサイト</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
+									<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">公式ウェブサイト</font></b></a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
 								{/if}
 								</p>
 								<!-- left -->
