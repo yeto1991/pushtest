@@ -4,7 +4,7 @@ Dear Mr. /Ms. {$user_nm},
 
 Thank you for using J-messe.
 
-This email informs you that J-messe Secretariat is unable to approve your registration of 窶悳$fair_title_en}窶�to J-messe for the reasons described below.
+This email informs you that J-messe Secretariat is unable to approve your registration of " {$fair_title_en} " to J-messe for the reasons described below.
 
 Reason: {$rejection_comment}
 
