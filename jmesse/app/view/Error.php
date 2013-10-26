@@ -24,7 +24,7 @@ class Jmesse_View_Error extends Jmesse_ViewClass
 	function preforward()
 	{
 		// 外部htmlの取得
-		$this->backend->getManager('Common')->setExtHtml();
+		$this->backend->getManager('Common')->setExtHtmlHttp();
 	}
 }
 

@@ -38,7 +38,7 @@ class Jmesse_View_FairList extends Jmesse_ViewClass
 		$this->af->setApp('main_sub_industory_list', $this->backend->getManager('JmCodeM')->getMainSubIndustory());
 
 		// 外部htmlの取得
-		$this->backend->getManager('Common')->setExtHtml();
+		$this->backend->getManager('Common')->setExtHtmlHttp();
 	}
 }
 
