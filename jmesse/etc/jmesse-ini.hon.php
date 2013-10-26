@@ -64,20 +64,25 @@ $config = array(
 	// MOD-E 2012.01.23 top3用ファイル作成
 
 	// 共通部分URL
-	// MOD-S 2012.05.10 保守対応：ヘッダー、フッター参照先変更対応
-	'header_url'           => 'http://www.jetro.go.jp/static/parts/ja_header.html',
- 	'footer_url'           => 'http://www.jetro.go.jp/static/parts/ja_footer.html',
- 	'footer_script_rul'    => 'http://www.jetro.go.jp/static/parts/ja_footer_script.html',
-	// MOD-E 2012.05.10 保守対応：ヘッダー、フッター参照先変更対応
 	'left_menu_url'        => '/home/jmesse1112/app/jmesse/www/ja_left_menu.html',
-// 	'left_menu_url'        => 'http://www.jetro.go.jp/parts/ja_left_menu.html',
-	// MOD-S 2012.05.10 保守対応：ヘッダー、フッター参照先変更対応
-	'header_url_en'        => 'http://www.jetro.go.jp/static/parts/en_header.html',
- 	'footer_url_en'        => 'http://www.jetro.go.jp/static/parts/en_footer.html',
-	'footer_script_rul_en' => 'http://www.jetro.go.jp/static/parts/en_footer_script.html',
-	// MOD-E 2012.05.10 保守対応：ヘッダー、フッター参照先変更対応
 	'left_menu_url_en'     => '/home/jmesse1112/app/jmesse/www/en_left_menu.html',
-// 	'left_menu_url_en'     => 'http://www.jetro.go.jp/en/parts/en_left_menu.html',
+	// MOD-S 2013.10.08 2013年度保守対応No.21
+	//https用
+	'header_url'           => 'https://www.jetro.go.jp/static/parts/ja_header.html',
+	'footer_url'           => 'https://www.jetro.go.jp/static/parts/ja_footer.html',
+	'footer_script_rul'    => 'https://www.jetro.go.jp/static/parts/ja_footer_script.html',
+	'header_url_en'        => 'https://www.jetro.go.jp/static/parts/en_header.html',
+	'footer_url_en'        => 'https://www.jetro.go.jp/static/parts/en_footer.html',
+	'footer_script_rul_en' => 'https://www.jetro.go.jp/static/parts/en_footer_script.html',
+	//http用
+	'http_header_url'           => 'http://www.jetro.go.jp/static/parts/ja_header.html',
+	'http_footer_url'           => 'http://www.jetro.go.jp/static/parts/ja_footer.html',
+	'http_footer_script_rul'    => 'http://www.jetro.go.jp/static/parts/ja_footer_script.html',
+	'http_header_url_en'        => 'http://www.jetro.go.jp/static/parts/en_header.html',
+	'http_footer_url_en'        => 'http://www.jetro.go.jp/static/parts/en_footer.html',
+	'http_footer_script_rul_en' => 'http://www.jetro.go.jp/static/parts/en_footer_script.html',
+	// MOD-E 2013.10.08 2013年度保守対応No.21
+
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
@@ -187,15 +192,15 @@ $config = array(
 	'mail_title_fair_rejection_en'  => 'Notice of rejection of trade fair registration to J-messe',
 	'mail_title_fair_approved_en'  => 'Notice of approval of your trade fair registration on J-messe',
 
-	'mail_imap_host' => 'mail.securemx.jp',
-	'mail_imap_port' => '143',
-	'mail_imap_user' => 'j-messe@jetro.go.jp',
+	//管理者サイト機能（エラーメール一覧機能削除によりコメントアウト
+	//'mail_imap_host' => 'mail.securemx.jp',
+	//'mail_imap_port' => '143',
+	//'mail_imap_user' => 'j-messe@jetro.go.jp',
 	// MOD-S 2012.08.03 保守対応：新パスワード反映(有効期限は10月末2012/10/31まで) f76f1036→ g87g2147
 	// MOD-S 2012.10.10 保守対応：新パスワード反映(有効期限は2013/01/08まで) g87g2147→ h98h3258
 	// MOD-S 2012.12.14 基盤移行対応：JI-PW適用
 	// MOD-S 2013.01.16 tenjikai1029 ⇒tenjikai0116 変更(但しエラーメール機能が不要となったため、今後対応不要。)
-	'mail_imap_pass' => 'tenjikai0116',
-	// MOD-E 保守対応：新パスワード反映
+	//'mail_imap_pass' => 'tenjikai0116',
 
 	// ADD-S 2012.02.24 バッチログメール追加
 	// バッチログ配信情報

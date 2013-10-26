@@ -64,20 +64,24 @@ $config = array(
 	// MOD-E 2012.01.23 top3用ファイル作成
 
 	// 共通部分URL
-	'header_url'           => 'http://192.168.0.236/j-messe/ja_header.html ',
- 	'footer_url'           => 'http://192.168.0.236/j-messe/ja_footer.html',
- 	'footer_script_rul'    => 'http://192.168.0.236/j-messe/ja_footer_script.html',
 	'left_menu_url'        => 'http://192.168.0.236/j-messe/ja_left_menu.html',
-	'header_url_en'        => 'http://192.168.0.236/j-messe/en_header.html',
- 	'footer_url_en'        => 'http://192.168.0.236/j-messe/en_footer.html',
-	'footer_script_rul_en' => 'http://192.168.0.236/j-messe/en_footer_script.html',
 	'left_menu_url_en'     => 'http://192.168.0.236/j-messe/en_left_menu.html',
-// 	'header_url'       => 'http://192.168.0.236/header.html',
-// 	'footer_url'       => 'http://192.168.0.236/footer.html',
-// 	'left_menu_url'    => 'http://192.168.0.236/j-messe/left_menu.html',
-// 	'header_url_en'    => 'http://192.168.0.236/enHeader.html',
-// 	'footer_url_en'    => 'http://192.168.0.236/enFooter.html',
-// 	'left_menu_url_en' => 'http://192.168.0.236/j-messe/enLeft_menu.html',
+	// MOD-S 2013.10.08 2013年度保守対応No.21
+	//https用
+	'header_url'           => 'http://192.168.0.236/j-messe/ja_header.html',
+	'footer_url'           => 'http://192.168.0.236/j-messe/ja_footer.html',
+	'footer_script_rul'    => 'http://192.168.0.236/j-messe/ja_footer_script.html',
+	'header_url_en'        => 'http://192.168.0.236/j-messe/en_header.html',
+	'footer_url_en'        => 'http://192.168.0.236/j-messe/en_footer.html',
+	'footer_script_rul_en' => 'http://192.168.0.236/j-messe/en_footer_script.html',
+	//http用
+	'http_header_url'           => 'http://192.168.0.236/j-messe/ja_header.html',
+	'http_footer_url'           => 'http://192.168.0.236/j-messe/ja_footer.html',
+	'http_footer_script_rul'    => 'http://192.168.0.236/j-messe/ja_footer_script.html',
+	'http_header_url_en'        => 'http://192.168.0.236/j-messe/en_header.html',
+	'http_footer_url_en'        => 'http://192.168.0.236/j-messe/en_footer.html',
+	'http_footer_script_rul_en' => 'http://192.168.0.236/j-messe/en_footer_script.html',
+	// MOD-E 2013.10.08 2013年度保守対応No.21
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
