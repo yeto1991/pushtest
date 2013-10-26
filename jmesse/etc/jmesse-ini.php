@@ -1,6 +1,6 @@
 <?php
 /*
- * jmesse-ini.php
+ * jmesse-ini.php (適宜、個人のローカル環境に合わせて設定すること)
 *
 * update:
 */
@@ -26,8 +26,8 @@ $config = array(
 	'flag_path'      => '/images/flag/',
 	'photos_dir_max' => 10000,
 
-	// JSONファイル作成格納場所
-	'jsonfile_path' => 'C:/opt/Apache2.2/htdocs/jmesse/www/jsonfile/',
+	//JSONファイル作成格納場所
+	'jsonfile_path' => 'C:/JETRO/xampp/apache/htdocs/jmesse/www/jsonfile/',
 
 	// JSONファイル名
 	'r_jp'  => 'region_jp.json',
@@ -64,28 +64,31 @@ $config = array(
 	// MOD-E 2012.01.23 top3用ファイル作成
 
 	// 共通部分URL
-	'header_url'           => 'ja_header.html ',
- 	'footer_url'           => 'ja_footer.html',
- 	'footer_script_rul'    => 'ja_footer_script.html',
 	'left_menu_url'        => 'ja_left_menu.html',
-	'header_url_en'        => 'en_header.html',
- 	'footer_url_en'        => 'en_footer.html',
-	'footer_script_rul_en' => 'en_footer_script.html',
 	'left_menu_url_en'     => 'en_left_menu.html',
-// 	'header_url'       => 'http://localhost/jmesse/www/header.html',
-// 	'footer_url'       => 'http://localhost/jmesse/www/footer.html',
-// 	'left_menu_url'    => 'http://localhost/jmesse/www/left_menu.html',
-// 	'header_url_en'    => 'http://localhost/jmesse/www/enHeader.html',
-// 	'footer_url_en'    => 'http://localhost/jmesse/www/enFooter.html',
-// 	'left_menu_url_en' => 'http://localhost/jmesse/www/enLeft_menu.html',
+	// MOD-S 2013.10.08 2013年度保守対応No.21
+	//https用
+	'header_url'           => 'ja_header.html ',
+	'footer_url'           => 'ja_footer.html',
+	'footer_script_rul'    => 'ja_footer_script.html',
+	'header_url_en'        => 'en_header.html',
+	'footer_url_en'        => 'en_footer.html',
+	'footer_script_rul_en' => 'en_footer_script.html',
+	//http用
+	'http_header_url'           => 'ja_header.html ',
+	'http_footer_url'           => 'ja_footer.html',
+	'http_footer_script_rul'    => 'ja_footer_script.html',
+	'http_header_url_en'        => 'en_header.html',
+	'http_footer_url_en'        => 'en_footer.html',
+	'http_footer_script_rul_en' => 'en_footer_script.html',
+	// MOD-E 2013.10.08 2013年度保守対応No.21
 
 	// debug
 	// (to enable ethna_info and ethna_unittest, turn this true)
 	'debug' => true,
 
 	// db
-// 	'dsn' => 'mysql://jmesse:idsjmesse@localhost/jmesse',
-	'dsn' => 'mysql://jmesse:idsjmesse@192.168.0.236/jmesse',
+	'dsn' => 'mysql://jmesse:idsjmesse@ec2-54-254-121-156.ap-southeast-1.compute.amazonaws.com/jmesse',
 	// sample-1: single db
 	// 'dsn' => 'mysql://user:password@server/database',
 	//
@@ -106,7 +109,7 @@ $config = array(
 			'level'  => 'debug',
 			'option' => 'pid,function,pos',
 			'mode'   => '666',
-//			'file'   => 'C:/opt/Apache2.2/htdocs/jmesse/log/jmesse_'.date('Ymd').'.log',
+			'file'   => 'C:/JETRO/xampp/apache/htdocs/jmesse/log/jmesse_'.date('Ymd').'.log',
 		),
 	),
 	// sample-1: sigile facility
@@ -169,12 +172,8 @@ $config = array(
 
 	'mail_from'        => mb_encode_mimeheader(mb_convert_encoding("J-messe 事務局", "ISO-2022-JP", "UTF-8"), "ISO-2022-JP").' <tanimoto@ids.co.jp>',
 	'mail_from_en'     => 'J-messe Administrator <tanimoto@ids.co.jp>',
-	'mail_bcc'         => 'tanimoto@ids.co.jp',
+	'mail_bcc'         => 'tanimoto@ids.co.jp,a.komatsu@ids.co.jp',
 	'mail_return-path' => 'tanimoto@ids.co.jp',
-// 	'mail_from'        => 'J-messe事務局 <j-messe@jetro.go.jp>',
-// 	'mail_from_en'     => 'J-messe Administrator <j-messe@jetro.go.jp>',
-// 	'mail_bcc'         => 'j-messe@totec-net.com',
-//	'mail_return-path' => 'j-messe@jetro.go.jp',
 
 	'mail_title_user_regist'  => 'J-messe 見本市ユーザー登録完了のお知らせ',
 	'mail_title_user_change'  => 'J-messe 見本市ユーザー更新完了のお知らせ',
@@ -191,18 +190,19 @@ $config = array(
 	'mail_title_fair_rejection_en'  => 'Notice of rejection of trade fair registration to J-messe',
 	'mail_title_fair_approved_en'  => 'Notice of approval of your trade fair registration on J-messe',
 
-	'mail_imap_host' => '192.168.0.236',
-	'mail_imap_port' => '993',
-	'mail_imap_user' => '',
-	'mail_imap_pass' => '',
+	//管理者サイト機能（エラーメール一覧機能削除によりコメントアウト）
+	//'mail_imap_host' => 'imap.gmail.com',
+	//'mail_imap_port' => '993',
+	//'mail_imap_user' => '',
+	//'mail_imap_pass' => '',
 
 	// ADD-S 2012.02.24 バッチログメール追加
 	// バッチログ配信情報
 	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
 	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_mon.log('.date('Ymd').')',
 	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp',
-	'batch_log'                    => 'C:\opt\Apache2.2\htdocs\jmesse\log\batch.log',
-	'batch_mon_log'                => 'C:\opt\Apache2.2\htdocs\jmesse\log\batch_mon.log',
+	'batch_log'                    => 'C:/JETRO/xampp/apache/htdocs/jmesse/log/batch.log',
+	'batch_mon_log'                => 'C:/JETRO/xampp/apache/htdocs/jmesse/log/batch_mon.log',
 	// ADD-E 2012.02.24 バッチログメール追加
 
 	//'mail_func_workaround' => false,
