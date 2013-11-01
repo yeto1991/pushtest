@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # SHELL変数
-PHP_HOME=/usr/local/php
+PHP_HOME=/usr/local/php5.4.19
 MYSQL_HOME=/usr
-JMESSE_HOME=/home/jmesse1112/app/jmesse
+JMESSE_HOME=/home/jmesse1112/app/jmesse_new
 DB_SERVER=172.16.20.80
 DB_BACKUP_PATH=/home/jmesse1112/db_backup
 

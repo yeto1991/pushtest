@@ -27,7 +27,7 @@ $config = array(
 	'photos_dir_max' => 10000,
 
 	//JSONファイル作成格納場所
-	'jsonfile_path' => '/home/jmesse1112/app/jmesse/www/jsonfile/',
+	'jsonfile_path' => '/home/jmesse1112/app/jmesse_new/www/jsonfile/',
 
 	// JSONファイル名
 	'r_jp'  => 'region_jp.json',
@@ -64,8 +64,8 @@ $config = array(
 	// MOD-E 2012.01.23 top3用ファイル作成
 
 	// 共通部分URL
-	'left_menu_url'        => '/home/jmesse1112/app/jmesse/www/ja_left_menu.html',
-	'left_menu_url_en'     => '/home/jmesse1112/app/jmesse/www/en_left_menu.html',
+	'left_menu_url'        => '/home/jmesse1112/app/jmesse_new/www/ja_left_menu.html',
+	'left_menu_url_en'     => '/home/jmesse1112/app/jmesse_new/www/en_left_menu.html',
 	// MOD-S 2013.10.08 2013年度保守対応No.21
 	//https用
 	'header_url'           => 'https://www.jetro.go.jp/static/parts/ja_header.html',
@@ -111,7 +111,7 @@ $config = array(
 			'level'  => 'err',
 			'option' => 'pid,function,pos',
 			'mode'   => '666',
-			'file'   => '/home/jmesse1112/app/jmesse/log/jmesse_'.date('Ymd').'.log',
+			'file'   => '/home/jmesse1112/app/jmesse_new/log/jmesse_'.date('Ymd').'.log',
 		),
 	),
 	// sample-1: sigile facility
@@ -207,8 +207,8 @@ $config = array(
 	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
 	'mail_mnt_batch_mon_log_title' => '[JETRO]batch_mon.log('.date('Ymd').')',
 	'mail_mnt_to'                  => 'goto@ids.co.jp,tanimoto@ids.co.jp',
-	'batch_log'                    => '/home/jmesse1112/app/jmesse/log/batch.log',
-	'batch_mon_log'                => '/home/jmesse1112/app/jmesse/log/batch_mon.log',
+	'batch_log'                    => '/home/jmesse1112/app/jmesse_new/log/batch.log',
+	'batch_mon_log'                => '/home/jmesse1112/app/jmesse_new/log/batch_mon.log',
 	// ADD-E 2012.02.24 バッチログメール追加
 
 	//'mail_func_workaround' => false,
