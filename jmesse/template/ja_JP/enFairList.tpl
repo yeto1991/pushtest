@@ -259,6 +259,7 @@ Trade Fairs held in Japan and the World - Online Trade Fair Database (J-messe) -
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/new-additions/">Recently Added</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/ranking/">Monthly Ranking</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/report/">Special Reports on Major Trade Shows in Japan</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/center/">Major Exhibition Sites</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/links/">Related Links</a></li>
 						</ul>
