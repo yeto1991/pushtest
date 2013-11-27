@@ -98,17 +98,19 @@ class Jmesse_Action_FairDetail extends Jmesse_ActionClass
 
 		$this->af->setApp('fair_detail', $fair_detail);
 
+		// MOD-S 2013.11.27 保守課題No.38対応
 		// 開催終了？
-		$date_to = $fair_detail['date_to_yyyy'].$fair_detail['date_to_mm'].$fair_detail['date_to_dd'];
-		$date_now = date('Ymd');
-		$this->backend->getLogger()->log(LOG_DEBUG, '■date_to  : '.$date_to);
-		$this->backend->getLogger()->log(LOG_DEBUG, '■date_now : '.$date_now);
-		if ($date_to < $date_now) {
-			$is_end = '1';
-		} else {
-			$is_end = '0';
-		}
-		$this->af->setApp('is_end', $is_end);
+// 		$date_to = $fair_detail['date_to_yyyy'].$fair_detail['date_to_mm'].$fair_detail['date_to_dd'];
+// 		$date_now = date('Ymd');
+// 		$this->backend->getLogger()->log(LOG_DEBUG, '■date_to  : '.$date_to);
+// 		$this->backend->getLogger()->log(LOG_DEBUG, '■date_now : '.$date_now);
+// 		if ($date_to < $date_now) {
+// 			$is_end = '1';
+// 		} else {
+// 			$is_end = '0';
+// 		}
+// 		$this->af->setApp('is_end', $is_end);
+		// MOD-E 2013.11.27 保守課題No.38対応
 
 		// 画像保存フォルダ
 		$this->af->setApp('photos_dir', $this->_getImageDir($this->af->get('mihon_no')));

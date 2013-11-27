@@ -160,7 +160,7 @@
 										<tr>
 											<th>会場</th>
 											<td>
-											{if ('' != $app.fair_detail.venue_url && '0' == $app.is_end)}
+											{if ('' != $app.fair_detail.venue_url)}
 												<a target="_blank" href="{$app.fair_detail.venue_url}">{$app.fair_detail.venue_jp}</a><br />
 											{else}
 												{$app.fair_detail.venue_jp}<br />
