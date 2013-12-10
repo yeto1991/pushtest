@@ -165,6 +165,10 @@ $form.mode
 											{if ('0' == $app.fair_start_past_flag)}
 												削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 												修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+											{else}
+												<p>
+													<font color="red">登録済みの見本市情報を次回開催の情報へ更新したい場合は「<a href="{$config.url}?action_user_fairCopyList=true">編集登録</a>」ページからお願いいたします。</font><br />
+												</p>
 											{/if}
 										</p>
 										{elseif ('p' == $form.mode)}

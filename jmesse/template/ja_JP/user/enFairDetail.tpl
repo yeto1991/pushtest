@@ -149,6 +149,10 @@ $form.mode
 						{if ('0' == $app.fair_start_past_flag)}
 							Delete<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Delete" class="over" /></a>
 							Edit<a href="{$config.url}?action_user_enFairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/en/database/j-messe/images/db/btn-yes.gif" alt="Edit" class="over" /></a>
+						{else}
+							<p>
+								<font color="red">To update the registered information of your trade fair in line with the upcoming event, use the "<a href="{$config.url}?action_user_enFairCopyList=true">Copying registered information</a>" page.</font><br />
+							</p>
 						{/if}
 					</p>
 					{elseif ('p' == $form.mode)}
