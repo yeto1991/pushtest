@@ -255,6 +255,18 @@ class Jmesse_Action_UserFairDetail extends Jmesse_ActionClass
 			$this->session->set('email', $user_obj->get('email'));
 		}
 
+		//MOD-S 2013.12.16 保守課題No.41対応
+		//会期開始日<=現在日付 の場合、修正モードの場合修正させないようフラグを設定
+		$date_start = $jm_fair->get('date_from_yyyy').$jm_fair->get('date_from_mm').$jm_fair->get('date_from_dd');
+		$date_now = date('Ymd');
+		if ($date_start <= $date_now) {
+			$fair_start_past_flag = '1';
+		} else {
+			$fair_start_past_flag = '0';
+		}
+		$this->af->setApp('fair_start_past_flag', $fair_start_past_flag);
+		//MOD-E 2013.12.16 保守課題No.41対応
+
 		//MOD-S 2013.04.25 登録（対象）画像の実画像表示
 		//画面表示対象ファイルパスを配列で保持
 		$ary_photos_name = array($jm_fair->get('photos_1'), $jm_fair->get('photos_2'), $jm_fair->get('photos_3'));

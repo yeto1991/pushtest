@@ -73,7 +73,11 @@
 							<div class="in_main">
 								<p class="t_right">ユーザー：{$session.email}</p>
 								{if $app.my_fair_info_list_count != "0"}
-								<p>・詳細を確認したい場合は、見本市名リンクをクリックしてください。<br />・削除する場合は、チェックを入れて削除ボタンをクリックしてください。<br /><br />
+								<p>
+									詳細を確認したい場合は、見本市名リンクをクリックしてください。<br />
+									これから開催される見本市情報のみ修正・削除ができます。<br />
+									<font color="red">登録済みの見本市情報を次回開催の情報へ更新したい場合は「<a href="{$config.url}?action_user_fairCopyList=true">編集登録</a>」ページからお願いいたします。</font><br />
+								</p>
 								{/if}
 								<form name="form_user_fairList" id="form_user_fairList" method="post" action="">
 									<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
@@ -87,7 +91,12 @@
 									{section name=it loop=$app.my_fair_info_list}
 									<table id="registration" style="word-break: break-all;">
 										<tr>
-											<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}"><font size="2">&nbsp;&nbsp;見本市名(日)</font></th>
+											<th class="item">
+												{if ('1' == $app.my_fair_info_list[it].fair_start_past_flag)}
+													<input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}">
+												{/if}
+												<font size="2">&nbsp;&nbsp;見本市名(日)</font>
+											</th>
 											<td><a href="{$config.url}?action_user_fairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_jp}</font></a></td>
 										</tr>
 										<tr>

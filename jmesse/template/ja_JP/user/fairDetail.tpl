@@ -162,14 +162,15 @@ $form.mode
 										<p></p>
 										<p>
 											<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
-											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
-											修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+											{if ('0' == $app.fair_start_past_flag)}
+												削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+												修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+											{/if}
 										</p>
 										{elseif ('p' == $form.mode)}
 										<p></p>
 										<p>
 											<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
-											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}', '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 											修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 										</p>
 										{else}
@@ -498,14 +499,15 @@ $form.mode
 									<p></p>
 									<p>
 										<a href="{$config.url}?action_user_fairList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
-										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}, '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
-										修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+										{if ('0' == $app.fair_start_past_flag)}
+											削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}, '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
+											修正<a href="{$config.url}?action_user_fairRegistStep1=true&mode=c&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
+										{/if}
 									</p>
 									{elseif ('p' == $form.mode)}
 									<p></p>
 									<p>
 										<a href="{$config.url}?action_user_fairCopyList=true"><img width="110" height="37" class="over" alt="戻る" src="/j-messe/images/db/btn-back.gif" /></a>
-										削除<a href="javascript:fair_delete('{$config.url}', '{$form.mihon_no}, '{$form.mode}')"><img src="/j-messe/images/db/btn-yes.gif" alt="削除" class="over" /></a>
 										修正登録<a href="{$config.url}?action_user_fairRegistStep1=true&mode=e&mihon_no={$form.mihon_no}"><img src="/j-messe/images/db/btn-yes.gif" alt="編集" class="over" /></a>
 									</p>
 									{else}

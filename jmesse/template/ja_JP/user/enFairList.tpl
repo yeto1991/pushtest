@@ -65,8 +65,11 @@
 			<div class="in_main">
 				<p class="t_right">user：{$session.email}</p>
 				{if $app.my_fair_info_list_count != "0"}
-				<p>If you need to confirm/edit details of your registered fairs, click on the fair title.<br />
-				If you need to delete a registered fair, check the box in front of “Fair title”, then click “Delete” at the bottom of this page.<br /></p>
+				<p>
+					If you need to confirm/edit details of your registered fairs, click on the fair title.<br />
+					You can modify or delete the information of future trade fairs only.<br />
+					<font color="red">To update the registered information of your trade fair in line with the upcoming event, use the "<a href="{$config.url}?action_user_enFairCopyList=true">Copying registered information</a>" page.</font><br />
+				</p>
 				{/if}
 				<form name="form_user_enFairList" id="form_user_enFairList" method="post" action="">
 					<input type="hidden" name="mode" id="mode" value="{$form.mode}" />
@@ -80,7 +83,12 @@
 					{section name=it loop=$app.my_fair_info_list}
 					<table id="registration" style="word-break: break-all;">
 						<tr>
-							<th class="item"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}" /><font size="2">&nbsp;&nbsp;Fair title (English)</font></th>
+							<th class="item">
+								{if ('1' == $app.my_fair_info_list[it].fair_start_past_flag)}
+									<input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.my_fair_info_list[it].mihon_no}" />
+								{/if}
+								<font size="2">&nbsp;&nbsp;Fair title (English)</font>
+							</th>
 							<td><a href="{$config.url}?action_user_enFairDetail=true&mode=d&mihon_no={$app.my_fair_info_list[it].mihon_no}"><font size="2">{$app.my_fair_info_list[it].fair_title_en}</font></a></td>
 						</tr>
 						<tr>
@@ -92,7 +100,7 @@
 							<td><font size="2">{if $app.my_fair_info_list[it].city_name_en == ""}Other({$app.my_fair_info_list[it].other_city_en}){else}{$app.my_fair_info_list[it].city_name_en}{/if} / {$app.my_fair_info_list[it].country_name_en} / {$app.my_fair_info_list[it].region_name_en}</font></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Main industries covered</font></th>
+							<th class="item"><font size="2">Main industries <br />covered</font></th>
 							<td><font size="2">
 								{$app.my_fair_info_list[it].main_indust_name1_en}&nbsp;/&nbsp;{$app.my_fair_info_list[it].sub_indust_name1_en}
 								{if $app.my_fair_info_list[it].main_indust_name2_en != ""}
@@ -118,7 +126,7 @@
 							<td><font size="2">{$app.my_fair_info_list[it].exhibits_en|replace:'&lt;br/&gt;':'<br/>'}</font></td>
 						</tr>
 						<tr>
-							<th class="item"><font size="2">Approval status (by JETRO)</font></th>
+							<th class="item"><font size="2">Approval status <br /> (by JETRO)</font></th>
 							<td>
 								<font size="2">
 								{if $app.my_fair_info_list[it].confirm_flag == "0"}Awaiting approval{/if}
