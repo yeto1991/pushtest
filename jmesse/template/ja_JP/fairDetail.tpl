@@ -341,23 +341,34 @@
 												{if ('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor)}
 												来場者数 : {$app.fair_detail.total_number_of_visitor} 人
 												{/if}
-												{if ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor)}
-												（うち海外から：{$app.fair_detail.number_of_foreign_visitor} 人）
+												{if ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor
+													&& $app.fair_detail.number_of_foreign_visitor <= $app.fair_detail.total_number_of_visitor)}
+														（うち海外から：{$app.fair_detail.number_of_foreign_visitor} 人）
 												{/if}
-												<br/>
+												{if (('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor))
+													|| (('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor
+															&& $app.fair_detail.number_of_foreign_visitor <= $app.fair_detail.total_number_of_visitor))}
+													<br/>
+												{/if}
 												{if ('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors)}
 												出展者数 : {$app.fair_detail.total_number_of_exhibitors} 社
 												{/if}
-												{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors)}
-												（うち海外から : {$app.fair_detail.number_of_foreign_exhibitors} 社）
+												{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors
+													&& $app.fair_detail.number_of_foreign_exhibitors <= $app.fair_detail.total_number_of_exhibitors)}
+														（うち海外から : {$app.fair_detail.number_of_foreign_exhibitors} 社）
 												{/if}
-												<br/>
+												{if (('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors))
+													|| (('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors
+															&& $app.fair_detail.number_of_foreign_exhibitors <= $app.fair_detail.total_number_of_exhibitors))}
+													<br/>
+												{/if}
 												{if ('' != $app.fair_detail.net_square_meters && 0 < $app.fair_detail.net_square_meters)}
 												展示面積 : {$app.fair_detail.net_square_meters} sq.m.<br/>
 												{/if}
 												{if ('' != $app.fair_detail.spare_field1)}
 												承認機関 : {$app.fair_detail.spare_field1}<br/>
 												{/if}
+												過去の実績は同時開催/併催展を含む場合もあります。
 											</td>
 										</tr>
 										{/if}

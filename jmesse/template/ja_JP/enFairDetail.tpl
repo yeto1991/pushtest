@@ -276,23 +276,34 @@
 								{if ('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor)}
 								Total number of visitors : {$app.fair_detail.total_number_of_visitor}
 								{/if}
-								{if ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor)}
-								（including ：{$app.fair_detail.number_of_foreign_visitor} foreign visitors)
+								{if ('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor
+									&& $app.fair_detail.number_of_foreign_visitor <= $app.fair_detail.total_number_of_visitor)}
+										（including ：{$app.fair_detail.number_of_foreign_visitor} foreign visitors)
 								{/if}
-								<br/>
+								{if (('' != $app.fair_detail.total_number_of_visitor && 0 < $app.fair_detail.total_number_of_visitor))
+									|| (('' != $app.fair_detail.number_of_foreign_visitor && 0 < $app.fair_detail.number_of_foreign_visitor
+											&& $app.fair_detail.number_of_foreign_visitor <= $app.fair_detail.total_number_of_visitor))}
+									<br/>
+								{/if}
 								{if ('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors)}
-								Total number of exhibitors : {$app.fair_detail.total_number_of_exhibitors}
+								Total number of exhibitors :{$app.fair_detail.total_number_of_exhibitors} 社
 								{/if}
-								{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors)}
-								（including : {$app.fair_detail.number_of_foreign_exhibitors} foreign exhibitors)
+								{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors
+									&& $app.fair_detail.number_of_foreign_exhibitors <= $app.fair_detail.total_number_of_exhibitors)}
+										（including : {$app.fair_detail.number_of_foreign_exhibitors} foreign exhibitors)
 								{/if}
-								<br/>
+								{if (('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors))
+									|| (('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors
+											&& $app.fair_detail.number_of_foreign_exhibitors <= $app.fair_detail.total_number_of_exhibitors))}
+									<br/>
+								{/if}
 								{if ('' != $app.fair_detail.net_square_meters && 0 < $app.fair_detail.net_square_meters)}
 								Net square meters : {$app.fair_detail.net_square_meters} sq.m.<br/>
 								{/if}
 								{if ('' != $app.fair_detail.spare_field1)}
 								Data verified : {$app.fair_detail.spare_field1}<br/>
 								{/if}
+								The past records may include concurrent/joint exhibits.
 							</td>
 						</tr>
 						{/if}

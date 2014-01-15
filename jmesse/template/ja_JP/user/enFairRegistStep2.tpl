@@ -287,7 +287,7 @@
 							<th class="required"></th>
 							<td>
 								<textarea cols="60" rows="6" name="detailed_information_en" id="detailed_information_en">{$form.detailed_information_en}</textarea><br/>
-								Maximum of 1000 letters (about 140 words) <br/>
+								If there is a concurrent/joint exhibit, please fill it in here.  Maximum of 1000 letters (about 140 words) <br/>
 								{if is_error('detailed_information_en')}
 								<span class="error-message">{message name="detailed_information_en"}</span><br />
 								{/if}

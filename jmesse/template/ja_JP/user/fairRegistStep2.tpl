@@ -289,7 +289,7 @@
 											<th class="required"></th>
 											<td>
 												<textarea cols="60" rows="6" name="detailed_information_jp" id="detailed_information_jp">{$form.detailed_information_jp}</textarea><br/>
-												1000文字以内で。<br/>
+												同時開催/併催展がある場合にはこちらにご記入をお願いします。1000文字以内で。<br/>
 												{if is_error('detailed_information_jp')}
 												<span class="error-message">{message name="detailed_information_jp"}</span><br />
 												{/if}
