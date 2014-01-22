@@ -60,7 +60,7 @@
 						</li>
 						<li>
 							Time until Publication (Public Release)<br />
-							In order to provide accurate information related to trade fairs for use in Japan and elsewhere, JETRO may choose to verify the content of the registered information prior to its publication. Please note beforehand that it will therefore take a certain of time for information to be published. It usually takes a day for publication after registrants receives an e-mail of "registration completed".<br /><br />
+							In order to provide accurate information related to trade fairs for use in Japan and elsewhere, JETRO may choose to verify the content of the registered information prior to its publication. Please note beforehand that it will therefore take a certain of time for information to be published.<br /><br />
 						</li>
 						<li>
 							Prohibited Actions<br />
@@ -75,7 +75,11 @@
 								<li>Actions that impede the administration of JETRO</li>
 								<li>Sales and marketing activities that are not approved of by JETRO</li>
 								<li>Other actions that JETRO deems to be inappropriate</li>
-							</ol><br /><br />
+							</ol><br />
+						</li>
+						<li>
+							Privacy Policy<br />
+							Your personal information is treated properly according to JETRO's <a href="https://www.jetro.go.jp/en/privacy/">Privacy Policy.</a><br /><br />
 						</li>
 					</ol>
 				</div>
