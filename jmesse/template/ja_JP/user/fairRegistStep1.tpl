@@ -613,13 +613,13 @@
 										{else}
 										<tr>
 										{/if}
-											<th class="item">チケットの入手方法</th>
+											<th class="item">入場方法</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />登録の必要なし
-												<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />WEBからの事前登録 <br />
-												<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />主催者・日本の照会先へ問い合わせ
-												<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />当日会場で入手 <br />
+												<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />公式ウェブサイトからの事前登録 <br />
+												<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />主催者もしくは日本国内の連絡先への問い合わせ
+												<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />当日会場でチケット入手 <br />
 												<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />その他<input name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" size="50" type="text" maxlength="500" /> <br />
 												複数選択可能<br/>
 												{if is_error('admission_ticket_1')}

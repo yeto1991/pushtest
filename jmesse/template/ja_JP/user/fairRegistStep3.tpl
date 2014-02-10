@@ -266,12 +266,12 @@
 											{else}
 											<tr>
 											{/if}
-												<th class="item">Admission ticket(other)<br />チケット入手法（その他)
+												<th class="item">Method of admission(other)<br />入場方法（その他)
 												</th>
 												<th class="required"></th>
 												<td>
 													<input type="text" value="{$form.other_admission_ticket_en}" size="50" name="other_admission_ticket_en" id="other_admission_ticket_en" maxlength="500" /> <br />
-													「チケットの入手方法」でその他にチェックをした方のみ入力してください。<br/>
+													「入場方法」でその他にチェックをした方のみ入力してください。<br/>
 													{if is_error('other_admission_ticket_en')}
 													<span class="error-message">{message name="other_admission_ticket_en"}</span><br />
 													{/if}

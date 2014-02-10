@@ -601,13 +601,13 @@
 						{else}
 						<tr>
 						{/if}
-							<th class="item">Method of obtaining tickets</th>
+							<th class="item">Method of admission</th>
 							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								<input name="admission_ticket_1" id="admission_ticket_1" value="1" type="checkbox" {if ('1' == $form.admission_ticket_1)}checked{/if} />Free
 								<input name="admission_ticket_2" id="admission_ticket_2" value="1" type="checkbox" {if ('1' == $form.admission_ticket_2)}checked{/if} />Apply/register online<br />
 								<input name="admission_ticket_3" id="admission_ticket_3" value="1" type="checkbox" {if ('1' == $form.admission_ticket_3)}checked{/if} />Contact organizer/agency in Japan
-								<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />Available at event<br />
+								<input name="admission_ticket_4" id="admission_ticket_4" value="1" type="checkbox" {if ('1' == $form.admission_ticket_4)}checked{/if} />Tickets available at event<br />
 								<input name="admission_ticket_5" id="admission_ticket_5" value="1" type="checkbox" {if ('1' == $form.admission_ticket_5)}checked{/if} />Other<input name="other_admission_ticket_en" id="other_admission_ticket_en" value="{$form.other_admission_ticket_en}" size="50" type="text" maxlength="500" /> <br />
 								(Multiple selections accepted) <br/>
 								{if is_error('admission_ticket_1')}

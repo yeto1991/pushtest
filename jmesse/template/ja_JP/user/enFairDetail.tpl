@@ -277,7 +277,7 @@ $form.mode
 							<td>{$app.open_to_name.discription_en}</td>
 						</tr>
 						<tr>
-							<th class="item">Method of obtaining tickets</th>
+							<th class="item">Method of admission</th>
 							<th class="required"><img src="/en/database/j-messe/images/db/required.gif " height="18" width="40" /></th>
 							<td>
 								{if ('1' == $form.admission_ticket_1)}
@@ -290,7 +290,7 @@ $form.mode
 								Contact organizer/agency in Japan<br />
 								{/if}
 								{if ('1' == $form.admission_ticket_4)}
-								Available at event<br />
+								Tickets available at event<br />
 								{/if}
 								{if ('1' == $form.admission_ticket_5)}
 								Other ({$form.other_admission_ticket_en})<br />

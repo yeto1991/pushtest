@@ -231,7 +231,7 @@
 										{else}
 										<tr>
 										{/if}
-											<th class="item">総出展者数</th>
+											<th class="item">総出社数</th>
 											<th class="required"></th>
 											<td>
 												<input type="text" value="{$form.total_number_of_exhibitors}" size="10" name="total_number_of_exhibitors" id="total_number_of_exhibitors" maxlength="10" /> <strong>社</strong> うち海外から <input type="text" value="{$form.number_of_foreign_exhibitors}" size="10" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" maxlength="10" /> <strong>社</strong><br />
@@ -417,7 +417,7 @@
 										{else}
 										<tr>
 										{/if}
-											<th class="item">日本国内の照会先</th>
+											<th class="item">日本国内の連絡先</th>
 											<th class="required"></th>
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />

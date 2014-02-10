@@ -280,20 +280,20 @@ $form.mode
 											<td>{$app.open_to_name.discription_jp}</td>
 										</tr>
 										<tr>
-											<th class="item">チケットの入手方法</th>
+											<th class="item">入場方法</th>
 											<th class="required"><img src="/j-messe/images/db/required.gif" height="18" width="30" /></th>
 											<td>
 												{if ('1' == $form.admission_ticket_1)}
 												登録の必要なし<br />
 												{/if}
 												{if ('1' == $form.admission_ticket_2)}
-												WEBからの事前登録<br />
+												公式ウェブサイトからの事前登録<br />
 												{/if}
 												{if ('1' == $form.admission_ticket_3)}
-												主催者・日本の照会先へ問い合わせ<br />
+												主催者もしくは日本国内の連絡先への問い合わせ<br />
 												{/if}
 												{if ('1' == $form.admission_ticket_4)}
-												当日会場で入手<br />
+												当日会場でチケット入手<br />
 												{/if}
 												{if ('1' == $form.admission_ticket_5)}
 												その他 ({$form.other_admission_ticket_jp})<br />
@@ -394,7 +394,7 @@ $form.mode
 											</td>
 										</tr>
 										<tr>
-											<th class="item">日本国内の照会先</th>
+											<th class="item">日本国内の連絡先</th>
 											<th class="required"></th>
 											<td>
 												<strong>海外で開催される見本市で、日本国内に問い合わせ先がある場合</strong><br />
@@ -465,7 +465,7 @@ $form.mode
 												<td>{$form.venue_en}</td>
 											</tr>
 											<tr>
-												<th class="item">Admission ticket(other)<br />チケット入手法（その他)</th>
+												<th class="item">Method of admission(other)<br />入場方法（その他)</th>
 												<th class="required"></th>
 												<td>{$form.other_admission_ticket_en}</td>
 											</tr>
