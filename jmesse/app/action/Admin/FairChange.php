@@ -219,7 +219,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 // 			$this->af->set('open_to_en', $jm_fair->get('open_to'));
 // 		}
 
-		// チケットの入手方法
+		// 入場方法
 // 		if ('0' == $use_language_flag) {
 			$this->af->set('admission_ticket_1_jp', $jm_fair->get('admission_ticket_1'));
 			$this->af->set('admission_ticket_2_jp', $jm_fair->get('admission_ticket_2'));
@@ -259,7 +259,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		$this->af->set('organizer_fax', $jm_fair->get('organizer_fax'));
 		$this->af->set('organizer_email', $jm_fair->get('organizer_email'));
 
-		// 日本国内の照会先
+		// 日本国内の連絡先
 		$this->af->set('agency_in_japan_jp', $jm_fair->get('agency_in_japan_jp'));
 		$this->af->set('agency_in_japan_en', $jm_fair->get('agency_in_japan_en'));
 		$this->af->set('agency_in_japan_tel', $jm_fair->get('agency_in_japan_tel'));

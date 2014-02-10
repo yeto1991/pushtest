@@ -1115,7 +1115,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'admission_ticket_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'WEBからの事前登録', // Display name
+			'name'        => '公式ウェブサイトからの事前登録', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1128,7 +1128,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'admission_ticket_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '主催者・日本の照会先へ問い合わせ', // Display name
+			'name'        => '主催者もしくは日本国内の連絡先への問い合わせ', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1141,7 +1141,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'admission_ticket_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => '当日会場で入手', // Display name
+			'name'        => '当日会場でチケット入手', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1167,7 +1167,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'other_admission_ticket_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'その他のチケットの入手方法(日)', // Display name
+			'name'        => 'その他の入場方法(日)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -1180,7 +1180,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'other_admission_ticket_jp_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => 'その他のチケットの入手方法(日)（条件）', // Display name
+			'name'        => 'その他の入場方法(日)（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1193,7 +1193,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'other_admission_ticket_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'その他のチケットの入手方法(英)', // Display name
+			'name'        => 'その他の入場方法(英)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -1206,7 +1206,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'other_admission_ticket_en_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => 'その他のチケットの入手方法(英)（条件）', // Display name
+			'name'        => 'その他の入場方法(英)（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1595,7 +1595,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先名称（日）', // Display name
+			'name'        => '日本国内の連絡先名称（日）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1608,7 +1608,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_jp_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '日本国内の照会先名称（日）（条件）', // Display name
+			'name'        => '日本国内の連絡先名称（日）（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1622,7 +1622,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先名称（英）', // Display name
+			'name'        => '日本国内の連絡先名称（英）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1635,7 +1635,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_en_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '日本国内の照会先名称（英）（条件）', // Display name
+			'name'        => '日本国内の連絡先名称（英）（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1649,7 +1649,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_tel' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先TEL', // Display name
+			'name'        => '日本国内の連絡先TEL', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1662,7 +1662,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_tel_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '日本国内の照会先TEL（条件）', // Display name
+			'name'        => '日本国内の連絡先TEL（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1676,7 +1676,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先FAX', // Display name
+			'name'        => '日本国内の連絡先FAX', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1689,7 +1689,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_fax_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '日本国内の照会先FAX（条件）', // Display name
+			'name'        => '日本国内の連絡先FAX（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -1703,7 +1703,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先E-Mail', // Display name
+			'name'        => '日本国内の連絡先E-Mail', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1716,7 +1716,7 @@ class Jmesse_Form_AdminFairSearch extends Jmesse_ActionForm
 		'agency_in_japan_email_cond' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_SELECT, // Form type
-			'name'        => '日本国内の照会先E-Mail（条件）', // Display name
+			'name'        => '日本国内の連絡先E-Mail（条件）', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
