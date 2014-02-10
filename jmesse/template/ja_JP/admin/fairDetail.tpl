@@ -367,26 +367,26 @@
 						</tr>
 
 						<tr>
-							<td nowrap rowspan="1">チケットの入手方法</td>
-							<!-- チケットの入手方法(日) -->
-							<!-- チケットの入手方法(英) -->
-							<!-- その他のチケットの入手方法(日) -->
-							<!-- その他のチケットの入手方法(英) -->
+							<td nowrap rowspan="1">入場方法</td>
+							<!-- 入場方法(日) -->
+							<!-- 入場方法(英) -->
+							<!-- 入場方法(日) -->
+							<!-- 入場方法(英) -->
 							<td>
 							{if ("1" == $form.admission_ticket_1_jp)}
 								登録の必要なし
 							{/if}
 							{if ("1" == $form.admission_ticket_2_jp)}
 								{if ("1" == $form.admission_ticket_1_jp)} / {/if}
-								WEBからの事前登録
+								公式ウェブサイトからの事前登録
 							{/if}
 							{if ("1" == $form.admission_ticket_3_jp)}
 								{if ("1" == $form.admission_ticket_1_jp || "1" == $form.admission_ticket_2_jp)} / {/if}
-								主催者・日本の照会先へ問い合わせ
+								主催者もしくは日本国内の連絡先への問い合わせ
 							{/if}
 							{if ("1" == $form.admission_ticket_4_jp)}
 								{if ("1" == $form.admission_ticket_1_jp || "1" == $form.admission_ticket_2_jp || "1" == $form.admission_ticket_3_jp)} / {/if}
-								当日会場で入手
+								当日会場でチケット入手
 							{/if}
 							{if ("1" == $form.admission_ticket_5_jp)}
 								{if ("1" == $form.admission_ticket_1_jp || "1" == $form.admission_ticket_2_jp || "1" == $form.admission_ticket_3_jp || "1" == $form.admission_ticket_4_jp)} / {/if}
@@ -422,7 +422,7 @@
 										<td>&nbsp;</td>
 									</tr>
 									<tr>
-										<td>出展者数</td>
+										<td>出展社数</td>
 										<td>{$form.total_number_of_exhibitors} 社</td>
 										<td>（うち海外から</td>
 										<td>{$form.number_of_foreign_exhibitors} 社）</td>
@@ -486,7 +486,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap>日本国内の照会先</td>
+							<td nowrap>日本国内の連絡先</td>
 							<!-- 在日代理店名(日) -->
 							<!-- 在日代理店名(英) -->
 							<!-- 在日代理店ＴＥＬ -->

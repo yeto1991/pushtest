@@ -653,21 +653,21 @@
 						</tr>
 
 						<tr>
-							<td nowrap>チケットの入手方法</td>
-							<!-- チケットの入手方法(日) -->
-							<!-- チケットの入手方法(英) -->
-							<!-- その他のチケットの入手方法(日) -->
-							<!-- その他のチケットの入手方法(英) -->
+							<td nowrap>入場方法</td>
+							<!-- 入場方法(日) -->
+							<!-- 入場方法(英) -->
+							<!-- その他の入場方法(日) -->
+							<!-- その他の入場方法(英) -->
 							<td nowrap>
 
 								<table>
 									<tr>
 										<td><input type="checkbox" name="admission_ticket_1" id="admission_ticket_1" value="1" {if ("1" == $form.admission_ticket_1)}checked{/if} />登録の必要なし</td>
-										<td><input type="checkbox" name="admission_ticket_2" id="admission_ticket_2" value="1" {if ("1" == $form.admission_ticket_2)}checked{/if} />WEBからの事前登録</td>
+										<td><input type="checkbox" name="admission_ticket_2" id="admission_ticket_2" value="1" {if ("1" == $form.admission_ticket_2)}checked{/if} />公式ウェブサイトからの事前登録</td>
 									</tr>
 									<tr>
-										<td><input type="checkbox" name="admission_ticket_3" id="admission_ticket_3" value="1" {if ("1" == $form.admission_ticket_3)}checked{/if} />主催者・日本の照会先へ問い合わせ</td>
-										<td><input type="checkbox" name="admission_ticket_4" id="admission_ticket_4" value="1" {if ("1" == $form.admission_ticket_4)}checked{/if} />当日会場で入手</td>
+										<td><input type="checkbox" name="admission_ticket_3" id="admission_ticket_3" value="1" {if ("1" == $form.admission_ticket_3)}checked{/if} />主催者もしくは日本国内の連絡先への問い合わせ</td>
+										<td><input type="checkbox" name="admission_ticket_4" id="admission_ticket_4" value="1" {if ("1" == $form.admission_ticket_4)}checked{/if} />当日会場でチケット入手</td>
 									</tr>
 								</table>
 								<table>
@@ -890,7 +890,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap>日本国内の照会先</td>
+							<td nowrap>日本国内の連絡先</td>
 							<!-- 在日代理店名(日) -->
 							<!-- 在日代理店名(英) -->
 							<!-- 在日代理店ＴＥＬ -->
@@ -1232,9 +1232,9 @@
 									<option value="36" {if ('36' == form.summary_key1)}selected{/if}>会場名(英)</option>
 									<option value="37" {if ('37' == form.summary_key1)}selected{/if}>開催予定規模</option>
 									<option value="38" {if ('38' == form.summary_key1)}selected{/if}>入場資格</option>
-									<option value="39" {if ('39' == form.summary_key1)}selected{/if}>チケットの入手方法</option>
-									<option value="40" {if ('40' == form.summary_key1)}selected{/if}>チケットの入手方法その他(日)</option>
-									<option value="41" {if ('41' == form.summary_key1)}selected{/if}>チケットの入手方法Others(英)</option>
+									<option value="39" {if ('39' == form.summary_key1)}selected{/if}>入場方法</option>
+									<option value="40" {if ('40' == form.summary_key1)}selected{/if}>入場方法その他(日)</option>
+									<option value="41" {if ('41' == form.summary_key1)}selected{/if}>入場方法Others(英)</option>
 									<option value="42" {if ('42' == form.summary_key1)}selected{/if}>過去の実績年実績</option>
 									<option value="43" {if ('43' == form.summary_key1)}selected{/if}>過去の実績来場者数</option>
 									<option value="44" {if ('44' == form.summary_key1)}selected{/if}>過去の実績海外来場者数</option>
@@ -1250,14 +1250,14 @@
 									<option value="54" {if ('54' == form.summary_key1)}selected{/if}>主催者・問合せ先住所</option>
 									<option value="55" {if ('55' == form.summary_key1)}selected{/if}>主催者・問合せ先担当部課</option>
 									<option value="56" {if ('56' == form.summary_key1)}selected{/if}>主催者・問合せ先担当者</option>
-									<option value="57" {if ('57' == form.summary_key1)}selected{/if}>日本国内の照会先名称(日)</option>
-									<option value="58" {if ('58' == form.summary_key1)}selected{/if}>日本国内の照会先名称(英)</option>
-									<option value="59" {if ('59' == form.summary_key1)}selected{/if}>日本国内の照会先TEL</option>
-									<option value="60" {if ('60' == form.summary_key1)}selected{/if}>日本国内の照会先FAX</option>
-									<option value="61" {if ('61' == form.summary_key1)}selected{/if}>日本国内の照会先Email</option>
-									<option value="62" {if ('62' == form.summary_key1)}selected{/if}>日本国内の照会先住所</option>
-									<option value="63" {if ('63' == form.summary_key1)}selected{/if}>日本国内の照会先担当部課</option>
-									<option value="64" {if ('64' == form.summary_key1)}selected{/if}>日本国内の照会先担当者</option>
+									<option value="57" {if ('57' == form.summary_key1)}selected{/if}>日本国内の連絡先名称(日)</option>
+									<option value="58" {if ('58' == form.summary_key1)}selected{/if}>日本国内の連絡先名称(英)</option>
+									<option value="59" {if ('59' == form.summary_key1)}selected{/if}>日本国内の連絡先TEL</option>
+									<option value="60" {if ('60' == form.summary_key1)}selected{/if}>日本国内の連絡先FAX</option>
+									<option value="61" {if ('61' == form.summary_key1)}selected{/if}>日本国内の連絡先Email</option>
+									<option value="62" {if ('62' == form.summary_key1)}selected{/if}>日本国内の連絡先住所</option>
+									<option value="63" {if ('63' == form.summary_key1)}selected{/if}>日本国内の連絡先担当部課</option>
+									<option value="64" {if ('64' == form.summary_key1)}selected{/if}>日本国内の連絡先担当者</option>
 									<option value="65" {if ('65' == form.summary_key1)}selected{/if}>見本市レポートURL</option>
 									<option value="66" {if ('66' == form.summary_key1)}selected{/if}>展示会に係わる画像名称1</option>
 									<option value="67" {if ('67' == form.summary_key1)}selected{/if}>展示会に係わる画像名称2</option>
@@ -1322,9 +1322,9 @@
 									<option value="36" {if ('36' == form.summary_key2)}selected{/if}>会場名(英)</option>
 									<option value="37" {if ('37' == form.summary_key2)}selected{/if}>開催予定規模</option>
 									<option value="38" {if ('38' == form.summary_key2)}selected{/if}>入場資格</option>
-									<option value="39" {if ('39' == form.summary_key2)}selected{/if}>チケットの入手方法</option>
-									<option value="40" {if ('40' == form.summary_key2)}selected{/if}>チケットの入手方法その他(日)</option>
-									<option value="41" {if ('41' == form.summary_key2)}selected{/if}>チケットの入手方法Others(英)</option>
+									<option value="39" {if ('39' == form.summary_key2)}selected{/if}>入場方法</option>
+									<option value="40" {if ('40' == form.summary_key2)}selected{/if}>入場方法その他(日)</option>
+									<option value="41" {if ('41' == form.summary_key2)}selected{/if}>入場方法Others(英)</option>
 									<option value="42" {if ('42' == form.summary_key2)}selected{/if}>過去の実績年実績</option>
 									<option value="43" {if ('43' == form.summary_key2)}selected{/if}>過去の実績来場者数</option>
 									<option value="44" {if ('44' == form.summary_key2)}selected{/if}>過去の実績海外来場者数</option>
@@ -1340,14 +1340,14 @@
 									<option value="54" {if ('54' == form.summary_key2)}selected{/if}>主催者・問合せ先住所</option>
 									<option value="55" {if ('55' == form.summary_key2)}selected{/if}>主催者・問合せ先担当部課</option>
 									<option value="56" {if ('56' == form.summary_key2)}selected{/if}>主催者・問合せ先担当者</option>
-									<option value="57" {if ('57' == form.summary_key2)}selected{/if}>日本国内の照会先名称(日)</option>
-									<option value="58" {if ('58' == form.summary_key2)}selected{/if}>日本国内の照会先名称(英)</option>
-									<option value="59" {if ('59' == form.summary_key2)}selected{/if}>日本国内の照会先TEL</option>
-									<option value="60" {if ('60' == form.summary_key2)}selected{/if}>日本国内の照会先FAX</option>
-									<option value="61" {if ('61' == form.summary_key2)}selected{/if}>日本国内の照会先Email</option>
-									<option value="62" {if ('62' == form.summary_key2)}selected{/if}>日本国内の照会先住所</option>
-									<option value="63" {if ('63' == form.summary_key2)}selected{/if}>日本国内の照会先担当部課</option>
-									<option value="64" {if ('64' == form.summary_key2)}selected{/if}>日本国内の照会先担当者</option>
+									<option value="57" {if ('57' == form.summary_key2)}selected{/if}>日本国内の連絡先名称(日)</option>
+									<option value="58" {if ('58' == form.summary_key2)}selected{/if}>日本国内の連絡先名称(英)</option>
+									<option value="59" {if ('59' == form.summary_key2)}selected{/if}>日本国内の連絡先TEL</option>
+									<option value="60" {if ('60' == form.summary_key2)}selected{/if}>日本国内の連絡先FAX</option>
+									<option value="61" {if ('61' == form.summary_key2)}selected{/if}>日本国内の連絡先Email</option>
+									<option value="62" {if ('62' == form.summary_key2)}selected{/if}>日本国内の連絡先住所</option>
+									<option value="63" {if ('63' == form.summary_key2)}selected{/if}>日本国内の連絡先担当部課</option>
+									<option value="64" {if ('64' == form.summary_key2)}selected{/if}>日本国内の連絡先担当者</option>
 									<option value="65" {if ('65' == form.summary_key2)}selected{/if}>見本市レポートURL</option>
 									<option value="66" {if ('66' == form.summary_key2)}selected{/if}>展示会に係わる画像名称1</option>
 									<option value="67" {if ('67' == form.summary_key2)}selected{/if}>展示会に係わる画像名称2</option>
@@ -1412,9 +1412,9 @@
 									<option value="36" {if ('36' == form.summary_key3)}selected{/if}>会場名(英)</option>
 									<option value="37" {if ('37' == form.summary_key3)}selected{/if}>開催予定規模</option>
 									<option value="38" {if ('38' == form.summary_key3)}selected{/if}>入場資格</option>
-									<option value="39" {if ('39' == form.summary_key3)}selected{/if}>チケットの入手方法</option>
-									<option value="40" {if ('40' == form.summary_key3)}selected{/if}>チケットの入手方法その他(日)</option>
-									<option value="41" {if ('41' == form.summary_key3)}selected{/if}>チケットの入手方法Others(英)</option>
+									<option value="39" {if ('39' == form.summary_key3)}selected{/if}>入場方法</option>
+									<option value="40" {if ('40' == form.summary_key3)}selected{/if}>入場方法その他(日)</option>
+									<option value="41" {if ('41' == form.summary_key3)}selected{/if}>入場方法Others(英)</option>
 									<option value="42" {if ('42' == form.summary_key3)}selected{/if}>過去の実績年実績</option>
 									<option value="43" {if ('43' == form.summary_key3)}selected{/if}>過去の実績来場者数</option>
 									<option value="44" {if ('44' == form.summary_key3)}selected{/if}>過去の実績海外来場者数</option>
@@ -1430,14 +1430,14 @@
 									<option value="54" {if ('54' == form.summary_key3)}selected{/if}>主催者・問合せ先住所</option>
 									<option value="55" {if ('55' == form.summary_key3)}selected{/if}>主催者・問合せ先担当部課</option>
 									<option value="56" {if ('56' == form.summary_key3)}selected{/if}>主催者・問合せ先担当者</option>
-									<option value="57" {if ('57' == form.summary_key3)}selected{/if}>日本国内の照会先名称(日)</option>
-									<option value="58" {if ('58' == form.summary_key3)}selected{/if}>日本国内の照会先名称(英)</option>
-									<option value="59" {if ('59' == form.summary_key3)}selected{/if}>日本国内の照会先TEL</option>
-									<option value="60" {if ('60' == form.summary_key3)}selected{/if}>日本国内の照会先FAX</option>
-									<option value="61" {if ('61' == form.summary_key3)}selected{/if}>日本国内の照会先Email</option>
-									<option value="62" {if ('62' == form.summary_key3)}selected{/if}>日本国内の照会先住所</option>
-									<option value="63" {if ('63' == form.summary_key3)}selected{/if}>日本国内の照会先担当部課</option>
-									<option value="64" {if ('64' == form.summary_key3)}selected{/if}>日本国内の照会先担当者</option>
+									<option value="57" {if ('57' == form.summary_key3)}selected{/if}>日本国内の連絡先名称(日)</option>
+									<option value="58" {if ('58' == form.summary_key3)}selected{/if}>日本国内の連絡先名称(英)</option>
+									<option value="59" {if ('59' == form.summary_key3)}selected{/if}>日本国内の連絡先TEL</option>
+									<option value="60" {if ('60' == form.summary_key3)}selected{/if}>日本国内の連絡先FAX</option>
+									<option value="61" {if ('61' == form.summary_key3)}selected{/if}>日本国内の連絡先Email</option>
+									<option value="62" {if ('62' == form.summary_key3)}selected{/if}>日本国内の連絡先住所</option>
+									<option value="63" {if ('63' == form.summary_key3)}selected{/if}>日本国内の連絡先担当部課</option>
+									<option value="64" {if ('64' == form.summary_key3)}selected{/if}>日本国内の連絡先担当者</option>
 									<option value="65" {if ('65' == form.summary_key3)}selected{/if}>見本市レポートURL</option>
 									<option value="66" {if ('66' == form.summary_key3)}selected{/if}>展示会に係わる画像名称1</option>
 									<option value="67" {if ('67' == form.summary_key3)}selected{/if}>展示会に係わる画像名称2</option>
@@ -1502,9 +1502,9 @@
 									<option value="36" {if ('36' == form.summary_key4)}selected{/if}>会場名(英)</option>
 									<option value="37" {if ('37' == form.summary_key4)}selected{/if}>開催予定規模</option>
 									<option value="38" {if ('38' == form.summary_key4)}selected{/if}>入場資格</option>
-									<option value="39" {if ('39' == form.summary_key4)}selected{/if}>チケットの入手方法</option>
-									<option value="40" {if ('40' == form.summary_key4)}selected{/if}>チケットの入手方法その他(日)</option>
-									<option value="41" {if ('41' == form.summary_key4)}selected{/if}>チケットの入手方法Others(英)</option>
+									<option value="39" {if ('39' == form.summary_key4)}selected{/if}>入場方法</option>
+									<option value="40" {if ('40' == form.summary_key4)}selected{/if}>入場方法その他(日)</option>
+									<option value="41" {if ('41' == form.summary_key4)}selected{/if}>入場方法Others(英)</option>
 									<option value="42" {if ('42' == form.summary_key4)}selected{/if}>過去の実績年実績</option>
 									<option value="43" {if ('43' == form.summary_key4)}selected{/if}>過去の実績来場者数</option>
 									<option value="44" {if ('44' == form.summary_key4)}selected{/if}>過去の実績海外来場者数</option>
@@ -1520,14 +1520,14 @@
 									<option value="54" {if ('54' == form.summary_key4)}selected{/if}>主催者・問合せ先住所</option>
 									<option value="55" {if ('55' == form.summary_key4)}selected{/if}>主催者・問合せ先担当部課</option>
 									<option value="56" {if ('56' == form.summary_key4)}selected{/if}>主催者・問合せ先担当者</option>
-									<option value="57" {if ('57' == form.summary_key4)}selected{/if}>日本国内の照会先名称(日)</option>
-									<option value="58" {if ('58' == form.summary_key4)}selected{/if}>日本国内の照会先名称(英)</option>
-									<option value="59" {if ('59' == form.summary_key4)}selected{/if}>日本国内の照会先TEL</option>
-									<option value="60" {if ('60' == form.summary_key4)}selected{/if}>日本国内の照会先FAX</option>
-									<option value="61" {if ('61' == form.summary_key4)}selected{/if}>日本国内の照会先Email</option>
-									<option value="62" {if ('62' == form.summary_key4)}selected{/if}>日本国内の照会先住所</option>
-									<option value="63" {if ('63' == form.summary_key4)}selected{/if}>日本国内の照会先担当部課</option>
-									<option value="64" {if ('64' == form.summary_key4)}selected{/if}>日本国内の照会先担当者</option>
+									<option value="57" {if ('57' == form.summary_key4)}selected{/if}>日本国内の連絡先名称(日)</option>
+									<option value="58" {if ('58' == form.summary_key4)}selected{/if}>日本国内の連絡先名称(英)</option>
+									<option value="59" {if ('59' == form.summary_key4)}selected{/if}>日本国内の連絡先TEL</option>
+									<option value="60" {if ('60' == form.summary_key4)}selected{/if}>日本国内の連絡先FAX</option>
+									<option value="61" {if ('61' == form.summary_key4)}selected{/if}>日本国内の連絡先Email</option>
+									<option value="62" {if ('62' == form.summary_key4)}selected{/if}>日本国内の連絡先住所</option>
+									<option value="63" {if ('63' == form.summary_key4)}selected{/if}>日本国内の連絡先担当部課</option>
+									<option value="64" {if ('64' == form.summary_key4)}selected{/if}>日本国内の連絡先担当者</option>
 									<option value="65" {if ('65' == form.summary_key4)}selected{/if}>見本市レポートURL</option>
 									<option value="66" {if ('66' == form.summary_key4)}selected{/if}>展示会に係わる画像名称1</option>
 									<option value="67" {if ('67' == form.summary_key4)}selected{/if}>展示会に係わる画像名称2</option>
@@ -1592,9 +1592,9 @@
 									<option value="36" {if ('36' == form.summary_key5)}selected{/if}>会場名(英)</option>
 									<option value="37" {if ('37' == form.summary_key5)}selected{/if}>開催予定規模</option>
 									<option value="38" {if ('38' == form.summary_key5)}selected{/if}>入場資格</option>
-									<option value="39" {if ('39' == form.summary_key5)}selected{/if}>チケットの入手方法</option>
-									<option value="40" {if ('40' == form.summary_key5)}selected{/if}>チケットの入手方法その他(日)</option>
-									<option value="41" {if ('41' == form.summary_key5)}selected{/if}>チケットの入手方法Others(英)</option>
+									<option value="39" {if ('39' == form.summary_key5)}selected{/if}>入場方法</option>
+									<option value="40" {if ('40' == form.summary_key5)}selected{/if}>入場方法その他(日)</option>
+									<option value="41" {if ('41' == form.summary_key5)}selected{/if}>入場方法Others(英)</option>
 									<option value="42" {if ('42' == form.summary_key5)}selected{/if}>過去の実績年実績</option>
 									<option value="43" {if ('43' == form.summary_key5)}selected{/if}>過去の実績来場者数</option>
 									<option value="44" {if ('44' == form.summary_key5)}selected{/if}>過去の実績海外来場者数</option>
@@ -1610,14 +1610,14 @@
 									<option value="54" {if ('54' == form.summary_key5)}selected{/if}>主催者・問合せ先住所</option>
 									<option value="55" {if ('55' == form.summary_key5)}selected{/if}>主催者・問合せ先担当部課</option>
 									<option value="56" {if ('56' == form.summary_key5)}selected{/if}>主催者・問合せ先担当者</option>
-									<option value="57" {if ('57' == form.summary_key5)}selected{/if}>日本国内の照会先名称(日)</option>
-									<option value="58" {if ('58' == form.summary_key5)}selected{/if}>日本国内の照会先名称(英)</option>
-									<option value="59" {if ('59' == form.summary_key5)}selected{/if}>日本国内の照会先TEL</option>
-									<option value="60" {if ('60' == form.summary_key5)}selected{/if}>日本国内の照会先FAX</option>
-									<option value="61" {if ('61' == form.summary_key5)}selected{/if}>日本国内の照会先Email</option>
-									<option value="62" {if ('62' == form.summary_key5)}selected{/if}>日本国内の照会先住所</option>
-									<option value="63" {if ('63' == form.summary_key5)}selected{/if}>日本国内の照会先担当部課</option>
-									<option value="64" {if ('64' == form.summary_key5)}selected{/if}>日本国内の照会先担当者</option>
+									<option value="57" {if ('57' == form.summary_key5)}selected{/if}>日本国内の連絡先名称(日)</option>
+									<option value="58" {if ('58' == form.summary_key5)}selected{/if}>日本国内の連絡先名称(英)</option>
+									<option value="59" {if ('59' == form.summary_key5)}selected{/if}>日本国内の連絡先TEL</option>
+									<option value="60" {if ('60' == form.summary_key5)}selected{/if}>日本国内の連絡先FAX</option>
+									<option value="61" {if ('61' == form.summary_key5)}selected{/if}>日本国内の連絡先Email</option>
+									<option value="62" {if ('62' == form.summary_key5)}selected{/if}>日本国内の連絡先住所</option>
+									<option value="63" {if ('63' == form.summary_key5)}selected{/if}>日本国内の連絡先担当部課</option>
+									<option value="64" {if ('64' == form.summary_key5)}selected{/if}>日本国内の連絡先担当者</option>
 									<option value="65" {if ('65' == form.summary_key5)}selected{/if}>見本市レポートURL</option>
 									<option value="66" {if ('66' == form.summary_key5)}selected{/if}>展示会に係わる画像名称1</option>
 									<option value="67" {if ('67' == form.summary_key5)}selected{/if}>展示会に係わる画像名称2</option>

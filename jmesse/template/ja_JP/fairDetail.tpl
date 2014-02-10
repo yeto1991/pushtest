@@ -188,7 +188,7 @@
 											<td>
 												入場資格:{$app.fair_detail.open_to_name}<br />
 												{if ('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2 || '1' == $app.fair_detail.admission_ticket_3 || '1' == $app.fair_detail.admission_ticket_4 || '' != $app.fair_detail.other_admission_ticket_jp)}
-												チケットの入手方法:
+												入場方法:
 													{if ('1' == $app.fair_detail.admission_ticket_1)}
 													登録の必要なし
 													{/if}
@@ -196,19 +196,19 @@
 													/
 													{/if}
 													{if ('1' == $app.fair_detail.admission_ticket_2)}
-													WEBからの事前登録
+													公式ウェブサイトからの事前登録
 													{/if}
 													{if (('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2) && '1' == $app.fair_detail.admission_ticket_3)}
 													/
 													{/if}
 													{if ('1' == $app.fair_detail.admission_ticket_3)}
-													主催者・日本の登録先へ問合せ
+													主催者もしくは日本国内の連絡先への問い合わせ
 													{/if}
 													{if (('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2 || '1' == $app.fair_detail.admission_ticket_3) && '1' == $app.fair_detail.admission_ticket_4)}
 													/
 													{/if}
 													{if ('1' == $app.fair_detail.admission_ticket_4)}
-													当日会場で入手
+													当日会場でチケット入手
 													{/if}
 													{if (('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2 || '1' == $app.fair_detail.admission_ticket_3 || '1' == $app.fair_detail.admission_ticket_4) && '' != $app.fair_detail.other_admission_ticket_jp)}
 													/
@@ -351,7 +351,7 @@
 													<br/>
 												{/if}
 												{if ('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors)}
-												出展者数 : {$app.fair_detail.total_number_of_exhibitors} 社
+												出展社数 : {$app.fair_detail.total_number_of_exhibitors} 社
 												{/if}
 												{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors
 													&& $app.fair_detail.number_of_foreign_exhibitors <= $app.fair_detail.total_number_of_exhibitors)}

@@ -966,11 +966,11 @@
 *}
 
 						<tr>
-							<td nowrap rowspan="1">チケットの入手方法 <font color="#CC3333">●</font></td>
-							<!-- チケットの入手方法(日) -->
-							<!-- チケットの入手方法(英) -->
-							<!-- その他のチケットの入手方法(日) -->
-							<!-- その他のチケットの入手方法(英) -->
+							<td nowrap rowspan="1">入場方法 <font color="#CC3333">●</font></td>
+							<!-- 入場方法(日) -->
+							<!-- 入場方法(英) -->
+							<!-- その他の入場方法(日) -->
+							<!-- その他の入場方法(英) -->
 {*
 							<td bgcolor="#FFFFAA">この項目の選択はユーザ使用言語フラグで選択（日本語・英語）した方を修正して下さい。</td>
 						</tr>
@@ -980,11 +980,11 @@
 							<table>
 							<tr>
 							<td><input type="checkbox" name="admission_ticket_1_jp" id="admission_ticket_1_jp" value="1" {if ("1" == $form.admission_ticket_1_jp)}checked{/if} />登録の必要なし</td>
-							<td><input type="checkbox" name="admission_ticket_2_jp" id="admission_ticket_2_jp" value="1" {if ("1" == $form.admission_ticket_2_jp)}checked{/if} />WEBからの事前登録</td>
+							<td><input type="checkbox" name="admission_ticket_2_jp" id="admission_ticket_2_jp" value="1" {if ("1" == $form.admission_ticket_2_jp)}checked{/if} />公式ウェブサイトからの事前登録</td>
 							</tr>
 							<tr>
-							<td><input type="checkbox" name="admission_ticket_3_jp" id="admission_ticket_3_jp" value="1" {if ("1" == $form.admission_ticket_3_jp)}checked{/if} />主催者・日本の照会先へ問い合わせ</td>
-							<td><input type="checkbox" name="admission_ticket_4_jp" id="admission_ticket_4_jp" value="1" {if ("1" == $form.admission_ticket_4_jp)}checked{/if} />当日会場で入手</td>
+							<td><input type="checkbox" name="admission_ticket_3_jp" id="admission_ticket_3_jp" value="1" {if ("1" == $form.admission_ticket_3_jp)}checked{/if} />主催者もしくは日本国内の連絡先への問い合わせ</td>
+							<td><input type="checkbox" name="admission_ticket_4_jp" id="admission_ticket_4_jp" value="1" {if ("1" == $form.admission_ticket_4_jp)}checked{/if} />当日会場でチケット入手</td>
 							</tr>
 							<tr>
 							<td colspan="2"><input type="checkbox" name="admission_ticket_5_jp" id="admission_ticket_5_jp" value="1" {if ("1" == $form.admission_ticket_5_jp)}checked{/if} />その他 <input type="text" name="other_admission_ticket_jp" id="other_admission_ticket_jp" value="{$form.other_admission_ticket_jp}" maxlenth="500" size="100" /></td>
@@ -1039,7 +1039,7 @@
 										<td>&nbsp;</td>
 									</tr>
 									<tr>
-										<td>出展者数</td>
+										<td>出展社数</td>
 										<td><input type="text" name="total_number_of_exhibitors"  id="total_number_of_exhibitors" value="{$form.total_number_of_exhibitors}" maxlength="10" size="10"> 社</td>
 										<td>（うち海外から</td>
 										<td><input type="text" name="number_of_foreign_exhibitors" id="number_of_foreign_exhibitors" value="{$form.number_of_foreign_exhibitors}" maxlength="10" size="10"> 社）</td>
@@ -1053,7 +1053,7 @@
 										<td>承認機関</td>
 										<td colspan="4">英：<input type="text" name="spare_field1" id="spare_field1" value="{$form.spare_field1}" maxlength="255" size="100" /></td>
 									</tr>
-								</table> <font size="-1">■出展者数の多いデータが検索結果で上位に表示されます。</font>
+								</table> <font size="-1">■出展社数の多いデータが検索結果で上位に表示されます。</font>
 							</td>
 						</tr>
 
@@ -1104,7 +1104,7 @@
 						</tr>
 
 						<tr>
-							<td nowrap>日本国内の照会先</td>
+							<td nowrap>日本国内の連絡先</td>
 							<!-- 在日代理店名(日) -->
 							<!-- 在日代理店名(英) -->
 							<!-- 在日代理店ＴＥＬ -->

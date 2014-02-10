@@ -122,7 +122,7 @@
 							<td>
 								Eligibility:{$app.fair_detail.open_to_name}<br />
 								{if ('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2 || '1' == $app.fair_detail.admission_ticket_3 || '1' == $app.fair_detail.admission_ticket_4 || '' != $app.fair_detail.other_admission_ticket_en)}
-								Method of obtaining tickets:
+								Method of admission:
 									{if ('1' == $app.fair_detail.admission_ticket_1)}
 									Free
 									{/if}
@@ -142,7 +142,7 @@
 									/
 									{/if}
 									{if ('1' == $app.fair_detail.admission_ticket_4)}
-									Available at event
+									Tickets available at event
 									{/if}
 									{if (('1' == $app.fair_detail.admission_ticket_1 || '1' == $app.fair_detail.admission_ticket_2 || '1' == $app.fair_detail.admission_ticket_3 || '1' == $app.fair_detail.admission_ticket_4) && '' != $app.fair_detail.other_admission_ticket_en)}
 									/
