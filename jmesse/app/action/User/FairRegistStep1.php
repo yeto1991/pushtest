@@ -687,7 +687,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_1' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX, // Form type
-			'name'        => 'チケットの入手方法(登録の必要なし)', // Display name
+			'name'        => '入場方法(登録の必要なし)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -700,7 +700,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_2' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(WEBからの事前登録)', // Display name
+			'name'        => '入場方法(公式ウェブサイトからの事前登録)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -713,7 +713,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_3' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(主催者・日本の照会先へ問い合わせ)', // Display name
+			'name'        => '入場方法(主催者もしくは日本国内の連絡先への問い合わせ)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -726,7 +726,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_4' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(当日会場で入手)', // Display name
+			'name'        => '入場方法(当日会場でチケット入手)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -739,7 +739,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'admission_ticket_5' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_CHECKBOX,  // Form type
-			'name'        => 'チケットの入手方法(その他)',        // Display name
+			'name'        => '入場方法(その他)',        // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => null,            // Maximum value
@@ -752,7 +752,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'other_admission_ticket_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'チケットの入手方法(その他)', // Display name
+			'name'        => '入場方法(その他)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value
@@ -1112,7 +1112,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_jp' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(名称(日))', // Display name
+			'name'        => '日本国内の連絡先(名称(日))', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1125,7 +1125,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_addr' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(住所)', // Display name
+			'name'        => '日本国内の連絡先(住所)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1138,7 +1138,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_div' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(担当部課)', // Display name
+			'name'        => '日本国内の連絡先(担当部課)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1151,7 +1151,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_pers' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(担当者)', // Display name
+			'name'        => '日本国内の連絡先(担当者)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1164,7 +1164,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_tel' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(TEL)', // Display name
+			'name'        => '日本国内の連絡先(TEL)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1177,7 +1177,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_fax' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(FAX)', // Display name
+			'name'        => '日本国内の連絡先(FAX)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 100,             // Maximum value
@@ -1190,7 +1190,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'agency_in_japan_email' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => '日本国内の照会先(Email)', // Display name
+			'name'        => '日本国内の連絡先(Email)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 255,             // Maximum value
@@ -1309,7 +1309,7 @@ class Jmesse_Form_UserFairRegistStep1 extends Jmesse_ActionForm
 		'other_admission_ticket_en' => array(
 			'type'        => VAR_TYPE_STRING, // Input type
 			'form_type'   => FORM_TYPE_TEXT,  // Form type
-			'name'        => 'Admission ticket(other)', // Display name
+			'name'        => 'Method of admission(other)', // Display name
 			'required'    => false,           // Required Option(true/false)
 			'min'         => null,            // Minimum value
 			'max'         => 500,             // Maximum value

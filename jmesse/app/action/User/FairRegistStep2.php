@@ -162,18 +162,18 @@ class Jmesse_Action_UserFairRegistStep2 extends Jmesse_ActionClass
 			$this->ae->add('open_to', '入場資格が選択されていません');
 		}
 
-		// チケットの入手方法
+		// 入場方法
 		if ('1' != $this->af->get('admission_ticket_1')
 			&& '1' != $this->af->get('admission_ticket_2')
 			&& '1' != $this->af->get('admission_ticket_3')
 			&& '1' != $this->af->get('admission_ticket_4')
 			&& '1' != $this->af->get('admission_ticket_5')
 			&& '' == $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('admission_ticket_1', 'チケットの入手方法が選択されていません');
+			$this->ae->add('admission_ticket_1', '入場方法が選択されていません');
 		} elseif ('1' == $this->af->get('admission_ticket_5') && '' == $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が入力されていません');
+			$this->ae->add('other_admission_ticket_jp', '入場方法(その他)が入力されていません');
 		} elseif ('1' != $this->af->get('admission_ticket_5') && '' != $this->af->get('other_admission_ticket_jp')) {
-			$this->ae->add('other_admission_ticket_jp', 'チケットの入手方法(その他)が選択されていません');
+			$this->ae->add('other_admission_ticket_jp', '入場方法(その他)が選択されていません');
 		}
 
 		// 出展申込締切日

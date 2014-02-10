@@ -87,7 +87,7 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			}
 		}
 
-		// 総出展者数
+		// 総出展社数
 		if ('' != $this->af->get('total_number_of_exhibitors')
 			&& 0 < $this->af->get('total_number_of_exhibitors')
 			&& '' != $this->af->get('number_of_foreign_exhibitors')
@@ -226,15 +226,15 @@ class Jmesse_Action_UserFairRegistStep3 extends Jmesse_ActionClass
 			}
 		}
 
-		// 日本国内の照会先
+		// 日本国内の連絡先
 		if ('' != $this->af->get('agency_in_japan_email')) {
 			if (!strpos($this->af->get('agency_in_japan_email'), '@')
 				|| 0 === strpos($this->af->get('agency_in_japan_email'), '@')
 				|| strlen($this->af->get('agency_in_japan_email')) - 1 === strpos($this->af->get('agency_in_japan_email'), '@')) {
-				$this->ae->add('agency_in_japan_email', '日本国内の照会先(E-Mail)が不正です');
+				$this->ae->add('agency_in_japan_email', '日本国内の連絡先(E-Mail)が不正です');
 			}
 			if (1 != substr_count($this->af->get('agency_in_japan_email'), '@')) {
-				$this->ae->add('agency_in_japan_email', '日本国内の照会先(E-Mail)が不正です');
+				$this->ae->add('agency_in_japan_email', '日本国内の連絡先(E-Mail)が不正です');
 			}
 		}
 

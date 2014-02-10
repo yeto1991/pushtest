@@ -134,12 +134,12 @@ class Jmesse_Action_UserFairRegistDo extends Jmesse_ActionClass
 // 				$this->ae->add('error', 'Transportation が入力されていません');
 // 			}
 
-			// Admission ticket(other)
+			// Method of admission(other)
 			if ('1' != $regist_param_1['admission_ticket_5'] && '' != $this->af->get('other_admission_ticket_en')) {
-				$this->ae->add('other_admission_ticket_en', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされていません');
+				$this->ae->add('other_admission_ticket_en', 'Method of admission(other)は「入場方法」でその他にチェックされていません');
 			}
 			if ('1' == $regist_param_1['admission_ticket_5'] && '' == $this->af->get('other_admission_ticket_en')) {
-				$this->ae->add('other_admission_ticket_en', 'Admission ticket(other)は「チケットの入手方法」でその他にチェックされています');
+				$this->ae->add('other_admission_ticket_en', 'Method of admission(other)は「入場方法」でその他にチェックされています');
 			}
 
 			// MOD-S 2012.02.07 主催者(英)Step3へ移動対応
