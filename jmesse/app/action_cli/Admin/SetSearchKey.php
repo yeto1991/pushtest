@@ -186,18 +186,18 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		$code = $jm_code_m_mgr->getCode('004', $jm_fair->get('open_to'), '000', '000');
 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
-		// チケットの入手方法
+		// 入場方法
 		if ('1' == $jm_fair->get('admission_ticket_1')) {
 			$search_key .= '登録の必要なし ';
 		}
 		if ('1' == $jm_fair->get('admission_ticket_2')) {
-			$search_key .= 'WEBからの事前登録 ';
+			$search_key .= '公式ウェブサイトからの事前登録 ';
 		}
 		if ('1' == $jm_fair->get('admission_ticket_3')) {
-			$search_key .= '主催者・日本の照会先へ問い合わせ ';
+			$search_key .= '主催者もしくは日本国内の連絡先への問い合わせ ';
 		}
 		if ('1' == $jm_fair->get('admission_ticket_3')) {
-			$search_key .= '当日会場で入手 ';
+			$search_key .= '当日会場でチケット入手 ';
 		}
 		$search_key .= $jm_fair->get('other_admission_ticket_jp').' ';
 		$search_key .= $jm_fair->get('other_admission_ticket_en').' ';
@@ -220,7 +220,7 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		$search_key .= $jm_fair->get('organizer_tel').' ';
 		$search_key .= $jm_fair->get('organizer_fax').' ';
 		$search_key .= $jm_fair->get('organizer_email').' ';
-		// 日本国内の照会先
+		// 日本国内の連絡先
 		$search_key .= $jm_fair->get('agency_in_japan_jp').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_en').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_addr').' ';
@@ -318,7 +318,7 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		$code = $jm_code_m_mgr->getCode('004', $jm_fair->get('open_to'), '000', '000');
 		// 		$search_key .= $code['discription_jp'].' ';
 		$search_key .= $code['discription_en'].' ';
-		// チケットの入手方法
+		// 入場方法
 		if ('1' == $jm_fair->get('admission_ticket_1')) {
 			$search_key .= 'Free';
 		}
@@ -329,7 +329,7 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 			$search_key .= 'Contact organizer/agency in Japan';
 		}
 		if ('1' == $jm_fair->get('admission_ticket_3')) {
-			$search_key .= 'Available at event';
+			$search_key .= 'Tickets available at event';
 		}
 		// 		$search_key .= $jm_fair->get('other_admission_ticket_jp').' ';
 		$search_key .= $jm_fair->get('other_admission_ticket_en').' ';
@@ -352,7 +352,7 @@ class Jmesse_Cli_Action_AdminSetSearchKey extends Jmesse_ActionClass
 		$search_key .= $jm_fair->get('organizer_tel').' ';
 		$search_key .= $jm_fair->get('organizer_fax').' ';
 		$search_key .= $jm_fair->get('organizer_email').' ';
-		// 日本国内の照会先
+		// 日本国内の連絡先
 		// 		$search_key .= $jm_fair->get('agency_in_japan_jp').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_en').' ';
 		$search_key .= $jm_fair->get('agency_in_japan_addr').' ';
