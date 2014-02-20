@@ -286,7 +286,7 @@
 									<br/>
 								{/if}
 								{if ('' != $app.fair_detail.total_number_of_exhibitors && 0 < $app.fair_detail.total_number_of_exhibitors)}
-								Total number of exhibitors :{$app.fair_detail.total_number_of_exhibitors} 社
+								Total number of exhibitors :{$app.fair_detail.total_number_of_exhibitors}
 								{/if}
 								{if ('' != $app.fair_detail.number_of_foreign_exhibitors && 0 < $app.fair_detail.number_of_foreign_exhibitors
 									&& $app.fair_detail.number_of_foreign_exhibitors <= $app.fair_detail.total_number_of_exhibitors)}
