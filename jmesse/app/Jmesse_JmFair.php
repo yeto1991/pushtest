@@ -1750,6 +1750,43 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 	}
 
 	/**
+	 * 見本市情報(承認/未削除/Web表示する 対象)の件数を取得する。
+	 *
+	 * @return int 件数
+	 */
+	function getCountFrontFairs() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		$sql = "select count(*) cnt from jm_fair where web_display_type = ? and  confirm_flag = ? and del_flg = ? ";
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array('1','1','0');
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
+
+	/**
 	 * 特定ユーザの見本市情報の件数を取得する。
 	 *
 	 * @param string $user_id ユーザID

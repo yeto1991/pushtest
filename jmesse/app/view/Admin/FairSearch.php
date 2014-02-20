@@ -26,6 +26,9 @@ class Jmesse_View_AdminFairSearch extends Jmesse_ViewClass
 		// Fairの件数を取得
 		$this->af->setApp('fair_count', $this->backend->getManager('JmFair')->getCountAll());
 
+		// Fairの件数を取得(承認/未削除/Web表示する 対象)
+		$this->af->setApp('fair_count_front_fairs', $this->backend->getManager('JmFair')->getCountFrontFairs());
+
 		// 開催頻度
 		$this->af->setApp('frequency', $this->backend->getManager('JmCodeM')->getFrequencyList());
 

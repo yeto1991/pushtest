@@ -8,7 +8,10 @@
 <br/>
 {/if}
 {if ("1" == $session.auth_fair)}
-<b>展示会情報({$app.fair_count})</b><br/>
+<b>展示会情報</b><br/>
+総件数：{$app.fair_count}<br/>
+一般公開件数：{$app.fair_count_front_fairs}<br/>
+<br/>
 ・<a href="{$config.url}?action_admin_fairRegist=true">新規展示会登録</a><br/>
 ・<a href="{$config.url}?action_admin_fairSearch=true">展示会検索</a><br/>
 ・<a href="{$config.url}?action_admin_fairList=true&type=u">展示会未承認一覧表示</a><br/>
