@@ -104,33 +104,42 @@
 
 					<table border="1">
 						<tr>
-							<th nowrap>選択</th>
-							<th nowrap>見本市番号</th>
+							<th nowrap></th>
+							<th nowrap>No.</th>
 							<th nowrap>見本市名</th>
 							<th nowrap>見本市略称</th>
 							<th nowrap>会期</th>
 							<th nowrap>開催地</th>
 							<th nowrap>Eメール</th>
-							<th nowrap>申請年月日</th>
-							<th nowrap>登録日(承認日)</th>
+							<th nowrap>申請日</th>
+							<th nowrap>登録日</th>
 							<th nowrap>否認コメント</th>
 						</tr>
 
 						{section name=it loop=$app.jm_fair_list}
 						<tr style="word-break: break-all;">
 							<td align="center"><input type="checkbox" name="check_mihon_no[]" id="check_mihon_no[]" value="{$app.jm_fair_list[it].mihon_no}"></td>
-							<td align="right">{$app.jm_fair_list[it].mihon_no}</td>
+							<td nowrap><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].mihon_no}</a></td>
 							{if ('' != $app.jm_fair_list[it].fair_title_jp)}
-							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].fair_title_jp}</a></td>
+								<td>{$app.jm_fair_list[it].fair_title_jp}</td>
 							{else}
-							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].fair_title_en}</a></td>
+								<td>{$app.jm_fair_list[it].fair_title_en}</td>
 							{/if}
-							<td><a href="{$config.url}?action_admin_fairDetail=true&mihon_no={$app.jm_fair_list[it].mihon_no}&type={$form.type}&page={$form.page}">{$app.jm_fair_list[it].abbrev_title}</a></td>
-							<td nowrap>{$app.jm_fair_list[it].date_from_yyyy}/{$app.jm_fair_list[it].date_from_mm}/{$app.jm_fair_list[it].date_from_dd} - {$app.jm_fair_list[it].date_to_yyyy}/{$app.jm_fair_list[it].date_to_mm}/{$app.jm_fair_list[it].date_to_dd}</td>
-							<td>{$app.jm_fair_list[it].region_name}/{$app.jm_fair_list[it].country_name}/{$app.jm_fair_list[it].city_name}/{$app.jm_fair_list[it].other_city_jp}</td>
+							<td>{$app.jm_fair_list[it].abbrev_title}</td>
+							<td nowrap>
+								{$app.jm_fair_list[it].date_from_yyyy}/{$app.jm_fair_list[it].date_from_mm}/{$app.jm_fair_list[it].date_from_dd}<br/><br/>
+								{$app.jm_fair_list[it].date_to_yyyy}/{$app.jm_fair_list[it].date_to_mm}/{$app.jm_fair_list[it].date_to_dd}
+							</td>
+							<td nowrap>
+								{$app.jm_fair_list[it].region_name}<br/>{$app.jm_fair_list[it].country_name}<br/>{$app.jm_fair_list[it].city_name}<br/>
+								{if ('' != $app.jm_fair_list[it].other_city_jp)}
+									{$app.jm_fair_list[it].other_city_jp}</td>
+								{else}
+									{$app.jm_fair_list[it].other_city_en}</td>
+								{/if}
 							<td>{$app.jm_fair_list[it].email}</td>
-							<td>{$app.jm_fair_list[it].date_of_application}</td>
-							<td>{$app.jm_fair_list[it].date_of_registration}</td>
+							<td nowrap>{$app.jm_fair_list[it].date_of_application}</td>
+							<td nowrap>{$app.jm_fair_list[it].date_of_registration}</td>
 							<td>{$app.jm_fair_list[it].negate_comment}</td>
 						</tr>
 						{/section}
@@ -148,75 +157,75 @@
 						<dd>
 							<select name="sort_1" id="sort_1">
 								<option value="" {if ('' == $form.sort_1)}selected{/if}>ソートなし</option>
-								<option value="0" {if ('0' == $form.sort_1)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_1)}selected{/if}>見本市名
-								<option value="2" {if ('2' == $form.sort_1)}selected{/if}>見本市略称
-								<option value="3" {if ('3' == $form.sort_1)}selected{/if}>会期
-								<option value="4" {if ('4' == $form.sort_1)}selected{/if}>開催地
-								<option value="5" {if ('5' == $form.sort_1)}selected{/if}>Eメール
-								<option value="6" {if ('6' == $form.sort_1)}selected{/if}>申請年月日
-								<option value="7" {if ('7' == $form.sort_1)}selected{/if}>登録日(承認日)
-								<option value="8" {if ('8' == $form.sort_1)}selected{/if}>否認コメント
+								<option value="0" {if ('0' == $form.sort_1)}selected{/if}>No.</option>
+								<option value="1" {if ('1' == $form.sort_1)}selected{/if}>見本市名</option>
+								<option value="2" {if ('2' == $form.sort_1)}selected{/if}>見本市略称</option>
+								<option value="3" {if ('3' == $form.sort_1)}selected{/if}>会期</option>
+								<option value="4" {if ('4' == $form.sort_1)}selected{/if}>開催地</option>
+								<option value="5" {if ('5' == $form.sort_1)}selected{/if}>Eメール</option>
+								<option value="6" {if ('6' == $form.sort_1)}selected{/if}>申請日</option>
+								<option value="7" {if ('7' == $form.sort_1)}selected{/if}>登録日</option>
+								<option value="8" {if ('8' == $form.sort_1)}selected{/if}>否認コメント</option>
 							</select>
 							<input type="radio" name="sort_cond_1" id="sort_cond_1" value="0" {if ('0' == $form.sort_cond_1 || '' == $form.sort_cond_1)}checked{/if}/>昇順
 							<input type="radio" name="sort_cond_1" id="sort_cond_1" value="1" {if ('1' == $form.sort_cond_1)}checked{/if}/>降順
 						<dd>
 							<select name="sort_2" id="sort_2">
 								<option value="" {if ('' == $form.sort_2)}selected{/if}>ソートなし</option>
-								<option value="0" {if ('0' == $form.sort_2)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_2)}selected{/if}>見本市名
-								<option value="2" {if ('2' == $form.sort_2)}selected{/if}>見本市略称
-								<option value="3" {if ('3' == $form.sort_2)}selected{/if}>会期
-								<option value="4" {if ('4' == $form.sort_2)}selected{/if}>開催地
-								<option value="5" {if ('5' == $form.sort_2)}selected{/if}>Eメール
-								<option value="6" {if ('6' == $form.sort_2)}selected{/if}>申請年月日
-								<option value="7" {if ('7' == $form.sort_2)}selected{/if}>登録日(承認日)
-								<option value="8" {if ('8' == $form.sort_2)}selected{/if}>否認コメント
+								<option value="0" {if ('0' == $form.sort_2)}selected{/if}>No.</option>
+								<option value="1" {if ('1' == $form.sort_2)}selected{/if}>見本市名</option>
+								<option value="2" {if ('2' == $form.sort_2)}selected{/if}>見本市略称</option>
+								<option value="3" {if ('3' == $form.sort_2)}selected{/if}>会期</option>
+								<option value="4" {if ('4' == $form.sort_2)}selected{/if}>開催地</option>
+								<option value="5" {if ('5' == $form.sort_2)}selected{/if}>Eメール</option>
+								<option value="6" {if ('6' == $form.sort_2)}selected{/if}>申請日</option>
+								<option value="7" {if ('7' == $form.sort_2)}selected{/if}>登録日</option>
+								<option value="8" {if ('8' == $form.sort_2)}selected{/if}>否認コメント</option>
 							</select>
 							<input type="radio" name="sort_cond_2" id="sort_cond_2" value="0" {if ('0' == $form.sort_cond_2 || '' == $form.sort_cond_2)}checked{/if}/>昇順
 							<input type="radio" name="sort_cond_2" id="sort_cond_2" value="1" {if ('1' == $form.sort_cond_2)}checked{/if}/>降順
 						<dd>
 							<select name="sort_3" id="sort_3">
 								<option value="" {if ('' == $form.sort_3)}selected{/if}>ソートなし</option>
-								<option value="0" {if ('0' == $form.sort_3)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_3)}selected{/if}>見本市名
-								<option value="2" {if ('2' == $form.sort_3)}selected{/if}>見本市略称
-								<option value="3" {if ('3' == $form.sort_3)}selected{/if}>会期
-								<option value="4" {if ('4' == $form.sort_3)}selected{/if}>開催地
-								<option value="5" {if ('5' == $form.sort_3)}selected{/if}>Eメール
-								<option value="6" {if ('6' == $form.sort_3)}selected{/if}>申請年月日
-								<option value="7" {if ('7' == $form.sort_3)}selected{/if}>登録日(承認日)
-								<option value="8" {if ('8' == $form.sort_3)}selected{/if}>否認コメント
+								<option value="0" {if ('0' == $form.sort_3)}selected{/if}>No.</option>
+								<option value="1" {if ('1' == $form.sort_3)}selected{/if}>見本市名</option>
+								<option value="2" {if ('2' == $form.sort_3)}selected{/if}>見本市略称</option>
+								<option value="3" {if ('3' == $form.sort_3)}selected{/if}>会期</option>
+								<option value="4" {if ('4' == $form.sort_3)}selected{/if}>開催地</option>
+								<option value="5" {if ('5' == $form.sort_3)}selected{/if}>Eメール</option>
+								<option value="6" {if ('6' == $form.sort_3)}selected{/if}>申請日</option>
+								<option value="7" {if ('7' == $form.sort_3)}selected{/if}>登録日</option>
+								<option value="8" {if ('8' == $form.sort_3)}selected{/if}>否認コメント</option>
 							</select>
 							<input type="radio" name="sort_cond_3" id="sort_cond_3" value="0" {if ('0' == $form.sort_cond_3 || '' == $form.sort_cond_3)}checked{/if}/>昇順
 							<input type="radio" name="sort_cond_3" id="sort_cond_3" value="1" {if ('1' == $form.sort_cond_3)}checked{/if}/>降順
 						<dd>
 							<select name="sort_4" id="sort_4">
 								<option value="" {if ('' == $form.sort_4)}selected{/if}>ソートなし</option>
-								<option value="0" {if ('0' == $form.sort_4)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_4)}selected{/if}>見本市名
-								<option value="2" {if ('2' == $form.sort_4)}selected{/if}>見本市略称
-								<option value="3" {if ('3' == $form.sort_4)}selected{/if}>会期
-								<option value="4" {if ('4' == $form.sort_4)}selected{/if}>開催地
-								<option value="5" {if ('5' == $form.sort_4)}selected{/if}>Eメール
-								<option value="6" {if ('6' == $form.sort_4)}selected{/if}>申請年月日
-								<option value="7" {if ('7' == $form.sort_4)}selected{/if}>登録日(承認日)
-								<option value="8" {if ('8' == $form.sort_4)}selected{/if}>否認コメント
+								<option value="0" {if ('0' == $form.sort_4)}selected{/if}>No.</option>
+								<option value="1" {if ('1' == $form.sort_4)}selected{/if}>見本市名</option>
+								<option value="2" {if ('2' == $form.sort_4)}selected{/if}>見本市略称</option>
+								<option value="3" {if ('3' == $form.sort_4)}selected{/if}>会期</option>
+								<option value="4" {if ('4' == $form.sort_4)}selected{/if}>開催地</option>
+								<option value="5" {if ('5' == $form.sort_4)}selected{/if}>Eメール</option>
+								<option value="6" {if ('6' == $form.sort_4)}selected{/if}>申請日</option>
+								<option value="7" {if ('7' == $form.sort_4)}selected{/if}>登録日</option>
+								<option value="8" {if ('8' == $form.sort_4)}selected{/if}>否認コメント</option>
 							</select>
 							<input type="radio" name="sort_cond_4" id="sort_cond_4" value="0" {if ('0' == $form.sort_cond_4 || '' == $form.sort_cond_4)}checked{/if}/>昇順
 							<input type="radio" name="sort_cond_4" id="sort_cond_4" value="1" {if ('1' == $form.sort_cond_4)}checked{/if}/>降順
 						<dd>
 							<select name="sort_5" id="sort_5">
 								<option value="" {if ('' == $form.sort_5)}selected{/if}>ソートなし</option>
-								<option value="0" {if ('0' == $form.sort_5)}selected{/if}>見本市番号</option>
-								<option value="1" {if ('1' == $form.sort_5)}selected{/if}>見本市名
-								<option value="2" {if ('2' == $form.sort_5)}selected{/if}>見本市略称
-								<option value="3" {if ('3' == $form.sort_5)}selected{/if}>会期
-								<option value="4" {if ('4' == $form.sort_5)}selected{/if}>開催地
-								<option value="5" {if ('5' == $form.sort_5)}selected{/if}>Eメール
-								<option value="6" {if ('6' == $form.sort_5)}selected{/if}>申請年月日
-								<option value="7" {if ('7' == $form.sort_5)}selected{/if}>登録日(承認日)
-								<option value="8" {if ('8' == $form.sort_5)}selected{/if}>否認コメント
+								<option value="0" {if ('0' == $form.sort_5)}selected{/if}>No.</option>
+								<option value="1" {if ('1' == $form.sort_5)}selected{/if}>見本市名</option>
+								<option value="2" {if ('2' == $form.sort_5)}selected{/if}>見本市略称</option>
+								<option value="3" {if ('3' == $form.sort_5)}selected{/if}>会期</option>
+								<option value="4" {if ('4' == $form.sort_5)}selected{/if}>開催地</option>
+								<option value="5" {if ('5' == $form.sort_5)}selected{/if}>Eメール</option>
+								<option value="6" {if ('6' == $form.sort_5)}selected{/if}>申請日</option>
+								<option value="7" {if ('7' == $form.sort_5)}selected{/if}>登録日</option>
+								<option value="8" {if ('8' == $form.sort_5)}selected{/if}>否認コメント</option>
 							</select>
 							<input type="radio" name="sort_cond_5" id="sort_cond_5" value="0" {if ('0' == $form.sort_cond_5 || '' == $form.sort_cond_5)}checked{/if}/>昇順
 							<input type="radio" name="sort_cond_5" id="sort_cond_5" value="1" {if ('1' == $form.sort_cond_5)}checked{/if}/>降順
