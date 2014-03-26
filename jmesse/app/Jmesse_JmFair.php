@@ -1902,7 +1902,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
-		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.user_id, date_format(jf.date_of_application,'%Y/%m/%d') date_of_application, date_format(jf.date_of_registration,'%Y/%m/%d') date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
 
 		// 入力値
 		$data = array();
@@ -1984,7 +1984,7 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		// DBオブジェクト取得
 		$db = $this->backend->getDB();
 
-		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.user_id, jf.date_of_application, jf.date_of_registration, jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+		$sql = "select jf.confirm_flag, jf.mihon_no, jf.fair_title_jp, jf.fair_title_en, jf.abbrev_title, jf.date_from_yyyy, jf.date_from_mm, jf.date_from_dd, jf.date_to_yyyy, jf.date_to_mm, jf.date_to_dd, jf.region, jf.country, jf.city, jf.other_city_jp, jf.other_city_en, jf.user_id, date_format(jf.date_of_application,'%Y/%m/%d'), date_format(jf.date_of_registration,'%Y/%m/%d'), jf.negate_comment, ju.email, jcm_1.discription_jp region_name, jcm_2.discription_jp country_name, jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
 
 		// 入力値
 		$data = array();
@@ -2001,6 +2001,121 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 		}
 
 		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : select count(*) cnt from ('.$sql.$sql_ext.') t');
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare('select count(*) cnt from ('.$sql.$sql_ext.') t');
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// 結果の取り出し
+		$row =& $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
+
+	/**
+	 * 見本市登録チェックリスト取得（管理画面表示用）。
+	 *
+	 * @return array 見本市リスト
+	 */
+	function getFairCheckListSearch($ary_sort, $ary_sort_cond) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		$sql = "select jf.mihon_no,jf.fair_title_jp,jf.fair_title_en,jf.abbrev_title,jf.fair_url,jf.date_from_yyyy,jf.date_from_mm,jf.date_from_dd,jf.date_to_yyyy,jf.date_to_mm,jf.date_to_dd,jf.region,jf.country,jf.city,jf.other_city_jp,jf.other_city_en,jf.venue_jp,jf.venue_en,ju.email,ju.user_id,jf.organizer_jp,jf.organizer_en,jf.organizer_tel,jf.organizer_fax,jf.organizer_email,jf.agency_in_japan_jp,jf.note_for_system_manager, date_format(jf.date_of_application,'%Y/%m/%d') date_of_application, date_format(jf.date_of_registration,'%Y/%m/%d') date_of_registration ,jf.negate_comment,jcm_1.discription_jp region_name,jcm_2.discription_jp country_name,jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+
+		// 入力値
+		$data = array();
+
+		// where句の取得
+		$sql_ext =$this->_getWhere($data);
+
+		// sort
+		// 入力値を取得
+		$sql_sort = '';
+		for ($i = 0; $i < count($ary_sort); $i++) {
+			if ('' != $ary_sort[$i]) {
+				if ('' == $sql_sort) {
+					$sql_sort .= ' order by ';
+				} else {
+					$sql_sort .= ', ';
+				}
+				$sql_sort .= $this->sort_column[$ary_sort[$i]];
+				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
+			}
+		}
+		if ('' == $sql_sort) {
+			// 見本市名(日) 昇順, 見本市番号 昇順
+			$sql_sort = ' order by '.$this->sort_column['1'].$this->sort_cond['0'].', '.$this->sort_column['0'].$this->sort_cond['0'];
+		}
+		//$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_sort);
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_sort);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * 見本市登録チェックリスト総件数取得（管理画面表示用）。
+	 *
+	 * @return int 見本市登録チェックリスト総件数
+	 */
+	function getFairCheckListSearchCnt() {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		$sql = "select jf.mihon_no,jf.fair_title_jp,jf.fair_title_en,jf.abbrev_title,jf.fair_url,jf.date_from_yyyy,jf.date_from_mm,jf.date_from_dd,jf.date_to_yyyy,jf.date_to_mm,jf.date_to_dd,jf.region,jf.country,jf.city,jf.other_city_jp,jf.other_city_en,jf.venue_jp,jf.venue_en,ju.email,ju.user_id,jf.organizer_jp,jf.organizer_en,jf.organizer_tel,jf.organizer_fax,jf.organizer_email,jf.agency_in_japan_jp,jf.note_for_system_manager,date_format(jf.date_of_application,'%Y/%m/%d') date_of_application, date_format(jf.date_of_registration,'%Y/%m/%d') date_of_registration,jf.negate_comment,jcm_1.discription_jp region_name,jcm_2.discription_jp country_name,jcm_3.discription_jp city_name from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join (select kbn_2, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000') jcm_1 on jf.region = jcm_1.kbn_2 left outer join (select kbn_2, kbn_3, discription_jp, discription_en from jm_code_m where kbn_1 = '003' and kbn_4 = '000') jcm_2 on jf.region = jcm_2.kbn_2 and jf.country = jcm_2.kbn_3 left outer join (select kbn_2, kbn_3, kbn_4, discription_jp, discription_en from jm_code_m where kbn_1 = '003') jcm_3 on jf.region = jcm_3.kbn_2 and jf.country = jcm_3.kbn_3 and jf.city = jcm_3.kbn_4";
+
+		// 入力値
+		$data = array();
+
+		// where句の取得
+		$sql_ext =$this->_getWhere($data);
+		//$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : select count(*) cnt from ('.$sql.$sql_ext.') t');
 
 		// Prepare Statement化
 		$stmt =& $db->db->prepare('select count(*) cnt from ('.$sql.$sql_ext.') t');
@@ -2276,6 +2391,76 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 				array_push($data, $p);
 			}
 		}
+
+		// sort
+		// 入力値を取得
+		for ($i = 0; $i < count($ary_sort); $i++) {
+			if ('' != $ary_sort[$i]) {
+				if ('' == $sql_sort) {
+					$sql_sort .= ' order by ';
+				} else {
+					$sql_sort .= ', ';
+				}
+				$sql_sort .= $this->sort_column[$ary_sort[$i]];
+				$sql_sort .= $this->sort_cond[$ary_sort_cond[$i]];
+			}
+		}
+		if ('' == $sql_sort) {
+			// 見本市名(日) 昇順, 見本市番号 昇順
+			$sql_sort = ' order by '.$this->sort_column['1'].$this->sort_cond['0'].', '.$this->sort_column['0'].$this->sort_cond['0'];
+		}
+
+		$this->backend->getLogger()->log(LOG_DEBUG, 'SQL : '.$sql.$sql_ext.$sql_sort);
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql.$sql_ext.$sql_sort);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+		// var_dump($data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+	/**
+	 * 見本市チェックリスト取得（ダウンロード用）。
+	 *
+	 * @param array $ary_sort ソート項目
+	 * @param array $ary_sort_cond ソート方法
+	 * @return array 見本市チェックリスト
+	 */
+	function getFairCheckListDownload($ary_sort, $ary_sort_cond) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+		$sql = "select jf.mihon_no,case when jf.fair_title_jp = '' then jf.fair_title_en else jf.fair_title_jp end,jf.abbrev_title,jf.fair_url,concat(jf.date_from_yyyy,'/',jf.date_from_mm,'/',jf.date_from_dd),concat(jf.date_to_yyyy,'/',jf.date_to_mm,'/',jf.date_to_dd),concat(rg.discription_jp,'/',co.discription_jp,'/',ci.discription_jp,'/',case when jf.other_city_jp = '' then jf.other_city_en else jf.other_city_jp end),case when jf.venue_jp = '' then jf.venue_en else jf.venue_jp end,ju.email,case when jf.organizer_jp = '' then jf.organizer_en else jf.organizer_jp end,jf.organizer_tel,jf.organizer_fax,jf.organizer_email,jf.agency_in_japan_jp,jf.note_for_system_manager,date_format(jf.date_of_application,'%Y/%m/%d'),date_format(jf.date_of_registration,'%Y/%m/%d'),jf.negate_comment from jm_fair jf left outer join jm_user ju on jf.user_id = ju.user_id left outer join ( select kbn_2, discription_jp from jm_code_m where kbn_1 = '003' and kbn_3 = '000' and kbn_4 = '000' ) rg on jf.region = rg.kbn_2 left outer join ( select kbn_2, kbn_3, discription_jp from jm_code_m where kbn_1 = '003' and kbn_4 = '000' ) co on jf.region = co.kbn_2 and jf.country = co.kbn_3 left outer join ( select kbn_2, kbn_3, kbn_4, discription_jp from jm_code_m where kbn_1 = '003' ) ci on jf.region = ci.kbn_2 and jf.country = ci.kbn_3 and jf.city = ci.kbn_4";
+
+		// 入力値
+		$data = array();
+
+		// where句の取得
+		$sql_ext =$this->_getWhere($data);
 
 		// sort
 		// 入力値を取得

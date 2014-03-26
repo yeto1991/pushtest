@@ -27,6 +27,8 @@
 								<div align="left">
 									{if $app.from_page_flg == '1'}
 										<input type="button" value="展示会詳細に戻る" onclick="history.back()"><br>
+									{elseif $app.from_page_flg == '2'}
+										<!-- ボタン非表示 -->
 									{else}
 										<input type="button" value="ユーザ一覧に戻る" onclick="history.back()"><br>
 									{/if}

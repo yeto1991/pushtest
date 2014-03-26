@@ -84,6 +84,15 @@
 		document.getElementById('form_fairSearch').appendChild(action);
 		document.getElementById('form_fairSearch').submit();
 	}
+	function checklist() {
+		action = document.createElement('input');
+		action.type = 'hidden';
+		action.name = 'action_admin_fairCheckList';
+		action.id = 'action_admin_fairCheckList';
+		action.value = 'dummy';
+		document.getElementById('form_fairSearch').appendChild(action);
+		document.getElementById('form_fairSearch').submit();
+	}
 	// -->
 {/literal}
 </script>
@@ -117,6 +126,7 @@
 					<div align="center">検索画面</div>
 					<input type="button" value="検索実行" onclick="search()" />
 					<input type="button" value="集計実行" onclick="summary()" />
+					<input type="button" value="見本市登録チェックリスト" onclick="checklist()" />
 					<input type="reset" value="リセット" />
 					<hr/>
 					<dl>
@@ -1674,6 +1684,7 @@
 					<hr/>
 					<input type="button" value="検索実行" onclick="search()" />
 					<input type="button" value="集計実行" onclick="summary()" />
+					<input type="button" value="見本市登録チェックリスト" onclick="checklist()" />
 					<input type="reset" value="リセット" />
 				</td>
 			</tr>

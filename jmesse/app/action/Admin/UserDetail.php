@@ -356,12 +356,13 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 			$this->ae->addObject('error', $jm_user);
 			return 'admin_error';
 		}
-		// MOD-S 2012.02.06 展示会詳細画面からのユーザ詳細画面への遷移対応
-		//展示会詳細画面からの遷移の場合 ボタン表示制御用
 		if($this->af->get('mode') == 'fairdetail'){
+			//展示会詳細画面からの遷移の場合 ボタン表示制御用
 			$this->af->setApp('from_page_flg', '1');
+		}elseif($this->af->get('mode') == 'fairchecklist'){
+			//見本市登録チェックリスト画面からの遷移の場合 ボタン表示制御用
+			$this->af->setApp('from_page_flg', '2');
 		}
-		// MOD-E 2012.02.06 展示会詳細画面からのユーザ詳細画面への遷移対応
 		//Form値設定
 		$this->af->set('mode', 'change'); //編集開始遷移用
 		$this->af->set('user_id', $jm_user->get('user_id'));

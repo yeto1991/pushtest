@@ -75,6 +75,19 @@ class Jmesse_Form_AdminFairDetail extends Jmesse_ActionForm
 			'filter'      => null,            // Optional Input filter to convert input
 			'custom'      => null,            // Optional method name which
 		),
+		'mode' => array(
+			'type'        => VAR_TYPE_STRING,
+			'form_type'   => FORM_TYPE_HIDDEN,
+			'name'        => '登録モード',
+			'required'    => false,
+			'min'         => null,
+			'max'         => null,
+			'regexp'      => null,
+			'mbregexp'    => null,
+			'mbregexp_encoding' => 'UTF-8',
+			'filter'      => null,
+			'custom'      => null,
+		),
 	);
 }
 
@@ -120,6 +133,12 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 	 */
 	function perform()
 	{
+
+		//表示モード指定
+		if($this->af->get('mode') == 'fairchecklist'){
+			$this->af->setApp('from_page_flg', '2');
+		}
+
 		$jm_fair_tmp_mgr =& $this->backend->getManager('jmFairTemp');
 		if (null != $this->af->get('seq_num') && 0 < $this->af->get('seq_num')) {
 			// JM_FAIR_TEMPより取得

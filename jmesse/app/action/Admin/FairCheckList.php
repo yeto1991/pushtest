@@ -1,6 +1,6 @@
 <?php
 /**
- *  Admin/FairList.php
+ *  Admin/FairCheckList.php
  *
  *  @author     {$author}
  *  @package    Jmesse
@@ -10,27 +10,27 @@
 require_once 'FairSearch.php';
 
 /**
- *  admin_fairList Form implementation.
+ *  admin_fairCheckList Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Form_AdminFairList extends Jmesse_Form_AdminFairSearch
+class Jmesse_Form_AdminFairCheckList extends Jmesse_Form_AdminFairSearch
 {
 }
 
 /**
- *  admin_fairList action implementation.
+ *  admin_fairCheckList action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Jmesse
  */
-class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
+class Jmesse_Action_AdminFairCheckList extends Jmesse_ActionClass
 {
 	/**
-	 *  preprocess of admin_fairList Action.
+	 *  preprocess of admin_fairCheckList Action.
 	 *
 	 *  @access public
 	 *  @return string    forward name(null: success.
@@ -104,7 +104,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '登録日(承認日)が正しくありません（開始 > 終了）');
 			}
 		}
-		// MOD-S 2013.01.16 JECC認証対応
 		// JECC認証年月日
 		if ((null != $this->af->get('jecc_date_y_from') && '' != $this->af->get('jecc_date_y_from'))
 		|| (null != $this->af->get('jecc_date_m_from') && '' != $this->af->get('jecc_date_m_from'))
@@ -131,10 +130,8 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', 'JECC認証年月日が正しくありません（開始 > 終了）');
 			}
 		}
-		// MOD-E 2013.01.16 JECC認証対応
 
 		// 会期
-		// MOD-S 2012.02.15 会期未定登録対応
 		if(!($this->af->get('kaiki_mitei' == '1'))){
 			//会期未定以外の場合
 			if ((null != $this->af->get('date_from_yyyy') && '' != $this->af->get('date_from_yyyy'))
@@ -163,7 +160,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				}
 			}
 		}
-		// MOD-E 2012.02.15 会期未定登録対応
+
 		// 数値の大小
 		// 見本市番号
 		if (null != $this->af->get('mihon_no_from') && '' != $this->af->get('mihon_no_from')
@@ -172,7 +169,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '見本市番号が正しくありません（開始 > 終了）');
 			}
 		}
-
 		// 開催予定規模
 		if (null != $this->af->get('gross_floor_area_from') && '' != $this->af->get('gross_floor_area_from')
 			&& null != $this->af->get('gross_floor_area_to') && '' != $this->af->get('gross_floor_area_to')) {
@@ -180,7 +176,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '開催予定規模が正しくありません（開始 > 終了）');
 			}
 		}
-
 		// 過去の実績(入場者数)
 		if (null != $this->af->get('total_number_of_visitor_from') && '' != $this->af->get('total_number_of_visitor_from')
 			&& null != $this->af->get('total_number_of_visitor_to') && '' != $this->af->get('total_number_of_visitor_to')) {
@@ -188,7 +183,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '過去の実績(入場者数)が正しくありません（開始 > 終了）');
 			}
 		}
-
 		// 過去の実績(入場者数(うち海外から))
 		if (null != $this->af->get('number_of_foreign_visitor_from') && '' != $this->af->get('number_of_foreign_visitor_from')
 			&& null != $this->af->get('number_of_foreign_visitor_to') && '' != $this->af->get('number_of_foreign_visitor_to')) {
@@ -196,7 +190,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '過去の実績(入場者数(うち海外から))が正しくありません（開始 > 終了）');
 			}
 		}
-
 		// 過去の実績(出展社数)
 		if (null != $this->af->get('total_number_of_exhibitors_from') && '' != $this->af->get('total_number_of_exhibitors_from')
 			&& null != $this->af->get('total_number_of_exhibitors_to') && '' != $this->af->get('total_number_of_exhibitors_to')) {
@@ -204,7 +197,6 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '過去の実績(出展社数)が正しくありません（開始 > 終了）');
 			}
 		}
-
 		// 過去の実績(出展社数(うち海外から))
 		if (null != $this->af->get('number_of_foreign_exhibitors_from') && '' != $this->af->get('number_of_foreign_exhibitors_from')
 		&& null != $this->af->get('number_of_foreign_exhibitors_to') && '' != $this->af->get('number_of_foreign_exhibitors_to')) {
@@ -212,6 +204,12 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$this->ae->add('error', '過去の実績(出展社数(うち海外から))が正しくありません（開始 > 終了）');
 			}
 		}
+
+// 		// 検索画面からの遷移かどうか（type=a）
+// 		if('a' != $this->af->get('type')){
+// 			$this->ae->add('error', '遷移元が検索画面ではない。遷移元画面不正');
+// 			return 'admin_fairSearch';
+// 		}
 
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, '詳細チェックエラー');
@@ -255,7 +253,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 	);
 
 	/**
-	 *  admin_fairList action implementation.
+	 *  admin_fairCheckList action implementation.
 	 *
 	 *  @access public
 	 *  @return string  forward name.
@@ -279,64 +277,9 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			$this->session->set('sort_cond', $sort_cond);
 		}
 
-		// タイプの分岐
-		if ('u' == $this->af->get('type')) {
-			// 展示会未承認一覧表示
-			// それまでの検索条件を削除
-			$this->session->set('search_cond', null);
-			// DEL-S 2012.02.21
-// 			$this->session->set('sort_cond', null);
-			// DEL-E 2012.02.21
-			$search_cond = array();
-			$search_cond['confirm_flag'] = '0';
-			// ADD-S 2012.02.08 削除済は非表示
-			$search_cond['del_flg'] = array('0');
-			$search_cond['connection'] = 'a';
-			// ADD-E 2012.02.08 削除済は非表示
-			$this->session->set('search_cond', $search_cond);
-			// ADD-S 2012.02.08 デフォルトソート条件追加
-			// 会期(昇順) > 登録日(承認日)(昇順) > 開催地(昇順)
-			if ('1' != $this->af->get('sort')) {
-				$sort_cond = array();
-				$sort_cond['sort_1'] = '3';
-				$sort_cond['sort_2'] = '7';
-				$sort_cond['sort_3'] = '4';
-				$sort_cond['sort_cond_1'] = '0';
-				$sort_cond['sort_cond_2'] = '0';
-				$sort_cond['sort_cond_3'] = '0';
-				$this->session->set('sort_cond', $sort_cond);
-			}
-			// ADD-E 2012.02.08 デフォルトソート条件追加
-		} elseif ('d' == $this->af->get('type')) {
-			// 展示会否認一覧表示
-			// それまでの検索条件を削除
-			$this->session->set('search_cond', null);
-			// DEL-S 2012.02.21
-// 			$this->session->set('sort_cond', null);
-			// DEL-E 2012.02.21
-			$search_cond = array();
-			$search_cond['confirm_flag'] = '2';
-			// ADD-S 2012.02.08 削除済は非表示
-			$search_cond['del_flg'] = array('0');
-			$search_cond['connection'] = 'a';
-			// ADD-E 2012.02.08 削除済は非表示
-			$this->session->set('search_cond', $search_cond);
-			// ADD-S 2012.02.21 デフォルトソート条件追加
-			// 会期(昇順) > 登録日(承認日)(昇順) > 開催地(昇順)
-			if ('1' != $this->af->get('sort')) {
-				$sort_cond = array();
-				$sort_cond['sort_1'] = '3';
-				$sort_cond['sort_2'] = '7';
-				$sort_cond['sort_3'] = '4';
-				$sort_cond['sort_cond_1'] = '0';
-				$sort_cond['sort_cond_2'] = '0';
-				$sort_cond['sort_cond_3'] = '0';
-				$this->session->set('sort_cond', $sort_cond);
-			}
-			// ADD-E 2012.02.21 デフォルトソート条件追加
-		} elseif ('a' == $this->af->get('type')) {
+		//検索画面からの遷移(type=a)
+		if ('a' == $this->af->get('type')) {
 			if (null == $this->session->get('search_cond')) {
-				$this->backend->getLogger()->log(LOG_DEBUG, '■検索画面より');
 				// 検索条件をセッションに保存
 				$search_cond = array();
 				$search_cond['phrases'] = $this->af->get('phrases');
@@ -389,9 +332,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['date_to_yyyy'] = $this->af->get('date_to_yyyy');
 				$search_cond['date_to_mm'] = $this->af->get('date_to_mm');
 				$search_cond['date_to_dd'] = $this->af->get('date_to_dd');
-				// MOD-S 2012.02.15 会期未定登録対応
 				$search_cond['kaiki_mitei'] = $this->af->get('kaiki_mitei');
-				// MOD-E 2012.02.15 会期未定登録対応
 				$search_cond['frequency'] = $this->af->get('frequency');
 				$search_cond['main_industory'] = $this->af->get('main_industory');
 				$search_cond['sub_industory'] = $this->af->get('sub_industory');
@@ -474,13 +415,8 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['note_for_system_manager_cond'] = $this->af->get('note_for_system_manager_cond');
 				$search_cond['note_for_data_manager'] = $this->af->get('note_for_data_manager');
 				$search_cond['note_for_data_manager_cond'] = $this->af->get('note_for_data_manager_cond');
-				// MOD-S 2012.02.03 登録カテゴリ追加対応
 				$search_cond['regist_category'] = $this->af->get('regist_category');
-				// MOD-E 2012.02.03 登録カテゴリ追加対応
-				// MOD-S 2012.02.08 削除フラグ追加対応
 				$search_cond['del_flg'] = $this->af->get('del_flg');
-				// MOD-E 2012.02.08 削除フラグ追加対応
-				// MOD-S 2013.01.16 JECC認証対応
 				$search_cond['jecc_flag'] = $this->af->get('jecc_flag');
 				$search_cond['jecc_date_y_from'] = $this->af->get('jecc_date_y_from');
 				$search_cond['jecc_date_m_from'] = $this->af->get('jecc_date_m_from');
@@ -488,46 +424,12 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 				$search_cond['jecc_date_y_to'] = $this->af->get('jecc_date_y_to');
 				$search_cond['jecc_date_m_to'] = $this->af->get('jecc_date_m_to');
 				$search_cond['jecc_date_d_to'] = $this->af->get('jecc_date_d_to');
-				// MOD-E 2013.01.16 JECC認証対応
-				// MOD-S 2013.01.22 JETRO出展支援対応
 				$search_cond['jetro_suport_url'] = $this->af->get('jetro_suport_url');
 				$search_cond['jetro_suport_url_cond'] = $this->af->get('jetro_suport_url_cond');
 				$search_cond['exhibit_support_flag'] = $this->af->get('exhibit_support_flag');
-				// MOD-E 2013.01.22 JETRO出展支援対応
 				$this->session->set('search_cond', $search_cond);
 			}
-		} elseif ('s' == $this->af->get('type')) {
-			$index = $this->af->get('index');
-			if (null == $index || '' == $index) {
-				$index = $this->session->get('index');
-			}
-			$this->session->set('index', $index);
-			$code_list = $this->session->get('code_list');
-			if (null != $code_list) {
-				$code = $code_list[$index];
-				$sql_sum = '';
-				$data_sum = array();
-				foreach ($code as $key => $value) {
-					$this->backend->getLogger()->log(LOG_DEBUG, '■value : '.$value);
-					if ('' != $sql_sum) {
-						$sql_sum .= ' and ';
-					}
-					if ('' == $value) {
-						if ('update_user_id' == $key) {
-							$sql_sum .= $this->_getDuplicationColumn($key)." is null ";
-						} else {
-							$sql_sum .= $this->_getDuplicationColumn($key)." = '' ";
-						}
-// 						$sql_sum .= "(".$this->_getDuplicationColumn($key)." is null or ".$this->_getDuplicationColumn($key)." = '')";
-					} else {
-						$sql_sum .= $this->_getDuplicationColumn($key).' = ? ';
-						array_push($data_sum, $value);
-					}
-				}
-				$this->backend->getLogger()->log(LOG_DEBUG, '■sql_sum : '.$sql_sum);
-				$this->session->set('sql_sum', $sql_sum);
-				$this->session->set('data_sum', $data_sum);
-			}
+
 		} else {
 			$this->ae->add('error', 'typeの指定が不正です。');
 			return 'admin_error';
@@ -537,61 +439,26 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 		$jm_fair_mgr =& $this->backend->getManager('JmFair');
 
 		// 総件数の取得
-		$jm_fair_cnt = $jm_fair_mgr->getFairListSearchCnt();
+		$jm_fair_cnt = $jm_fair_mgr->getFairCheckListSearchCnt();
 		$this->backend->getLogger()->log(LOG_DEBUG, 'TOTAL : '.$jm_fair_cnt);
-
 		if (0 < $jm_fair_cnt) {
-			// ページ設定
-			$limit = 100;
-			$max_page = floor($jm_fair_cnt / $limit);
-			if (0 < $jm_fair_cnt % $limit) {
-				$max_page += 1;
-			}
-			if ('' == $this->af->get('page')) {
-				$page = 1;
-			} elseif ($max_page < $this->af->get('page')) {
-				$page = $max_page;
-			} else {
-				$page = $this->af->get('page');
-			}
-			$offset = $limit * ($page - 1);
-
+			//1件以上の場合
 			$sort_cond = $this->session->get('sort_cond');
 			$ary_sort = array($sort_cond['sort_1'], $sort_cond['sort_2'], $sort_cond['sort_3'], $sort_cond['sort_4'], $sort_cond['sort_5']);
 			$ary_sort_cond = array($sort_cond['sort_cond_1'], $sort_cond['sort_cond_2'], $sort_cond['sort_cond_3'], $sort_cond['sort_cond_4'], $sort_cond['sort_cond_5']);
 
 			// 見本市リストの取得
-			$jm_fair_list = $jm_fair_mgr->getFairListSearch($offset, $limit, $ary_sort, $ary_sort_cond);
+			$jm_fair_check_list = $jm_fair_mgr->getFairCheckListSearch($ary_sort, $ary_sort_cond);
 
 			// 見本市リスト
-			$this->af->setApp('jm_fair_list', $jm_fair_list);
+			$this->af->setApp('jm_fair_check_list', $jm_fair_check_list);
 			// 全件数
 			$this->af->setApp('total', $jm_fair_cnt);
-			// 表示開始
-			$this->af->setApp('begin', $offset + 1);
-			// 表示件数
-			if ($jm_fair_cnt > ($page * $limit)) {
-				$this->af->setApp('limit', $limit);
-			} else {
-				$this->af->setApp('limit', $jm_fair_cnt - (($page - 1) * $limit));
-			}
-			// ページ
-			$this->af->setApp('page', $page);
-			$this->af->setApp('page_next', $page + 1);
-			$this->af->setApp('page_prev', $page - 1);
 			// 検索タイプ
 			$this->af->setApp('type', $this->af->get('type'));
-			// 最初・最後？
-			if (1 == $page) {
-				$this->af->setApp('first_page', '1');
-			}
-			if ($max_page == $page) {
-				$this->af->setApp('last_page', '1');
-			}
-
 			// 現在のソート順
 			if ('' == $sort_cond['sort_1']) {
-				$this->af->setApp('sort_1', '見本市名');
+				$this->af->setApp('sort_1', '見本市名(日)');
 			} else {
 				$this->af->setApp('sort_1', $this->sort_column[$sort_cond['sort_1']]);
 			}
@@ -649,20 +516,12 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			$this->af->setApp('jm_fair_list', null);
 			// 全件数
 			$this->af->setApp('total', 0);
-			// 表示開始
-			$this->af->setApp('begin', 0);
-			// 表示件数
-			$this->af->setApp('limit', 0);
-			// ページ
-			$this->af->setApp('page', 1);
-			$this->af->setApp('page_next', $page + 1);
-			$this->af->setApp('page_prev', $page - 1);
 			// 検索タイプ
 			$this->af->setApp('type', $this->af->get('type'));
-			// 最初・最後？
-			$this->af->setApp('first_page', '1');
-			$this->af->setApp('last_page', '1');
 		}
+
+		//表示モード指定(遷移先画面制御に利用)
+		$this->af->setApp('display_mode', 'fairchecklist');
 
 		// エラー判定
 		if (0 < $this->ae->count()) {
@@ -670,8 +529,7 @@ class Jmesse_Action_AdminFairList extends Jmesse_ActionClass
 			return 'admin_error';
 		}
 
-// 		return 'admin_error';
- 		return 'admin_fairList';
+ 		return 'admin_fairCheckList';
 	}
 
 	function _getDuplicationColumn($column) {
