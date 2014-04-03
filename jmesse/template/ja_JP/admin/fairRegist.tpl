@@ -573,11 +573,11 @@
 							<td nowrap rowspan="2">キャッチフレーズ <font color="#CC3333">○</font></td>
 							<!-- キャッチフレーズ(日) -->
 							<!-- キャッチフレーズ(英) -->
-							<td nowrap>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="80" rows="7">{$form.profile_jp}</textarea><br />
+							<td>日：<br /> <textarea name="profile_jp" id="profile_jp" cols="80" rows="7">{$form.profile_jp}</textarea><br />
 							</td>
 						</tr>
 						<tr>
-							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="profile_en" id="profile_en" cols="80" rows="7">{$form.profile_en}</textarea><br />
+							<td>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="profile_en" id="profile_en" cols="80" rows="7">{$form.profile_en}</textarea><br />
 							</td>
 						</tr>
 
@@ -585,10 +585,10 @@
 							<td nowrap rowspan="2">ＰＲ・紹介文</td>
 							<!-- ＰＲ・紹介文(日) -->
 							<!-- ＰＲ・紹介文(英) -->
-							<td nowrap>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="80" rows="7">{$form.detailed_information_jp}</textarea></td>
+							<td>日：<br> <textarea name="detailed_information_jp" id="detailed_information_jp" cols="80" rows="7">{$form.detailed_information_jp}</textarea></td>
 						</tr>
 						<tr>
-							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="detailed_information_en" id="detailed_information_en" cols="80" rows="7">{$form.detailed_information_en}</textarea></td>
+							<td>英：<font color="#CC3333">（翻訳）</font><br /> <textarea name="detailed_information_en" id="detailed_information_en" cols="80" rows="7">{$form.detailed_information_en}</textarea></td>
 						</tr>
 
 						<tr>
@@ -787,14 +787,15 @@
 							<td nowrap rowspan="2">出品物 <font color="#CC3333">●</font></td>
 							<!-- 出品物(日) -->
 							<!-- 出品物(英) -->
-							<td nowrap>日：<br/>
-							<textarea name="exhibits_jp" id="exhibits_jp" cols="80" rows="7">{$form.exhibits_jp}</textarea>
-							<br>
+							<td>
+								日：<br/>
+								<textarea name="exhibits_jp" id="exhibits_jp" cols="80" rows="7">{$form.exhibits_jp}</textarea>
+								<br>
 							</td>
 						</tr>
 						<tr>
-							<td nowrap>英：<font color="#CC3333">（翻訳）</font><br>
-							<textarea name="exhibits_en" id="exhibits_en" cols="80" rows="7">{$form.exhibits_en}</textarea>
+							<td>英：<font color="#CC3333">（翻訳）</font><br>
+								<textarea name="exhibits_en" id="exhibits_en" cols="80" rows="7">{$form.exhibits_en}</textarea>
 							</td>
 						</tr>
 
