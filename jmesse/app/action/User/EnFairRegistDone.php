@@ -453,19 +453,6 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 		system("rm -rf ".$this->session->get('img_tmp_path'));
 		// MOD-E 2012.08.13 保守：画像処理エラー対応
 
-		// LOGに記録
-		$mgr =& $this->backend->getManager('userCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '2', $jm_fair->get('mihon_no'));
-		if (Ethna::isError($ret)) {
-			$msg = 'JM_LOGテーブルへの登録に失敗しました。';
-			$this->backend->getLogger()->log(LOG_ERR, $msg);
-			$this->ae->addObject('error', $ret);
-			//tmpディレクトリ強制削除
-			system($this->session->get('img_tmp_path'));
-			$db->rollback();
-			return 'enError';
-		}
-
 		// COMMIT
 		$db->commit();
 

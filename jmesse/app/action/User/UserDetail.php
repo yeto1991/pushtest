@@ -273,23 +273,6 @@ class Jmesse_Action_UserUserDetail extends Jmesse_ActionClass
 		$this->af->set('fax', $jm_user->get('fax'));
 		$this->af->set('url', $jm_user->get('url'));
 
-		// トランザクション開始
-		$db = $this->backend->getDB();
-		$db->db->autocommit(false);
-		$db->begin();
-
-		// ログテーブル登録
-		$mgr = $this->backend->getManager('userCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $this->af->get('email').'('.$this->af->get('user_id').')');
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'error';
-		}
-
-		// COMMIT
-		$db->commit();
-
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');

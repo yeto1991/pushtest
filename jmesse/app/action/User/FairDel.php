@@ -133,16 +133,6 @@ class Jmesse_Action_UserFairDel extends Jmesse_ActionClass
 // 		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
 // 		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
 
-		// LOGに記録
-		$mgr =& $this->backend->getManager('userCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '4', '2', $this->af->get('mihon_no'));
-		if (Ethna::isError($ret)) {
-			$this->backend->getLogger()->log(LOG_ERR, 'JM_LOG登録失敗');
-			$this->ae->add('error', 'システムエラーが発生しました。');
-			$db->rollback();
-			return 'error';
-		}
-
 		// COMMIT
 		$db->commit();
 

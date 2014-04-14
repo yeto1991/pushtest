@@ -277,17 +277,6 @@ class Jmesse_Action_UserEnFairDetail extends Jmesse_ActionClass
 		$this->session->set('display_photos_path', $displayPhotosPath);
 		//MOD-E 2013.04.25 登録（対象）画像の実画像表示
 
-		// ログテーブル登録
-		if ('d' == $this->af->get('mode') || 'p' == $this->af->get('mode')) {
-			$mgr = $this->backend->getManager('userCommon');
-			$ret = $mgr->regLog($this->session->get('user_id'), '1' , '2', $this->af->get('mihon_no'));
-			if (Ethna::isError($ret)) {
-				$this->ae->addObject('error', $ret);
-				$db->rollback();
-				return 'enError';
-			}
-		}
-
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');

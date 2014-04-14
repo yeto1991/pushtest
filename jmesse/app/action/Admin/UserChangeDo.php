@@ -206,20 +206,6 @@ class Jmesse_Action_AdminUserChangeDo extends Jmesse_ActionClass
 		}
 		$this->af->setApp('user_id', $jm_user->get('user_id'));
 
-		// ログテーブル登録
-		$mgr = $this->backend->getManager('adminCommon');
-		if ($this->af->get('delFlg') == '1') {
-			$ope_kbn = '4'; //削除
-		} else {
-			$ope_kbn = '3'; //更新
-		}
-		$ret = $mgr->regLog($this->session->get('user_id'), $ope_kbn, '1', strtolower($this->af->get('email').'('.$this->af->get('user_id').')'));
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'admin_error';
-		}
-
 		// COMMIT
 		$db->commit();
 

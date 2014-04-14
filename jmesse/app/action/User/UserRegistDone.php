@@ -154,8 +154,6 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 			$db->rollback();
 			return 'error';
 		}
-		// ログテーブルに登録
-		$mgr = $this->backend->getManager('userCommon');
 		// 登録したユーザ情報取得
 		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 		if (Ethna::isError($user)) {
@@ -167,12 +165,6 @@ class Jmesse_Action_UserUserRegistDone extends Jmesse_ActionClass
 		if (null == $user || strtolower($this->af->get('email')) != $user->get('email')) {
 			$this->backend->getLogger()->log(LOG_ERR, 'ユーザ検索エラー');
 			$this->ae->add('error', 'システムエラーが発生しました。');
-			$db->rollback();
-			return 'error';
-		}
-		$ret = $mgr->regLog($user->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
 			$db->rollback();
 			return 'error';
 		}

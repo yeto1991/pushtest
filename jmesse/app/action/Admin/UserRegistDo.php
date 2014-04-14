@@ -195,16 +195,8 @@ class Jmesse_Action_AdminUserRegistDo extends Jmesse_ActionClass
 			return 'admin_error';
 		}
 
-		// ログテーブルに登録
-		$mgr = $this->backend->getManager('adminCommon');
 		// 登録したユーザ情報取得
 		$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
-		$ret = $mgr->regLog($this->session->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'admin_error';
-		}
 
 		// COMMIT
 		$db->commit();

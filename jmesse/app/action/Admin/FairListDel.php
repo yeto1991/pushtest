@@ -87,16 +87,6 @@ class Jmesse_Action_AdminFairListDel extends Jmesse_ActionClass
 				// JM_FAIR_TEMPにコピー
 				$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
 				$jmFairTempMgr->copyFair($jm_fair->get('mihon_no'));
-
-				// ログに登録
-				$mgr = $this->backend->getManager('adminCommon');
-				$ret = $mgr->regLog($this->session->get('user_id'), '4', '2', $jm_fair->get('mihon_no'));
-				if (Ethna::isError($ret)) {
-					$this->ae->addObject('error', $ret);
-					$db->rollback();
-					return 'admin_error';
-				}
-
 			}
 		}
 		// コミット

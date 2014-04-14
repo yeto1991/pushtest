@@ -387,23 +387,6 @@ class Jmesse_Action_AdminUserDetail extends Jmesse_ActionClass
 		$this->af->set('registDate', $jm_user->get('regist_date'));
 		$this->af->set('updateDate', $jm_user->get('update_date'));
 
-		// トランザクション開始
-		$db = $this->backend->getDB();
-		$db->db->autocommit(false);
-		$db->begin();
-
-		// ログテーブル登録
-		$mgr = $this->backend->getManager('adminCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '1' , '1', $this->af->get('email').'('.$this->af->get('user_id').')');
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			$db->rollback();
-			return 'admin_error';
-		}
-
-		// COMMIT
-		$db->commit();
-
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');

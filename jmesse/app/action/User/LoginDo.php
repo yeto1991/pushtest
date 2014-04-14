@@ -101,21 +101,7 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 			$login_ok = false;
 		}
 
-		// トランザクション開始
-		$db = $this->backend->getDB();
-		$db->db->autocommit(false);
-		$db->begin();
-
-		$mgr = $this->backend->getManager('userCommon');
 		if ($login_ok) {
-			// ログに記録
-			$ret = $mgr->regLog($user->get('user_id'), '5', '3', 'Successful login.');
-			if (Ethna::isError($ret)) {
-				$this->ae->addObject('error', $ret);
-				$db->rollback();
-				return 'error';
-			}
-
 			// SESSIONに設定
 			$this->session->start();
 			$this->session->set('user_id', $user->get('user_id'));
@@ -123,19 +109,10 @@ class Jmesse_Action_UserLoginDo extends Jmesse_ActionClass
 			$ret_view = 'user_top';
 		} else {
 			// ログイン失敗画面へ遷移
-			$ret = $mgr->regLog('0', '5', '3', 'Login failed.('.$this->af->get('email').':'.$_SERVER['REMOTE_ADDR'].')');
-			if (Ethna::isError($ret)) {
-				$this->ae->addObject('error', $ret);
-				$db->rollback();
-				return 'error';
-			}
 			$this->ae->add('email', 'ログイン認証エラー 入力されたeメールアドレスは正しくありません。');
 			$this->ae->add('password', 'ログイン認証エラー 入力されたパスワードは正しくありません。');
 			return 'user_login';
 		}
-
-		// COMMIT
-		$db->commit();
 
 		// 最終エラー確認
 		if (0 < $this->ae->count()) {

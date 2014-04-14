@@ -97,14 +97,6 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$db->rollback();
 				return 'enError';
 			}
-			// ログテーブル登録
-			$mgr = $this->backend->getManager('userCommon');
-			$ret = $mgr->regLog($this->session->get('user_id'), '4', '1', $jm_user->get('email').'('.$this->af->get('user_id').')');
-			if (Ethna::isError($ret)) {
-				$this->ae->addObject('error', $ret);
-				$db->rollback();
-				return 'enError';
-			}
 			// SESSIONの破棄。
 			$this->session->set('user_id', '');
 			$this->session->set('auth_gen', '');
@@ -206,8 +198,6 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$db->rollback();
 				return 'enError';
 			}
-			// ログテーブルに登録
-			$mgr = $this->backend->getManager('userCommon');
 			// 登録したユーザ情報取得
 			$user =& $this->backend->getObject('JmUser', 'email', strtolower($this->af->get('email')));
 			if (Ethna::isError($user)) {
@@ -220,12 +210,7 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				$this->ae->add('error', 'A system error has occurred.');
 				return 'enError';
 			}
-			$ret = $mgr->regLog($user->get('user_id'), '2', '1', strtolower($this->af->get('email')).'('.$user->get('user_id').')');
-			if (Ethna::isError($ret)) {
-				$this->ae->addObject('error', $ret);
-				$db->rollback();
-				return 'enError';
-			}
+
 			//Sessionデータ再設定（ユーザIDのみ）
 			$this->session->set('user_id', $user->get('user_id'));
 			//更新モードで完了画面へ
@@ -286,14 +271,6 @@ class Jmesse_Action_UserEnUserChangeDone extends Jmesse_ActionClass
 				return 'enError';
 			}
 			$this->af->setApp('user_id', $jm_user->get('user_id'));
-			// ログテーブル登録
-			$mgr = $this->backend->getManager('userCommon');
-			$ret = $mgr->regLog($this->session->get('user_id'), '3', '1', strtolower($this->af->get('email').'('.$this->af->get('user_id').')'));
-			if (Ethna::isError($ret)) {
-				$this->ae->addObject('error', $ret);
-				$db->rollback();
-				return 'enError';
-			}
 
 			// COMMIT
 			$db->commit();

@@ -475,15 +475,6 @@ class Jmesse_Action_AdminFairDetail extends Jmesse_ActionClass
 // 				}
 // 			}
 // 		}
-
-		// ログに登録
-		$mgr = $this->backend->getManager('adminCommon');
-		$ret = $mgr->regLog($this->session->get('user_id'), '1', '2', $jm_fair->get('mihon_no'));
-		if (Ethna::isError($ret)) {
-			$this->ae->addObject('error', $ret);
-			return 'admin_error';
-		}
-
 		// エラー判定
 		if (0 < $this->ae->count()) {
 			$this->backend->getLogger()->log(LOG_ERR, 'システムエラー');
