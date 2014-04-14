@@ -192,16 +192,6 @@ $config = array(
 	'mail_title_fair_rejection_en'  => 'Notice of rejection of trade fair registration to J-messe',
 	'mail_title_fair_approved_en'  => 'Notice of approval of your trade fair registration on J-messe',
 
-	//管理者サイト機能（エラーメール一覧機能削除によりコメントアウト
-	//'mail_imap_host' => 'mail.securemx.jp',
-	//'mail_imap_port' => '143',
-	//'mail_imap_user' => 'j-messe@jetro.go.jp',
-	// MOD-S 2012.08.03 保守対応：新パスワード反映(有効期限は10月末2012/10/31まで) f76f1036→ g87g2147
-	// MOD-S 2012.10.10 保守対応：新パスワード反映(有効期限は2013/01/08まで) g87g2147→ h98h3258
-	// MOD-S 2012.12.14 基盤移行対応：JI-PW適用
-	// MOD-S 2013.01.16 tenjikai1029 ⇒tenjikai0116 変更(但しエラーメール機能が不要となったため、今後対応不要。)
-	//'mail_imap_pass' => 'tenjikai0116',
-
 	// ADD-S 2012.02.24 バッチログメール追加
 	// バッチログ配信情報
 	'mail_mnt_batch_log_title'     => '[JETRO]batch.log('.date('Ymd').')',
