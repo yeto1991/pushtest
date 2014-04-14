@@ -2,7 +2,7 @@
 
 # SHELL変数
 PHP_HOME=/usr/local/php
-JMESSE_HOME=/home/j-messe/app/jmesse
+JMESSE_HOME=/home/jmesse1112/app/jmesse
 
 # Batch開始時刻
 echo ▼▼▼ [`date`]【開始】バッチ

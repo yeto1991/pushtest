@@ -1,6 +1,6 @@
 @echo off
-mysql -ujmesse -pidsjmesse -h192.168.0.229 jmesse < summaryCountForFairCntTable.sql
-mysql -ujmesse -pidsjmesse -h192.168.0.229 jmesse < summaryCountForFairDetailCntTable.sql
+mysql -ujmesse -pidsjmesse -h172.16.20.80 jmesse < summaryCountForFairCntTable.sql
+mysql -ujmesse -pidsjmesse -h172.16.20.80 jmesse < summaryCountForFairDetailCntTable.sql
 php -f getJsonIndustory.php
 php -f getJsonMonthlyRanking.php
 php -f getJsonNewMihonichi.php
