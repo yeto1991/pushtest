@@ -350,6 +350,7 @@
 							<th class="item">Search Keyword</th>
 							<th class="required"></th>
 							<td>
+								You can set up to 5 keywords. Please place a comma (,) between keywords.<br />
 								<input type="text" value="{$form.keyword}" size="60" name="keyword" id="keyword" maxlength="100" /><br/>
 								{if is_error('keyword')}
 								<span class="error-message">{message name="keyword"}</span><br />

@@ -352,6 +352,7 @@
 											<th class="item">検索キーワード</th>
 											<th class="required"></th>
 											<td>
+												複数指定が可能です(5つまで)。複数指定の際は、半角コンマ「,」で区切ってご入力ください。<br />
 												<input type="text" value="{$form.keyword}" size="60" name="keyword" id="keyword" maxlength="100" /><br/>
 												{if is_error('keyword')}
 												<span class="error-message">{message name="keyword"}</span><br />

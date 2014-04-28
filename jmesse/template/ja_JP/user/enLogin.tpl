@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="Keywords" content="trade fair registration,trade show registration,exhibition registration,expo registration,trade fair promotion,trade show promotion,exhibition promotion,expo promotion" />
 {include file="user/enHeader.tpl"}
 <title>User login - Online Trade Fair Database (J-messe) - JETRO</title>
 </head>

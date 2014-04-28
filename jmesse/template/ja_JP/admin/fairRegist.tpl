@@ -593,7 +593,10 @@
 
 						<tr>
 							<td nowrap>検索キーワード</td>
-							<td nowrap><input type="text" name="keyword" id="keyword" value="{$form.keyword}" maxlength="100" size="100" />
+							<td nowrap>
+								<font size="-1">複数指定が可能です(5つまで)。複数指定の際は、半角コンマ「,」で区切ってご入力ください。</font><br />
+								<input type="text" name="keyword" id="keyword" value="{$form.keyword}" maxlength="100" size="100" />
+							</td>
 						</tr>
 
 						<tr>
