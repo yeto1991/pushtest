@@ -96,6 +96,8 @@ class Jmesse_Action_AdminFairCsvDownload extends Jmesse_ActionClass
 				if (0 < $j) {
 					echo ',';
 				}
+				//対象データ内に"が含まれる場合は、除去
+				$value = str_replace("\"", "", $value);
 				echo '"'.mb_convert_encoding($value, 'CP932', 'UTF-8').'"';
 				$j++;
 			}
