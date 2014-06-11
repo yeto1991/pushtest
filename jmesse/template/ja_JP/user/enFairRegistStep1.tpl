@@ -163,6 +163,10 @@
 				<h3 class="img t_center">
 					<img src="/en/database/j-messe/images/db/fair01.jpg" alt="見本市登録ステップ1" />
 				</h3>
+				<p>
+					Please register trade fair information according to your official website.<br />
+					JETRO may verify and revise the content of the registered information based on the official website prior to its publication.<br />
+				</p>
 				<p class="t_right">
 					user：{$session.email}
 				</p>

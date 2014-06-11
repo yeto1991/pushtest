@@ -149,6 +149,10 @@
 								<h3 class="img t_center">
 									<img src="/j-messe/images/db/fair03.jpg" alt="見本市登録　ステップ2" />
 								</h3>
+								<p>
+									公式ウェブサイトの掲載内容に沿ったご登録をお願いいたします。<br />
+									ジェトロは一般公開のための審査・承認時に、公式ウェブサイトに基づいて登録内容の修正を行うことがあります。<br />
+								</p>
 								<p class="t_right">ユーザー：{$session.email}</p>
 
 								{* エラー表示 *}
