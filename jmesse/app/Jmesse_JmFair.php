@@ -215,9 +215,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}
 		// MOD-S 2012.02.17 規模順追加
 		} elseif ('3' == $sort) {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
 			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
 		// MOD-E 2012.02.17 規模順追加
+		// MOD-S 2014.06.11 過去の出展社数順追加
+		} elseif ('4' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		// MOD-E 2014.06.11 過去の出展社数順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -363,9 +368,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}
 		// MOD-S 2012.02.17 規模順追加
 		} elseif ('3' == $sort) {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
 			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
 		// MOD-E 2012.02.17 規模順追加
+		// MOD-S 2014.06.11 過去の出展社数順追加
+		} elseif ('4' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		// MOD-E 2014.06.11 過去の出展社数順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -878,9 +888,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}
 		// MOD-S 2012.02.17 規模順追加
 		} elseif ('3' == $sort) {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
 			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
 		// MOD-E 2012.02.17 規模順追加
+		// MOD-S 2014.06.11 過去の出展社数順追加
+		} elseif ('4' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		// MOD-E 2014.06.11 過去の出展社数順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -1025,9 +1040,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}
 		// MOD-S 2012.02.17 規模順追加
 		} elseif ('3' == $sort) {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
 			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
 		// MOD-E 2012.02.17 規模順追加
+		// MOD-S 2014.06.11 過去の出展社数順追加
+		} elseif ('4' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		// MOD-E 2014.06.11 過去の出展社数順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -1165,9 +1185,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}
 		// MOD-S 2012.02.17 規模順追加
 		} elseif ('3' == $sort) {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
 			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
 		// MOD-E 2012.02.17 規模順追加
+		// MOD-S 2014.06.11 過去の出展社数順追加
+		} elseif ('4' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		// MOD-E 2014.06.11 過去の出展社数順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
@@ -1253,9 +1278,14 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 			}
 		// MOD-S 2012.02.17 規模順追加
 		} elseif ('3' == $sort) {
-			$this->backend->getLogger()->log(LOG_DEBUG, "▼規模");
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
 			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
 		// MOD-E 2012.02.17 規模順追加
+		// MOD-S 2014.06.11 過去の出展社数順追加
+		} elseif ('4' == $sort) {
+			$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		// MOD-E 2014.06.11 過去の出展社数順追加
 		} elseif ('1' == $sort) {
 			$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
 			$sql_sort = ' order by date_of_registration desc ';
