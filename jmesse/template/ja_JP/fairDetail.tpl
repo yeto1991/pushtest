@@ -380,6 +380,12 @@
 										</tr>
 										{/if}
 *}
+										{if ('' != $app.fair_detail.fair_url)}
+										<tr>
+											<th>公式ウェブサイト</th>
+											<td>こちらの見本市・展示会のさらに詳しい情報は、主催者の<a target="_blank" href="{$app.fair_detail.fair_url}">公式ウェブサイト</a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">でご確認いただくことができます。</td>
+										</tr>
+										{/if}
 										<tr>
 											<th>最終更新日</th>
 											<td>

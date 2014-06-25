@@ -57,7 +57,7 @@
 					<a href="http://www.jetro.go.jp/en/database/j-messe/jecc/" /><img src="/j-messe/images/approved_exhibition.jpg" alt="JECC"></a>
 				{/if}
 				{if ('' != $app.fair_detail.fair_url)}
-					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">official site</font></b></a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
+					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">official site</font></b></a><img class="icon_external" src="/images/jp/icon-external.gif">
 				{/if}
 				</p>
 				<!-- left -->
@@ -315,6 +315,13 @@
 						</tr>
 						{/if}
 *}
+
+						{if ('' != $app.fair_detail.fair_url)}
+						<tr>
+							<th>Official website</th>
+							<td>For more detailed information of the trade fair, please check <a target="_blank" href="{$app.fair_detail.fair_url}">the official website</a><img class="icon_external" src="/images/jp/icon-external.gif"> of the individual organizer.</td>
+						</tr>
+						{/if}
 						<tr>
 							<th>last update</th>
 							<td>
