@@ -139,9 +139,9 @@ class Jmesse_Action_UserEnFairDel extends Jmesse_ActionClass
 			return 'enError';
 		}
 
-// 		// JM_FAIR_TEMPにコピー
-// 		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
-// 		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
+		// JM_FAIR_TEMPにコピー
+		$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+		$jmFairTempMgr->copyFair($jm_fair_obj->get('mihon_no'));
 
 		// COMMIT
 		$db->commit();

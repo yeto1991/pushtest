@@ -255,6 +255,11 @@ class Jmesse_Action_UserEnFairRegistDone extends Jmesse_ActionClass
 			// UPDATE
 			$ret = $jm_fair->update();
 			$ope_kbn = '3';
+
+			// JM_FAIR_TEMPにコピー
+			$jmFairTempMgr = $this->backend->getManager('jmFairTemp');
+			$jmFairTempMgr->copyFair($this->af->get('mihon_no'));
+
 		} else {
 			// ユーザ使用言語(英語)
 			$jm_fair->set('use_language_flag', '1');
