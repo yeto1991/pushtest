@@ -104,7 +104,7 @@
 	</p>
 
 	<p>
-		<strong>Keywords</strong><br /> Title of Trade Fairs, Exhibits, etc.
+		<strong>Keywords</strong><br /> Please create a one-byte space between keywords (trade fair name, exhibit name, etc.)
 	</p>
 	<input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="38" />
 	</p>

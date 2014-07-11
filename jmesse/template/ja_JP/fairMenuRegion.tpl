@@ -55,7 +55,7 @@
 	</p>
 
 	<p>
-		<strong>キーワード</strong><br /> 展示会名、商品名（日本語可）等
+		<strong>キーワード</strong><br /> キーワード（展示会名、取扱品目など）ごとに半角スペースをご入力ください
 	</p>
 	<input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="38" />
 	</p>

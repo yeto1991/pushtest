@@ -144,7 +144,10 @@
 		</tr>
 		<tr>
 			<th>Keywords</th>
-			<td><input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="30" /></td>
+			<td>
+				Please create a one-byte space between keywords (trade fair name, exhibit name, etc.)<br />
+				<input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="30" />
+			</td>
 		</tr>
 	</table>
 	<a href="javascript:search('form_enFairMenuDetail');"><img width="93" height="34" alt="Refine" src="/en/database/j-messe/images/db/btn-narrow.gif" class="over"></a>

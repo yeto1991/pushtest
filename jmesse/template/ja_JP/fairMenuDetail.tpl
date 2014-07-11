@@ -35,120 +35,114 @@
 	{if count($errors)}
 	<p class="error-message" id="error-pagetop">入力に誤りがあります。ご確認ください。</p>
 	{/if}
-	<table class="detail">
-		<tr>
-			<th>業種</th>
-			<td>
-				<div id="industory_disp">
-					{section name=it loop=$app.industory_list}
-						・{$app.industory_list[it]}<br/>
-					{sectionelse}
-						選択されていません<br/>
-					{/section}
-				</div>
-				<button class="modalInputIndustory" rel="#prompt_industory">業種を変更する</button>
-			</td>
-		</tr>
-		<tr>
-			<th>開催地</th>
-			<td>
-				<div id="venue_disp">
-					{section name=it loop=$app.vanue_list}
-						・{$app.vanue_list[it]}<br/>
-					{sectionelse}
-						選択されていません<br/>
-					{/section}
-				</div>
-				<button class="modalInputVenue" rel="#prompt_venue">開催地選択</button>
-			</td>
-		</tr>
-		<tr>
-			<th>会期</th>
-			<td>
-				<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if} onclick="fSelectDisabled('u')"/>これから開催のもの<br />
-				<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if} onclick="fSelectDisabled('a')"/>過去のものを含む<br/>
-				<input type="radio" name="year" id="year_e" value="e" {if ('e' == $form.year)}checked{/if} onclick="fSelectDisabled('e')"/>期間を選択する<br/>
-				&nbsp;&nbsp;&nbsp;
-				{if ('e' != $form.year)}
-				<select name="date_from_yyyy" id="date_from_yyyy" disabled="disabled">
-				{else}
-				<select name="date_from_yyyy" id="date_from_yyyy">
-				{/if}
-					<option value=""></option>
-					{section name=it loop=$app.year_list}
-					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_from_yyyy)}selected{/if}>{$app.year_list[it]}</option>
-					{/section}
-				</select>年
-				{if ('e' != $form.year)}
-				<select name="date_from_mm" id="date_from_mm" disabled="disabled">
-				{else}
-				<select name="date_from_mm" id="date_from_mm">
-				{/if}
-					<option value=""></option>
-					<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>1</option>
-					<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>2</option>
-					<option value="03" {if ('03' == $form.date_from_mm)}selected{/if}>3</option>
-					<option value="04" {if ('04' == $form.date_from_mm)}selected{/if}>4</option>
-					<option value="05" {if ('05' == $form.date_from_mm)}selected{/if}>5</option>
-					<option value="06" {if ('06' == $form.date_from_mm)}selected{/if}>6</option>
-					<option value="07" {if ('07' == $form.date_from_mm)}selected{/if}>7</option>
-					<option value="08" {if ('08' == $form.date_from_mm)}selected{/if}>8</option>
-					<option value="09" {if ('09' == $form.date_from_mm)}selected{/if}>9</option>
-					<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
-					<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
-					<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
-				</select>月～<br/>
-				&nbsp;&nbsp;&nbsp;
-				{if ('e' != $form.year)}
-				<select name="date_to_yyyy" id="date_to_yyyy" disabled="disabled">
-				{else}
-				<select name="date_to_yyyy" id="date_to_yyyy">
-				{/if}
-					<option value=""></option>
-					{section name=it loop=$app.year_list}
-					<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
-					{/section}
-				</select>年
-				{if ('e' != $form.year)}
-				<select name="date_to_mm" id="date_to_mm" disabled="disabled">
-				{else}
-				<select name="date_to_mm" id="date_to_mm">
-				{/if}
-					<option value=""></option>
-					<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
-					<option value="02" {if ('02' == $form.date_to_mm)}selected{/if}>2</option>
-					<option value="03" {if ('03' == $form.date_to_mm)}selected{/if}>3</option>
-					<option value="04" {if ('04' == $form.date_to_mm)}selected{/if}>4</option>
-					<option value="05" {if ('05' == $form.date_to_mm)}selected{/if}>5</option>
-					<option value="06" {if ('06' == $form.date_to_mm)}selected{/if}>6</option>
-					<option value="07" {if ('07' == $form.date_to_mm)}selected{/if}>7</option>
-					<option value="08" {if ('08' == $form.date_to_mm)}selected{/if}>8</option>
-					<option value="09" {if ('09' == $form.date_to_mm)}selected{/if}>9</option>
-					<option value="10" {if ('10' == $form.date_to_mm)}selected{/if}>10</option>
-					<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
-					<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
-				</select>月<br/>
-				{if is_error('date_from_yyyy')}
-				<span class="error-message">{message name="date_from_yyyy"}</span><br />
-				{/if}
-				{if is_error('date_from_mm')}
-				<span class="error-message">{message name="date_from_mm"}</span><br />
-				{/if}
-				{if is_error('date_to_yyyy')}
-				<span class="error-message">{message name="date_to_yyyy"}</span><br />
-				{/if}
-				{if is_error('date_to_mm')}
-				<span class="error-message">{message name="date_to_mm"}</span><br />
-				{/if}
-			</td>
-		</tr>
-		<tr>
-			<th>キーワード</th>
-			<td><input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="30" /></td>
-		</tr>
-	</table>
-	<a href="javascript:search('form_fairMenuDetail');"><img width="93" height="34" alt="絞り込む" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
+	<p>
+		<strong>業種</strong>
+	</p>
+	<div id="industory_disp">
+		{section name=it loop=$app.industory_list}
+			・{$app.industory_list[it]}<br/>
+		{sectionelse}
+			選択されていません<br/>
+		{/section}
+	</div>
+	<button class="modalInputIndustory" rel="#prompt_industory">業種を変更する</button>
 
+	<p>
+		<strong>開催地</strong>
+	</p>
+	<div id="venue_disp">
+		{section name=it loop=$app.vanue_list}
+			・{$app.vanue_list[it]}<br/>
+		{sectionelse}
+			選択されていません<br/>
+		{/section}
+	</div>
+	<button class="modalInputVenue" rel="#prompt_venue">開催地選択</button>
+	<p>
+		<strong>会期</strong>
+	</p>
+	<input type="radio" name="year" id="year_u" value="u" {if ('u' == $form.year || '' == $form.year)}checked{/if} onclick="fSelectDisabled('u')"/>これから開催のもの<br />
+	<input type="radio" name="year" id="year_a" value="a" {if ('a' == $form.year)}checked{/if} onclick="fSelectDisabled('a')"/>過去のものを含む<br/>
+	<input type="radio" name="year" id="year_e" value="e" {if ('e' == $form.year)}checked{/if} onclick="fSelectDisabled('e')"/>期間を選択する<br/>
+	&nbsp;&nbsp;&nbsp;
+	{if ('e' != $form.year)}
+	<select name="date_from_yyyy" id="date_from_yyyy" disabled="disabled">
+	{else}
+	<select name="date_from_yyyy" id="date_from_yyyy">
+	{/if}
+		<option value=""></option>
+		{section name=it loop=$app.year_list}
+		<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_from_yyyy)}selected{/if}>{$app.year_list[it]}</option>
+		{/section}
+	</select>年
+	{if ('e' != $form.year)}
+	<select name="date_from_mm" id="date_from_mm" disabled="disabled">
+	{else}
+	<select name="date_from_mm" id="date_from_mm">
+	{/if}
+		<option value=""></option>
+		<option value="01" {if ('01' == $form.date_from_mm)}selected{/if}>1</option>
+		<option value="02" {if ('02' == $form.date_from_mm)}selected{/if}>2</option>
+		<option value="03" {if ('03' == $form.date_from_mm)}selected{/if}>3</option>
+		<option value="04" {if ('04' == $form.date_from_mm)}selected{/if}>4</option>
+		<option value="05" {if ('05' == $form.date_from_mm)}selected{/if}>5</option>
+		<option value="06" {if ('06' == $form.date_from_mm)}selected{/if}>6</option>
+		<option value="07" {if ('07' == $form.date_from_mm)}selected{/if}>7</option>
+		<option value="08" {if ('08' == $form.date_from_mm)}selected{/if}>8</option>
+		<option value="09" {if ('09' == $form.date_from_mm)}selected{/if}>9</option>
+		<option value="10" {if ('10' == $form.date_from_mm)}selected{/if}>10</option>
+		<option value="11" {if ('11' == $form.date_from_mm)}selected{/if}>11</option>
+		<option value="12" {if ('12' == $form.date_from_mm)}selected{/if}>12</option>
+	</select>月～<br/>
+	&nbsp;&nbsp;&nbsp;
+	{if ('e' != $form.year)}
+	<select name="date_to_yyyy" id="date_to_yyyy" disabled="disabled">
+	{else}
+	<select name="date_to_yyyy" id="date_to_yyyy">
+	{/if}
+		<option value=""></option>
+		{section name=it loop=$app.year_list}
+		<option value="{$app.year_list[it]}" {if ($app.year_list[it] == $form.date_to_yyyy)}selected{/if}>{$app.year_list[it]}</option>
+		{/section}
+	</select>年
+	{if ('e' != $form.year)}
+	<select name="date_to_mm" id="date_to_mm" disabled="disabled">
+	{else}
+	<select name="date_to_mm" id="date_to_mm">
+	{/if}
+		<option value=""></option>
+		<option value="01" {if ('01' == $form.date_to_mm)}selected{/if}>1</option>
+		<option value="02" {if ('02' == $form.date_to_mm)}selected{/if}>2</option>
+		<option value="03" {if ('03' == $form.date_to_mm)}selected{/if}>3</option>
+		<option value="04" {if ('04' == $form.date_to_mm)}selected{/if}>4</option>
+		<option value="05" {if ('05' == $form.date_to_mm)}selected{/if}>5</option>
+		<option value="06" {if ('06' == $form.date_to_mm)}selected{/if}>6</option>
+		<option value="07" {if ('07' == $form.date_to_mm)}selected{/if}>7</option>
+		<option value="08" {if ('08' == $form.date_to_mm)}selected{/if}>8</option>
+		<option value="09" {if ('09' == $form.date_to_mm)}selected{/if}>9</option>
+		<option value="10" {if ('10' == $form.date_to_mm)}selected{/if}>10</option>
+		<option value="11" {if ('11' == $form.date_to_mm)}selected{/if}>11</option>
+		<option value="12" {if ('12' == $form.date_to_mm)}selected{/if}>12</option>
+	</select>月<br/>
+	{if is_error('date_from_yyyy')}
+	<span class="error-message">{message name="date_from_yyyy"}</span><br />
+	{/if}
+	{if is_error('date_from_mm')}
+	<span class="error-message">{message name="date_from_mm"}</span><br />
+	{/if}
+	{if is_error('date_to_yyyy')}
+	<span class="error-message">{message name="date_to_yyyy"}</span><br />
+	{/if}
+	{if is_error('date_to_mm')}
+	<span class="error-message">{message name="date_to_mm"}</span><br />
+	{/if}
+	<p>
+		<strong>キーワード</strong>
+	</p>
+	キーワード（展示会名、取扱品目など）ごとに半角スペースをご入力ください<br />
+	<input type="text" name="keyword" id="keyword" value="{$form.keyword}" size="30" />
+	<br /><br />
+	<a href="javascript:search('form_fairMenuDetail');"><img width="93" height="34" alt="絞り込む" src="/j-messe/images/db/btn-narrow.gif" class="over"></a>
 
 	<!-- 業種選択 -->
 	<script type="text/javascript">
