@@ -56,13 +56,14 @@
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/tradefair/">詳細検索</a></li>
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/new-additions/">新着見本市</a></li>
 									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/ranking/">月間ランキング</a></li>
+									<li class="lv01_title"><a href="http://www.jetro.go.jp/j-messe/faq/">よくある質問 (FAQ)</a></li>
 								</ul>
 								<ul class="navi">
 									<li class="lv01_label">出展お役立ち情報</li>
 									<li class="lv02_title"><a href="http://www.jetro.go.jp/j-messe/w-info/">見本市レポート</a></li>
 									<li class="lv02_title"><a href="http://www.jetro.go.jp/services/tradefair/">出展支援</a></li>
 									<li class="lv02_title"><a href="http://www.jetro.go.jp/j-messe/center/">世界の展示会場</a></li>
-									<li class="lv02_title"><a href="http://www.jetro.go.jp/j-messe/business/">世界の見本市ビジネス動向</a></li>
+									<li class="lv02_title"><a href="http://www.jetro.go.jp/j-messe/business/">世界の見本市ビジネストレンド</a></li>
 								</ul>
 							</div>
 						</div>
@@ -80,11 +81,14 @@
 					</div>
 					<div class="wrap">
 						<dl>
-							<dt><img src="/j-messe/images/title-left-inquiry.gif" alt="お問い合わせ" width="150" height="26" /></dt>
-							<dd>本コーナーに関するお問い合わせ・ご意見・ご感想はこちらまで<br />
-								<a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form5/pub/faa/inquiry_j');"><img src="/j-messe/images/btn_inquiry.gif" alt="お問い合わせフォーム" width="140" height="25" class="over padding_l05 margin_tb10" /></a><br />
-								ジェトロ展示事業課<br />
-								（TEL：03-3582-5541）</dd>
+							<dt><img width="150" height="26" alt="お問い合わせ" src="/j-messe/images/title-left-inquiry.gif"></dt>
+							<dd>
+								※お問い合わせいただく前に<a href="/j-messe/j-messe/faq/">「よくある質問(FAQ)」</a>および<a href="/j-messe/tradefair/terms.html">「見本市・展示会情報のご利用について」</a>をご覧ください。
+								<br><br>
+								<font color="red">個別の見本市・展示会に関する詳細情報は、右記主催者への直接のお問い合わせをお願いいたします。</font>
+								<br><br>
+								ジェトロ展示事業課<br><a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form5/pub/faa/inquiry_j');">お問い合わせフォーム</a><br>TEL：03-3582-5541
+							</dd>
 						</dl>
 					</div>
 				</div>
