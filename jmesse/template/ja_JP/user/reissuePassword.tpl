@@ -69,6 +69,10 @@
 									</form>
 								</div>
 							</div>
+							<div class="line_dot"><hr /></div>
+							<!-- ssl area-->
+							<script language="JavaScript" src="https://www.jetro.go.jp/js/jetro_seal_ja.js"></script>
+							<!-- /ssl area-->
 						</div>
 					</div>
 				</div>

@@ -79,6 +79,10 @@
 					<a href="{$config.url}?action_user_enUserTerms=true">User Registration</a></p>
 				</div>
 			</div>
+			<div class="line_dot"><hr /></div>
+			<!-- ssl area-->
+			<script language="JavaScript" src="https://www.jetro.go.jp/js/jetro_seal_en.js"></script>
+			<!-- /ssl area-->
 			<p class="totop">
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
 			</p>

@@ -109,12 +109,9 @@
 
 									</div>
 								</div>
-
 								<div class="right" style="width: 360px;">
-
 									<div class="entry">
 										<h3>初めてご利用の方</h3>
-
 										<p>
 											<strong>貴方の主催する見本市・展示会を世界に向けてPR！<br /> 国内のみならず海外からの来場誘致、出展社募集のお役に立ちます。
 											</strong>
@@ -122,17 +119,16 @@
 										<p>
 											<strong><span class="red">登録は無料。</span> </strong>見本市主催者ご自身で、登録情報を更新・削除することも可能です。今後開催される見本市・展示会の広報手段として、ぜひご活用下さい。
 										</p>
-
-
 										<p class="clearfix">
 											見本市登録をご利用いただく場合は、ユーザー登録をお願いします。<br /> <a href="{$config.url}?action_user_userTerms=true"><img class="over imgright" src="/j-messe/images/db/btn-user-regist.gif" /> </a>
 										</p>
-
 									</div>
 								</div>
-
-
 							</div>
+							<div class="line_dot"><hr /></div>
+							<!-- ssl area-->
+							<script language="JavaScript" src="https://www.jetro.go.jp/js/jetro_seal_ja.js"></script>
+							<!-- /ssl area-->
 						</div>
 					</div>
 

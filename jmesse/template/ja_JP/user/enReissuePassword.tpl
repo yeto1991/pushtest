@@ -60,6 +60,10 @@
 						<p class="t_right"><input type="image" src="/en/database/j-messe/images/db/btn-send.gif" alt="send"  class="over" width="110" height="37"  /></p>
 					</form>
 				</div>
+				<div class="line_dot"><hr /></div>
+				<!-- ssl area-->
+				<script language="JavaScript" src="https://www.jetro.go.jp/js/jetro_seal_en.js"></script>
+				<!-- /ssl area-->
 			</div>
 			<p class="totop">
 				<a href="javascript:window.scrollTo(0, 0);"><img src="/images/en/totop.gif" alt="Return to PAGETOP" width="103" height="14" /></a>
