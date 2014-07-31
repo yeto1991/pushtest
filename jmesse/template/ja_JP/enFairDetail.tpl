@@ -400,9 +400,10 @@
 						<ul>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/industry/">By Industry</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/country/">By Country</a></li>
-							<li><a href="http://www.jetro.go.jp/en/database/j-messe/tradefair/">Trade Fair Search</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/tradefair/">Advanced Search</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/new-additions/">Recently Added</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/ranking/">Monthly Ranking</a></li>
+							<li><a href="http://www.jetro.go.jp/en/database/j-messe/faq/">FAQ</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/report/">Special Reports on Major Trade Shows in Japan</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/center/">Major Exhibition Sites</a></li>
 							<li><a href="http://www.jetro.go.jp/en/database/j-messe/links/">Related Links</a></li>
@@ -419,11 +420,12 @@
 			</div>
 			<div id="direct_inquiries">
 				<div id="direct_inquiries_inside">
-					<p>Please direct inquiries or comments to</p>
-					<p>Trade Fair Planning Division</p>
+					<p><strong>Inquiries to Online Trade Fair Database J-messe</strong></p>
 					<ul>
+						<li><a href="/en/database/j-messe/faq/">FAQ</a></li>
 						<li><a href="javascript:jetro_open_win600('https://www.jetro.go.jp/form5/pub/faa/inquiry_en');" class="icon_arrow">Inquiry form</a></li>
 					</ul>
+					<p>(Trade Fair Division, JETRO)</p>
 				</div>
 			</div>
 		</div>
