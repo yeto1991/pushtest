@@ -18,7 +18,7 @@
 			<li><a href="http://www.jetro.go.jp/">HOME</a></li>
 			<li><a href="http://www.jetro.go.jp/en/database/j-messe/">Online Trade Fair Database (J-messe)</a></li>
 			<li><a href="{$config.url}?action_user_enTop=true">Administration Menus</a></li>
-			<li>Coping registered information</li>
+			<li>Copying registered information</li>
 		</ul>
 	</div>
 	<!-- /bread -->

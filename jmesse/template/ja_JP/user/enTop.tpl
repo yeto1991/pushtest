@@ -42,8 +42,8 @@
 					</div>
 
 					<div class="btn nomp">
-						<a href="{$config.url}?action_user_enFairCopyList=true"><span class="title">Coping registered information</span>
-						<span class="description">Click the link above to register your new trade fair information by coping and editing your existing record.</span></a>
+						<a href="{$config.url}?action_user_enFairCopyList=true"><span class="title">Copying registered information</span>
+						<span class="description">Click the link above to register your new trade fair information by Copying and editing your existing record.</span></a>
 					</div>
 				</div>
 				<h3>Management of User's Information</h3>
