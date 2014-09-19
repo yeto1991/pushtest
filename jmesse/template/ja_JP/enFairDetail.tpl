@@ -15,7 +15,7 @@
 </title>
 </head>
 
-<body class="layout-LC highlight-database j-messe">
+<body class="layout-LC highlight-database j-messe" oncontextmenu="return false;" oncopy="return false;">
 	<!-- header -->
 	{$app_ne.header}
 	<!-- /header -->
