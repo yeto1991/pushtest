@@ -1129,7 +1129,8 @@
 							<td nowrap>
 								{if ('' == $form.jecc_flag)}
 									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="0" />未認証
-									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="1" />認証
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="1" />旧認証
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="2" />新認証
 								{else}
 									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="0"
 										{section name=it loop=$form.jecc_flag}
@@ -1140,7 +1141,12 @@
 										{section name=it loop=$form.jecc_flag}
 										{if ('1' == $form.jecc_flag[it] && '' != $form.jecc_flag[it])}checked{/if}
 										{/section}
-									/>認証
+									/>旧認証
+									<input type="checkbox" name="jecc_flag[]" id="jecc_flag[]" value="2"
+										{section name=it loop=$form.jecc_flag}
+										{if ('2' == $form.jecc_flag[it] && '' != $form.jecc_flag[it])}checked{/if}
+										{/section}
+									/>新認証
 								{/if}
 							</td>
 						</tr>

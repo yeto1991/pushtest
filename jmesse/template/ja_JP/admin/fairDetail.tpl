@@ -588,7 +588,15 @@
 						<tr>
 							<td nowrap>JECC認証</td>
 							<!-- JECC認証フラグ -->
-							<td>{if ("1" ==$form.jecc_flag)}認証{else}未認証{/if}</td>
+							<td>
+								{if ("1" ==$form.jecc_flag)}
+									旧認証
+								{elseif ("2" == $form.jecc_flag)}
+									新認証
+								{else}
+									未認証
+								{/if}
+							</td>
 						</tr>
 						<tr>
 							<td nowrap>JECC認証年月日</td>

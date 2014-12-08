@@ -303,7 +303,7 @@ class Jmesse_Action_AdminFairChange extends Jmesse_ActionClass
 		// MOD-S 2013.01.16 JECC認証対応
 		$this->af->set('jecc_flag', $jm_fair->get('jecc_flag'));
 		// JECC認証年月日
-		if('1' == $jm_fair->get('jecc_flag')){
+		if('1' == $jm_fair->get('jecc_flag') || '2' == $jm_fair->get('jecc_flag')){
 			$this->af->set('jecc_date_y', substr($jm_fair->get('jecc_date'), 0, 4));
 			$this->af->set('jecc_date_m', substr($jm_fair->get('jecc_date'), 5, 2));
 			$this->af->set('jecc_date_d', substr($jm_fair->get('jecc_date'), 8, 2));

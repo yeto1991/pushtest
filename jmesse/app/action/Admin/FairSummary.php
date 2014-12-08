@@ -600,7 +600,8 @@ class Jmesse_Action_AdminFairSummary extends Jmesse_ActionClass
 
 	var $jecc_flag_name = array(
 		'0' => '未認証',
-		'1' => '認証'
+		'1' => '旧認証',
+		'2' => '新認証'
 	);
 
 	var $exhibit_support_flag_name = array(

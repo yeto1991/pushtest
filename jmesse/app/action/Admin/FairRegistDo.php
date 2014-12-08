@@ -170,7 +170,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// ADD-E 2012.01.31 未来日付はエラー
 		// MOD-S 2013.01.22 JECC認証対応
 		// JECC認証年月日(認証時のみ)
-		if ('1' == $this->af->get('jecc_flag')) {
+		if ('1' == $this->af->get('jecc_flag') || '2' == $this->af->get('jecc_flag')) {
 			if (!checkdate($this->af->get('jecc_date_m'), $this->af->get('jecc_date_d'), $this->af->get('jecc_date_y'))) {
 				$this->ae->add('error', 'JECC認証年月日が正しくありません');
 			}
@@ -707,7 +707,7 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 		// MOD-S 2013.01.16 JECC認証対応
 		$jm_fair->set('jecc_flag', $this->af->get('jecc_flag'));
 		// JECC認証年月日
-		if ('1' == $this->af->get('jecc_flag')) {
+		if ('1' == $this->af->get('jecc_flag') || '2' == $this->af->get('jecc_flag')) {
 			$jecc_date = $this->af->get('jecc_date_y').'/'.$this->af->get('jecc_date_m').'/'.$this->af->get('jecc_date_d');
 			$jm_fair->set('jecc_date', $jecc_date);
 		}else{
@@ -874,8 +874,11 @@ class Jmesse_Action_AdminFairRegistDo extends Jmesse_ActionClass
 			$search_key .= '削除 ';
 		}
 		// MOD-S 2013.01.16 JECC認証対応
+		if ('2' == $this->af->get('jecc_flag')) {
+			$search_key .= '新認証 ';
+		}
 		if ('1' == $this->af->get('jecc_flag')) {
-			$search_key .= '認証 ';
+			$search_key .= '旧認証 ';
 		}
 		if ('0' == $this->af->get('jecc_flag')) {
 			$search_key .= '未認証 ';

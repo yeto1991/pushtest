@@ -1228,10 +1228,12 @@
 							<td nowrap>
 								{if ("copy" == $form.mode)}
 									<input type="radio" name="jecc_flag" id="jecc_flag" value="0" checked />未認証
-									<input type="radio" name="jecc_flag" id="jecc_flag" value="1"  />認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="1"  />旧認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="2"  />新認証
 								{else}
-									<input type="radio" name="jecc_flag" id="jecc_flag" value="0" {if ("0" == $form.jecc_flag || "1" != $form.jecc_flag)}checked{/if} />未認証
-									<input type="radio" name="jecc_flag" id="jecc_flag" value="1" {if ("1" == $form.jecc_flag)}checked{/if} />認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="0" {if ("0" == $form.jecc_flag || "1" != $form.jecc_flag || "2" != $form.jecc_flag)}checked{/if} />未認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="1" {if ("1" == $form.jecc_flag)}checked{/if} />旧認証
+									<input type="radio" name="jecc_flag" id="jecc_flag" value="2" {if ("2" == $form.jecc_flag)}checked{/if} />新認証
 								{/if}
 							</td>
 						</tr>
