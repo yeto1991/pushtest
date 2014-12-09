@@ -121,11 +121,9 @@
 								{/if}
 
 								<p style="word-break: break-all;">{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
-								<div style="float:left">
-									{if ('' != $app.fair_detail.fair_url)}
+								{if ('' != $app.fair_detail.fair_url)}
 										<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">公式ウェブサイト</font></b></a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
-									{/if}
-								</div>
+								{/if}
 								<p class="t_right">
 								{if ('2' == $app.fair_detail.jecc_flag)}
 									<img src="/j-messe/images/JECC_UFI_Logo.jpg" alt="new_JECC"><br />

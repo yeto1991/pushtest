@@ -51,11 +51,9 @@
 				{/if}
 
 				<p style="word-break: break-all;">{$app.fair_detail.profile_en|replace:"&lt;br/&gt;":"<br/>"}</p>
-				<div style="float:left">
-					{if ('' != $app.fair_detail.fair_url)}
-						<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">official site</font></b></a><img class="icon_external" src="/images/jp/icon-external.gif">
-					{/if}
-				</div>
+				{if ('' != $app.fair_detail.fair_url)}
+					<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">official site</font></b></a><img class="icon_external" src="/images/jp/icon-external.gif">
+				{/if}
 				<p class="t_right">
 				{if ('2' == $app.fair_detail.jecc_flag)}
 					<img src="/j-messe/images/JECC_UFI_Logo.jpg" alt="new_JECC"><br />
