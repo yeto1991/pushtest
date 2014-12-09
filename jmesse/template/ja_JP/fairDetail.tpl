@@ -122,18 +122,20 @@
 
 								<p style="word-break: break-all;">{$app.fair_detail.profile_jp|replace:"&lt;br/&gt;":"<br/>"}</p>
 								{if ('' != $app.fair_detail.fair_url)}
-										<a class="icon_arrow" target="_blank" href="{$app.fair_detail.fair_url}"><b><font size="4">公式ウェブサイト</font></b></a><img class="icon_external" alt="他のサイトへ" src="/images/jp/icon-external.gif">
+										<a class="icon_arrow" target="_blank" style="float:left;" href="{$app.fair_detail.fair_url}"><b><font size="2">公式ウェブサイト</font></b></a>
+										<img class="icon_external" style="float:left;" alt="他のサイトへ" src="/images/jp/icon-external.gif">
 								{/if}
 								<p class="t_right">
-								{if ('2' == $app.fair_detail.jecc_flag)}
-									<img src="/j-messe/images/JECC_UFI_Logo.jpg" alt="new_JECC"><br />
-									<a href="http://www.jetro.go.jp/j-messe/jecc/" />展示会認証制度について</a>
-								{/if}
-								{if ('1' == $app.fair_detail.jecc_flag)}
-									<img src="/j-messe/images/approved_exhibition.jpg" alt="old_JECC"><br />
-									<a href="http://www.jetro.go.jp/j-messe/jecc/" />展示会認証制度について</a>
-								{/if}
+									{if ('2' == $app.fair_detail.jecc_flag)}
+										<img src="/j-messe/images/JECC_UFI_Logo.jpg" alt="new_JECC"><br />
+										<a href="http://www.jetro.go.jp/j-messe/jecc/" />展示会認証制度について</a>
+									{/if}
+									{if ('1' == $app.fair_detail.jecc_flag)}
+										<img src="/j-messe/images/approved_exhibition.jpg" alt="old_JECC"><br />
+										<a href="http://www.jetro.go.jp/j-messe/jecc/" />展示会認証制度について</a>
+									{/if}
 								</p>
+								<div style="clear:both;"></div>
 								<!-- left -->
 								{if ('' != $app.fair_detail.photos_1 || '' != $app.fair_detail.photos_2 || '' != $app.fair_detail.photos_3)}
 								<div class="left" id="detail">
