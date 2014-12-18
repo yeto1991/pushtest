@@ -161,14 +161,16 @@
 							<th>Organizer</th>
 							<td>
 								{$app.fair_detail.organizer_en}<br />
-								{if ('' != $app.fair_detail.organizer_addr)}
-								Address : {$app.fair_detail.organizer_addr}<br/>
-								{/if}
-								{if ('' != $app.fair_detail.organizer_div)}
-								Department : {$app.fair_detail.organizer_div}<br/>
-								{/if}
-								{if ('' != $app.fair_detail.organizer_pers)}
-								Person : {$app.fair_detail.organizer_pers}<br/>
+								{if ('1' == $app.fair_detail.select_language_info)}
+									{if ('' != $app.fair_detail.organizer_addr)}
+									Address : {$app.fair_detail.organizer_addr}<br/>
+									{/if}
+									{if ('' != $app.fair_detail.organizer_div)}
+									Department : {$app.fair_detail.organizer_div}<br/>
+									{/if}
+									{if ('' != $app.fair_detail.organizer_pers)}
+									Person : {$app.fair_detail.organizer_pers}<br/>
+									{/if}
 								{/if}
 								TEL : {$app.fair_detail.organizer_tel}<br />
 								{if ('' != $app.fair_detail.organizer_fax)}
@@ -199,14 +201,16 @@
 								{if ('' != $app.fair_detail.agency_in_japan_en)}
 								{$app.fair_detail.agency_in_japan_en}<br/>
 								{/if}
-								{if ('' != $app.fair_detail.agency_in_japan_addr)}
-								Address : {$app.fair_detail.agency_in_japan_addr}<br/>
-								{/if}
-								{if ('' != $app.fair_detail.agency_in_japan_div)}
-								Department : {$app.fair_detail.agency_in_japan_div}<br/>
-								{/if}
-								{if ('' != $app.fair_detail.agency_in_japan_pers)}
-								Person : {$app.fair_detail.agency_in_japan_pers}<br/>
+								{if ('1' == $app.fair_detail.select_language_info)}
+									{if ('' != $app.fair_detail.agency_in_japan_addr)}
+									Address : {$app.fair_detail.agency_in_japan_addr}<br/>
+									{/if}
+									{if ('' != $app.fair_detail.agency_in_japan_div)}
+									Department : {$app.fair_detail.agency_in_japan_div}<br/>
+									{/if}
+									{if ('' != $app.fair_detail.agency_in_japan_pers)}
+									Person : {$app.fair_detail.agency_in_japan_pers}<br/>
+									{/if}
 								{/if}
 								{if ('' != $app.fair_detail.agency_in_japan_tel)}
 								TEL : {$app.fair_detail.agency_in_japan_tel}<br/>
