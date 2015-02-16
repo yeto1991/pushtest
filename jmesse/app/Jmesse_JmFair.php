@@ -3732,6 +3732,1170 @@ class Jmesse_JmFairManager extends Ethna_AppManager
 
 		return $list;
 	}
+
+	// ADD-S 2015.01.08 課題No.64(フロント/産業区分×開催地検索機能対応
+	/**
+	 * フロント画面用の見本市一覧の件数取得。(フロント/産業区分×開催地 見本市検索用）
+	 *
+	 * @param string language
+	 * @return NULL|unknown
+	 */
+	function getFairListCntForIH($language) {
+
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
+
+		// WHERE句追加
+		$data = array();
+		$sql_ext = $this->_makeWhereForIH($data);
+		$sql = 'select count(*) cnt from ('.$sql.' and ('.$sql_ext.')) t';
+		$stmt =& $db->db->prepare($sql);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+
+		return $row['cnt'];
+	}
+
+	/**
+	 * フロント画面用の見本市一覧取得。(フロント/産業区分×開催地 見本市検索用）
+	 *
+	 * @param int $offset
+	 * @param int $limit
+	 * @param string $sort
+	 * @param string $language
+	 * @return NULL|unknown
+	 */
+	function getFairListForIH($offset, $limit, $sort, $language) {
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
+
+		// WHERE句追加
+		$data = array();
+		$sql_ext = $this->_makeWhereForIH($data);
+
+		// SORT条件
+		if ('2' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
+			if($language == 'J'){
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
+			}else{
+				$sql_sort = ' order by trim(fair_title_en) asc ';
+			}
+		} elseif ('3' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		} elseif ('4' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		} elseif ('1' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
+			$sql_sort = ' order by date_of_registration desc ';
+		} else {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
+		}
+
+		// OFFSET、LIMIT
+		$sql_limit = ' limit ?, ? ';
+		array_push($data, (int)$offset, (int)$limit);
+
+		// Prepare Statement化
+		$sql .= ' and ('.$sql_ext.')'.$sql_sort.$sql_limit;
+		$stmt =& $db->db->prepare($sql);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * 見本市情報一覧検索条件WHERE句作成。(フロント/産業区分×開催地 見本市検索用）
+	 *
+	 * @param array $data
+	 * @return string WHERE句
+	 */
+	function _makeWhereForIH(&$data) {
+		$sql_ext = '';
+		$search_cond = $this->session->get('search_cond');
+
+		// 各リンク
+		$sql_tmp_l = '';
+
+		//開催地-Where条件
+		$sql_tmp_host = '';
+		if ('' != $search_cond['ha']) {
+			//オプション別条件分岐
+			if ('' != $search_cond['op']) {
+				if ('E' == $search_cond['op']) {
+					//EU               region = '002' and country not in ('002','012','020','027','029','031','032','033','038')
+					$sql_tmp_host .= ' region = ? and country not in (?,?,?,?,?,?,?,?,?) ';
+					array_push($data, '002');
+					array_push($data, '002');
+					array_push($data, '012');
+					array_push($data, '020');
+					array_push($data, '027');
+					array_push($data, '029');
+					array_push($data, '031');
+					array_push($data, '032');
+					array_push($data, '033');
+					array_push($data, '038');
+				}elseif ('A' == $search_cond['op']) {
+					//ASEAN            region = '009' and country in ('004''006''007''009''016''017''018''019''020''023')
+					$sql_tmp_host .= ' region = ? and country in (?,?,?,?,?,?,?,?,?,?) ';
+					array_push($data, '009');
+					array_push($data, '004');
+					array_push($data, '006');
+					array_push($data, '007');
+					array_push($data, '009');
+					array_push($data, '016');
+					array_push($data, '017');
+					array_push($data, '018');
+					array_push($data, '019');
+					array_push($data, '020');
+					array_push($data, '023');
+				}elseif ('NHK' == $search_cond['op']) {
+					//中国（香港以外）
+					$sql_tmp_host .= ' region = ? and country = ? and city <> ? ';
+					array_push($data, '009');
+					array_push($data, '011');
+					array_push($data, '028');
+				}elseif ('HK' == $search_cond['op']) {
+					//香港
+					$sql_tmp_host .= ' region = ? and country = ? and city = ? ';
+					array_push($data, '009');
+					array_push($data, '011');
+					array_push($data, '028');
+				}
+			}else{
+				if ('' != $search_cond['hc']) {
+					//国で指定
+					$sql_tmp_host .= ' region = ? and country = ? ';
+					array_push($data, $search_cond['ha']);
+					array_push($data, $search_cond['hc']);
+				}else{
+					//地域で指定
+					$sql_tmp_host .= ' region = ? ';
+					array_push($data, $search_cond['ha']);
+				}
+			}
+		}
+
+		//産業区分-Where条件
+		$sql_tmp_ind = '';
+		if ('' != $search_cond['ind']) {
+			if ('001' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_001_002_001');
+				$wherin_target2 = $this->config->get('industry_001_008_001');
+				$wherin_target3 = $this->config->get('industry_001_009_011');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+			}elseif ('002' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_002_008_002');
+				$wherin_target2 = $this->config->get('industry_002_008_003');
+				$wherin_target3 = $this->config->get('industry_002_008_009');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+			}elseif ('003' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_003_008_005');
+				$wherin_target2 = $this->config->get('industry_003_008_006');
+				$wherin_target3 = $this->config->get('industry_003_008_007');
+				$wherin_target4 = $this->config->get('industry_003_009_008');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+			}elseif ('004' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_004_005_004');
+				$wherin_target2 = $this->config->get('industry_004_009_001');
+				$wherin_target3 = $this->config->get('industry_004_009_002');
+				$wherin_target4 = $this->config->get('industry_004_009_007');
+				$wherin_target5 = $this->config->get('industry_004_009_009');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+			}elseif ('005' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_005_007_006');
+				$wherin_target2 = $this->config->get('industry_005_008_014');
+				$wherin_target3 = $this->config->get('industry_005_009_006');
+				$wherin_target4 = $this->config->get('industry_005_010_001');
+				$wherin_target5 = $this->config->get('industry_005_010_002');
+				$wherin_target6 = $this->config->get('industry_005_010_005');
+				$wherin_target7 = $this->config->get('industry_005_010_008');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+			}elseif ('006' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_006_007_001');
+				$wherin_target2 = $this->config->get('industry_006_007_002');
+				$wherin_target3 = $this->config->get('industry_006_007_003');
+				$wherin_target4 = $this->config->get('industry_006_007_004');
+				$wherin_target5 = $this->config->get('industry_006_007_005');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+			}elseif ('007' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_007_004_001');
+				$wherin_target2 = $this->config->get('industry_007_004_002');
+				$wherin_target3 = $this->config->get('industry_007_004_003');
+				$wherin_target4 = $this->config->get('industry_007_004_004');
+				$wherin_target5 = $this->config->get('industry_007_004_005');
+				$wherin_target6 = $this->config->get('industry_007_004_006');
+				$wherin_target7 = $this->config->get('industry_007_004_007');
+				$wherin_target8 = $this->config->get('industry_007_005_001');
+				$wherin_target9 = $this->config->get('industry_007_005_002');
+				$wherin_target10 = $this->config->get('industry_007_006_001');
+				$wherin_target11 = $this->config->get('industry_007_006_002');
+				$wherin_target12 = $this->config->get('industry_007_006_003');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?,?,?,?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+			}elseif ('008' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_008_002_002');
+				$wherin_target2 = $this->config->get('industry_008_011_001');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?) or concat(main_industory_2, sub_industory_2) in (?,?) or concat(main_industory_3, sub_industory_3) in (?,?) or concat(main_industory_4, sub_industory_4) in (?,?) or concat(main_industory_5, sub_industory_5) in (?,?) or concat(main_industory_6, sub_industory_6) in (?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+			}elseif ('009' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_009_002_002');
+				$wherin_target2 = $this->config->get('industry_009_003_001');
+				$wherin_target3 = $this->config->get('industry_009_003_002');
+				$wherin_target4 = $this->config->get('industry_009_006_004');
+				$wherin_target5 = $this->config->get('industry_009_006_006');
+				$wherin_target6 = $this->config->get('industry_009_006_007');
+				$wherin_target7 = $this->config->get('industry_009_008_013');
+				$wherin_target8 = $this->config->get('industry_009_010_009');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+			}
+		}
+		// ANDで連結
+		$ary_sql = array($sql_tmp_host, $sql_tmp_ind);
+		$sql_tmp_l = $this->_addWhereRelation($ary_sql, 'a');
+
+		//これから開催条件
+		$sql_tmp_y = '';
+		$sql_tmp_y .= " concat(date_to_yyyy, '/', date_to_mm, '/', date_to_dd) >= curdate() ";
+
+		// 全検索条件をAND連結
+		$ary_sql = array($sql_tmp_l, $sql_tmp_y);
+		$sql_ext = $this->_addWhereRelation($ary_sql, 'a');
+		return $sql_ext;
+	}
+
+	/**
+	 * すべての有効な見本市情報の件数を取得。(フロント/産業区分×開催地検索用）
+	 *
+	 * @param string $language
+	 */
+	function getFairListAllCntForIH($language) {
+
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		}else{
+			$sql = $this->sql_get_fair_list_en;
+		}
+
+		// WHERE句追加
+		$data = array();
+		$sql_ext = $this->_makeWhereAllForIH($data);
+		$sql .= ' and ('.$sql_ext.') ';
+		$sql = 'select count(*) cnt from ('.$sql.') t';
+
+		// SQLを実行
+		$stmt =& $db->db->prepare($sql);
+		$res = $db->db->execute($stmt, $data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+		return $row['cnt'];
+	}
+
+
+	/**
+	 * すべての有効な見本市情報の取得。(フロント/産業区分×開催地検索用）
+	 *
+	 * @param unknown_type $offset
+	 * @param unknown_type $limit
+	 * @param unknown_type $sort
+	 * @param unknown_type $language
+	 */
+	function getFairListAllForIH($offset, $limit, $sort, $language) {
+
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+
+		// SQL作成
+		if($language == 'J'){
+			$sql = $this->sql_get_fair_list;
+		} else {
+			$sql = $this->sql_get_fair_list_en;
+		}
+
+		// WHERE句追加
+		$data = array();
+		$sql_ext = $this->_makeWhereAllForIH($data);
+		$sql .= ' and ('.$sql_ext.') ';
+
+		// SORT条件
+		if ('2' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▲見本市名");
+			if($language == 'J'){
+				$sql_sort = ' order by trim(fair_title_jp) asc ';
+			}else{
+				$sql_sort = ' order by trim(fair_title_en) asc ';
+			}
+			// MOD-S 2012.02.17 規模順追加
+		} elseif ('3' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▼展示予定面積順");
+			$sql_sort = ' order by cast(gross_floor_area as SIGNED) desc ';
+		} elseif ('4' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▼過去の出展社数順");
+			$sql_sort = ' order by cast(total_number_of_exhibitors as SIGNED) desc ';
+		} elseif ('1' == $sort) {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▼登録日");
+			$sql_sort = ' order by date_of_registration desc ';
+		} else {
+			//$this->backend->getLogger()->log(LOG_DEBUG, "▲開始日");
+			$sql_sort = ' order by concat(date_from_yyyy, date_from_mm, date_from_dd) asc ';
+		}
+		$sql .= $sql_sort;
+
+		// OFFSET、LIMIT
+		$sql .= ' limit ?, ? ';
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+
+		// 検索条件をArray化
+		array_push($data, (int)$offset, (int)$limit);
+
+		// SQLを実行
+		$res = $db->db->execute($stmt, $data);
+
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+
+		return $list;
+	}
+
+	/**
+	 * 見本市情報一覧「すべて」検索条件WHERE句作成。(フロント/産業区分×開催地検索用）
+	 *
+	 * @param array $data
+	 * @return string WHERE句
+	 */
+	function _makeWhereAllForIH(&$data) {
+
+		$sql_ext = '';
+		$search_cond = $this->session->get('search_cond');
+
+		// 各リンク
+		$sql_tmp_l = '';
+		//開催地-Where条件
+		$sql_tmp_host = '';
+		if ('' != $search_cond['ha']) {
+			//オプション別条件分岐
+			if ('' != $search_cond['op']) {
+				if ('E' == $search_cond['op']) {
+					//EU               region = '002' and country not in ('002','012','020','027','029','031','032','033','038') ";
+					$sql_tmp_host .= ' region = ? and country not in (?,?,?,?,?,?,?,?,?) ';
+					array_push($data, '002');
+					array_push($data, '002');
+					array_push($data, '012');
+					array_push($data, '020');
+					array_push($data, '027');
+					array_push($data, '029');
+					array_push($data, '031');
+					array_push($data, '032');
+					array_push($data, '033');
+					array_push($data, '038');
+				}elseif ('A' == $search_cond['op']) {
+					//ASEAN            region = '009' and country in ('004''006''007''009''016''017''018''019''020''023') ";
+					$sql_tmp_host .= ' region = ? and country in (?,?,?,?,?,?,?,?,?,?) ';
+					array_push($data, '009');
+					array_push($data, '004');
+					array_push($data, '006');
+					array_push($data, '007');
+					array_push($data, '009');
+					array_push($data, '016');
+					array_push($data, '017');
+					array_push($data, '018');
+					array_push($data, '019');
+					array_push($data, '020');
+					array_push($data, '023');
+				}elseif ('NHK' == $search_cond['op']) {
+					//中国（香港以外）
+					$sql_tmp_host .= ' region = ? and country = ? and city <> ? ';
+					array_push($data, '009');
+					array_push($data, '011');
+					array_push($data, '028');
+				}elseif ('HK' == $search_cond['op']) {
+					//香港
+					$sql_tmp_host .= ' region = ? and country = ? and city = ? ';
+					array_push($data, '009');
+					array_push($data, '011');
+					array_push($data, '028');
+				}
+			}else{
+				if ('' != $search_cond['hc']) {
+					//国で指定
+					$sql_tmp_host .= ' region = ? and country = ? ';
+					array_push($data, $search_cond['ha']);
+					array_push($data, $search_cond['hc']);
+				}else{
+					//地域で指定
+					$sql_tmp_host .= ' region = ? ';
+					array_push($data, $search_cond['ha']);
+				}
+			}
+		}
+
+		//産業区分-Where条件
+		$sql_tmp_ind = '';
+		$wherin_targets = '';
+		if ('' != $search_cond['ind']) {
+			if ('001' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_001_002_001');
+				$wherin_target2 = $this->config->get('industry_001_008_001');
+				$wherin_target3 = $this->config->get('industry_001_009_011');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+			}elseif ('002' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_002_008_002');
+				$wherin_target2 = $this->config->get('industry_002_008_003');
+				$wherin_target3 = $this->config->get('industry_002_008_009');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+			}elseif ('003' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_003_008_005');
+				$wherin_target2 = $this->config->get('industry_003_008_006');
+				$wherin_target3 = $this->config->get('industry_003_008_007');
+				$wherin_target4 = $this->config->get('industry_003_009_008');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+			}elseif ('004' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_004_005_004');
+				$wherin_target2 = $this->config->get('industry_004_009_001');
+				$wherin_target3 = $this->config->get('industry_004_009_002');
+				$wherin_target4 = $this->config->get('industry_004_009_007');
+				$wherin_target5 = $this->config->get('industry_004_009_009');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+			}elseif ('005' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_005_007_006');
+				$wherin_target2 = $this->config->get('industry_005_008_014');
+				$wherin_target3 = $this->config->get('industry_005_009_006');
+				$wherin_target4 = $this->config->get('industry_005_010_001');
+				$wherin_target5 = $this->config->get('industry_005_010_002');
+				$wherin_target6 = $this->config->get('industry_005_010_005');
+				$wherin_target7 = $this->config->get('industry_005_010_008');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+			}elseif ('006' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_006_007_001');
+				$wherin_target2 = $this->config->get('industry_006_007_002');
+				$wherin_target3 = $this->config->get('industry_006_007_003');
+				$wherin_target4 = $this->config->get('industry_006_007_004');
+				$wherin_target5 = $this->config->get('industry_006_007_005');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+			}elseif ('007' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_007_004_001');
+				$wherin_target2 = $this->config->get('industry_007_004_002');
+				$wherin_target3 = $this->config->get('industry_007_004_003');
+				$wherin_target4 = $this->config->get('industry_007_004_004');
+				$wherin_target5 = $this->config->get('industry_007_004_005');
+				$wherin_target6 = $this->config->get('industry_007_004_006');
+				$wherin_target7 = $this->config->get('industry_007_004_007');
+				$wherin_target8 = $this->config->get('industry_007_005_001');
+				$wherin_target9 = $this->config->get('industry_007_005_002');
+				$wherin_target10 = $this->config->get('industry_007_006_001');
+				$wherin_target11 = $this->config->get('industry_007_006_002');
+				$wherin_target12 = $this->config->get('industry_007_006_003');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?,?,?,?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?,?,?,?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target9);
+				array_push($data, $wherin_target10);
+				array_push($data, $wherin_target11);
+				array_push($data, $wherin_target12);
+			}elseif ('008' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_008_002_002');
+				$wherin_target2 = $this->config->get('industry_008_011_001');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?) or concat(main_industory_2, sub_industory_2) in (?,?) or concat(main_industory_3, sub_industory_3) in (?,?) or concat(main_industory_4, sub_industory_4) in (?,?) or concat(main_industory_5, sub_industory_5) in (?,?) or concat(main_industory_6, sub_industory_6) in (?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+			}elseif ('009' == $search_cond['ind']) {
+				$wherin_target1 = $this->config->get('industry_009_002_002');
+				$wherin_target2 = $this->config->get('industry_009_003_001');
+				$wherin_target3 = $this->config->get('industry_009_003_002');
+				$wherin_target4 = $this->config->get('industry_009_006_004');
+				$wherin_target5 = $this->config->get('industry_009_006_006');
+				$wherin_target6 = $this->config->get('industry_009_006_007');
+				$wherin_target7 = $this->config->get('industry_009_008_013');
+				$wherin_target8 = $this->config->get('industry_009_010_009');
+				$sql_tmp_ind .= ' concat(main_industory_1, sub_industory_1) in (?,?,?,?,?,?,?,?) or concat(main_industory_2, sub_industory_2) in (?,?,?,?,?,?,?,?) or concat(main_industory_3, sub_industory_3) in (?,?,?,?,?,?,?,?) or concat(main_industory_4, sub_industory_4) in (?,?,?,?,?,?,?,?) or concat(main_industory_5, sub_industory_5) in (?,?,?,?,?,?,?,?) or concat(main_industory_6, sub_industory_6) in (?,?,?,?,?,?,?,?) ';
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+				array_push($data, $wherin_target1);
+				array_push($data, $wherin_target2);
+				array_push($data, $wherin_target3);
+				array_push($data, $wherin_target4);
+				array_push($data, $wherin_target5);
+				array_push($data, $wherin_target6);
+				array_push($data, $wherin_target7);
+				array_push($data, $wherin_target8);
+			}
+		}
+		// ANDで連結
+		$ary_sql = array($sql_tmp_host, $sql_tmp_ind);
+		$sql_tmp_l = $this->_addWhereRelation($ary_sql, 'a');
+
+		return $sql_tmp_l;
+	}
+	// ADD-E 2015.01.08 課題No.64(フロント/産業区分×開催地検索機能対応
+
 }
 
 /**
