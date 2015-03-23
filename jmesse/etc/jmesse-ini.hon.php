@@ -272,6 +272,8 @@ $config = array(
 	'industry_009_010_009' => '010009', //産業安全、労災、労務管理
 	// ADD-E 2015.02.07 産業区分コード設定
 
+	//見本市移譲先ユーザID(honban j-messe@totec-net.com)
+	'transfer_user_id'      => '2453',
 
 	// Smarty
 	//'renderer' => array(
