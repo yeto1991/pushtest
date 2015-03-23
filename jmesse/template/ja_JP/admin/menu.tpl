@@ -5,6 +5,7 @@
 <b>ユーザ情報</b><br />
 ・<a href="?action_admin_userRegist=true">ユーザ登録</a><br/>
 ・<a href="?action_admin_userSearch=true">ユーザ検索</a><br/>
+・<a href="?action_admin_userTransferList=true">見本市未移譲ユーザ一覧表示</a><br/>
 <br/>
 {/if}
 {if ("1" == $session.auth_fair)}
