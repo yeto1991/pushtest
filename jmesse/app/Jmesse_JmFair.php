@@ -17,6 +17,47 @@
 class Jmesse_JmFairManager extends Ethna_AppManager
 {
 	/**
+	 * 削除済みユーザの保有する見本市No（移譲対象となる）リスト取得
+	 *
+	 * @param transfer_user_id 移譲対象ユーザID
+	 * @return list 検索情報結果
+	 */
+	function getTransferMihonNoList($transfer_user_id) {
+
+		// DBオブジェクト取得
+		$db = $this->backend->getDB();
+		$sql = " select mihon_no from jm_fair where user_id = ? order by mihon_no asc ";
+
+		// Prepare Statement化
+		$stmt =& $db->db->prepare($sql);
+		// 検索条件をArray化
+		$param = array($transfer_user_id);
+		// SQLを実行
+		$res = $db->db->execute($stmt, $param);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return null;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// リスト化
+		$i = 0;
+		while ($tmp =& $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+		return $list;
+	}
+
+	/**
 	* JECC認証見本市 日本語JSONファイル作成用
 	* @param int
 	* @return array 取得データ

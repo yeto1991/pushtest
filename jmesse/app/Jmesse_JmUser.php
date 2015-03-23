@@ -17,6 +17,79 @@
 class Jmesse_JmUserManager extends Ethna_AppManager
 {
 	/**
+	 * 見本市移譲先ユーザ情報取得
+	 *
+	 * @param string $user_id 見本市移譲先ユーザID
+	 * @return array<string>：検索結果、null：データなし、DB::Error()：エラー
+	 */
+	function getUserTrasferTargetInfo($user_id) {
+
+		$db = $this->backend->getDB();
+		$sql = "select user_id, user_nm, email from jm_user where user_id = ?";
+		$stmt =& $db->db->prepare($sql);
+		$param = array($user_id);
+		$res = $db->db->execute($stmt, $param);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+		return $list;
+	}
+
+	/**
+	 * 見本市未移譲ユーザ一覧データ取得
+	 *
+	 * @return array<string>：検索結果、null：データなし、DB::Error()：エラー
+	 */
+	function getUserTrasferList() {
+
+		$db = $this->backend->getDB();
+		$sql = " select jmu.user_id, user_nm, email, fair_cnt from jm_user as jmu ";
+		$sql .= " left join (select user_id, count(*) as fair_cnt from jm_fair group by user_id) as jmf on jmu.user_id = jmf.user_id ";
+		$sql .= " where jmu.del_flg = ? and fair_cnt is not null order by jmu.user_id ASC; ";
+		$stmt =& $db->db->prepare($sql);
+		$param = array('1');
+		$res = $db->db->execute($stmt, $param);
+		// 結果の判定
+		if (null == $res) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索結果が取得できません。');
+			return null;
+		}
+		if (DB::isError($res)) {
+			$this->backend->getLogger()->log(LOG_ERR, '検索Errorが発生しました。');
+			$this->backend->getActionError()->addObject('error', $res);
+			return $res;
+		}
+		if (0 == $res->numRows()) {
+			$this->backend->getLogger()->log(LOG_WARNING, '検索件数が0件です。');
+			return null;
+		}
+		// リスト化
+		$i = 0;
+		while ($tmp = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$list[$i] = $tmp;
+			$i ++;
+		}
+		return $list;
+	}
+
+	/**
 	* Eメール重複チェック用データ取得
 	*
 	* @param string $email 登録するEメール
